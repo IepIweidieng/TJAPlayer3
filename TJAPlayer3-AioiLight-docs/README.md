@@ -12,6 +12,8 @@ These page files were saved using Microsoft Edge, after:
   * close the Wayback Machine toolbar by clicking the close button
   * choose a filename which is consistent with the URL
 
+Non-date, non-tag links were re-pointed to this archive if the target page has been archived here.
+
 ## Copyright Disclaimer
 
 This archive contains copyrighted works authored by AioiLight.
