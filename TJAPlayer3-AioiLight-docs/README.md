@@ -1,5 +1,7 @@
 # AioiLight's Documentation for TJAPlayer3 (Retrieved from Internet Archive)
 
+* GitHub Pages site version: [TJAPlayer3-AioiLight-docs/](https://iepiweidieng.github.io/TJAPlayer3/TJAPlayer3-AioiLight-docs/)
+
 An unofficial archive of AioiLight's documentation for TJAPlayer3, from Internet Archive:
 <https://web.archive.org/web/*/https://aioilight.space/taiko/tjap3*>
 
