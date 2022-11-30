@@ -2,6 +2,9 @@
 
 An unofficial documentation compilation of TJAPlayer3.
 
+* GitHub repository: <https://github.com/IepIweidieng/TJAPlayer3/tree/gh-pages>
+* GitHub Pages site: <https://iepiweidieng.github.io/TJAPlayer3>
+
 These documentations mainly applies to:
 
 * [AioiLight/TJAPlayer3](<https://github.com/AioiLight/TJAPlayer3>)
