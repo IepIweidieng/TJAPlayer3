@@ -1,0 +1,10 @@
+permalink: pretty
+plugins:
+  - jekyll-relative-links
+  - jemoji
+relative_links:
+  enabled: true
+  collections: true
+include:
+  - README.md
+  - TJAPlayer3-AioiLight-docs/README.md
