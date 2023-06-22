@@ -15,3 +15,5 @@ Index:
 * [TJAPlayer3-AioiLight-docs/](./TJAPlayer3-AioiLight-docs/)
   * AioiLight's Documentation for TJAPlayer3 (Retrieved from Internet Archive)
   * See its [README.md](./TJAPlayer3-AioiLight-docs/README.md) for the information of this archive, especially the copyright information.
+* [tja.md](./tja.md)
+  * An unofficial compilation and commentation of the TJA format & its related formats
