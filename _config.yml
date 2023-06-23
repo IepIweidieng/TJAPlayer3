@@ -2,6 +2,7 @@ permalink: pretty
 plugins:
   - jekyll-relative-links
   - jemoji
+  - jekyll-sitemap
 relative_links:
   enabled: true
   collections: true
