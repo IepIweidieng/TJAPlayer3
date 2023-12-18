@@ -2271,7 +2271,7 @@ The honorific title is omitted.
     * master (v1.5.7), non-after 2020, August 28 -> TJAPlayer3-Develop: By touhou-renren *et al.* <https://github.com/TJAPlayer3-Develop/TJAPlayer3-Develop>
       * Non-after 2020, Nov 8 -> TJAPlayer3-Develop-ReWrite: By touhourenren *et al.* <https://github.com/touhourenren/TJAPlayer3-Develop-ReWrite>
         * Non-after 2021, Sep 21 -> OpenTaiko (aka. TJAPlayer3-Develop-BSQ) (0auBSQ): By 0auBSQ *et al.* <https://github.com/0auBSQ/OpenTaiko>
-* taiko-web: By Clemaister, now mainly maintained by bui <https://github.com/bui/taiko-web> (this link no longer accessible)
+* taiko-web: By Clemaister, later mainly maintained by bui <https://github.com/bui/taiko-web> (no longer unavailable, see <https://github.com/github/dmca/blob/master/2023/02/2023-02-21-bandai.md>)
 * Project OutFox: Mainly maintained by Team Rizu <https://projectoutfox.com/>
   * \<- Derived from StepMania 5.1: Mainly maintained by The Spinal Shark Collective <https://github.com/stepmania/stepmania>
     * \<- Derived from StepMania 3.95: By Chris Danford *et al.*
@@ -2291,7 +2291,7 @@ The honorific title is omitted.
 * *TJAPlayer3/CDTX.cs at ver-1.6.x*. (2019, Mar 2). AioiLight/TJAPlayer3. GitHub. <https://github.com/AioiLight/TJAPlayer3/blob/ver-1.6.x/TJAPlayer3/Songs/CDTX.cs>
 * AioiLight (2019, April 17). *.tja フォーマット* (".tja Format"). AioiLight.space. <https://web.archive.org/web/20190914085205/https://aioilight.space/taiko/tjap3/doc/tja/> Browsable archive: [TJAPlayer3-AioiLight-docs/doc/tja](<https://iepiweidieng.github.io/TJAPlayer3/TJAPlayer3-AioiLight-docs/doc/tja.html>)
 * KabanFriends (2021, May 29). *New TJA Commands in TJAPlayer3-Extended*. KabanFriends/TJAPlayer3-Extended. GitHub. <https://github.com/KabanFriends/TJAPlayer3-Extended/blob/master/Test/COMMANDS.txt>
-* *TJA format*. (2021, September 28). bui/taiko-web Wiki. GitHub. <https://github.com/bui/taiko-web/wiki/TJA-format> (this link is no longer accessible)
+* *TJA format*. (2021, September 28). bui/taiko-web Wiki. GitHub. <https://web.archive.org/web/20230103093826/https://github.com/bui/taiko-web/wiki/TJA-format>
 * Mr-Ojii (2021, November 11). *TJAPlayer3-f/About_additional_and_modified_functions.md at master*. Mr-Ojii/TJAPlayer3-f. GitHub. <https://github.com/Mr-Ojii/TJAPlayer3-f/blob/master/TJAPlayer3-f/Docs/About_additional_and_modified_functions.md>
 * 0auBSQ (2022, May 27). *New Commands*. 0auBSQ/OpenTaiko. GitHub. <https://github.com/0auBSQ/OpenTaiko/blob/main/Test/Documentation/Tja/NewCommands.md>
 * *OpenTaiko/NotesManager.cs at main*. 0auBSQ/OpenTaiko. GitHub. <https://github.com/0auBSQ/OpenTaiko/blob/main/TJAPlayer3/Stages/07.Game/Taiko/NotesManager.cs>
