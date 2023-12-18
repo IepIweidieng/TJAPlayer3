@@ -10,7 +10,7 @@ This article is still *in construction*:
 * Missing, inaccurate, or even incorrect information is possible, especially about less known software behaviors, due to insufficient or misunderstood references. If it is the case, please do not hesitate to edit this article to fix it.
 * The terminologies introduced in this article are not finalized and might be subject to changes.
 
-This article also contains tentative proposals by the main maintainer (@IepIweidieng) of this article. These proposals are explicitly expressed to be *Proposal*s and are subject to changes.
+This article also contains tentative proposals by the main maintainer ([@IepIweidieng](https://github.com/IepIweidieng)) of this article. These proposals are explicitly expressed to be *Proposal*s and are subject to changes.
 
 See [Terminologies](#terminologies) for the explanation and conventions of some terminologies used in this article.
 

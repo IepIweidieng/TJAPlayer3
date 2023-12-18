@@ -2,10 +2,10 @@
 
 * GitHub Pages site version: [TJAPlayer3-AioiLight-docs/](https://iepiweidieng.github.io/TJAPlayer3/TJAPlayer3-AioiLight-docs/)
 
-An unofficial archive of AioiLight's documentation for TJAPlayer3, from Internet Archive:
+An unofficial archive of [@AioiLight](https://github.com/AioiLight)'s documentation for TJAPlayer3, from Internet Archive:
 <https://web.archive.org/web/*/https://aioilight.space/taiko/tjap3*>
 
-These documentation pages were authored and maintained by AioiLight (the first main maintainer of TJAPlayer3), and have been archived by Internet Archive.
+These documentation pages were authored and maintained by [@AioiLight](https://github.com/AioiLight) (the first main maintainer of TJAPlayer3), and have been archived by Internet Archive.
 
 However, the original archived version is not browsable due to a CSS styling issue which makes the page content invisible. This styling issue has been fixed in this modified archived version.
 
@@ -18,10 +18,10 @@ Non-date, non-tag links have been re-pointed to this archive if the target page 
 
 ## Copyright Disclaimer
 
-This archive contains copyrighted works authored by AioiLight.
+This archive contains copyrighted works authored by [@AioiLight](https://github.com/AioiLight).
 
 For the copyright policy of Internet Archive, please refer to <https://archive.org/about/terms.php>.
 
 Under Section 107 of the Copyright Act 1976, allowance is made for "fair use" for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statute that might otherwise be infringing. Non-profit, educational or personal use tips the balance in favor of fair use.
 
-If there are still copyright issues, please contact us.
+If there are still copyright issues, please contact us ([@IepIweidieng](https://github.com/IepIweidieng)).
