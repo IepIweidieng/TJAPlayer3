@@ -2293,8 +2293,8 @@ The honorific title is omitted.
 * KabanFriends (2021, May 29). *New TJA Commands in TJAPlayer3-Extended*. KabanFriends/TJAPlayer3-Extended. GitHub. <https://github.com/KabanFriends/TJAPlayer3-Extended/blob/master/Test/COMMANDS.txt>
 * *TJA format*. (2021, September 28). bui/taiko-web Wiki. GitHub. <https://web.archive.org/web/20230103093826/https://github.com/bui/taiko-web/wiki/TJA-format>
 * Mr-Ojii (2021, November 11). *TJAPlayer3-f/About_additional_and_modified_functions.md at master*. Mr-Ojii/TJAPlayer3-f. GitHub. <https://github.com/Mr-Ojii/TJAPlayer3-f/blob/master/TJAPlayer3-f/Docs/About_additional_and_modified_functions.md>
-* 0auBSQ (2022, May 27). *New Commands*. 0auBSQ/OpenTaiko. GitHub. <https://github.com/0auBSQ/OpenTaiko/blob/main/Test/Documentation/Tja/NewCommands.md>
-* *OpenTaiko/NotesManager.cs at main*. 0auBSQ/OpenTaiko. GitHub. <https://github.com/0auBSQ/OpenTaiko/blob/main/TJAPlayer3/Stages/07.Game/Taiko/NotesManager.cs>
+* 0auBSQ (2022, May 27). *New Commands*. 0auBSQ/OpenTaiko. GitHub. <https://github.com/0auBSQ/OpenTaiko/blob/main/OpenTaiko/Documentation/Tja/NewCommands.md>
+* *OpenTaiko/NotesManager.cs at main*. 0auBSQ/OpenTaiko. GitHub. <https://github.com/0auBSQ/OpenTaiko/blob/main/OpenTaiko/src/Stages/07.Game/Taiko/NotesManager.cs>
 * Squirrel. *TJA Compatibility*. Project OutFox Wiki. <https://outfox.wiki/dev/mode-support/tja-support/>
 * nyoro. *TJA Format Support*. Visual Studio Marketplace. <https://marketplace.visualstudio.com/items?itemName=nyoro.tja-format-support>
   * This vscode extension provides short explanations for TJA headers/commands, including headers/commands introduced by TaikoManyGimmick.
