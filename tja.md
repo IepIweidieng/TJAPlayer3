@@ -1213,16 +1213,16 @@ Change the scrolling **direction** of notes & bar lines.
 
 * `#DIRECTION <enum-int-direction>`
   * `<enum-int-direction>` specifies the degrees (°) of the counterclockwise (↺) rotation and can be one of:
-    | | Rotation (degrees CCW) | Scrolling direction under `#SCROLL 1`
-    | --- | --- | ---
-    | `0` | 0° ↺/↻ (no changes) | ←
-    | `1` | 90° ↺ | ↓
-    | `2` | 270° ↺ (≡ 90° ↻) | ↑
-    | `3` | 45° ↺ | ↙
-    | `4` | 315° ↺ (≡ 45° ↻) | ↖
-    | `5` | 180° ↺ (≡ 180° ↻) | →
-    | `6` | 135° ↺ | ↘
-    | `7` | 225° ↺ (≡ 135° ↻) | ↗
+    * | | Rotation (degrees CCW) | Scrolling direction under `#SCROLL 1`
+      | --- | --- | ---
+      | `0` | 0° ↺/↻ (no changes) | ←
+      | `1` | 90° ↺ | ↓
+      | `2` | 270° ↺ (≡ 90° ↻) | ↑
+      | `3` | 45° ↺ | ↙
+      | `4` | 315° ↺ (≡ 45° ↻) | ↖
+      | `5` | 180° ↺ (≡ 180° ↻) | →
+      | `6` | 135° ↺ | ↘
+      | `7` | 225° ↺ (≡ 135° ↻) | ↗
 * *Proposal*: `#DIRECTION <number-degrees>deg`
   * `<number-degrees-rotation>` specifies the degrees (°) of the counterclockwise (↺) rotation.
 
@@ -1375,20 +1375,20 @@ Override ("**change**") the automatically assigned *<ruby>口<rt>Kuchi</rt> 唱<
 
 * `#SENOTECHANGE <enum-int-note-phoneticization>`
   * `<enum-int-note-phoneticization>` can be one of:
-    | | | Designed for what note symbol
-    | --- | --- | ---
-    | `1` | *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>* Don | `1`
-    | `2` | *<ruby>ド<rt>Do</rt></ruby>* Do | `1`
-    | `3` | *<ruby>コ<rt>Ko</rt></ruby>* (Do) | `1`
-    | `4` | *<ruby>カッ<rt>Ka'</rt></ruby>* Ka | `2`
-    | `5` | *<ruby>カ<rt>Ka</rt></ruby>* (Ka) | `2`
-    | `6` | *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* DON | `3`
-    | `7` | *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* KA | `4`
-    | `8` | *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>* Roll | note head of `5`
-    | `9` | *ー* &ndash; | bar body of `5` & `6`
-    | `10` | *ーっ!!* &ndash;!! | note end of `5` & `6`
-    | `11` | *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* ROLL | note head of `6`
-    | `12` | *<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* Balloon | `7`
+    * | | | Designed for what note symbol
+      | --- | --- | ---
+      | `1` | *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>* Don | `1`
+      | `2` | *<ruby>ド<rt>Do</rt></ruby>* Do | `1`
+      | `3` | *<ruby>コ<rt>Ko</rt></ruby>* (Do) | `1`
+      | `4` | *<ruby>カッ<rt>Ka'</rt></ruby>* Ka | `2`
+      | `5` | *<ruby>カ<rt>Ka</rt></ruby>* (Ka) | `2`
+      | `6` | *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* DON | `3`
+      | `7` | *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* KA | `4`
+      | `8` | *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>* Roll | note head of `5`
+      | `9` | *ー* &ndash; | bar body of `5` & `6`
+      | `10` | *ーっ!!* &ndash;!! | note end of `5` & `6`
+      | `11` | *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* ROLL | note head of `6`
+      | `12` | *<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* Balloon | `7`
   * *Unspecified*: The behavior when an `<enum-int-note-phoneticization>` not designed for the applied note is used.
 * *Proposal*: `#SENOTECHANGE <enum-str-note-phoneticization>`
   * `<enum-str-note-phoneticization>` can be one of:
