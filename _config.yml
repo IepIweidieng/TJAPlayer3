@@ -10,3 +10,8 @@ include:
   - README.md
   - TJAPlayer3-AioiLight-docs/README.md
   - tja.md
+defaults:
+  - scope:
+      path: "**/*_files"
+    values:
+      sitemap: false
