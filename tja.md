@@ -22,7 +22,7 @@ Formats mentioned in this articles:
 
 Extension | Full Name | Content | Notes
 --- | --- | --- | ---
-`.tjf` | **T**atsu**j**in *<ruby>**譜**<rt>**F**u</rt> 面<rt>men</rt>* Notechart Data (?) | Notechart metadata + definition | Introduced in Taikosan
+`.tjf` | **T**atsu**j**in *<ruby>**譜**<rt>**F**u</rt> 面<rt>men</rt></ruby>* Notechart Data (?) | Notechart metadata + definition | Introduced in Taikosan
 `.tja` | **T**atsu**j**in Notechart Format **A**(?) (?) | Notechart metadata + definition | Introduced in TaikoJiro 1
 `.tjc` | **T**atsu**j**in **C**ourse (?) | Notechart set metadata | Introduced in TaikoJiro 1, v2.34
 `.tci` | Open **T**aiko **C**hart **I**nformation | Notechart metadata |
@@ -164,8 +164,8 @@ Specify the **title** of the song.
   * `<enum-str-lang>` is an IETF BCP 47 language or region tag (see <https://en.wikipedia.org/wiki/IETF_language_tag>) and can be one of:
     * `JA`, **Ja**panese
     * `EN`, **En**glish
-    * `ES` &mdash; OpenTaiko (0auBSQ), ***Es**pañol* Spanish
-    * `FR` &mdash; OpenTaiko (0auBSQ), ***Fr**ançais* **Fr**ench
+    * `ES` &mdash; OpenTaiko (0auBSQ), _**Es**pañol_ Spanish
+    * `FR` &mdash; OpenTaiko (0auBSQ), _**Fr**ançais_ **Fr**ench
     * `ZH` &mdash; OpenTaiko (0auBSQ), *<ruby>简<rt>Jiǎn</rt> 体<rt>tǐ</rt> **中**<rt>**Zh**ōng</rt> 文<rt>wén</rt></ruby>* Simplified Chinese
     * `CN` &mdash; taiko-web, Simplified **C**hi**n**ese (Mainland **C**hi**n**a) (region tag)
     * `TW` &mdash; taiko-web, Traditional Chinese (<ruby>**臺**<rt>**T**ái</rt> **灣**<rt>**w**ān</rt></ruby>/<ruby>**台**<rt>**T**ái</rt> **灣**<rt>**w**ān</rt></ruby>) (region tag)
@@ -781,7 +781,7 @@ Used in conjuction with [`COURSE:Dan`](#course).
     * `jg` amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgment.
     * `jb`, amount of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* **B**AD **j**udgment.
     * `jm` &mdash; OpenTaiko (0auBSQ), amount of catched bomb/**m**ine notes.
-    * `ja` &mdash; OpenTaiko (0auBSQ), amount of catched ***A****d libitum* (**A**D-LIB) notes.
+    * `ja` &mdash; OpenTaiko (0auBSQ), amount of catched _**A**d libitum_ (**A**D-LIB) notes.
     * `s`, final **s**core.
     * `r`, amount of hits on *all* drum**r**oll-type notes.
       * Not to be confused with the `r` (bar drum**r**oll notes&ndash;only) used for the condition of the [`#BRANCHSTART`](#branchstart--branchend) command.
@@ -1547,7 +1547,7 @@ The "branch"/path is determined by a condition value when `<enum-str-condition>`
 * *Proposal*: `pp`, the **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") during the determining section.
 * *Proposal*: `ph`, the **p**ercentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its during the determining section.
 * *Proposal*: `pm`, **p**ercentage (%) of *avoided* bomb/**m**ine notes during the determining section.
-* *Proposal*: `pa`, **p**ercentage (%) of catched ***A****d libitum* (**A**D-LIB) notes during the determining section.
+* *Proposal*: `pa`, **p**ercentage (%) of catched _**A**d libitum_ (**A**D-LIB) notes during the determining section.
 * `d` &mdash; TJAPlayer2 for PC, the percentage (%) of "precision"/accuracy of big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section. (**`d`** can be seen as a rotated `p`)
   * Defined but unimplemented in TJAPlayer2 for PC
   * > *Proposal*: Formula: (*<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/Good + 0.5 × *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{amount of big hit-type notes, 1} × 100(%)
@@ -1558,8 +1558,8 @@ The "branch"/path is determined by a condition value when `<enum-str-condition>`
 * *Proposal*: `hh`, amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, hit-type note **h**its during the determining section.
   * > Formula: `hh` = *<ruby>良<rt>Ryou</rt></ruby>* GREAT/Good + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK
 * *Proposal*: `hp`, amount (**h**its) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") during the determining section.
-* *Proposal*: `am`, amount of ***a**voided* bomb/**m**ine notes during the determining section.
-* *Proposal*: `ha`, amount of catched ("**h**it") ***A****d libitum* (**A**D-LIB) notes during the determining section.
+* *Proposal*: `am`, amount of _**a**voided_ bomb/**m**ine notes during the determining section.
+* *Proposal*: `ha`, amount of catched ("**h**it") _**A**d libitum_ (**A**D-LIB) notes during the determining section.
 * *Proposal*: `b`, amount of *strong* **h**its on all **b**ig notes during the determining section. (**`b`** can be seen as an `h` with rounded bottom)
   * > Formula: `b` = `bh` + `br`
 * *Proposal*: `bp`, amount ("hits") of *strong* *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on **b**ig notes during the determining section.
