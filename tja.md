@@ -337,7 +337,7 @@ Scope: per-play-side
 
 Specify the initial **BPM** (**b**eat **p**er **m**inute) of the notechart.
 
-* **`BPM:<non-zero-float-initial-bpm>`** &mdash; (Universal supported)
+* **`BPM:<non-zero-float-initial-bpm>`** &mdash; (Universally supported)
 * `BPM:0`
   * The behavior is *unspecified* (may cause crashes in some existing simulators).
 * `BPM:`
@@ -2014,7 +2014,7 @@ If any note symbols present, each note symbol occupies the same amount of beats 
 
 * In TJF format, `,` did not exist and every note symbol occupies the amount of beats of a 16th note.
 
-Measures with no note symbols (*i.e.*, `,`-only measures) equivalent to `0,`
+Measures with no note symbols (*i.e.*, `,`-only measures) are equivalent to `0,`
 
 Equation: `beat_duration_of_symbol` (scope: a measure)
 
