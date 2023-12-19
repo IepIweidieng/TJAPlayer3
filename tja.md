@@ -886,7 +886,7 @@ Specify the *<ruby>公<rt>kou</rt> **差**<rt>sa</rt></ruby>* common **diff**ere
 * `SCOREDIFF:<non-negative-int-score-diff>`
 * `SCOREDIFF:<non-negative-int-score-diff>d` &mdash; TaikoJiro v2.49
   * If supported, a scoring rule similar to *<ruby>ド<rt>Do</rt> ン<rt>n</rt> ダ<rt>da</rt> フ<rt>fu</rt>ル<rt>ru</rt></ruby>！<ruby>コー<rt>Koo</rt> ス<rt>su</rt></ruby>* "Donderful! Course" is used as if `SCOREMODE:0` were used, except that the `SCOREINIT:` & `SCOREDIFF:` are not ignored.
-  * Combo | 0&ndash;199 | 200&ndash;
+  * Combo | 1&ndash;199 | 200&ndash;
     --- | --- | ---
     Basic score | `init` | `init` + `diff`
 * `SCOREDIFF:0`
