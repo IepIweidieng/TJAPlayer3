@@ -972,7 +972,7 @@ Some branch-scoped commands are non-sequential, *i.e.*, they can be arranged fre
 
 Some commands can affect game objects outside of their scope by default. The effect scope is listed below for such commands.
 
-*Proposal*: Allow the effect scope to be overridden for the certain branch-scoped commands, see [*Proposal*: Command Modifier](#proposal-command-modifier).
+*Proposal*: Allow the effect scope to be overridden for certain branch-scoped commands, see [*Proposal*: Command Modifier](#proposal-command-modifier).
 
 ### `#BMSCROLL` / `#HBSCROLL`
 
