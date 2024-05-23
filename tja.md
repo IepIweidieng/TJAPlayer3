@@ -148,7 +148,7 @@ For non-string values, whitespaces can immediately occur after `:`, *e.g.*, [`LE
 
 #### Header Scope
 
-The effect of each header continues until the next occurrence of the same header or the end of the file, regardless of whether it is per-file or per-playside.
+The effect of each header continues until the next occurrence of the same header or the end of the file, regardless of whether it is per-file or per&ndash;play-side.
 
 * *Unspecified*: The behavior when the same header occur multiple times within its scope.
 
@@ -294,7 +294,7 @@ From: TaikoJiro v2.37
 
 ### OFFSET:
 
-Scope: per-play-side (?)
+Scope: per&ndash;play-side (?)
 
 Specify the amount of seconds past ("**offset**ted") from the time position of `#START` of the notechart which the song audio should start playing from the beginning.
 
@@ -319,7 +319,7 @@ From: TaikoJiro v1.66
 
 ### SEVOL:
 
-Scope: per-play-side (?)
+Scope: per&ndash;play-side (?)
 
 Specify the relative amplitude percentage (%) of the desired **vol**ume gain of the taiko sound ("**s**ound **e**ffect").
 
@@ -333,7 +333,7 @@ From: TaikoJiro v1.66
 
 ### BPM:
 
-Scope: per-play-side
+Scope: per&ndash;play-side
 
 Specify the initial **BPM** (**b**eat **p**er **m**inute) of the notechart.
 
@@ -348,7 +348,7 @@ From: TJF format
 
 ### HEADSCROLL:
 
-Scope: per-play-side, gimmicky
+Scope: per&ndash;play-side, gimmicky
 
 Specify the normal **scroll**ing velocity (before and non-after the beginning ("**head**") of the notechart), relative to the base scrolling velocity.
 
@@ -360,7 +360,7 @@ From: TJAPlayer2 for PC
 
 ### PREIMAGE:
 
-Scope: per-play-side (?), decorative
+Scope: per&ndash;play-side (?), decorative
 
 Specify the jacket ("**pre**view") **image** of the song.
 
@@ -403,7 +403,7 @@ From: taiko-web
 
 ### TOWERTYPE:
 
-Scope: per-play-side (?), decorative
+Scope: per&ndash;play-side (?), decorative
 
 Specify the dedicated **tower** skin ("**type**") to use.
 
@@ -459,7 +459,7 @@ From: OpenTaiko (0auBSQ)
 
 ### BGIMAGE:
 
-Scope: per-play-side (?), decorative
+Scope: per&ndash;play-side (?), decorative
 
 Specify the **b**ack**g**round **image** of the gameplay screen. Override the skin settings.
 
@@ -473,7 +473,7 @@ From: TJAPlayer2 for PC ver.2016021300
 
 ### BGOFFSET:
 
-Scope: per-play-side (?), decorative
+Scope: per&ndash;play-side (?), decorative
 
 Specify the amount of seconds past ("**offset**ted") from the time position specified by the [`OFFSET:`](#offset) header which the background image ("**image**") should start displaying.
 
@@ -487,7 +487,7 @@ Reference: TJA Format Support (vscode extension)
 
 ### BGMOVIE:
 
-Scope: per-play-side (?), decorative
+Scope: per&ndash;play-side (?), decorative
 
 Specify the **b**ack**g**round video ("**movie**") of the gameplay screen. Override the skin settings.
 
@@ -501,7 +501,7 @@ From: TJAPlayer2 for PC ver.2016021300
 
 ### MOVIEOFFSET:
 
-Scope: per-play-side (?), decorative
+Scope: per&ndash;play-side (?), decorative
 
 Specify the amount of seconds past ("**offset**ted") from the time position specified by the [`OFFSET:`](#offset) header which the background video ("**movie**") should start playing from the beginning.
 
@@ -561,7 +561,7 @@ Support:
 
 ### GAME:
 
-Scope: per-play-side (?)
+Scope: per&ndash;play-side (?)
 
 Specify the **game** mode. The meaning of the symbols used in the notechart definition is changed accordingly; see [TJA Notechart Definition](#tja-notechart-definition).
 
@@ -585,7 +585,7 @@ Support:
 
 ### COURSE:
 
-Scope: per-play-side
+Scope: per&ndash;play-side
 
 Specify the *<ruby>コー<rt>koo</rt> ス<rt>su</rt></ruby> "course"/<ruby>む<rt>mu</rt> ず<rt>zu</rt> か<rt>ka</rt> し<rt>shi</rt> い<rt>i</rt></ruby> "difficulty"/<ruby>難<rt>nan'</rt> 易<rt>i</rt> 度<rt>do</rt></ruby> "difficulty (or easiness) level"* difficulty/difficulty level ("**course**").
 
@@ -634,7 +634,7 @@ Support:
 
 ### LEVEL:
 
-Scope: per-play-side
+Scope: per&ndash;play-side
 
 Specify the *<ruby>難<rt>nan'</rt> 易<rt>i</rt> **度**<rt>do</rt></ruby>* "difficulty (or easiness) **level**"/difficulty star/? ("**level**").
 
@@ -658,7 +658,7 @@ From: TJF format
 
 ### STYLE:
 
-Scope: per-play-side
+Scope: per&ndash;play-side
 
 Specify the total amount of play-**side**s of the notechart(s).
 
@@ -674,7 +674,7 @@ From: TaikoJiro v1.99
 
 ### BALLOON Headers
 
-Scope: per-play-side
+Scope: per&ndash;play-side
 
 Specify the required amount of hits of *<ruby>激<rt>geki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>/<ruby>ゲ<rt>ge</rt> キ<rt>ki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>fuu</rt> 船<rt>sen</rt></ruby>/<ruby>ふ <rt>fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* **balloon**&ndash;type notes (denoted by either `7` or `9` in the notechart definition), in the order of their definition, ***NOT*** the hit order during playing.
 
@@ -704,7 +704,7 @@ Support:
 
 ### LIFE:
 
-Scope: per-play-side
+Scope: per&ndash;play-side
 
 Specify the initial **life** count of the life count gauge (if used).
 
@@ -730,7 +730,7 @@ From: TaikoJiro v2.19
 
 ### TOTAL:
 
-Scope: per-play-side
+Scope: per&ndash;play-side
 
 Specify the **total** *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge increment of the notechart when all hit-type notes are hit with *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgment, *i.e.*, *<ruby>ド<rt>Do</rt> ン<rt>n</rt> ダ<rt>da</rt> フ<rt>fu</rt> ル<rt>ru</rt> コ<rt>ko</rt> ン<rt>n</rt> ボ<rt>bo</rt></ruby>* Donderful Combo.
 
@@ -743,7 +743,7 @@ From: TaikoJiro v2.92 & TaikoJiro 2 v0.93
 
 ### GAUGEINCR:
 
-Scope: per-play-side
+Scope: per&ndash;play-side
 
 Specify the rounding mode of the **incr**ement of the *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**gee**</rt>**ジ**<rt>**ji**</rt></ruby>* spirit **gauge**/soul **gauge**.
 
@@ -759,7 +759,7 @@ From: TJAPlayer3 v1.5.4
 
 ### EXAM Headers
 
-Scope: per-play-side (?)
+Scope: per&ndash;play-side (?)
 
 Specify a requirement for passing the notechart in *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode" ("**exam**ination").
 
@@ -802,7 +802,7 @@ From: TJAPlayer3 v1.5.0
 
 ### SCOREMODE:
 
-Scope: per-play-side, scoring
+Scope: per&ndash;play-side, scoring
 
 Specify the **scoring mode**.
 
@@ -862,7 +862,7 @@ Support:
 
 ### SCOREINIT:
 
-Scope: per-play-side, scoring
+Scope: per&ndash;play-side, scoring
 
 Specify the *<ruby>**初**<rt>sho</rt> 項<rt>kou</rt></ruby>* **init**ial term (refers to an arithmetic progression) (`init`) used for calculate the basic **score**. See the explanation for the [`SCOREMODE:`](#scoremode) header.
 
@@ -878,7 +878,7 @@ From: TaikoJiro v1.67
 
 ### SCOREDIFF:
 
-Scope: per-play-side, scoring
+Scope: per&ndash;play-side, scoring
 
 Specify the *<ruby>公<rt>kou</rt> **差**<rt>sa</rt></ruby>* common **diff**erence (refers to an arithmetic progression) (`diff`) used for calculate the basic **score**. See the explanation for the [`SCOREMODE:`](#scoremode) header.
 
@@ -897,7 +897,7 @@ From: TaikoJiro v1.67
 
 ### HIDDENBRANCH:
 
-Scope: per-play-side, gimmicky
+Scope: per&ndash;play-side, gimmicky
 
 If enabled, make the *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path indicator **hidden** in the song selection screen; hide the "branch"/path mark on the note field from the beginning of the notechart until time point when the "branch"/path&ndash;switching effects should play for the first "branch"/path section in the gameplay screen.
 
@@ -976,7 +976,7 @@ Some commands can affect game objects outside of their scope by default. The eff
 
 ### `#BMSCROLL` / `#HBSCROLL`
 
-Scope: per-play-side (placed before the [`#START`](#start--end) command; syntax-wisely a non-resettable zero-parameter header), gimmicky
+Scope: per&ndash;play-side (placed before the [`#START`](#start--end) command; syntax-wisely a non-resettable zero-parameter header), gimmicky
 
 Use a **scroll**ing mode similar to the scrolling method used in **B**E**M**ANI-series, unless overridden by user settings.
 
@@ -1017,7 +1017,7 @@ Support:
 
 ### `#PAPAMAMA`
 
-Scope: per-play-side (placed before the [`#START`](#start--end) command; syntax-wisely a non-resettable zero-parameter header)
+Scope: per&ndash;play-side (placed before the [`#START`](#start--end) command; syntax-wisely a non-resettable zero-parameter header)
 
 Use the *<ruby>**パ**<rt>**Pa**</rt> **パ**<rt>**pa**</rt> **マ**<rt>**Ma**</rt> **マ**<rt>**ma**</rt> サ<rt>Sa</rt> ポー<rt>poo</rt> ト<rt>to</rt></ruby>* "Parent Support Mode"/Helping Hand Mode gameplay rules from the official arcade games for certain song in the *<ruby>簡<rt>Kan</rt> 単<rt>tan</rt></ruby>/<ruby>か<rt>Ka</rt> ん<rt>n</rt> た<rt>ta</rt> ん<rt>n</rt></ruby>* Easy difficulty, where the amount of players is fixed to 1 and the inputs from all players are combined to play the song.
 
@@ -1029,7 +1029,7 @@ From: TJAPlayer3-f
 
 ### #START / `#END`
 
-Scope: per-play-side (enclosing the notechart definition)
+Scope: per&ndash;play-side (enclosing the notechart definition)
 
 Respectively **start** / **end** the region of notechart definition.
 
