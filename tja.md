@@ -2219,7 +2219,7 @@ A gimmicky header or command may affect the difficulty for reading the notechart
 * Character Tabulation / Tab (U+0009; `\t`)
 * Carriage Return / CR (U+000D; `\r`)
 * Line Feed / LF / Newline (U+000A; `\n`)
-* ***NOT***: Ideographic Space / Fullwidth Space (U+3000; "<code> </code>")
+* ***NOT***: Ideographic Space / Fullwidth Space (U+3000; "<code>　</code>")
 * It is *unspecified* (but unlikely) whether other space-like characters are accepted.
 
 ### Translations
