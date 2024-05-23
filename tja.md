@@ -167,7 +167,7 @@ Specify the **title** of the song.
     * `ES` &mdash; OpenTaiko (0auBSQ), _**Es**pañol_ Spanish
     * `FR` &mdash; OpenTaiko (0auBSQ), _**Fr**ançais_ **Fr**ench
     * `ZH` &mdash; OpenTaiko (0auBSQ), *<ruby>简<rt>Jiǎn</rt> 体<rt>tǐ</rt> **中**<rt>**Zh**ōng</rt> 文<rt>wén</rt></ruby>* Simplified Chinese
-    * `CN` &mdash; taiko-web, Simplified **C**hi**n**ese (Mainland **C**hi**n**a) (region tag)
+    * `CN` &mdash; taiko-web, Simplified **C**hi**n**ese (mainland **C**hi**n**a) (region tag)
     * `TW` &mdash; taiko-web, Traditional Chinese (<ruby>**臺**<rt>**T**ái</rt> **灣**<rt>**w**ān</rt></ruby>/<ruby>**台**<rt>**T**ái</rt> **灣**<rt>**w**ān</rt></ruby>) (region tag)
     * `KO` &mdash; taiko-web, **Ko**rean
 
@@ -227,7 +227,7 @@ The display details is *unspecified*.
     * *`バラエティ` (Baraeti)* "Variety"
     * *`クラシック` (Kurashikku)* "Classic"
     * *`ゲームミュージック` (Geemu Myuujikku)* "Game Music"
-    * *`ナムコオリジナル` (Namuko Orijinaru)* "Namco original"
+    * *`ナムコオリジナル` (Namuko Orijinaru)* "Namco Original"
 
 From: TJAPlayer2 for PC
 
@@ -568,7 +568,7 @@ Specify the **game** mode. The meaning of the symbols used in the notechart defi
 *Unspecified*: The implemented game modes other than `GAME:Taiko`.
 
 * `GAME:Taiko` / `GAME:` &mdash; (Universally supported)
-  * A game mode similar to *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> の<rt>no</rt> 達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>*, developed by Namco (Now Bandai Namco)
+  * A game mode similar to *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> の<rt>no</rt> 達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>*, developed by Namco (now Bandai Namco)
   * See [Note Symbols in Taiko Mode](#note-symbols-in-taiko-mode)
 * `GAME:Jube` &mdash; TaikoJiro 1
   * A game mode similar to *Jubeat*, developed by Konami
