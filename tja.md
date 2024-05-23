@@ -2258,22 +2258,22 @@ The honorific title is omitted.
     * The TJF format was developed and used for this simulator.
 * TJAPlayer2 for PC: By J.MIR (kairera0467) <https://github.com/kairera0467/TJAP2fPC>
   * Inspired by TJAPlayer2 (for PSP): (Unknown author)
-  * \<- Derived from DTXManiaXG (Ver.K): By J.MIR (kairera0467) <https://ja.osdn.net/projects/dtxmaniaxg-verk/>
-    * \<- Derived from DTXMania: By ＦＲＯＭ (DTXMania), <ruby>や<rt>Ya</rt> ぎ<rt>gi</rt>。</ruby> (yyagi), *et al.* <https://ja.osdn.net/projects/dtxmania/>
+  * ← Derived from DTXManiaXG (Ver.K): By J.MIR (kairera0467) <https://ja.osdn.net/projects/dtxmaniaxg-verk/>
+    * ← Derived from DTXMania: By ＦＲＯＭ (DTXMania), <ruby>や<rt>Ya</rt> ぎ<rt>gi</rt>。</ruby> (yyagi), *et al.* <https://ja.osdn.net/projects/dtxmania/>
       * Ref: <https://ja.osdn.net/projects/dtxmania/wiki/derivatives>
   * Derivatives \
-    ver.2017072200, non-after 2017, December 15 -> TJAPlayer3 (AioiLight): By AioiLight *et al.* <https://github.com/AioiLight/TJAPlayer3>
-    * ver-1.6.x, non-after 2019, October 27 -> TJAPlayer3 (twopointzero): By Jeremy Gray (twopointzero) <https://github.com/twopointzero/TJAPlayer3>
-      * v5.2.4, non-after 2020, May 19, &ndash; v5.2.9 -> TJAPlayer3 (KabanFriends): By KabanFriends <https://github.com/KabanFriends/TJAPlayer3>
-        * Non-after 2021, May 26 -> TJAPlayer3-Extended: By KabanFriends <https://github.com/KabanFriends/TJAPlayer3-Extended>
-    * master (v1.5.7). non-after 2020, March 25 -> TJAPlayer3-f: By Mr-Ojii <https://github.com/Mr-Ojii/TJAPlayer3-f>
-    * master (v1.5.7), non-after 2020, August 28 -> TJAPlayer3-Develop: By touhou-renren *et al.* <https://github.com/TJAPlayer3-Develop/TJAPlayer3-Develop>
-      * Non-after 2020, Nov 8 -> TJAPlayer3-Develop-ReWrite: By touhourenren *et al.* <https://github.com/touhourenren/TJAPlayer3-Develop-ReWrite>
-        * Non-after 2021, Sep 21 -> OpenTaiko (aka. TJAPlayer3-Develop-BSQ) (0auBSQ): By 0auBSQ *et al.* <https://github.com/0auBSQ/OpenTaiko>
+    ver.2017072200, non-after 2017, December 15 → TJAPlayer3 (AioiLight): By AioiLight *et al.* <https://github.com/AioiLight/TJAPlayer3>
+    * ver-1.6.x, non-after 2019, October 27 → TJAPlayer3 (twopointzero): By Jeremy Gray (twopointzero) <https://github.com/twopointzero/TJAPlayer3>
+      * v5.2.4, non-after 2020, May 19, &ndash; v5.2.9 → TJAPlayer3 (KabanFriends): By KabanFriends <https://github.com/KabanFriends/TJAPlayer3>
+        * Non-after 2021, May 26 → TJAPlayer3-Extended: By KabanFriends <https://github.com/KabanFriends/TJAPlayer3-Extended>
+    * master (v1.5.7). non-after 2020, March 25 → TJAPlayer3-f: By Mr-Ojii <https://github.com/Mr-Ojii/TJAPlayer3-f>
+    * master (v1.5.7), non-after 2020, August 28 → TJAPlayer3-Develop: By touhou-renren *et al.* <https://github.com/TJAPlayer3-Develop/TJAPlayer3-Develop>
+      * Non-after 2020, Nov 8 → TJAPlayer3-Develop-ReWrite: By touhourenren *et al.* <https://github.com/touhourenren/TJAPlayer3-Develop-ReWrite>
+        * Non-after 2021, Sep 21 → OpenTaiko (aka. TJAPlayer3-Develop-BSQ) (0auBSQ): By 0auBSQ *et al.* <https://github.com/0auBSQ/OpenTaiko>
 * taiko-web: By Clemaister, later mainly maintained by bui <https://github.com/bui/taiko-web> (no longer unavailable, see <https://github.com/github/dmca/blob/master/2023/02/2023-02-21-bandai.md>)
 * Project OutFox: Mainly maintained by Team Rizu <https://projectoutfox.com/>
-  * \<- Derived from StepMania 5.1: Mainly maintained by The Spinal Shark Collective <https://github.com/stepmania/stepmania>
-    * \<- Derived from StepMania 3.95: By Chris Danford *et al.*
+  * ← Derived from StepMania 5.1: Mainly maintained by The Spinal Shark Collective <https://github.com/stepmania/stepmania>
+    * ← Derived from StepMania 3.95: By Chris Danford *et al.*
 * TaikoManyGimmicks (aka. taikosimu(NN)): By barrier15300 <https://twitter.com/barrier15300/with_replies>
 
 ## References
