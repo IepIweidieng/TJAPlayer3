@@ -672,7 +672,7 @@ In the official games, some difficulties may have only 2-play-side notecharts bu
 
 * In TaikoJiro 1, such notecharts are chosen as if all other players had chosen the same difficulty for each player.
 
-If the specified amount of play-sides is not 1, [`#START P<positive-int-play-side>`](#start--end) should be used for specifying the play-side of the notechart.
+If the specified amount of play-sides is not 1, [`#START <enum-str-play-side>`](#start--end) should be used for specifying the play-side of the notechart.
 
 * `STYLE:1` / `STYLE:Single` / `STYLE:single` / `STYLE:`
 * `STYLE:2` / `STYLE:Double` / `STYLE:double` / `STYLE:Couple` / `STYLE:couple`
