@@ -1955,7 +1955,7 @@ From: TJAPlayer3-Extended
 
 Scope: branch, timing (intended; depending on usage)
 
-Execute the given **Lua** code with predefined variables describing the current beat position the loaded notechart, *etc.*, after the notechart is loaded.
+Execute the given **Lua** code with predefined variables describing the current beat position, the loaded notechart, *etc.*, after the notechart is loaded.
 
 Intended for **mod**ifying the content of loaded notechart, including adjusting the notechart timing, calculating relative note distance, *etc.*
 
