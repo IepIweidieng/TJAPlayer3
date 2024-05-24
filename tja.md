@@ -664,15 +664,25 @@ Scope: per&ndash;play-side
 
 Specify the total amount of play-**side**s of the notechart(s).
 
-The multiple-play-side notecharts of the difficulty is chosen only if enough amount of players have chosen the same difficulty.
+The multiple-play-side notecharts of the difficulty is chosen if enough amount of players have chosen the same difficulty.
 
-If the amount of players is not 1, `#START P<positive-int-play-side>` can be used for specifying the play-side of the notechart.
+In the official games, some difficulties may have only 2-play-side notecharts but are still playable in single player mode, where the notechart for one of the play-side is chosen (always the 1st play-side in PC-generation games).
+
+*Unspecified*: Whether such notecharts are chosen when some players have chosen different difficulties.
+
+* In TaikoJiro 1, such notecharts are chosen as if all other players had chosen the same difficulty for each player.
+
+If the specified amount of play-sides is not 1, [`#START P<positive-int-play-side>`](#start--end) should be used for specifying the play-side of the notechart.
 
 * `STYLE:1` / `STYLE:Single` / `STYLE:single` / `STYLE:`
 * `STYLE:2` / `STYLE:Double` / `STYLE:double` / `STYLE:Couple` / `STYLE:couple`
-* *Proposal*: `STYLE:<positive-int-amount-of-players>`
+* *Proposal*: `STYLE:<positive-int-amount-of-play-sides>`
+
+Reference: *ダブルプレイ* ("Double Play"; "Two-player Charts"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/ダブルプレイ>
 
 From: TaikoJiro v1.99
+
+Support: Ignored in TaikoJiro 2.
 
 ### BALLOON Headers
 
@@ -961,11 +971,11 @@ The arguments for commands introduced in TaikoJiro are comma-separated. However,
 
 #### Command Scope
 
-Per-file and per&ndash;play-side commands are effectively [headers](#tja-header).
+No known per-file commands exist, which would be effectively [headers](#tja-header). Per&ndash;play-side commands are similar to [headers](#tja-header) but the effects of these commands reset at the end of their scope.
 
 Except for one-shot commands, the effect of each command continues until the next occurrence of any command from the same command group or [`#END`](#start--end).
 
-* For per&ndash;play-side one-shot commands, the behavior is *unspecified* when (the same or different) commands in the same command group occur together within its scope.
+* For per&ndash;play-side commands, the behavior is *unspecified* when (the same or different) commands in the same command group occur together within its scope.
 * For measure-based&ndash;scoped commands, the behavior is *unspecified* when any notechart symbols occur between such a command and the first symbol of the measure in the notechart definition.
 
 Some branch-scoped commands are non-sequential, *i.e.*, they can be arranged freely within the same beat position without causing any behavior changes, as long as both their relative order to the sequential commands and the relative order among commands which override each other are not changed. All commands with other type of scope are implicitly sequential.
@@ -978,7 +988,7 @@ Some commands can affect game objects outside of their scope by default. The eff
 
 ### `#BMSCROLL` / `#HBSCROLL`
 
-Scope: per&ndash;play-side (placed before the [`#START`](#start--end) command; syntax-wisely a non-resettable zero-parameter header), gimmicky
+Scope: per&ndash;play-side (placed before the [`#START`](#start--end) command), gimmicky
 
 Use a **scroll**ing mode similar to the scrolling method used in **B**E**M**ANI-series, unless overridden by user settings.
 
@@ -1019,13 +1029,13 @@ Support:
 
 ### `#PAPAMAMA`
 
-Scope: per&ndash;play-side (placed before the [`#START`](#start--end) command; syntax-wisely a non-resettable zero-parameter header)
+Scope: per&ndash;play-side (placed before the [`#START`](#start--end) command)
 
 Use the *<ruby>**パ**<rt>**Pa**</rt> **パ**<rt>**pa**</rt> **マ**<rt>**Ma**</rt> **マ**<rt>**ma**</rt> サ<rt>Sa</rt> ポー<rt>poo</rt> ト<rt>to</rt></ruby>* "Parent Support Mode"/Helping Hand Mode gameplay rules from the official arcade games for certain song in the *<ruby>簡<rt>Kan</rt> 単<rt>tan</rt></ruby>/<ruby>か<rt>Ka</rt> ん<rt>n</rt> た<rt>ta</rt> ん<rt>n</rt></ruby>* Easy difficulty, where the amount of players is fixed to 1 and the inputs from all players are combined to play the song.
 
 Reference: <https://taiko.namco-ch.net/taiko/en/howto/papamama.php#papamama>
 
-*Unspecified*: The behavior when the amount of players specified by the [`STYLE:`](#style) header is not 1.
+*Unspecified*: The behavior when the amount of play-sides specified by the [`STYLE:`](#style) header is not 1.
 
 From: TJAPlayer3-f
 
@@ -1036,12 +1046,45 @@ Scope: per&ndash;play-side (enclosing the notechart definition)
 Respectively **start** / **end** the region of notechart definition.
 
 * `#START`
-  * Start the notechart definition for single player, regardless of the [`STYLE:`](#style) header.
-* `#START P<positive-int-play-side>` &mdash; TaikoJiro v1.99
-  * If the amount of players specified by the [`STYLE:`](#style) header is not 1, start the notechart definition for the specified play-side.
+  * The notechart definition is for the only play-side if the [`STYLE:`](#style) header is ignored or this header specifies the amount of play-sides to be 1.
+* `#START <enum-str-play-side>` &mdash; TaikoJiro v1.99 but not TaikoJiro 2
+  * The notechart definition is for the play-side specified by `<enum-str-combination>`, which can be one of:
+    * `P1`, for the 1st play-side (1P).
+    * `P2`, for the 2nd play-side (2P) if the amount of play-sides specified by the [`STYLE:`](#style) header >= 2.
+  * *Unspecified*: The behavior when other `<enum-str-combination>` are used.
+    * In TaikoJiro, any other `<enum-str-combination>` are treated as if the 0-argument `#START` were used.
+* *Proposal*: `#START P<positive-int-play-side>`
+  * The notechart definition is for the `<positive-int-play-side>`-th play-side if the amount of play-sides specified by the [`STYLE:`](#style) header >= `<positive-int-play-side>`.
 * `#END`
 
+*Unspecified*: The behavior when any of the followings are violated when defining each difficulty:
+
+* The 1-play-side notechart should be defined using the 0-argument `#START`
+* Each multiple-play-side notechart should be defined using the 1-argument `#START <enum-str-play-side>` or *proposed* `P<positive-int-play-side>`.
+* At most 1 definition should exist for each play-side of each amount of play-sides
+  * In TaikoJiro 1, only the earliest definition is used when multiple such definitions exist.
+* Every play-side notechart should be defined if any notecharts for the same amount of play-sides are defined, otherwise the 1-play-side notechart should be the earliest defined notechart.
+* The 1-play-side notechart should be defined if any multiple-play-side notecharts are defined
+  * *Proposal*: Make the 1-play-side in such case optional when each defined play-side notechart has all other play-side notecharts defined for the same amount of play-sides. The chosen 1-play-side notechart will be the notechart for an *unspecified* play-side.
+
 From: TJF format
+
+Support:
+
+* In TaikoJiro 1, the actual notechart-choosing behavior is one of:
+  | Set of `STYLE:1` definitions | `STYLE:2` `P1` & `P2` defined | Chosen `STYLE:1` 1P | Chosen `STYLE:2` 1P | Chosen `STYLE:2` 2P
+  | --- | --- | --- | --- | ---
+  | Is `P2`(s) | Yes & Yes | Empty <br /> Or (crash) when quit from the gameplay after switching from `STYLE:2` in the gameplay screen | Earliest defined `STYLE:2` `P1` | Earliest defined `STYLE:2` `P2`
+  | Otherwise | Yes & Yes | Earliest defined non-`P2` `STYLE:1` (if any) <br /> Or empty | Earliest defined `STYLE:2` `P1` | Earliest defined `STYLE:2` `P2`
+  | Contains `P2`(s) | Yes & No | Earliest defined non-`P2` `STYLE:1` (if any) <br /> Or empty | (Crash) | (Crash)
+  | Otherwise | Yes & No | Earliest defined non-`P2` `STYLE:1` (if any) <br /> Or empty | Earliest defined `STYLE:2` `P1` | Any earliest defined
+  | Contains `P1`(s) | No & Yes | Earliest defined non-`P2` `STYLE:1` | Empty | Earliest defined `STYLE:2` `P2`
+  | Otherwise | No & Yes | Any earliest defined | Any earliest defined | Earliest defined `STYLE:2` `P2`
+  | (Empty) | No & No | Empty | (Crash) | (Crash)
+  | Contains `P1`(s) & `P2`(s) | No & No | Earliest defined non-`P2` `STYLE:1` | (Crash) | (Crash)
+  | Otherwise, contains `P1`(s) | No & No | Earliest defined non-`P2` `STYLE:1` | Empty | Any earliest defined
+  | Otherwise, contains `P2`(s) | No & No | Any earliest defined | (Crash) | (Crash)
+  | Otherwise (is 0-argument `#START`(s)) | No & No | Any earliest defined | Any earliest defined | Any earliest defined
 
 ### #BPMCHANGE
 
@@ -2037,7 +2080,7 @@ The time duration intervals of different note symbols are possible to overlap by
 
 *Unspecified*: The behavior when the time duration intervals of any non-blank note symbols overlap.
 
-* In TaikoJiro, regardless of whether any multiple notechart sections overlap in time, the later defined notes do not accept any inputs until all the earlier defined notes are judged. This is different from the official games, where a later red (or blue) hit-type note may be hit before an earlier blue (or red) hit-type note is judged.
+* In TaikoJiro, regardless of whether any multiple notechart sections overlap in time, the later defined notes in a branch do not accept any inputs until all the earlier defined notes in this branch are judged. This is different from the official games, where a later red (or blue) hit-type note may be hit before an earlier blue (or red) hit-type note is judged.
 
 (*in construction: explain the behavior of such timing commands with non-positive value*)
 
