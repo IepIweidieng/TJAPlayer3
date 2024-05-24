@@ -1051,8 +1051,8 @@ Respectively **start** / **end** the region of notechart definition.
   * The notechart definition is for the play-side specified by `<enum-str-combination>`, which can be one of:
     * `P1`, for the 1st play-side (1P).
     * `P2`, for the 2nd play-side (2P) if the amount of play-sides specified by the [`STYLE:`](#style) header >= 2.
-  * *Unspecified*: The behavior when other `<enum-str-combination>` are used.
-    * In TaikoJiro, any other `<enum-str-combination>` are treated as if the 0-argument `#START` were used.
+  * *Unspecified*: The behavior when other `<enum-str-combination>` is used.
+    * In TaikoJiro, using any other `<enum-str-combination>` is treated as if the 0-argument `#START` were used.
 * *Proposal*: `#START P<positive-int-play-side>`
   * The notechart definition is for the `<positive-int-play-side>`-th play-side if the amount of play-sides specified by the [`STYLE:`](#style) header >= `<positive-int-play-side>`.
 * `#END`
@@ -1226,7 +1226,7 @@ Scope: branch, non-before, gimmicky
 
 Effect scope: all
 
-Suddenly change the base scrolling **speed** of notes & bar lines. In other word, suddenly change the normal scrolling velocity and direction.
+Suddenly change the base scrolling **speed** of notes & bar lines. In other words, suddenly change the normal scrolling velocity and direction.
 
 The `<approach-specifier>` from the *proposal* [Command Modifier](#proposal-command-modifier) is intended to be used in conjunction.
 
