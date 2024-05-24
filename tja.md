@@ -1652,7 +1652,7 @@ An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--en
 
 * No commands should be placed after a branchless measure or `#BRANCHEND` and before the `#BRANCHSTART` command.
 * No drumroll-type notes should be defined as starting before and ending non-before the beginning or the end of the "branch"/path section.
-  * In TaikoJiro 1, such notes are handled as if the "branches"/paths are independent notecharts. However, the visual appearance of such bar drumroll notes become broken when the note head in the target "branch"/paths is no longer drawn when switching the "branch"/paths.
+  * In TaikoJiro 1, such notes are handled as if the "branches"/paths were independent notecharts. However, the visual appearance of such bar drumroll notes become broken when the note head in the target "branch"/paths is no longer drawn when switching the "branch"/paths.
 
 From: TaikoJiro v1.63
 
@@ -1678,7 +1678,7 @@ The definition of unused "branches"/paths due to forced "branch"/path determinat
 * The amount of measures and their total time duration should be consistent among all of the defined "branches"/paths.
   * In TaikoJiro: The first occurring definition determines the timing settings & amount of measures and all definitions are blank-filled to that amount of measures with that timing settings; any definition with a larger amount of measures or inconsistent timing settings causes unintended behaviors.
 * The final effects of non-before&ndash;scoped gimmicky commands should be consistent among all the "branches"/paths, except when the "branch"/path section ends non-before the end of the notechart.
-  * In TaikoJiro 1, such cases are handled as if the "branches"/paths are independent notecharts.
+  * In TaikoJiro 1, such cases are handled as if the "branches"/paths were independent notecharts.
 
 From: TaikoJiro v1.63
 
