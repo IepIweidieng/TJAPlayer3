@@ -573,9 +573,11 @@ Specify the **game** mode. The meaning of the symbols used in the notechart defi
 * `GAME:Jube` &mdash; TaikoJiro 1
   * A game mode similar to *Jubeat*, developed by Konami
   * See [Note Symbols in Jube Mode](#note-symbols-in-jube-mode)
-* `GAME:Konga` &mdash; OpenTaiko (0auBSQ), Outfox
+* `GAME:Konga` &mdash; OpenTaiko (0auBSQ), taiko-web (plugin "Donkey Konga Mode")
   * A game mode similar to *Donkey Konga*, developed by Namco
   * See [Note Symbols in Konga Mode](#note-symbols-in-konga-mode)
+* `GAME:Bongo` &mdash; OpenTaiko (0auBSQ), Outfox, taiko-web (plugin "Donkey Konga Mode")
+  * Equivalent to `GAME:Konga`
 
 From: TaikoJiro v2.13
 
@@ -691,7 +693,7 @@ Each balloon-type note with unassigned hit amount requires an *unspecified* defa
 * `BALLOONEXP:<comma-separated-list-non-negative-int-amount-of-hits>` &mdash; TJAPlayer2 for PC
   * The list of amount is iterated over only sections of ***<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**Exp**ert") "branches"/paths.
 * `BALLOONMAS:<comma-separated-list-non-negative-int-amount-of-hits>` &mdash; TJAPlayer2 for PC
-  * The list of amount is iterated over only sections of  ***<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>*** **Mas**ter "branches"/paths.
+  * The list of amount is iterated over only sections of ***<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>*** **Mas**ter "branches"/paths.
 
 For each element of `<comma-separated-list-non-negative-int-amount-of-hits>`, if the amount of hits is `0`, the per-note behavior is *unspecified*.
 
@@ -1168,7 +1170,7 @@ Unlike the `#BPMCHANGE` command, the `#SCROLL` command is measure-scoped.
 Support:
 
 * In TJAPlayer2 for PC and TJAPlayer3, `<always-signed-float-scroll-speed-y>` specifies the vertical scrolling speed from the bottom to the top of the screen (↑) instead.
-* In TJAPlayer2 for PC and TJAPlayer3, `<always-signed-float-scroll-speed-y>` makes bar lines rotate around their center. However, it is misinterpreted as the amount of rotation and the unit is 90 degrees (°)  clockwise (↻), see:
+* In TJAPlayer2 for PC and TJAPlayer3, `<always-signed-float-scroll-speed-y>` makes bar lines rotate around their center. However, it is misinterpreted as the amount of rotation and the unit is 90 degrees (°) clockwise (↻), see:
   * <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/ステージ/07.演奏/ドラム画面/CStage演奏ドラム画面.cs#L2026>
   * <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Stages/07.Game/Taiko/CStage演奏ドラム画面.cs#L2034>
   * This behavior is utilized in some existing notecharts to achieve bar line rotation. Exemplar notechart: <https://www.youtube.com/watch?v=SR94XPuGoyQ> <br />
@@ -2064,9 +2066,9 @@ See <https://taiko.namco-ch.net/taiko/en/howto/onpu.php> for the appearance of n
 `A` | Hand-holding big <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> | Big orange-ish red circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "DON (Hand)" (in 4-player mode) | Like `3`, extra score bonus if all players caught <br> In the official games, becomes `3` when no hit-type notes exist for some players at the same position. | From: TJAPlayer2 for PC ver.2018040100
 `B` | Hand-holding big <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> | Big sky-blue circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "KA (Hand)" (in 4-player mode) | Like `4`, extra score bonus if all players caught <br> In the official games, becomes `4` when no hit-type notes exist for some players at the same position. | From: TJAPlayer2 for PC ver.2018040100
 `C` | Bomb/mine | Small dark-blue cherry bomb | (none) | Combo-break and *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge penalty if caught | From: OpenTaiko (0auBSQ)
-`D` | Fuse drumroll | Small dark-blue cherry bomb | (none) | Roll on the drum without  (or BAD?) <br> Inspired by StepMania. | From: OutFox
+`D` | Fuse drumroll | ? <br /> (Big blue-ish purple cherry bomb with a clock on the face and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt> 爆<rt>baku</rt>弾<rt>dan</rt></ruby> "time bomb"/Fuseroll in OpenTaiko (0auBSQ)) | Roll on the drum continuously without leaving the note unhit for over certain tolerated time duration (?), or roll on the drum surface with certain amount of hits in OpenTaiko (0auBSQ), combo-break (or BAD?) and *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge penalty if failed to do so <br> Not in the official games. <br /> Inspired by StepMania. (?) | From: OutFox
 `F` | *Ad libitum* note (AD-LIB) | (Invisible) | (none) | Score bonus if caught. <br> Not in the official games. <br> Inspired by another rhythm game *GROOVE COASTER*, developed by TAITO | From: TJAPlayer2 for PC ver.2016081500
-`G` | ? | Big purple circle | (*<ruby>カ<rt>Ka</rt> ド<rt>do</rt> ン<rt>n</rt></ruby>* KADON) | Hit the drum surface **&** the drum rim, with both hands. <br> Not in the official games. | From: OpenTaiko (0auBSQ)
+`G` | ? | (Vary) <br /> Big purple circle in OpenTaiko (0auBSQ) <br /> Big green circle in taiko-web (plugin "Green Notes") | (*<ruby>カ<rt>Ka</rt> ド<rt>do</rt> ン<rt>n</rt></ruby>* KADON) <br /> (*<ruby>グ<rt>Gu</rt> リー<rt>rii</rt> ン<rt>n</rt></ruby>* Green) | Hit the drum surface **&** the drum rim, with both hands. <br> Not in the official games. | From: OpenTaiko (0auBSQ)
 
 Unknown note symbols & `8` without the corresponding head of drumroll-type notes are treated as `0`.
 
@@ -2170,7 +2172,7 @@ See the exemplar actual gameplay: <https://www.youtube.com/watch?v=G70HoWO1umc> 
 `I` | Head of yellow bar drumroll | Yellow circle with its left half filled and with bar attached behind | Roll the left bongo drum for score bonus |
 `6` | Head of pink bar drumroll | Pink circle with bar attached behind | Roll both bongo drums for score bonus |
 `H` | Head of clap bar "roll" | Sky-blue circle with star-ish edge and with bar attached behind | "Roll" (rapidly clap) the hands above the bongo drums for score bonus |
-`8` | Explicit end of a drumroll-type note (if any) | (round end of a bar) | (ー!! for ending bar drumroll notes) | Stop rolling the drum or clapping non-after the point |
+`8` | Explicit end of a drumroll-type note (if any) | (round end of a bar) | Stop rolling the drum or clapping non-after the point |
 `A` | Hand-holding pink hit | Pink circle with hands holding with other note(s) for other player(s) | Like `3`, extra score bonus if all players caught <br> Not in the official games. <br> By analogy with `GAMEMODE:Taiko`. | From: OpenTaiko (0auBSQ)
 `B` | Hand-holding clap "hit" | Sky-blue circle with star-ish edge and with hands holding with other note(s) for other player(s) | Like `4`, extra score bonus if all players caught <br> Not in the official games. <br> By analogy with `GAMEMODE:Taiko`. | From: OpenTaiko (0auBSQ)
 `F` | *Ad libitum* note (AD-LIB) | (Invisible) | Score bonus if caught. <br> Not in the official games. <br> By analogy with `GAMEMODE:Taiko`. | From: TJAPlayer2 for PC ver.2016081500
@@ -2291,6 +2293,7 @@ The honorific title is omitted.
 * AioiLight (2019, April 17). *.tja フォーマット* (".tja Format"). AioiLight.space. <https://web.archive.org/web/20190914085205/https://aioilight.space/taiko/tjap3/doc/tja/> Browsable archive: [TJAPlayer3-AioiLight-docs/doc/tja](<https://iepiweidieng.github.io/TJAPlayer3/TJAPlayer3-AioiLight-docs/doc/tja.html>)
 * KabanFriends (2021, May 29). *New TJA Commands in TJAPlayer3-Extended*. KabanFriends/TJAPlayer3-Extended. GitHub. <https://github.com/KabanFriends/TJAPlayer3-Extended/blob/master/Test/COMMANDS.txt>
 * *TJA format*. (2021, September 28). bui/taiko-web Wiki. GitHub. <https://web.archive.org/web/20230103093826/https://github.com/bui/taiko-web/wiki/TJA-format>
+* Katie Frogs (2023, Feburary 12). *taiko-web-plugins/README.md at main*. KatieFrogs/taiko-web-plugins. GitHub. <https://github.com/KatieFrogs/taiko-web-plugins/blob/main/README.md>
 * Mr-Ojii (2021, November 11). *TJAPlayer3-f/About_additional_and_modified_functions.md at master*. Mr-Ojii/TJAPlayer3-f. GitHub. <https://github.com/Mr-Ojii/TJAPlayer3-f/blob/master/TJAPlayer3-f/Docs/About_additional_and_modified_functions.md>
 * 0auBSQ (2022, May 27). *New Commands*. 0auBSQ/OpenTaiko. GitHub. <https://github.com/0auBSQ/OpenTaiko/blob/main/OpenTaiko/Documentation/Tja/NewCommands.md>
 * *OpenTaiko/NotesManager.cs at main*. 0auBSQ/OpenTaiko. GitHub. <https://github.com/0auBSQ/OpenTaiko/blob/main/OpenTaiko/src/Stages/07.Game/Taiko/NotesManager.cs>
