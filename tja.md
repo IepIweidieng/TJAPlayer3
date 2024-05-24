@@ -1436,7 +1436,7 @@ Override ("**change**") the automatically assigned *<ruby>口<rt>Kuchi</rt> 唱<
   * *Unspecified*: The behavior when an `<enum-int-note-phoneticization>` not designed for the applied note is used.
 * *Proposal*: `#SENOTECHANGE <enum-str-note-phoneticization>`
   * `<enum-str-note-phoneticization>` can be one of:
-    * `0`, the default, use the automatically assigned note phoneticization.
+    * `D`, the default, use the automatically assigned note phoneticization.
     * `L`, **l**ong, use *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>* Don for note symbol `1` and *<ruby>カッ<rt>Ka'</rt></ruby>* Ka for note symbol `2`; make *ーっ!!* &ndash;!! displayed for bar drumroll notes; the same as `D` for other notes.
     * `S`, **s**hort, use *<ruby>ド<rt>Do</rt></ruby>* Do for note symbol `1` and <ruby>カ<rt>Ka</rt></ruby> (Ka) Ka for note symbol `2`; make *ーっ!!* &ndash;!! hidden for bar drumroll notes; the same as `D` for other notes.
     * `A`, **a**lternate, *<ruby>コ<rt>Ko</rt></ruby>* (Do) for note symbol `1`; otherwise the same as `S`.
