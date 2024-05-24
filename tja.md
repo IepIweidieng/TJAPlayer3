@@ -2138,6 +2138,7 @@ For special balloons (`9`), the last occurrence of repeated note head symbol (if
 By default, drumroll-type notes are ended non-after one of:
 
 * The definition position of an `8`.
+  * *Proposal*: The ending position can be earlier than the `8` by an *unspecified* duration.
 * An *unspecified* duration before a hit-type note symbol.
   * In TaikoJiro, the duration is one of:
     * In notecharts without any "branch"/path sections: 50ms.
@@ -2145,10 +2146,13 @@ By default, drumroll-type notes are ended non-after one of:
     * Otherwise, in other "branch"/path states: 0ms.
 * In TaikoJiro, the definition position of the last note symbol of the notechart, except when the note head is in the definition of a "branch"/path other than the *<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>* Normal "branch"/path.
 
+In the official games, drumroll-type notes are usually intentionally made to end earlier than the designed ending beat position by the amount of beats of a 48th note.
+
+* Reference: *連打秒数表* ("List of seconds of drumrolls"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/連打秒数表>
+
 *Unspecified*: Whether other drumroll-type note symbols can appear during a drumroll-type note.
 
 * In TJF format, `8` did not exist and the duration interval is specified by repeat the note head symbol consecutively, where the last repeated symbol corresponds to TJA `8`, *e.g.*, TJF `5555` = TJA `5558`.
-* In TaikoJiro, a drumroll-type note ended by a non-blank hit-type note ends 48th before the hit-type note.
 
 *Unspecified*: The behavior when a balloon-type note (including `7`, `9`, *etc.*) is not ended with an `8` before other non-blank note symbols.
 
@@ -2157,7 +2161,7 @@ By default, drumroll-type notes are ended non-after one of:
     * See <https://wikiwiki.jp/taiko-fumen/収録曲/その他/太鼓タワー3%28辛口%29>
   * *Proposal*: Restrict this behavior to `COURSE:Tower`.
 
-*Unspecified*: The behavior when a non-positive-duration bar drumroll note is formed, possibly from a drumroll-type note ended by a hit-type note (*e.g.*, `51` / `56` / `65` when the per-note beat duration <= 48th) or by using timing settings.
+*Unspecified*: The behavior when a non-positive-duration bar drumroll note is formed, possibly from a drumroll-type note ended by a hit-type note (*e.g.*, `51` / `56` / `65`, where the duration of the drumroll may be shortened as mentioned above) or by using timing settings.
 
 * In Taikosan, zero-duration bar drumroll notes can be created by using an isolated drumroll-type note symbol. However, they are not accepted and an error message is displayed. \
   ![Taikosan's Error Message for Zero-duration Bar Drumroll Note](https://i.imgur.com/MDdNzKX.png)
