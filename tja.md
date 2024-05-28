@@ -168,7 +168,7 @@ The effect of each header continues until the next occurrence of the same header
 
 ### TITLE Headers
 
-Scope: per-file
+***Scope***: per-file
 
 Specify the **title** of the song.
 
@@ -187,12 +187,12 @@ Specify the **title** of the song.
     * `NL` &mdash; OpenTaiko (0auBSQ) v0.6.0, _**N**eder**l**ands_ Dutch
     * `KO` &mdash; taiko-web, **Ko**rean, OpenTaiko (0auBSQ) v0.6.0
 
-From: TJF format \
-Supported by: (Universally supported)
+***From***: TJF format \
+***Supported by***: (Universally supported)
 
 ### SUBTITLE Headers
 
-Scope: per-file
+***Scope***: per-file
 
 Specify the **subtitle** (not of the meaning of *caption*) of the song (could be artist, game series, *etc.*).
 
@@ -210,12 +210,12 @@ The display details are *unspecified*.
   * Specify the localized subtitle. The display mode (`++`/`--`) is instead specified by the `SUBTITLE:` header.
   * `<enum-str-lang>` can be one of the possible `<enum-str-lang>` for the [`TITLE<enum-str-lang>:`](#title-headers) header.
 
-From: TaikoJiro v2.64 \
-Supported by: (Universally supported)
+***From***: TaikoJiro v2.64 \
+***Supported by***: (Universally supported)
 
 ### MAKER:
 
-Scope: per-file
+***Scope***: per-file
 
 Specify the creator (**maker**) of the notechart.
 
@@ -225,12 +225,12 @@ The display details are *unspecified*.
 * `MAKER:<string-name-notechart-creator> <string-notechart-creator-web-url>`
   * `<string-notechart-creator-web-url>` is immediately enclosed by a pair of angle brackets (`<` & `>`).
 
-From: taiko-web ver.19.11.25 \
-Supported by: OpenTaiko (0auBSQ) v0.6.0
+***From***: taiko-web ver.19.11.25 \
+***Supported by***: OpenTaiko (0auBSQ) v0.6.0
 
 ### GENRE:
 
-Scope: per-file
+***Scope***: per-file
 
 Specify the **genre** of the song.
 
@@ -248,11 +248,11 @@ The display details are *unspecified*.
     * *`ゲームミュージック` (Geemu Myuujikku)* "Game Music"
     * *`ナムコオリジナル` (Namuko Orijinaru)* "Namco Original"
 
-From: TJAPlayer2 for PC
+***From***: TJAPlayer2 for PC
 
 ### SIDE:
 
-Scope: per-file
+***Scope***: per-file
 
 Specify whether the corresponding song entry is displayed, regarding the *<ruby>裏<rt>ura</rt> 譜<rt>fu</rt> 面<rt>men</rt> 状<rt>jou</rt> 態<rt>tai</rt></ruby>* "inner notechart state/mode" ("*<ruby>裏 <rt>ura</rt></ruby>* inner or *<ruby>表 <rt>omote</rt></ruby>* outer **side**") of the song selection screen.
 
@@ -265,8 +265,8 @@ Specify whether the corresponding song entry is displayed, regarding the *<ruby>
 * **`SIDE:3`** / **`SIDE:Both`** / `SIDE:both` / **`SIDE:`**
   * Always displayed.
 
-From: TaikoJiro v2.49 \
-Supported by: OpenTaiko (0auBSQ) v0.6.0
+***From***: TaikoJiro v2.49 \
+***Supported by***: OpenTaiko (0auBSQ) v0.6.0
 
 #### Compatibility Issues
 
@@ -276,7 +276,7 @@ Supported by: OpenTaiko (0auBSQ) v0.6.0
 
 ### SIDEREV:
 
-Scope: per-file
+***Scope***: per-file
 
 Specify the filename of the *<ruby>裏<rt>ura</rt> 譜<rt>fu</rt> 面<rt>men</rt></ruby>* "inner notechart" or *<ruby>表<rt>omote</rt> 譜<rt>fu</rt> 面<rt>men</rt></ruby>* "outer notechart" version ("the **rev**erse **side**") of this notechart file.
 
@@ -285,11 +285,11 @@ Specify the filename of the *<ruby>裏<rt>ura</rt> 譜<rt>fu</rt> 面<rt>men</rt
   * If `SIDE:Ex` is used, specify the filename of the outer notechart.
   * If `SIDE:Both` is used, the behavior is *unspecified*.
 
-From: TaikoJiro 2 v0.70
+***From***: TaikoJiro 2 v0.70
 
 ### WAVE:
 
-Scope: per-file
+***Scope***: per-file
 
 Specify the audio file ("**wave**form audio file") of the song.
 
@@ -305,24 +305,24 @@ Specify the audio file ("**wave**form audio file") of the song.
 * `WAVE:`
   * No audio will be played.
 
-From: TJF format \
-Supported by: (Universally supported)
+***From***: TJF format \
+***Supported by***: (Universally supported)
 
 ### DEMOSTART:
 
-Scope: per-file
+***Scope***: per-file
 
 Specify the amount of seconds into the song audio for **start**ing playing the preview ("**demo**nstration") audio in the song selection screen.
 
 * `DEMOSTART:<non-negative-float-seconds-preview-audio-offset>`
 * `DEMOSTART:0` / `DEMOSTART:`
 
-From: TaikoJiro v2.37 \
-Supported by: (Universally supported)
+***From***: TaikoJiro v2.37 \
+***Supported by***: (Universally supported)
 
 ### OFFSET:
 
-Scope: per&ndash;play-side (?)
+***Scope***: per&ndash;play-side (?)
 
 Specify the amount of seconds past ("**offset**ted") from the time position of `#START` of the notechart which the song audio should start playing from the beginning.
 
@@ -335,7 +335,7 @@ Replaced the TJF command `#GOMUSIC` (starting ("**go**") playing the song audio 
 
 ### SONGVOL:
 
-Scope: per-file
+***Scope***: per-file
 
 Specify the relative amplitude percentage (%) of the desired **vol**ume gain of the **song** audio.
 
@@ -343,8 +343,8 @@ Specify the relative amplitude percentage (%) of the desired **vol**ume gain of 
 * `SONGVOL:`
   * The behavior is *unspecified*.
 
-From: TaikoJiro v1.66 \
-Supported by: TaikoJiro 2, TJAPlayer3 v1.5.2
+***From***: TaikoJiro v1.66 \
+***Supported by***: TaikoJiro 2, TJAPlayer3 v1.5.2
 
 #### Compatibility Issues
 
@@ -352,7 +352,7 @@ Supported by: TaikoJiro 2, TJAPlayer3 v1.5.2
 
 ### SEVOL:
 
-Scope: per&ndash;play-side (?)
+***Scope***: per&ndash;play-side (?)
 
 Specify the relative amplitude percentage (%) of the desired **vol**ume gain of the taiko sound ("**s**ound **e**ffect").
 
@@ -362,8 +362,8 @@ Specify the relative amplitude percentage (%) of the desired **vol**ume gain of 
 * `SEVOL:`
   * The behavior is *unspecified*.
 
-From: TaikoJiro v1.66 \
-Supported by: TaikoJiro 2
+***From***: TaikoJiro v1.66 \
+***Supported by***: TaikoJiro 2
 
 #### Compatibility Issues
 
@@ -371,7 +371,7 @@ Supported by: TaikoJiro 2
 
 ### BPM:
 
-Scope: per&ndash;play-side
+***Scope***: per&ndash;play-side
 
 Specify the initial **BPM** (**b**eat **p**er **m**inute) of the notechart.
 
@@ -382,12 +382,12 @@ Specify the initial **BPM** (**b**eat **p**er **m**inute) of the notechart.
   * The behavior is *unspecified*.
   * In TaikoJiro, equivalent to `BPM:120`.
 
-From: TJF format \
-Supported by: (Universally supported)
+***From***: TJF format \
+***Supported by***: (Universally supported)
 
 ### HEADSCROLL:
 
-Scope: per&ndash;play-side, gimmicky
+***Scope***: per&ndash;play-side, gimmicky
 
 Specify the normal **scroll**ing velocity (before and non-after the beginning ("**head**") of the notechart), relative to the base scrolling velocity.
 
@@ -395,11 +395,11 @@ Specify the normal **scroll**ing velocity (before and non-after the beginning ("
 * `HEADSCROLL:0`
   * The behavior is *unspecified*.
 
-From: TJAPlayer2 for PC
+***From***: TJAPlayer2 for PC
 
 ### PREIMAGE:
 
-Scope: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;play-side (?), decorative
 
 Specify the jacket ("**pre**view") **image** of the song.
 
@@ -407,11 +407,11 @@ Specify the jacket ("**pre**view") **image** of the song.
 * `PREIMAGE:`
   * No jacket image will be displayed.
 
-From: OpenTaiko (0auBSQ) v0.5.4
+***From***: OpenTaiko (0auBSQ) v0.5.4
 
 ### TAIKOWEBSKIN:
 
-Scope: per-file, decorative
+***Scope***: per-file, decorative
 
 Specify the **skin** in the gameplay screen for **taiko-web**.
 
@@ -438,11 +438,11 @@ Each element of `<comma-separated-list-string-key-value>` can be one of:
     * `<enum-str-animation-type>`, animated image with pre-defined animation type, requires both `bg_<str-element><text-suffix-skin-variation>_a.<text-file-extension>` & `bg_<str-element><text-suffix-skin-variation>_b.<text-file-extension>` to exist.
       * Cannot be used when `<str-element>` is `stage`.
 
-From: taiko-web ver.19.02.03
+***From***: taiko-web ver.19.02.03
 
 ### SCENEPRESET:
 
-Scope: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;play-side (?), decorative
 
 Specify the pre-defined ("**preset**") skin ("**scene**") in the gameplay screen.
 
@@ -450,11 +450,11 @@ Specify the pre-defined ("**preset**") skin ("**scene**") in the gameplay screen
 * `SCENEPRESET:`
   * The default skin is used.
 
-From: OpenTaiko (0auBSQ) v0.6.0
+***From***: OpenTaiko (0auBSQ) v0.6.0
 
 ### TOWERTYPE:
 
-Scope: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;play-side (?), decorative
 
 Specify the dedicated **tower** skin ("**type**") to use.
 
@@ -463,11 +463,11 @@ Used in conjunction with [`COURSE:Tower`](#course).
 * `TOWERTYPE:<non-negative-int-tower-skin>`
 * `TOWERTYPE:0` / `TOWERTYPE:`
 
-From: OpenTaiko (0auBSQ) v0.5.0
+***From***: OpenTaiko (0auBSQ) v0.5.0
 
 ### DANTICK:
 
-Scope: per-file, decorative
+***Scope***: per-file, decorative
 
 Specify the dedicated *<ruby>**段**<rt>**Dan**'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode" skin (*<ruby>コ<rt>ko</rt> ス<rt>su</rt> メ<rt>me</rt> **チッ**<rt>**chik**</rt> **ク**<rt>**ku**</rt></ruby>* "cosme**tic**" (?)) to use in the certification challenge selection screen.
 
@@ -487,11 +487,11 @@ Used in conjunction with [`COURSE:Dan`](#course).
       * Reference: <https://taiko.namco-ch.net/taiko/en/special/dani_dojo_gaiden/about.php>
 * `DANTICK:0` / `DANTICK:`
 
-From: OpenTaiko (0auBSQ) v0.5.1
+***From***: OpenTaiko (0auBSQ) v0.5.1
 
 ### DANTICKCOLOR:
 
-Scope: per-file, decorative
+***Scope***: per-file, decorative
 
 Specify the **color** filter to apply to the *<ruby>**段**<rt>**Dan**'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode" skin (*<ruby>コ<rt>ko</rt> ス<rt>su</rt> メ<rt>me</rt> **チッ**<rt>**chik**</rt> **ク**<rt>**ku**</rt></ruby>* "cosme**tic**" (?)) objects in the certification challenge selection screen.
 
@@ -506,11 +506,11 @@ Used in conjunction with [`COURSE:Dan`](#course).
     * `<enum-str-html-color-name>`
 * `DANTICKCOLOR:#FFFFFF` / `DANTICKCOLOR:`
 
-From: OpenTaiko (0auBSQ) v0.5.1
+***From***: OpenTaiko (0auBSQ) v0.5.1
 
 ### SELECTBG:
 
-Scope: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;play-side (?), decorative
 
 Specify the **b**ack**g**round image of the song **select**ion screen. Override the skin settings.
 
@@ -518,11 +518,11 @@ Specify the **b**ack**g**round image of the song **select**ion screen. Override 
 * `SELECTBG:`
   * The default song selection background for the containing song folder is used.
 
-From: OpenTaiko (0auBSQ) v0.6.0
+***From***: OpenTaiko (0auBSQ) v0.6.0
 
 ### BGIMAGE:
 
-Scope: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;play-side (?), decorative
 
 Specify the **b**ack**g**round **image** of the gameplay screen. Override the skin settings.
 
@@ -532,11 +532,11 @@ Specify the **b**ack**g**round **image** of the gameplay screen. Override the sk
 * `BGIMAGE:`
   * No background images will be displayed.
 
-From: TJAPlayer2 for PC ver.2016021300
+***From***: TJAPlayer2 for PC ver.2016021300
 
 ### BGOFFSET:
 
-Scope: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;play-side (?), decorative
 
 Specify the amount of seconds past ("**offset**ted") from the time position specified by the [`OFFSET:`](#offset) header which the background image ("**image**") should start displaying.
 
@@ -545,12 +545,12 @@ Equation: `bgoffset` = `time-point-of-image-displaying` − `time-point-of-audio
 * `BGOFFSET:<float-seconds-offset>`
 * `BGOFFSET:0` / `BGOFFSET:`
 
-From: ? \
+***From***: ? \
 Reference: TJA Format Support (vscode extension)
 
 ### BGMOVIE:
 
-Scope: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;play-side (?), decorative
 
 Specify the **b**ack**g**round video ("**movie**") of the gameplay screen. Override the skin settings.
 
@@ -560,11 +560,11 @@ Specify the **b**ack**g**round video ("**movie**") of the gameplay screen. Overr
 * `BGMOVIE:`
   * No background videos will be displayed.
 
-From: TJAPlayer2 for PC ver.2016021300
+***From***: TJAPlayer2 for PC ver.2016021300
 
 ### MOVIEOFFSET:
 
-Scope: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;play-side (?), decorative
 
 Specify the amount of seconds past ("**offset**ted") from the time position specified by the [`OFFSET:`](#offset) header which the background video ("**movie**") should start playing from the beginning.
 
@@ -573,7 +573,7 @@ Equation: `movieoffset` = `time-point-of-video-beginning` − `time-point-of-aud
 * `MOVIEOFFSET:<positive-float-seconds-offset>`
 * `MOVIEOFFSET:0` / `MOVIEOFFSET:`
 
-From: TJAPlayer2 for PC ver.2015081100
+***From***: TJAPlayer2 for PC ver.2015081100
 
 #### Compatibility Issues
 
@@ -582,7 +582,7 @@ From: TJAPlayer2 for PC ver.2015081100
 
 ### BGA:
 
-Scope: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;play-side (?), decorative
 
 Specify a **b**ack**g**round video ("**a**nimation") to be used in the gameplay screen by the [`#BGAON` and `#BGAOFF`](#bgaon--bgaoff) commands. Override the skin settings.
 
@@ -594,7 +594,7 @@ Not reset by `BGA:` itself.
 * `BGA:`
   * No background video will be displayed.
 
-From: OpenTaiko (0auBSQ) v0.6.0
+***From***: OpenTaiko (0auBSQ) v0.6.0
 
 #### Compatibility Issues
 
@@ -603,7 +603,7 @@ From: OpenTaiko (0auBSQ) v0.6.0
 
 ### LYRICS: / LYRICFILE:
 
-Scope: per-file, decorative
+***Scope***: per-file, decorative
 
 Specify the lyric file(s) for the song to display **lyrics** in the playback screen.
 
@@ -623,8 +623,8 @@ Specify the lyric file(s) for the song to display **lyrics** in the playback scr
 * `LYRICS:` / `LYRICFILE:`
   * Use only the lyric specified by [`#LYRIC`](#lyric) commands (if any).
 
-From: taiko-web ver.20.03.31, TJAPlayer3-Develop-ReWrite \
-Supported by: TJAPlayer3-f v1.6.0.0, OpenTaiko (0auBSQ) v0.6.0
+***From***: taiko-web ver.20.03.31, TJAPlayer3-Develop-ReWrite \
+***Supported by***: TJAPlayer3-f v1.6.0.0, OpenTaiko (0auBSQ) v0.6.0
 
 #### Compatibility Issues
 
@@ -633,7 +633,7 @@ Supported by: TJAPlayer3-f v1.6.0.0, OpenTaiko (0auBSQ) v0.6.0
 
 ### EXPLICIT:
 
-Scope: per-file, decorative
+***Scope***: per-file, decorative
 
 If enabled, specify that the song has **explicit** (of the meaning of *not safe for work (NSFW)*) lyrics.
 
@@ -644,11 +644,11 @@ The display details are *unspecified*.
 * `EXPLICIT:0` / `EXPLICIT:`
   * The song has no explicit lyrics.
 
-From: OpenTaiko (0auBSQ) v0.6.0
+***From***: OpenTaiko (0auBSQ) v0.6.0
 
 ### GAME:
 
-Scope: per&ndash;play-side (?)
+***Scope***: per&ndash;play-side (?)
 
 Specify the **game** mode. The meaning of the symbols used in the notechart definition is changed accordingly; see [TJA Notechart Definition](#tja-notechart-definition).
 
@@ -666,8 +666,8 @@ See [the `#GAMETYPE` command](#gametype) for specifying the game mode for specif
   * A game mode similar to *Donkey Konga*, developed by Namco
   * See [Note Symbols in Konga Mode](#note-symbols-in-konga-mode)
 
-From: TaikoJiro v2.13 \
-Supported by: taiko-web (plugin "Donkey Konga Mode")
+***From***: TaikoJiro v2.13 \
+***Supported by***: taiko-web (plugin "Donkey Konga Mode")
 
 #### Compatibility Issues
 
@@ -675,7 +675,7 @@ Supported by: taiko-web (plugin "Donkey Konga Mode")
 
 ### COURSE:
 
-Scope: per&ndash;play-side
+***Scope***: per&ndash;play-side
 
 Specify the *<ruby>コー<rt>koo</rt> ス<rt>su</rt></ruby> "course"/<ruby>む<rt>mu</rt> ず<rt>zu</rt> か<rt>ka</rt> し<rt>shi</rt> い<rt>i</rt></ruby> "difficulty"/<ruby>難<rt>nan'</rt> 易<rt>i</rt> 度<rt>do</rt></ruby> "difficulty (or easiness) level"* difficulty/difficulty level ("**course**").
 
@@ -714,8 +714,8 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
   * An *unspecified* default difficulty is chosen by the simulator.
   * Usually equivalent to `COURSE:Oni`
 
-From: TaikoJiro v1.76 \
-Supported by: (Universally supported)
+***From***: TaikoJiro v1.76 \
+***Supported by***: (Universally supported)
 
 #### Compatibility Issues
 
@@ -725,7 +725,7 @@ Supported by: (Universally supported)
 
 ### LEVEL:
 
-Scope: per&ndash;play-side
+***Scope***: per&ndash;play-side
 
 Specify the *<ruby>難<rt>nan'</rt> 易<rt>i</rt> **度**<rt>do</rt></ruby>* "difficulty (or easiness) **level**"/difficulty star/? ("**level**").
 
@@ -745,12 +745,12 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
 * `LEVEL:<non-negative-float-difficulty-star>` &mdash; TaikoJiro v2.78
   * The fraction part is considered for sorting by difficulty star but is not displayed.
 
-From: TJF format \
-Supported by: (Universally supported)
+***From***: TJF format \
+***Supported by***: (Universally supported)
 
 ### STYLE:
 
-Scope: per&ndash;play-side
+***Scope***: per&ndash;play-side
 
 Specify the total amount of play-**side**s of the notechart(s).
 
@@ -770,8 +770,8 @@ If the specified amount of play-sides is not 1, [`#START <enum-str-play-side>`](
 
 Reference: *ダブルプレイ* ("Double Play"; "Two-player Charts"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/ダブルプレイ>
 
-From: TaikoJiro v1.99 \
-Supported by: TJAPlayer2 for PC
+***From***: TaikoJiro v1.99 \
+***Supported by***: TJAPlayer2 for PC
 
 #### Compatibility Issues
 
@@ -779,7 +779,7 @@ Supported by: TJAPlayer2 for PC
 
 ### BALLOON Headers
 
-Scope: per&ndash;play-side
+***Scope***: per&ndash;play-side
 
 Specify the required amount of hits of *<ruby>激<rt>geki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>/<ruby>ゲ<rt>ge</rt> キ<rt>ki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>fuu</rt> 船<rt>sen</rt></ruby>/<ruby>ふ <rt>fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* **balloon**&ndash;type notes (denoted by `7`, `9`, or `D` in the notechart definition), in the order of their definition, ***NOT*** the hit order during playing.
 
@@ -800,8 +800,8 @@ Each balloon-type note with unassigned hit amount requires an *unspecified* defa
 
 For each element of `<comma-separated-list-non-negative-int-amount-of-hits>`, if the amount of hits is `0`, the per-note behavior is *unspecified*.
 
-From: TaikoJiro \
-Supported by: (Universally supported)
+***From***: TaikoJiro \
+***Supported by***: (Universally supported)
 
 #### Compatibility Issues
 
@@ -812,7 +812,7 @@ Supported by: (Universally supported)
 
 ### LIFE:
 
-Scope: per&ndash;play-side
+***Scope***: per&ndash;play-side
 
 Specify the initial **life** count of the life count gauge (if used).
 
@@ -834,12 +834,12 @@ A *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* bad judgment decreases the life c
   * In TaikoJiro, equivalent to `LIFE:0`.
   * In OpenTaiko (0auBSQ), equivalent to `LIFE:5` when used in conjunction with `COURSE:Tower`.
 
-From: TaikoJiro v2.19 \
-Supported by: OpenTaiko (0auBSQ) v0.4.3
+***From***: TaikoJiro v2.19 \
+***Supported by***: OpenTaiko (0auBSQ) v0.4.3
 
 ### TOTAL:
 
-Scope: per&ndash;play-side
+***Scope***: per&ndash;play-side
 
 Specify the **total** *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge increment of the notechart when all hit-type notes are hit with *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgment, *i.e.*, *<ruby>ド<rt>Do</rt> ン<rt>n</rt> ダ<rt>da</rt> フ<rt>fu</rt> ル<rt>ru</rt> コ<rt>ko</rt> ン<rt>n</rt> ボ<rt>bo</rt></ruby>* Donderful Combo.
 
@@ -848,11 +848,11 @@ Specify the **total** *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</r
 * `TOTAL:`
   * The increasing rate of spirit gauge/soul gauge is determined by the simulator. *Unspecified*: The details for determining it; usually one of the official games is followed.
 
-From: TaikoJiro v2.92 & TaikoJiro 2 v0.93
+***From***: TaikoJiro v2.92 & TaikoJiro 2 v0.93
 
 ### GAUGEINCR:
 
-Scope: per&ndash;play-side
+***Scope***: per&ndash;play-side
 
 Specify the rounding mode of the **incr**ement of the *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**gee**</rt>**ジ**<rt>**ji**</rt></ruby>* spirit **gauge**/soul **gauge**.
 
@@ -864,11 +864,11 @@ Specify the rounding mode of the **incr**ement of the *<ruby>魂<rt>tamashii</rt
     * `Notfix`, no rounding is performed.
     * `Ceiling`
 
-From: TJAPlayer3 v1.5.4
+***From***: TJAPlayer3 v1.5.4
 
 ### EXAM Headers
 
-Scope: per&ndash;play-side (?)
+***Scope***: per&ndash;play-side (?)
 
 Specify a requirement for passing the notechart in *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode" ("**exam**ination").
 
@@ -907,11 +907,11 @@ Used in conjunction with [`COURSE:Dan`](#course).
   * The `<enum-str-requirement>` is implicitly fixed to `g`.
   * Corresponding to the `EXAM1:` command in TJAPlayer3-Develop-ReWrite & OpenTaiko (0auBSQ).
 
-From: TJAPlayer3 v1.5.0
+***From***: TJAPlayer3 v1.5.0
 
 ### SCOREMODE:
 
-Scope: per&ndash;play-side, scoring
+***Scope***: per&ndash;play-side, scoring
 
 Specify the **scoring mode**.
 
@@ -963,8 +963,8 @@ When either the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true percussi
 
 Reference: *配点* ("Scoring"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/システム/配点>
 
-From: TaikoJiro v2.85 \
-Supported by: TaikoJiro 2 v0.72, TJAPlayer2 for PC
+***From***: TaikoJiro v2.85 \
+***Supported by***: TaikoJiro 2 v0.72, TJAPlayer2 for PC
 
 #### Compatibility Issues
 
@@ -972,7 +972,7 @@ Supported by: TaikoJiro 2 v0.72, TJAPlayer2 for PC
 
 ### SCOREINIT:
 
-Scope: per&ndash;play-side, scoring
+***Scope***: per&ndash;play-side, scoring
 
 Specify the *<ruby>**初**<rt>sho</rt> 項<rt>kou</rt></ruby>* **init**ial term (refers to an arithmetic progression) (`init`) used for calculate the basic **score**. See the explanation for the [`SCOREMODE:`](#scoremode) header.
 
@@ -984,12 +984,12 @@ Specify the *<ruby>**初**<rt>sho</rt> 項<rt>kou</rt></ruby>* **init**ial term 
 * `SCOREINIT:`
   * `init` is determined by the simulator. *Unspecified*: The details for determining it; usually one of the official games is followed.
 
-From: TaikoJiro v1.67 \
-Supported by: (Universally supported)
+***From***: TaikoJiro v1.67 \
+***Supported by***: (Universally supported)
 
 ### SCOREDIFF:
 
-Scope: per&ndash;play-side, scoring
+***Scope***: per&ndash;play-side, scoring
 
 Specify the *<ruby>公<rt>kou</rt> **差**<rt>sa</rt></ruby>* common **diff**erence (refers to an arithmetic progression) (`diff`) used for calculate the basic **score**. See the explanation for the [`SCOREMODE:`](#scoremode) header.
 
@@ -1004,12 +1004,12 @@ Specify the *<ruby>公<rt>kou</rt> **差**<rt>sa</rt></ruby>* common **diff**ere
 * `SCOREDIFF:`
   * `diff` is determined by the simulator. *Unspecified*: The details for determining it; usually one of the official games is followed.
 
-From: TaikoJiro v1.67 \
-Supported by: (Universally supported)
+***From***: TaikoJiro v1.67 \
+***Supported by***: (Universally supported)
 
 ### HIDDENBRANCH:
 
-Scope: per&ndash;play-side, gimmicky
+***Scope***: per&ndash;play-side, gimmicky
 
 If enabled, make the *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path indicator **hidden** in the song selection screen; hide the "branch"/path mark on the note field from the beginning of the notechart until time point when the "branch"/path&ndash;switching effects should play for the first "branch"/path section in the gameplay screen.
 
@@ -1021,7 +1021,7 @@ If enabled, make the *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<r
 * `HIDDENBRANCH:`
   * Disable such effects.
 
-From: TJAPlayer2 for PC
+***From***: TJAPlayer2 for PC
 
 ## TJC Header
 
@@ -1035,14 +1035,14 @@ See the [`#NEXTSONG`](#nextsong) command for the TJA command version of TJC head
 
 ### SONG:
 
-Scope: per-file, sequential
+***Scope***: per-file, sequential
 
 Specify a notechart ("**song**") of the notechart set.
 
 * `SONG:<string-filepath-tja-from-game-root-directory>`
 
-From: TaikoJiro v2.34 \
-Supported by: (Universally supported)
+***From***: TaikoJiro v2.34 \
+***Supported by***: (Universally supported)
 
 ## TJA Command
 
@@ -1101,13 +1101,10 @@ Commands only affect their targetting game objects. The target of each command c
 
 ### `#BMSCROLL` / `#HBSCROLL` / `#NMSCROLL`
 
-Scope (placed before the [`#START`](#start--end) command): per&ndash;play-side, gimmicky
-
-Scope (placed after the [`#START`](#start--end) command): branch, non-before, gimmicky &mdash; OpenTaiko (0auBSQ) v0.6.0
-
-Effect scope: all
-
-Effect target: notes, bar lines
+***Scope*** (placed before the [`#START`](#start--end) command): per&ndash;play-side, gimmicky \
+***Scope*** (placed after the [`#START`](#start--end) command): branch, non-before, gimmicky &mdash; OpenTaiko (0auBSQ) v0.6.0 \
+***Effect scope***: all \
+***Effect target***: notes, bar lines
 
 Use a **scroll**ing mode similar to the scrolling method used in either **B**E**M**ANI-series or the official Taiko ("**n**or**m**al") game series, unless overridden by user settings.
 
@@ -1150,8 +1147,8 @@ See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-
 
 *Proposal*: See [*Proposal*: Command Modifier](#proposal-command-modifier) for the syntax for mode-invariant commands.
 
-From: TaikoJiro v1.91 \
-Supported by: TaikoJiro 2, TJAPlayer2 for PC
+***From***: TaikoJiro v1.91 \
+***Supported by***: TaikoJiro 2, TJAPlayer2 for PC
 
 #### Compatibility Issues
 
@@ -1159,9 +1156,8 @@ Supported by: TaikoJiro 2, TJAPlayer2 for PC
 
 ### `#PAPAMAMA`
 
-Scope: per&ndash;play-side (placed before the [`#START`](#start--end) command)
-
-Effect target: notes
+***Scope***: per&ndash;play-side (placed before the [`#START`](#start--end) command) \
+***Effect target***: notes
 
 Use the *<ruby>**パ**<rt>**Pa**</rt> **パ**<rt>**pa**</rt> **マ**<rt>**Ma**</rt> **マ**<rt>**ma**</rt> サ<rt>Sa</rt> ポー<rt>poo</rt> ト<rt>to</rt></ruby>* "Parent Support Mode"/Helping Hand Mode gameplay rules from the official arcade games for certain song in the *<ruby>簡<rt>Kan</rt> 単<rt>tan</rt></ruby>/<ruby>か<rt>Ka</rt> ん<rt>n</rt> た<rt>ta</rt> ん<rt>n</rt></ruby>* Easy difficulty, where the amount of players is fixed to 1 and the inputs from all players are combined to play the song.
 
@@ -1169,11 +1165,11 @@ Reference: <https://taiko.namco-ch.net/taiko/en/howto/papamama.php#papamama>
 
 *Unspecified*: The behavior when the amount of play-sides specified by the [`STYLE:`](#style) header is not 1.
 
-From: TJAPlayer3-f v1.7.2.0
+***From***: TJAPlayer3-f v1.7.2.0
 
 ### #START / `#END`
 
-Scope: per&ndash;play-side (enclosing the notechart definition), sequential
+***Scope***: per&ndash;play-side (enclosing the notechart definition), sequential
 
 Respectively **start** / **end** the region of notechart definition.
 
@@ -1199,8 +1195,8 @@ Respectively **start** / **end** the region of notechart definition.
 * The 1-play-side notechart should be defined if any multiple-play-side notecharts are defined
   * *Proposal*: Make the 1-play-side in such case optional when each defined play-side notechart has all other play-side notecharts defined for the same amount of play-sides. The chosen 1-play-side notechart will be the notechart for an *unspecified* play-side.
 
-From: TJF format \
-Supported by: (Universally supported)
+***From***: TJF format \
+***Supported by***: (Universally supported)
 
 #### Compatibility Issues
 
@@ -1221,11 +1217,9 @@ Supported by: (Universally supported)
 
 ### #BPMCHANGE
 
-Scope: branch, non-before, timing
-
-Effect scope: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll)); branch, non-before (otherwise)
-
-Effect target: notes, bar lines
+***Scope***: branch, non-before, timing \
+***Effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll)); branch, non-before (otherwise) \
+***Effect target***: notes, bar lines
 
 **Change** the **BPM**.
 
@@ -1236,14 +1230,13 @@ Effect target: notes, bar lines
   * The behavior is *unspecified* (may cause crashes in some existing simulators).
 * Initial value: The BPM specified by the [`BPM:`](#bpm) header
 
-From: TJF format \
-Supported by: (Universally supported)
+***From***: TJF format \
+***Supported by***: (Universally supported)
 
 ### #MEASURE
 
-Scope: branch, measure non-before, timing
-
-Effect target: notes, bar lines
+***Scope***: branch, measure non-before, timing \
+***Effect target***: notes, bar lines
 
 Change the time signature / meter signature / **measure** signature.
 
@@ -1268,11 +1261,9 @@ Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby
 
 ### #DELAY
 
-Scope: branch, non-before, timing, sequential
-
-Effect scope: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll), positive value); non-before (otherwise)
-
-Effect target: notes, bar lines
+***Scope***: branch, non-before, timing, sequential \
+***Effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll), positive value); non-before (otherwise) \
+***Effect target***: notes, bar lines
 
 Adjust (**delay**) the time position of all notechart object (including commands) non-preceding the `#DELAY` command by the specified time duration.
 
@@ -1292,8 +1283,8 @@ For the timing of notechart object, multiple `#DELAY` commands placed at the sam
   * The specified time duration is the beat amount of `<beats-time-duration>` under the current BPM.
   * The `<enum-str-delay-type>` part of the [`beats`](#value-type) value ***MUST*** be `d` or (empty) and specifies whether the specified measure duration includes the time duration of the `#DELAY` commands with overlapping time interval.
 
-From: TaikoJiro v1.60 \
-Supported by: (Universally supported)
+***From***: TaikoJiro v1.60 \
+***Supported by***: (Universally supported)
 
 #### Compatibility Issues
 
@@ -1303,9 +1294,8 @@ Supported by: (Universally supported)
 
 ### `#GOGOSTART` / `#GOGOEND`
 
-Scope: branch, non-before, scoring, sequential
-
-Effect target: notes
+***Scope***: branch, non-before, scoring, sequential \
+***Effect target***: notes
 
 Respectively **start** / **end** a *<ruby>ゴー<rt>Goo</rt> ゴー<rt>Goo</rt> タ<rt>Ta</rt> イ<rt>i</rt> ム<rt>mu</rt></ruby>* **Go-Go** Time section if not already respectively started / ended.
 
@@ -1315,19 +1305,17 @@ For playing the Go-Go Time entering effects during an existing Go-Go Time sectio
 
 ### `#DUMMYSTART` / `#DUMMYEND`
 
-Scope: branch, non-before, sequential
-
-Effect target: notes
+***Scope***: branch, non-before, sequential \
+***Effect target***: notes
 
 Respectively **start** / **end** a fake/dummy section if not already respectively started / ended.
 
-From: TaikoManyGimmicks
+***From***: TaikoManyGimmicks
 
 ### #SCROLL
 
-Scope: branch, measure non-before, gimmicky
-
-Effect target: notes, bar lines
+***Scope***: branch, measure non-before, gimmicky \
+***Effect target***: notes, bar lines
 
 Change the **scroll**ing speed of notes & bar lines, relative to the normal scrolling velocity and direction.
 
@@ -1367,9 +1355,8 @@ Unlike the `#BPMCHANGE` command, the `#SCROLL` command is measure-scoped.
 
 ### `#BARLINESCROLL`
 
-Scope: branch, non-before, gimmicky
-
-Effect target: bar lines
+***Scope***: branch, non-before, gimmicky \
+***Effect target***: bar lines
 
 Change the **scroll**ing speed of only **bar** **line**s, relative to the normal scrolling velocity and direction and prevent this speed from being overridden by further [`#SCROLL`](#scroll).
 
@@ -1377,15 +1364,13 @@ Change the **scroll**ing speed of only **bar** **line**s, relative to the normal
 * **`#BARLINESCROLL Off`** / `#BARLINESCROLL off` / `#BARLINESCROLL`
   * Reset the scrolling speed of bar lines to the scrolling speed of notes and allow this speed to be overridden by further [`#SCROLL`](#scroll).
 
-From: taiko-web (plugin "Custom Barlines")
+***From***: taiko-web (plugin "Custom Barlines")
 
 ### *Proposal*: #SPEED
 
-Scope: branch, non-before, gimmicky
-
-Effect scope: all
-
-Effect target: notes, bar lines
+***Scope***: branch, non-before, gimmicky \
+***Effect scope***: all \
+***Effect target***: notes, bar lines
 
 Suddenly change the base scrolling **speed** of notes & bar lines. In other words, suddenly change the normal scrolling velocity and direction.
 
@@ -1406,9 +1391,8 @@ If the notes & the bar lines are rotated around their center accordingly when a 
 
 ### #DIRECTION
 
-Scope: branch, non-before, gimmicky
-
-Effect target: notes, bar lines
+***Scope***: branch, non-before, gimmicky \
+***Effect target***: notes, bar lines
 
 Change the scrolling **direction** of notes & bar lines.
 
@@ -1433,35 +1417,32 @@ Change the scrolling **direction** of notes & bar lines.
 * *Proposal*: `#DIRECTION <number-degrees>deg`
   * `<number-degrees-rotation>` specifies the degrees (°) of the counterclockwise (↺) rotation.
 
-From: TJAPlayer2 for PC
+***From***: TJAPlayer2 for PC
 
 ### `#BARLINEOFF` / `#BARLINEON`
 
-Scope: branch, non-before, gimmicky
-
-Effect target: bar lines
+***Scope***: branch, non-before, gimmicky \
+***Effect target***: bar lines
 
 Respectively disable ("turn **off**") / enable ("turn **on**") the display of all **bar** **line**s (including the special bar lines indicating the beginning of a *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path section) from the definition position and on.
 
-From: TaikoJiro v2.69 \
-Supported by: (Universally supported)
+***From***: TaikoJiro v2.69 \
+***Supported by***: (Universally supported)
 
 ### `#BARLINE`
 
-Scope: branch, beat interval one-shot, gimmicky
-
-Effect target: bar lines
+***Scope***: branch, beat interval one-shot, gimmicky \
+***Effect target***: bar lines
 
 Insert a fake/dummy normal **bar** **line** displayed at the head of the current beat position.
 
-From: taiko-web (plugin "Custom Barlines") \
-Supported by: OpenTaiko (0auBSQ) v0.6.0
+***From***: taiko-web (plugin "Custom Barlines") \
+***Supported by***: OpenTaiko (0auBSQ) v0.6.0
 
 ### #JPOSSCROLL
 
-Scope: branch, non-before, gimmicky
-
-Effect target: notes, bar lines, judgment circle, notefield
+***Scope***: branch, non-before, gimmicky \
+***Effect target***: notes, bar lines, judgment circle, notefield
 
 Move ("**scroll**") the **pos**ition of the **j**udgment circle from the current position.
 
@@ -1488,13 +1469,12 @@ The arguments are whitespace-separated.
     * `1`
       * The moving direction is reversed (rotated 180 degrees (°) (counter)clockwise (↺/↻)).
 
-From: TJAPlayer2 for PC
+***From***: TJAPlayer2 for PC
 
 ### #JUDGEDELAY
 
-Scope: branch, non-after, gimmicky
-
-Effect target: notes, bar lines
+***Scope***: branch, non-after, gimmicky \
+***Effect target***: notes, bar lines
 
 Specify the per&ndash;note/bar line visual **judgment** point to be offset ("**delay**") from the judgment mark.
 
@@ -1515,13 +1495,12 @@ The arguments are whitespace-separated.
   * **3**-parameter form.
   * Specify the visual judgment point to be visually `<float-seconds-duration>` before the given position relative to the judgment mark.
 
-From: TaikoManyGimmicks
+***From***: TaikoManyGimmicks
 
 ### SUDDEN / HIDDEN Commands
 
-Scope: branch, non-before, gimmicky
-
-Effect target: notes
+***Scope***: branch, non-before, gimmicky \
+***Effect target***: notes
 
 Make non-preceding notes and their *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* "Note phoneticization" respectively appear and move **sudden**ly / disappear ("**hidden**") and stop moving suddenly.
 
@@ -1548,7 +1527,7 @@ The arguments are whitespace-separated.
 * `nb` &mdash; Affect both the **n**ote & the **b**ar lines.
 * `ntb` / `All` &mdash; Affect all notechart objects.
 
-From: TJAPlayer2 for PC
+***From***: TJAPlayer2 for PC
 
 #### Compatibility Issues
 
@@ -1556,9 +1535,8 @@ From: TJAPlayer2 for PC
 
 ### #NOTESPAWN
 
-Scope: branch, non-before, gimmicky
-
-Effect target: notes
+***Scope***: branch, non-before, gimmicky \
+***Effect target***: notes
 
 Specify the displaying ("**spawn**") duration of **note**s before the time point of judgment.
 
@@ -1573,26 +1551,23 @@ The arguments are whitespace-separated.
   * Set the hidden point.
   * Equivalent to (*Proposal*) `#HIDDEN <float-milliseconds-duration> 0` after unit conversion.
 
-From: TaikoManyGimmicks
+***From***: TaikoManyGimmicks
 
 ### `#ENABLEDORON` / `#DISABLEDORON`
 
-Scope: branch, non-before, gimmicky
-
-Effect scope: all
-
-Effect target: notes
+***Scope***: branch, non-before, gimmicky \
+***Effect scope***: all \
+***Effect target***: notes
 
 Respectively **enable** / **disable** the ***<ruby>ド<rt>Do</rt> ロ<rt>ro</rt> ン<rt>n</rt></ruby>*** "note-wise stealth" game modifier. The *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* "Note phoneticization" is not hidden by this game modifier.
 
-From: TJAPlayer3-Extended \
-Supported by: OpenTaiko (0auBSQ) v0.6.0
+***From***: TJAPlayer3-Extended \
+***Supported by***: OpenTaiko (0auBSQ) v0.6.0
 
 ### #LYRIC
 
-Scope: branch, non-before, decorative
-
-Effect target: gameplay screen
+***Scope***: branch, non-before, decorative \
+***Effect target***: gameplay screen
 
 Display the specified **lyric**.
 
@@ -1601,8 +1576,8 @@ Display the specified **lyric**.
 * `#LYRIC <str-lyric>`
   * In taiko-web, a `\n` in `<str-lyric>` is displayed as a newline.
 
-From: TJAPlayer2 for PC \
-Supported by: taiko-web ver.20.03.31
+***From***: TJAPlayer2 for PC \
+***Supported by***: taiko-web ver.20.03.31
 
 #### Compatibility Issues
 
@@ -1610,9 +1585,8 @@ Supported by: taiko-web ver.20.03.31
 
 ### #SENOTECHANGE
 
-Scope: branch, note one-shot, gimmicky
-
-Effect target: notes
+***Scope***: branch, note one-shot, gimmicky \
+***Effect target***: notes
 
 Override ("**change**") the automatically assigned *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* "**Note** phoneticization" ("**s**ound **e**ffect of a **note**" or "*<ruby>発<rt>Hatsu</rt> **声**<rt>**se**i</rt></ruby>* vocalization of a **note**" (?)) of the nearest note(s) placed non-before the command.
 
@@ -1687,13 +1661,12 @@ However, in the official Konga games, the general pattern is less consistent and
 * There is only one form for drumroll-type notes and applause notes in the official games: Only the short form has been used because all the Konga games were released before the PS3-generation of Taiko games.
 * The short form is used otherwise.
 
-From: TJAPlayer3 v1.4.0
+***From***: TJAPlayer3 v1.4.0
 
 ### *Proposal*: #BALLOON (Command)
 
-Scope: branch, note one-shot
-
-Effect target: balloon-type notes
+***Scope***: branch, note one-shot \
+***Effect target***: balloon-type notes
 
 Basically the same as the **[`BALLOON:`](#balloon-headers)** header, except that the `#BALLOON` command only applies to non-preceding notes in the note definition.
 
@@ -1705,9 +1678,8 @@ The semantics are otherwise the same as the [BALLOON](#balloon-headers) headers.
 
 ### `#SECTION`
 
-Scope: branch, instant one-shot
-
-Effect target: (none)
+***Scope***: branch, instant one-shot \
+***Effect target***: (none)
 
 Start a *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart branch"/forked path&ndash;determining **section** by resetting the value of the conditions for determining the next not-yet-determined "branch(es)"/path(s) at the beginning of the section. See the explanation for the [`#BRANCHSTART`](#branchstart--branchend) command.
 
@@ -1721,8 +1693,8 @@ An implicit `#SECTION` is placed at the beginning of every notechart definition.
 * *Proposal*: `#SECTION <no-punctuation-str-name-section>`
   * Start a named "branch"/path determining section with the initial condition values.
 
-From: TaikoJiro v1.63 \
-Supported by: (Universally supported)
+***From***: TaikoJiro v1.63 \
+***Supported by***: (Universally supported)
 
 #### Compatibility Issues
 
@@ -1730,9 +1702,8 @@ Supported by: (Universally supported)
 
 ### *Proposal*: #SECTIONRESUME / #SECTIONEND
 
-Scope: branch, instant one-shot
-
-Effect target: (none)
+***Scope***: branch, instant one-shot \
+***Effect target***: (none)
 
 **Resume**/**end** a *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart branch"/forked path&ndash;determining **section** by resuming/stopping updating the value of the conditions for determining the next not-yet-determined "branch(es)"/path(s) at the beginning of the section. See the explanation for the [`#BRANCHSTART`](#branchstart--branchend) command.
 
@@ -1743,9 +1714,8 @@ This command can apply to only named "branch"/path-determining sections.
 
 ### `#LEVELHOLD`
 
-Scope: branch, measure non-before
-
-Effect target: (none)
+***Scope***: branch, measure non-before \
+***Effect target***: (none)
 
 Override the result of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path ("**level**") determination from the definition of this measure and on with the current branch/path ("**hold**").
 
@@ -1755,14 +1725,13 @@ Override the result of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt>
   * Override the determining result as the current "branch"/path.
   * *Proposal*: Equivalent to `#LEVELREDIR <enum-str-branch-current>, <enum-str-branch-current>, <enum-str-branch-current>`, where `<enum-str-branch-current>` represents the current "branch"/path.
 
-From: TaikoJiro v1.63 \
-Supported by: TaikoJiro 2, TJAPlayer2 for PC
+***From***: TaikoJiro v1.63 \
+***Supported by***: TaikoJiro 2, TJAPlayer2 for PC
 
 ### *Proposal*: #LEVELREDIR
 
-Scope: branch, measure non-before
-
-Effect target: (none)
+***Scope***: branch, measure non-before \
+***Effect target***: (none)
 
 Override the result of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path ("**level**") determination from the definition of this measure and on with specified branches/paths (**redir**ect).
 
@@ -1811,9 +1780,8 @@ Its effects end at either the next [`#LEVELHOLD`](#levelhold) or another #LEVELR
 
 ### #BRANCHSTART / `#BRANCHEND`
 
-Scope: notechart, measure non-before, sequential
-
-Effect target: notes, bar lines, judgment circle(s), notefield(s)
+***Scope***: notechart, measure non-before, sequential \
+***Effect target***: notes, bar lines, judgment circle(s), notefield(s)
 
 Respectively **start** / **end** the definition of a *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path section.
 
@@ -1910,14 +1878,13 @@ An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--en
 * No drumroll-type notes should be defined as starting before and ending non-before the beginning or the end of the "branch"/path section.
   * In TaikoJiro 1, such notes are handled as if the "branches"/paths were independent notecharts. However, the visual appearance of such bar drumroll notes become broken when the note head in the target "branch"/paths is no longer drawn when switching the "branch"/paths.
 
-From: TaikoJiro v1.63 \
-Supported by: (Universally supported)
+***From***: TaikoJiro v1.63 \
+***Supported by***: (Universally supported)
 
 ### `#N` / `#E` / `#M`
 
-Scope: notechart, measure non-before
-
-Effect target: notes, bar lines, judgment circle(s), notefield(s)
+***Scope***: notechart, measure non-before \
+***Effect target***: notes, bar lines, judgment circle(s), notefield(s)
 
 Start the definition of respectively the ***<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>*** **N**ormal / ***<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**E**xpert") / ***<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>*** **M**aster *<ruby>譜<rt>fu</rt> 面<rt>men</rt></ruby> (<ruby>分<rt>bun</rt> 岐<rt>ki</rt></ruby>)* "notechart branch"/forked path section.
 
@@ -1939,14 +1906,13 @@ The definition of unused "branches"/paths due to forced "branch"/path determinat
 * The final effects of non-before&ndash;scoped gimmicky commands should be consistent among all the "branches"/paths, except when the "branch"/path section ends non-before the end of the notechart.
   * In TaikoJiro 1, such cases are handled as if the "branches"/paths were independent notecharts.
 
-From: TaikoJiro v1.63 \
-Supported by: (Universally supported)
+***From***: TaikoJiro v1.63 \
+***Supported by***: (Universally supported)
 
 ### *Proposal*: `#LAYERSTART` / `#LAYEREND`
 
-Scope: notechart, non-before, sequential
-
-Effect target: notes, bar lines, judgment circle(s), notefield(s)
+***Scope***: notechart, non-before, sequential \
+***Effect target***: notes, bar lines, judgment circle(s), notefield(s)
 
 Respectively **start** / **end** the definition of a layer section. All layers in a layer section occur simultaneously and all branch-scoped commands not targetting the gameplay screen are applied separately for each layer.
 
@@ -1969,9 +1935,8 @@ An implicit `#LAYEREND` is placed before `#LAYERSTART` & [`#END`](#start--end) c
 
 ### *Proposal*: #LAYER
 
-Scope: notechart, non-before
-
-Effect target: notes, bar lines, judgment circle(s), notefield(s)
+***Scope***: notechart, non-before \
+***Effect target***: notes, bar lines, judgment circle(s), notefield(s)
 
 Start the definition of a layer of the layer section. A layer can span over multiple layer sections.
 
@@ -1989,9 +1954,8 @@ Start the definition of a layer of the layer section. A layer can span over mult
 
 ### #NEXTSONG
 
-Scope: notechart, non-before
-
-Effect target: all
+***Scope***: notechart, non-before \
+***Effect target***: all
 
 Switch to the **next song** in the *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode".
 
@@ -2011,13 +1975,12 @@ See [TJC Header](#tjc-header) for the header version of the `#NEXTSONG` command.
     * `<enum-course>` has the effects and the default value of the [`COURSE:`](#course) header.
     * `<non-negative-number-level>` has the effects and the default value of the [`LEVEL:`](#level) header.
 
-From: TJAPlayer3 v1.5.0
+***From***: TJAPlayer3 v1.5.0
 
 ### #GAMETYPE
 
-Scope: branch, non-before
-
-Effect target: notes, bar lines
+***Scope***: branch, non-before \
+***Effect target***: notes, bar lines
 
 Specify the **game** mode ("**type**") for the notes non-before the current beat position. The meaning of the note symbols non-before the current beat position is changed accordingly; see [TJA Notechart Definition](#tja-notechart-definition).
 
@@ -2033,13 +1996,12 @@ See [the `GAME:` header](#game) for specifying the initial game mode for the not
   * See [Note Symbols in Konga Mode](#note-symbols-in-konga-mode)
 * Initial value: The game mode specified by the [`GAME:`](#game) header (not supported by OpenTaiko (0auBSQ))
 
-From: OpenTaiko (0auBSQ) v0.6.0
+***From***: OpenTaiko (0auBSQ) v0.6.0
 
 ### NOTE / BARLINE Commands
 
-Scope: branch, non-before, gimmicky
-
-Effect target: notes, bar lines
+***Scope***: branch, non-before, gimmicky \
+***Effect target***: notes, bar lines
 
 Manipulate the display properties of **note**s & **bar** **line**s.
 
@@ -2063,13 +2025,12 @@ Setters:
 * `#COLOR <unsigned-number-8bit-r> <unsigned-number-8bit-g> <unsigned-number-8bit-b> <unsigned-number-8bit-a>`
   * Specify the **color** of bar lines.
 
-From: TaikoManyGimmicks
+***From***: TaikoManyGimmicks
 
 ### #GRADATION
 
-Scope: branch, non-before, gimmicky, sequential
-
-Effect target: notes, bar lines
+***Scope***: branch, non-before, gimmicky, sequential \
+***Effect target***: notes, bar lines
 
 Control the commands apply to the starting/ending of the per&ndash;note/bar line approaching phase ("**gradation**").
 
@@ -2123,15 +2084,13 @@ Commands supporting the `#GRADATION` command in TaikoManyGimmicks:
 * The `#COLOR` command
 * The `#ANGLE` command
 
-From: TaikoManyGimmicks
+***From***: TaikoManyGimmicks
 
 ### `#SPLITLANE` / `#MERGELANE`
 
-Scope: branch, non-before
-
-Effect scope: all
-
-Effect target: notes, bar lines, judgment circle(s), notefield(s)
+***Scope***: branch, non-before \
+***Effect scope***: all \
+***Effect target***: notes, bar lines, judgment circle(s), notefield(s)
 
 **Split**/**merge** the notefield ("**lane**") into/from top and bottom notefield, with <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> notes on the top notefield, <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> notes on the bottom notefield, and other notes on the middle of these 2 notefields.
 
@@ -2140,13 +2099,12 @@ Effect target: notes, bar lines, judgment circle(s), notefield(s)
   * Specify the split amount, 1 for `#SPLITLANE` & 0 for `#MERGELANE`. A negative split amount makes <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> notes on the bottom notefield and <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> notes on the top notefield intead.
 * Initial value / `#MERGELANE` / (*Proposed*) `#SPLITLANE 0`
 
-From: OpenTaiko (0auBSQ) v0.6.0
+***From***: OpenTaiko (0auBSQ) v0.6.0
 
 ### OBJ / CAM Commands
 
-Scope: branch, non-before, gimmicky
-
-Effect target: gameplay screen
+***Scope***: branch, non-before, gimmicky \
+***Effect target***: gameplay screen
 
 Manipulate texture **obj**ects & the game screen **cam**ara.
 
@@ -2237,39 +2195,37 @@ The approach phase of a `#<property>START` command starts at its definition posi
 * `CIRCULAR`
 * `LINEAR`
 
-From: TJAPlayer3-Extended \
-Supported by: OpenTaiko (0auBSQ) v0.6.0
+***From***: TJAPlayer3-Extended \
+***Supported by***: OpenTaiko (0auBSQ) v0.6.0
 
 ### #BORDERCOLOR
 
-Scope: branch, non-before, decorative
-
-Effect target: gameplay screen
+***Scope***: branch, non-before, decorative \
+***Effect target***: gameplay screen
 
 Set the **color** of the displayed region outside the **border** of the gameplay screen (when the gameplay screen camera is manipulated).
 
 * `#BORDERCOLOR <unsigned-number-8bit-r>, <unsigned-number-8bit-g>, <unsigned-number-8bit-b>`
 
-From: TJAPlayer3-Extended \
-Supported by: OpenTaiko (0auBSQ) v0.6.0
+***From***: TJAPlayer3-Extended \
+***Supported by***: OpenTaiko (0auBSQ) v0.6.0
 
 ### #CHANGETEXTURE / #RESETTEXTURE
 
-Scope: branch, non-before, decorative
-
-Effect target: gameplay screen
+***Scope***: branch, non-before, decorative \
+***Effect target***: gameplay screen
 
 Respectively **change** / restore ("**reset**") the texture used in the current skin.
 
 * `#CHANGETEXTURE <string-filepath-original>,<string-filepath-replacing>`
 * `#RESETTEXTURE <string-filepath-original>`
 
-From: TJAPlayer3-Extended \
-Supported by: OpenTaiko (0auBSQ) v0.6.0
+***From***: TJAPlayer3-Extended \
+***Supported by***: OpenTaiko (0auBSQ) v0.6.0
 
 ### #SETCONFIG
 
-Scope: branch, non-before, gimmicky
+***Scope***: branch, non-before, gimmicky
 
 Override ("**set**") the **config** value read from the `SkinConfig.ini` of the currently used skin.
 
@@ -2277,14 +2233,13 @@ Override ("**set**") the **config** value read from the `SkinConfig.ini` of the 
 
 * `#SETCONFIG <str-config-key>=<text-config-value>`
 
-From: TJAPlayer3-Extended \
-Supported by: OpenTaiko (0auBSQ) v0.6.0
+***From***: TJAPlayer3-Extended \
+***Supported by***: OpenTaiko (0auBSQ) v0.6.0
 
 ### #BGAON / #BGAOFF
 
-Scope: branch, non-before, decorative
-
-Effect target: gameplay screen
+***Scope***: branch, non-before, decorative \
+***Effect target***: gameplay screen
 
 Start ("**on**")/stop ("**off**") playing the specified **b**ack**g**round video ("**a**nimation") defined by the [`BGA:`](#bga) header on the gameplay screen.
 
@@ -2295,7 +2250,7 @@ The arguments are whitespace-separated.
 * `#BGAOFF <unsigned-int-video-index>`
   * Stop the specified backgound video. The background video specified by [`BGMOVIE:`](#bgmovie) (if any) is shown and is still playing.
 
-From: OpenTaiko (0auBSQ) v0.6.0
+***From***: OpenTaiko (0auBSQ) v0.6.0
 
 #### Compatibility Issues
 
@@ -2305,9 +2260,8 @@ From: OpenTaiko (0auBSQ) v0.6.0
 
 ### *Proposal*: #LUAMOD
 
-Scope: branch, timing (intended; depending on usage)
-
-Effect target: notes, bar lines (intended; depending on usage)
+***Scope***: branch, timing (intended; depending on usage) \
+***Effect target***: notes, bar lines (intended; depending on usage)
 
 Execute the given **Lua** code with predefined variables describing the current beat position, the loaded notechart, *etc.*, after the notechart is loaded.
 
@@ -2321,9 +2275,8 @@ Inspired by StepMania.
 
 ### *Proposal*: #LUAFX
 
-Scope: branch, gimmicky (intended; depending on usage)
-
-Effect target: notes, bar lines, judgment circle(s), notefield(s) (intended; depending on usage)
+***Scope***: branch, gimmicky (intended; depending on usage) \
+***Effect target***: notes, bar lines, judgment circle(s), notefield(s) (intended; depending on usage)
 
 Execute the given **Lua** code with predefined variables describing the current beat position, the loaded notechart, *etc.*, when the beginning of the approach phase of the command is reached during gameplay.
 
@@ -2339,9 +2292,8 @@ Inspired by StepMania.
 
 ### *Proposal*: Command Modifier
 
-Scope: (Part of a command), gimmicky
-
-Effect target: notes, bar lines, notefield(s)
+***Scope***: (Part of a command), gimmicky \
+***Effect target***: notes, bar lines, notefield(s)
 
 A command modifier can be specified to certain branch-scoped commands using the following form:
 
@@ -2452,24 +2404,24 @@ See <https://taiko.namco-ch.net/taiko/en/howto/onpu.php> for the appearance of n
 
 | | Note Type | Note Appearance | *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* <br> "Note phoneticizations" in PC-generation arcade games | Explanations | Notes
 --- | --- | --- | --- | --- | ---
-`0` | (blank) | (none) | (none) | Nothing needs to be done | From: TJF format
-`1` | Regular <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> | Small orange-ish red circle | *<ruby>ド<rt>Do</rt></ruby>* Do / <ruby>コ<rt>Ko</rt></ruby> / *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>* Don | Hit the drum surface | From: TJF format
-`2` | Regular <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> | Small sky-blue circle | <ruby>カ<rt>Ka</rt></ruby> / *<ruby>カッ<rt>Ka'</rt></ruby>* Ka | Hit the drum rim | From: TJF format
-`3` | Big <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> | Big orange-ish red circle | *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* DON | Hit the drum surface, score bonus if with certain force (AC) <br> if on both left and right sides (CS) | From: TJF format
-`4` | Big <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> | Big sky-blue circle | *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* KA | Hit the drum rim, score bonus if with certain force (AC) <br> if on both left and right sides (CS) | From: TJF format
-`5` | Head of regular (bar) *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>* drumroll | Small yellow circle with bar attached behind <br> Turns red if hit rapidly in AC games | *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>ー* Roll&ndash; | Roll on the drum surface or rim for score bonus | From: TJF format
-`I` | (same as `5`) | (see `5`) | (see `5`) | By analogy with Konga mode | From: OpenTaiko (0auBSQ)
-`6` | Head of big (bar) *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>* drumroll | Big yellow circle with bar attached behind <br> Turns red if hit rapidly in AC games | *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）ー* ROLL&ndash; | Roll on the drum surface or rim for score bonus, more score bonus if with certain force (AC) <br> if on both left and right sides (CS) | From: TJF format
-`H` | (same as `6`) | (see `6`) | (see `6`) | By analogy with Konga mode | From: OpenTaiko (0auBSQ)
-`7` | Head of regular *<ruby>激<rt>Geki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt> キ<rt>ki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt> 船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* balloon | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | *<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* Balloon | Roll on the drum surface with certain amount of hits for score bonus, extra score bonus if cleared | From: TJF format
+`0` | (blank) | (none) | (none) | Nothing needs to be done | ***From***: TJF format
+`1` | Regular <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> | Small orange-ish red circle | *<ruby>ド<rt>Do</rt></ruby>* Do / <ruby>コ<rt>Ko</rt></ruby> / *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>* Don | Hit the drum surface | ***From***: TJF format
+`2` | Regular <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> | Small sky-blue circle | <ruby>カ<rt>Ka</rt></ruby> / *<ruby>カッ<rt>Ka'</rt></ruby>* Ka | Hit the drum rim | ***From***: TJF format
+`3` | Big <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> | Big orange-ish red circle | *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* DON | Hit the drum surface, score bonus if with certain force (AC) <br> if on both left and right sides (CS) | ***From***: TJF format
+`4` | Big <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> | Big sky-blue circle | *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* KA | Hit the drum rim, score bonus if with certain force (AC) <br> if on both left and right sides (CS) | ***From***: TJF format
+`5` | Head of regular (bar) *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>* drumroll | Small yellow circle with bar attached behind <br> Turns red if hit rapidly in AC games | *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>ー* Roll&ndash; | Roll on the drum surface or rim for score bonus | ***From***: TJF format
+`I` | (same as `5`) | (see `5`) | (see `5`) | By analogy with Konga mode | ***From***: OpenTaiko (0auBSQ)
+`6` | Head of big (bar) *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>* drumroll | Big yellow circle with bar attached behind <br> Turns red if hit rapidly in AC games | *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）ー* ROLL&ndash; | Roll on the drum surface or rim for score bonus, more score bonus if with certain force (AC) <br> if on both left and right sides (CS) | ***From***: TJF format
+`H` | (same as `6`) | (see `6`) | (see `6`) | By analogy with Konga mode | ***From***: OpenTaiko (0auBSQ)
+`7` | Head of regular *<ruby>激<rt>Geki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt> キ<rt>ki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt> 船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* balloon | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | *<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* Balloon | Roll on the drum surface with certain amount of hits for score bonus, extra score bonus if cleared | ***From***: TJF format
 `8` | Explicit end of a drumroll-type note (if any) | (round end of a yellow bar) | (っ!! for ending bar drumroll notes) | Stop rolling the drum non-after the point |
 `9` | Head of special burst note/balloon <br> (Differ from game to game) | (Vary) <br> Big yellow circle with potato attached (PS2-generation) <br> Big yellow circle in the shape of a confetti ball 🎊 (PS3- and PC-generation) <br> Has particle decorative visual effects in AC. | *<ruby>く<rt>Ku</rt> す<rt>su</rt> 玉<rt>dama</rt></ruby>* Party Popper <br> (Strictly speaking, *<ruby>薬<rt>Kusu</rt> 玉<rt>dama</rt></ruby>/<ruby>く<rt>Ku</rt> す<rt>su</rt> 玉<rt>dama</rt></ruby>* "Confetti Ball" 🎊 & party popper 🎉 only resemble each other and are not the same thing) | (Vary) <br> In AC, Roll on the drum surface with certain amount of hits (shared among players) for score bonus, extra score bonus if cleared, more extra score bonus if done quickly enough <br> In the official games, becomes `7` when not all players encounter `9` at the same beat position. | From TaikoJiro v2.75
-`A` | Hand-holding big <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> | Big orange-ish red circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "DON (Hand)" (in 4-player mode) | Like `3`, extra score bonus if all players caught <br> In the official games, becomes `3` when no hit-type notes exist for some players at the same position. | From: TJAPlayer2 for PC ver.2018040100
-`B` | Hand-holding big <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> | Big sky-blue circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "KA (Hand)" (in 4-player mode) | Like `4`, extra score bonus if all players caught <br> In the official games, becomes `4` when no hit-type notes exist for some players at the same position. | From: TJAPlayer2 for PC ver.2018040100
-`C` | Bomb/mine | Small dark-blue cherry bomb with ignited fuze 💣 | (none) | Combo-break and *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge penalty if caught | From: OpenTaiko (0auBSQ)
-`D` | Fuze/fuse drumroll | ? <br /> (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt> 爆<rt>baku</rt>弾<rt>dan</rt></ruby> "Time bomb"/Fuseroll in OpenTaiko (0auBSQ)) | Roll on the drum surface with certain amount of hits, combo-break (or BAD?) (in OpenTaiko (0auBSQ)) and *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge penalty if failed to do so <br> Not in the official games. | From: OutFox
-`F` | *Ad libitum* note (AD-LIB) | (Invisible) | (none) | Hit the drum surface or rim for score bonus. <br> Not in the official games. <br> Inspired by another rhythm game *GROOVE COASTER*, developed by TAITO | From: TJAPlayer2 for PC ver.2016081500
-`G` | Swap note | (Vary) <br /> Big green circle in taiko-web (plugin "Green Notes") <br /> Big purple circle in OpenTaiko (0auBSQ) | (*<ruby>グ<rt>Gu</rt> リー<rt>rii</rt> ン<rt>n</rt></ruby>* Green) <br /> (*<ruby>カ<rt>Ka</rt> ド<rt>do</rt> ン<rt>n</rt></ruby>* KADON) | Hit the drum surface on left or right side **&** the drum rim on the other left or right side. <br> Not in the official games. | From: taiko-web (plugin "Green Notes"); supported by: OpenTaiko (0auBSQ) v0.5.4
+`A` | Hand-holding big <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> | Big orange-ish red circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "DON (Hand)" (in 4-player mode) | Like `3`, extra score bonus if all players caught <br> In the official games, becomes `3` when no hit-type notes exist for some players at the same position. | ***From***: TJAPlayer2 for PC ver.2018040100
+`B` | Hand-holding big <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> | Big sky-blue circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "KA (Hand)" (in 4-player mode) | Like `4`, extra score bonus if all players caught <br> In the official games, becomes `4` when no hit-type notes exist for some players at the same position. | ***From***: TJAPlayer2 for PC ver.2018040100
+`C` | Bomb/mine | Small dark-blue cherry bomb with ignited fuze 💣 | (none) | Combo-break and *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge penalty if caught | ***From***: OpenTaiko (0auBSQ)
+`D` | Fuze/fuse drumroll | ? <br /> (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt> 爆<rt>baku</rt>弾<rt>dan</rt></ruby> "Time bomb"/Fuseroll in OpenTaiko (0auBSQ)) | Roll on the drum surface with certain amount of hits, combo-break (or BAD?) (in OpenTaiko (0auBSQ)) and *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge penalty if failed to do so <br> Not in the official games. | ***From***: OutFox
+`F` | *Ad libitum* note (AD-LIB) | (Invisible) | (none) | Hit the drum surface or rim for score bonus. <br> Not in the official games. <br> Inspired by another rhythm game *GROOVE COASTER*, developed by TAITO | ***From***: TJAPlayer2 for PC ver.2016081500
+`G` | Swap note | (Vary) <br /> Big green circle in taiko-web (plugin "Green Notes") <br /> Big purple circle in OpenTaiko (0auBSQ) | (*<ruby>グ<rt>Gu</rt> リー<rt>rii</rt> ン<rt>n</rt></ruby>* Green) <br /> (*<ruby>カ<rt>Ka</rt> ド<rt>do</rt> ン<rt>n</rt></ruby>* KADON) | Hit the drum surface on left or right side **&** the drum rim on the other left or right side. <br> Not in the official games. | ***From***: taiko-web (plugin "Green Notes"); supported by: OpenTaiko (0auBSQ) v0.5.4
 
 Unknown note symbols & `8` without the corresponding head of drumroll-type notes are treated as `0`.
 
@@ -2524,8 +2476,8 @@ In the official games, drumroll-type notes are usually intentionally made to end
 * In Taikosan, zero-duration bar drumroll notes can be created by using an isolated drumroll-type note symbol. However, they are not accepted and an error message is displayed. \
   ![Taikosan's Error Message for Zero-duration Bar Drumroll Note](https://i.imgur.com/MDdNzKX.png)
 
-From: TJF format \
-Supported by: (Universally supported)
+***From***: TJF format \
+***Supported by***: (Universally supported)
 
 #### Compatibility Issues
 
@@ -2560,7 +2512,7 @@ The above note combination is written `D610`.
 
 ![GAME:Jube Example](https://i.imgur.com/eOqpsO8.gif)
 
-From: TaikoJiro v2.13
+***From***: TaikoJiro v2.13
 
 ### Note Symbols in Konga Mode
 
@@ -2573,32 +2525,32 @@ See the exemplar actual gameplays:
 
 | | Note Type | Note Appearance | *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* <br> "Note phoneticizations" in *Donkey Konga 3* | Explanations | Notes
 --- | --- | --- | --- | --- | ---
-`0` | (blank) | (none) | (none) | Nothing needs to be done | From: TJF format
+`0` | (blank) | (none) | (none) | Nothing needs to be done | ***From***: TJF format
 `1` | Right drum beat | Red circle with its right half filled | <ruby>パ<rt>Pa</rt></ruby> / <ruby>パッ<rt>Pa'</rt></ruby> / <ruby>パン<rt>Pan</rt></ruby> | Hit the right bongo drum |
 `2` | Left drum beat | Yellow circle with its left half filled | <ruby>ポ<rt>Po</rt></ruby> / <ruby>ポッ<rt>Po'</rt></ruby> / <ruby>ポン<rt>Pon</rt></ruby> | Hit the left bongo drum |
 `3` | Both drum beats | Pink circle | D | Hit both bongo drums |
-`G` | (same as `3`) | (see `3`) | (see `3`) | By analogy with Taiko mode. | From: OpenTaiko (0auBSQ) v0.5.4
+`G` | (same as `3`) | (see `3`) | (see `3`) | By analogy with Taiko mode. | ***From***: OpenTaiko (0auBSQ) v0.5.4
 `4` | Clap | Sky-blue circle with star-ish edge | <ruby>チャ<rt>Cha</rt></ruby> / <ruby>チャッ<rt>Cha'</rt></ruby> / <ruby>チャン<rt>Chan</rt></ruby> | Clap hands above the bongo drums |
 `5` | Head of right bar drumroll | Red circle with its right half filled and with bar attached behind | *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>～* "Roll~" | Roll on the right bongo drum for score bonus |
 `I` | Head of left bar drumroll | Yellow circle with its left half filled and with bar attached behind | *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>～* "Roll~" | Roll on the left bongo drum for score bonus |
 `6` | Head of both bar drumroll | Pink circle with bar attached behind | *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>～* "Roll~" | Roll on either bongo drum for score bonus |
 `H` | Head of clap bar applause | Sky-blue circle with star-ish edge and with bar attached behind | *<ruby>拍<rt>Haku</rt> 手<rt>shu</rt></ruby>～* "Applaud~" | Applaud above the bongo drums for score bonus |
-`7` | Head of regular *<ruby>激<rt>Geki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt> キ<rt>ki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt> 船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* balloon | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | (*<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* Balloon) | Roll on either bongo drum with certain amount of hits for score bonus, extra score bonus if cleared <br /> Not in the official games. <br /> By analogy with Taiko mode. | From: TJF format
+`7` | Head of regular *<ruby>激<rt>Geki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt> キ<rt>ki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt> 船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* balloon | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | (*<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* Balloon) | Roll on either bongo drum with certain amount of hits for score bonus, extra score bonus if cleared <br /> Not in the official games. <br /> By analogy with Taiko mode. | ***From***: TJF format
 `8` | Explicit end of a drumroll-type note (if any) | (round end of a bar) | (none) | Stop rolling the drum or clapping non-after the point |
 `9` | Head of special burst note/balloon | (Vary) | (*<ruby>く<rt>Ku</rt> す<rt>su</rt> 玉<rt>dama</rt></ruby>* Party Popper) | (Vary) <br> Roll on either bongo drum with certain amount of hits (shared among players) for score bonus, extra score bonus if cleared, more extra score bonus if done quickly enough <br> Might become `7` when not all players encounter `9` at the same beat position. <br /> Not in the official games. <br /> By analogy with Taiko mode. | From TaikoJiro v2.75
-`A` | Hand-holding both drum beats | (Pink circle with hands holding with other note(s) for other player(s)) | ? | Like `3`, extra score bonus if all players caught <br /> Might becomes `3` when no hit-type notes exist for some players at the same position. <br> Not in the official games. <br> By analogy with `GAME:Taiko`. | From: OpenTaiko (0auBSQ)
-`B` | Hand-holding clap beat | (Sky-blue circle with star-ish edge and with hands holding with other note(s) for other player(s)) | ? | Like `4`, extra score bonus if all players caught <br /> Might becomes `4` when no hit-type notes exist for some players at the same position. <br> Not in the official games. <br> By analogy with Taiko mode. | From: OpenTaiko (0auBSQ)
-`C` | Bomb/mine | (Small dark-blue cherry bomb with ignited fuze 💣) | (none) | Combo-break and *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge penalty if caught <br /> Not in the official games. <br /> By analogy with Taiko mode. | From: OpenTaiko (0auBSQ)
-`D` | Fuze/fuse drumroll | (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt> 爆<rt>baku</rt>弾<rt>dan</rt></ruby> "Time bomb"/Fuseroll in OpenTaiko (0auBSQ)) | Roll on either bongo drum with certain amount of hits, combo-break (or BAD?) (in OpenTaiko (0auBSQ)) and *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge penalty if failed to do so <br> Not in the official games. <br /> By analogy with Taiko mode. | From: OutFox
-`F` | *Ad libitum* note (AD-LIB) | (Invisible) | (none) | Hit either bongo drum or clap for score bonus. <br> Not in the official games. <br> By analogy with Taiko mode. | From: TJAPlayer2 for PC ver.2016081500
+`A` | Hand-holding both drum beats | (Pink circle with hands holding with other note(s) for other player(s)) | ? | Like `3`, extra score bonus if all players caught <br /> Might becomes `3` when no hit-type notes exist for some players at the same position. <br> Not in the official games. <br> By analogy with `GAME:Taiko`. | ***From***: OpenTaiko (0auBSQ)
+`B` | Hand-holding clap beat | (Sky-blue circle with star-ish edge and with hands holding with other note(s) for other player(s)) | ? | Like `4`, extra score bonus if all players caught <br /> Might becomes `4` when no hit-type notes exist for some players at the same position. <br> Not in the official games. <br> By analogy with Taiko mode. | ***From***: OpenTaiko (0auBSQ)
+`C` | Bomb/mine | (Small dark-blue cherry bomb with ignited fuze 💣) | (none) | Combo-break and *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge penalty if caught <br /> Not in the official games. <br /> By analogy with Taiko mode. | ***From***: OpenTaiko (0auBSQ)
+`D` | Fuze/fuse drumroll | (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt> 爆<rt>baku</rt>弾<rt>dan</rt></ruby> "Time bomb"/Fuseroll in OpenTaiko (0auBSQ)) | Roll on either bongo drum with certain amount of hits, combo-break (or BAD?) (in OpenTaiko (0auBSQ)) and *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge penalty if failed to do so <br> Not in the official games. <br /> By analogy with Taiko mode. | ***From***: OutFox
+`F` | *Ad libitum* note (AD-LIB) | (Invisible) | (none) | Hit either bongo drum or clap for score bonus. <br> Not in the official games. <br> By analogy with Taiko mode. | ***From***: TJAPlayer2 for PC ver.2016081500
 
 * Beat-type notes & the clap note correspond to hit-type notes in Taiko mode.
 * Drumroll-type notes & the applause note correspond to drumroll-type notes in Taiko mode.
 
 The note handling details of the Taiko mode apply. See the explanation in [Note Symbols in Taiko Mode](#note-symbols-in-taiko-mode).
 
-From: OpenTaiko (0auBSQ) v0.5.4 \
-Supported by: taiko-web (plugin "Donkey Konga Mode"), OutFox
+***From***: OpenTaiko (0auBSQ) v0.5.4 \
+***Supported by***: taiko-web (plugin "Donkey Konga Mode"), OutFox
 
 ## Terminologies
 
