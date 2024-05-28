@@ -1089,7 +1089,7 @@ Some branch-scoped commands are non-sequential, *i.e.*, they can be arranged fre
 
 #### Command Effect Scope
 
-Some commands can affect game objects outside of their scope by default. The effect scope is listed below for such commands.
+Some commands can cause targetted game objects outside the scope of these commands to have sudden visible changes. The effect scope is defined by these affected game objects and is listed below for such commands.
 
 *Proposal*: Allow the effect scope to be overridden for certain branch-scoped commands, see [*Proposal*: Command Modifier](#proposal-command-modifier).
 
@@ -1107,7 +1107,7 @@ Commands only affect their targetting game objects. The target of each command c
 
 ***Scope*** (placed before [the `#START` command](#start--end)): per&ndash;play-side, gimmicky \
 ***Scope*** (placed after [the `#START` command](#start--end)): branch, non-before, gimmicky &mdash; OpenTaiko (0auBSQ) v0.6.0 \
-***Effect scope***: all \
+***Effect scope***: all (?) \
 ***Effect target***: notes, bar lines
 
 Use a **scroll**ing mode similar to the scrolling method used in either **B**E**M**ANI-series or the official Taiko ("**n**or**m**al") game series, unless overridden by user settings.
@@ -1140,9 +1140,9 @@ Scrolling velocity <br> Note traveling takes 4 beats in what BPM | **abs**(BPM a
 Default scrolling changes of [`#BPMCHANGE`](#bpmchange) command | Set the per-note base BPM of non-preceding notes and bar lines | Suddenly change the apparent base BPM of all notes & all bar lines | (No changes)
 Default scrolling changes of [`#DELAY`](#delay) command | (No changes) | Pause the scrolling if positive; <br> (no changes) if negative | (No changes)
 Default scrolling changes of [`#SCROLL`](#scroll) command | Set the per-note `scroll` | (Ignored) (`#BMSCROLL`) <br> Set the per-note `scroll` (`#HBSCROLL`) | (Ignored)
-*Proposal*: Mode-invariant `#BPMCHANGE` command | `#BPMCHANGE <value>; :*` | `#BPMCHANGE <value>; *:*` | `#BPMCHANGE <value>; :*` + `#SCROLL <non-zero-float-bpm>bpm; :*`
-*Proposal*: Mode-invariant `#DELAY` command | `#DELAY <value>; :*` | `#DELAY <value>; *:*` | `#DELAY <value>; :*`
-*Proposal*: Mode-invariant velocity-changing command | `#SCROLL <value>; :*` (default) <br> `#SPEED <value>; :*` | `#SCROLL <value>; *:*` | `#SPEED <value>bpm; *:*; <changing-duration>`
+*Proposal*: Mode-invariant `#BPMCHANGE` command | `#BPMCHANGE <value>; :` | `#BPMCHANGE <value>; *:*` | `#BPMCHANGE <value>; :` + `#SCROLL <non-zero-float-bpm>bpm; :*`
+*Proposal*: Mode-invariant `#DELAY` command | `#DELAY <value>; :` | `#DELAY <value>; *:*` | `#DELAY <value>; :`
+*Proposal*: Mode-invariant velocity-changing command | `#SCROLL <value>; :` (default) | `#SCROLL <value>; *:*` | `#SPEED <value>bpm; *:*; <changing-duration>`
 
 In OutFox, the Taiko-like scrolling mode can be achieved by using CAMod (AMod/"Average BPM Scroll Mode" with constant per-note scrolling speed) with the BPM parameter set to the average BPM of the notechart.
 
@@ -1221,7 +1221,7 @@ Respectively **start** / **end** the region of notechart definition.
 ### #BPMCHANGE
 
 ***Scope***: branch, non-before, timing \
-***Effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll)); branch, non-before (otherwise) \
+***Effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll)); (none) (otherwise) \
 ***Effect target***: notes, bar lines
 
 **Change** the **BPM**.
@@ -1268,7 +1268,7 @@ Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby
 ### #DELAY
 
 ***Scope***: branch, non-before, timing, sequential \
-***Effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll), positive value); non-before (otherwise) \
+***Effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll), positive value); (none) (otherwise) \
 ***Effect target***: notes, bar lines
 
 Adjust (**delay**) the time position of all notechart object (including commands) non-preceding the `#DELAY` command by the specified time duration.
@@ -1324,6 +1324,7 @@ Respectively **start** / **end** a fake/dummy section if not already respectivel
 ### #SCROLL
 
 ***Scope***: branch, measure non-before, gimmicky \
+***Effect scope***: (none) \
 ***Effect target***: notes, bar lines
 
 Change the **scroll**ing speed of notes & bar lines, relative to the normal scrolling velocity and direction.
@@ -2331,6 +2332,7 @@ The characters after the first semicolon (`;`) are ignored in TaikoJiro 1 but ca
   * The last comma-separated element(s) can be omitted.
 * `<affected-range-specifier>` can be one of:
   * (Empty) &mdash; the default.
+  * `:` &mdash; (None): Affect no notechart objects (no sudden visible changes).
   * `:<range-affected-non-before>` &mdash; Non-before: Affect notechart objects non-before the point.
   * `<range-affected-before>:` / `<range-affected-before>:0` &mdash; Before, sudden: Suddenly affect notechart objects before the point.
   * `<range-affected-before>:<range-affected-non-before>` &mdash; Both, sudden: Suddenly affect notechart objects near to the point.
