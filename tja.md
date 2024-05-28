@@ -899,7 +899,7 @@ Used in conjunction with [`COURSE:Dan`](#course).
     * `a` &mdash; OpenTaiko (0auBSQ), final percentage (%) of **a**ccuracy.
       * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/Good + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
   * `<enum-str-range>` can be one of:
-    * `m` / (*Proposal*) `>=`, **m**ore than or equal to (">=") the given requirement
+    * `m` / (*Proposal*) `>=`, **m**ore than or equal to ("≥") the given requirement
     * `l` / (*Proposal*) `<`, **l**ess than ("\<") the given requirement
 * `EXAM<exam-requirement-index-specifier>:<enum-str-requirement>, <comma-separated-list-number-pass-and-gold-requirements>, <enum-str-range>` &mdash; TJAPlayer3-f
   * The elements of `<comma-separated-list-number-pass-and-gold-requirements>` are pairs of `<number-pass-requirement>, <number-gold-requirement>` for each song specified by the [`#NEXTSONG`](#nextsong) command.
@@ -1182,11 +1182,11 @@ Respectively **start** / **end** the region of notechart definition.
 * `#START <enum-str-play-side>` &mdash; TaikoJiro v1.99 but not TaikoJiro 2
   * The notechart definition is for the play-side specified by `<enum-str-combination>`, which can be one of:
     * `P1`, for the 1st play-side (1P).
-    * `P2`, for the 2nd play-side (2P) if the amount of play-sides specified by the [`STYLE:`](#style) header >= 2.
+    * `P2`, for the 2nd play-side (2P) if the amount of play-sides specified by the [`STYLE:`](#style) header ≥ 2.
   * *Unspecified*: The behavior when other `<enum-str-combination>` is used.
     * In TaikoJiro, using any other `<enum-str-combination>` is treated as if the 0-argument `#START` were used.
 * *Proposal*: `#START P<positive-int-play-side>`
-  * The notechart definition is for the 1/`<positive-int-play-side>`-th play-side if the amount of play-sides specified by the [`STYLE:`](#style) header >= `<positive-int-play-side>`.
+  * The notechart definition is for the 1/`<positive-int-play-side>`-th play-side if the amount of play-sides specified by the [`STYLE:`](#style) header ≥ `<positive-int-play-side>`.
 * `#END`
 
 *Unspecified*: The behavior when any of the followings are violated when defining each difficulty:
@@ -1665,8 +1665,8 @@ The general pattern in recent Taiko games seems to be:
 * Both the head and end of drumroll-type notes are treated as odinary notes for determining the note phoneticization.
 * A note is "chain-final" when any of the followings are met (the "? / 3" factors are tentatively determined tolerance values):
   * `d_this_to_next_note` > 1/8th, the end of a chain before a pause.
-  * `d_this_to_next_note` >= 4.0 / 3 × `d_this_to_previous_note`, the end of a chain before a short pause or a sparser chain.
-  * `d_next_to_2nd_next_note` \<= 2.0 / 3 × `d_this_to_next_note`, the end of a chain before a denser chain.
+  * `d_this_to_next_note` ≥ 4.0 / 3 × `d_this_to_previous_note`, the end of a chain before a short pause or a sparser chain.
+  * `d_next_to_2nd_next_note` ≤ 2.0 / 3 × `d_this_to_next_note`, the end of a chain before a denser chain.
 * The long form is avoided for notes in any of the following conditions ("non-long conditions"), to ensure the readability of note phoneticization:
   * `d_this_to_previous_note` \< 1/16th, to avoid the texts from overlapping.
   * `d_this_to_next_note` \< 1/8th, with `scroll` upper-limited to 1.0 for calculation, to avoid the text for a note from being extended below the next note.
@@ -1675,7 +1675,7 @@ The general pattern in recent Taiko games seems to be:
   * The chain contains only odd amount of notes of the same type (*i.e.*, using the same note symbol) and the same drumroll duration (if applicable).
   * The notes are spaced evenly in time duration.
   * The "chain-final" note of this chain does not meet any of the "non-long conditions".
-  * The time duration between the first note & the last note \<= 0.5 seconds.
+  * The time duration between the first note & the last note ≤ 0.5 seconds.
 * The long form is used for "chain-final" hit-type notes which do not meet any of the "non-long conditions".
 * There is only one form for drumroll-type notes and applause notes in the official games: The short form had been used in earlier games until the long form was introduced in PS3-generation and has been used onward.
 * The short form is used for all other notes and is preferred in other obscure cases.
@@ -1866,14 +1866,14 @@ The "branch"/path is determined by a condition value when `<enum-str-condition>`
 * *Proposal*: `bh`, amount ("**h**its") of *strong* non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD ("**h**it") on **b**ig notes during the determining section.
 * `s` &mdash; TaikoJiro v2.66, the accumulated **s**core points during the determining section.
   * *Unspecified*: The behavior when either unsupported scoring mode or the default value is specified to the [`SCOREMODE:`](#scoremode) header or the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true performance" option is enabled.
-* *Proposal*: `g`, percentage (%) of *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge change during the determining section, −100 \<= `g` \<= 100
+* *Proposal*: `g`, percentage (%) of *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge change during the determining section, −100 ≤ `g` ≤ 100
 * *Proposal*: `c`, the maximum/longest **c**ombo during the determining section (counted from 0).
-* *Proposal*: `?`, a uniform distribution random value (float), 0 \<= `?` \< 100
+* *Proposal*: `?`, a uniform distribution random value (float), 0 ≤ `?` \< 100
 
 If the condition value...
 
-* \>= `<number-master-branch-requirement>`: The *<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>* Master "branch"/path will be taken by default.
-* Otherwise, \>= `<number-expert-branch-requirement>`: The *<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path will be taken by default.
+* ≥ `<number-master-branch-requirement>`: The *<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>* Master "branch"/path will be taken by default.
+* Otherwise, ≥ `<number-expert-branch-requirement>`: The *<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path will be taken by default.
 * Otherwise: The *<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>* Normal "branch"/path is taken by default.
 * The value of the requirements can be set out-of-bound to force a "branch"/path to be taken by default.
 * The [`#LEVELHOLD`](#levelhold) command affects the final determining result.
@@ -2614,7 +2614,7 @@ The time relation is denoted as follow:
 
 Word | Before | Non-after | At | Non-before | After
 --- | --- | --- | --- | --- | ---
-Time relation | \< | \<= | == | >= | >
+Time relation | \< | ≤ | = | ≥ | >
 
 The fraction (for beat duration, *etc*.) is denoted as follow:
 
@@ -2635,9 +2635,9 @@ Because this article is still *in construction* and the TJA format is still evol
 
 The maximum level of impact of the headers and commands are listed in the description of their scope.
 
-Changing the value of a header or command whose impact level \<= scoring never affects the required timing and types of the gameplay input.
+Changing the value of a header or command whose impact level ≤ scoring never affects the required timing and types of the gameplay input.
 
-Changing the value of a header or command whose impact level \<= gimmicky also never affects the sorting order of the song or the gameplay and scoring rules.
+Changing the value of a header or command whose impact level ≤ gimmicky also never affects the sorting order of the song or the gameplay and scoring rules.
 
 A gimmicky header or command may affect the difficulty for reading the notechart during gameplay, while a decorative header or command usually does not.
 
