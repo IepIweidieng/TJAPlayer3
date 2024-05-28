@@ -173,7 +173,7 @@ The effect of each header continues until the next occurrence of the same header
 Specify the **title** of the song.
 
 * `TITLE:<str-title>`
-* `TITLE<enum-str-lang>:<str-title-localized>` &mdash; taiko-web, OpenTaiko (0auBSQ) v0.5.1
+* `TITLE<enum-str-lang>:<str-title-localized>` &mdash; taiko-web ver.19.03.10, OpenTaiko (0auBSQ) v0.5.1
   * Specify the localized title.
   * `<enum-str-lang>` is an IETF BCP 47 language or region tag (see <https://en.wikipedia.org/wiki/IETF_language_tag>) and can be one of:
     * `EN`, **En**glish
@@ -203,10 +203,10 @@ The display details are *unspecified*.
     * `--<str-displayed-subtitle>`
       * Only show the subtitle in the song selection screen. Usually used for artist name.
       * The `--` prefix needs to be prepended to the displayed subtitle when the subtitle already begins with `--`.
-    * `++<str-displayed-subtitle>` &mdash; TaikoJiro, TJAPlayer2 for PC, taiko-web / `<str-displayed-subtitle>` &mdash; TaikoJiro, TJAPlayer2 for PC ver.2021xxxxxx, TJAPlayer3-f v1.7.2.0, OpenTaiko (0auBSQ) v0.6.0, taiko-web
+    * `++<str-displayed-subtitle>` &mdash; TaikoJiro, TJAPlayer2 for PC, taiko-web ver.19.03.10 / `<str-displayed-subtitle>` &mdash; TaikoJiro, TJAPlayer2 for PC ver.2021xxxxxx, TJAPlayer3-f v1.7.2.0, OpenTaiko (0auBSQ) v0.6.0, taiko-web
       * Also show the subtitle during the gameplay screen & the result screen.
       * The `++` prefix needs to be prepended to the displayed subtitle when the subtitle begins with either `++` or `--`.
-* `SUBTITLE<enum-str-lang>:<str-displayed-subtitle-localized>` &mdash; taiko-web, OpenTaiko (0auBSQ)
+* `SUBTITLE<enum-str-lang>:<str-displayed-subtitle-localized>` &mdash; taiko-web ver.19.03.10, OpenTaiko (0auBSQ) v0.5.1
   * Specify the localized subtitle. The display mode (`++`/`--`) is instead specified by the `SUBTITLE:` header.
   * `<enum-str-lang>` can be one of the possible `<enum-str-lang>` for [the `TITLE<enum-str-lang>:` header](#title-headers).
 
@@ -237,7 +237,7 @@ Specify the **genre** of the song.
 The display details are *unspecified*.
 
 * `GENRE:<str-genre>`
-  * *Unspecified*: The exact list of all supported `<str-genre>`.
+  * *Unspecified*: The exact list of all supported `<str-genre>` and their aliases.
   * Usually supported:
     * `J-POP`
     * *`アニメ` (Anime)* "Animation"
@@ -248,7 +248,8 @@ The display details are *unspecified*.
     * *`ゲームミュージック` (Geemu Myuujikku)* "Game Music"
     * *`ナムコオリジナル` (Namuko Orijinaru)* "Namco Original"
 
-***From***: TJAPlayer2 for PC
+***From***: TJAPlayer2 for PC \
+***Supported by***: taiko-web ver.19.01.06
 
 ### SIDE:
 
