@@ -123,7 +123,7 @@ For multiple values separated by comma (`,`), except for `text`-valued fields, o
       * All trailing characters are ignored in TaikoJiro. (*e.g.*, `Vsomething` / `valuesomething` are also accepted)
 * *Proposal*: `beats`
   * Format: `<float-upper-numeral>/<unsigned-float-lower-numeral><enum-str-delay-type>`
-  * The beat duration of `<float-upper-numeral>` times of a `unsigned-float-lower-numeral`-th note.
+  * The beat duration of `<float-upper-numeral>` times of a 1/`unsigned-float-lower-numeral`-th note.
   * > Formula: Amount of beats = 4 × `upper` / `lower`
   * Analogy to the argument of [`#MEASURE`](#measure).
   * `<enum-str-delay-type>` can be one of:
@@ -1186,7 +1186,7 @@ Respectively **start** / **end** the region of notechart definition.
   * *Unspecified*: The behavior when other `<enum-str-combination>` is used.
     * In TaikoJiro, using any other `<enum-str-combination>` is treated as if the 0-argument `#START` were used.
 * *Proposal*: `#START P<positive-int-play-side>`
-  * The notechart definition is for the `<positive-int-play-side>`-th play-side if the amount of play-sides specified by the [`STYLE:`](#style) header >= `<positive-int-play-side>`.
+  * The notechart definition is for the 1/`<positive-int-play-side>`-th play-side if the amount of play-sides specified by the [`STYLE:`](#style) header >= `<positive-int-play-side>`.
 * `#END`
 
 *Unspecified*: The behavior when any of the followings are violated when defining each difficulty:
@@ -2414,7 +2414,7 @@ Within a measure, there can be any amount of note symbols as long as the *unspec
 
 If any note symbols present, each note symbol occupies the same amount of beats within the measure &mdash; a closed-head, open-end beat interval "note symbol beat duration interval". The beat position of the note is at the beginning of this duration interval. The actual time duration of every such beat duration interval can vary and even become negative.
 
-* In TJF format, `,` did not exist and every note symbol occupies the amount of beats of a 16th note.
+* In TJF format, `,` did not exist and every note symbol occupies the amount of beats of a 1/16th note.
 
 Measures with no note symbols (*i.e.*, `,`-only measures) are equivalent to `0,`
 
@@ -2504,7 +2504,7 @@ By default, drumroll-type notes are ended non-after one of:
     * Otherwise, in other "branch"/path states: 0ms.
 * In TaikoJiro, the definition position of the last note symbol of the notechart, except when the note head is in the definition of a "branch"/path other than the *<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>* Normal "branch"/path.
 
-In the official games, drumroll-type notes are usually intentionally made to end earlier than the designed ending beat position by the amount of beats of a 48th note.
+In the official games, drumroll-type notes are usually intentionally made to end earlier than the designed ending beat position by the amount of beats of a 1/48th note.
 
 * Reference: *連打秒数表* ("List of seconds of drumrolls"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/連打秒数表>
 
@@ -2615,6 +2615,13 @@ The time relation is denoted as follow:
 Word | Before | Non-after | At | Non-before | After
 --- | --- | --- | --- | --- | ---
 Time relation | \< | \<= | == | >= | >
+
+The fraction (for beat duration, *etc*.) is denoted as follow:
+
+Word | whole | half | 1/3rd | quarter <br /> 1/4th | 1/8th | 1/16th | ...
+--- | --- | --- | --- | --- | --- | --- | ---
+Fraction | 1/1 | 1/2 | 1/3 | 1/4 | 1/8 | 1/16 | ...
+Other <br /> spellings | whole | half | third | quarter <br /> fourth | eighth | sixteenth | ...
 
 #### *Unspecified*
 
