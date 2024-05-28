@@ -1112,14 +1112,13 @@ Commands only affect their targetting game objects. The target of each command c
 
 Use a **scroll**ing mode similar to the scrolling method used in either **B**E**M**ANI-series or the official Taiko ("**n**or**m**al") game series, unless overridden by user settings.
 
-Emulate the scrolling behavior of Taikosan.
-
 *Unspecified*: Whether the final per-note velocity is kept as the base velocity when switching the scrolling mode.
 
 *Unspecified*: Whether the switching of scrolling mode is taken into account for preventing the note position from being suddenly changed when switching the scrolling mode.
 
 * `#BMSCROLL` &mdash; TaikoJiro v1.91
   * The [`#SCROLL`](#scroll) command is ignored.
+  * Emulates the scrolling behavior of Taikosan.
 * `#HBSCROLL` &mdash; TaikoJiro v2.31
   * Likes `#BMSCROLL` ("**B**E**M**ANI-like"), but [the `#SCROLL` command](#scroll) ("(per-note) **H**iSpeed") is not ignored and is effective.
 * `#NMSCROLL` &mdash; OpenTaiko (0auBSQ) v0.6.0 / initial value
