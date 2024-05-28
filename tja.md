@@ -333,6 +333,9 @@ Equation: `offset` = `time-point-of-audio-beginning` − `time-point-of-chart-st
 
 Replaced the TJF command `#GOMUSIC` (starting ("**go**") playing the song audio ("**music**") from this point).
 
+***From***: TaikoJiro \
+***Supported by***: (Universally supported)
+
 ### SONGVOL:
 
 ***Scope***: per-file
@@ -1255,6 +1258,9 @@ Change the time signature / meter signature / **measure** signature.
 
 Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby>小<rt>shou</rt> 節<rt>setsu</rt></ruby>*** "measure" to fit all note symbols on the following line if placed after the previous measure (if any) and before the first symbol of this measure in the notechart definition).
 
+***From***: TaikoJiro \
+***Supported by***: (Universally supported)
+
 #### Compatibility Issues
 
 * In TaikoJiro, for `<number-upper-numeral>`, only non-zero integers are supported. Zero-duration measures can be constructed using a large `<number-upper-numeral>` value due to the limited timing precision.
@@ -1303,6 +1309,9 @@ Respectively **start** / **end** a *<ruby>ゴー<rt>Goo</rt> ゴー<rt>Goo</rt> 
 
 For playing the Go-Go Time entering effects during an existing Go-Go Time section, a pair of `#GOGOEND` and `#GOGOSTART` can be placed together.
 
+***From***: TaikoJiro \
+***Supported by***: (Universally supported)
+
 ### `#DUMMYSTART` / `#DUMMYEND`
 
 ***Scope***: branch, non-before, sequential \
@@ -1342,6 +1351,9 @@ Unlike the `#BPMCHANGE` command, the `#SCROLL` command is measure-scoped.
   * Can cause the per&ndash;note/bar line visual judgment position to move away from the judgment mark.
 * Initial value: `#SCROLL 1` / `#SCROLL 1+0i` / (TaikoManyGimmicks) `#SCROLL 1, 0, 0`
   * The normal scrolling speed vectors. The notes & the bar lines travel through the whole note field in 4 beats when no BPM changes occur.
+
+***From***: TaikoJiro \
+***Supported by***: (Universally supported)
 
 #### Compatibility Issues
 
