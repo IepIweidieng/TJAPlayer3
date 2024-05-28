@@ -208,7 +208,7 @@ The display details are *unspecified*.
       * The `++` prefix needs to be prepended to the displayed subtitle when the subtitle begins with either `++` or `--`.
 * `SUBTITLE<enum-str-lang>:<str-displayed-subtitle-localized>` &mdash; taiko-web, OpenTaiko (0auBSQ)
   * Specify the localized subtitle. The display mode (`++`/`--`) is instead specified by the `SUBTITLE:` header.
-  * `<enum-str-lang>` can be one of the possible `<enum-str-lang>` for the [`TITLE<enum-str-lang>:`](#title-headers) header.
+  * `<enum-str-lang>` can be one of the possible `<enum-str-lang>` for [the `TITLE<enum-str-lang>:` header](#title-headers).
 
 ***From***: TaikoJiro v2.64 \
 ***Supported by***: (Universally supported)
@@ -538,7 +538,7 @@ Specify the **b**ack**g**round **image** of the gameplay screen. Override the sk
 
 ***Scope***: per&ndash;play-side (?), decorative
 
-Specify the amount of seconds past ("**offset**ted") from the time position specified by the [`OFFSET:`](#offset) header which the background image ("**image**") should start displaying.
+Specify the amount of seconds past ("**offset**ted") from the time position specified by [the `OFFSET:` header](#offset) which the background image ("**image**") should start displaying.
 
 Equation: `bgoffset` = `time-point-of-image-displaying` − `time-point-of-audio-beginning` (Unit: Seconds)
 
@@ -566,7 +566,7 @@ Specify the **b**ack**g**round video ("**movie**") of the gameplay screen. Overr
 
 ***Scope***: per&ndash;play-side (?), decorative
 
-Specify the amount of seconds past ("**offset**ted") from the time position specified by the [`OFFSET:`](#offset) header which the background video ("**movie**") should start playing from the beginning.
+Specify the amount of seconds past ("**offset**ted") from the time position specified by [the `OFFSET:` header](#offset) which the background video ("**movie**") should start playing from the beginning.
 
 Equation: `movieoffset` = `time-point-of-video-beginning` − `time-point-of-audio-beginning` (Unit: Seconds)
 
@@ -584,7 +584,7 @@ Equation: `movieoffset` = `time-point-of-video-beginning` − `time-point-of-aud
 
 ***Scope***: per&ndash;play-side (?), decorative
 
-Specify a **b**ack**g**round video ("**a**nimation") to be used in the gameplay screen by the [`#BGAON` and `#BGAOFF`](#bgaon--bgaoff) commands. Override the skin settings.
+Specify a **b**ack**g**round video ("**a**nimation") to be used in the gameplay screen by [the `#BGAON` and `#BGAOFF` commands](#bgaon--bgaoff). Override the skin settings.
 
 *Unspecified*: Whether the video is scaled or stretched to fill the gameplay screen.
 
@@ -599,7 +599,7 @@ Not reset by `BGA:` itself.
 #### Compatibility Issues
 
 * In OpenTaiko (0auBSQ) v0.6.0:
-  * `<string-filepath-background-animation>` must start with `<unsigned-int-video-index>`, which must be exactly 2 decimal digits (with `0` prefixed if necessary) and is used to specify the background animation by the [`#BGAON` and `#BGAOFF`](#bgaon--bgaoff) commands.
+  * `<string-filepath-background-animation>` must start with `<unsigned-int-video-index>`, which must be exactly 2 decimal digits (with `0` prefixed if necessary) and is used to specify the background animation by [the `#BGAON` and `#BGAOFF` commands](#bgaon--bgaoff).
 
 ### LYRICS: / LYRICFILE:
 
@@ -617,7 +617,7 @@ Specify the lyric file(s) for the song to display **lyrics** in the playback scr
     * `.lrc` &mdash; OpenTaiko (0auBSQ) v0.6.0, LRC, see <https://en.wikipedia.org/wiki/LRC_(file_format)>
   * In TJAPlayer3-f & OpenTaiko (0auBSQ) v0.6.0, every comma (`,`) in `<string-filepath-lyric-file>` ***MUST*** be escaped as `\,`
 * `LYRICS:<comma-separated-list-string-filepath-lyric-file>` &mdash; OpenTaiko (0auBSQ) v0.6.0 / `LYRICFILE:<comma-separated-list-string-filepath-lyric-file>` &mdash; TJAPlayer3-f v1.6.0.0, OpenTaiko (0auBSQ) v0.6.0
-  * Specify the lyric file used for each song specified by the [`#NEXTSONG`](#nextsong) command.
+  * Specify the lyric file used for each song specified by [the `#NEXTSONG` command](#nextsong).
   * Used in conjunction with `COURSE:Dan`.
   * In TJAPlayer3-f & OpenTaiko (0auBSQ) v0.6.0, every comma (`,`) in the filepath specified in `<comma-separated-list-string-filepath-lyric-file>` ***MUST*** be escaped as `\,`
 * `LYRICS:` / `LYRICFILE:`
@@ -700,7 +700,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
 * `COURSE:Ura` / `COURSE:ura` &mdash; taiko-web
   * Equivalent to `COURSE:Edit`
 * **`COURSE:5`** / **`COURSE:Tower`** / `COURSE:tower` &mdash; TaikoJiro v1.79
-  * This difficulty refers to the *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt></ruby>* "Taiko Tower" notechart series in the *<ruby>わ<rt>Wa</rt> く<rt>ku</rt> わ<rt>wa</rt>く<rt>ku</rt> 冒<rt>Bou</rt> 険<rt>ken</rt> ラ<rt>Ra</rt> ン<rt>n</rt> ド<rt>do</rt></ruby>* "Wakuwaku (Exciting) Adventure land" mode from the 7th PS2 console game. To further simulate the mode, the [`LIFE:`](#life) header can be used in conjunction.
+  * This difficulty refers to the *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt></ruby>* "Taiko Tower" notechart series in the *<ruby>わ<rt>Wa</rt> く<rt>ku</rt> わ<rt>wa</rt>く<rt>ku</rt> 冒<rt>Bou</rt> 険<rt>ken</rt> ラ<rt>Ra</rt> ン<rt>n</rt> ド<rt>do</rt></ruby>* "Wakuwaku (Exciting) Adventure land" mode from the 7th PS2 console game. To further simulate the mode, [the `LIFE:` header](#life) can be used in conjunction.
   * The actual behavior may differ from simulator to simulator.
   * In TaikoJiro, this cause the bar drumroll notes to be drawn above of all <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> & <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> notes. However, it was stated that *this behavior might be changed later.* (Original quote: "*この仕様は後に変更されるかもしれません。*")
   * This behavior is in reference to *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt> 6<rt>Roku</rt></ruby>（<ruby>辛<rt>kara</rt> 口<rt>kuchi</rt></ruby>）* ("Taiko Tower 6 (hard)"), where the faster notes are drawn beneath the slower note (mainly the big bar drumroll notes) and thus make the notechart hard to read.
@@ -729,7 +729,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
 
 Specify the *<ruby>難<rt>nan'</rt> 易<rt>i</rt> **度**<rt>do</rt></ruby>* "difficulty (or easiness) **level**"/difficulty star/? ("**level**").
 
-Since the Japanese terminology is easily confused with the fore-mentioned "difficulty" specified by the [`COURSE:`](#course) header, the difficulty star is often referred as *<ruby>星<rt>hoshi</rt> の<rt>no</rt> 数<rt>kazu</rt></ruby>/<ruby>★<rt>hoshi</rt> の<rt>no</rt> 数<rt>kazu</rt></ruby>* "amount of stars" and is displayed as "<ruby>★<rt>hoshi</rt></ruby>×*n*" in the official PC-generation arcade games.
+Since the Japanese terminology is easily confused with the fore-mentioned "difficulty" specified by [the `COURSE:` header](#course), the difficulty star is often referred as *<ruby>星<rt>hoshi</rt> の<rt>no</rt> 数<rt>kazu</rt></ruby>/<ruby>★<rt>hoshi</rt> の<rt>no</rt> 数<rt>kazu</rt></ruby>* "amount of stars" and is displayed as "<ruby>★<rt>hoshi</rt></ruby>×*n*" in the official PC-generation arcade games.
 
 Depending on the simulator and/or user settings, the `LEVEL:` header may affect the default scoring, the default increasing rate of the *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge, *etc.*
 
@@ -892,7 +892,7 @@ Used in conjunction with [`COURSE:Dan`](#course).
     * `ja` &mdash; OpenTaiko (0auBSQ), amount of caught _**A**d libitum_ (**A**D-LIB) notes.
     * `s`, final **s**core.
     * `r`, amount of hits on *all* drum**r**oll-type notes.
-      * Not to be confused with the `r` (bar drum**r**oll notes&ndash;only) used for the condition of the [`#BRANCHSTART`](#branchstart--branchend) command.
+      * Not to be confused with the `r` (bar drum**r**oll notes&ndash;only) used for the condition of [the `#BRANCHSTART` command](#branchstart--branchend).
     * `h`, amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, non-blank hits.
       * > Formula: `h` = `jp` + `jg` + `r`
     * `c`, maximum/longest **c**ombo.
@@ -902,7 +902,7 @@ Used in conjunction with [`COURSE:Dan`](#course).
     * `m` / (*Proposal*) `>=`, **m**ore than or equal to ("≥") the given requirement
     * `l` / (*Proposal*) `<`, **l**ess than ("\<") the given requirement
 * `EXAM<exam-requirement-index-specifier>:<enum-str-requirement>, <comma-separated-list-number-pass-and-gold-requirements>, <enum-str-range>` &mdash; TJAPlayer3-f
-  * The elements of `<comma-separated-list-number-pass-and-gold-requirements>` are pairs of `<number-pass-requirement>, <number-gold-requirement>` for each song specified by the [`#NEXTSONG`](#nextsong) command.
+  * The elements of `<comma-separated-list-number-pass-and-gold-requirements>` are pairs of `<number-pass-requirement>, <number-gold-requirement>` for each song specified by [the `#NEXTSONG` command](#nextsong).
 * `EXAMGAUGE:<number-pass-requirement>, <number-gold-requirement>, <enum-str-range>` &mdash; TJAPlayer3-f
   * The `<enum-str-requirement>` is implicitly fixed to `g`.
   * Corresponding to the `EXAM1:` command in TJAPlayer3-Develop-ReWrite & OpenTaiko (0auBSQ).
@@ -921,7 +921,7 @@ The main scoring formula has two `int` variables: `init` & `diff`.
 
 The "basic score" below refers to the score awarded per *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgment on non-big notes outside Go-Go Time sections.
 
-When either the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true percussion (performance)"/"true performance" option is enabled or `SCOREMODE:3` is used, the basic score is fixed to `init` points and the [`SCOREDIFF:`](#scorediff) header is ignored.
+When either the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true percussion (performance)"/"true performance" option is enabled or `SCOREMODE:3` is used, the basic score is fixed to `init` points and [the `SCOREDIFF:` header](#scorediff) is ignored.
 
 * In TaikoJiro, the option with *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true performance" enabled is referred as "Stable", while the disable of this option is referred as "StepWise".
 
@@ -974,7 +974,7 @@ Reference: *配点* ("Scoring"). 太鼓の達人 譜面とか Wiki\* ("Taiko no 
 
 ***Scope***: per&ndash;play-side, scoring
 
-Specify the *<ruby>**初**<rt>sho</rt> 項<rt>kou</rt></ruby>* **init**ial term (refers to an arithmetic progression) (`init`) used for calculate the basic **score**. See the explanation for the [`SCOREMODE:`](#scoremode) header.
+Specify the *<ruby>**初**<rt>sho</rt> 項<rt>kou</rt></ruby>* **init**ial term (refers to an arithmetic progression) (`init`) used for calculate the basic **score**. See the explanation for [the `SCOREMODE:` header](#scoremode).
 
 * `SCOREINIT:<non-negative-int-score-init>`
 * `SCOREINIT:<non-negative-int-score-init>, <non-negative-int-score-init-shin'uchi>` &mdash; TaikoJiro v2.70
@@ -991,7 +991,7 @@ Specify the *<ruby>**初**<rt>sho</rt> 項<rt>kou</rt></ruby>* **init**ial term 
 
 ***Scope***: per&ndash;play-side, scoring
 
-Specify the *<ruby>公<rt>kou</rt> **差**<rt>sa</rt></ruby>* common **diff**erence (refers to an arithmetic progression) (`diff`) used for calculate the basic **score**. See the explanation for the [`SCOREMODE:`](#scoremode) header.
+Specify the *<ruby>公<rt>kou</rt> **差**<rt>sa</rt></ruby>* common **diff**erence (refers to an arithmetic progression) (`diff`) used for calculate the basic **score**. See the explanation for [the `SCOREMODE:` header](#scoremode).
 
 * `SCOREDIFF:<non-negative-int-score-diff>`
 * `SCOREDIFF:<non-negative-int-score-diff>d` &mdash; TaikoJiro v2.49
@@ -1031,7 +1031,7 @@ The descriptions of [Header Overview](#header-overview) for TJA mostly applies. 
 
 Some TJA headers can be used as TJC headers and have similar or even identical effects. *Unspecified*: Which TJA headers can be used as TJC header aside from [`TITLE:`](#title-headers), [`COURSE:`](#course), & [`TOTAL:`](#total). Only non-TJA headers are listed in this section.
 
-See the [`#NEXTSONG`](#nextsong) command for the TJA command version of TJC headers.
+See [the `#NEXTSONG` command](#nextsong) for the TJA command version of TJC headers.
 
 ### SONG:
 
@@ -1101,8 +1101,8 @@ Commands only affect their targetting game objects. The target of each command c
 
 ### `#BMSCROLL` / `#HBSCROLL` / `#NMSCROLL`
 
-***Scope*** (placed before the [`#START`](#start--end) command): per&ndash;play-side, gimmicky \
-***Scope*** (placed after the [`#START`](#start--end) command): branch, non-before, gimmicky &mdash; OpenTaiko (0auBSQ) v0.6.0 \
+***Scope*** (placed before [the `#START` command](#start--end)): per&ndash;play-side, gimmicky \
+***Scope*** (placed after [the `#START` command](#start--end)): branch, non-before, gimmicky &mdash; OpenTaiko (0auBSQ) v0.6.0 \
 ***Effect scope***: all \
 ***Effect target***: notes, bar lines
 
@@ -1117,13 +1117,13 @@ Emulate the scrolling behavior of Taikosan.
 * `#BMSCROLL` &mdash; TaikoJiro v1.91
   * The [`#SCROLL`](#scroll) command is ignored.
 * `#HBSCROLL` &mdash; TaikoJiro v2.31
-  * Likes `#BMSCROLL` ("**B**E**M**ANI-like"), but the [`#SCROLL`](#scroll) command ("(per-note) **H**iSpeed") is not ignored and is effective.
+  * Likes `#BMSCROLL` ("**B**E**M**ANI-like"), but [the `#SCROLL` command](#scroll) ("(per-note) **H**iSpeed") is not ignored and is effective.
 * `#NMSCROLL` &mdash; OpenTaiko (0auBSQ) v0.6.0 / initial value
   * Use the default ("**n**or**m**al") Taiko-like scrolling behavior
 
 Scrolling mode comparison: Consider BPM changes occur during notes traveling through the whole note field (including the part past the judgment circle).
 
-* `scroll` is the scrolling rate multiplier specified by the [`#SCROLL`](#scroll) command and by the [`HEADSCROLL:`](#headscroll) header.
+* `scroll` is the scrolling rate multiplier specified by [the `#SCROLL` command](#scroll) and by [the `HEADSCROLL:` header](#headscroll).
   * Fixed to `1` when either `#BMSCROLL` or REGUL-SPEED (TaikoJiro) is used.
   * > Formula: `scroll` = `scroll_command` × `headscroll`, otherwise
 * `modifier` is the scrolling rate multiplier specified by the speed modifier options.
@@ -1156,14 +1156,14 @@ See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-
 
 ### `#PAPAMAMA`
 
-***Scope***: per&ndash;play-side (placed before the [`#START`](#start--end) command) \
+***Scope***: per&ndash;play-side (placed before [the `#START` command](#start--end)) \
 ***Effect target***: notes
 
 Use the *<ruby>**パ**<rt>**Pa**</rt> **パ**<rt>**pa**</rt> **マ**<rt>**Ma**</rt> **マ**<rt>**ma**</rt> サ<rt>Sa</rt> ポー<rt>poo</rt> ト<rt>to</rt></ruby>* "Parent Support Mode"/Helping Hand Mode gameplay rules from the official arcade games for certain song in the *<ruby>簡<rt>Kan</rt> 単<rt>tan</rt></ruby>/<ruby>か<rt>Ka</rt> ん<rt>n</rt> た<rt>ta</rt> ん<rt>n</rt></ruby>* Easy difficulty, where the amount of players is fixed to 1 and the inputs from all players are combined to play the song.
 
 Reference: <https://taiko.namco-ch.net/taiko/en/howto/papamama.php#papamama>
 
-*Unspecified*: The behavior when the amount of play-sides specified by the [`STYLE:`](#style) header is not 1.
+*Unspecified*: The behavior when the amount of play-sides specified by [the `STYLE:` header](#style) is not 1.
 
 ***From***: TJAPlayer3-f v1.7.2.0
 
@@ -1174,15 +1174,15 @@ Reference: <https://taiko.namco-ch.net/taiko/en/howto/papamama.php#papamama>
 Respectively **start** / **end** the region of notechart definition.
 
 * `#START`
-  * The notechart definition is for the only play-side if the [`STYLE:`](#style) header is ignored or this header specifies the amount of play-sides to be 1.
+  * The notechart definition is for the only play-side if [the `STYLE:` header](#style) is ignored or this header specifies the amount of play-sides to be 1.
 * `#START <enum-str-play-side>` &mdash; TaikoJiro v1.99 but not TaikoJiro 2
   * The notechart definition is for the play-side specified by `<enum-str-combination>`, which can be one of:
     * `P1`, for the 1st play-side (1P).
-    * `P2`, for the 2nd play-side (2P) if the amount of play-sides specified by the [`STYLE:`](#style) header ≥ 2.
+    * `P2`, for the 2nd play-side (2P) if the amount of play-sides specified by [the `STYLE:` header](#style) ≥ 2.
   * *Unspecified*: The behavior when other `<enum-str-combination>` is used.
     * In TaikoJiro, using any other `<enum-str-combination>` is treated as if the 0-argument `#START` were used.
 * *Proposal*: `#START P<positive-int-play-side>`
-  * The notechart definition is for the 1/`<positive-int-play-side>`-th play-side if the amount of play-sides specified by the [`STYLE:`](#style) header ≥ `<positive-int-play-side>`.
+  * The notechart definition is for the 1/`<positive-int-play-side>`-th play-side if the amount of play-sides specified by [the `STYLE:` header](#style) ≥ `<positive-int-play-side>`.
 * `#END`
 
 *Unspecified*: The behavior when any of the followings are violated when defining each difficulty:
@@ -1224,11 +1224,11 @@ Respectively **start** / **end** the region of notechart definition.
 **Change** the **BPM**.
 
 * `#BPMCHANGE <non-zero-float-bpm>`
-  * A negative value results in "negative BPM" and causes the beat duration and the total note distance to be in the opposite sign. The behavior depend on the [`#MEASURE`](#measure) command used in conjunction.
+  * A negative value results in "negative BPM" and causes the beat duration and the total note distance to be in the opposite sign. The behavior depend on [the `#MEASURE` command](#measure) used in conjunction.
     * See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-and-timing) for the behavior.
 * `#BPMCHANGE 0`
   * The behavior is *unspecified* (may cause crashes in some existing simulators).
-* Initial value: The BPM specified by the [`BPM:`](#bpm) header
+* Initial value: The BPM specified by [the `BPM:` header](#bpm).
 
 ***From***: TJF format \
 ***Supported by***: (Universally supported)
@@ -1398,9 +1398,9 @@ Change the scrolling **direction** of notes & bar lines.
 
 *Unspecified*: Whether the notes & the bar lines are rotated around their center accordingly.
 
-*Unspecified*: The behavior when a [`#SCROLL`](#scroll) command with complex value is active.
+*Unspecified*: The behavior when a [`#SCROLL` command](#scroll) with complex value is active.
 
-*Proposal*: The direction is relative to the scrolling direction specified by the [`#SCROLL`](#scroll) command.
+*Proposal*: The direction is relative to the scrolling direction specified by [the `#SCROLL` command](#scroll).
 
 * `#DIRECTION <enum-int-direction>`
   * `<enum-int-direction>` specifies the degrees (°) of the counterclockwise (↺) rotation and can be one of:
@@ -1465,7 +1465,7 @@ The arguments are whitespace-separated.
       * Move the judgment circle to the default position.
   * `<direction-specifier>` can be one of:
     * (Empty) / `0`
-      * Specify the moving direction as the scrolling direction if `<pixel-distance-specifier>` were the argument of the [`#SCROLL`](#scroll) command when the BPM is positive.
+      * Specify the moving direction as the scrolling direction if `<pixel-distance-specifier>` were the argument of [the `#SCROLL` command](#scroll) when the BPM is positive.
     * `1`
       * The moving direction is reversed (rotated 180 degrees (°) (counter)clockwise (↺/↻)).
 
@@ -1531,7 +1531,7 @@ The arguments are whitespace-separated.
 
 #### Compatibility Issues
 
-* In TJAPlayer2 for PC, the per-note effect is only applied non-before the time position of the [`#START`](#start--end) command. (?)
+* In TJAPlayer2 for PC, the per-note effect is only applied non-before the time position of [the `#START` command](#start--end). (?)
 
 ### #NOTESPAWN
 
@@ -1571,7 +1571,7 @@ Respectively **enable** / **disable** the ***<ruby>ド<rt>Do</rt> ロ<rt>ro</rt>
 
 Display the specified **lyric**.
 
-*Unspecified*: Whether `#LYRIC` commands are ignored if the lyric file specified by the [`#LYRICS` / `#LYRICFILE`](#lyrics--lyricfile) header is used.
+*Unspecified*: Whether `#LYRIC` commands are ignored if the lyric file specified by [the `LYRICS:` or `LYRICFILE:` header](#lyrics--lyricfile) is used.
 
 * `#LYRIC <str-lyric>`
   * In taiko-web, a `\n` in `<str-lyric>` is displayed as a newline.
@@ -1681,7 +1681,7 @@ The semantics are otherwise the same as the [BALLOON](#balloon-headers) headers.
 ***Scope***: branch, instant one-shot \
 ***Effect target***: (none)
 
-Start a *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart branch"/forked path&ndash;determining **section** by resetting the value of the conditions for determining the next not-yet-determined "branch(es)"/path(s) at the beginning of the section. See the explanation for the [`#BRANCHSTART`](#branchstart--branchend) command.
+Start a *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart branch"/forked path&ndash;determining **section** by resetting the value of the conditions for determining the next not-yet-determined "branch(es)"/path(s) at the beginning of the section. See the explanation for [the `#BRANCHSTART` command](#branchstart--branchend).
 
 When the `#SECTION` command & a "branch"/path&ndash;determining point occur at the same beat position, the effect of the `#SECTION` command should take place after the "notechart branch"/forked path is determined.
 
@@ -1705,7 +1705,7 @@ An implicit `#SECTION` is placed at the beginning of every notechart definition.
 ***Scope***: branch, instant one-shot \
 ***Effect target***: (none)
 
-**Resume**/**end** a *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart branch"/forked path&ndash;determining **section** by resuming/stopping updating the value of the conditions for determining the next not-yet-determined "branch(es)"/path(s) at the beginning of the section. See the explanation for the [`#BRANCHSTART`](#branchstart--branchend) command.
+**Resume**/**end** a *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart branch"/forked path&ndash;determining **section** by resuming/stopping updating the value of the conditions for determining the next not-yet-determined "branch(es)"/path(s) at the beginning of the section. See the explanation for [the `#BRANCHSTART` command](#branchstart--branchend).
 
 This command can apply to only named "branch"/path-determining sections.
 
@@ -1738,7 +1738,7 @@ Override the result of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt>
 Its effects end at either the next [`#LEVELHOLD`](#levelhold) or another #LEVELREDIR command.
 
 * *Proposal*: `#LEVELREDIR <enum-str-branch-from-normal>, <enum-str-branch-from-expert>, <enum-str-branch-from-master>`
-  * Override the determining result as respectively `<enum-str-branch-from-normal>` / `<enum-str-branch-from-expert>` / `<enum-str-branch-from-master>` when the default "branch"/path is determined to be respectively the ***<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>*** **N**ormal / ***<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**E**xpert") / ***<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>*** **M**aster "branch"/path. See the explanation of the [`#BRANCHSTART`](#branchstart--branchend) command.
+  * Override the determining result as respectively `<enum-str-branch-from-normal>` / `<enum-str-branch-from-expert>` / `<enum-str-branch-from-master>` when the default "branch"/path is determined to be respectively the ***<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>*** **N**ormal / ***<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**E**xpert") / ***<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>*** **M**aster "branch"/path. See the explanation of [the `#BRANCHSTART` command](#branchstart--branchend).
   * Example: The "branch"/path behavior of the *<ruby>お<rt>O</rt> に<rt>ni</rt></ruby>* Oni/Extreme difficulty of "<ruby>聖<rt>Shou</rt> 徳<rt>doku</rt> た<rt>Ta</rt> い<rt>i</rt> こ<rt>ko</rt> の<rt>no</rt>「<rt></rt> 日<rt>Hi</rt> い<rt>I</rt> ず<rt>zu</rt> る<rt>ru</rt> ま<rt>ma</rt> で<rt>de</rt> 飛鳥<rt>Asuka</rt>」</ruby>" can be achieved using:
 
     ```txt
@@ -1833,7 +1833,7 @@ The "branch"/path is determined by a condition value when `<enum-str-condition>`
 * *Proposal*: `bp`, amount ("hits") of *strong* *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on **b**ig notes during the determining section.
 * *Proposal*: `bh`, amount ("**h**its") of *strong* non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD ("**h**it") on **b**ig notes during the determining section.
 * `s` &mdash; TaikoJiro v2.66, the accumulated **s**core points during the determining section.
-  * *Unspecified*: The behavior when either unsupported scoring mode or the default value is specified to the [`SCOREMODE:`](#scoremode) header or the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true performance" option is enabled.
+  * *Unspecified*: The behavior when either unsupported scoring mode or the default value is specified to [the `SCOREMODE:` header](#scoremode) or the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true performance" option is enabled.
 * *Proposal*: `g`, percentage (%) of *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge change during the determining section, −100 ≤ `g` ≤ 100
 * *Proposal*: `c`, the maximum/longest **c**ombo during the determining section (counted from 0).
 * *Proposal*: `?`, a uniform distribution random value (float), 0 ≤ `?` \< 100
@@ -1892,7 +1892,7 @@ The definition of unused "branches"/paths due to forced "branch"/path determinat
 
 *Unspecified*: The behavior when any of the followings are violated:
 
-* No ordinary notechart sections should be placed after the [`#BRANCHSTART`](#branchstart--branchend) command and before any of the `#N` / `#E` / `#M` commands.
+* No ordinary notechart sections should be placed after [the `#BRANCHSTART` command](#branchstart--branchend) and before any of the `#N` / `#E` / `#M` commands.
 * All `#N` / `#E` / `#M` commands should be placed within the region enclosed by the `#BRANCHSTART` & (possibly implicit) `#BRANCHEND` commands.
 * Definitions should appear in the `#N` / `#E` / `#M` order if defined.
   * In TaikoJiro: Not required.
@@ -1981,8 +1981,8 @@ See [TJC Header](#tjc-header) for the header version of the `#NEXTSONG` command.
     * `<enum-bool-hide-title>` defaults to `False` and specifies whether the title of the song is obscured ("hidden") in the certification challenge selection screen of the *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 道<rt>Dou</rt> 場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games. If given, it can be one of:
       * `False`, the default; the title is displayed as-is.
       * `True`, the title is obscured (*e.g.*, displayed as "`???`").
-    * `<enum-course>` has the effects and the default value of the [`COURSE:`](#course) header.
-    * `<non-negative-number-level>` has the effects and the default value of the [`LEVEL:`](#level) header.
+    * `<enum-course>` has the effects and the default value of [the `COURSE:` header](#course).
+    * `<non-negative-number-level>` has the effects and the default value of [the `LEVEL:` header](#level).
 
 ***From***: TJAPlayer3 v1.5.0
 
@@ -2003,7 +2003,7 @@ See [the `GAME:` header](#game) for specifying the initial game mode for the not
 * `#GAMETYPE Konga` / `#GAMETYPE Bongo`
   * A game mode similar to *Donkey Konga*, developed by Namco
   * See [Note Symbols in Konga Mode](#note-symbols-in-konga-mode)
-* Initial value: The game mode specified by the [`GAME:`](#game) header (not supported by OpenTaiko (0auBSQ))
+* Initial value: The game mode specified by [the `GAME:` header](#game) (not supported by OpenTaiko (0auBSQ))
 
 ***From***: OpenTaiko (0auBSQ) v0.6.0
 
@@ -2019,7 +2019,7 @@ The arguments are whitespace-separated.
 Resetters:
 
 * `#RESETCOMMAND`
-  * **Reset** the effects of gimmicky commands to their default value, including NOTE / BARLINE commands, the [`#JUDGEDELAY`](#judgedelay) command, the [`#NOTESPAWN`](#notespawn) command, & the [`#GRADATION`](#gradation) command.
+  * **Reset** the effects of gimmicky commands to their default value, including NOTE / BARLINE commands, [the `#JUDGEDELAY` command](#judgedelay), [the `#NOTESPAWN` command](#notespawn), & [the `#GRADATION` command](#gradation).
 
 Setters:
 
@@ -2087,11 +2087,9 @@ They are conventionally used as follow:
 
 Commands supporting the `#GRADATION` command in TaikoManyGimmicks:
 
-* The `#SCROLL` command
-* The `#JUDGEDELAY` command
-* The `#SIZE` command
-* The `#COLOR` command
-* The `#ANGLE` command
+* [The `#SCROLL` command](#scroll)
+* [The `#JUDGEDELAY` command](#judgedelay)
+* [The `#SIZE`, `#COLOR`, & `#ANGLE` commands](#note--barline-commands)
 
 ***From***: TaikoManyGimmicks
 
@@ -2250,7 +2248,7 @@ Override ("**set**") the **config** value read from the `SkinConfig.ini` of the 
 ***Scope***: branch, non-before, decorative \
 ***Effect target***: gameplay screen
 
-Start ("**on**")/stop ("**off**") playing the specified **b**ack**g**round video ("**a**nimation") defined by the [`BGA:`](#bga) header on the gameplay screen.
+Start ("**on**")/stop ("**off**") playing the specified **b**ack**g**round video ("**a**nimation") defined by [the `BGA:` header](#bga) on the gameplay screen.
 
 The arguments are whitespace-separated.
 
@@ -2450,7 +2448,7 @@ During the defined duration interval within a drumroll-type note, either `0` or 
 
 * In TaikoJiro, all drumroll-type note head symbols can be used in place of the repeated symbol.
 
-*Proposal*: Each symbol of the note head inside a bar drumroll-type note denote a middle point of the bar which can scroll independently to the head, end, and other middle points of the note.
+*Proposal*: Each symbol of the note head inside a bar drumroll note denote a middle point of the bar which can scroll independently to the head, end, and other middle points of the note.
 
 For special balloons (`9`), the last occurrence of repeated note head symbol (if any) defines the full bonus time point. If the note is cleared, full bonus is awarded only by clearing the note non-after that point and partial bonus is awarded otherwise. The full bonus time point is *unspecified* when no repeated note head symbols ever occur.
 
