@@ -1941,8 +1941,6 @@ An implicit `#LAYEREND` is placed before `#LAYERSTART` & [`#END`](#start--end) c
 Start the definition of a layer of the layer section. A layer can span over multiple layer sections.
 
 * `#LAYER <no-punctuation-str-name-layer>`
-* `#LAYER <no-punctuation-str-name-layer>, <int-layer-relative-overlapping-order>`
-  * Specify the overlapping order relative to other layers in the current layer section (default: 0). Notes from a layer with a more positive number overlap the notes from layers with less positive overlapping orders. Notes outsides the current layer section are not affected.
 * `#LAYER` / `#LAYER default`
   * Start the definition of the default layer.
 
@@ -1951,6 +1949,17 @@ Start the definition of a layer of the layer section. A layer can span over mult
 * All #LAYER commands should be placed within the region enclosed by the `#LAYERSTART` & (possibly implicit) `#LAYEREND` commands.
 * At most one definition should exist for a layer.
 * The amount of measures and their total time duration should be consistent among all of the defined layers.
+
+### *Proposal*: #LAYERORDER
+
+***Scope***: branch, non-before \
+***Effect target***: notes, bar lines, judgment circle(s), notefield(s)
+
+Specify the draw **order** of this **layer** relative to other layers in the current layer section for the notes & bar lines non-before the current beat position and the judgment circle(s) & notefield(s) (if any) for this layer.
+
+* `#LAYERORDER <int-layer-relative-draw-order>`
+  * Specify the draw order relative to other layers in the current layer section (default: 0). Notes from a layer with a more positive number are drawn above the notes from layers with less positive draw orders. Notes outsides the current layer section are not affected.
+* Initial value: `#LAYERORDER 0`
 
 ### #NEXTSONG
 
@@ -2440,6 +2449,8 @@ The head and end of drumroll-type notes have no timing window. In the official a
 During the defined duration interval within a drumroll-type note, either `0` or the symbol of the note head may appear. *E.g.*: `5008` / `5558` / `5058` are all equivalent. *Unspecified*: Whether other drumroll-type notes can be used in place of the repeated symbol of the note head.
 
 * In TaikoJiro, all drumroll-type note head symbols can be used in place of the repeated symbol.
+
+*Proposal*: Each symbol of the note head inside a bar drumroll-type note denote a middle point of the bar which can scroll independently to the head, end, and other middle points of the note.
 
 For special balloons (`9`), the last occurrence of repeated note head symbol (if any) defines the full bonus time point. If the note is cleared, full bonus is awarded only by clearing the note non-after that point and partial bonus is awarded otherwise. The full bonus time point is *unspecified* when no repeated note head symbols ever occur.
 
