@@ -744,13 +744,24 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
     * Normal: 1&ndash;7
     * Hard: 1&ndash;8
     * Oni/Extreme and beyond: 1&ndash;10
-* `LEVEL:0` / `LEVEL:`
+* `LEVEL:0`
   * If supported, the difficulty star is displayed as 0 stars in the song selection screen. The other behaviors are *unspecified*.
+* `LEVEL:`
+  * An *unspecified* default difficulty star is chosen by the simulator.
+  * Usually equivalent to `LEVEL:0`.
 * `LEVEL:<non-negative-float-difficulty-star>` &mdash; TaikoJiro v2.78
   * The fraction part is considered for sorting by difficulty star but is not displayed.
 
 ***From***: TJF format \
 ***Supported by***: (Universally supported)
+
+#### Compatibility Issues
+
+* In TaikoJiro and TJAPlayer2 for PC, the difficulty star displayed in the song selection screen for each difficulty is determined differently from the actual difficulty star in the gameplay screen. For the difficulty star displayed in the song selection screen:
+  * The scope of the `LEVEL:` header is per-difficulty instead of per&ndash;play-side. Each per-difficulty scope starts or resumes at `COURSE:` headers specifying the target difficulty and ends at another `COURSE:` header specifying a different difficulty.
+    * A "deceptive difficulty star" (a displayed difficulty star in the song selection screen which is different from the actual difficulty star in the gameplay screen) can be defined by placing the `LEVEL:` for the deceptive difficulty star after all notechart definitions in the per-difficulty scope.
+  * In TaikoJiro, if a `LEVEL:` header is defined before any `COURSE:` headers with difficulty specified, the specified difficulty star instead of 0 stars will be used as the default difficulty star.
+  * In TJAPlayer2 for PC, if a `LEVEL:` header is defined before any `COURSE:` headers with value, the specified difficulty star become the difficulty star for the *<ruby>お<rt>O</rt> に<rt>ni</rt></ruby>* Oni/Extreme difficulty, even if no notecharts are defined for the Oni/Extreme difficulty.
 
 ### STYLE:
 
