@@ -1218,19 +1218,19 @@ Respectively **start** / **end** the region of notechart definition.
 #### Compatibility Issues
 
 * In TaikoJiro 1, the actual notechart-choosing behavior is one of:
-  | Set of `STYLE:1` definitions | `STYLE:2` `P1` & `P2` defined | Chosen `STYLE:1` 1P | Chosen `STYLE:2` 1P | Chosen `STYLE:2` 2P
-  | --- | --- | --- | --- | ---
-  | Is `P2`(s) | Yes & Yes | Empty <br /> Or (crash) when quit from the gameplay after switching from `STYLE:2` in the gameplay screen | Earliest defined `STYLE:2` `P1` | Earliest defined `STYLE:2` `P2`
-  | Otherwise | Yes & Yes | Earliest defined non-`P2` `STYLE:1` (if any) <br /> Or empty | Earliest defined `STYLE:2` `P1` | Earliest defined `STYLE:2` `P2`
-  | Contains `P2`(s) | Yes & No | Earliest defined non-`P2` `STYLE:1` (if any) <br /> Or empty | (Crash) | (Crash)
-  | Otherwise | Yes & No | Earliest defined non-`P2` `STYLE:1` (if any) <br /> Or empty | Earliest defined `STYLE:2` `P1` | Any earliest defined
-  | Contains `P1`(s) | No & Yes | Earliest defined non-`P2` `STYLE:1` | Empty | Earliest defined `STYLE:2` `P2`
-  | Otherwise | No & Yes | Any earliest defined | Any earliest defined | Earliest defined `STYLE:2` `P2`
-  | (Empty) | No & No | Empty | (Crash) | (Crash)
-  | Contains `P1`(s) & `P2`(s) | No & No | Earliest defined non-`P2` `STYLE:1` | (Crash) | (Crash)
-  | Otherwise, contains `P1`(s) | No & No | Earliest defined non-`P2` `STYLE:1` | Empty | Any earliest defined
-  | Otherwise, contains `P2`(s) | No & No | Any earliest defined | (Crash) | (Crash)
-  | Otherwise (is 0-argument `#START`(s)) | No & No | Any earliest defined | Any earliest defined | Any earliest defined
+  * | Set of `STYLE:1` definitions | `STYLE:2` `P1` & `P2` defined | Chosen `STYLE:1` 1P | Chosen `STYLE:2` 1P | Chosen `STYLE:2` 2P
+    | --- | --- | --- | --- | ---
+    | Is `P2`(s) | Yes & Yes | Empty <br /> Or (crash) when quit from the gameplay after switching from `STYLE:2` in the gameplay screen | Earliest defined `STYLE:2` `P1` | Earliest defined `STYLE:2` `P2`
+    | Otherwise | Yes & Yes | Earliest defined non-`P2` `STYLE:1` (if any) <br /> Or empty | Earliest defined `STYLE:2` `P1` | Earliest defined `STYLE:2` `P2`
+    | Contains `P2`(s) | Yes & No | Earliest defined non-`P2` `STYLE:1` (if any) <br /> Or empty | (Crash) | (Crash)
+    | Otherwise | Yes & No | Earliest defined non-`P2` `STYLE:1` (if any) <br /> Or empty | Earliest defined `STYLE:2` `P1` | Any earliest defined
+    | Contains `P1`(s) | No & Yes | Earliest defined non-`P2` `STYLE:1` | Empty | Earliest defined `STYLE:2` `P2`
+    | Otherwise | No & Yes | Any earliest defined | Any earliest defined | Earliest defined `STYLE:2` `P2`
+    | (Empty) | No & No | Empty | (Crash) | (Crash)
+    | Contains `P1`(s) & `P2`(s) | No & No | Earliest defined non-`P2` `STYLE:1` | (Crash) | (Crash)
+    | Otherwise, contains `P1`(s) | No & No | Earliest defined non-`P2` `STYLE:1` | Empty | Any earliest defined
+    | Otherwise, contains `P2`(s) | No & No | Any earliest defined | (Crash) | (Crash)
+    | Otherwise (is 0-argument `#START`(s)) | No & No | Any earliest defined | Any earliest defined | Any earliest defined
 
 ### #BPMCHANGE
 
