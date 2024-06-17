@@ -1119,8 +1119,8 @@ Commands only affect their targetting game objects. The target of each command c
 
 * Notes, including fake/dummy notes.
 * Bar lines, including fake/dummy bar lines.
-* Judgment circle(s). There may be multiple judgment circles for a single player when, *e.g.*, [the `#SPLITLANE` command](#splitlane--mergelane) is used or (*Proposed*) [the `#JPOSSCROLL` command](#jposscroll) is used inconsistently in any layers defined by [the `#LAYER` command](#proposal-layer).
-* Notefield(s): Any effects affecting the default scrolling path of notes and bar lines. There may be multiple notefields for a single player when there are multiple judgment circles.
+* Judgment mark(s). There may be multiple judgment marks for a single player when, *e.g.*, [the `#SPLITLANE` command](#splitlane--mergelane) is used or (*Proposed*) [the `#JPOSSCROLL` command](#jposscroll) is used inconsistently in any layers defined by [the `#LAYER` command](#proposal-layer).
+* Note field(s): Any effects affecting the default scrolling path of notes and bar lines. There may be multiple note fields for a single player when there are multiple judgment marks.
 * Gameplay screen: Any other visible effects not directly targetting the above objects.
 
 ### `#BMSCROLL` / `#HBSCROLL` / `#NMSCROLL`
@@ -1144,7 +1144,7 @@ Use a **scroll**ing mode similar to the scrolling method used in either **B**E**
 * `#NMSCROLL` &mdash; OpenTaiko (0auBSQ) v0.6.0 / initial value
   * Use the default ("**n**or**m**al") Taiko-like scrolling behavior
 
-Scrolling mode comparison: Consider BPM changes occur during notes traveling through the whole note field (including the part past the judgment circle).
+Scrolling mode comparison: Consider BPM changes occur during notes traveling through the whole note field (including the part past the judgment mark).
 
 * `scroll` is the scrolling rate multiplier specified by [the `#SCROLL` command](#scroll) and by [the `HEADSCROLL:` header](#headscroll).
   * Fixed to `1` when either `#BMSCROLL` or REGUL-SPEED (TaikoJiro) is used.
@@ -1483,7 +1483,7 @@ Insert a fake/dummy normal **bar** **line** displayed at the head of the current
 
 ***Scope***: branch, non-before, gimmicky \
 ***Late effect scope***: all \
-***Effect target***: notes, bar lines, judgment circle, notefield
+***Effect target***: notes, bar lines, judgment mark, note field
 
 Move ("**scroll**") the **pos**ition of the **j**udgment circle from the current position.
 
@@ -1499,11 +1499,11 @@ The arguments are whitespace-separated.
     * `<number-pixel-distance-x>`
     * `<number-pixel-distance-x><always-signed-number-pixel-distance-y>i` &mdash; TJAPlayer3 v1.6.x, OpenTaiko (0auBSQ) v0.6.0
     * `<number-distance-x-upper>/<number-distance-x-lower>` &mdash; TaikoManyGimmicks
-      * Specify the horizontal movement to be `<number-distance-x-upper>/<number-distance-x-lower>` of the default notefield width.
+      * Specify the horizontal movement to be `<number-distance-x-upper>/<number-distance-x-lower>` of the default note field width.
     * *Proposal*: `<value> deg <float-degrees-angle>`
       * Specify the moving vector as `<value>` rotated `<float-degrees-angle>` degrees (°) counterclockwise (↺).
     * `default` &mdash; TaikoManyGimmicks
-      * Move the judgment circle to the default position.
+      * Move the judgment mark to the default position.
   * `<direction-specifier>` can be one of:
     * (Empty) / `0`
       * Specify the moving direction as the scrolling direction if `<pixel-distance-specifier>` were the argument of [the `#SCROLL` command](#scroll) when the BPM is positive.
@@ -1832,8 +1832,8 @@ Its effects end at either the next [`#LEVELHOLD`](#levelhold) or another #LEVELR
 ### #BRANCHSTART / `#BRANCHEND`
 
 ***Scope***: notechart, measure non-before, sequential \
-***Late effect scope***: notes, bar lines, & judgment circle(s): non-before, notefield(s): non-before the previous measure (`#BRANCHSTART`) or (none) (`#BRANCHEND`) \
-***Effect target***: notes, bar lines, judgment circle(s), notefield(s)
+***Late effect scope***: notes, bar lines, & judgment mark(s): non-before, note field(s): non-before the previous measure (`#BRANCHSTART`) or (none) (`#BRANCHEND`) \
+***Effect target***: notes, bar lines, judgment mark(s), note field(s)
 
 Respectively **start** / **end** the definition of a *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path section.
 
@@ -1937,7 +1937,7 @@ An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--en
 
 ***Scope***: notechart, measure non-before \
 ***Late effect scope***: (none) \
-***Effect target***: notes, bar lines, judgment circle(s), notefield(s)
+***Effect target***: notes, bar lines, judgment mark(s), note field(s)
 
 Start the definition of respectively the ***<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>*** **N**ormal / ***<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**E**xpert") / ***<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>*** **M**aster *<ruby>譜<rt>fu</rt> 面<rt>men</rt></ruby> (<ruby>分<rt>bun</rt> 岐<rt>ki</rt></ruby>)* "notechart branch"/forked path section.
 
@@ -1966,7 +1966,7 @@ The definition of unused "branches"/paths due to forced "branch"/path determinat
 
 ***Scope***: notechart, non-before, sequential \
 ***Late effect scope***: (none) \
-***Effect target***: notes, bar lines, judgment circle(s), notefield(s)
+***Effect target***: notes, bar lines, judgment mark(s), note field(s)
 
 Respectively **start** / **end** the definition of a layer section. All layers in a layer section occur simultaneously and all branch-scoped commands not targetting the gameplay screen are applied separately for each layer.
 
@@ -1991,7 +1991,7 @@ An implicit `#LAYEREND` is placed before `#LAYERSTART` & [`#END`](#start--end) c
 
 ***Scope***: notechart, non-before \
 ***Late effect scope***: (none) \
-***Effect target***: notes, bar lines, judgment circle(s), notefield(s)
+***Effect target***: notes, bar lines, judgment mark(s), note field(s)
 
 Start the definition of a layer of the layer section. A layer can span over multiple layer sections.
 
@@ -2009,9 +2009,9 @@ Start the definition of a layer of the layer section. A layer can span over mult
 
 ***Scope***: branch, non-before \
 ***Late effect scope***: (none) \
-***Effect target***: notes, bar lines, judgment circle(s), notefield(s)
+***Effect target***: notes, bar lines, judgment mark(s), note field(s)
 
-Specify the draw **order** of this **layer** relative to other layers in the current layer section for the notes & bar lines non-before the current beat position and the judgment circle(s) & notefield(s) (if any) for this layer.
+Specify the draw **order** of this **layer** relative to other layers in the current layer section for the notes & bar lines non-before the current beat position and the judgment mark(s) & note field(s) (if any) for this layer.
 
 * `#LAYERORDER <int-layer-relative-draw-order>`
   * Specify the draw order relative to other layers in the current layer section (default: 0). Notes from a layer with a more positive number are drawn above the notes from layers with less positive draw orders. Notes outsides the current layer section are not affected.
@@ -2157,13 +2157,13 @@ Commands supporting the `#GRADATION` command in TaikoManyGimmicks:
 
 ***Scope***: branch, non-before \
 ***Late effect scope***: all \
-***Effect target***: notes, bar lines, judgment circle(s), notefield(s)
+***Effect target***: notes, bar lines, judgment mark(s), note field(s)
 
-**Split**/**merge** the notefield ("**lane**") into/from top and bottom notefield, with <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> notes on the top notefield, <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> notes on the bottom notefield, and other notes on the middle of these 2 notefields.
+**Split**/**merge** the note field ("**lane**") into/from top and bottom note field, with <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> notes on the top note field, <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> notes on the bottom note field, and other notes on the middle of these 2 note fields.
 
 * `#SPLITLANE` / (*Proposed*) `#SPLITLANE 1`
 * *Proposal*: `#SPLITLANE <float-split-amount>`
-  * Specify the split amount, 1 for `#SPLITLANE` & 0 for `#MERGELANE`. A negative split amount makes <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> notes on the bottom notefield and <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> notes on the top notefield intead.
+  * Specify the split amount, 1 for `#SPLITLANE` & 0 for `#MERGELANE`. A negative split amount makes <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> notes on the bottom note field and <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> notes on the top note field intead.
 * Initial value / `#MERGELANE` / (*Proposed*) `#SPLITLANE 0`
 
 ***From***: OpenTaiko (0auBSQ) v0.6.0
@@ -2351,7 +2351,7 @@ Inspired by StepMania.
 
 ***Scope***: branch, gimmicky (intended; depending on usage) \
 ***Late effect scope***: (Depending on usage) \
-***Effect target***: notes, bar lines, judgment circle(s), notefield(s) (intended; depending on usage)
+***Effect target***: notes, bar lines, judgment mark(s), note field(s) (intended; depending on usage)
 
 Execute the given **Lua** code with predefined variables describing the current beat position, the loaded notechart, *etc.*, when the beginning of the approach phase of the command is reached during gameplay.
 
@@ -2369,7 +2369,7 @@ Inspired by StepMania.
 
 ***Scope***: (Part of a command), gimmicky \
 ***Late effect scope***: (As specified) \
-***Effect target***: notes, bar lines, notefield(s)
+***Effect target***: notes, bar lines, note field(s)
 
 A command modifier can be specified to certain branch-scoped commands using the following form:
 
