@@ -1680,7 +1680,7 @@ In the official games, the note phoneticization is assigned per-note and does no
 The general pattern in recent Taiko games seems to be:
 
 * The visual beat duration between `x` & `y` (`d_<x>_to_<y>` below) is used for determining the note phoneticization and is defined as `scroll` × `beat_duration_<x>_to_<y>` = `scroll_command` × `headscroll` × `beat_duration_<x>_to_<y>`.
-* Both the head and end of drumroll-type notes are treated as odinary notes for determining the note phoneticization.
+* Both the head and end of drumroll-type notes are treated as ordinary notes for determining the note phoneticization.
 * A note is "chain-final" when any of the followings are met (the "? / 3" factors are tentatively determined tolerance values):
   * `d_this_to_next_note` > 1/8th, the end of a chain before a pause.
   * `d_this_to_next_note` ≥ 4.0 / 3 × `d_this_to_previous_note`, the end of a chain before a short pause or a sparser chain.
