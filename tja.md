@@ -713,7 +713,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
     * Exemplar Gameplay: <https://www.youtube.com/watch?v=8xU8uh5FSEw> <br />
       <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8xU8uh5FSEw" title="YouTube video player, playing &quot;【太鼓の達人 CS7】太鼓タワー その6&quot;, uploaded by Lunar. lu" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     * However, near to the end of this notechart, the big bar drumroll notes are drawn beneath the preceding big <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> note with the same scrolling velocity. The draw order is probably determined by the scrolling velocity rather than the note type in this case.
-    * In TJAPlayer2 for PC, the draw order of bar drumroll notes is determined by the relative scrolling velocity regardless of the value of the `COURSE:` command.
+    * In TJAPlayer2 for PC, the draw order of bar drumroll notes is determined by the relative scrolling velocity regardless of the value of the `COURSE:` header.
 * **`COURSE:6`** / **`COURSE:Dan`** / `COURSE:dan` &mdash; TJAPlayer3 v1.5.0
   * The special difficulty used for *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 道<rt>Dou</rt> 場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games.
 * `COURSE:`
@@ -927,7 +927,7 @@ Used in conjunction with [`COURSE:Dan`](#course).
   * Corresponding to the per-song&ndash;scoped usage in TJAPlayer3-Develop-ReWrite & OpenTaiko (0auBSQ).
 * `EXAMGAUGE:<number-pass-requirement>, <number-gold-requirement>, <enum-str-range>` &mdash; TJAPlayer3-f
   * The `<enum-str-requirement>` is implicitly fixed to `g`.
-  * Corresponding to the `EXAM1:` command in TJAPlayer3-Develop-ReWrite & OpenTaiko (0auBSQ).
+  * Corresponding to the `EXAM1:` header in TJAPlayer3-Develop-ReWrite & OpenTaiko (0auBSQ).
 
 ***From***: TJAPlayer3 v1.5.0
 
