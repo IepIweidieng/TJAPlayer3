@@ -22,7 +22,7 @@ Known notechart formats used in <ruby>**太**<rt>**T**ai</rt> 鼓<rt>ko</rt> の
 
 Extension | Full Name | Content | Supported by | Specification
 --- | --- | --- | --- | ---
-`.bin` | **Bin**ary (*<ruby>**譜**<rt>**F**u</rt> 面<rt>men</rt></ruby>* Notechart File Format) | Notechart metadata + definition (binary file) | Official games, taiko-web (plugin "Fumen File Format") | Proprietary format, not explained in this article.
+`.bin` | **Bin**ary (*<ruby>譜<rt>Fu</rt> 面<rt>men</rt></ruby>* Notechart File Format) | Notechart metadata + definition (binary file) | Official games, taiko-web (plugin "Fumen File Format") | Proprietary format, not explained in this article.
 `.tjf` | **T**atsu**j**in *<ruby>**譜**<rt>**F**u</rt> 面<rt>men</rt></ruby>* Notechart Data (?) | Notechart metadata + definition | Taikosan, TaikoJiro 1 |
 `.tja` | **T**atsu**j**in Notechart Format **A**(?) (?) | Notechart metadata + definition | TaikoJiro, TJAPlayer2 for PC, taiko-web ver.18.10.11, OutFox Alpha 4.9.9, TaikoManyGimmicks |
 `.tjc` | **T**atsu**j**in **C**ourse (?) | Notechart set metadata | TaikoJiro v2.34, TaikoJiro 2 v0.98 |
