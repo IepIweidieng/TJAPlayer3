@@ -1107,7 +1107,9 @@ Some branch-scoped commands are non-sequential, *i.e.*, they can be arranged fre
 
 #### Command Late Effect Scope
 
-A command may have some effects applied only when the head of their defined beat position is reached. These effects are defined as the late effects. The late effect scope is defined by the targetted game objects which are affected by the late effects.
+A command may have some effects applied only when their approach phase is reached. These effects are defined as the late effects. The late effect scope is defined by the targetted game objects which are affected by the late effects.
+
+The approach phase of a command occurs before the head of their defined beat position by a specified time or beat duration (if any) or no duration.
 
 *Proposal*: Allow the late effect scope to be overridden for branch-scoped commands targetting notes & bar lines, see [*Proposal*: Command Modifier](#proposal-command-modifier).
 
