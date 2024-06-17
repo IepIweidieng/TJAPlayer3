@@ -1205,7 +1205,7 @@ Respectively **start** / **end** the region of notechart definition.
   * *Unspecified*: The behavior when other `<enum-str-combination>` is used.
     * In TaikoJiro, using any other `<enum-str-combination>` is treated as if the 0-argument `#START` were used.
 * *Proposal*: `#START P<positive-int-player-side>`
-  * The notechart definition is for the 1/`<positive-int-player-side>`-th player-side if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ `<positive-int-player-side>`.
+  * The notechart definition is for the `<positive-int-player-side>`-th player-side if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ `<positive-int-player-side>`.
 * `#END`
 
 *Unspecified*: The behavior when any of the followings are violated when defining each difficulty:
