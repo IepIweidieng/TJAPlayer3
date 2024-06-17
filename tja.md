@@ -162,7 +162,7 @@ For non-string values, whitespaces can immediately occur after `:`, *e.g.*, [`LE
 
 #### Header Scope
 
-The effect of each header continues until the next occurrence of the same header or the end of the file, regardless of whether it is per-file or per&ndash;play-side.
+The effect of each header continues until the next occurrence of the same header or the end of the file, regardless of whether it is per-file or per&ndash;player-side.
 
 * *Unspecified*: The behavior when the same header occur multiple times within its scope.
 
@@ -323,7 +323,7 @@ Specify the amount of seconds into the song audio for **start**ing playing the p
 
 ### OFFSET:
 
-***Scope***: per&ndash;play-side (?)
+***Scope***: per&ndash;player-side (?)
 
 Specify the amount of seconds past ("**offset**ted") from the time position of `#START` of the notechart which the song audio should start playing from the beginning.
 
@@ -356,7 +356,7 @@ Specify the relative amplitude percentage (%) of the desired **vol**ume gain of 
 
 ### SEVOL:
 
-***Scope***: per&ndash;play-side (?)
+***Scope***: per&ndash;player-side (?)
 
 Specify the relative amplitude percentage (%) of the desired **vol**ume gain of the taiko sound ("**s**ound **e**ffect").
 
@@ -375,7 +375,7 @@ Specify the relative amplitude percentage (%) of the desired **vol**ume gain of 
 
 ### BPM:
 
-***Scope***: per&ndash;play-side
+***Scope***: per&ndash;player-side
 
 Specify the initial **BPM** (**b**eat **p**er **m**inute) of the notechart.
 
@@ -391,7 +391,7 @@ Specify the initial **BPM** (**b**eat **p**er **m**inute) of the notechart.
 
 ### HEADSCROLL:
 
-***Scope***: per&ndash;play-side, gimmicky
+***Scope***: per&ndash;player-side, gimmicky
 
 Specify the normal **scroll**ing velocity (before and non-after the beginning ("**head**") of the notechart), relative to the base scrolling velocity.
 
@@ -403,7 +403,7 @@ Specify the normal **scroll**ing velocity (before and non-after the beginning ("
 
 ### PREIMAGE:
 
-***Scope***: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;player-side (?), decorative
 
 Specify the jacket ("**pre**view") **image** of the song.
 
@@ -446,7 +446,7 @@ Each element of `<comma-separated-list-string-key-value>` can be one of:
 
 ### SCENEPRESET:
 
-***Scope***: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;player-side (?), decorative
 
 Specify the pre-defined ("**preset**") skin ("**scene**") in the gameplay screen.
 
@@ -458,7 +458,7 @@ Specify the pre-defined ("**preset**") skin ("**scene**") in the gameplay screen
 
 ### TOWERTYPE:
 
-***Scope***: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;player-side (?), decorative
 
 Specify the dedicated **tower** skin ("**type**") to use.
 
@@ -514,7 +514,7 @@ Used in conjunction with [`COURSE:Dan`](#course).
 
 ### SELECTBG:
 
-***Scope***: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;player-side (?), decorative
 
 Specify the **b**ack**g**round image of the song **select**ion screen. Override the skin settings.
 
@@ -526,7 +526,7 @@ Specify the **b**ack**g**round image of the song **select**ion screen. Override 
 
 ### BGIMAGE:
 
-***Scope***: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;player-side (?), decorative
 
 Specify the **b**ack**g**round **image** of the gameplay screen. Override the skin settings.
 
@@ -540,7 +540,7 @@ Specify the **b**ack**g**round **image** of the gameplay screen. Override the sk
 
 ### BGOFFSET:
 
-***Scope***: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;player-side (?), decorative
 
 Specify the amount of seconds past ("**offset**ted") from the time position specified by [the `OFFSET:` header](#offset) which the background image ("**image**") should start displaying.
 
@@ -554,7 +554,7 @@ Reference: TJA Format Support (vscode extension)
 
 ### BGMOVIE:
 
-***Scope***: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;player-side (?), decorative
 
 Specify the **b**ack**g**round video ("**movie**") of the gameplay screen. Override the skin settings.
 
@@ -568,7 +568,7 @@ Specify the **b**ack**g**round video ("**movie**") of the gameplay screen. Overr
 
 ### MOVIEOFFSET:
 
-***Scope***: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;player-side (?), decorative
 
 Specify the amount of seconds past ("**offset**ted") from the time position specified by [the `OFFSET:` header](#offset) which the background video ("**movie**") should start playing from the beginning.
 
@@ -586,7 +586,7 @@ Equation: `movieoffset` = `time-point-of-video-beginning` − `time-point-of-aud
 
 ### BGA:
 
-***Scope***: per&ndash;play-side (?), decorative
+***Scope***: per&ndash;player-side (?), decorative
 
 Specify a **b**ack**g**round video ("**a**nimation") to be used in the gameplay screen by [the `#BGAON` and `#BGAOFF` commands](#bgaon--bgaoff). Override the skin settings.
 
@@ -652,7 +652,7 @@ The display details are *unspecified*.
 
 ### GAME:
 
-***Scope***: per&ndash;play-side (?)
+***Scope***: per&ndash;player-side (?)
 
 Specify the **game** mode. The meaning of the symbols used in the notechart definition is changed accordingly; see [TJA Notechart Definition](#tja-notechart-definition).
 
@@ -679,7 +679,7 @@ See [the `#GAMETYPE` command](#gametype) for specifying the game mode for specif
 
 ### COURSE:
 
-***Scope***: per&ndash;play-side
+***Scope***: per&ndash;player-side
 
 Specify the *<ruby>コー<rt>koo</rt> ス<rt>su</rt></ruby> "course"/<ruby>む<rt>mu</rt> ず<rt>zu</rt> か<rt>ka</rt> し<rt>shi</rt> い<rt>i</rt></ruby> "difficulty"/<ruby>難<rt>nan'</rt> 易<rt>i</rt> 度<rt>do</rt></ruby> "difficulty (or easiness) level"* difficulty/difficulty level ("**course**").
 
@@ -729,7 +729,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
 
 ### LEVEL:
 
-***Scope***: per&ndash;play-side
+***Scope***: per&ndash;player-side
 
 Specify the *<ruby>難<rt>nan'</rt> 易<rt>i</rt> **度**<rt>do</rt></ruby>* "difficulty (or easiness) **level**"/difficulty star/? ("**level**").
 
@@ -758,30 +758,30 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
 #### Compatibility Issues
 
 * In TaikoJiro and TJAPlayer2 for PC, the difficulty star displayed in the song selection screen for each difficulty is determined differently from the actual difficulty star in the gameplay screen. For the difficulty star displayed in the song selection screen:
-  * The scope of the `LEVEL:` header is per-difficulty instead of per&ndash;play-side. Each per-difficulty scope starts or resumes at `COURSE:` headers specifying the target difficulty and ends at another `COURSE:` header specifying a different difficulty.
+  * The scope of the `LEVEL:` header is per-difficulty instead of per&ndash;player-side. Each per-difficulty scope starts or resumes at `COURSE:` headers specifying the target difficulty and ends at another `COURSE:` header specifying a different difficulty.
     * A "deceptive difficulty star" (a displayed difficulty star in the song selection screen which is different from the actual difficulty star in the gameplay screen) can be defined by placing the `LEVEL:` for the deceptive difficulty star after all notechart definitions in the per-difficulty scope.
   * In TaikoJiro, if a `LEVEL:` header is defined before any `COURSE:` headers with difficulty specified, the specified difficulty star instead of 0 stars will be used as the default difficulty star.
   * In TJAPlayer2 for PC, if a `LEVEL:` header is defined before any `COURSE:` headers with value, the specified difficulty star become the difficulty star for the *<ruby>お<rt>O</rt> に<rt>ni</rt></ruby>* Oni/Extreme difficulty, even if no notecharts are defined for the Oni/Extreme difficulty.
 
 ### STYLE:
 
-***Scope***: per&ndash;play-side
+***Scope***: per&ndash;player-side
 
 Specify the total amount of play-**side**s of the notechart(s).
 
-The multiple-play-side notecharts of the difficulty is chosen if enough amount of players have chosen the same difficulty.
+The multiple-player-side notecharts of the difficulty is chosen if enough amount of players have chosen the same difficulty.
 
-In the official games, some difficulties may have only 2-play-side notecharts but are still playable in single player mode, where the notechart for one of the play-side is chosen (always the 1st play-side in PC-generation games).
+In the official games, some difficulties may have only 2-player-side notecharts but are still playable in single player mode, where the notechart for one of the player-side is chosen (always the 1st player-side in PC-generation games).
 
 *Unspecified*: Whether such notecharts are chosen when some players have chosen different difficulties.
 
 * In TaikoJiro 1, such notecharts are chosen as if all other players had chosen the same difficulty for each player.
 
-If the specified amount of play-sides is not 1, [`#START <enum-str-play-side>`](#start--end) should be used for specifying the play-side of the notechart.
+If the specified amount of player-sides is not 1, [`#START <enum-str-player-side>`](#start--end) should be used for specifying the player-side of the notechart.
 
 * `STYLE:1` / `STYLE:Single` / `STYLE:single` / `STYLE:`
 * `STYLE:2` / `STYLE:Double` / `STYLE:double` / `STYLE:Couple` / `STYLE:couple`
-* *Proposal*: `STYLE:<positive-int-amount-of-play-sides>`
+* *Proposal*: `STYLE:<positive-int-amount-of-player-sides>`
 
 Reference: *ダブルプレイ* ("Double Play"; "Two-player Charts"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/ダブルプレイ>
 
@@ -794,7 +794,7 @@ Reference: *ダブルプレイ* ("Double Play"; "Two-player Charts"). 太鼓の�
 
 ### BALLOON Headers
 
-***Scope***: per&ndash;play-side
+***Scope***: per&ndash;player-side
 
 Specify the required amount of hits of *<ruby>激<rt>geki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>/<ruby>ゲ<rt>ge</rt> キ<rt>ki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>fuu</rt> 船<rt>sen</rt></ruby>/<ruby>ふ <rt>fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* **balloon**&ndash;type notes (denoted by `7`, `9`, or `D` in the notechart definition), in the order of their definition, ***NOT*** the hit order during playing.
 
@@ -830,7 +830,7 @@ For each element of `<comma-separated-list-non-negative-int-amount-of-hits>`, if
 
 ### LIFE:
 
-***Scope***: per&ndash;play-side
+***Scope***: per&ndash;player-side
 
 Specify the initial **life** count of the life count gauge (if used).
 
@@ -857,7 +857,7 @@ A *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* bad judgment decreases the life c
 
 ### TOTAL:
 
-***Scope***: per&ndash;play-side
+***Scope***: per&ndash;player-side
 
 Specify the **total** *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge increment of the notechart when all hit-type notes are hit with *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgment, *i.e.*, *<ruby>ド<rt>Do</rt> ン<rt>n</rt> ダ<rt>da</rt> フ<rt>fu</rt> ル<rt>ru</rt> コ<rt>ko</rt> ン<rt>n</rt> ボ<rt>bo</rt></ruby>* Donderful Combo.
 
@@ -870,7 +870,7 @@ Specify the **total** *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</r
 
 ### GAUGEINCR:
 
-***Scope***: per&ndash;play-side
+***Scope***: per&ndash;player-side
 
 Specify the rounding mode of the **incr**ement of the *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**gee**</rt>**ジ**<rt>**ji**</rt></ruby>* spirit **gauge**/soul **gauge**.
 
@@ -886,7 +886,7 @@ Specify the rounding mode of the **incr**ement of the *<ruby>魂<rt>tamashii</rt
 
 ### EXAM Headers
 
-***Scope***: per&ndash;play-side (?)
+***Scope***: per&ndash;player-side (?)
 
 Specify a requirement for passing the notechart in *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode" ("**exam**ination").
 
@@ -929,7 +929,7 @@ Used in conjunction with [`COURSE:Dan`](#course).
 
 ### SCOREMODE:
 
-***Scope***: per&ndash;play-side, scoring
+***Scope***: per&ndash;player-side, scoring
 
 Specify the **scoring mode**.
 
@@ -990,7 +990,7 @@ Reference: *配点* ("Scoring"). 太鼓の達人 譜面とか Wiki\* ("Taiko no 
 
 ### SCOREINIT:
 
-***Scope***: per&ndash;play-side, scoring
+***Scope***: per&ndash;player-side, scoring
 
 Specify the *<ruby>**初**<rt>sho</rt> 項<rt>kou</rt></ruby>* **init**ial term (refers to an arithmetic progression) (`init`) used for calculate the basic **score**. See the explanation for [the `SCOREMODE:` header](#scoremode).
 
@@ -1007,7 +1007,7 @@ Specify the *<ruby>**初**<rt>sho</rt> 項<rt>kou</rt></ruby>* **init**ial term 
 
 ### SCOREDIFF:
 
-***Scope***: per&ndash;play-side, scoring
+***Scope***: per&ndash;player-side, scoring
 
 Specify the *<ruby>公<rt>kou</rt> **差**<rt>sa</rt></ruby>* common **diff**erence (refers to an arithmetic progression) (`diff`) used for calculate the basic **score**. See the explanation for [the `SCOREMODE:` header](#scoremode).
 
@@ -1027,7 +1027,7 @@ Specify the *<ruby>公<rt>kou</rt> **差**<rt>sa</rt></ruby>* common **diff**ere
 
 ### HIDDENBRANCH:
 
-***Scope***: per&ndash;play-side, gimmicky
+***Scope***: per&ndash;player-side, gimmicky
 
 If enabled, make the *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path indicator **hidden** in the song selection screen; hide the "branch"/path mark on the note field from the beginning of the notechart until time point when the "branch"/path&ndash;switching effects should play for the first "branch"/path section in the gameplay screen.
 
@@ -1092,11 +1092,11 @@ The arguments for commands introduced in TaikoJiro are comma-separated. However,
 
 #### Command Scope
 
-No known per-file commands exist, which would be effectively [headers](#tja-header). Per&ndash;play-side commands are similar to [headers](#tja-header) but the effects of these commands reset at the end of their scope.
+No known per-file commands exist, which would be effectively [headers](#tja-header). Per&ndash;player-side commands are similar to [headers](#tja-header) but the effects of these commands reset at the end of their scope.
 
 Except for one-shot commands, the effect of each command continues until the next occurrence of any command from the same command group or [`#END`](#start--end).
 
-* For per&ndash;play-side commands, the behavior is *unspecified* when (the same or different) commands in the same command group occur together within its scope.
+* For per&ndash;player-side commands, the behavior is *unspecified* when (the same or different) commands in the same command group occur together within its scope.
 * For measure-based&ndash;scoped commands, the behavior is *unspecified* when any notechart symbols occur between such a command and the first symbol of the measure in the notechart definition.
 
 Some branch-scoped commands are non-sequential, *i.e.*, they can be arranged freely within the same beat position without causing any behavior changes, as long as both their relative order to the sequential commands and the relative order among commands which override each other are not changed. All commands with other type of scope are implicitly sequential.
@@ -1119,7 +1119,7 @@ Commands only affect their targetting game objects. The target of each command c
 
 ### `#BMSCROLL` / `#HBSCROLL` / `#NMSCROLL`
 
-***Scope*** (placed before [the `#START` command](#start--end)): per&ndash;play-side, gimmicky \
+***Scope*** (placed before [the `#START` command](#start--end)): per&ndash;player-side, gimmicky \
 ***Scope*** (placed after [the `#START` command](#start--end)): branch, non-before, gimmicky &mdash; OpenTaiko (0auBSQ) v0.6.0 \
 ***Late effect scope***: all (?) \
 ***Effect target***: notes, bar lines
@@ -1173,44 +1173,44 @@ See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-
 
 ### `#PAPAMAMA`
 
-***Scope***: per&ndash;play-side (placed before [the `#START` command](#start--end)) \
+***Scope***: per&ndash;player-side (placed before [the `#START` command](#start--end)) \
 ***Effect target***: notes
 
 Use the *<ruby>**パ**<rt>**Pa**</rt> **パ**<rt>**pa**</rt> **マ**<rt>**Ma**</rt> **マ**<rt>**ma**</rt> サ<rt>Sa</rt> ポー<rt>poo</rt> ト<rt>to</rt></ruby>* "Parent Support Mode"/Helping Hand Mode gameplay rules from the official arcade games for certain song in the *<ruby>簡<rt>Kan</rt> 単<rt>tan</rt></ruby>/<ruby>か<rt>Ka</rt> ん<rt>n</rt> た<rt>ta</rt> ん<rt>n</rt></ruby>* Easy difficulty, where the amount of players is fixed to 1 and the inputs from all players are combined to play the song.
 
 Reference: <https://taiko.namco-ch.net/taiko/en/howto/papamama.php#papamama>
 
-*Unspecified*: The behavior when the amount of play-sides specified by [the `STYLE:` header](#style) is not 1.
+*Unspecified*: The behavior when the amount of player-sides specified by [the `STYLE:` header](#style) is not 1.
 
 ***From***: TJAPlayer3-f v1.7.2.0
 
 ### #START / `#END`
 
-***Scope***: per&ndash;play-side (enclosing the notechart definition), sequential
+***Scope***: per&ndash;player-side (enclosing the notechart definition), sequential
 
 Respectively **start** / **end** the region of notechart definition.
 
 * `#START`
-  * The notechart definition is for the only play-side if [the `STYLE:` header](#style) is ignored or this header specifies the amount of play-sides to be 1.
-* `#START <enum-str-play-side>` &mdash; TaikoJiro v1.99 but not TaikoJiro 2
-  * The notechart definition is for the play-side specified by `<enum-str-combination>`, which can be one of:
-    * `P1`, for the 1st play-side (1P).
-    * `P2`, for the 2nd play-side (2P) if the amount of play-sides specified by [the `STYLE:` header](#style) ≥ 2.
+  * The notechart definition is for the only player-side if [the `STYLE:` header](#style) is ignored or this header specifies the amount of player-sides to be 1.
+* `#START <enum-str-player-side>` &mdash; TaikoJiro v1.99 but not TaikoJiro 2
+  * The notechart definition is for the player-side specified by `<enum-str-combination>`, which can be one of:
+    * `P1`, for the 1st player-side (1P).
+    * `P2`, for the 2nd player-side (2P) if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ 2.
   * *Unspecified*: The behavior when other `<enum-str-combination>` is used.
     * In TaikoJiro, using any other `<enum-str-combination>` is treated as if the 0-argument `#START` were used.
-* *Proposal*: `#START P<positive-int-play-side>`
-  * The notechart definition is for the 1/`<positive-int-play-side>`-th play-side if the amount of play-sides specified by [the `STYLE:` header](#style) ≥ `<positive-int-play-side>`.
+* *Proposal*: `#START P<positive-int-player-side>`
+  * The notechart definition is for the 1/`<positive-int-player-side>`-th player-side if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ `<positive-int-player-side>`.
 * `#END`
 
 *Unspecified*: The behavior when any of the followings are violated when defining each difficulty:
 
-* The 1-play-side notechart should be defined using the 0-argument `#START`
-* Each multiple-play-side notechart should be defined using the 1-argument `#START <enum-str-play-side>` or *proposed* `P<positive-int-play-side>`.
-* At most 1 definition should exist for each play-side of each amount of play-sides
+* The 1-player-side notechart should be defined using the 0-argument `#START`
+* Each multiple-player-side notechart should be defined using the 1-argument `#START <enum-str-player-side>` or *proposed* `P<positive-int-player-side>`.
+* At most 1 definition should exist for each player-side of each amount of player-sides
   * In TaikoJiro 1, only the earliest definition is used when multiple such definitions exist.
-* Every play-side notechart should be defined if any notecharts for the same amount of play-sides are defined, otherwise the 1-play-side notechart should be the earliest defined notechart.
-* The 1-play-side notechart should be defined if any multiple-play-side notecharts are defined
-  * *Proposal*: Make the 1-play-side in such case optional when each defined play-side notechart has all other play-side notecharts defined for the same amount of play-sides. The chosen 1-play-side notechart will be the notechart for an *unspecified* play-side.
+* Every player-side notechart should be defined if any notecharts for the same amount of player-sides are defined, otherwise the 1-player-side notechart should be the earliest defined notechart.
+* The 1-player-side notechart should be defined if any multiple-player-side notecharts are defined
+  * *Proposal*: Make the 1-player-side in such case optional when each defined player-side notechart has all other player-side notecharts defined for the same amount of player-sides. The chosen 1-player-side notechart will be the notechart for an *unspecified* player-side.
 
 ***From***: TJF format \
 ***Supported by***: (Universally supported)
