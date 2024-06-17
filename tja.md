@@ -162,7 +162,9 @@ For non-string values, whitespaces can immediately occur after `:`, *e.g.*, [`LE
 
 #### Header Scope
 
-The effect of each header continues until the next occurrence of the same header or the end of the file, regardless of whether it is per-file or per&ndash;player-side.
+For headers placed outside any notechart definition enclosed between `#START` & `#END`, the effect of each header continues until the next occurrence of the same header or the end of the file, regardless of whether it is per-file or per&ndash;player-side.
+
+Some headers are allowed to be placed in a notechart definition enclosed between `#START` & `#END` (*e.g.*, [the EXAM headers](#exam-headers)). Headers placed in a notechart definition are effectively [commands](#tja-command).
 
 * *Unspecified*: The behavior when the same header occur multiple times within its scope.
 
@@ -886,7 +888,8 @@ Specify the rounding mode of the **incr**ement of the *<ruby>魂<rt>tamashii</rt
 
 ### EXAM Headers
 
-***Scope***: per&ndash;player-side (?)
+***Scope*** (placed outside of any notechart definition enclosed between `#START` & `#END`): per&ndash;player-side (?) \
+***Scope*** (placed in a notechart definition enclosed between `#START` & `#END`): per-song (begins with a [`#NEXTSONG` command](#nextsong) and ends with another [`#NEXTSONG` command](#nextsong)) &mdash; TJAPlayer3-Develop-ReWrite
 
 Specify a requirement for passing the notechart in *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode" ("**exam**ination").
 
@@ -921,6 +924,7 @@ Used in conjunction with [`COURSE:Dan`](#course).
     * `l` / (*Proposal*) `<`, **l**ess than ("\<") the given requirement
 * `EXAM<exam-requirement-index-specifier>:<enum-str-requirement>, <comma-separated-list-number-pass-and-gold-requirements>, <enum-str-range>` &mdash; TJAPlayer3-f
   * The elements of `<comma-separated-list-number-pass-and-gold-requirements>` are pairs of `<number-pass-requirement>, <number-gold-requirement>` for each song specified by [the `#NEXTSONG` command](#nextsong).
+  * Corresponding to the per-song&ndash;scoped usage in TJAPlayer3-Develop-ReWrite & OpenTaiko (0auBSQ).
 * `EXAMGAUGE:<number-pass-requirement>, <number-gold-requirement>, <enum-str-range>` &mdash; TJAPlayer3-f
   * The `<enum-str-requirement>` is implicitly fixed to `g`.
   * Corresponding to the `EXAM1:` command in TJAPlayer3-Develop-ReWrite & OpenTaiko (0auBSQ).
