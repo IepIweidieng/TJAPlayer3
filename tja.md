@@ -180,14 +180,14 @@ Specify the **title** of the song.
   * `<enum-str-lang>` is an IETF BCP 47 language or region tag (see <https://en.wikipedia.org/wiki/IETF_language_tag>) and can be one of:
     * `EN`, **En**glish
     * `JA`, **Ja**panese &mdash; taiko-web, OpenTaiko (0auBSQ) v0.6.0+
-    * `JP`, **J**a**p**anese &mdash; OpenTaiko (0auBSQ) before v0.6.0 (region tag)
-    * `FR` &mdash; OpenTaiko (0auBSQ), _**Fr**ançais_ **Fr**ench
-    * `ES` &mdash; OpenTaiko (0auBSQ) v0.5.1.1, _**Es**pañol_ Spanish
-    * `ZH` &mdash; OpenTaiko (0auBSQ) v0.5.3, *<ruby>简<rt>Jiǎn</rt> 体<rt>tǐ</rt> **中**<rt>**Zh**ōng</rt> 文<rt>wén</rt></ruby>* Simplified Chinese
-    * `CN` &mdash; taiko-web, Simplified **C**hi**n**ese (mainland **C**hi**n**a) (region tag)
-    * `TW` &mdash; taiko-web, Traditional Chinese (<ruby>**臺**<rt>**T**ái</rt> **灣**<rt>**w**ān</rt></ruby>/<ruby>**台**<rt>**T**ái</rt> **灣**<rt>**w**ān</rt></ruby>) (region tag)
-    * `NL` &mdash; OpenTaiko (0auBSQ) v0.6.0, _**N**eder**l**ands_ Dutch
-    * `KO` &mdash; taiko-web, **Ko**rean, OpenTaiko (0auBSQ) v0.6.0
+    * `JP`, **J**a**p**anese (region tag) &mdash; OpenTaiko (0auBSQ) before v0.6.0
+    * `FR`, _**Fr**ançais_ **Fr**ench &mdash; OpenTaiko (0auBSQ)
+    * `ES`, _**Es**pañol_ Spanish &mdash; OpenTaiko (0auBSQ) v0.5.1.1
+    * `ZH`, *<ruby>简<rt>Jiǎn</rt> 体<rt>tǐ</rt> **中**<rt>**Zh**ōng</rt> 文<rt>wén</rt></ruby>* Simplified Chinese &mdash; OpenTaiko (0auBSQ) v0.5.3
+    * `CN`, Simplified **C**hi**n**ese (mainland **C**hi**n**a) (region tag) &mdash; taiko-web
+    * `TW`, Traditional Chinese (<ruby>**臺**<rt>**T**ái</rt> **灣**<rt>**w**ān</rt></ruby>/<ruby>**台**<rt>**T**ái</rt> **灣**<rt>**w**ān</rt></ruby>) (region tag) &mdash; taiko-web
+    * `NL`, _**N**eder**l**ands_ Dutch &mdash; OpenTaiko (0auBSQ) v0.6.0
+    * `KO`, **Ko**rean &mdash; taiko-web, OpenTaiko (0auBSQ) v0.6.0
 
 ***From***: TJF format \
 ***Supported by***: (Universally supported)
@@ -620,7 +620,7 @@ Specify the lyric file(s) for the song to display **lyrics** in the playback scr
 * `LYRICS:<string-filepath-lyric-file>` &mdash; taiko-web, OpenTaiko (0auBSQ) v0.6.0 / `LYRICFILE:<string-filepath-lyric-file>` &mdash; TJAPlayer3-Develop-ReWrite, TJAPlayer3-f v1.6.0.0
   * `<string-filepath-lyric-file>` has a file extension of one of, *e.g.*:
     * `.vtt`, WebVTT, see <https://en.wikipedia.org/wiki/WebVTT> &mdash; taiko-web, OpenTaiko (0auBSQ) v0.6.0 (only for the `LYRICS:` header)
-    * `.lrc` &mdash; TJAPlayer3-Develop-ReWrite, TJAPlayer3-f v1.6.0.0, LRC, see <https://en.wikipedia.org/wiki/LRC_(file_format)>
+    * `.lrc`, LRC, see <https://en.wikipedia.org/wiki/LRC_(file_format)> &mdash; TJAPlayer3-Develop-ReWrite, TJAPlayer3-f v1.6.0.0
   * In TJAPlayer3-f & OpenTaiko (0auBSQ) v0.6.0, every comma (`,`) in `<string-filepath-lyric-file>` ***MUST*** be escaped as `\,`
 * `LYRICS:<comma-separated-list-string-filepath-lyric-file>` &mdash; OpenTaiko (0auBSQ) v0.6.0 / `LYRICFILE:<comma-separated-list-string-filepath-lyric-file>` &mdash; TJAPlayer3-f v1.6.0.0, OpenTaiko (0auBSQ) v0.6.0
   * Specify the lyric file used for each song specified by [the `#NEXTSONG` command](#nextsong).
@@ -909,15 +909,15 @@ Used in conjunction with [`COURSE:Dan`](#course).
     * `jp`, amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgment.
     * `jg` amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgment.
     * `jb`, amount of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* **B**AD **j**udgment.
-    * `jm` &mdash; OpenTaiko (0auBSQ), amount of caught bomb/**m**ine notes.
-    * `ja` &mdash; OpenTaiko (0auBSQ), amount of caught _**A**d libitum_ (**A**D-LIB) notes.
+    * `jm`, amount of caught bomb/**m**ine notes. &mdash; OpenTaiko (0auBSQ)
+    * `ja`, amount of caught _**A**d libitum_ (**A**D-LIB) notes. &mdash; OpenTaiko (0auBSQ)
     * `s`, final **s**core.
     * `r`, amount of hits on *all* drum**r**oll-type notes.
       * Not to be confused with the `r` (bar drum**r**oll notes&ndash;only) used for the condition of [the `#BRANCHSTART` command](#branchstart--branchend).
     * `h`, amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, non-blank hits.
       * > Formula: `h` = `jp` + `jg` + `r`
     * `c`, maximum/longest **c**ombo.
-    * `a` &mdash; OpenTaiko (0auBSQ), final percentage (%) of **a**ccuracy.
+    * `a`, final percentage (%) of **a**ccuracy. &mdash; OpenTaiko (0auBSQ)
       * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/Good + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
   * `<enum-str-range>` can be one of:
     * `m` / (*Proposal*) `>=`, **m**ore than or equal to ("≥") the given requirement
@@ -1868,7 +1868,7 @@ The "branch"/path is determined by a condition value when `<enum-str-condition>`
 * *Proposal*: `ph`, the **p**ercentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its during the determining section.
 * *Proposal*: `pm`, **p**ercentage (%) of *avoided* bomb/**m**ine notes during the determining section.
 * *Proposal*: `pa`, **p**ercentage (%) of caught _**A**d libitum_ (**A**D-LIB) notes during the determining section.
-* `d` &mdash; TJAPlayer2 for PC, the percentage (%) of "precision"/accuracy of big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section. (**`d`** can be seen as a rotated `p`)
+* `d`, the percentage (%) of "precision"/accuracy of big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section. (**`d`** can be seen as a rotated `p`) &mdash; TJAPlayer2 for PC
   * Defined but unimplemented in TJAPlayer2 for PC
   * > *Proposal*: Formula: (*<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/Good + 0.5 × *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{amount of big hit-type notes, 1} × 100(%)
 * *Proposal*: `dp`, the percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
@@ -1884,7 +1884,7 @@ The "branch"/path is determined by a condition value when `<enum-str-condition>`
   * > Formula: `b` = `bh` + `br`
 * *Proposal*: `bp`, amount ("hits") of *strong* *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on **b**ig notes during the determining section.
 * *Proposal*: `bh`, amount ("**h**its") of *strong* non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD ("**h**it") on **b**ig notes during the determining section.
-* `s` &mdash; TaikoJiro v2.66, the accumulated **s**core points during the determining section.
+* `s`, the accumulated **s**core points during the determining section. &mdash; TaikoJiro v2.66
   * *Unspecified*: The behavior when either unsupported scoring mode or the default value is specified to [the `SCOREMODE:` header](#scoremode) or the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true performance" option is enabled.
 * *Proposal*: `g`, percentage (%) of *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge change during the determining section, −100 ≤ `g` ≤ 100
 * *Proposal*: `c`, the maximum/longest **c**ombo during the determining section (counted from 0).
