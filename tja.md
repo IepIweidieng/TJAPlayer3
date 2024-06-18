@@ -590,7 +590,7 @@ Equation: `movieoffset` = `time-point-of-video-beginning` − `time-point-of-aud
 
 ***Scope***: per&ndash;player-side (?), decorative
 
-Specify a **b**ack**g**round video ("**a**nimation") to be used in the gameplay screen by [the `#BGAON` and `#BGAOFF` commands](#bgaon--bgaoff). Override the skin settings.
+Specify a **b**ack**g**round video ("**a**nimation") to be used in the gameplay screen by [the `#BGAON` and `#BGAOFF` commands](#bgaon--bgaoff).
 
 *Unspecified*: Whether the video is scaled or stretched to fill the gameplay screen.
 
@@ -598,7 +598,7 @@ Not reset by `BGA:` itself.
 
 * `BGA:<string-filepath-background-video>`
 * `BGA:`
-  * No background video will be displayed.
+  * The behavior is *unspecified*.
 
 ***From***: OpenTaiko (0auBSQ) v0.6.0
 
