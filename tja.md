@@ -620,7 +620,7 @@ Specify the lyric file(s) for the song to display **lyrics** in the playback scr
 * `LYRICS:<string-filepath-lyric-file>` &mdash; taiko-web, OpenTaiko (0auBSQ) v0.6.0 / `LYRICFILE:<string-filepath-lyric-file>` &mdash; TJAPlayer3-Develop-ReWrite, TJAPlayer3-f v1.6.0.0
   * `<string-filepath-lyric-file>` has a file extension of one of, *e.g.*:
     * `.vtt`, WebVTT, see <https://en.wikipedia.org/wiki/WebVTT> &mdash; taiko-web, OpenTaiko (0auBSQ) v0.6.0 (only for the `LYRICS:` header)
-    * `.lrc` &mdash; OpenTaiko (0auBSQ) v0.6.0, LRC, see <https://en.wikipedia.org/wiki/LRC_(file_format)>
+    * `.lrc` &mdash; TJAPlayer3-Develop-ReWrite, TJAPlayer3-f v1.6.0.0, LRC, see <https://en.wikipedia.org/wiki/LRC_(file_format)>
   * In TJAPlayer3-f & OpenTaiko (0auBSQ) v0.6.0, every comma (`,`) in `<string-filepath-lyric-file>` ***MUST*** be escaped as `\,`
 * `LYRICS:<comma-separated-list-string-filepath-lyric-file>` &mdash; OpenTaiko (0auBSQ) v0.6.0 / `LYRICFILE:<comma-separated-list-string-filepath-lyric-file>` &mdash; TJAPlayer3-f v1.6.0.0, OpenTaiko (0auBSQ) v0.6.0
   * Specify the lyric file used for each song specified by [the `#NEXTSONG` command](#nextsong).
