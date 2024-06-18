@@ -1107,21 +1107,21 @@ Some branch-scoped commands are non-sequential, *i.e.*, they can be arranged fre
 
 #### Command Late Effect Scope
 
-A command may have some effects applied only when their approach phase is reached. These effects are defined as the late effects. The late effect scope is defined by the targetted game objects which are affected by the late effects.
+A command may have some effects applied only when their approach phase is reached. These effects are defined as the late effects. The late effect scope is defined by the targeted game objects which are affected by the late effects.
 
 The approach phase of a command occurs before the head of their defined beat position by a specified time or beat duration (if any) or no duration.
 
-*Proposal*: Allow the late effect scope to be overridden for branch-scoped commands targetting notes & bar lines, see [*Proposal*: Command Modifier](#proposal-command-modifier).
+*Proposal*: Allow the late effect scope to be overridden for branch-scoped commands targeting notes & bar lines, see [*Proposal*: Command Modifier](#proposal-command-modifier).
 
 #### Command Effect Target
 
-Commands only affect their targetting game objects. The target of each command can be any (including none) of:
+Commands only affect their targeting game objects. The target of each command can be any (including none) of:
 
 * Notes, including fake/dummy notes.
 * Bar lines, including fake/dummy bar lines.
 * Judgment mark(s). There may be multiple judgment marks for a single player when, *e.g.*, [the `#SPLITLANE` command](#splitlane--mergelane) is used or (*Proposed*) [the `#JPOSSCROLL` command](#jposscroll) is used inconsistently in any layers defined by [the `#LAYER` command](#proposal-layer).
 * Note field(s): Any effects affecting the default scrolling path of notes and bar lines. There may be multiple note fields for a single player when there are multiple judgment marks.
-* Gameplay screen: Any other visible effects not directly targetting the above objects.
+* Gameplay screen: Any other visible effects not directly targeting the above objects.
 
 ### `#BMSCROLL` / `#HBSCROLL` / `#NMSCROLL`
 
@@ -1968,7 +1968,7 @@ The definition of unused "branches"/paths due to forced "branch"/path determinat
 ***Late effect scope***: (none) \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s)
 
-Respectively **start** / **end** the definition of a layer section. All layers in a layer section occur simultaneously and all branch-scoped commands not targetting the gameplay screen are applied separately for each layer.
+Respectively **start** / **end** the definition of a layer section. All layers in a layer section occur simultaneously and all branch-scoped commands not targeting the gameplay screen are applied separately for each layer.
 
 They can be used as follow:
 
