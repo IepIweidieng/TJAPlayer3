@@ -1411,7 +1411,7 @@ Change the **scroll**ing speed of only **bar** **line**s, relative to the normal
 
 Suddenly change the base scrolling **speed** of notes & bar lines. In other words, suddenly change the normal scrolling velocity and direction.
 
-The `<approach-specifier>` from the *proposal* [Command Modifier](#proposal-command-modifier) is intended to be used in conjunction.
+Targeted notes & bar lines have their distance and/or direction to the visual judgment position scaled and/or rotated. The `<approach-specifier>` from the *proposal* [Command Modifier](#proposal-command-modifier) is intended to be used in conjunction.
 
 If the notes & the bar lines are rotated around their center accordingly when a [`#SCROLL`](#scroll) command with complex number value is used, they are also rotated accordingly when a `#SPEED` command with complex number value is used.
 
