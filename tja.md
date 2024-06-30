@@ -1726,12 +1726,14 @@ The semantics are otherwise the same as the [BALLOON](#balloon-headers) headers.
 ### `#SECTION`
 
 ***Scope***: branch, instant one-shot \
-***Late effect scope***: all \
+***Late effect scope***: all (across branches) \
 ***Effect target***: (none)
 
 Start a *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart branch"/forked path&ndash;determining **section** by resetting the value of the conditions for determining the next not-yet-determined "branch(es)"/path(s) at the beginning of the section. See the explanation for [the `#BRANCHSTART` command](#branchstart--branchend).
 
 When the `#SECTION` command & a "branch"/path&ndash;determining point occur at the same beat position, the effect of the `#SECTION` command should take place after the "notechart branch"/forked path is determined.
+
+The effects of `#SECTION` applie regardless the current branch and on which branch the command is defined.
 
 An implicit `#SECTION` is placed at the beginning of every notechart definition.
 
