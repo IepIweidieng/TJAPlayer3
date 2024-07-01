@@ -1359,10 +1359,10 @@ Unlike the `#BPMCHANGE` command, the `#SCROLL` command is measure-scoped.
 *Proposal*: Make the scope simply non-before.
 
 * `#SCROLL <float-scroll-speed-x>`
-* `#SCROLL <float-scroll-speed-x><always-signed-float-scroll-speed-y>i` &mdash; TaikoJiro 2 v0.97, TJAPlayer2 for PC
+* `#SCROLL <float-scroll-speed-x><sign-scroll-speed-y><optional-unsigned-float-scroll-speed-y>i` &mdash; TaikoJiro 2 v0.97, TJAPlayer2 for PC
   * Complex-number&ndash;valued, modeled after the rectangular form of complex number: *x* ± *yi*
   * Notecharts with this type of command are usually referred as *<ruby>複<rt>Fuku</rt> 素<rt>so</rt> 数<rt>suu</rt> 譜<rt>fu</rt> 面<rt>men</rt></ruby>* "Complex number notechart".
-  * `<always-signed-float-scroll-speed-y>`, begins with `+` / `-`, specifies the vertical scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-scroll-speed-x>`.
+  * `<sign-scroll-speed-y>` (either `+` or `-`) & `<optional-unsigned-float-scroll-speed-y>` (defaults to `1` if omitted) respectively specify the sign & the absolute value of the vertical scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-scroll-speed-x>`.
   * *Unspecified*: Whether `j` can be used in place of `i`.
 * `#SCROLL 0`
   * The behavior is *unspecified*.
@@ -1416,8 +1416,8 @@ Targeted notes & bar lines have their distance and/or direction to the visual ju
 If the notes & the bar lines are rotated around their center accordingly when a [`#SCROLL`](#scroll) command with complex number value is used, they are also rotated accordingly when a `#SPEED` command with complex number value is used.
 
 * `#SPEED <float-base-speed-x>`
-* `#SPEED <float-base-speed-x><always-signed-float-base-speed-y>i`
-  * `<always-signed-float-base-speed-y>`, begins with `+` / `-`, specifies the vertical normal scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-base-speed-x>`.
+* `#SPEED <float-base-speed-x><sign-base-speed-y><unsigned-float-base-speed-y>i`
+  * `<<sign-base-speed-y>` (either `+` or `-`) & `<unsigned-float-base-speed-y>` (defaults to `1` if omitted) respectively specify the sign & the absolute value of the vertical normal scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-base-speed-x>`.
   * *Unspecified*: Whether `j` can be used in place of `i`.
 * `#SPEED <value>bpm`
   * Use the corresponding normal scrolling speed as when the absolute value (velocity) of `<value>` were used for `#BPMCHANGE`, the unit direction of `<value>` were used for `#SPEED`, and `#SCROLL 1` were used.
@@ -1497,7 +1497,9 @@ The arguments are whitespace-separated.
     * *Proposal*: `<beats-approach-duration>`
   * `<distance-specifier>` can be one of:
     * `<number-pixel-distance-x>`
-    * `<number-pixel-distance-x><always-signed-number-pixel-distance-y>i` &mdash; TJAPlayer3 v1.6.x, OpenTaiko (0auBSQ) v0.6.0
+    * `<number-pixel-distance-x><sign-pixel-distance-y><optional-unsigned-number-pixel-distance-y>i` &mdash; TJAPlayer3 v1.6.x, OpenTaiko (0auBSQ) v0.6.0
+      * `<sign-pixel-distance-y>` (either `+` or `-`) & `<optional-unsigned-number-pixel-distance-y>` (defaults to `1` if omitted) respectively specify the sign & the absolute value of the vertical movement toward the top of the screen (↑).
+      * *Unspecified*: Whether `j` can be used in place of `i`.
     * `<number-distance-x-upper>/<number-distance-x-lower>` &mdash; TaikoManyGimmicks
       * Specify the horizontal movement to be `<number-distance-x-upper>/<number-distance-x-lower>` of the default note field width.
     * *Proposal*: `<value> deg <float-degrees-angle>`
