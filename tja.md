@@ -56,7 +56,9 @@ The mostly used character encoding for legacy TJA files is **Shift-JIS**.
 However, the actual encoding depended on the system setting and can potentially be any non&ndash;UTF-8 encoding, including:
 
 * Big5 (with or without extensions) for some legacy charts created by Traditional Chinese users
-* GB 2312 for some legacy charts created by Simplified Chinese users
+  * Most used extensions include Big5-UAO & Big5-HKSCS.
+* GB 2312 (with or without extensions) for some legacy charts created by Simplified Chinese users
+  * Most used extensions include GBK & GB 18030.
 
 **UTF-8** (**with BOM** or not) is often used for modern TJA files.
 
