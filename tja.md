@@ -111,6 +111,16 @@ For multiple values separated by comma (`,`), except for `text`-valued fields, o
   * `enum-int` (enum-like, int-form): An `int` with specific accepted values.
   * *Unspecified*: Whether the positive sign (`+`) may appear for a non-negative or positive value, unless the type is indicated as `unsigned-`.
   * In TaikoJiro, leading non-newline whitespaces are always ignored.
+* `complex-ri-number`: A complex number in the form of a real number, an imaginary number, or both added together. `complex-ri-number` indicates that it is *unspecified* whether a number with a fraction part is allowed for any of the real and imaginary components.
+  * `complex-ri-float`: A complex number where each of the real and imaginary components can either be an integer or have the fraction part, *e.g.*, `1` / `i` / `.3+.3i`.
+  * The format is one of:
+    * `<number-real>`, a pure real number where the real component is `<number-real>`.
+    * `<optional-sign-imaginary><unsigned-number-imaginary-specifier>`, a pure imaginary number where the imaginary part has the sign of `<optional-sign-imaginary>` (defaults to `+`) and the absolute value specified by `<unsigned-number-imaginary-specifier>`.
+    * `<number-real><sign-imaginary><unsigned-number-imaginary-specifier>`, a general complex number where the real component is `<number-real>` and the imaginary component has the sign of `<sign-imaginary>` and the absolute value specified by `<unsigned-number-imaginary-specifier>`.
+  * `<unsigned-number-imaginary-specifier>` can be one of:
+    * `i`, the imaginary component has the absolute value of 1.
+    * `<unsigned-number-imaginary>i`, the imaginary component has the absolute value of `<unsigned-float-imaginary>`.
+    * *Unspecified*: whether `j` can be used in place of `i`.
 * `string`: A string. `string` indicates that it is *unspecified* whether leading or trailing non-newline whitespaces are significant. *Unspecified*: The maximum supported length.
   * `text`: A string. Can contain leading or trailing non-newline whitespaces & comments.
   * `str`: A string. Leading and trailing new-newline whitespaces & comments are ignored.
@@ -1359,11 +1369,10 @@ Unlike the `#BPMCHANGE` command, the `#SCROLL` command is measure-scoped.
 *Proposal*: Make the scope simply non-before.
 
 * `#SCROLL <float-scroll-speed-x>`
-* `#SCROLL <float-scroll-speed-x><sign-scroll-speed-y><optional-unsigned-float-scroll-speed-y>i` &mdash; TaikoJiro 2 v0.97, TJAPlayer2 for PC
+* `#SCROLL <complex-ri-float-scroll-speed-xy>` &mdash; TaikoJiro 2 v0.97, TJAPlayer2 for PC
   * Complex-number&ndash;valued, modeled after the rectangular form of complex number: *x* ± *yi*
   * Notecharts with this type of command are usually referred as *<ruby>複<rt>Fuku</rt> 素<rt>so</rt> 数<rt>suu</rt> 譜<rt>fu</rt> 面<rt>men</rt></ruby>* "Complex number notechart".
-  * `<sign-scroll-speed-y>` (either `+` or `-`) & `<optional-unsigned-float-scroll-speed-y>` (defaults to `1` if omitted) respectively specify the sign & the absolute value of the vertical scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-scroll-speed-x>`.
-  * *Unspecified*: Whether `j` can be used in place of `i`.
+  * The imaginary part of `<complex-ri-float-scroll-speed-xy>` specifies the vertical scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-scroll-speed-x>`.
 * `#SCROLL 0`
   * The behavior is *unspecified*.
 * *Proposal*: `#SCROLL <value>bpm`
@@ -1416,9 +1425,8 @@ Targeted notes & bar lines have their distance and/or direction to the visual ju
 If the notes & the bar lines are rotated around their center accordingly when a [`#SCROLL`](#scroll) command with complex number value is used, they are also rotated accordingly when a `#SPEED` command with complex number value is used.
 
 * `#SPEED <float-base-speed-x>`
-* `#SPEED <float-base-speed-x><sign-base-speed-y><unsigned-float-base-speed-y>i`
-  * `<<sign-base-speed-y>` (either `+` or `-`) & `<unsigned-float-base-speed-y>` (defaults to `1` if omitted) respectively specify the sign & the absolute value of the vertical normal scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-base-speed-x>`.
-  * *Unspecified*: Whether `j` can be used in place of `i`.
+* `#SPEED <complex-ri-float-base-speed-xy>`
+  * The imaginary part of `<complex-ri-float-base-speed-xy>` specifies the vertical normal scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-base-speed-x>`.
 * `#SPEED <value>bpm`
   * Use the corresponding normal scrolling speed as when the absolute value (velocity) of `<value>` were used for `#BPMCHANGE`, the unit direction of `<value>` were used for `#SPEED`, and `#SCROLL 1` were used.
   * > Formula: `base_speed` = `value` / `current_bpm` / `current_scroll`
@@ -1497,9 +1505,8 @@ The arguments are whitespace-separated.
     * *Proposal*: `<beats-approach-duration>`
   * `<distance-specifier>` can be one of:
     * `<number-pixel-distance-x>`
-    * `<number-pixel-distance-x><sign-pixel-distance-y><optional-unsigned-number-pixel-distance-y>i` &mdash; TJAPlayer3 v1.6.x, OpenTaiko (0auBSQ) v0.6.0
-      * `<sign-pixel-distance-y>` (either `+` or `-`) & `<optional-unsigned-number-pixel-distance-y>` (defaults to `1` if omitted) respectively specify the sign & the absolute value of the vertical movement toward the top of the screen (↑).
-      * *Unspecified*: Whether `j` can be used in place of `i`.
+    * `<complex-ri-number-pixel-distance-xy>` &mdash; TJAPlayer3 v1.6.x, OpenTaiko (0auBSQ) v0.6.0
+      * The imaginary part of `<complex-ri-number-pixel-distance-xy>` specifies the vertical movement toward the top of the screen (↑).
     * `<number-distance-x-upper>/<number-distance-x-lower>` &mdash; TaikoManyGimmicks
       * Specify the horizontal movement to be `<number-distance-x-upper>/<number-distance-x-lower>` of the default note field width.
     * *Proposal*: `<value> deg <float-degrees-angle>`
