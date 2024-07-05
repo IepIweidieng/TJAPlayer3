@@ -31,7 +31,14 @@ Extension | Full Name | Content | Supported by | Specification
 `.tci` | Open **T**aiko **C**hart **I**nformation | Notechart metadata (JSON) | Koioto (plugin "OpenTaikoChart"), TJAPlayer3-f v1.6.0.1 | See <https://github.com/AioiLight/Open-Taiko-Chart>
 `.tcc` | Open **T**aiko **C**hart **C**ourse | Notechart definition (JSON) | Koioto (plugin "OpenTaikoChart"), TJAPlayer3-f v1.6.0.1 | See <https://github.com/AioiLight/Open-Taiko-Chart>
 `.tcm` | Open **T**aiko **C**hart **M**edley | Notechart set metadata (JSON) | TJAPlayer3-f v1.6.0.1 | See <https://github.com/AioiLight/Open-Taiko-Chart>
-`.tmg` | **T**aiko**M**any**G**immicks | Notechart metadata + definition | TaikoManyGimmicks | The same as `.tja`. (?)
+`.tmg` | **T**aiko**M**any**G**immicks | Notechart metadata + definition | TaikoManyGimmicks | Similar to `.tja` but has some syntax differences (explained right below).
+
+The TMG format (`.tmg`) is similar to the TJA format (`.tja`) and has the following features:
+
+* In TaikoManyGimmicks, the TMG and TJA formats share the same set of [headers](#tja-header) & [commands](#tja-command).
+* Command arguments in the TMG format are comma-separated and requires parentheses `()` around the whole argument list, even if no arguments are specified. TMG commands are written in the format of **`#COMMAND(expressions, ...)`**.
+* Math expressions and functions are allowed for each [`number`-typed and `complex-ri-number`&ndash;typed](#value-type) argument for commands.
+* Substitution of predefined variables are allowed in each argument of headers & commands and in notechart definitions. For [`str`-typed](#value-type) argument, `#` (preserved after substitution) needed to be prepended for applying substitution (?).
 
 Excluding `.bin` & `.osz`, all the formats listed above are text-based and can be edited with any text editor.
 
@@ -2172,6 +2179,18 @@ Commands supporting the `#GRADATION` command in TaikoManyGimmicks:
 * [The `#SCROLL` command](#scroll)
 * [The `#JUDGEDELAY` command](#judgedelay)
 * [The `#SIZE`, `#COLOR`, & `#ANGLE` commands](#note--barline-commands)
+
+***From***: TaikoManyGimmicks
+
+### #INCLUDE
+
+***Scope***: branch (?), (depending on included notechart definition content) \
+***Late effect scope***: (depending on included notechart definition content) \
+***Effect target***: (depending on included notechart definition content)
+
+Append ("**include**") the notechart definition content defined the included file to the current definition. The included file can have any headers and commands (except for the [`#START` and `#END` commands](#start--end) (?)) in either the TJA (?) or the TMG format.
+
+* `#INCLUDE <string-filepath-notechart-definition>`
 
 ***From***: TaikoManyGimmicks
 
