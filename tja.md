@@ -2508,7 +2508,7 @@ The time duration intervals of different note symbols are possible to overlap by
 
 *Unspecified*: The behavior when the time duration intervals of any non-blank note symbols overlap.
 
-* In TaikoJiro, regardless of whether any multiple notechart sections overlap in time, the later defined notes do not accept any inputs until all the earlier defined notes in currently determined branch(es) are judged. This is different from the official games, where a later <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> (or <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby>) hit-type note may be hit before an earlier <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> (or <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>) hit-type note is judged.
+* In TaikoJiro, regardless of whether any multiple notechart sections overlap in time, the later defined notes (?) do not accept any inputs until all the earlier defined notes in currently determined branch(es) (?) are judged. This is different from the official games, where a later <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> (or <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby>) hit-type note may be hit before an earlier <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> (or <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>) hit-type note is judged.
 
 (*in construction: explain the behavior of such timing commands with non-positive value*)
 
@@ -2801,3 +2801,16 @@ The honorific title is omitted.
 * Squirrel (2023, November 4). *TJA Compatibility*. Project OutFox Wiki. <https://outfox.wiki/dev/mode-support/tja-support/>
 * nyoro (2023, November 11). *TJA Format Support*. Visual Studio Marketplace. <https://marketplace.visualstudio.com/items?itemName=nyoro.tja-format-support>
   * This vscode extension provides short explanations for TJA headers/commands, including headers/commands introduced by TaikoManyGimmicks.
+
+## TODO
+
+* Reorder headers & commands by their categories & popularity and possibility of being supported: Pending.
+* Explain timing commands with non-positive arguments, supplemented with diagrams: In progress. Behaviors to check:
+  * Uncertain rules for notes being not judged until a later note in non-trivial cases.
+* List & explain known gimmicks, especially the gimmicks which have appeared in multiple charts by different chart creators and received terminologies: Planned. Gimmicks with uncertain mechanics:
+  * *<ruby>途<rt>To</rt> 中<rt>chuu</rt> 出<rt>Shutsu</rt> 現<rt>gen</rt></ruby>* "appearing in middle" (including "disappearing in middle").
+    * Similar to a warp in definition.
+    * Interfering with amount of displayed beats before/after judgment?
+    * Utilizing the constant speed past judgment in TaikoJiro?
+  * Bar lines that disappears.
+    * Unknown threshold to hide bar lines past judgment in TaikoJiro.
