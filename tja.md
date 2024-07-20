@@ -183,7 +183,7 @@ For non-string values, whitespaces can immediately occur after `:`, *e.g.*, [`LE
 
 For headers placed outside any notechart definition enclosed between `#START` & `#END`, the effect of each header continues until the next occurrence of the same header or the end of the file, regardless of whether it is per-file or per&ndash;player-side.
 
-Some headers are allowed to be placed in a notechart definition enclosed between `#START` & `#END` (*e.g.*, [the EXAM headers](#exam-headers)). Headers placed in a notechart definition are effectively [commands](#tja-command).
+Some headers are allowed to be placed in a notechart definition enclosed between `#START` & `#END` (*e.g.*, [the EXAM headers](#exam-headers)) and such usage is listed in their scope. Headers placed in a notechart definition are effectively [commands](#tja-command).
 
 * *Unspecified*: The behavior when the same header occur multiple times within its scope.
 
@@ -1099,7 +1099,7 @@ No leading non-newline whitespaces are allowed for the `#START` and `#END` comma
 
 However, leading non-newline whitespaces are allowed and ignored in the notechart definition enclosed between `#START` & `#END`.
 
-*Unspecified*: The behavior when any commands are placed before any headers, especially for the commands which are expected to be placed before the notechart definition.
+*Unspecified*: The behavior when any commands are placed before any headers outside the notechart definition, especially for the commands which are expected to be placed before the notechart definition.
 
 The `#COMMAND` part ***MUST*** be written in an all-upper-case manner and ***MUST NOT*** contain whitespaces in-between.
 
@@ -2465,6 +2465,11 @@ The characters after the first semicolon (`;`) are ignored in TaikoJiro 1 but ca
 The notechart definition is enclosed between `#START` & `#END`.
 
 Most headers are not allowed in notechart definition.
+
+*Unspecified*: The behavior when a header not allowed in notechart definition is placed in a notechart definition.
+
+* In TaikoJiro, such a header is interpreted as note symbols with unrecognized characters ignored and removed.
+* In TJAPlayer2 for PC, such a header behavior the same as if the header were placed before `#START` and all commands for the current player-side.
 
 ### Whitespaces in Notechart Definition
 
