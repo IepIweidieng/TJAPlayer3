@@ -2464,7 +2464,7 @@ The characters after the first semicolon (`;`) are ignored in TaikoJiro 1 but ca
 
 The notechart definition is enclosed between `#START` & `#END`.
 
-Headers are not allowed in notechart definition.
+Most headers are not allowed in notechart definition.
 
 ### Whitespaces in Notechart Definition
 
