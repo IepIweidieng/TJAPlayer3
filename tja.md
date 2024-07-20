@@ -2476,6 +2476,10 @@ In non-command lines, all whitespaces are ignored. (TaikoJiro-only?)
 
 Including the measure-terminating symbol (comma; `,`) & note symbols (`<enum-str-note>`).
 
+*Unspecified*: Whether unrecognized note symbols are ignored (removed) or treated as `0` (blank).
+
+* In TaikoJiro, unrecognized note symbols are ignored and removed.
+
 ### The Measure-terminating Symbol and Timing
 
 The definition of each measure is ended with a comma (`,`). *Unspecified*: The behavior when there are non-whitespaces, non-comment trailing characters after the first comma (`,`) of the line.
