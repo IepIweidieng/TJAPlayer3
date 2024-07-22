@@ -249,7 +249,7 @@ The display details are *unspecified*.
 ***From***: taiko-web ver.19.11.25 \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
 
-### NOTEDESIGNER Headers
+### NOTESDESIGNER Headers
 
 ***Scope***: per&ndash;player-side (?)
 
@@ -257,10 +257,10 @@ Specify the creator (**designer**) of the **note**chart.
 
 The display details are *unspecified*.
 
-* `NOTEDESIGNER<enum-int-diffculty-course>:<string-name-notechart-creator>` &mdash; (Better)TaikoCatsCaffe (?), OpenTaiko (0auBSQ) v0.6.0
+* `NOTESDESIGNER<enum-int-diffculty-course>:<string-name-notechart-creator>` &mdash; (Better)TaikoCatsCaffe (?), OpenTaiko (0auBSQ) v0.6.0
   * `<enum-int-diffculty-course>` can one of the integer argument to [the `COURSE:` header](#course).
   * *Unspecified*: The behavior when the difficulty specified by `<enum-int-diffculty-course>` is different from the difficulty specified by `COURSE:` for the notechart definition.
-* `NOTEDESIGNER:<string-name-notechart-creator>` &mdash; OpenTaiko (0auBSQ) v0.6.0
+* `NOTESDESIGNER:<string-name-notechart-creator>` &mdash; OpenTaiko (0auBSQ) v0.6.0
 
 ***From***: (Better)TaikoCatsCaffe (?) \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
