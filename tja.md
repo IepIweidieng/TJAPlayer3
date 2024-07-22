@@ -238,7 +238,7 @@ The display details are *unspecified*.
 
 ***Scope***: per-file
 
-Specify the creator (**maker**) of the notechart.
+Specify the creator ("**maker**") of the notechart.
 
 The display details are *unspecified*.
 
@@ -253,7 +253,7 @@ The display details are *unspecified*.
 
 ***Scope***: per&ndash;player-side (?)
 
-Specify the creator (**designer**) of the **note**chart.
+Specify the creator ("**designer**") of the notechart ("**notes**").
 
 The display details are *unspecified*.
 
