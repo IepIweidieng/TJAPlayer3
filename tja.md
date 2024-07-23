@@ -44,7 +44,7 @@ Excluding `.bin` & `.osz`, all the formats listed above are text-based and can b
 
 ## About TJA
 
-The TJA format (`.tja`, first used in TaikoJiro) was modified and extended from the much simpler TJF format (`.tjf`, first used in Taikosan), both share similarities with the `.bms` (**B**e-**M**usic **S**cript, not **B**eat**M**ania **S**core) format.
+The TJA format (`.tja`, first used in TaikoJiro) was modified and extended from the much simpler TJF format (`.tjf`, first used in Taikosan), both share similarities with the `.bms` (**B**e-**M**usic **S**cript, not **B**eat**M**ania **S**core) format and its derivations, especially the `.dtx` (**DTX**Mania) format.
 
 The etymology of both `.tjf` & `.tja` were unexplained.
 
@@ -1125,7 +1125,7 @@ Commands with an unrecognized `#COMMAND` name are ignored.
 
 * In TaikoJiro, such a case is parsed as if there were whitespaces before the `values` part.
 
-The arguments for commands introduced in TaikoJiro are comma-separated. However, the arguments for commands introduced in TJAPlayer2 for PC are instead whitespace-separated as in the `.bms` format (which is extended into the `.dtx` format for DTXMania).
+The arguments for commands introduced in TaikoJiro are comma-separated. However, the arguments for commands introduced in TJAPlayer2 for PC are instead whitespace-separated as in the `.bms` format (which is modified and extended into the `.dtx` format for DTXMania).
 
 *Unspecified*: The behavior when a comma (`,`) is used as the decimal point (normally a full-stop (`.`)).
 
