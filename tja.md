@@ -804,7 +804,7 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
 
 ***Scope***: per&ndash;player-side
 
-Specify the total amount of play-**side**s of the notechart(s).
+Specify the total amount of player-**side**s of the notechart(s).
 
 The multiple-player-side notecharts of the difficulty is chosen if enough amount of players have chosen the same difficulty.
 
