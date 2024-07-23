@@ -99,7 +99,7 @@ Line-initial whitespaces are allowed and ignored only within the notechart defin
 
 * Line-initial whitespaces before headers & commands were never allowed in the original TJF format.
 
-Consecutive whitespaces within a line is treated as a single space.
+Except when within a `string` value and around a `text` value, consecutive whitespaces within a line is treated as a single space.
 
 * Non-newline whitespaces in non-command lines within the notechart definition were not ignored in the original TJF format but ignored by TaikoJiro.
 
