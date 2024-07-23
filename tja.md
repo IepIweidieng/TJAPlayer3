@@ -257,9 +257,9 @@ Specify the creator ("**designer**") of the notechart ("**notes**").
 
 The display details are *unspecified*.
 
-* `NOTESDESIGNER<enum-int-diffculty-course>:<string-name-notechart-creator>` &mdash; (Better)TaikoCatsCaffe (?), OpenTaiko (0auBSQ) v0.6.0
-  * `<enum-int-diffculty-course>` can one of the integer argument to [the `COURSE:` header](#course).
-  * *Unspecified*: The behavior when the difficulty specified by `<enum-int-diffculty-course>` is different from the difficulty specified by `COURSE:` for the notechart definition.
+* `NOTESDESIGNER<enum-int-difficulty-course>:<string-name-notechart-creator>` &mdash; (Better)TaikoCatsCaffe (?), OpenTaiko (0auBSQ) v0.6.0
+  * `<enum-int-difficulty-course>` can one of the integer argument to [the `COURSE:` header](#course).
+  * *Unspecified*: The behavior when the difficulty specified by `<enum-int-difficulty-course>` is different from the difficulty specified by `COURSE:` for the notechart definition.
 * `NOTESDESIGNER:<string-name-notechart-creator>` &mdash; OpenTaiko (0auBSQ) v0.6.0
 
 ***From***: (Better)TaikoCatsCaffe (?) \
@@ -310,7 +310,7 @@ Specify whether the corresponding song entry is displayed, regarding the *<ruby>
 
 * In OpenTaiko (0auBSQ), `SIDE:` has been re-purposed to be used in conjunction with [`COURSE:Tower`](#course) to specify the actual difficulty and can be one of:
   * `SIDE:Normal`, the *<ruby>甘<rt>ama</rt> 口<rt>kuchi</rt></ruby>* "easy" difficulty.
-  * `SIDE:Ex` / `SIDE:` / any other unrecogized argument, the *<ruby>辛<rt>kara</rt> 口<rt>kuchi</rt></ruby>* "hard" difficulty.
+  * `SIDE:Ex` / `SIDE:` / any other unrecognized argument, the *<ruby>辛<rt>kara</rt> 口<rt>kuchi</rt></ruby>* "hard" difficulty.
 
 ### SIDEREV:
 
@@ -2586,7 +2586,7 @@ During the defined duration interval within a drumroll-type note, either `0` or 
 
 * In TaikoJiro, all drumroll-type note head symbols can be used in place of the repeated symbol.
 
-*Proposal*: Each symbol of the note head inside a bar drumroll note denote a middle point of the bar which can scroll independently to the head, end, and other middle points of the note.
+*Proposal*: Each symbol of the note head inside a bar drumroll note denotes a middle point of the bar which can scroll independently to the head, end, and other middle points of the note.
 
 For special balloons (`9`), the last occurrence of repeated note head symbol (if any) defines the full bonus time point. If the note is cleared, full bonus is awarded only by clearing the note non-after that point and partial bonus is awarded otherwise. The full bonus time point is *unspecified* when no repeated note head symbols ever occur.
 
