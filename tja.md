@@ -290,7 +290,8 @@ The display details are *unspecified*.
 
 ### SIDE:
 
-***Scope***: per-file
+***Scope***: per-file &mdash; TaikoJiro \
+***Scope***: per&ndash;player-side &mdash; OpenTaiko (0auBSQ)
 
 Specify whether the corresponding song entry is displayed, regarding the *<ruby>裏<rt>ura</rt> 譜<rt>fu</rt> 面<rt>men</rt> 状<rt>jou</rt> 態<rt>tai</rt></ruby>* "inner notechart state/mode" ("*<ruby>裏 <rt>ura</rt></ruby>* inner or *<ruby>表 <rt>omote</rt></ruby>* outer **side**") of the song selection screen.
 
@@ -308,7 +309,7 @@ Specify whether the corresponding song entry is displayed, regarding the *<ruby>
 
 #### Compatibility Issues
 
-* In OpenTaiko (0auBSQ), `SIDE:` has been re-purposed to be used in conjunction with [`COURSE:Tower`](#course) to specify the actual difficulty and can be one of:
+* In OpenTaiko (0auBSQ), `SIDE:` has been re-purposed to be used in conjunction with [`COURSE:Tower`](#course) to specify the actual difficulty in the tower mode and can be one of:
   * `SIDE:Normal`, the *<ruby>甘<rt>ama</rt> 口<rt>kuchi</rt></ruby>* "easy" difficulty.
   * `SIDE:Ex` / `SIDE:` / any other unrecognized argument, the *<ruby>辛<rt>kara</rt> 口<rt>kuchi</rt></ruby>* "hard" difficulty.
 
