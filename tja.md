@@ -290,12 +290,13 @@ The display details are *unspecified*.
 
 ### SIDE:
 
-***Scope***: per-file &mdash; TaikoJiro \
-***Scope***: per&ndash;player-side &mdash; OpenTaiko (0auBSQ)
+***Scope***: per-file
 
 Specify whether the corresponding song entry is displayed, regarding the *<ruby>裏<rt>ura</rt> 譜<rt>fu</rt> 面<rt>men</rt> 状<rt>jou</rt> 態<rt>tai</rt></ruby>* "inner notechart state/mode" ("*<ruby>裏 <rt>ura</rt></ruby>* inner or *<ruby>表 <rt>omote</rt></ruby>* outer **side**") of the song selection screen.
 
 *Unspecified*: Whether and how inner mode is implemented.
+
+*Proposal*: Make the scope per&ndash;player-side.
 
 * **`SIDE:1`** / **`SIDE:Normal`** / `SIDE:normal`
   * Displayed only outside the inner notechart mode.
@@ -309,6 +310,8 @@ Specify whether the corresponding song entry is displayed, regarding the *<ruby>
 
 #### Compatibility Issues
 
+* In TaikoJiro, `SIDE:` has per-file scope and notechart definitions for `SIDE:Normal` & `SIDE:Ex` should be separated into 2 files and for `SIDE:Both` should be duplicated into these 2 files.
+  * In OpenTaiko (0auBSQ), `SIDE:` has per&ndash;player-side scope.
 * In OpenTaiko (0auBSQ), `SIDE:` has been re-purposed to be used in conjunction with [`COURSE:Tower`](#course) to specify the actual difficulty in the tower mode and can be one of:
   * `SIDE:Normal`, the *<ruby>甘<rt>ama</rt> 口<rt>kuchi</rt></ruby>* "easy" difficulty.
   * `SIDE:Ex` / `SIDE:` / any other unrecognized argument, the *<ruby>辛<rt>kara</rt> 口<rt>kuchi</rt></ruby>* "hard" difficulty.
@@ -1416,6 +1419,7 @@ Unlike the `#BPMCHANGE` command, the `#SCROLL` command is measure-scoped.
 
 #### Compatibility Issues
 
+* In TaikoJiro, `#SCROLL` has measure-based&ndash;scope, so using [`#MEASURE`](#measure) & [`#BARLINEOFF`](#barlineoff--barlineon) to split the measure are needed to make `#SCROLL` visually work in the middle of a measure.
 * In TJAPlayer2 for PC and TJAPlayer3, the imaginary component of `<complex-ri-float-scroll-speed-xy>` specifies the vertical scrolling speed from the bottom to the top of the screen (↑) instead.
 * In TJAPlayer2 for PC and TJAPlayer3, the imaginary component of `<complex-ri-float-scroll-speed-xy>` makes bar lines rotate around their center. However, it is misinterpreted as the amount of rotation and the unit is 90 degrees (°) clockwise (↻), see:
   * <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/ステージ/07.演奏/ドラム画面/CStage演奏ドラム画面.cs#L2026>
