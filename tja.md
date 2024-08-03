@@ -1592,17 +1592,17 @@ Make non-preceding notes and their *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌
 
 The arguments are whitespace-separated.
 
-* `#SUDDEN <float-milliseconds-appear-duration> <float-milliseconds-moving-duration>`
+* `#SUDDEN <float-seconds-appear-duration> <float-seconds-moving-duration>`
   * The "note phoneticization" is displayed/hidden along the note.
-* *Proposal*: `#SUDDEN <float-milliseconds-appear-duration> <float-milliseconds-moving-duration> <enum-str-affected-type>`
+* *Proposal*: `#SUDDEN <float-seconds-appear-duration> <float-seconds-moving-duration> <enum-str-affected-type>`
   * See below.
-* *Proposal*: `#HIDDEN <float-milliseconds-disappear-duration> <float-milliseconds-stopping-duration>`
+* *Proposal*: `#HIDDEN <float-seconds-disappear-duration> <float-seconds-stopping-duration>`
   * The "note phoneticization" is displayed/hidden along the note.
-* *Proposal*: `#HIDDEN <float-milliseconds-disappear-duration> <float-milliseconds-stopping-duration> <enum-str-affected-type>`
+* *Proposal*: `#HIDDEN <float-seconds-disappear-duration> <float-seconds-stopping-duration> <enum-str-affected-type>`
   * See below.
 * Initial value: `#SUDDEN 0 0` & (*Proposal*) `#HIDDEN 0 0`
 
-`<float-milliseconds-*-duration>` specifies the time durations (ms; 0.001s) before the time point of judgment is reached; if its absolute value equals to `0`, the time duration is positive infinity (+∞) for the `#SUDDEN` command and is negative infinity (−∞) for the `#HIDDEN` command.
+`<float-seconds-*-duration>` specifies the time durations (ms; 0.001s) before the time point of judgment is reached; if its absolute value equals to `0`, the time duration is positive infinity (+∞) for the `#SUDDEN` command and is negative infinity (−∞) for the `#HIDDEN` command.
 
 *Proposal*: `<enum-str-afftect-type>` can be one of:
 
@@ -1633,10 +1633,10 @@ The arguments are whitespace-separated.
   * Reset to the default.
 * `#NOTESPAWN 1 <float-seconds-duration>`
   * Set the sudden point.
-  * Equivalent to `#SUDDEN <float-milliseconds-duration> 0` after unit conversion.
+  * Equivalent to `#SUDDEN <float-seconds-duration> 0` after unit conversion.
 * `#NOTESPAWN 2 <float-seconds-duration>`
   * Set the hidden point.
-  * Equivalent to (*Proposal*) `#HIDDEN <float-milliseconds-duration> 0` after unit conversion.
+  * Equivalent to (*Proposal*) `#HIDDEN <float-seconds-duration> 0` after unit conversion.
 
 ***From***: TaikoManyGimmicks
 
