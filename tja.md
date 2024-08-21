@@ -1917,13 +1917,13 @@ The "branch"/path is determined by a condition value when `<enum-str-condition>`
 * *Proposal*: `dp`, the percentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
 * *Proposal*: `dh`, the percentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
 * `b`, the percentage (%) of "precision"/accuracy of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments on **b**ig (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
-  * > Formula: (*<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/Good + 0.5 × *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{amount of big hit-type notes, 1} × 100(%)
+  * > Formula: (*<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/Good + 0.5 × *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{amount of big missable hit-type notes, 1} × 100(%)
 * *Proposal*: `bp`, the percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
 * *Proposal*: `bh`, the percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
 * *Proposal*: `br`, accumulated amount of *strong* hits on **b**ig bar drum**r**oll notes during the determining section. The postponed-determining behavior of the `r` condition applies.
 * *Proposal*: `h`, amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, non-blank **h**its during the determining section.
   * > Formula: `h` = `hh` + `rt`
-* *Proposal*: `hh`, amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, hit-type note **h**its during the determining section.
+* *Proposal*: `hh`, amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, missable hit-type note **h**its during the determining section.
   * > Formula: `hh` = *<ruby>良<rt>Ryou</rt></ruby>* GREAT/Good + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK
 * *Proposal*: `hp`, amount (**h**its) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") during the determining section.
 * *Proposal*: `am`, amount of _**a**voided_ bomb/**m**ine notes during the determining section.
@@ -2564,8 +2564,8 @@ See <https://taiko.namco-ch.net/taiko/en/howto/onpu.php> for the appearance of n
 `7` | Head of regular *<ruby>激<rt>Geki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt> キ<rt>ki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt> 船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* balloon | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | *<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* Balloon | Roll on the drum surface with certain amount of hits for score bonus, extra score bonus† if cleared | ***From***: TJF format
 `8` | Explicit end of a drumroll-type note (if any) | (round end of a yellow bar) | (っ!! for ending bar drumroll notes) | Stop rolling the drum non-after the point |
 `9` | Head of special burst note/balloon <br> (Differ from game to game) | (Vary) <br> Big yellow circle with potato attached (PS2-generation) <br> Big yellow circle in the shape of a confetti ball 🎊 (PS3- and PC-generation) <br> Has particle decorative visual effects in AC. | *<ruby>く<rt>Ku</rt> す<rt>su</rt> 玉<rt>dama</rt></ruby>* Party Popper <br> (Strictly speaking, *<ruby>薬<rt>Kusu</rt> 玉<rt>dama</rt></ruby>/<ruby>く<rt>Ku</rt> す<rt>su</rt> 玉<rt>dama</rt></ruby>* "Confetti Ball" 🎊 & party popper 🎉 only resemble each other and are not the same thing) | (Vary) <br> In AC, Roll on the drum surface with certain amount of hits (shared among players) for score bonus, extra score bonus† if cleared, more extra score bonus† if done quickly enough <br> In the official games, becomes `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player. | From TaikoJiro v2.75
-`A` | Hand-holding big <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> | Big orange-ish red circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "DON (Hand)" (in 4-player mode) | Like `3`, extra score bonus† if all players caught <br> In the official games, becomes `3` when no hit-type notes exist at the same time position for any of the player above or below the current player. | ***From***: TJAPlayer2 for PC ver.2018040100
-`B` | Hand-holding big <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> | Big sky-blue circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "KA (Hand)" (in 4-player mode) | Like `4`, extra score bonus† if all players caught <br> In the official games, becomes `4` when no hit-type notes exist at the same time position for any of the player above or below the current player. | ***From***: TJAPlayer2 for PC ver.2018040100
+`A` | Hand-holding big <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> | Big orange-ish red circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "DON (Hand)" (in 4-player mode) | Like `3`, extra score bonus† if all players caught <br> In the official games, becomes `3` when no missable hit-type notes exist at the same time position for any of the player above or below the current player. | ***From***: TJAPlayer2 for PC ver.2018040100
+`B` | Hand-holding big <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> | Big sky-blue circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "KA (Hand)" (in 4-player mode) | Like `4`, extra score bonus† if all players caught <br> In the official games, becomes `4` when no missable hit-type notes exist at the same time position for any of the player above or below the current player. | ***From***: TJAPlayer2 for PC ver.2018040100
 `C` | Bomb/mine | Small dark-blue cherry bomb with ignited fuze 💣 | (none) | Combo-break and *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge penalty if caught | ***From***: OpenTaiko (0auBSQ)
 `D` | Fuze/fuse drumroll | ? <br /> (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt> 爆<rt>baku</rt>弾<rt>dan</rt></ruby> "Time bomb"/Fuseroll in OpenTaiko (0auBSQ)) | Roll on the drum surface with certain amount of hits, combo-break (or BAD?) (in OpenTaiko (0auBSQ)) and *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge penalty if failed to do so <br> Not in the official games. | ***From***: OutFox
 `F` | *Ad libitum* note (AD-LIB) | (Invisible) | (none) | Hit the drum surface or rim for score bonus or other bonuses. <br> Not in the official games. <br> Inspired by another rhythm game *GROOVE COASTER*, developed by TAITO | ***From***: TJAPlayer2 for PC ver.2016081500
@@ -2577,13 +2577,16 @@ Unknown note symbols & `8` without the corresponding head of drumroll-type notes
 
 * In TJAPlayer2 for PC & OpenTaiko (0auBSQ) until v0.6.0, `9` is treated the same as `7`.
 
-#### Hit-type notes
+#### Note type category
 
-Including `1`, `2`, `3`, `4`, `A`, `B`, *etc.*, but not `F`.
+* Hit-type notes: Notes with no duration and involving a single or double hit, *e.g.*, `1`, `2`, `3`, `4`, `A`, `B`.
+  * Missable hit-type notes: Notes which give a *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* bad judgment if missed.
+    * This category does not include `C` & `F`.
+* Drumroll-type notes: Notes with duration and involving multiple hits, *e.g.*, `5`, `6`, `7`, `9`.
+  * Bar balloon-type notes: Notes with visual bar body, *e.g.*, `5`, `6`, `D`.
+  * Balloon-type notes: Notes which require specified amount of hits to clear, *e.g.*, `7`, `9`, `D`.
 
 #### Drumroll-type notes
-
-Including `5`, `6`, `7`, `9`, *etc.*
 
 The head and end of drumroll-type notes have no timing window. In the official arcade game, drumroll inputs are allowed non-before/non-after the containing frame of the judgment timing of the head/end of the drumroll-type note.
 
