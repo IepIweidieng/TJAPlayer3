@@ -31,11 +31,12 @@ Extension | Full Name | Content | Supported by | Specification
 `.tci` | Open **T**aiko **C**hart **I**nformation | Notechart metadata (JSON) | Koioto (plugin "OpenTaikoChart"), TJAPlayer3-f v1.6.0.1 | See <https://github.com/AioiLight/Open-Taiko-Chart>
 `.tcc` | Open **T**aiko **C**hart **C**ourse | Notechart definition (JSON) | Koioto (plugin "OpenTaikoChart"), TJAPlayer3-f v1.6.0.1 | See <https://github.com/AioiLight/Open-Taiko-Chart>
 `.tcm` | Open **T**aiko **C**hart **M**edley | Notechart set metadata (JSON) | TJAPlayer3-f v1.6.0.1 | See <https://github.com/AioiLight/Open-Taiko-Chart>
-`.tmg` | **T**aiko**M**any**G**immicks | Notechart metadata + definition | TaikoManyGimmicks | Similar to `.tja` but has some syntax differences (explained right below).
+`.tmg` | **T**aiko**M**any**G**immicks | Notechart metadata + definition | TaikoManyGimmicks v0.6.1α | The plaintext form is similar to `.tja` but has some syntax differences (explained right below).
 
-The TMG format (`.tmg`) is similar to the TJA format (`.tja`) and has the following features:
+The TMG format (`.tmg`) has plaintext and binary form, where the plaintext form is similar to the TJA format (`.tja`) and has the following features:
 
-* In TaikoManyGimmicks, the TMG and TJA formats share the same set of [headers](#tja-header) & [commands](#tja-command).
+* In TaikoManyGimmicks, the TMG and TJA formats share similar set of [headers](#tja-header) & [commands](#tja-command). However, TJA files containing [headers](#tja-header) & [commands](#tja-command) introduced in TaikoManyGimmicks are required to be converted (done automatically by TaikoManyGimmicks) into TMG format since v0.6.1α.
+  * TMG headers and commands introduced since v0.6.1α are listed along with TJA headers and commands, but in the TMG syntax.
 * Command arguments in the TMG format are comma-separated and requires parentheses `()` around the whole argument list, even if no arguments are specified. TMG commands are written in the format of **`#COMMAND(expressions, ...)`**.
 * Math expressions and functions are allowed for each [`number`-typed and `complex-ri-number`&ndash;typed](#value-type) argument for commands.
 * Substitution of predefined variables are allowed in each argument of headers & commands and in notechart definitions. For [`str`-typed](#value-type) argument, `#` (preserved after substitution) needed to be prepended for applying substitution (?).
@@ -1201,7 +1202,7 @@ Default scrolling changes of [`#DELAY`](#delay) command | (No changes) | Pause t
 Default scrolling changes of [`#SCROLL`](#scroll) command | Set the per-note `scroll` | (Ignored) (`#BMSCROLL`) <br> Set the per-note `scroll` (`#HBSCROLL`) | (Ignored)
 *Proposal*: Mode-invariant `#BPMCHANGE` command | `#BPMCHANGE <value>; :` | `#BPMCHANGE <value>; *:*` | `#BPMCHANGE <value>; :` + `#SCROLL <non-zero-float-bpm>bpm; :*`
 *Proposal*: Mode-invariant `#DELAY` command | `#DELAY <value>; :` | `#DELAY <value>; *:*` | `#DELAY <value>; :`
-*Proposal*: Mode-invariant velocity-changing command | `#SCROLL <value>; :` (default) | `#SCROLL <value>; *:*` | `#SPEED <value>bpm; *:*; <changing-duration>`
+*Proposal*: Mode-invariant velocity-changing command | `#SCROLL <value>; :` (default) | [`#HISPEED(<value>)`](#hispeed) (TMG format) <br> `#SCROLL <value>; *:*` | `#SPEED <value>bpm; *:*; <changing-duration>`
 
 In OutFox, the Taiko-like scrolling mode can be achieved by using CAMod (AMod/"Average BPM Scroll Mode" with constant per-note scrolling speed) with the BPM parameter set to the average BPM of the notechart.
 
@@ -1393,21 +1394,30 @@ Change the **scroll**ing speed of notes & bar lines, relative to the normal scro
 
 *Unspecified*: Whether the notes & the bar lines are rotated around their center accordingly when a complex number value is used.
 
+Reset by [`#RESETCOMMAND`](#note--barline-commands).
+
 * `#SCROLL <float-scroll-speed-x>`
-* `#SCROLL <complex-ri-float-scroll-speed-xy>` &mdash; TaikoJiro 2 v0.97, TJAPlayer2 for PC
+* `#SCROLL <complex-ri-float-scroll-speed-xy>` &mdash; TaikoJiro 2 v0.97, TJAPlayer2 for PC, TaikoManyGimmicks (TJA)
   * Complex-number&ndash;valued, modeled after the rectangular form of complex number: *x* ± *yi*
   * Notecharts with this type of command are usually referred as *<ruby>複<rt>Fuku</rt> 素<rt>so</rt> 数<rt>suu</rt> 譜<rt>fu</rt> 面<rt>men</rt></ruby>* "Complex number notechart".
   * The imaginary component of `<complex-ri-float-scroll-speed-xy>` specifies the vertical scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-scroll-speed-x>`.
+* `#SCROLL(<float-scroll-speed-x>, <float-scroll-speed-y>)` &mdash; TaikoManyGimmicks v0.6.1α
+  * `<float-scroll-speed-y>` specifies the vertical scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-scroll-speed-x>`.
 * `#SCROLL 0`
   * The behavior is *unspecified*.
 * *Proposal*: `#SCROLL <value>bpm`
   * Use the corresponding scrolling speed vector as when the absolute value (velocity) of `<value>` were used for `#BPMCHANGE` and the unit direction of `<value>` were used for `#SCROLL`.
   * > Formula: `scroll` = `value` / `current_bpm`
-* `#SCROLL <float-scroll-speed>, <number-pixel-rotation-center-x>, <float-degrees-angle>` &mdash; TaikoManyGimmicks
+* `#SCROLL <float-scroll-speed>, <number-rotation-lower>, <number-rotation-upper>` &mdash; TaikoManyGimmicks
   * Complex-number&ndash;valued, modeled after the polar form of complex number: *r*∠*φ*
-  * Set the scrolling speed vector to `<float-scroll-speed>` rotated `<float-degrees-angle>` degrees (°) counterclockwise (↺) centered around the position `<number-pixel-rotation-center-x>` from the visual judgment position.
-  * Can cause the per&ndash;note/bar line visual judgment position to move away from the judgment mark.
-* Initial value: `#SCROLL 1` / `#SCROLL 1+0i` / (TaikoManyGimmicks) `#SCROLL 1, 0, 0`
+  * Set the scrolling speed vector to `<float-scroll-speed>` rotated `<number-degrees-upper>/<number-degrees-lower>` turns counterclockwise (↺).
+    * In other words, the unit of `<number-rotation-upper>` depends on the `<number-rotation-lower>`, *e.g.*:
+      * Turn (tr/pla), when `<number-rotation-lower>` is 1.
+      * Degree (deg), when `<number-rotation-lower>` is 360.
+      * Gradian (grad), when `<number-rotation-lower>` is 400.
+  * > Formula: `scroll_speed_x` = `scroll_speed` × **cos**(2*π* × `rotation_upper` ÷ `rotation_lower`)
+  * > Formula: `scroll_speed_y` = `scroll_speed` × **sin**(2*π* × `rotation_upper` ÷ `rotation_lower`)
+* Initial value: `#SCROLL 1` / `#SCROLL 1+0i` / (TaikoManyGimmicks) `#SCROLL 1, 180, 0`
   * The normal scrolling speed vectors. The notes & the bar lines travel through the whole note field in 4 beats when no BPM changes occur.
 
 ***From***: TaikoJiro \
@@ -1437,6 +1447,21 @@ Change the **scroll**ing speed of only **bar** **line**s, relative to the normal
   * Reset the scrolling speed of bar lines to the scrolling speed of notes and allow this speed to be overridden by further [`#SCROLL`](#scroll).
 
 ***From***: taiko-web (plugin "Custom Barlines")
+
+### #HISPEED
+
+***Scope***: branch, non-before, gimmicky \
+***Late effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll)); (none) (otherwise) \
+***Effect target***: notes, bar lines
+
+Suddenly change the scrolling speed (**HiSpeed** / **hi**gh-**speed**) of notes & bar lines in BMS scrolling modes, as if the BPM were changed accordingly.
+
+Reset by [`#RESETCOMMAND`](#note--barline-commands).
+
+* `#HISPEED(<float-scroll-speed-x>)`
+  * Suddenly change the scrolling speed as if the BPM were changed into `<float-scroll-speed-x>` × BPM.
+
+***From***: TaikoManyGimmicks v0.6.1α
 
 ### *Proposal*: #SPEED
 
@@ -1527,9 +1552,11 @@ Move ("**scroll**") the **pos**ition of the **j**udgment circle from the current
 
 *Unspecified*: The behavior when another `#JPOSSCROLL` command is placed within the moving duration interval of the current `#JPOSSCROLL` command.
 
+Reset by [`#RESETCOMMAND`](#note--barline-commands).
+
 The arguments are whitespace-separated.
 
-* `#JPOSSCROLL <approach-duration-specifier> <distance-specifier> <direction-specifier>`
+* `#JPOSSCROLL <approach-duration-specifier> <distance-specifier> <direction-specifier>` / `#JPOSSCROLL(<approach-duration-specifier>, <number-pixel-distance-x>)` &mdash; TaikoManyGimmicks v0.6.1α / `#JPOSSCROLL(<approach-duration-specifier>, <number-pixel-distance-x>, <number-pixel-distance-y>)` &mdash; TaikoManyGimmicks v0.6.6α
   * `<approach-duration-specifier>` can be one of:
     * `<positive-float-seconds-approach-duration>`
     * *Proposal*: `<beats-approach-duration>`
@@ -1542,14 +1569,15 @@ The arguments are whitespace-separated.
     * *Proposal*: `<value> deg <float-degrees-angle>`
       * Specify the moving vector as `<value>` rotated `<float-degrees-angle>` degrees (°) counterclockwise (↺).
     * `default` &mdash; TaikoManyGimmicks
-      * Move the judgment mark to the default position.
+      * Move the judgment mark to the default position, regardless of `<direction-specifier>`.
   * `<direction-specifier>` can be one of:
     * (Empty) / `0`
       * Specify the moving direction as toward from where the notes and bar lines would scroll if `<pixel-distance-specifier>` were the argument of [the `#SCROLL` command](#scroll) when the BPM is positive.
     * `1`
       * The moving direction is reversed (rotated 180 degrees (°) (counter)clockwise (↺/↻)) compared to when `<direction-specifier>` is `0`.
 
-***From***: TJAPlayer2 for PC
+***From***: TJAPlayer2 for PC \
+***Supported by***: TaikoManyGimmicks v0.6α
 
 #### Compatibility Issues
 
@@ -1563,20 +1591,20 @@ The arguments are whitespace-separated.
 
 Specify the per&ndash;note/bar line visual **judgment** point to be offset ("**delay**") from the judgment mark.
 
-Reset by [`#RESETCOMMAND`](#note--barline-commands) (?)
+Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 The arguments are whitespace-separated.
 
 * `#JUDGEDELAY 0`
   * **0**-parameter form.
   * Reset the effects.
-* `#JUDGEDELAY 1 <float-seconds-duration>`
+* `#JUDGEDELAY 1 <float-seconds-duration>` / `#JUDGEDELAY(Sec, <float-seconds-duration>)`
   * **1**-parameter form.
   * Specify the visual judgment point to be visually `<float-seconds-duration>` before the judgment mark.
-* `#JUDGEDELAY 2 <float-pixel-position-x> <float-pixel-position-y>`
+* `#JUDGEDELAY 2 <float-pixel-position-x> <float-pixel-position-y>` / `#JUDGEDELAY(Pos, <float-pixel-position-x>, <float-pixel-position-y>)`
   * **2**-parameter form.
   * Specify the visual judgment point to be the given position relative to the judgment mark.
-* `#JUDGEDELAY 3 <float-seconds-duration> <float-pixel-position-x> <float-pixel-position-y>`
+* `#JUDGEDELAY 3 <float-seconds-duration> <float-pixel-position-x> <float-pixel-position-y>` / `#JUDGEDELAY(Sec_Pos, <float-seconds-duration, <float-pixel-position-x>, <float-pixel-position-y>)`
   * **3**-parameter form.
   * Specify the visual judgment point to be visually `<float-seconds-duration>` before the given position relative to the judgment mark.
 
@@ -1589,6 +1617,8 @@ The arguments are whitespace-separated.
 ***Effect target***: notes
 
 Make non-preceding notes and their *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* "Note phoneticization" respectively appear and move **sudden**ly / disappear ("**hidden**") and stop moving suddenly.
+
+Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 The arguments are whitespace-separated.
 
@@ -1613,7 +1643,8 @@ The arguments are whitespace-separated.
 * `nb` &mdash; Affect both the **n**ote & the **b**ar lines.
 * `ntb` / `All` &mdash; Affect all notechart objects.
 
-***From***: TJAPlayer2 for PC
+***From***: TJAPlayer2 for PC \
+***Supported by***: TaikoManyGimmicks v0.6α
 
 #### Compatibility Issues
 
@@ -1627,14 +1658,16 @@ The arguments are whitespace-separated.
 
 Specify the displaying ("**spawn**") duration of **note**s before the time point of judgment.
 
+Reset by [`#RESETCOMMAND`](#note--barline-commands).
+
 The arguments are whitespace-separated.
 
 * `#NOTESPAWN 0`
   * Reset to the default.
-* `#NOTESPAWN 1 <float-seconds-duration>`
+* `#NOTESPAWN 1 <float-seconds-duration>` / `#NOTESPAWN(Spawn, <float-seconds-duration>)`
   * Set the sudden point.
   * Equivalent to `#SUDDEN <float-seconds-duration> 0` after unit conversion.
-* `#NOTESPAWN 2 <float-seconds-duration>`
+* `#NOTESPAWN 2 <float-seconds-duration>` / `#NOTESPAWN(Vanish, <float-seconds-duration>)`
   * Set the hidden point.
   * Equivalent to (*Proposal*) `#HIDDEN <float-seconds-duration> 0` after unit conversion.
 
@@ -1665,7 +1698,7 @@ Display the specified **lyric**.
   * In taiko-web, a `\n` in `<str-lyric>` is displayed as a newline.
 
 ***From***: TJAPlayer2 for PC \
-***Supported by***: taiko-web ver.20.03.31
+***Supported by***: taiko-web ver.20.03.31, TaikoManyGimmicks v0.6α
 
 #### Compatibility Issues
 
@@ -2128,20 +2161,32 @@ The arguments are whitespace-separated.
 Resetters:
 
 * `#RESETCOMMAND`
-  * **Reset** the effects of gimmicky commands to their default value, including NOTE / BARLINE commands, [the `#JUDGEDELAY` command](#judgedelay), [the `#NOTESPAWN` command](#notespawn), & [the `#GRADATION` command](#gradation).
+  * **Reset** the effects of gimmicky commands to their default value, including:
+  * [The `#SCROLL` command](#scroll)
+  * [The `#SUDDEN` command](#sudden--hidden-commands)
+  * [The `#JPOSSCROLL` command](#jposscroll)
+  * NOTE / BARLINE commands
+  * [The `#JUDGEDELAY` command](#judgedelay)
+  * [The `#NOTESPAWN` command](#notespawn)
+  * [The `#GRADATION` command](#gradation)
+  * [The `#HISPEED` command](#hispeed)
 
 Setters:
 
-* `#SIZE <unsigned-number-scale>`
+* `#SIZE <unsigned-number-scale>` &mdash; TaikoManyGimmicks v0.6α
   * Specify the scaling ("**size**") of notes.
 * `#BARLINESIZE <unsigned-number-pixel-thickness> <unsigned-number-pixel-height>`
   * Specify the **size** of **bar** **line**s.
-* `#ANGLE <number-degrees-rotation>`
+* `#ANGLE <number-degrees-rotation>` &mdash; TaikoManyGimmicks v0.6α
   * Specify the per-object rotation ("**angle**") of notes & bar lines to be `<number-degrees-rotation>` degrees (°) counterclockwise (↺).
-* `#ALPHA <unsigned-number-8bit-a>`
-  * Specify the opacity ("**α** channel"/"**alpha** channel") of notes.
-* `#COLOR <unsigned-number-8bit-r> <unsigned-number-8bit-g> <unsigned-number-8bit-b> <unsigned-number-8bit-a>`
-  * Specify the **color** of bar lines.
+* `#COLOR <unsigned-number-9bit-r> <unsigned-number-9bit-g> <unsigned-number-9bit-b> <unsigned-number-8bit-a>` &mdash; TaikoManyGimmicks v0.6α / `#COLOR(<unsigned-number-9bit-r>, <unsigned-number-9bit-g>, <unsigned-number-9bit-b>)` &mdash; TaikoManyGimmicks v0.6.1α
+  * Specify the **color** of notes & bar lines.
+  * Each color channel (assumed to be in unsigned 8-bit) has its value increased by `<unsigned-number-*bit-*>` − 255.
+  * Defaults to `#COLOR 255 255 255 255` or `#COLOR(255, 255, 255)`
+* `#ALPHA(<unsigned-number-8bit-a>)` &mdash; TaikoManyGimmicks v0.6.1α
+  * Specify the opacity ("**α** channel"/"**alpha** channel") of notes & bar lines.
+  * Defaults to `#ALPHA(255)`
+
 
 ***From***: TaikoManyGimmicks
 
@@ -2153,55 +2198,75 @@ Setters:
 
 Control the commands apply to the starting/ending of the per&ndash;note/bar line approaching phase ("**gradation**").
 
+Reset by [`#RESETCOMMAND`](#note--barline-commands).
+
 The arguments are whitespace-separated.
 
-* `#GRADATION init`
-  * Stop applying effects specified by the `#GRADATION` command to non-preceding notes and bar lines.
-* `#GRADATION start <float-seconds-approach-duration> <enum-int-easing-points> <enum-int-easing-function>`
+* `#GRADATION start <float-seconds-approach-duration> <enum-int-easing-points> <enum-int-easing-function>` &mdash; TaikoManyGimmicks (TJA)
   * Make the following commands apply to the beginning ("**start**") of the approaching phase and specify the time duration and easing property of the approaching phase.
+* `#GRADATION(Set, <enum-int-easing-points>, <enum-int-easing-function>, <float-seconds-pre-approach-offset>, <float-seconds-approach-duration>)` &mdash; TaikoManyGimmicks v0.6.1α
+  * Start (**set** up) the interpolated command definition section of the approaching phase and specify the time offset and duration and easing property of the approaching phase.
+  * For interpolated commands, each value for the interpolation points is separated by a tilde operator (`~`), which has a lower operator precedence than most operators except the comma (`,`).
+  * `<float-seconds-pre-approach-offset>` specifies the time point before the time position of this command when the approaching phase should start.
   * `<enum-int-easing-points>` can be one of:
-    * `0` &mdash; EaseIn
-    * `1` &mdash; EaseOut
-    * `2` &mdash; EaseInOut
+    * `0`, EaseIn
+    * `1`, EaseOut
+    * `2`, EaseInOut
+    * `3`, EaseOutIn &mdash; TaikoManyGimmicks v0.6.1α+
   * `<enum-int-easing-function>` can be one of:
-    * `0` &mdash; Linear
-    * `1` &mdash; Sine
-    * `2` &mdash; Quadratic
-    * `3` &mdash; Cubic
-    * `4` &mdash; Quartic
-    * `5` &mdash; Quintic
-    * `6` &mdash; Exponential
-    * `7` &mdash; Circular
-    * `8` &mdash; Back
-    * `9` &mdash; Elastic
-    * `10` &mdash; Bounce
+    * `0`, Linear
+    * `1`, Sine
+    * `2`, Quadratic
+    * `3`, Cubic
+    * `4`, Quartic
+    * `5`, Quintic
+    * `6`, Exponential
+    * `7`, Circular
+    * `8`, Back
+    * `9`, Elastic
+    * `10`, Bounce
   * See <https://easings.net/> for a visual preview and the actual equation.
-* `#GRADATION end`
+* `#GRADATION end` &mdash; TaikoManyGimmicks (TJA)
   * Make the following commands apply to the **end**ing of the approaching phase.
   * Each commands appear after `#GRADATION start <float-seconds-approach-duration> <enum-int-easing-points> <enum-int-easing-function>` are specified again with a possibly different value here.
+* `#GRADATION(Start)` &mdash; TaikoManyGimmicks v0.6.1α
+  * End the interpolated command definition section and **start** a section of normal notechart definition.
+* `#GRADATION init` &mdash; TaikoManyGimmicks (TJA) / `#GRADATION(End)` &mdash; TaikoManyGimmicks v0.6.1α
+  * Stop ("**end**") applying ("**init**ialize") effects specified by the `#GRADATION` command to non-preceding notes and bar lines.
 
 They are conventionally used as follow:
 
-```tja
-#GRADATION start 1 0 0 // Exemplar
-#SIZE 1 // Exemplar command with the value before approaching
-// More commands with the values before approaching
-#GRADATION end
-#SIZE 2 // Exemplar command with the value after approaching
-// More commands with the values after approaching
-// Notechart section
-#GRADATION init // Optional sometimes
-```
+* TaikoManyGimmicks before v0.6.1α:
+  ```tja
+  #GRADATION start 1.0 2 0 // Exemplar
+  #SIZE 1 // Exemplar command with the value before approaching
+  // More commands with the values before approaching
+  #GRADATION end
+  #SIZE 2 // Exemplar command with the value after approaching
+  // More commands with the values after approaching
+  // Notechart section
+  #GRADATION init // Optional sometimes
+  ```
+* TaikoManyGimmicks v0.6.1α+:
+  ```tmg
+  #GRADATION(Set, 2, 0, 0.0, 1.0) // Exemplar
+  #SIZE(1~2) // Exemplar command with the value before~after approaching
+  // More commands with the values before approaching
+  #GRADATION(Start)
+  // Notechart section
+  #GRADATION(End) // Optional sometimes
+  ```
 
-*Unspecified*: Which commands support the `#GRADATION` command.
+*Unspecified*: Which commands are supported by the `#GRADATION` command.
 
 Commands supporting the `#GRADATION` command in TaikoManyGimmicks:
 
 * [The `#SCROLL` command](#scroll)
 * [The `#JUDGEDELAY` command](#judgedelay)
-* [The `#SIZE`, `#COLOR`, & `#ANGLE` commands](#note--barline-commands)
+* [The `#SIZE`, `#COLOR`, `#ALPHA`, & `#ANGLE` commands](#note--barline-commands)
+* [The `#BARLINESIZE` command](#note--barline-commands) &mdash; TaikoManyGimmicks v0.6.1α
 
-***From***: TaikoManyGimmicks
+***From***: TaikoManyGimmicks v0.6α
 
 ### #INCLUDE
 
@@ -2209,11 +2274,11 @@ Commands supporting the `#GRADATION` command in TaikoManyGimmicks:
 ***Late effect scope***: (depending on included notechart definition content) \
 ***Effect target***: (depending on included notechart definition content)
 
-Append ("**include**") the notechart definition content defined the included file to the current definition. The included file can have any headers and commands (except for the [`#START` and `#END` commands](#start--end) (?)) in either the TJA (?) or the TMG format.
+Append ("**include**") the notechart definition content defined the included file to the current definition. The included file can include any headers and commands in the TMG format.
 
-* `#INCLUDE <string-filepath-notechart-definition>`
+* `#INCLUDE(<string-filepath-notechart-definition>)`
 
-***From***: TaikoManyGimmicks
+***From***: TaikoManyGimmicks v0.6.1α
 
 ### `#SPLITLANE` / `#MERGELANE`
 
@@ -2833,6 +2898,8 @@ The honorific title is omitted.
 * *OpenTaiko/CDTX.cs at main*. (2024, May 3). 0auBSQ/OpenTaiko. GitHub. <https://github.com/0auBSQ/OpenTaiko/blob/main/OpenTaiko/src/Songs/CDTX.cs>
 * *OpenTaiko/NotesManager.cs at main*. (2024, April 15). 0auBSQ/OpenTaiko. GitHub. <https://github.com/0auBSQ/OpenTaiko/blob/main/OpenTaiko/src/Stages/07.Game/Taiko/NotesManager.cs>
 * Squirrel (2023, November 4). *TJA Compatibility*. Project OutFox Wiki. <https://outfox.wiki/dev/mode-support/tja-support/>
+* barrier (2023, May 1). *Readme.txt*. *TaikoManyGimmicks ver0.6.6α*.
+  * This file is distributed along with TaikoManyGimmicks.
 * nyoro (2023, November 11). *TJA Format Support*. Visual Studio Marketplace. <https://marketplace.visualstudio.com/items?itemName=nyoro.tja-format-support>
   * This vscode extension provides short explanations for TJA headers/commands, including headers/commands introduced by TaikoManyGimmicks.
 
