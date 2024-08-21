@@ -1385,17 +1385,13 @@ Respectively **start** / **end** a fake/dummy section if not already respectivel
 
 ### #SCROLL
 
-***Scope***: branch, measure non-before, gimmicky \
+***Scope***: branch, non-before, gimmicky \
 ***Late effect scope***: (none) \
 ***Effect target***: notes, bar lines
 
 Change the **scroll**ing speed of notes & bar lines, relative to the normal scrolling velocity and direction.
 
 *Unspecified*: Whether the notes & the bar lines are rotated around their center accordingly when a complex number value is used.
-
-Unlike the `#BPMCHANGE` command, the `#SCROLL` command is measure-scoped.
-
-*Proposal*: Make the scope simply non-before.
 
 * `#SCROLL <float-scroll-speed-x>`
 * `#SCROLL <complex-ri-float-scroll-speed-xy>` &mdash; TaikoJiro 2 v0.97, TJAPlayer2 for PC
@@ -1419,7 +1415,7 @@ Unlike the `#BPMCHANGE` command, the `#SCROLL` command is measure-scoped.
 
 #### Compatibility Issues
 
-* In TaikoJiro, `#SCROLL` has measure-based&ndash;scope, so using [`#MEASURE`](#measure) & [`#BARLINEOFF`](#barlineoff--barlineon) to split the measure are needed to make `#SCROLL` visually work in the middle of a measure.
+* In TaikoJiro 1 but not TaikoJiro 2, `#SCROLL` has measure-based&ndash;scope (specifically, `#SCROLL`s defined in the middle of a measure apply instead non-before the next measure) unlike [the `#BPMCHANGE` command](#bpmchange), so splitting the measures using [`#MEASURE`](#measure) & [`#BARLINEOFF`](#barlineoff--barlineon) is needed to make `#SCROLL` visually work in the middle of a measure.
 * In TJAPlayer2 for PC and TJAPlayer3, the imaginary component of `<complex-ri-float-scroll-speed-xy>` specifies the vertical scrolling speed from the bottom to the top of the screen (↑) instead.
 * In TJAPlayer2 for PC and TJAPlayer3, the imaginary component of `<complex-ri-float-scroll-speed-xy>` makes bar lines rotate around their center. However, it is misinterpreted as the amount of rotation and the unit is 90 degrees (°) clockwise (↻), see:
   * <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/ステージ/07.演奏/ドラム画面/CStage演奏ドラム画面.cs#L2026>
