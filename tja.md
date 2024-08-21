@@ -1483,17 +1483,21 @@ Change the scrolling **direction** of notes & bar lines.
     * | | Rotation (degrees CCW) | Scrolling direction under `#SCROLL 1`
       | --- | --- | ---
       | `0` | 0° ↺/↻ (no changes) | ←
-      | `1` | 90° ↺ | ↓
-      | `2` | 270° ↺ (≡ 90° ↻) | ↑
-      | `3` | 45° ↺ | ↙
-      | `4` | 315° ↺ (≡ 45° ↻) | ↖
+      | `1` | 270° ↺ (≡ 90° ↻) | ↑
+      | `2` | 90° ↺ | ↓
+      | `3` | 315° ↺ (≡ 45° ↻) | ↖
+      | `4` | 45° ↺ | ↙
       | `5` | 180° ↺ (≡ 180° ↻) | →
-      | `6` | 135° ↺ | ↘
-      | `7` | 225° ↺ (≡ 135° ↻) | ↗
+      | `6` | 225° ↺ (≡ 135° ↻) | ↗
+      | `7` | 135° ↺ | ↘
 * *Proposal*: `#DIRECTION <number-degrees>deg`
   * `<number-degrees-rotation>` specifies the degrees (°) of the counterclockwise (↺) rotation.
 
 ***From***: TJAPlayer2 for PC
+
+#### Compatibility Issues
+
+* In TJAPlayer2 for PC and TJAPlayer3, `<enum-int-direction>` specifies the degrees (°) of the clockwise (↻) rotation instead due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑).
 
 ### `#BARLINEOFF` / `#BARLINEON`
 
