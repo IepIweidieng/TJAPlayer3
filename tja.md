@@ -2584,7 +2584,7 @@ See <https://taiko.namco-ch.net/taiko/en/howto/onpu.php> for the appearance of n
   * Bar balloon-type notes: Notes with visual bar body, *e.g.*, `5`, `6`, `D`.
   * Balloon-type notes: Notes which require specified amount of hits to clear, *e.g.*, `7`, `9`, `D`.
 
-#### Drumroll-type notes
+#### Duration of drumroll-type notes
 
 The head and end of drumroll-type notes have no timing window. In the official arcade game, drumroll inputs are allowed non-before/non-after the containing frame of the judgment timing of the head/end of the drumroll-type note.
 
@@ -2607,6 +2607,11 @@ By default, drumroll-type notes are ended non-after one of:
     * In notecharts without any "branch"/path sections: 50ms.
     * Otherwise, in the *<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>* Normal "branch"/path state: 8/53 s (≈ 150.94ms) (tentatically determined).
     * Otherwise, in other "branch"/path states: 0ms.
+  * *Unspecified*: The behavior of the hit-type note which ends a balloon-type note.
+    * In TaikoJiro v2.36+, the hit-type note become impossible to hit if the balloon-type note is not cleared.
+      * This behavior is in reference to *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt> 3<rt>San</rt></ruby>（<ruby>辛<rt>kara</rt> 口<rt>kuchi</rt></ruby>）* ("Taiko Tower 3 (hard)"), where the duration interval of balloon-type notes overlaps with the following hit-type note, which can be achieved alternatively by using `#DELAY`s with negative duration to place the hit-type note.
+        * See <https://wikiwiki.jp/taiko-fumen/収録曲/その他/太鼓タワー3%28辛口%29>
+      * *Proposal*: Restrict this behavior to `COURSE:Tower`.
 * In TaikoJiro, the definition position of the last note symbol of the notechart, except when the note head is in the definition of a "branch"/path other than the *<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>* Normal "branch"/path.
 
 In the official games, drumroll-type notes are usually intentionally made to end earlier than the designed ending beat position by the amount of beats of a 1/48th note.
@@ -2617,17 +2622,11 @@ In the official games, drumroll-type notes are usually intentionally made to end
 
 * In TJF format, `8` did not exist and the duration interval is specified by repeat the note head symbol consecutively, where the last repeated symbol corresponds to TJA `8`, *e.g.*, TJF `5555` = TJA `5558`.
 
-*Unspecified*: The behavior when a balloon-type note (including `7`, `9`, `D`, *etc.*) is not ended with an `8` before other non-blank note symbols.
+*Unspecified*: The behavior when a drumroll-type note with non-positive time duration is formed, possibly from a drumroll-type note ended by a hit-type note (*e.g.*, `51` / `56` / `65`, where the time duration of the drumroll may be shortened as mentioned above) or by using timing settings.
 
-* In TaikoJiro v2.36+, after the non-blank note symbols (must be hit-type), the balloon-type note remains active if not cleared and is only closed by clearing it or by an `8` or another head of this balloon-type note. All other notes become impossible to hit while the balloon-type note is active.
-  * This behavior is in reference to *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt> 3<rt>San</rt></ruby>（<ruby>辛<rt>kara</rt> 口<rt>kuchi</rt></ruby>）* ("Taiko Tower 3 (hard)"), where the duration interval of balloon-type notes overlaps with the following hit-type note.
-    * See <https://wikiwiki.jp/taiko-fumen/収録曲/その他/太鼓タワー3%28辛口%29>
-  * *Proposal*: Restrict this behavior to `COURSE:Tower`.
-
-*Unspecified*: The behavior when a non-positive-duration bar drumroll note is formed, possibly from a drumroll-type note ended by a hit-type note (*e.g.*, `51` / `56` / `65`, where the duration of the drumroll may be shortened as mentioned above) or by using timing settings.
-
-* In Taikosan, zero-duration bar drumroll notes can be created by using an isolated drumroll-type note symbol. However, they are not accepted and an error message is displayed. \
+* In Taikosan, bar drumroll notes with zero time duration can be created by using an isolated drumroll-type note symbol. However, such notes are not accepted and an error message is displayed, although balloon notes with zero time duration are allowed. \
   ![Taikosan's Error Message for Zero-duration Bar Drumroll Note](https://i.imgur.com/MDdNzKX.png)
+* In TaikoJiro, drumroll-type notes with zero time duration are allowed and may receive inputs in occasion, while drumroll-type notes with negative time duration never receive inputs. Bar-less balloon-type notes with negative time duration teleport to the judgment mark when the time position of the note end is reached.
 
 ***From***: TJF format \
 ***Supported by***: (Universally supported)
