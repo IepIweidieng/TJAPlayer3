@@ -1549,9 +1549,9 @@ The arguments are whitespace-separated.
       * Move the judgment mark to the default position.
   * `<direction-specifier>` can be one of:
     * (Empty) / `0`
-      * Specify the moving direction as the scrolling direction if `<pixel-distance-specifier>` were the argument of [the `#SCROLL` command](#scroll) when the BPM is positive.
+      * Specify the moving direction as toward from where the notes and bar lines would scroll if `<pixel-distance-specifier>` were the argument of [the `#SCROLL` command](#scroll) when the BPM is positive.
     * `1`
-      * The moving direction is reversed (rotated 180 degrees (°) (counter)clockwise (↺/↻)).
+      * The moving direction is reversed (rotated 180 degrees (°) (counter)clockwise (↺/↻)) compared to when `<direction-specifier>` is `0`.
 
 ***From***: TJAPlayer2 for PC
 
