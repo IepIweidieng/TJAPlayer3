@@ -2858,10 +2858,10 @@ The honorific title is omitted.
     * The TJF format was developed and used for this simulator.
 * TJAPlayer2 for PC (aka. <ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> さ<rt>sa</rt> ん<rt>n</rt> ア<rt>A</rt> ル<rt>ru</rt> ファ<rt>fa</rt></ruby> (*TaikosanAlpha*)): By J.MIR (kairera0467) <https://github.com/kairera0467/TJAP2fPC>
   * Inspired by TJAPlayer2 (for PSP): (Unknown author)
-  * ← Derived from DTXManiaXG (Ver.K): By J.MIR (kairera0467) <https://ja.osdn.net/projects/dtxmaniaxg-verk/>, <https://github.com/kairera0467/DTXManiaXG_VerK_Old> \
+  * ← Derived from DTXManiaXG (Ver.K): By J.MIR (kairera0467) <https://osdn.net/projects/dtxmaniaxg-verk/>, <https://github.com/kairera0467/DTXManiaXG_VerK_Old> \
     In comparison, TJAPlayer2 for PC introduces the originally lacking TJA format parsing and Taiko gameplay, while the original BMS-derived format (specifically DTX, GDA, G2D, BMS, & BME) parsing and GITADORA-style gameplay are either removed or not fully functional.
-    * ← Derived from DTXMania: By ＦＲＯＭ (DTXMania), <ruby>や<rt>Ya</rt> ぎ<rt>gi</rt>。</ruby> (yyagi), *et al.* <https://ja.osdn.net/projects/dtxmania/>
-      * Reference: <ruby>や<rt>Ya</rt> ぎ<rt>gi</rt>。</ruby> (2020, September 14). *Derivatives of DTXMania*. DTXMania Wiki - DTXMania. OSDN. <https://ja.osdn.net/projects/dtxmania/wiki/derivatives>
+    * ← Derived from DTXMania: By ＦＲＯＭ (DTXMania), <ruby>や<rt>Ya</rt> ぎ<rt>gi</rt>。</ruby> (yyagi), *et al.* <https://osdn.net/projects/dtxmania/>
+      * Reference: <ruby>や<rt>Ya</rt> ぎ<rt>gi</rt>。</ruby> (2020, September 14). *Derivatives of DTXMania*. DTXMania Wiki - DTXMania. OSDN. <https://osdn.net/projects/dtxmania/wiki/derivatives>
   * Derivatives \
     ver.2017072200, non-after 2017, December 15 → TJAPlayer3 (AioiLight): By AioiLight *et al.* <https://github.com/AioiLight/TJAPlayer3>
     * ver-1.6.x, non-after 2019, October 27 → TJAPlayer3 (twopointzero): By Jeremy Gray (twopointzero) <https://github.com/twopointzero/TJAPlayer3>
