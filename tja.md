@@ -866,9 +866,10 @@ For each element of `<comma-separated-list-non-negative-int-amount-of-hits>`, if
 * TJAPlayer3 but not TJAPlayer3-Develop: If a balloon-type note is defined in sections after [`#BRANCHEND`](#branchstart--branchend) and before another [`#BRANCHSTART`](#branchstart--branchend), it *erroneously* uses 3 values from the iteration of the `BALLOONNOR:` / `BALLOONEXP:` / `BALLOONMAS:` list according to the last defined "branch"/path before the `#BRANCHEND`. (?; deduced from source code)
   * <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Songs/CDTX.cs#L3719>, <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Songs/CDTX.cs#L4020-L4055>
   * *C.f.*, <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/スコア、曲/CDTX.cs#L3872-L3877>, <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/スコア、曲/CDTX.cs#L4118-L4149>
-* TJAPlayer3-Develop: If a balloon-type note is defined in sections after [`#BRANCHEND`](#branchstart--branchend) and before another [`#BRANCHSTART`](#branchstart--branchend), it use 1 value from each iteration of `BALLOONNOR:`, `BALLOONEXP:`, & `BALLOONMAS:` instead of only `BALLOONNOR:`.
+* TJAPlayer3-Develop & TJAPlayer3-Develop-ReWrite: If a balloon-type note is defined in sections after [`#BRANCHEND`](#branchstart--branchend) and before another [`#BRANCHSTART`](#branchstart--branchend), it use 1 value from each iteration of `BALLOONNOR:`, `BALLOONEXP:`, & `BALLOONMAS:` instead of only `BALLOONNOR:`.
   * <https://github.com/TJAPlayer3-Develop/TJAPlayer3-Develop/blame/b6ab37cbdc25a4257c7d685de48b6997ae81fe95/TJAPlayer3/Songs/CDTX.cs#L4173-L4217>
-  * See commit: <https://github.com/TJAPlayer3-Develop/TJAPlayer3-Develop/commit/abffd3204c437abaaf49fbd2ae890729a5485682>
+  * <https://github.com/touhourenren/TJAPlayer3-Develop-ReWrite/blame/9cce1fac9c4a8988b950e1c646a749832c85cfd8/TJAPlayer3/Songs/CDTX.cs#L4315-L4358>
+  * See commits: <https://github.com/TJAPlayer3-Develop/TJAPlayer3-Develop/commit/abffd3204c437abaaf49fbd2ae890729a5485682> and <https://github.com/touhourenren/TJAPlayer3-Develop-ReWrite/commit/e1440cc349143fe2c820c8759e7e8512dba073e0>
 
 ### LIFE:
 
@@ -2855,9 +2856,10 @@ The honorific title is omitted.
   * The TJF format was modified and extended into the TJA format for this simulator.
   * Inspired by <ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> さ<rt>sa</rt> ん<rt>n</rt> 太<rt>Ta</rt> 郎<rt>rou</rt></ruby> (*Taikosan*): By VIL.
     * The TJF format was developed and used for this simulator.
-* TJAPlayer2 for PC: By J.MIR (kairera0467) <https://github.com/kairera0467/TJAP2fPC>
+* TJAPlayer2 for PC (aka. <ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> さ<rt>sa</rt> ん<rt>n</rt> ア<rt>A</rt> ル<rt>ru</rt> ファ<rt>fa</rt></ruby> (*TaikosanAlpha*)): By J.MIR (kairera0467) <https://github.com/kairera0467/TJAP2fPC>
   * Inspired by TJAPlayer2 (for PSP): (Unknown author)
-  * ← Derived from DTXManiaXG (Ver.K): By J.MIR (kairera0467) <https://ja.osdn.net/projects/dtxmaniaxg-verk/>
+  * ← Derived from DTXManiaXG (Ver.K): By J.MIR (kairera0467) <https://ja.osdn.net/projects/dtxmaniaxg-verk/>, <https://github.com/kairera0467/DTXManiaXG_VerK_Old> \
+    In comparison, TJAPlayer2 for PC introduces the originally lacking TJA format parsing and Taiko gameplay, while the original BMS-derived format (specifically DTX, GDA, G2D, BMS, & BME) parsing and GITADORA-style gameplay are either removed or not fully functional.
     * ← Derived from DTXMania: By ＦＲＯＭ (DTXMania), <ruby>や<rt>Ya</rt> ぎ<rt>gi</rt>。</ruby> (yyagi), *et al.* <https://ja.osdn.net/projects/dtxmania/>
       * Reference: <ruby>や<rt>Ya</rt> ぎ<rt>gi</rt>。</ruby> (2020, September 14). *Derivatives of DTXMania*. DTXMania Wiki - DTXMania. OSDN. <https://ja.osdn.net/projects/dtxmania/wiki/derivatives>
   * Derivatives \
@@ -2865,14 +2867,15 @@ The honorific title is omitted.
     * ver-1.6.x, non-after 2019, October 27 → TJAPlayer3 (twopointzero): By Jeremy Gray (twopointzero) <https://github.com/twopointzero/TJAPlayer3>
       * v5.2.4, non-after 2020, May 19, &ndash; v5.2.9 → TJAPlayer3 (KabanFriends): By KabanFriends <https://github.com/KabanFriends/TJAPlayer3>
         * Non-after 2021, May 26 → TJAPlayer3-Extended: By KabanFriends <https://github.com/KabanFriends/TJAPlayer3-Extended>
-    * master (v1.5.7). non-after 2020, March 25 → TJAPlayer3-f: By Mr-Ojii <https://github.com/Mr-Ojii/TJAPlayer3-f>
-    * master (v1.5.7), non-after 2020, August 28 → TJAPlayer3-Develop: By touhou-renren *et al.* <https://github.com/TJAPlayer3-Develop/TJAPlayer3-Develop>
-      * Non-after 2020, Nov 8 → TJAPlayer3-Develop-ReWrite: By touhourenren *et al.* <https://github.com/touhourenren/TJAPlayer3-Develop-ReWrite>
-        * Non-after 2021, Sep 21 → OpenTaiko (aka. TJAPlayer3-Develop-BSQ) (0auBSQ): By 0auBSQ *et al.* <https://github.com/0auBSQ/OpenTaiko>
+    * master (v1.5.7), non-after 2020, March 25 → TJAPlayer3-f: By Mr-Ojii <https://github.com/Mr-Ojii/TJAPlayer3-f>
+    * master (v1.5.7), non-after 2020, August 28 → TJAPlayer3-Develop: By touhou-renren *et al.*, later mainly maintained by brian218 *et al.* <https://github.com/TJAPlayer3-Develop/TJAPlayer3-Develop>
+    * master (v1.5.7), non-after 2020, Nov 8 → TJAPlayer3-Develop-ReWrite: By touhourenren *et al.* <https://github.com/touhourenren/TJAPlayer3-Develop-ReWrite>
+      * Non-after 2021, Sep 21 → OpenTaiko (aka. TJAPlayer3-Develop-BSQ) (0auBSQ): By 0auBSQ *et al.* <https://github.com/0auBSQ/OpenTaiko>
 * taiko-web: By Clemaister, later mainly maintained by bui <https://github.com/bui/taiko-web> (no longer unavailable, see <https://github.com/github/dmca/blob/master/2023/02/2023-02-21-bandai.md>)
 * Project OutFox: Mainly maintained by Team Rizu <https://projectoutfox.com/>
-  * ← Derived from StepMania 5.1: Mainly maintained by The Spinal Shark Collective <https://github.com/stepmania/stepmania>
-    * ← Derived from StepMania 3.95: By Chris Danford *et al.*
+  * ← Derived from StepMania 5.1: Mainly maintained by The Spinal Shark Collective <https://github.com/stepmania/stepmania> \
+    In comparison, Project OutFox introduces the originally lacking TJA format parsing and Taiko gameplay (as "taitai" mode), among with many new game modes, theming and gameplay gimmick support, and other improvements.
+    * ← Derived from StepMania 3.9: By Chris Danford *et al.*
 * TaikoManyGimmicks (aka. taikosimu(NN)): By barrier15300 <https://twitter.com/barrier15300/with_replies>
 
 ## References
