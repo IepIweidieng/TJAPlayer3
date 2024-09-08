@@ -1,14 +1,19 @@
 # TJA Format and on
 
+* First created: 2022-02-01 (UTC+8)
+* Last changed: 2024-09-08 (UTC+8)
+
 This is an unofficial compilation and commentation of the TJA format & its related formats.
 
 This article aims at providing a comprehensive enough overview & possible etymologies and addressing undocumented corner cases.
 
-This article is still *in construction*:
+This article is still *in construction* and will be updated at times. It's recommended to check [its change history](https://github.com/IepIweidieng/TJAPlayer3/commits/gh-pages/tja.md) regularly.
 
 * Information requiring verification is included and is marked with *(?)*.
-* Missing, inaccurate, or even incorrect information is possible, especially about less known software behaviors, due to insufficient or misunderstood references. If it is the case, please do not hesitate to edit this article to fix it.
+* Missing, inaccurate, or even incorrect information is possible, even if such information is not marked with *(?)*, especially about less known software behaviors, due to insufficient or misunderstood references. If it is the case, please do not hesitate to [edit this article](https://github.com/IepIweidieng/TJAPlayer3/edit/gh-pages/tja.md) to fix it.
 * The terminologies introduced in this article are not finalized and might be subject to changes.
+
+Also see [TODO](#TODO) for known issues and planned changes of this article.
 
 This article also contains tentative proposals by the main maintainer ([@IepIweidieng](https://github.com/IepIweidieng)) of this article. These proposals are explicitly expressed to be *Proposal*s and are subject to changes.
 
@@ -47,6 +52,8 @@ Excluding `.bin` & `.osz`, all the formats listed above are text-based and can b
 
 The TJA format (`.tja`, first used in TaikoJiro) was modified and extended from the much simpler TJF format (`.tjf`, first used in Taikosan), both share similarities with the `.bms` (**B**e-**M**usic **S**cript, not **B**eat**M**ania **S**core) format and its derivations, especially the `.dtx` (**DTX**Mania) format.
 
+### Naming of TJA
+
 The etymology of both `.tjf` & `.tja` were unexplained.
 
 * `tj` originally did ***NOT*** refer to *<ruby>**太**<rt>**T**ai</rt> 鼓<rt>ko</rt> さ<rt>sa</rt> ん<rt>n</rt> **次**<rt>**J**i</rt> 郎<rt>rou</rt></ruby>* **T**aiko**J**iro since it has already appeared in `.tjf`, which is already used in *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> さ<rt>sa</rt> ん<rt>n</rt> 太<rt>Ta</rt> 郎<rt>rou</rt></ruby>* Taikosan.
@@ -56,6 +63,16 @@ The etymology of both `.tjf` & `.tja` were unexplained.
 * `a` could just be the alphabet numbering, could instead mean "**a**dvanced" (refers to *<ruby>**次**<rt>**J**i</rt></ruby>* "next"), "**a**dd" (refers to *<ruby>＋<rt>**a**dd</rt></ruby>* "plus"), *etc.*, or could even instead mean *<ruby>譜<rt>fu</rt> 面<rt>men</rt> デー<rt>dee</rt> **タ**<rt>t**a**</rt></ruby>* notechart dat**a** as the `f` in `.tjf`.
 
 Thus, `.tja` possibly means *(<ruby>**太**<rt>**T**ai</rt> 鼓<rt>ko</rt> の<rt>no</rt></ruby>) <ruby>**達**<rt>**T**atsu</rt> **人**<rt>**j**in</rt></ruby> (simulator) <ruby>譜<rt>fu</rt> 面<rt>men</rt> デー<rt>dee</rt> **タ**<rt>t**a**</rt></ruby>* "(Taiko no) **T**atsu**j**in (Simulator) Notechart Format A".
+
+### Standardizations of TJA
+
+The specification and behavior of TJA in TaikoJiro (active in 2008–2013) was often considered the standard for many years.
+
+However, many extensions after are developed and adopted after TaikoJiro, especially since TJAPlayer2 for PC, and there lacks a cross-simulator standard.
+
+Since around 2022, OpenTaiko (0auBSQ) and Project OutFox have started to collaborate on a new cross-simulator standardization, which is referred to as "OpenTaiko-OutFox standard" in this article.
+
+For OpenTaiko (0auBSQ) and Project OutFox, the per-simulator behaviors are documented, but their behaviors will be unified through their development. Any new-found discrepancies of these simulators from the OpenTaiko-OutFox standard will be soon consolidated and reported to the relevant project.
 
 ## TJA File Encoding
 
@@ -2871,8 +2888,10 @@ The honorific title is omitted.
     * master (v1.5.7), non-after 2020, August 28 → TJAPlayer3-Develop: By touhou-renren *et al.*, later mainly maintained by brian218 *et al.* <https://github.com/TJAPlayer3-Develop/TJAPlayer3-Develop>
     * master (v1.5.7), non-after 2020, Nov 8 → TJAPlayer3-Develop-ReWrite: By touhourenren *et al.* <https://github.com/touhourenren/TJAPlayer3-Develop-ReWrite>
       * Non-after 2021, Sep 21 → OpenTaiko (aka. TJAPlayer3-Develop-BSQ) (0auBSQ): By 0auBSQ *et al.* <https://github.com/0auBSQ/OpenTaiko>
+        * Actively developed; last referenced version for behavior verification: v0.6.0 b3+, at commit [e6aa17cdc6](https://github.com/0auBSQ/OpenTaiko/commit/e6aa17cdc677c0c6ec1c13ff431c7a96a533e074)
 * taiko-web: By Clemaister, later mainly maintained by bui <https://github.com/bui/taiko-web> (no longer unavailable, see <https://github.com/github/dmca/blob/master/2023/02/2023-02-21-bandai.md>)
 * Project OutFox: Mainly maintained by Team Rizu <https://projectoutfox.com/>
+  * Actively developed; last referenced version for behavior verification: v0.5.0 pre043 a17c
   * ← Derived from StepMania 5.1: Mainly maintained by The Spinal Shark Collective <https://github.com/stepmania/stepmania> \
     In comparison, Project OutFox introduces the originally lacking TJA format parsing and Taiko gameplay (as "taitai" mode), among with many new game modes, theming and gameplay gimmick support, and other improvements.
     * ← Derived from StepMania 3.9: By Chris Danford *et al.*
@@ -2918,3 +2937,7 @@ The honorific title is omitted.
     * Utilizing the constant speed past judgment in TaikoJiro?
   * Bar lines that disappears.
     * Unknown threshold to hide bar lines past judgment in TaikoJiro.
+* Add (unimplemented) *proposal*s from simulator develops.
+* Add separated recommendation for respectively simulator behavior and chart creators and editors. Currently, the relevant paragraphs have ambiguous phrasing.
+* Add standardization information, especially the OpenTaiko-OutFox standardization and the direction toward behavior unification. Currently, the relevant paragraphs lack clarifications and are misleading.
+* Fix missing and/or unverified information about Project OutFox.
