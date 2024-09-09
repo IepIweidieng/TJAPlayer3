@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2024-09-08 (UTC+8)
+* Last changed: 2024-09-10 (UTC+8)
 
 This is an unofficial compilation and commentation of the TJA format & its related formats.
 
@@ -1159,7 +1159,7 @@ No known per-file commands exist, which would be effectively [headers](#tja-head
 Except for one-shot commands, the effect of each command continues until the next occurrence of any command from the same command group or [`#END`](#start--end).
 
 * For per&ndash;player-side commands, the behavior is *unspecified* when (the same or different) commands in the same command group occur together within its scope.
-* For measure-based&ndash;scoped commands, the behavior is *unspecified* when any notechart symbols occur between such a command and the first symbol of the measure in the notechart definition.
+* For measure-based&ndash;scoped commands, the behavior is *unspecified* when any [notechart symbols](#notechart-symbol) occur after the last [notechart symbol](#notechart-symbol) (always `,` in TJA) and before such a command in the notechart definition.
 
 Some branch-scoped commands are non-sequential, *i.e.*, they can be arranged freely within the same beat position without causing any behavior changes, as long as both their relative order to the sequential commands and the relative order among commands which override each other are not changed. All commands with other type of scope are implicitly sequential.
 
@@ -1335,7 +1335,7 @@ Change the time signature / meter signature / **measure** signature.
   * The `<enum-str-delay-type>` part of the [`beats`](#value-type) value ***MUST*** be `d` or (empty) and specifies whether the specified measure duration includes the time duration of the `#DELAY` commands.
 * Initial value: `#MEASURE 4/4`
 
-Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby>小<rt>shou</rt> 節<rt>setsu</rt></ruby>*** "measure" to fit all note symbols on the following line if placed after the previous measure (if any) and before the first symbol of this measure in the notechart definition).
+Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby>小<rt>shou</rt> 節<rt>setsu</rt></ruby>*** "measure" to fit all note symbols on the following line if placed after the previous measure (if any) and before the first [notechart symbol](#notechart-symbol) of this measure in the notechart definition).
 
 ***First seen in***: TaikoJiro \
 ***Supported by***: (Universally supported)
@@ -2023,7 +2023,7 @@ They are conventionally used as follow:
 // ...
 ```
 
-An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--end) commands. If no commands & notechart symbols occur after the explicit defined `#BRANCHEND` and before such commands, the `#BRANCHEND` can be omitted.
+An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--end) commands. If no commands & [notechart symbols](#notechart-symbol) occur after the explicit defined `#BRANCHEND` and before such commands, the `#BRANCHEND` can be omitted.
 
 *Unspecified*: The behavior when any of the followings are violated:
 
@@ -2084,7 +2084,7 @@ They can be used as follow:
 #LAYEREND // Sometimes optional, see below
 ```
 
-An implicit `#LAYEREND` is placed before `#LAYERSTART` & [`#END`](#start--end) commands. If no commands & notechart symbols occur after the explicit defined `#LAYEREND` and before such commands, the `#LAYEREND` can be omitted.
+An implicit `#LAYEREND` is placed before `#LAYERSTART` & [`#END`](#start--end) commands. If no commands & [notechart symbols](#notechart-symbol) occur after the explicit defined `#LAYEREND` and before such commands, the `#LAYEREND` can be omitted.
 
 *Unspecified*: The behavior when [the `#BRANCHSTART` commands, `#BRANCHEND`](#branchstart--branchend), [`#N`, `#E`, `#M`](#n--e--m) are placed within the layer section definition.
 
@@ -2615,7 +2615,7 @@ Compatibility issues:
 * In TaikoJiro, the time precision is 1 millisecond, and the time duration of a note symbol is **floor**(**floor**(4 × 60 × 1000 / `defined_bpm_at_beat_duration`) × `beat_duration_of_symbol` / 4) / 1000 (unit: seconds)
   * Reference: <https://twitter.com/barrier15300/status/1619399304250290180> by @barrier15300
 
-Non&ndash;measure-based&ndash;scoped, non-sequential, non&ndash;one-shot commands have their effects fired when the beat duration interval of the nearest preceding note symbol ends. If such commands are placed after the last note symbol of a measure and before the first symbol of the next measure, whether they are placed before or after the `,` symbol has the same effects.
+Non&ndash;measure-based&ndash;scoped, non-sequential, non&ndash;one-shot commands have their effects fired when the beat duration interval of the nearest preceding note symbol ends. If such commands are placed after the last note symbol of a measure and before the first notechart symbol of the next measure, whether they are placed before or after the `,` symbol has the same effects.
 
 The time duration intervals of different note symbols are possible to overlap by using [`#BPMCHANGE`](#bpmchange) / [`#MEASURE`](#measure) / [`#DELAY`](#delay) commands with non-positive value.
 
