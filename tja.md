@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2024-09-10 (UTC+8)
+* Last changed: 2024-09-11 (UTC+8)
 
 This is an unofficial compilation and commentation of the TJA format & its related formats.
 
@@ -1185,14 +1185,10 @@ Commands only affect their targeting game objects. The target of each command ca
 
 ***Scope*** (placed before [the `#START` command](#start--end)): per&ndash;player-side, gimmicky \
 ***Scope*** (placed after [the `#START` command](#start--end)): branch, non-before, gimmicky &mdash; OpenTaiko (0auBSQ) v0.6.0 \
-***Late effect scope***: all (?) \
+***Late effect scope***: (none) \
 ***Effect target***: notes, bar lines
 
-Use a **scroll**ing mode similar to the scrolling method used in either **B**E**M**ANI-series or the official Taiko ("**n**or**m**al") game series, unless overridden by user settings.
-
-*Unspecified*: Whether the final per-note velocity is kept as the base velocity when switching the scrolling mode.
-
-*Unspecified*: Whether the switching of scrolling mode is taken into account for preventing the note position from being suddenly changed when switching the scrolling mode.
+Use a **scroll**ing mode similar to the scrolling method used in either **B**E**M**ANI-series or the official Taiko ("**n**or**m**al") game series for the non-before notes and bar lines, unless overridden by user settings.
 
 * `#BMSCROLL` &mdash; TaikoJiro v1.91
   * The [`#SCROLL`](#scroll) command is ignored.
@@ -1202,7 +1198,7 @@ Use a **scroll**ing mode similar to the scrolling method used in either **B**E**
 * `#NMSCROLL` &mdash; OpenTaiko (0auBSQ) v0.6.0 / initial value
   * Use the default ("**n**or**m**al") Taiko-like scrolling behavior
 
-Scrolling mode comparison: Consider BPM changes occur during notes traveling through the whole note field (including the part past the judgment mark).
+Scrolling mode comparison: Consider BPM changes occur during notes and bar lines traveling through the whole note field (including the part past the judgment mark).
 
 * `scroll` is the scrolling rate multiplier specified by [the `#SCROLL` command](#scroll) and by [the `HEADSCROLL:` header](#headscroll).
   * Fixed to `1` when either `#BMSCROLL` or REGUL-SPEED (TaikoJiro) is used.
@@ -1214,15 +1210,16 @@ Scrolling mode | Taiko-like | BEMANI-like <br> XMod | CMod
 --- | --- | --- | ---
 Command or TaikoJiro setting | (Default) <br /> `#NMSCROLL` | `#BMSCROLL` <br> `#HBSCROLL` <br> User option | User option: REGUL-SPEED
 Varing factor | Relative scrolling speed vector among notes | Scrolling speed vector during travel | Beats taken during traveling
-Scrolling velocity <br> Note traveling takes 4 beats in what BPM | **abs**(BPM at the defined position of the note × `scroll` × `modifier`) | **abs**(Current effective BPM (0 during a positive [`#DELAY`](#delay)) × `scroll` × `modifier`) | The apparent BPM specified by REGUL-SPEED settings ("BPM HiSpeed") <br> `modifier`
-Default scrolling changes of [`#BPMCHANGE`](#bpmchange) command | Set the per-note base BPM of non-preceding notes and bar lines | Suddenly change the apparent base BPM of all notes & all bar lines | (No changes)
+Position factor <br> Note or bar line position is in linear relation to what factor | Current time | Current visual beat (actual beat offset toward negative by past negative `#DELAY`s) | Current time
+Scrolling velocity <br> Note or bar line traveling takes 4 beats in what BPM | **abs**(BPM at the defined position of the note or bar line × `scroll` × `modifier`) | **abs**(Current effective BPM (0 during a positive [`#DELAY`](#delay)) × `scroll` × `modifier`) | The apparent BPM specified by REGUL-SPEED settings ("BPM HiSpeed") <br> `modifier`
+Default scrolling changes of [`#BPMCHANGE`](#bpmchange) command | Set the per-note or per–bar-line base BPM of non-preceding notes and bar lines | Suddenly change the apparent base BPM of all notes & all bar lines | (No changes)
 Default scrolling changes of [`#DELAY`](#delay) command | (No changes) | Pause the scrolling if positive; <br> (no changes) if negative | (No changes)
-Default scrolling changes of [`#SCROLL`](#scroll) command | Set the per-note `scroll` | (Ignored) (`#BMSCROLL`) <br> Set the per-note `scroll` (`#HBSCROLL`) | (Ignored)
+Default scrolling changes of [`#SCROLL`](#scroll) command | Set the per-note or per–bar-line  `scroll` | (Ignored) (`#BMSCROLL`) <br> Set the per-note or per–bar-line `scroll` (`#HBSCROLL`) | (Ignored)
 *Proposal*: Mode-invariant `#BPMCHANGE` command | `#BPMCHANGE <value>; :` | `#BPMCHANGE <value>; *:*` | `#BPMCHANGE <value>; :` + `#SCROLL <non-zero-float-bpm>bpm; :*`
 *Proposal*: Mode-invariant `#DELAY` command | `#DELAY <value>; :` | `#DELAY <value>; *:*` | `#DELAY <value>; :`
 *Proposal*: Mode-invariant velocity-changing command | `#SCROLL <value>; :` (default) | [`#HISPEED(<value>)`](#hispeed) (TMG format) <br> `#SCROLL <value>; *:*` | `#SPEED <value>bpm; *:*; <changing-duration>`
 
-In OutFox, the Taiko-like scrolling mode can be achieved by using CAMod (AMod/"Average BPM Scroll Mode" with constant per-note scrolling speed) with the BPM parameter set to the average BPM of the notechart.
+In OutFox, the Taiko-like scrolling mode can be achieved by using CAMod (AMod/"Average BPM Scroll Mode" with constant per-note or per–bar-line scrolling speed) with the BPM parameter set to 4 × the average BPM of the notechart.
 
 See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-and-timing) for the behavior of timing commands.
 
@@ -1233,7 +1230,7 @@ See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-
 
 #### Compatibility Issues
 
-* In TaikoJiro, all notechart objects past the judgment timing keep a constant velocity even when `#BPMCHANGE` commands are used in BMS scrolling modes. This behavior can be utilized for creating bar drumroll notes which stretch when reaching the judgment timing.
+* In TaikoJiro, all notechart objects past the judgment timing and all earlier defined notechart objects (?) become in the normal scrolling mode (with `#SCROLL 1` applied if `#BMSCROLL` is used). Such objects keep a constant velocity even when `#BPMCHANGE` commands are used in BMS scrolling modes. This behavior can be utilized for creating bar drumroll notes which stretch when reaching the judgment timing.
 
 ### `#PAPAMAMA`
 
