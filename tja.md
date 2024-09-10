@@ -29,7 +29,7 @@ Extension | Full Name | Content | Supported by | Specification
 --- | --- | --- | --- | ---
 `.bin` | **Bin**ary (*<ruby>譜<rt>Fu</rt> 面<rt>men</rt></ruby>* Notechart File Format) | Notechart metadata + definition (binary file) | Official games, taiko-web (plugin "Fumen File Format") | Proprietary format, not explained in this article.
 `.tjf` | **T**atsu**j**in *<ruby>**譜**<rt>**F**u</rt> 面<rt>men</rt></ruby>* Notechart Data (?) | Notechart metadata + definition | Taikosan, TaikoJiro 1 |
-`.tja` | **T**atsu**j**in Notechart Format **A**(?) (?) | Notechart metadata + definition | TaikoJiro, TJAPlayer2 for PC, taiko-web ver.18.10.11, OutFox v0.4.9.9, TaikoManyGimmicks |
+`.tja` | **T**atsu**j**in Notechart Format **A**(?) (?) | Notechart metadata + definition | TaikoJiro, TJAPlayer2 for.PC, taiko-web ver.18.10.11, OutFox v0.4.9.9, TaikoManyGimmicks |
 `.tjc` | **T**atsu**j**in **C**ourse (?) | Notechart set metadata | TaikoJiro v2.34, TaikoJiro 2 v0.98 |
 `.osu` | **osu**! Beatmap | Notechart metadata + definition | osu!, taiko-web | See <https://osu.ppy.sh/wiki/en/Client/File_formats>
 `.osz` | **os**u! Beatmap Archive ("**Z**ipped") | Notechart metadata + definition + resources (compressed binary file) | osu! | See <https://osu.ppy.sh/wiki/en/Client/File_formats>
@@ -68,7 +68,7 @@ Thus, `.tja` possibly means *(<ruby>**太**<rt>**T**ai</rt> 鼓<rt>ko</rt> の<r
 
 The specification and behavior of TJA in TaikoJiro (active in 2008–2013) was often considered the standard for many years.
 
-However, many extensions after are developed and adopted after TaikoJiro, especially since TJAPlayer2 for PC, and there lacks a cross-simulator standard.
+However, many extensions after are developed and adopted after TaikoJiro, especially since TJAPlayer2 for.PC, and there lacks a cross-simulator standard.
 
 Since around 2022, OpenTaiko (0auBSQ) and Project OutFox have started to collaborate on a new cross-simulator standardization, which is referred to as "OpenTaiko-OutFox standard" in this article.
 
@@ -89,7 +89,7 @@ However, the actual encoding depended on the system setting and can potentially 
 
 #### Compatibility Issues
 
-* Native encoding: TaikoJiro, TJAPlayer2 for PC, TJAPlayer3 before v1.5.2
+* Native encoding: TaikoJiro, TJAPlayer2 for.PC, TJAPlayer3 before v1.5.2
 * Shift-JIS: TJAPlayer3 v1.5.2+, taiko-web
 * UTF-8 with BOM: TJAPlayer3, taiko-web
 * Plain UTF-8: taiko-web
@@ -242,7 +242,7 @@ The display details are *unspecified*.
     * `--<str-displayed-subtitle>`
       * Only show the subtitle in the song selection screen. Usually used for artist name.
       * The `--` prefix needs to be prepended to the displayed subtitle when the subtitle already begins with `--`.
-    * `++<str-displayed-subtitle>` &mdash; TaikoJiro, TJAPlayer2 for PC, taiko-web ver.19.03.10 / `<str-displayed-subtitle>` &mdash; TaikoJiro, TJAPlayer2 for PC ver.2021xxxxxx, TJAPlayer3-f v1.7.2.0, OpenTaiko (0auBSQ) v0.6.0, taiko-web
+    * `++<str-displayed-subtitle>` &mdash; TaikoJiro, TJAPlayer2 for.PC, taiko-web ver.19.03.10 / `<str-displayed-subtitle>` &mdash; TaikoJiro, TJAPlayer2 for.PC ver.2021xxxxxx, TJAPlayer3-f v1.7.2.0, OpenTaiko (0auBSQ) v0.6.0, taiko-web
       * Also show the subtitle during the gameplay screen & the result screen.
       * The `++` prefix needs to be prepended to the displayed subtitle when the subtitle begins with either `++` or `--`.
 * `SUBTITLE<enum-str-lang>:<str-displayed-subtitle-localized>` &mdash; taiko-web ver.19.03.10, OpenTaiko (0auBSQ) v0.5.1
@@ -303,7 +303,7 @@ The display details are *unspecified*.
     * *`ゲームミュージック` (Geemu Myuujikku)* "Game Music"
     * *`ナムコオリジナル` (Namuko Orijinaru)* "Namco Original"
 
-***First seen in***: TJAPlayer2 for PC \
+***First seen in***: TJAPlayer2 for.PC \
 ***Supported by***: taiko-web ver.19.01.06
 
 ### SIDE:
@@ -360,7 +360,7 @@ Specify the audio file ("**wave**form audio file") of the song.
 * `WAVE:<string-filepath-song-audio-file>`
   * `<string-filepath-song-audio-file>` has a file extension of one of, *e.g.*:
     * `.wav` &mdash; TaikoJiro
-    * `.ogg` &mdash; TaikoJiro, TJAPlayer2 for PC
+    * `.ogg` &mdash; TaikoJiro, TJAPlayer2 for.PC
     * `.mp3` &mdash; TaikoJiro 1 with `lame.exe`
 * `WAVE:`
   * No audio will be played.
@@ -411,7 +411,7 @@ Specify the relative amplitude percentage (%) of the desired **vol**ume gain of 
 
 #### Compatibility Issues
 
-* Handled but ignored by TJAPlayer2 for PC & TJAPlayer3 before v1.5.2
+* Handled but ignored by TJAPlayer2 for.PC & TJAPlayer3 before v1.5.2
 
 ### SEVOL:
 
@@ -430,7 +430,7 @@ Specify the relative amplitude percentage (%) of the desired **vol**ume gain of 
 
 #### Compatibility Issues
 
-* Handled but ignored by TJAPlayer2 for PC
+* Handled but ignored by TJAPlayer2 for.PC
 
 ### BPM:
 
@@ -458,7 +458,7 @@ Specify the normal **scroll**ing velocity (before and non-after the beginning ("
 * `HEADSCROLL:0`
   * The behavior is *unspecified*.
 
-***First seen in***: TJAPlayer2 for PC
+***First seen in***: TJAPlayer2 for.PC
 
 ### PREIMAGE:
 
@@ -595,7 +595,7 @@ Specify the **b**ack**g**round **image** of the gameplay screen. Override the sk
 * `BGIMAGE:`
   * No background images will be displayed.
 
-***First seen in***: TJAPlayer2 for PC ver.2016021300
+***First seen in***: TJAPlayer2 for.PC ver.2016021300
 
 ### BGOFFSET:
 
@@ -623,7 +623,7 @@ Specify the **b**ack**g**round video ("**movie**") of the gameplay screen. Overr
 * `BGMOVIE:`
   * No background videos will be displayed.
 
-***First seen in***: TJAPlayer2 for PC ver.2016021300
+***First seen in***: TJAPlayer2 for.PC ver.2016021300
 
 ### MOVIEOFFSET:
 
@@ -636,7 +636,7 @@ Equation: `movieoffset` = `time-point-of-video-beginning` − `time-point-of-aud
 * `MOVIEOFFSET:<positive-float-seconds-offset>`
 * `MOVIEOFFSET:0` / `MOVIEOFFSET:`
 
-***First seen in***: TJAPlayer2 for PC ver.2015081100
+***First seen in***: TJAPlayer2 for.PC ver.2015081100
 
 #### Compatibility Issues
 
@@ -770,7 +770,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
     * Exemplar Gameplay: <https://www.youtube.com/watch?v=8xU8uh5FSEw> <br />
       <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8xU8uh5FSEw" title="YouTube video player, playing &quot;【太鼓の達人 CS7】太鼓タワー その6&quot;, uploaded by Lunar. lu" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     * However, near to the end of this notechart, the big bar drumroll notes are drawn beneath the preceding big <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> note with the same scrolling velocity. The draw order is probably determined by the scrolling velocity rather than the note type in this case.
-    * In TJAPlayer2 for PC, the draw order of bar drumroll notes is determined by the relative scrolling velocity regardless of the value of the `COURSE:` header.
+    * In TJAPlayer2 for.PC, the draw order of bar drumroll notes is determined by the relative scrolling velocity regardless of the value of the `COURSE:` header.
 * **`COURSE:6`** / **`COURSE:Dan`** / `COURSE:dan` &mdash; TJAPlayer3 v1.5.0
   * The special difficulty used for *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 道<rt>Dou</rt> 場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games.
 * `COURSE:`
@@ -782,7 +782,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
 
 #### Compatibility Issues
 
-* In TJAPlayer2 for PC but not TJAPlayer3, `COURSE:Tower` and its equivalent commands cause unintended behaviors. (?; deduced from source code)
+* In TJAPlayer2 for.PC but not TJAPlayer3, `COURSE:Tower` and its equivalent commands cause unintended behaviors. (?; deduced from source code)
   * <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/スコア、曲/CDTX.cs#L4892>
   * <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/スコア、曲/CDTX.cs#L2991>
 
@@ -816,11 +816,11 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
 
 #### Compatibility Issues
 
-* In TaikoJiro and TJAPlayer2 for PC, the difficulty star displayed in the song selection screen for each difficulty is determined differently from the actual difficulty star in the gameplay screen. For the difficulty star displayed in the song selection screen:
+* In TaikoJiro and TJAPlayer2 for.PC, the difficulty star displayed in the song selection screen for each difficulty is determined differently from the actual difficulty star in the gameplay screen. For the difficulty star displayed in the song selection screen:
   * The scope of the `LEVEL:` header is per-difficulty instead of per&ndash;player-side. Each per-difficulty scope starts or resumes at `COURSE:` headers specifying the target difficulty and ends at another `COURSE:` header specifying a different difficulty.
     * A "deceptive difficulty star" (a displayed difficulty star in the song selection screen which is different from the actual difficulty star in the gameplay screen) can be defined by placing the `LEVEL:` for the deceptive difficulty star after all notechart definitions in the per-difficulty scope.
   * In TaikoJiro, if a `LEVEL:` header is defined before any `COURSE:` headers with difficulty specified, the specified difficulty star instead of 0 stars will be used as the default difficulty star.
-  * In TJAPlayer2 for PC, if a `LEVEL:` header is defined before any `COURSE:` headers with value, the specified difficulty star become the difficulty star for the *<ruby>お<rt>O</rt> に<rt>ni</rt></ruby>* Oni/Extreme difficulty, even if no notecharts are defined for the Oni/Extreme difficulty.
+  * In TJAPlayer2 for.PC, if a `LEVEL:` header is defined before any `COURSE:` headers with value, the specified difficulty star become the difficulty star for the *<ruby>お<rt>O</rt> に<rt>ni</rt></ruby>* Oni/Extreme difficulty, even if no notecharts are defined for the Oni/Extreme difficulty.
 
 ### STYLE:
 
@@ -845,7 +845,7 @@ If the specified amount of player-sides is not 1, [`#START <enum-str-player-side
 Reference: *ダブルプレイ* ("Double Play"; "Two-player Charts"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/ダブルプレイ>
 
 ***First seen in***: TaikoJiro v1.99 \
-***Supported by***: TJAPlayer2 for PC
+***Supported by***: TJAPlayer2 for.PC
 
 #### Compatibility Issues
 
@@ -859,17 +859,17 @@ Specify the required amount of hits of *<ruby>激<rt>geki</rt> 連<rt>ren</rt> �
 
 Each balloon-type note with unassigned hit amount requires an *unspecified* default amount of hits.
 
-* In TaikoJiro & TJAPlayer2 for PC, the default amount of hits is `5`.
+* In TaikoJiro & TJAPlayer2 for.PC, the default amount of hits is `5`.
 
 *Proposal*: The [`#BALLOON`](#proposal-balloon-command) command can be used in the notechart definition for the same purpose instead.
 
 * `BALLOON:<comma-separated-list-non-negative-int-amount-of-hits>`
   * The list of amount is iterated over all sections of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart branches"/forked paths.
-* `BALLOONNOR:<comma-separated-list-non-negative-int-amount-of-hits>` &mdash; TJAPlayer2 for PC
+* `BALLOONNOR:<comma-separated-list-non-negative-int-amount-of-hits>` &mdash; TJAPlayer2 for.PC
   * The list of amount is iterated over only sections of common & ***<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>*** **Nor**mal "branches"/paths.
-* `BALLOONEXP:<comma-separated-list-non-negative-int-amount-of-hits>` &mdash; TJAPlayer2 for PC
+* `BALLOONEXP:<comma-separated-list-non-negative-int-amount-of-hits>` &mdash; TJAPlayer2 for.PC
   * The list of amount is iterated over only sections of ***<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**Exp**ert") "branches"/paths.
-* `BALLOONMAS:<comma-separated-list-non-negative-int-amount-of-hits>` &mdash; TJAPlayer2 for PC
+* `BALLOONMAS:<comma-separated-list-non-negative-int-amount-of-hits>` &mdash; TJAPlayer2 for.PC
   * The list of amount is iterated over only sections of ***<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>*** **Mas**ter "branches"/paths.
 
 For each element of `<comma-separated-list-non-negative-int-amount-of-hits>`, if the amount of hits is `0`, the per-note behavior is *unspecified*.
@@ -879,7 +879,7 @@ For each element of `<comma-separated-list-non-negative-int-amount-of-hits>`, if
 
 #### Compatibility Issues
 
-* TJAPlayer2 for PC & TJAPlayer3: The `BALLOON:` header is *erroneously* treated as the `BALLOONNOR:` header.
+* TJAPlayer2 for.PC & TJAPlayer3: The `BALLOON:` header is *erroneously* treated as the `BALLOONNOR:` header.
 * TJAPlayer3 but not TJAPlayer3-Develop: If a balloon-type note is defined in sections after [`#BRANCHEND`](#branchstart--branchend) and before another [`#BRANCHSTART`](#branchstart--branchend), it *erroneously* uses 3 values from the iteration of the `BALLOONNOR:` / `BALLOONEXP:` / `BALLOONMAS:` list according to the last defined "branch"/path before the `#BRANCHEND`. (?; deduced from source code)
   * <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Songs/CDTX.cs#L3719>, <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Songs/CDTX.cs#L4020-L4055>
   * *C.f.*, <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/スコア、曲/CDTX.cs#L3872-L3877>, <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/スコア、曲/CDTX.cs#L4118-L4149>
@@ -1029,7 +1029,7 @@ When either the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true percussi
     --- | --- | --- | --- | --- | ---
     *n* | 0 | 1 | 2 | 3 | 4
   * The basic score is `init` + *n* × `diff` points.
-* `SCOREMODE:3` &mdash; TJAPlayer2 for PC but not TJAPlayer3 v1.4.0+, TJAPlayer3-f
+* `SCOREMODE:3` &mdash; TJAPlayer2 for.PC but not TJAPlayer3 v1.4.0+, TJAPlayer3-f
   * Follow the scoring rule of the official PC-generation games (<ruby>虹<rt>Niji</rt> 色<rt>iro</rt></ruby>/<ruby>ニ<rt>Ni</rt> ジ<rt>ji</rt> イ<rt>i</rt> ロ<rt>ro</rt></ruby> version(s); AC16)
   * All types of score bonus are cancelled.
   * Combo | 1&ndash;
@@ -1044,7 +1044,7 @@ When either the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true percussi
 Reference: *配点* ("Scoring"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/システム/配点>
 
 ***First seen in***: TaikoJiro v2.85 \
-***Supported by***: TaikoJiro 2 v0.72, TJAPlayer2 for PC
+***Supported by***: TaikoJiro 2 v0.72, TJAPlayer2 for.PC
 
 #### Compatibility Issues
 
@@ -1097,11 +1097,11 @@ If enabled, make the *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<r
   * Hiding the "branch"/path indicator and note field mark.
 * `HIDDENBRANCH:0`
   * The behavior is *unspecified*.
-  * In TJAPlayer2 for PC: Equivalent to `HIDDENBRANCH:1`
+  * In TJAPlayer2 for.PC: Equivalent to `HIDDENBRANCH:1`
 * `HIDDENBRANCH:`
   * Disable such effects.
 
-***First seen in***: TJAPlayer2 for PC
+***First seen in***: TJAPlayer2 for.PC
 
 ## TJC Header
 
@@ -1148,7 +1148,7 @@ Commands with an unrecognized `#COMMAND` name are ignored.
 
 * In TaikoJiro, such a case is parsed as if there were whitespaces before the `values` part.
 
-The arguments for commands introduced in TaikoJiro are comma-separated. However, the arguments for commands introduced in TJAPlayer2 for PC are instead whitespace-separated as in the `.bms` format (which is modified and extended into the `.dtx` format for DTXMania).
+The arguments for commands introduced in TaikoJiro are comma-separated. However, the arguments for commands introduced in TJAPlayer2 for.PC are instead whitespace-separated as in the `.bms` format (which is modified and extended into the `.dtx` format for DTXMania).
 
 *Unspecified*: The behavior when a comma (`,`) is used as the decimal point (normally a full-stop (`.`)).
 
@@ -1226,7 +1226,7 @@ See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-
 *Proposal*: See [*Proposal*: Command Modifier](#proposal-command-modifier) for the syntax for mode-invariant commands.
 
 ***First seen in***: TaikoJiro v1.91 \
-***Supported by***: TaikoJiro 2, TJAPlayer2 for PC
+***Supported by***: TaikoJiro 2, TJAPlayer2 for.PC
 
 #### Compatibility Issues
 
@@ -1372,7 +1372,7 @@ For the timing of notechart object, multiple `#DELAY` commands placed at the sam
 
 * In TaikoJiro, delays with the absolute value of duration < 0.001 are treated as 0 due to limited timing precision.
 * In TaikoJiro, when either `#BMSCROLL` or `#HBSCROLL` is used, delays with positive duration cause the notechart to stop scrolling for the specified duration even when notechart objects are placed into the stop duration by using negative delays.
-* In TJAPlayer2 for PC, a negative delay value causes unintended behaviors. (?)
+* In TJAPlayer2 for.PC, a negative delay value causes unintended behaviors. (?)
 
 ### `#GOGOSTART` / `#GOGOEND`
 
@@ -1412,7 +1412,7 @@ Change the **scroll**ing speed of notes & bar lines, relative to the normal scro
 Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 * `#SCROLL <float-scroll-speed-x>`
-* `#SCROLL <complex-ri-float-scroll-speed-xy>` &mdash; TaikoJiro 2 v0.97, TJAPlayer2 for PC, TaikoManyGimmicks (TJA)
+* `#SCROLL <complex-ri-float-scroll-speed-xy>` &mdash; TaikoJiro 2 v0.97, TJAPlayer2 for.PC, TaikoManyGimmicks (TJA)
   * Complex-number&ndash;valued, modeled after the rectangular form of complex number: *x* ± *yi*
   * Notecharts with this type of command are usually referred as *<ruby>複<rt>Fuku</rt> 素<rt>so</rt> 数<rt>suu</rt> 譜<rt>fu</rt> 面<rt>men</rt></ruby>* "Complex number notechart".
   * The imaginary component of `<complex-ri-float-scroll-speed-xy>` specifies the vertical scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-scroll-speed-x>`.
@@ -1441,8 +1441,8 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 #### Compatibility Issues
 
 * In TaikoJiro 1 but not TaikoJiro 2, `#SCROLL` has measure-based&ndash;scope (specifically, `#SCROLL`s defined in the middle of a measure apply instead non-before the next measure) unlike [the `#BPMCHANGE` command](#bpmchange), so splitting the measures using [`#MEASURE`](#measure) & [`#BARLINEOFF`](#barlineoff--barlineon) is needed to make `#SCROLL` visually work in the middle of a measure.
-* In TJAPlayer2 for PC and TJAPlayer3, the imaginary component of `<complex-ri-float-scroll-speed-xy>` specifies the vertical scrolling speed from the bottom to the top of the screen (↑) instead.
-* In TJAPlayer2 for PC and TJAPlayer3, the imaginary component of `<complex-ri-float-scroll-speed-xy>` makes bar lines rotate around their center. However, it is misinterpreted as the amount of rotation and the unit is 90 degrees (°) clockwise (↻), see:
+* In TJAPlayer2 for.PC and TJAPlayer3, the imaginary component of `<complex-ri-float-scroll-speed-xy>` specifies the vertical scrolling speed from the bottom to the top of the screen (↑) instead.
+* In TJAPlayer2 for.PC and TJAPlayer3, the imaginary component of `<complex-ri-float-scroll-speed-xy>` makes bar lines rotate around their center. However, it is misinterpreted as the amount of rotation and the unit is 90 degrees (°) clockwise (↻), see:
   * <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/ステージ/07.演奏/ドラム画面/CStage演奏ドラム画面.cs#L2026>
   * <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Stages/07.Game/Taiko/CStage演奏ドラム画面.cs#L2034>
   * This behavior is utilized in some existing notecharts to achieve bar line rotation. Exemplar notechart: <https://www.youtube.com/watch?v=SR94XPuGoyQ> <br />
@@ -1529,11 +1529,11 @@ Change the scrolling **direction** of notes & bar lines.
 * *Proposal*: `#DIRECTION <number-degrees>deg`
   * `<number-degrees-rotation>` specifies the degrees (°) of the counterclockwise (↺) rotation.
 
-***First seen in***: TJAPlayer2 for PC
+***First seen in***: TJAPlayer2 for.PC
 
 #### Compatibility Issues
 
-* In TJAPlayer2 for PC and TJAPlayer3, `<enum-int-direction>` specifies the degrees (°) of the clockwise (↻) rotation instead due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑).
+* In TJAPlayer2 for.PC and TJAPlayer3, `<enum-int-direction>` specifies the degrees (°) of the clockwise (↻) rotation instead due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑).
 
 ### `#BARLINEOFF` / `#BARLINEON`
 
@@ -1591,12 +1591,12 @@ The arguments are whitespace-separated.
     * `1`
       * The moving direction is reversed (rotated 180 degrees (°) (counter)clockwise (↺/↻)) compared to when `<direction-specifier>` is `0`.
 
-***First seen in***: TJAPlayer2 for PC \
+***First seen in***: TJAPlayer2 for.PC \
 ***Supported by***: TaikoManyGimmicks v0.6α
 
 #### Compatibility Issues
 
-* In TJAPlayer2 for PC and TJAPlayer3, the imaginary component of `<complex-ri-number-pixel-distance-xy>` specifies the vertical movement toward the bottom of the screen (↓) instead.
+* In TJAPlayer2 for.PC and TJAPlayer3, the imaginary component of `<complex-ri-number-pixel-distance-xy>` specifies the vertical movement toward the bottom of the screen (↓) instead.
 
 ### #JUDGEDELAY
 
@@ -1658,12 +1658,12 @@ The arguments are whitespace-separated.
 * `nb` &mdash; Affect both the **n**ote & the **b**ar lines.
 * `ntb` / `All` &mdash; Affect all notechart objects.
 
-***First seen in***: TJAPlayer2 for PC \
+***First seen in***: TJAPlayer2 for.PC \
 ***Supported by***: TaikoManyGimmicks v0.6α
 
 #### Compatibility Issues
 
-* In TJAPlayer2 for PC, the per-note effect is only applied non-before the time position of [the `#START` command](#start--end). (?)
+* In TJAPlayer2 for.PC, the per-note effect is only applied non-before the time position of [the `#START` command](#start--end). (?)
 
 ### #NOTESPAWN
 
@@ -1712,12 +1712,12 @@ Display the specified **lyric**.
 * `#LYRIC <str-lyric>`
   * In taiko-web, a `\n` in `<str-lyric>` is displayed as a newline.
 
-***First seen in***: TJAPlayer2 for PC \
+***First seen in***: TJAPlayer2 for.PC \
 ***Supported by***: taiko-web ver.20.03.31, TaikoManyGimmicks v0.6α
 
 #### Compatibility Issues
 
-* In TJAPlayer2 for PC but not TJAPlayer3, the first whitespace in the middle of `<str-lyric>` terminators the loaded lyric.
+* In TJAPlayer2 for.PC but not TJAPlayer3, the first whitespace in the middle of `<str-lyric>` terminators the loaded lyric.
 
 ### #SENOTECHANGE
 
@@ -1869,7 +1869,7 @@ Override the result of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt>
   * *Proposal*: Equivalent to `#LEVELREDIR <enum-str-branch-current>, <enum-str-branch-current>, <enum-str-branch-current>`, where `<enum-str-branch-current>` represents the current "branch"/path.
 
 ***First seen in***: TaikoJiro v1.63 \
-***Supported by***: TaikoJiro 2, TJAPlayer2 for PC
+***Supported by***: TaikoJiro 2, TJAPlayer2 for.PC
 
 ### *Proposal*: #LEVELREDIR
 
@@ -1951,7 +1951,7 @@ The "branch"/path is determined by a condition value when `<enum-str-condition>`
 * `r`, accumulated amount of hits on bar drum**r**oll notes during the determining section.
   * If a bar drumroll note is defined as beginning non-after but ending after the default beat position of the determining point, the actual determining point is postponed until the earlier of the definition positions of the ending of that note and an *unspecified* duration before the `#BRANCHSTART` command.
     * TaikoJiro: zero-duration.
-    * TJAPlayer2 for PC and TJAPlayer3: 1 measure (i.e., not postponed).
+    * TJAPlayer2 for.PC and TJAPlayer3: 1 measure (i.e., not postponed).
     * *Proposed*: **min**{**min**{4 × 60 / bpm / scroll **at** the first note symbol after the `#BRANCHSTART` command (unit: second)}, 1 measure}.
 * *Proposal*: `rt`, accumulated amount of hits on all (**t**otal) drum**r**oll-**t**ype notes during the determining section. The postponed-determining behavior of the `r` condition applies.
 * `p`, the percentage (%) of *<ruby>精<rt>sei</rt> 度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy during the determining section.
@@ -1960,8 +1960,8 @@ The "branch"/path is determined by a condition value when `<enum-str-condition>`
 * *Proposal*: `ph`, the **p**ercentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its during the determining section.
 * *Proposal*: `pm`, **p**ercentage (%) of *avoided* bomb/**m**ine notes during the determining section.
 * *Proposal*: `pa`, **p**ercentage (%) of caught _**A**d libitum_ (**A**D-LIB) notes during the determining section.
-* `d`, the percentage (%) of "precision"/accuracy of big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section. (**`d`** can be seen as a rotated `p`) &mdash; TJAPlayer2 for PC
-  * Defined but unimplemented in TJAPlayer2 for PC
+* `d`, the percentage (%) of "precision"/accuracy of big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section. (**`d`** can be seen as a rotated `p`) &mdash; TJAPlayer2 for.PC
+  * Defined but unimplemented in TJAPlayer2 for.PC
 * *Proposal*: `dp`, the percentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
 * *Proposal*: `dh`, the percentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
 * `b`, the percentage (%) of "precision"/accuracy of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments on **b**ig (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
@@ -2570,7 +2570,7 @@ Most headers are not allowed in notechart definition.
 *Unspecified*: The behavior when a header not allowed in notechart definition is placed in a notechart definition.
 
 * In TaikoJiro, such a header is interpreted as note symbols with unrecognized characters ignored and removed.
-* In TJAPlayer2 for PC, such a header behavior the same as if the header were placed before `#START` and all commands for the current player-side.
+* In TJAPlayer2 for.PC, such a header behavior the same as if the header were placed before `#START` and all commands for the current player-side.
 
 ### Whitespaces in Notechart Definition
 
@@ -2646,16 +2646,16 @@ See [#SENOTECHANGE](#senotechange) for the general patterns of how the alternati
 `7` | Head of regular *<ruby>激<rt>Geki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt> キ<rt>ki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt> 船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* balloon <br /> Examples: `7008`, `7778`, `7001` | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | *<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* Balloon | Roll on the drum surface with exactly certain amount of reacted hits during its duration, consumes each surface or rim (?) hit with unlimited speed, reacts to each surface hit up to 1 hit per 60fps frame (official games). <br /> Each reacted hit increases score (except for CS4&ndash;5, TDM, & PSP1&ndash;2). <br /> Awards extra score bonus† when cleared. | Fail to input enough amount of reacted hits. <br /> Does not give penalties except that notes (except bombs/mines (?)) placed within the duration of the ballon are impossible to hit while the balloon is not cleared. | ***First seen in***: TJF format
 `8` | Explicit end of a drumroll-type note (if any), otherwise (blank) | (round end of a bar) (end of bar drumrolls) <br /> (none) (otherwise) | (っ!!) (end of bar drumrolls) <br /> (none) (otherwise) | Nothing needs to be done. Consumes no input. | (impossible to miss) | Stopping rolling the drum non-after the point (end of drumrolls) <br /> Introduced to replaced the TJF syntax for specifying drumroll duration (`5555` / `7777`) (explained below).
 `9` | Head of special burst note/balloon <br> (Differ from game to game) <br /> Examples: `9008`, `9998`, `9001` | (Vary) <br> Big yellow circle with potato attached (PS2-generation) <br> Big yellow circle in the shape of a confetti ball 🎊 (PS3- and PC-generation) <br> Has particle decorative visual effects in AC. | *<ruby>く<rt>Ku</rt> す<rt>su</rt> 玉<rt>dama</rt></ruby>* Party Popper <br> (Strictly speaking, *<ruby>薬<rt>Kusu</rt> 玉<rt>dama</rt></ruby>/<ruby>く<rt>Ku</rt> す<rt>su</rt> 玉<rt>dama</rt></ruby>* "Confetti Ball" 🎊 & party popper 🎉 only resemble each other and are not the same thing) | (Vary) <br> In AC, roll on the drum surface with exactly certain amount (summed and shared among players) of reacted hits during its duration, consumes each surface or rim (?) hit with unlimited speed, reacts to each surface hit up to 1 hit per 60fps frame (official games). <br /> Each reacted hit increases score. <br /> Awards vary extra score bonus† when cleared, according to the timing of an additional final hit (consumed) hinted by the player character's face (AC7) or whether the note is cleared quickly enough (later AC) <br> | (same as `7`) | In the official games, becomes `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player. <br /> ***First seen in***: TaikoJiro v2.75
-`A` | Hand-holding big <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> | Big orange-ish red circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "DON (Hand)" (in 4-player mode) | Similar to `3` but awards extra score bonus† if all players hit within a certain time duration <br> | (same as `3`) | In the official games, becomes `3` when no missable hit-type notes exist at the same time position for any of the player above or below the current player. <br /> ***First seen in***: TJAPlayer2 for PC ver.2018040100 <br /> ***Supported by***: OpenTaiko-OutFox standard, OutFox v0.4.9.9
-`B` | Hand-holding big <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> | Big sky-blue circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "KA (Hand)" (in 4-player mode) | Similar to `4` but awards extra score bonus† if all players hit within a certain time duration. | (same as `4`) | In the official games, becomes `4` when no missable hit-type notes exist at the same time position for any of the player above or below the current player. <br /> ***First seen in***: TJAPlayer2 for PC ver.2018040100 <br /> ***Supported by***: OpenTaiko-OutFox standard, OutFox v0.4.9.9
+`A` | Hand-holding big <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> | Big orange-ish red circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "DON (Hand)" (in 4-player mode) | Similar to `3` but awards extra score bonus† if all players hit within a certain time duration <br> | (same as `3`) | In the official games, becomes `3` when no missable hit-type notes exist at the same time position for any of the player above or below the current player. <br /> ***First seen in***: TJAPlayer2 for.PC ver.2018040100 <br /> ***Supported by***: OpenTaiko-OutFox standard, OutFox v0.4.9.9
+`B` | Hand-holding big <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> | Big sky-blue circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "KA (Hand)" (in 4-player mode) | Similar to `4` but awards extra score bonus† if all players hit within a certain time duration. | (same as `4`) | In the official games, becomes `4` when no missable hit-type notes exist at the same time position for any of the player above or below the current player. <br /> ***First seen in***: TJAPlayer2 for.PC ver.2018040100 <br /> ***Supported by***: OpenTaiko-OutFox standard, OutFox v0.4.9.9
 `C` | Bomb/mine | Small dark-blue cherry bomb with ignited fuze 💣 | (none) | All hits are too off or not hit (both consumes no inputs). <br /> Awards a "bomb/mine-pass" judgment. | Hit the drum surface or rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK (?) timing window, consumes an input. <br /> Gives a BOOM ("bomb/mine-miss") judgment & a combo-break and decreases *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge. | ***First seen in***: OpenTaiko-OutFox standard <br /> ***Supported by***: OpenTaiko (0auBSQ) v0.5.4
 `D` | Fuze/fuse drumroll <br /> Examples: `D008`, `DDD8`, `D001` | ? <br /> (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt> 爆<rt>baku</rt>弾<rt>dan</rt></ruby> "Time bomb"/Fuseroll) | Similar to `7` but awards a "bomb/mine-pass" judgment. | Similar to `7` but gives a BOOM ("bomb/mine-miss") judgment & a combo-break and decreases *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge. | Not in the official games. <br /> OpenTaiko-OutFox standard, first proposed from OutFox.  <br /> ***First seen in***: OpenTaiko-OutFox standard, OpenTaiko (0auBSQ) v0.6.0
-`F` | *Ad libitum* note (AD-LIB) | (invisible by default) | (none) | Hit the drum surface or rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window, consumes a surface input. <br /> Awards an AD-LIB judgment but keep combo unchanged. | Not hit within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window (consumes no inputs). <br /> Gives no penalties. | Not in the official games. <br> Inspired by another rhythm game *GROOVE COASTER*, developed by TAITO <br /> ***First seen in***: TJAPlayer2 for PC ver.2016081500 <br /> ***Supported by***: OpenTaiko-OutFox standard
+`F` | *Ad libitum* note (AD-LIB) | (invisible by default) | (none) | Hit the drum surface or rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window, consumes a surface input. <br /> Awards an AD-LIB judgment but keep combo unchanged. | Not hit within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window (consumes no inputs). <br /> Gives no penalties. | Not in the official games. <br> Inspired by another rhythm game *GROOVE COASTER*, developed by TAITO <br /> ***First seen in***: TJAPlayer2 for.PC ver.2016081500 <br /> ***Supported by***: OpenTaiko-OutFox standard
 `G` | Swap note | (Vary) <br /> Big green circle in taiko-web (plugin "Green Notes") <br /> Big purple circle in OpenTaiko (0auBSQ) | (*<ruby>グ<rt>Gu</rt> リー<rt>rii</rt> ン<rt>n</rt></ruby>* Green) <br /> (*<ruby>カ<rt>Ka</rt> ド<rt>do</rt> ン<rt>n</rt></ruby>* KADON) | Hit the drum surface (or rim) on left or right side within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window **&** the drum rim (or surface) on the other left or right side within a certain time duration (consumes a surface input & a rim input in total) <br /> Awards the same as `1` according to the timing of the first input. | Hit too off but within *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD judgment window (consumes the first input), or not hit within the *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD judgment window (consumes no inputs), or the second input is not given in a certain time duration after the first input (consumes only the first input). <br /> Gives the same penalty as `1`. | Not in the official games. <br /> ***First seen in***: taiko-web (plugin "Green Notes") <br /> ***Supported by***: OpenTaiko-OutFox standard, OpenTaiko (0auBSQ) v0.5.4
 
 †: No score bonuses if the PC-generation scoring rule is followed.
 
-* In TJAPlayer2 for PC & OpenTaiko (0auBSQ) until v0.6.0, `9` is treated the same as `7`.
+* In TJAPlayer2 for.PC & OpenTaiko (0auBSQ) until v0.6.0, `9` is treated the same as `7`.
 * In OutFox, as for v0.5.0 pre043, `A` is treated the same as `3` and `B` is treated the same as `4` (subjects to changes according to demands).
 * In OutFox, `0` to `9`, `A` to `D`, & `F` to `J` are all parsed, where `C` and `H` have work-in-progress gamepad/keyboard input and `D` to `G` & `I` have work-in-progress gamepad/keyboard input and noteskin support as for v0.5.0 pre043 a17.
 
@@ -2717,8 +2717,8 @@ In the official games, drumroll-type notes are usually intentionally made to end
 
 #### Compatibility Issues
 
-* In TJAPlayer2 for PC, drumroll-type notes must be ended with `8`.
-* In TJAPlayer2 for PC, The head of balloon-type notes has a timing window of the time duration of 1 frame under 60fps.
+* In TJAPlayer2 for.PC, drumroll-type notes must be ended with `8`.
+* In TJAPlayer2 for.PC, The head of balloon-type notes has a timing window of the time duration of 1 frame under 60fps.
 
 ### Note Symbols in Jube Mode
 
@@ -2883,10 +2883,10 @@ The honorific title is omitted.
   * The TJF format was modified and extended into the TJA format for this simulator.
   * Inspired by <ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> さ<rt>sa</rt> ん<rt>n</rt> 太<rt>Ta</rt> 郎<rt>rou</rt></ruby> (*Taikosan*): By VIL.
     * The TJF format was developed and used for this simulator.
-* TJAPlayer2 for PC (aka. <ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> さ<rt>sa</rt> ん<rt>n</rt> ア<rt>A</rt> ル<rt>ru</rt> ファ<rt>fa</rt></ruby> (*TaikosanAlpha*)): By J.MIR (kairera0467) <https://github.com/kairera0467/TJAP2fPC>
+* TJAPlayer2 for.PC (aka. <ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> さ<rt>sa</rt> ん<rt>n</rt> ア<rt>A</rt> ル<rt>ru</rt> ファ<rt>fa</rt></ruby> (*TaikosanAlpha*)): By J.MIR (kairera0467) <https://github.com/kairera0467/TJAP2fPC>
   * Inspired by TJAPlayer2 (for PSP): (Unknown author)
   * ← Derived from DTXManiaXG (Ver.K): By J.MIR (kairera0467) <https://osdn.net/projects/dtxmaniaxg-verk/>, <https://github.com/kairera0467/DTXManiaXG_VerK_Old> \
-    In comparison, TJAPlayer2 for PC introduces the originally lacking TJA format parsing and Taiko gameplay, while the original BMS-derived format (specifically DTX, GDA, G2D, BMS, & BME) parsing and GITADORA-style gameplay are either removed or not fully functional.
+    In comparison, TJAPlayer2 for.PC introduces the originally lacking TJA format parsing and Taiko gameplay, while the original BMS-derived format (specifically DTX, GDA, G2D, BMS, & BME) parsing and GITADORA-style gameplay are either removed or not fully functional.
     * ← Derived from DTXMania: By ＦＲＯＭ (DTXMania), <ruby>や<rt>Ya</rt> ぎ<rt>gi</rt>。</ruby> (yyagi), *et al.* <https://osdn.net/projects/dtxmania/>
       * Reference: <ruby>や<rt>Ya</rt> ぎ<rt>gi</rt>。</ruby> (2020, September 14). *Derivatives of DTXMania*. DTXMania Wiki - DTXMania. OSDN. <https://osdn.net/projects/dtxmania/wiki/derivatives>
   * Derivatives \
