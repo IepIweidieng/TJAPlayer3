@@ -894,7 +894,7 @@ For each element of `<comma-separated-list-non-negative-int-amount-of-hits>`, if
 
 Specify the initial **life** count of the life count gauge (if used).
 
-A *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* bad judgment decreases the life count by 1 (missing). When the life count decreased to 0, the player is immediately judged to be failed and the notechart ends.
+A *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD judgment decreases the life count by 1 (missing). When the life count decreased to 0, the player is immediately judged to be failed and the notechart ends.
 
 *Unspecified*: Whether there is invincible time after missing and how long is its time duration.
 
@@ -976,7 +976,7 @@ Used in conjunction with [`COURSE:Dan`](#course).
       * > Formula: `h` = `jp` + `jg` + `r`
     * `c`, maximum/longest **c**ombo.
     * `a`, final percentage (%) of **a**ccuracy. &mdash; OpenTaiko (0auBSQ)
-      * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/Good + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
+      * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
   * `<enum-str-range>` can be one of:
     * `m` / (*Proposal*) `>=`, **m**ore than or equal to ("≥") the given requirement
     * `l` / (*Proposal*) `<`, **l**ess than ("\<") the given requirement
@@ -1955,7 +1955,7 @@ The "branch"/path is determined by a condition value when `<enum-str-condition>`
     * *Proposed*: **min**{**min**{4 × 60 / bpm / scroll **at** the first note symbol after the `#BRANCHSTART` command (unit: second)}, 1 measure}.
 * *Proposal*: `rt`, accumulated amount of hits on all (**t**otal) drum**r**oll-**t**ype notes during the determining section. The postponed-determining behavior of the `r` condition applies.
 * `p`, the percentage (%) of *<ruby>精<rt>sei</rt> 度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy during the determining section.
-  * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/Good + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
+  * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
 * *Proposal*: `pp`, the **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") during the determining section.
 * *Proposal*: `ph`, the **p**ercentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its during the determining section.
 * *Proposal*: `pm`, **p**ercentage (%) of *avoided* bomb/**m**ine notes during the determining section.
@@ -1965,14 +1965,14 @@ The "branch"/path is determined by a condition value when `<enum-str-condition>`
 * *Proposal*: `dp`, the percentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
 * *Proposal*: `dh`, the percentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
 * `b`, the percentage (%) of "precision"/accuracy of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments on **b**ig (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
-  * > Formula: (*<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/Good + 0.5 × *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{amount of big missable hit-type notes, 1} × 100(%)
+  * > Formula: (*<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{amount of big missable hit-type notes, 1} × 100(%)
 * *Proposal*: `bp`, the percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
 * *Proposal*: `bh`, the percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
 * *Proposal*: `br`, accumulated amount of *strong* hits on **b**ig bar drum**r**oll notes during the determining section. The postponed-determining behavior of the `r` condition applies.
 * *Proposal*: `h`, amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, non-blank **h**its during the determining section.
   * > Formula: `h` = `hh` + `rt`
 * *Proposal*: `hh`, amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, missable hit-type note **h**its during the determining section.
-  * > Formula: `hh` = *<ruby>良<rt>Ryou</rt></ruby>* GREAT/Good + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK
+  * > Formula: `hh` = *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK
 * *Proposal*: `hp`, amount (**h**its) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") during the determining section.
 * *Proposal*: `am`, amount of _**a**voided_ bomb/**m**ine notes during the determining section.
 * *Proposal*: `ha`, amount of caught ("**h**it") _**A**d libitum_ (**A**D-LIB) notes during the determining section.
@@ -2662,7 +2662,7 @@ See [#SENOTECHANGE](#senotechange) for the general patterns of how the alternati
 #### Note type category
 
 * Hit-type notes: Notes with no duration and involving a single or double hit, *e.g.*, `1`, `2`, `3`, `4`, `A`, `B`.
-  * Missable hit-type notes: Notes which give a *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* bad judgment if missed.
+  * Missable hit-type notes: Notes which give a *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD judgment if missed.
     * This category does not include `C` & `F`.
 * Drumroll-type notes: Notes with duration and involving multiple hits, *e.g.*, `5`, `6`, `7`, `9`.
   * Bar balloon-type notes: Notes with visual bar body, *e.g.*, `5`, `6`, `D`.
