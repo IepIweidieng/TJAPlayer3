@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2024-09-11 (UTC+8)
+* Last changed: 2024-09-26 (UTC+8)
 
 This is an unofficial compilation and commentation of the TJA format & its related formats.
 
@@ -2051,9 +2051,10 @@ The definition of unused "branches"/paths due to forced "branch"/path determinat
   * In TaikoJiro: Not required; an empty "branch"/path section is allowed.
 * At most one definition should exist for a particular "branch"/path.
   * In TaikoJiro: The lastly occurring definition is taken.
-  * All timing commands should be consistent among all the defined "branches"/paths.
-* The amount of measures and their total time duration should be consistent among all of the defined "branches"/paths.
-  * In TaikoJiro: The first occurring definition determines the timing settings & amount of measures and all definitions are blank-filled to that amount of measures with that timing settings; any definition with a larger amount of measures or inconsistent timing settings causes unintended behaviors.
+* All timing commands should be consistent among all the defined "branches"/paths.
+  * In TaikoJiro 1: Every `#BPMCHANGE` not defined in the first occurring branch definition is ignored. The measure length after the branch section reverts to the value right before the branch section. The beat position and time position of the beginning of each measure is determined by the first occurring branch definition.
+* The amount of measures should be consistent among all of the defined "branches"/paths.
+  * In TaikoJiro 1: The first occurring definition determines the amount of measures and all definitions are blank-filled to that amount of measures; any definition with a larger amount of measures causes unintended behaviors.
 * The final effects of non-before&ndash;scoped gimmicky commands should be consistent among all the "branches"/paths, except when the "branch"/path section ends non-before the end of the notechart.
   * In TaikoJiro 1, such cases are handled as if the "branches"/paths were independent notecharts.
 
