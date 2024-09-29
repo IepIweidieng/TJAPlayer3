@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2024-09-26 (UTC+8)
+* Last changed: 2024-09-29 (UTC+8)
 
 This is an unofficial compilation and commentation of the TJA format & its related formats.
 
@@ -1332,7 +1332,7 @@ Change the time signature / meter signature / **measure** signature.
   * The `<enum-str-delay-type>` part of the [`beats`](#value-type) value ***MUST*** be `d` or (empty) and specifies whether the specified measure duration includes the time duration of the `#DELAY` commands.
 * Initial value: `#MEASURE 4/4`
 
-Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby>小<rt>shou</rt> 節<rt>setsu</rt></ruby>*** "measure" to fit all note symbols on the following line if placed after the previous measure (if any) and before the first [notechart symbol](#notechart-symbol) of this measure in the notechart definition).
+Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby>小<rt>shou</rt> 節<rt>setsu</rt></ruby>*** "measure" to fit all note symbols on the following line if placed after the previous measure (if any) and before the first [notechart symbol](#notechart-symbols) of this measure in the notechart definition).
 
 ***First seen in***: TaikoJiro \
 ***Supported by***: (Universally supported)
@@ -1340,6 +1340,8 @@ Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby
 #### Compatibility Issues
 
 * In TaikoJiro, for `<number-upper-numeral>`, only non-zero integers are supported. Zero-duration measures can be constructed using a large `<number-upper-numeral>` value due to the limited timing precision.
+* In TaikoJiro, the last defined `#MEASURE` in a measure applies to the whole measure regardless of where it is defined.
+* In TaikoJiro 1, `#MEASURE`s defined in [a branch definition](#n--e--m) are partially reverted after [a `#BRANCHEND` or another `#BRANCHSTART` command](#branchstart--branchend). Not explicit defining `#MEASURE` after the branch definition section causes unintended behaviors. See [the `#N` / `#E` / `#M` commands](#n--e--m) for details.
 
 ### #DELAY
 
@@ -1440,7 +1442,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 #### Compatibility Issues
 
-* In TaikoJiro 1 but not TaikoJiro 2, `#SCROLL` has measure-based&ndash;scope (specifically, `#SCROLL`s defined in the middle of a measure apply instead non-before the next measure) unlike [the `#BPMCHANGE` command](#bpmchange), so splitting the measures using [`#MEASURE`](#measure) & [`#BARLINEOFF`](#barlineoff--barlineon) is needed to make `#SCROLL` visually work in the middle of a measure.
+* In TaikoJiro 1 but not TaikoJiro 2, if the notechart definition contains any `#BRANCHSTART` commands, `#SCROLL` will have measure-based&ndash;scope (specifically, the last defined `#SCROLL` in a measure applies at the definition position of the first defined `#SCROLL` in the measure and onward), so splitting the measures using [`#MEASURE`](#measure) & [`#BARLINEOFF`](#barlineoff--barlineon) is needed to make multiple `#SCROLL`s visually work in the same measure for branched charts.
 * In TJAPlayer2 for.PC and TJAPlayer3, the imaginary component of `<complex-ri-float-scroll-speed-xy>` specifies the vertical scrolling speed from the bottom to the top of the screen (↑) instead.
 * In TJAPlayer2 for.PC and TJAPlayer3, the imaginary component of `<complex-ri-float-scroll-speed-xy>` makes bar lines rotate around their center. However, it is misinterpreted as the amount of rotation and the unit is 90 degrees (°) clockwise (↻), see:
   * <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/ステージ/07.演奏/ドラム画面/CStage演奏ドラム画面.cs#L2026>
@@ -2024,9 +2026,15 @@ An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--en
 
 *Unspecified*: The behavior when any of the followings are violated:
 
-* No commands should be placed after a branchless measure or `#BRANCHEND` and before the `#BRANCHSTART` command.
+* No note symbols without ending with `,` should be placed after a branchless measure or `#BRANCHEND` and before the `#BRANCHSTART` command. However, commands are allowed there and apply to all branches in the incoming branch section.
+  * In TaikoJiro 1, such note symbols are combined into the first measure of first-occuring branch definition to form a complete measure.
 * No drumroll-type notes should be defined as starting before and ending non-before the beginning or the end of the "branch"/path section.
-  * In TaikoJiro 1, such notes are handled as if the "branches"/paths were independent notecharts. However, the visual appearance of such bar drumroll notes become broken when the note head in the target "branch"/paths is no longer drawn when switching the "branch"/paths.
+  * In TaikoJiro 1:
+    * The position and duration of each drumroll-type note is determined as [Duration of drumroll-type notes](#duration-of-drumroll-type-notes), but is determined independently for each branch. Each note symbol in a non-branching section is treated as a note symbol in every branch.
+    * A drumroll-type notes which starts in a non-branching section: Behaves as a single drumroll-type note but changes its length (and swap its bar body, for bar drumroll notes) on branch switching.
+    * Drumroll-type note(s) which share the same terminating note symbol: Behaves as a single drumroll-type note but changes its head position, note type, and length on branch switching.
+    * For length-changing notes, the amount of hits done for bar drumrolls is counted independently in each branch, but amount of hits done for balloons is shared across branches.
+    * For a bar drumroll note, its visual appearance becomes broken when its head in the target branch is no longer drawn when switching the branch.
 
 ***First seen in***: TaikoJiro v1.63 \
 ***Supported by***: (Universally supported)
@@ -2044,22 +2052,35 @@ The definition of unused "branches"/paths due to forced "branch"/path determinat
 *Unspecified*: The behavior when any of the followings are violated:
 
 * No ordinary notechart sections should be placed after [the `#BRANCHSTART` command](#branchstart--branchend) and before any of the `#N` / `#E` / `#M` commands.
+  * In TaikoJiro, commands and [notechart symbols](#notechart-symbols) placed there cause an implicit first-occuring `#N` section to be defined to contain them.
+* All note symbols within an explicit or implicit `#N` / `#E` / `#M` sections should be ended with `,`. However, commands are allowed there and apply to next measure.
+  * In TaikoJiro 1, notes symbols placed there but not ended with `,` cause unintended time and beat position of non-before notes in the current branch and unintendedly counted for determining the per&ndash;note-symbol beat duration weight of the next completed measure (probably across multiple definition sections) in the notechart definition. \
+  If a command are placed after any of such note symbols, it might applies at the wrong time and beat position, but it consistently overrides commands before it and its effects are limited to the current branch.
 * All `#N` / `#E` / `#M` commands should be placed within the region enclosed by the `#BRANCHSTART` & (possibly implicit) `#BRANCHEND` commands.
+  * In TaikoJiro 1: An `#N` / `#E` / `#M` command always begins a notechart definition section for the last `#BRANCHSTART` command even if the definition section has been ended by a `#BRANCHEND`. If there are no preceeding `#BRANCHSTART` commands, the game crashes.
 * Definitions should appear in the `#N` / `#E` / `#M` order if defined.
   * In TaikoJiro: Not required.
 * At least one definition should exist for any "branch"/path.
   * In TaikoJiro: Not required; an empty "branch"/path section is allowed.
 * At most one definition should exist for a particular "branch"/path.
-  * In TaikoJiro: The lastly occurring definition is taken.
+  * In TaikoJiro: All definition sections for the branch are taken as overlapped sections.
 * All timing commands should be consistent among all the defined "branches"/paths.
-  * In TaikoJiro 1: Every `#BPMCHANGE` not defined in the first occurring branch definition is ignored. The measure length after the branch section reverts to the value right before the branch section. The beat position and time position of the beginning of each measure is determined by the first occurring branch definition.
+  * In TaikoJiro 1: Every timing command not defined in the first occurring branch definition is ignored. The beat position and time position of the beginning of each measure is determined by the first occurring branch definition.
+* [`#MEASURE` commands](#measure) and mid-measure [`#DELAY` commands](#delay) should not appear within the definition of any "branches"/paths.
+  * In TaikoJiro 1: These commands are ignored in non&ndash;first-occurring branches, and these commands from the first-occurring branch doesn't applied to other branches. Notice that a measure-initial [`#DELAY`](#delay) applies to all branches.
+  * In TaikoJiro 1: Unintended behaviors occur if the final measure length in the first occurring branch differ from the last [`#MEASURE`](#measure) command defined outside of branch definition sections. After a branch section, the internal measure length for calculating per&ndash;note-symbol beat duration reverts to the value right before the branch section, but the internal measure length for calculating the time position of measures persists.
 * The amount of measures should be consistent among all of the defined "branches"/paths.
   * In TaikoJiro 1: The first occurring definition determines the amount of measures and all definitions are blank-filled to that amount of measures; any definition with a larger amount of measures causes unintended behaviors.
 * The final effects of non-before&ndash;scoped gimmicky commands should be consistent among all the "branches"/paths, except when the "branch"/path section ends non-before the end of the notechart.
-  * In TaikoJiro 1, such cases are handled as if the "branches"/paths were independent notecharts.
+  * In TaikoJiro 1, the effects of gimmicky commands persist into future branching or non-branching sections until overridden. Each non-branching section containing persisted non-consistent gimmicky effects behaves as a branching section where each branch shares the same notes and commands except for the inconsistent gimmicky effects and other inconsistencies.
 
 ***First seen in***: TaikoJiro v1.63 \
 ***Supported by***: (Universally supported)
+
+#### Compatibility Issues
+
+* In TaikoJiro 1, if a bar drumroll note in a branch has no any earlier-defined notes in the branch or any non-branching sections, hit-type notes whose time position is not >85ms (?) before the note head of the problematic drumroll in other branches become impossible to hit. \
+  In each affected branch, hit-type notes become possible to hit again at the note end of any drumroll-type note with the time position not >9ms (?) before the note end of the problematic drumroll.
 
 ### *Proposal*: `#LAYERSTART` / `#LAYEREND`
 
@@ -2613,7 +2634,7 @@ Compatibility issues:
 * In TaikoJiro, the time precision is 1 millisecond, and the time duration of a note symbol is **floor**(**floor**(4 × 60 × 1000 / `defined_bpm_at_beat_duration`) × `beat_duration_of_symbol` / 4) / 1000 (unit: seconds)
   * Reference: <https://twitter.com/barrier15300/status/1619399304250290180> by @barrier15300
 
-Non&ndash;measure-based&ndash;scoped, non-sequential, non&ndash;one-shot commands have their effects fired when the beat duration interval of the nearest preceding note symbol ends. If such commands are placed after the last note symbol of a measure and before the first notechart symbol of the next measure, whether they are placed before or after the `,` symbol has the same effects.
+Non&ndash;measure-based&ndash;scoped, non-sequential, non&ndash;one-shot commands have their effects fired when the beat duration interval of the nearest preceding note symbol ends. If such commands are placed after the last note symbol of a measure and before the first [notechart symbol](#notechart-symbols) of the next measure, whether they are placed before or after the `,` symbol has the same effects.
 
 The time duration intervals of different note symbols are possible to overlap by using [`#BPMCHANGE`](#bpmchange) / [`#MEASURE`](#measure) / [`#DELAY`](#delay) commands with non-positive value.
 
