@@ -3,6 +3,8 @@
 * First created: 2022-02-01 (UTC+8)
 * Last changed: 2024-10-14 (UTC+8)
 
+Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
+
 This is an unofficial compilation and commentation of the TJA format & its related formats.
 
 This article aims at providing a comprehensive enough overview & possible etymologies and addressing undocumented corner cases.
@@ -13,9 +15,9 @@ This article is still *in construction* and will be updated at times. It's recom
 * Missing, inaccurate, or even incorrect information is possible, even if such information is not marked with *(?)*, especially about less known software behaviors, due to insufficient or misunderstood references. If it is the case, please do not hesitate to [edit this article](https://github.com/IepIweidieng/TJAPlayer3/edit/gh-pages/tja.md) to fix it.
 * The terminologies introduced in this article are not finalized and might be subject to changes.
 
-Also see [TODO](#TODO) for known issues and planned changes of this article.
+Also see [TODO](#todo) for known issues and planned changes of this article.
 
-This article also contains tentative proposals by the main maintainer ([@IepIweidieng](https://github.com/IepIweidieng)) of this article. These proposals are explicitly expressed to be *Proposal*s and are subject to changes.
+This article also contains unimplemented proposals, including tentative proposals by the main maintainer of this article and known proposals by simulator developers. These proposals are explicitly expressed to be *Proposal*s and may be subject to changes.
 
 See [Terminologies](#terminologies) for the explanation and conventions of some terminologies used in this article.
 
@@ -154,7 +156,7 @@ For multiple values separated by comma (`,`), except for `text`-valued fields, o
   * `float`: A real number in decimal which can either be an integer or have the fraction part, *e.g.*, `0` / `+.3` / `-1.`
     * *Unspecified*: Whether a comma (`,`) can be used as the decimal point instead of a full-stop (`.`).
     * *Unspecified*: The supported precision.
-    * *Proposal*: `+inf` for positive infinity (+∞) & `-inf` for negative infinity (−∞).
+    * *Proposal* (IID): `+inf` for positive infinity (+∞) & `-inf` for negative infinity (−∞).
   * `enum-int` (enum-like, int-form): An `int` with specific accepted values.
   * *Unspecified*: Whether the positive sign (`+`) may appear for a non-negative or positive value, unless the type is indicated as `unsigned-`.
   * In TaikoJiro, leading non-newline whitespaces are always ignored.
@@ -178,7 +180,7 @@ For multiple values separated by comma (`,`), except for `text`-valued fields, o
       * If not, the value ***MUST*** begin with one of the above forms.
       * Leading non-newline whitespaces are ignored.
       * All trailing characters are ignored in TaikoJiro. (*e.g.*, `Vsomething` / `valuesomething` are also accepted)
-* *Proposal*: `beats`
+* *Proposal* (IID): `beats`
   * Format: `<float-upper-numeral>/<unsigned-float-lower-numeral><enum-str-delay-type>`
   * The beat duration of `<float-upper-numeral>` times of a 1/`unsigned-float-lower-numeral`-th note.
   * > Formula: Amount of beats = 4 × `upper` / `lower`
@@ -187,7 +189,7 @@ For multiple values separated by comma (`,`), except for `text`-valued fields, o
     * (empty) / `-`, the time duration does not contain the `#DELAY` command(s) at the end of beat duration interval (if any).
     * `+`, the time duration contains the `#DELAY` command(s) at the end of beat duration interval (if any).
     * `d`, the specified beat duration includes beats which would otherwise pass during all `#DELAY` commands.
-* *Proposal*: `relative-number`: Can be used as a `number` for a real number or the leading part of a compound number value. The specified value (include all numeric parts for a compound number value) is relative to a value equivalent to the last defined value. *Unspecified*: The behavior when being used as an `enum-int`.
+* *Proposal* (IID): `relative-number`: Can be used as a `number` for a real number or the leading part of a compound number value. The specified value (include all numeric parts for a compound number value) is relative to a value equivalent to the last defined value. *Unspecified*: The behavior when being used as an `enum-int`.
   * Format:
     * `<relative-specifier><number>`, the value modified relative to a value equivalent to the last defined value
     * `=`, a value equivalent to the last defined value
@@ -334,7 +336,7 @@ Specify whether the corresponding song entry is displayed, regarding the *<ruby>
 
 *Unspecified*: Whether and how inner mode is implemented.
 
-*Proposal*: Make the scope per&ndash;player-side.
+*Proposal* (IID): Make the scope per&ndash;player-side.
 
 * **`SIDE:1`** / **`SIDE:Normal`** / `SIDE:normal`
   * Displayed only outside the inner notechart mode.
@@ -860,7 +862,7 @@ If the specified amount of player-sides is not 1, [`#START <enum-str-player-side
 
 * `STYLE:1` / `STYLE:Single` / `STYLE:single` / `STYLE:`
 * `STYLE:2` / `STYLE:Double` / `STYLE:double` / `STYLE:Couple` / `STYLE:couple`
-* *Proposal*: `STYLE:<positive-int-amount-of-player-sides>`
+* *Proposal* (IID): `STYLE:<positive-int-amount-of-player-sides>`
 
 Reference: *ダブルプレイ* ("Double Play"; "Two-player Charts"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/ダブルプレイ>
 
@@ -881,7 +883,7 @@ Each balloon-type note with unassigned hit amount requires an *unspecified* defa
 
 * In TaikoJiro & TJAPlayer2 for.PC, the default amount of hits is `5`.
 
-*Proposal*: The [`#BALLOON`](#proposal-balloon-command) command can be used in the notechart definition for the same purpose instead.
+*Proposal* (IID): The [`#BALLOON`](#proposal-iid-balloon-command) command can be used in the notechart definition for the same purpose instead.
 
 * `BALLOON:<comma-separated-list-non-negative-int-amount-of-hits>`
   * The list of amount is iterated over all sections of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart branches"/forked paths.
@@ -998,8 +1000,8 @@ Used in conjunction with [`COURSE:Dan`](#course).
     * `a`, final percentage (%) of **a**ccuracy. &mdash; OpenTaiko (0auBSQ)
       * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
   * `<enum-str-range>` can be one of:
-    * `m` / (*Proposal*) `>=`, **m**ore than or equal to ("≥") the given requirement
-    * `l` / (*Proposal*) `<`, **l**ess than ("\<") the given requirement
+    * `m` / (*Proposal* (IID)) `>=`, **m**ore than or equal to ("≥") the given requirement
+    * `l` / (*Proposal* (IID)) `<`, **l**ess than ("\<") the given requirement
 * `EXAM<exam-requirement-index-specifier>:<enum-str-requirement>, <comma-separated-list-number-pass-and-gold-requirements>, <enum-str-range>` &mdash; TJAPlayer3-f
   * The elements of `<comma-separated-list-number-pass-and-gold-requirements>` are pairs of `<number-pass-requirement>, <number-gold-requirement>` for each song specified by [the `#NEXTSONG` command](#nextsong).
   * Corresponding to the per-song&ndash;scoped usage in TJAPlayer3-Develop-ReWrite & OpenTaiko (0auBSQ).
@@ -1179,7 +1181,7 @@ No known per-file commands exist, which would be effectively [headers](#tja-head
 Except for one-shot commands, the effect of each command continues until the next occurrence of any command from the same command group or [`#END`](#start--end).
 
 * For per&ndash;player-side commands, the behavior is *unspecified* when (the same or different) commands in the same command group occur together within its scope.
-* For measure-based&ndash;scoped commands, the behavior is *unspecified* when any [notechart symbols](#notechart-symbol) occur after the last [notechart symbol](#notechart-symbol) (always `,` in TJA) and before such a command in the notechart definition.
+* For measure-based&ndash;scoped commands, the behavior is *unspecified* when any [notechart symbols](#notechart-symbols) occur after the last [notechart symbol](#notechart-symbols) (always `,` in TJA) and before such a command in the notechart definition.
 
 Some branch-scoped commands are non-sequential, *i.e.*, they can be arranged freely within the same beat position without causing any behavior changes, as long as both their relative order to the sequential commands and the relative order among commands which override each other are not changed. All commands with other type of scope are implicitly sequential.
 
@@ -1189,7 +1191,7 @@ A command may have some effects applied only when their approach phase is reache
 
 The approach phase of a command occurs before the head of their defined beat position by a specified time or beat duration (if any) or no duration.
 
-*Proposal*: Allow the late effect scope to be overridden for branch-scoped commands targeting notes & bar lines, see [*Proposal*: Command Modifier](#proposal-command-modifier).
+*Proposal* (IID): Allow the late effect scope to be overridden for branch-scoped commands targeting notes & bar lines, see [*Proposal* (IID): Command Modifier](#proposal-iid-command-modifier).
 
 #### Command Effect Target
 
@@ -1197,7 +1199,7 @@ Commands only affect their targeting game objects. The target of each command ca
 
 * Notes, including fake/dummy notes.
 * Bar lines, including fake/dummy bar lines.
-* Judgment mark(s). There may be multiple judgment marks for a single player when, *e.g.*, [the `#SPLITLANE` command](#splitlane--mergelane) is used or (*Proposed*) [the `#JPOSSCROLL` command](#jposscroll) is used inconsistently in any layers defined by [the `#LAYER` command](#proposal-layer).
+* Judgment mark(s). There may be multiple judgment marks for a single player when, *e.g.*, [the `#SPLITLANE` command](#splitlane--mergelane) is used or (*Proposed* (IID)) [the `#JPOSSCROLL` command](#jposscroll) is used inconsistently in any layers defined by [the `#LAYER` command](#proposal-iid-layer).
 * Note field(s): Any effects affecting the default scrolling path of notes and bar lines. There may be multiple note fields for a single player when there are multiple judgment marks.
 * Gameplay screen: Any other visible effects not directly targeting the above objects.
 
@@ -1235,15 +1237,15 @@ Scrolling velocity <br> Note or bar line traveling takes 4 beats in what BPM | *
 Default scrolling changes of [`#BPMCHANGE`](#bpmchange) command | Set the per-note or per–bar-line base BPM of non-preceding notes and bar lines | Suddenly change the apparent base BPM of all notes & all bar lines | (No changes)
 Default scrolling changes of [`#DELAY`](#delay) command | (No changes) | Pause the scrolling if positive; <br> (no changes) if negative | (No changes)
 Default scrolling changes of [`#SCROLL`](#scroll) command | Set the per-note or per–bar-line  `scroll` | (Ignored) (`#BMSCROLL`) <br> Set the per-note or per–bar-line `scroll` (`#HBSCROLL`) | (Ignored)
-*Proposal*: Mode-invariant `#BPMCHANGE` command | `#BPMCHANGE <value>; :` | `#BPMCHANGE <value>; *:*` | `#BPMCHANGE <value>; :` + `#SCROLL <non-zero-float-bpm>bpm; :*`
-*Proposal*: Mode-invariant `#DELAY` command | `#DELAY <value>; :` | `#DELAY <value>; *:*` | `#DELAY <value>; :`
-*Proposal*: Mode-invariant velocity-changing command | `#SCROLL <value>; :` (default) | [`#HISPEED(<value>)`](#hispeed) (TMG format) <br> `#SCROLL <value>; *:*` | `#SPEED <value>bpm; *:*; <changing-duration>`
+*Proposal* (IID): Mode-invariant `#BPMCHANGE` command | `#BPMCHANGE <value>; :` | `#BPMCHANGE <value>; *:*` | `#BPMCHANGE <value>; :` + `#SCROLL <non-zero-float-bpm>bpm; :*`
+*Proposal* (IID): Mode-invariant `#DELAY` command | `#DELAY <value>; :` | `#DELAY <value>; *:*` | `#DELAY <value>; :`
+*Proposal* (IID): Mode-invariant velocity-changing command | `#SCROLL <value>; :` (default) | [`#HISPEED(<value>)`](#hispeed) (TMG format) <br> `#SCROLL <value>; *:*` | `#SPEED <value>bpm; *:*; <changing-duration>`
 
 In OutFox, the Taiko-like scrolling mode can be achieved by using CAMod (AMod/"Average BPM Scroll Mode" with constant per-note or per–bar-line scrolling speed) with the BPM parameter set to 4 × the average BPM of the notechart.
 
 See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-and-timing) for the behavior of timing commands.
 
-*Proposal*: See [*Proposal*: Command Modifier](#proposal-command-modifier) for the syntax for mode-invariant commands.
+*Proposal* (IID): See [*Proposal* (IID): Command Modifier](#proposal-iid-command-modifier) for the syntax for mode-invariant commands.
 
 ***First seen in***: TaikoJiro v1.91 \
 ***Supported by***: TaikoJiro 2, TJAPlayer2 for.PC
@@ -1279,19 +1281,19 @@ Respectively **start** / **end** the region of notechart definition.
     * `P2`, for the 2nd player-side (2P) if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ 2.
   * *Unspecified*: The behavior when other `<enum-str-combination>` is used.
     * In TaikoJiro, using any other `<enum-str-combination>` is treated as if the 0-argument `#START` were used.
-* *Proposal*: `#START P<positive-int-player-side>`
+* *Proposal* (IID): `#START P<positive-int-player-side>`
   * The notechart definition is for the `<positive-int-player-side>`-th player-side if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ `<positive-int-player-side>`.
 * `#END`
 
 *Unspecified*: The behavior when any of the followings are violated when defining each difficulty:
 
 * The 1-player-side notechart should be defined using the 0-argument `#START`
-* Each multiple-player-side notechart should be defined using the 1-argument `#START <enum-str-player-side>` or *proposed* `P<positive-int-player-side>`.
+* Each multiple-player-side notechart should be defined using the 1-argument `#START <enum-str-player-side>` or *proposed* (IID) `P<positive-int-player-side>`.
 * At most 1 definition should exist for each player-side of each amount of player-sides
   * In TaikoJiro 1, only the earliest definition is used when multiple such definitions exist.
 * Every player-side notechart should be defined if any notecharts for the same amount of player-sides are defined, otherwise the 1-player-side notechart should be the earliest defined notechart.
 * The 1-player-side notechart should be defined if any multiple-player-side notecharts are defined
-  * *Proposal*: Make the 1-player-side in such case optional when each defined player-side notechart has all other player-side notecharts defined for the same amount of player-sides. The chosen 1-player-side notechart will be the notechart for an *unspecified* player-side.
+  * *Proposal* (IID): Make the 1-player-side in such case optional when each defined player-side notechart has all other player-side notecharts defined for the same amount of player-sides. The chosen 1-player-side notechart will be the notechart for an *unspecified* player-side.
 
 ***First seen in***: TJF format \
 ***Supported by***: (Universally supported)
@@ -1348,7 +1350,7 @@ Change the time signature / meter signature / **measure** signature.
     * See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-and-timing) for the behavior.
 * `#MEASURE <number-upper-numeral>/0`
   * The behavior is *unspecified* (may cause crashes in some existing simulators).
-* *Proposal*: `#MEASURE <beats-measure>`
+* *Proposal* (IID): `#MEASURE <beats-measure>`
   * The `<enum-str-delay-type>` part of the [`beats`](#value-type) value ***MUST*** be `d` or (empty) and specifies whether the specified measure duration includes the time duration of the `#DELAY` commands.
 * Initial value: `#MEASURE 4/4`
 
@@ -1383,7 +1385,7 @@ For the timing of notechart object, multiple `#DELAY` commands placed at the sam
     * See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-and-timing) for the behavior.
 * `#DELAY 0`
   * No effects
-* *Proposal*: `#DELAY <beats-time-duration>`
+* *Proposal* (IID): `#DELAY <beats-time-duration>`
   * The specified time duration is the beat amount of `<beats-time-duration>` under the current BPM.
   * The `<enum-str-delay-type>` part of the [`beats`](#value-type) value ***MUST*** be `d` or (empty) and specifies whether the specified measure duration includes the time duration of the `#DELAY` commands with overlapping time interval.
 
@@ -1442,7 +1444,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
   * `<float-scroll-speed-y>` specifies the vertical scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-scroll-speed-x>`.
 * `#SCROLL 0`
   * The behavior is *unspecified*.
-* *Proposal*: `#SCROLL <value>bpm`
+* *Proposal* (IID): `#SCROLL <value>bpm`
   * Use the corresponding scrolling speed vector as when the absolute value (velocity) of `<value>` were used for `#BPMCHANGE` and the unit direction of `<value>` were used for `#SCROLL`.
   * > Formula: `scroll` = `value` / `current_bpm`
 * `#SCROLL <float-scroll-speed>, <number-rotation-lower>, <number-rotation-upper>` &mdash; TaikoManyGimmicks
@@ -1500,7 +1502,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 ***First seen in***: TaikoManyGimmicks v0.6.1α
 
-### *Proposal*: #SPEED
+### *Proposal* (IID): #SPEED
 
 ***Scope***: branch, non-before, gimmicky \
 ***Late effect scope***: all \
@@ -1508,7 +1510,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 Suddenly change the base scrolling **speed** of notes & bar lines. In other words, suddenly change the normal scrolling velocity and direction.
 
-Targeted notes & bar lines have their distance and/or direction to the visual judgment position scaled and/or rotated. The `<approach-specifier>` from the *proposal* [Command Modifier](#proposal-command-modifier) is intended to be used in conjunction.
+Targeted notes & bar lines have their distance and/or direction to the visual judgment position scaled and/or rotated. The `<approach-specifier>` from [the *proposal* (IID) Command Modifier](#proposal-iid-command-modifier) is intended to be used in conjunction.
 
 If the notes & the bar lines are rotated around their center accordingly when a [`#SCROLL`](#scroll) command with complex number value is used, they are also rotated accordingly when a `#SPEED` command with complex number value is used.
 
@@ -1534,7 +1536,7 @@ Change the scrolling **direction** of notes & bar lines.
 
 *Unspecified*: The behavior when a [`#SCROLL` command](#scroll) with complex value is active.
 
-*Proposal*: The direction is relative to the scrolling direction specified by [the `#SCROLL` command](#scroll).
+*Proposal* (IID): The direction is relative to the scrolling direction specified by [the `#SCROLL` command](#scroll).
 
 * `#DIRECTION <enum-int-direction>`
   * `<enum-int-direction>` specifies the degrees (°) of the counterclockwise (↺) rotation and can be one of:
@@ -1548,7 +1550,7 @@ Change the scrolling **direction** of notes & bar lines.
       | `5` | 180° ↺ (≡ 180° ↻) | →
       | `6` | 225° ↺ (≡ 135° ↻) | ↗
       | `7` | 135° ↺ | ↘
-* *Proposal*: `#DIRECTION <number-degrees>deg`
+* *Proposal* (IID): `#DIRECTION <number-degrees>deg`
   * `<number-degrees-rotation>` specifies the degrees (°) of the counterclockwise (↺) rotation.
 
 ***First seen in***: TJAPlayer2 for.PC
@@ -1596,14 +1598,14 @@ The arguments are whitespace-separated.
 * `#JPOSSCROLL <approach-duration-specifier> <distance-specifier> <direction-specifier>` / `#JPOSSCROLL(<approach-duration-specifier>, <number-pixel-distance-x>)` &mdash; TaikoManyGimmicks v0.6.1α / `#JPOSSCROLL(<approach-duration-specifier>, <number-pixel-distance-x>, <number-pixel-distance-y>)` &mdash; TaikoManyGimmicks v0.6.6α
   * `<approach-duration-specifier>` can be one of:
     * `<positive-float-seconds-approach-duration>`
-    * *Proposal*: `<beats-approach-duration>`
+    * *Proposal* (IID): `<beats-approach-duration>`
   * `<distance-specifier>` can be one of:
     * `<number-pixel-distance-x>`
     * `<complex-ri-number-pixel-distance-xy>` &mdash; TJAPlayer3 v1.6.x, OpenTaiko (0auBSQ) v0.6.0
       * The imaginary component of `<complex-ri-number-pixel-distance-xy>` specifies the vertical movement toward the top of the screen (↑).
     * `<number-distance-x-upper>/<number-distance-x-lower>` &mdash; TaikoManyGimmicks
       * Specify the horizontal movement to be `<number-distance-x-upper>/<number-distance-x-lower>` of the default note field width.
-    * *Proposal*: `<value> deg <float-degrees-angle>`
+    * *Proposal* (IID): `<value> deg <float-degrees-angle>`
       * Specify the moving vector as `<value>` rotated `<float-degrees-angle>` degrees (°) counterclockwise (↺).
     * `default` &mdash; TaikoManyGimmicks
       * Move the judgment mark to the default position, regardless of `<direction-specifier>`.
@@ -1661,17 +1663,17 @@ The arguments are whitespace-separated.
 
 * `#SUDDEN <float-seconds-appear-duration> <float-seconds-moving-duration>`
   * The "note phoneticization" is displayed/hidden along the note.
-* *Proposal*: `#SUDDEN <float-seconds-appear-duration> <float-seconds-moving-duration> <enum-str-affected-type>`
+* *Proposal* (IID): `#SUDDEN <float-seconds-appear-duration> <float-seconds-moving-duration> <enum-str-affected-type>`
   * See below.
-* *Proposal*: `#HIDDEN <float-seconds-disappear-duration> <float-seconds-stopping-duration>`
+* *Proposal* (IID): `#HIDDEN <float-seconds-disappear-duration> <float-seconds-stopping-duration>`
   * The "note phoneticization" is displayed/hidden along the note.
-* *Proposal*: `#HIDDEN <float-seconds-disappear-duration> <float-seconds-stopping-duration> <enum-str-affected-type>`
+* *Proposal* (IID): `#HIDDEN <float-seconds-disappear-duration> <float-seconds-stopping-duration> <enum-str-affected-type>`
   * See below.
-* Initial value: `#SUDDEN 0 0` & (*Proposal*) `#HIDDEN 0 0`
+* Initial value: `#SUDDEN 0 0` & (*Proposal* (IID)) `#HIDDEN 0 0`
 
 `<float-seconds-*-duration>` specifies the time durations (ms; 0.001s) before the time point of judgment is reached; if its absolute value equals to `0`, the time duration is positive infinity (+∞) for the `#SUDDEN` command and is negative infinity (−∞) for the `#HIDDEN` command.
 
-*Proposal*: `<enum-str-afftect-type>` can be one of:
+*Proposal* (IID): `<enum-str-afftect-type>` can be one of:
 
 * `n` / `Doron` &mdash; Affect only the **n**otes, as in the ***<ruby>ド<rt>Do</rt> ロ<rt>ro</rt> ン<rt>n</rt></ruby>*** "**n**ote-wise stealth" game modifier.
 * `t` &mdash; Affect only the "note phoneticization" ("the **t**exts on the lower note field").
@@ -1706,7 +1708,7 @@ The arguments are whitespace-separated.
   * Equivalent to `#SUDDEN <float-seconds-duration> 0` after unit conversion.
 * `#NOTESPAWN 2 <float-seconds-duration>` / `#NOTESPAWN(Vanish, <float-seconds-duration>)`
   * Set the hidden point.
-  * Equivalent to (*Proposal*) `#HIDDEN <float-seconds-duration> 0` after unit conversion.
+  * Equivalent to (*Proposal* (IID)) `#HIDDEN <float-seconds-duration> 0` after unit conversion.
 
 ***First seen in***: TaikoManyGimmicks
 
@@ -1766,7 +1768,7 @@ Override ("**change**") the automatically assigned *<ruby>口<rt>Kuchi</rt> 唱<
       | `11` | *<ruby>連<rt>Ren</rt> 打<rt>da</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* ROLL | note head of `6`
       | `12` | *<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* Balloon | `7`
   * *Unspecified*: The behavior when an `<enum-int-note-phoneticization>` not designed for the applied note is used.
-* *Proposal*: `#SENOTECHANGE <enum-str-note-phoneticization>`
+* *Proposal* (IID): `#SENOTECHANGE <enum-str-note-phoneticization>`
   * `<enum-str-note-phoneticization>` can be one of:
     * `D`, the default, use the automatically assigned note phoneticization.
     * `L`, **l**ong:
@@ -1785,9 +1787,9 @@ Override ("**change**") the automatically assigned *<ruby>口<rt>Kuchi</rt> 唱<
     * `A`, **a**lternate:
       * In Taiko mode, use *<ruby>コ<rt>Ko</rt></ruby>* (Do) for note symbol `1`
       * Otherwise the same as `S`.
-* *Proposal*: `#SENOTECHANGE <comma-separated-list-enum-note-phoneticization>`
+* *Proposal* (IID): `#SENOTECHANGE <comma-separated-list-enum-note-phoneticization>`
   * All elements of `<comma-separated-list-enum-note-phoneticization>` are valid `<enum-int-note-phoneticization>` or `<enum-str-note-phoneticization>` and are iterated and applied to multiple notes in their definition order.
-* *Proposal*: `#SENOTECHANGE <string-enum-str-note-phoneticization>`
+* *Proposal* (IID): `#SENOTECHANGE <string-enum-str-note-phoneticization>`
   * All non-whitespace characters in `<string-enum-str-note-phoneticization>` are valid `<enum-str-note-phoneticization>` and are iterated and applied to multiple notes in their definition order.
 
 In the official games, the note phoneticization is assigned per-note and does not follow a definite pattern, especially in earlier games.
@@ -1822,7 +1824,7 @@ However, in the official Konga games, the general pattern is less consistent and
 
 ***First seen in***: TJAPlayer3 v1.4.0
 
-### *Proposal*: #BALLOON (Command)
+### *Proposal* (IID): #BALLOON (Command)
 
 ***Scope***: branch, note one-shot \
 ***Late effect scope***: (none) \
@@ -1853,7 +1855,7 @@ An implicit `#SECTION` is placed at the beginning of every notechart definition.
 *Unspecified*: Whether the value of the condition for determining the "branch"/path by score (`#BRANCHSTART s, <number-expert-branch-requirement>, <number-master-branch-requirement>`) is reset.
 
 * `#SECTION`
-* *Proposal*: `#SECTION <no-punctuation-str-name-section>`
+* *Proposal* (IID): `#SECTION <no-punctuation-str-name-section>`
   * Start a named "branch"/path determining section with the initial condition values.
 
 ***First seen in***: TaikoJiro v1.63 \
@@ -1863,7 +1865,7 @@ An implicit `#SECTION` is placed at the beginning of every notechart definition.
 
 * In TaikoJiro, the firing order between the `#SECTION` command and a "branch"/path&ndash;determining point is indeterminate when they occur at the same beat position.
 
-### *Proposal*: #SECTIONRESUME / #SECTIONEND
+### *Proposal* (IID): #SECTIONRESUME / #SECTIONEND
 
 ***Scope***: branch, instant one-shot \
 ***Late effect scope***: all \
@@ -1873,8 +1875,8 @@ An implicit `#SECTION` is placed at the beginning of every notechart definition.
 
 This command can apply to only named "branch"/path-determining sections.
 
-* *Proposal*: `#SECTIONRESUME <no-punctuation-str-name-section>`
-* *Proposal*: `#SECTIONEND <no-punctuation-str-name-section>`
+* *Proposal* (IID): `#SECTIONRESUME <no-punctuation-str-name-section>`
+* *Proposal* (IID): `#SECTIONEND <no-punctuation-str-name-section>`
 
 ### `#LEVELHOLD`
 
@@ -1884,16 +1886,16 @@ This command can apply to only named "branch"/path-determining sections.
 
 Override the result of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path ("**level**") determination from the definition of this measure and on with the current branch/path ("**hold**").
 
-*Proposal*: Its effects end at either the next another `#LEVELHOLD` or a [#LEVELREDIR](#proposal-levelredir) command.
+*Proposal* (IID): Its effects end at either the next another `#LEVELHOLD` or a [#LEVELREDIR](#proposal-iid-levelredir) command.
 
 * `#LEVELHOLD`
   * Override the determining result as the current "branch"/path.
-  * *Proposal*: Equivalent to `#LEVELREDIR <enum-str-branch-current>, <enum-str-branch-current>, <enum-str-branch-current>`, where `<enum-str-branch-current>` represents the current "branch"/path.
+  * *Proposal* (IID): Equivalent to `#LEVELREDIR <enum-str-branch-current>, <enum-str-branch-current>, <enum-str-branch-current>`, where `<enum-str-branch-current>` represents the current "branch"/path.
 
 ***First seen in***: TaikoJiro v1.63 \
 ***Supported by***: TaikoJiro 2, TJAPlayer2 for.PC
 
-### *Proposal*: #LEVELREDIR
+### *Proposal* (IID): #LEVELREDIR
 
 ***Scope***: branch, measure non-before \
 ***Late effect scope***: all \
@@ -1903,7 +1905,7 @@ Override the result of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt>
 
 Its effects end at either the next [`#LEVELHOLD`](#levelhold) or another #LEVELREDIR command.
 
-* *Proposal*: `#LEVELREDIR <enum-str-branch-from-normal>, <enum-str-branch-from-expert>, <enum-str-branch-from-master>`
+* *Proposal* (IID): `#LEVELREDIR <enum-str-branch-from-normal>, <enum-str-branch-from-expert>, <enum-str-branch-from-master>`
   * Override the determining result as respectively `<enum-str-branch-from-normal>` / `<enum-str-branch-from-expert>` / `<enum-str-branch-from-master>` when the default "branch"/path is determined to be respectively the ***<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>*** **N**ormal / ***<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**E**xpert") / ***<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>*** **M**aster "branch"/path. See the explanation of [the `#BRANCHSTART` command](#branchstart--branchend).
   * Example: The "branch"/path behavior of the *<ruby>お<rt>O</rt> に<rt>ni</rt></ruby>* Oni/Extreme difficulty of "<ruby>聖<rt>Shou</rt> 徳<rt>doku</rt> た<rt>Ta</rt> い<rt>i</rt> こ<rt>ko</rt> の<rt>no</rt>「<rt></rt> 日<rt>Hi</rt> い<rt>I</rt> ず<rt>zu</rt> る<rt>ru</rt> ま<rt>ma</rt> で<rt>de</rt> 飛鳥<rt>Asuka</rt>」</ruby>" can be achieved using:
 
@@ -1942,7 +1944,7 @@ Its effects end at either the next [`#LEVELHOLD`](#levelhold) or another #LEVELR
     ```
 
     * Reference: <https://wikiwiki.jp/taiko-fumen/収録曲/おに/聖徳たいこの%E3%80%8C日いずるまで飛鳥%E3%80%8D>
-* *Proposal*: Initial value: `#LEVELREDIR N, E, M`
+* *Proposal* (IID): Initial value: `#LEVELREDIR N, E, M`
 
 ### #BRANCHSTART / `#BRANCHEND`
 
@@ -1957,9 +1959,9 @@ The determining point of this "branch"/path section is defaulted to be placed at
 At the determining point, the "branch"/path&ndash;switching effects are played but the current "branch"/path is not changed until the actual beginning of the "branch"/path section.
 
 * `#BRANCHSTART <enum-str-condition>, <number-expert-branch-requirement>, <number-master-branch-requirement>`
-* *Proposal*: `#BRANCHSTART <enum-str-condition>, <number-expert-branch-requirement>, <number-master-branch-requirement>, <no-punctuation-str-name-section>`
+* *Proposal* (IID): `#BRANCHSTART <enum-str-condition>, <number-expert-branch-requirement>, <number-master-branch-requirement>, <no-punctuation-str-name-section>`
   * Use the condition values from the specified named "branch"/path determining section. See [#SECTION](#section).
-* *Proposal*: `#BRANCHSTART <enum-str-combination>, <comma-separated-list-requirements>`
+* *Proposal* (IID): `#BRANCHSTART <enum-str-combination>, <comma-separated-list-requirements>`
   * Use the combined result of determining branch/path by each specified requirements.
   * `<comma-separated-list-requirements>` can be a certain number of argument combinations, each takes a form listed above (including this `<enum-str-combination>` form).
   * `<enum-str-combination>` can be one of:
@@ -1974,41 +1976,41 @@ The "branch"/path is determined by a condition value when `<enum-str-condition>`
   * If a bar drumroll note is defined as beginning non-after but ending after the default beat position of the determining point, the actual determining point is postponed until the earlier of the definition positions of the ending of that note and an *unspecified* duration before the `#BRANCHSTART` command.
     * TaikoJiro: zero-duration.
     * TJAPlayer2 for.PC and TJAPlayer3: 1 measure (i.e., not postponed).
-    * *Proposed*: **min**{**min**{4 × 60 / bpm / scroll **at** the first note symbol after the `#BRANCHSTART` command (unit: second)}, 1 measure}.
-* *Proposal*: `rt`, accumulated amount of hits on all (**t**otal) drum**r**oll-**t**ype notes during the determining section. The postponed-determining behavior of the `r` condition applies.
+    * *Proposed* (IID): **min**{**min**{4 × 60 / bpm / scroll **at** the first note symbol after the `#BRANCHSTART` command (unit: second)}, 1 measure}.
+* *Proposal* (IID): `rt`, accumulated amount of hits on all (**t**otal) drum**r**oll-**t**ype notes during the determining section. The postponed-determining behavior of the `r` condition applies.
 * `p`, the percentage (%) of *<ruby>精<rt>sei</rt> 度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy during the determining section.
   * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
-* *Proposal*: `pp`, the **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") during the determining section.
-* *Proposal*: `ph`, the **p**ercentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its during the determining section.
-* *Proposal*: `pm`, **p**ercentage (%) of *avoided* bomb/**m**ine notes during the determining section.
-* *Proposal*: `pa`, **p**ercentage (%) of caught _**A**d libitum_ (**A**D-LIB) notes during the determining section.
+* *Proposal* (IID): `pp`, the **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") during the determining section.
+* *Proposal* (IID): `ph`, the **p**ercentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its during the determining section.
+* *Proposal* (IID): `pm`, **p**ercentage (%) of *avoided* bomb/**m**ine notes during the determining section.
+* *Proposal* (IID): `pa`, **p**ercentage (%) of caught _**A**d libitum_ (**A**D-LIB) notes during the determining section.
 * `d`, the percentage (%) of "precision"/accuracy of big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section. (**`d`** can be seen as a rotated `p`) &mdash; TJAPlayer2 for.PC
   * Defined but unimplemented in TJAPlayer2 for.PC
-* *Proposal*: `dp`, the percentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
-* *Proposal*: `dh`, the percentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
+* *Proposal* (IID): `dp`, the percentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
+* *Proposal* (IID): `dh`, the percentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
 * `b`, the percentage (%) of "precision"/accuracy of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments on **b**ig (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
   * > Formula: (*<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{amount of big missable hit-type notes, 1} × 100(%)
-* *Proposal*: `bp`, the percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
-* *Proposal*: `bh`, the percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
-* *Proposal*: `br`, accumulated amount of *strong* hits on **b**ig bar drum**r**oll notes during the determining section. The postponed-determining behavior of the `r` condition applies.
-* *Proposal*: `h`, amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, non-blank **h**its during the determining section.
+* *Proposal* (IID): `bp`, the percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
+* *Proposal* (IID): `bh`, the percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
+* *Proposal* (IID): `br`, accumulated amount of *strong* hits on **b**ig bar drum**r**oll notes during the determining section. The postponed-determining behavior of the `r` condition applies.
+* *Proposal* (IID): `h`, amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, non-blank **h**its during the determining section.
   * > Formula: `h` = `hh` + `rt`
-* *Proposal*: `hh`, amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, missable hit-type note **h**its during the determining section.
+* *Proposal* (IID): `hh`, amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, missable hit-type note **h**its during the determining section.
   * > Formula: `hh` = *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK
-* *Proposal*: `hp`, amount (**h**its) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") during the determining section.
-* *Proposal*: `am`, amount of _**a**voided_ bomb/**m**ine notes during the determining section.
-* *Proposal*: `ha`, amount of caught ("**h**it") _**A**d libitum_ (**A**D-LIB) notes during the determining section.
-* *Proposal*: `hdp`, amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
-* *Proposal*: `hdh`, amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
-* *Proposal*: `hb`, amount of *strong* **h**its on all **b**ig notes during the determining section. (**`b`** can be seen as an `h` with rounded bottom)
+* *Proposal* (IID): `hp`, amount (**h**its) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") during the determining section.
+* *Proposal* (IID): `am`, amount of _**a**voided_ bomb/**m**ine notes during the determining section.
+* *Proposal* (IID): `ha`, amount of caught ("**h**it") _**A**d libitum_ (**A**D-LIB) notes during the determining section.
+* *Proposal* (IID): `hdp`, amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
+* *Proposal* (IID): `hdh`, amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
+* *Proposal* (IID): `hb`, amount of *strong* **h**its on all **b**ig notes during the determining section. (**`b`** can be seen as an `h` with rounded bottom)
   * > Formula: `hb` = `hbh` + `br`
-* *Proposal*: `hbp`, amount ("hits") of *strong* *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on **b**ig notes during the determining section.
-* *Proposal*: `hbh`, amount ("**h**its") of *strong* non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD ("**h**it") on **b**ig notes during the determining section.
-* `s`, the total **s**core points if (*proposed*) `<no-punctuation-str-name-section>` is not specified or otherwise (*proposed*) accumulated **s**core points during the specified named determining section. &mdash; TaikoJiro v2.66
+* *Proposal* (IID): `hbp`, amount ("hits") of *strong* *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on **b**ig notes during the determining section.
+* *Proposal* (IID): `hbh`, amount ("**h**its") of *strong* non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD ("**h**it") on **b**ig notes during the determining section.
+* `s`, the total **s**core points if (*proposed* (IID)) `<no-punctuation-str-name-section>` is not specified or otherwise (*proposed* (IID)) accumulated **s**core points during the specified named determining section. &mdash; TaikoJiro v2.66
   * *Unspecified*: The behavior when either unsupported scoring mode or the default value is specified to [the `SCOREMODE:` header](#scoremode) or the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true performance" option is enabled.
-* *Proposal*: `g`, percentage (%) of *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge change during the determining section, −100 ≤ `g` ≤ 100
-* *Proposal*: `c`, the maximum/longest **c**ombo during the determining section (counted from 0).
-* *Proposal*: `?`, a uniform distribution random value (float), 0 ≤ `?` \< 100
+* *Proposal* (IID): `g`, percentage (%) of *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge change during the determining section, −100 ≤ `g` ≤ 100
+* *Proposal* (IID): `c`, the maximum/longest **c**ombo during the determining section (counted from 0).
+* *Proposal* (IID): `?`, a uniform distribution random value (float), 0 ≤ `?` \< 100
 
 If the condition value...
 
@@ -2042,7 +2044,7 @@ They are conventionally used as follow:
 // ...
 ```
 
-An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--end) commands. If no commands & [notechart symbols](#notechart-symbol) occur after the explicit defined `#BRANCHEND` and before such commands, the `#BRANCHEND` can be omitted.
+An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--end) commands. If no commands & [notechart symbols](#notechart-symbols) occur after the explicit defined `#BRANCHEND` and before such commands, the `#BRANCHEND` can be omitted.
 
 *Unspecified*: The behavior when any of the followings are violated:
 
@@ -2102,7 +2104,7 @@ The definition of unused "branches"/paths due to forced "branch"/path determinat
 * In TaikoJiro 1, if a bar drumroll note in a branch has no any earlier-defined notes in the branch or any non-branching sections, hit-type notes whose time position is not >85ms (?) before the note head of the problematic drumroll in other branches become impossible to hit. \
   In each affected branch, hit-type notes become possible to hit again at the note end of any drumroll-type note with the time position not >9ms (?) before the note end of the problematic drumroll.
 
-### *Proposal*: `#LAYERSTART` / `#LAYEREND`
+### *Proposal* (IID): `#LAYERSTART` / `#LAYEREND`
 
 ***Scope***: notechart, non-before, sequential \
 ***Late effect scope***: (none) \
@@ -2123,11 +2125,11 @@ They can be used as follow:
 #LAYEREND // Sometimes optional, see below
 ```
 
-An implicit `#LAYEREND` is placed before `#LAYERSTART` & [`#END`](#start--end) commands. If no commands & [notechart symbols](#notechart-symbol) occur after the explicit defined `#LAYEREND` and before such commands, the `#LAYEREND` can be omitted.
+An implicit `#LAYEREND` is placed before `#LAYERSTART` & [`#END`](#start--end) commands. If no commands & [notechart symbols](#notechart-symbols) occur after the explicit defined `#LAYEREND` and before such commands, the `#LAYEREND` can be omitted.
 
 *Unspecified*: The behavior when [the `#BRANCHSTART` commands, `#BRANCHEND`](#branchstart--branchend), [`#N`, `#E`, `#M`](#n--e--m) are placed within the layer section definition.
 
-### *Proposal*: #LAYER
+### *Proposal* (IID): #LAYER
 
 ***Scope***: notechart, non-before \
 ***Late effect scope***: (none) \
@@ -2145,7 +2147,7 @@ Start the definition of a layer of the layer section. A layer can span over mult
 * At most one definition should exist for a layer.
 * The amount of measures and their total time duration should be consistent among all of the defined layers.
 
-### *Proposal*: #LAYERORDER
+### *Proposal* (IID): #LAYERORDER
 
 ***Scope***: branch, non-before \
 ***Late effect scope***: (none) \
@@ -2346,9 +2348,9 @@ Append ("**include**") the notechart definition content defined the included fil
 **Split**/**merge** the note field ("**lane**") into/from top and bottom note field, with <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> notes on the top note field, <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> notes on the bottom note field, and other notes on the middle of these 2 note fields.
 
 * `#SPLITLANE` / (*Proposed*) `#SPLITLANE 1`
-* *Proposal*: `#SPLITLANE <float-split-amount>`
+* *Proposal* (IID): `#SPLITLANE <float-split-amount>`
   * Specify the split amount, 1 for `#SPLITLANE` & 0 for `#MERGELANE`. A negative split amount makes <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> notes on the bottom note field and <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> notes on the top note field intead.
-* Initial value / `#MERGELANE` / (*Proposed*) `#SPLITLANE 0`
+* Initial value / `#MERGELANE` / (*Proposed* (IID)) `#SPLITLANE 0`
 
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0
 
@@ -2515,7 +2517,7 @@ The arguments are whitespace-separated.
   * Only the halfwidth space ("` `") is allowed for separating arguments
   * `<unsigned-int-video-index>` must be exactly 2 decimal digits (with `0` prefixed if necessary).
 
-### *Proposal*: #LUAMOD
+### *Proposal* (IID): #LUAMOD
 
 ***Scope***: branch, timing (intended; depending on usage) \
 ***Late effect scope***: (none) \
@@ -2541,7 +2543,7 @@ Execute the given **Lua** code with predefined variables describing the current 
 
 Intended for adding decorative visual/audio **effect**s ("**FX**s"), including changing the moving path of notes, (dis)play extra images and sounds, *etc.*
 
-Intended to be used in conjunction with (**Proposal**) [command modifiers](#proposal-command-modifier).
+Intended to be used in conjunction with [**Proposed** ( (IID) command modifiers](#proposal-iid-command-modifier).
 
 The exact behavior is *unspecified*.
 
@@ -2549,7 +2551,7 @@ The exact behavior is *unspecified*.
 
 Inspired by StepMania.
 
-### *Proposal*: Command Modifier
+### *Proposal* (IID): Command Modifier
 
 ***Scope***: (Part of a command), gimmicky \
 ***Late effect scope***: (As specified) \
@@ -2580,7 +2582,7 @@ The characters after the first semicolon (`;`) are ignored in TaikoJiro 1 but ca
   * `*`, the range is unlimited.
   * `<unsigned-int-amount-note>n` specifies the maximum amount of affected notes.
   * `<range-duration-*>` specifies the time/beat range of affected notes (see below).
-* *Proposal*: `<spline-specifier>`
+* *Proposal* (IID): `<spline-specifier>`
   * (Empty), override the effect of the whole scrolling path.
   * `<range-path-deactivate>:<range-path-activate>` &mdash; Override the effect of the part of scrolling path from `<range-path-activate>` (inclusive) before the judgment time to `<range-path-deactivate>` (inclusive) before the judgment time.
     * `<range-path-deactivate>` & `<range-path-activate>` can be one of:
@@ -2718,7 +2720,7 @@ During the defined duration interval within a drumroll-type note, either `0` or 
 
 * In TaikoJiro, all drumroll-type note head symbols can be used in place of the repeated symbol.
 
-*Proposal*: Each symbol of the note head inside a bar drumroll note denotes a middle point of the bar which can scroll independently to the head, end, and other middle points of the note.
+*Proposal* (IID): Each symbol of the note head inside a bar drumroll note denotes a middle point of the bar which can scroll independently to the head, end, and other middle points of the note.
 
 For special balloons (`9`), the last occurrence of repeated note head symbol (if any) defines the full bonus time point. If the note is cleared, full bonus is awarded only by clearing the note non-after that point and partial bonus is awarded otherwise. The full bonus time point is *unspecified* when no repeated note head symbols ever occur.
 
@@ -2727,7 +2729,7 @@ For special balloons (`9`), the last occurrence of repeated note head symbol (if
 By default, drumroll-type notes are ended non-after one of:
 
 * The definition position of an `8`.
-  * *Proposal*: The ending position can be earlier than the `8` by an *unspecified* duration.
+  * *Proposal* (IID): The ending position can be earlier than the `8` by an *unspecified* duration.
 * An *unspecified* duration before a hit-type note symbol.
   * In TaikoJiro, the duration is one of:
     * In notecharts without any "branch"/path sections: 50ms.
@@ -2737,7 +2739,7 @@ By default, drumroll-type notes are ended non-after one of:
     * In TaikoJiro v2.36+, the hit-type note become impossible to hit if the balloon-type note is not cleared.
       * This behavior is in reference to *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt> 3<rt>San</rt></ruby>（<ruby>辛<rt>kara</rt> 口<rt>kuchi</rt></ruby>）* ("Taiko Tower 3 (hard)"), where the duration interval of balloon-type notes overlaps with the following hit-type note, which can be achieved alternatively by using `#DELAY`s with negative duration to place the hit-type note.
         * See <https://wikiwiki.jp/taiko-fumen/収録曲/その他/太鼓タワー3%28辛口%29>
-      * *Proposal*: Restrict this behavior to `COURSE:Tower`.
+      * *Proposal* (IID): Restrict this behavior to `COURSE:Tower`.
 * In TaikoJiro, the definition position of the last note symbol of the notechart, except when the note head is in the definition of a "branch"/path other than the *<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>* Normal "branch"/path.
 
 In the official games, drumroll-type notes are usually intentionally made to end earlier than the designed ending beat position by the amount of beats of a 1/48th note.
@@ -2989,7 +2991,7 @@ The honorific title is omitted.
     * Utilizing the constant speed past judgment in TaikoJiro?
   * Bar lines that disappears.
     * Unknown threshold to hide bar lines past judgment in TaikoJiro.
-* Add (unimplemented) *proposal*s from simulator develops.
+* Add (unimplemented) *proposal*s from simulator developers.
 * Add separated recommendation for respectively simulator behavior and chart creators and editors. Currently, the relevant paragraphs have ambiguous phrasing.
 * Add standardization information, especially the OpenTaiko-OutFox standardization and the direction toward behavior unification. Currently, the relevant paragraphs lack clarifications and are misleading.
 * Fix missing and/or unverified information about Project OutFox.
