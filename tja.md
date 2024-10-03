@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2024-09-29 (UTC+8)
+* Last changed: 2024-10-04 (UTC+8)
 
 This is an unofficial compilation and commentation of the TJA format & its related formats.
 
@@ -23,20 +23,28 @@ When there exist multiple equivalent usages accepted by the simulators, the conv
 
 ## Formats
 
-Known notechart formats used in <ruby>**太**<rt>**T**ai</rt> 鼓<rt>ko</rt> の<rt>no</rt> **達**<rt>**T**atsu</rt> **人**<rt>**j**in</rt></ruby> games and simulators:
+### Notechart Formats
+
+Known external-use notechart formats used in <ruby>**太**<rt>**T**ai</rt> 鼓<rt>ko</rt> の<rt>no</rt> **達**<rt>**T**atsu</rt> **人**<rt>**j**in</rt></ruby> games and simulators:
 
 Extension | Full Name | Content | Supported by | Specification
 --- | --- | --- | --- | ---
 `.bin` | **Bin**ary (*<ruby>譜<rt>Fu</rt> 面<rt>men</rt></ruby>* Notechart File Format) | Notechart metadata + definition (binary file) | Official games, taiko-web (plugin "Fumen File Format") | Proprietary format, not explained in this article.
-`.tjf` | **T**atsu**j**in *<ruby>**譜**<rt>**F**u</rt> 面<rt>men</rt></ruby>* Notechart Data (?) | Notechart metadata + definition | Taikosan, TaikoJiro 1 |
-`.tja` | **T**atsu**j**in Notechart Format **A**(?) (?) | Notechart metadata + definition | TaikoJiro, TJAPlayer2 for.PC, taiko-web ver.18.10.11, OutFox v0.4.9.9, TaikoManyGimmicks |
-`.tjc` | **T**atsu**j**in **C**ourse (?) | Notechart set metadata | TaikoJiro v2.34, TaikoJiro 2 v0.98 |
-`.osu` | **osu**! Beatmap | Notechart metadata + definition | osu!, taiko-web | See <https://osu.ppy.sh/wiki/en/Client/File_formats>
-`.osz` | **os**u! Beatmap Archive ("**Z**ipped") | Notechart metadata + definition + resources (compressed binary file) | osu! | See <https://osu.ppy.sh/wiki/en/Client/File_formats>
+`.tjf` | **T**atsu**j**in *<ruby>**譜**<rt>**F**u</rt> 面<rt>men</rt></ruby>* Notechart Data (?) | Notechart metadata + definition | Taikosan, TaikoJiro 1 | Taikosan's `Readme.txt`
+`.tja` | **T**atsu**j**in Notechart Format **A**(?) (?) | Notechart metadata + definition | TaikoJiro, Malody, TJAPlayer2 for.PC, taiko-web ver.18.10.11, OutFox v0.4.9.9, TaikoManyGimmicks | TaikoJiro's `readme.txt`. <br/> But many extensions exist
+`.tjc` | **T**atsu**j**in **C**ourse (?) | Notechart set metadata | TaikoJiro v2.34, TaikoJiro 2 v0.98 | TaikoJiro's `readme.txt`
+`.osu` | **osu**! Beatmap | Notechart metadata + definition | osu!, taiko-web, OutFox (Taiko mode planned) | See <https://osu.ppy.sh/wiki/en/Client/File_formats>. <br/> An `.osu` file with std or Taiko mode can be played as a Taiko chart.
+`.mc` | **M**alody **C**hart (?) | Notechart metadata + definition (JSON) | Malody | No known official documentation. See the non-official parser <https://github.com/LuiCat/mc2tja>. <br/> An `.mc` file with Taiko mode can be played as a Taiko chart.
+`.dtx` | **DTX**Mania Chart (?) | Notechart metadata + definition | TJAPlayer2 for.PC (early versions, deprecated (?)) | First used in DTXMania, inherited by TJAPlayer2 for.PC. <br/> No official documentation for Taiko chart. For general chart, see (English translation) <https://osdn.net/projects/dtxmania/wiki/DTX%20data%20format>, <br/> (Japanese original) <https://osdn.net/projects/dtxmania/wiki/DTX%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88>
 `.tci` | Open **T**aiko **C**hart **I**nformation | Notechart metadata (JSON) | Koioto (plugin "OpenTaikoChart"), TJAPlayer3-f v1.6.0.1 | See <https://github.com/AioiLight/Open-Taiko-Chart>
-`.tcc` | Open **T**aiko **C**hart **C**ourse | Notechart definition (JSON) | Koioto (plugin "OpenTaikoChart"), TJAPlayer3-f v1.6.0.1 | See <https://github.com/AioiLight/Open-Taiko-Chart>
-`.tcm` | Open **T**aiko **C**hart **M**edley | Notechart set metadata (JSON) | TJAPlayer3-f v1.6.0.1 | See <https://github.com/AioiLight/Open-Taiko-Chart>
-`.tmg` | **T**aiko**M**any**G**immicks | Notechart metadata + definition | TaikoManyGimmicks v0.6.1α | The plaintext form is similar to `.tja` but has some syntax differences (explained right below).
+`.tcc` | Open **T**aiko **C**hart **C**ourse | Notechart definition (JSON with non-parsed strings) | Koioto (plugin "OpenTaikoChart"), TJAPlayer3-f v1.6.0.1 | See <https://github.com/AioiLight/Open-Taiko-Chart>
+`.tcm` | Open **T**aiko **C**hart **M**edley | Notechart set metadata (JSON) | Koioto (plugin "OpenTaikoChart" v3.0), TJAPlayer3-f v1.6.0.1 | See <https://github.com/AioiLight/Open-Taiko-Chart>
+`.tmg` | **T**aiko**M**any**G**immicks | Notechart metadata + definition | TaikoManyGimmicks v0.6.1α | TaikoManyGimmicks' `Readme.txt`. <br/> The plaintext form is similar to `.tja` but has some syntax differences (explained right below).
+
+`.osu` and `.mc` have corresponding compressed formats, which include multiple notecharts for each difficulty and additional resource files:
+
+* `.osu` &mdash; `.osz`: **os**u! Beatmap Archive ("**Z**ipped")
+* `.mc` &mdash; `.mcz`: **M**alody **C**hart **Z**ipped (?)
 
 The TMG format (`.tmg`) has plaintext and binary form, where the plaintext form is similar to the TJA format (`.tja`) and has the following features:
 
@@ -46,7 +54,19 @@ The TMG format (`.tmg`) has plaintext and binary form, where the plaintext form 
 * Math expressions and functions are allowed for each [`number`-typed and `complex-ri-number`&ndash;typed](#value-type) argument for commands.
 * Substitution of predefined variables are allowed in each argument of headers & commands and in notechart definitions. For [`str`-typed](#value-type) argument, `#` (preserved after substitution) needed to be prepended for applying substitution (?).
 
-Excluding `.bin` & `.osz`, all the formats listed above are text-based and can be edited with any text editor.
+Excluding `.bin` and the compressed formats, all the formats listed above are text-based and can be edited with any text editor.
+
+### Genre Formats
+
+Known external-use genre formats used in <ruby>**太**<rt>**T**ai</rt> 鼓<rt>ko</rt> の<rt>no</rt> **達**<rt>**T**atsu</rt> **人**<rt>**j**in</rt></ruby> games and simulators:
+
+Filename/extension | Content | Supported by | Notes
+--- | --- | --- | ---
+`genre.ini` | Genre definition for notecharts in the (sub)directory/ies. INI config file. | TaikoJiro, taiko-web |
+`box.def` | Genre definition for notecharts in the (sub)directory/ies. `.dtx`-syntax headers. | TJAPlayer2 for.PC, taiko-web | First used in DTXMania, inherited by TJAPlayer2 for.PC
+`folder.json` | Genre definition for notecharts in the (sub)directory/ies. (JSON) | Koioto |
+`songtitles.txt` | List of file paths to notecharts (?) | taiko-web
+`.t3u8` | List of file paths to notecharts | TJAPlayer3 | See <https://github.com/twopointzero/TJAPlayer3/blob/develop/docs/song-list-files.md>. Based on and having identical syntax with `.m3u8`. `.m3u8` is a UTF-8&ndash;encoded variant of `.m3u` (**M**P**3** **U**RL).
 
 ## About TJA
 
