@@ -66,7 +66,7 @@ Filename/extension | Content | Supported by | Notes
 `box.def` | Genre definition for notecharts in the (sub)directory/ies. `.dtx`-syntax headers. | TJAPlayer2 for.PC, taiko-web | First used in DTXMania, inherited by TJAPlayer2 for.PC
 `folder.json` | Genre definition for notecharts in the (sub)directory/ies. (JSON) | Koioto |
 `songtitles.txt` | List of file paths to notecharts (?) | taiko-web
-`.t3u8` | List of file paths to notecharts | TJAPlayer3 | See <https://github.com/twopointzero/TJAPlayer3/blob/develop/docs/song-list-files.md>. Based on and having identical syntax with `.m3u8`. `.m3u8` is a UTF-8&ndash;encoded variant of `.m3u` (**M**P**3** **U**RL).
+`.t3u8` | List of file paths to notecharts | TJAPlayer3 v4.7.0 | See <https://github.com/twopointzero/TJAPlayer3/blob/develop/docs/song-list-files.md>. Based on and having identical syntax with `.m3u8`. `.m3u8` is a UTF-8&ndash;encoded variant of `.m3u` (**M**P**3** **U**RL).
 
 ## About TJA
 
