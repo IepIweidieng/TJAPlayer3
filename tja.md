@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2024-10-04 (UTC+8)
+* Last changed: 2024-10-07 (UTC+8)
 
 This is an unofficial compilation and commentation of the TJA format & its related formats.
 
@@ -35,7 +35,7 @@ Extension | Full Name | Content | Supported by | Specification
 `.tjc` | **T**atsu**j**in **C**ourse (?) | Notechart set metadata | TaikoJiro v2.34, TaikoJiro 2 v0.98 | TaikoJiro's `readme.txt`
 `.osu` | **osu**! Beatmap | Notechart metadata + definition | osu!, taiko-web, OutFox (Taiko mode planned) | See <https://osu.ppy.sh/wiki/en/Client/File_formats>. <br/> An `.osu` file with std or Taiko mode can be played as a Taiko chart.
 `.mc` | **M**alody **C**hart (?) | Notechart metadata + definition (JSON) | Malody | No known official documentation. See the non-official parser <https://github.com/LuiCat/mc2tja>. <br/> An `.mc` file with Taiko mode can be played as a Taiko chart.
-`.dtx` | **DTX**Mania Chart (?) | Notechart metadata + definition | TJAPlayer2 for.PC (early versions, deprecated (?)) | First used in DTXMania, inherited by TJAPlayer2 for.PC. <br/> No official documentation for Taiko chart. For general chart, see (English translation) <https://osdn.net/projects/dtxmania/wiki/DTX%20data%20format>, <br/> (Japanese original) <https://osdn.net/projects/dtxmania/wiki/DTX%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88>
+`.dtx` | **DTX**Mania Chart (?) | Notechart metadata + definition | TJAPlayer2 for.PC (early versions, deprecated (?)) | First used in DTXMania, inherited by TJAPlayer2 for.PC. <br/> No official documentation for Taiko chart. For general chart, see (English translation) <https://osdn.net/projects/dtxmania/wiki/DTX%20data%20format>, <br/> (Japanese original) <https://osdn.net/projects/dtxmania/wiki/DTXデータのフォーマット>
 `.tci` | Open **T**aiko **C**hart **I**nformation | Notechart metadata (JSON) | Koioto (plugin "OpenTaikoChart"), TJAPlayer3-f v1.6.0.1 | See <https://github.com/AioiLight/Open-Taiko-Chart>
 `.tcc` | Open **T**aiko **C**hart **C**ourse | Notechart definition (JSON with non-parsed strings) | Koioto (plugin "OpenTaikoChart"), TJAPlayer3-f v1.6.0.1 | See <https://github.com/AioiLight/Open-Taiko-Chart>
 `.tcm` | Open **T**aiko **C**hart **M**edley | Notechart set metadata (JSON) | Koioto (plugin "OpenTaikoChart" v3.0), TJAPlayer3-f v1.6.0.1 | See <https://github.com/AioiLight/Open-Taiko-Chart>
