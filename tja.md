@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2024-10-14 (UTC+8)
+* Last changed: 2024-10-15 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1184,6 +1184,8 @@ Most commands are expected to be placed within the notechart definition enclosed
 
 Commands allowed in pre-#START position will be explicitly denoted.
 
+*Proposal* (IID): If a command with [command-time effects](#command-effect-time) is placed in the pre-#START position, its command-time effects apply as if these effects were [static effects](#command-effect-time).
+
 *Unspecified*: The behavior when any commands are placed before any headers outside the notechart definition.
 
 #### Command Scope
@@ -1197,13 +1199,27 @@ Except for one-shot commands, the effect of each command continues until the nex
 
 Some branch-scoped commands are non-sequential, *i.e.*, they can be arranged freely within the same beat position without causing any behavior changes, as long as both their relative order to the sequential commands and the relative order among commands which override each other are not changed. All commands with other type of scope are implicitly sequential.
 
-#### Command Late Effect Scope
+#### Command Effect Time
 
-A command may have some effects applied only when their approach phase is reached. These effects are defined as the late effects. The late effect scope is defined by the targeted game objects which are affected by the late effects.
+A command may have each part of its effects applied at different time position.
 
-The approach phase of a command occurs before the head of their defined beat position by a specified time or beat duration (if any) or no duration.
+Each part of the effects can be classified into the following effect time types according to the effect-applying time position (listed in the order of descending static-ness):
 
-*Proposal* (IID): Allow the late effect scope to be overridden for branch-scoped commands targeting notes & bar lines, see [*Proposal* (IID): Command Modifier](#proposal-iid-command-modifier).
+Effect time | Applying time
+--- | ---
+static | Theoretically negative infinity (−∞) measures (presumely −∞ seconds) before the first measure, practically before the notechart is started.
+command-time | A specific time position relative to the time position of the command.
+object-time | A specific time position relative to the time position of notechart objects (including notes and bar lines).
+
+If an effect can be interpreted as different effect time types, the effect is classified as the most static-ness type interpreted.
+
+As a special case, for an effect affecting the scrolling path of notechart objects, the effect is classified as object-time only if the path is a direct or indirect function of the time position of notechart objects, otherwise the effect is classified as command-time or static.
+
+#### Non-static Effect Scope
+
+The non-static effect scope is defined by the targeted game objects which are affected by the non-static effects.
+
+*Proposal* (IID): Allow the scope of non-static effects to be overridden for branch-scoped commands targeting notes & bar lines, see [*Proposal* (IID): Command Modifier](#proposal-iid-command-modifier).
 
 #### Command Effect Target
 
@@ -1219,7 +1235,7 @@ Commands only affect their targeting game objects. The target of each command ca
 
 ***Pre-[#START](#start--end) position***: required; allowed &mdash; OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope***: per&ndash;player-side (or branch, non-before), gimmicky \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: notes, bar lines
 
 Use a **scroll**ing mode similar to the scrolling method used in either **B**E**M**ANI-series or the official Taiko ("**n**or**m**al") game series for the non-before notes and bar lines, unless overridden by user settings.
@@ -1284,6 +1300,9 @@ Reference: <https://taiko.namco-ch.net/taiko/en/howto/papamama.php#papamama>
 
 ***Pre-[#START](#start--end) position***: forbidden (enclosing the notechart definition) \
 ***Scope***: per&ndash;player-side (or notechart, non-before), sequential \
+***Effect time***: static <sub>notechart definition</sub> + command-time <sub>show ending animation</sub> (for `#END` in some simulators) \
+***Non-static effect scope***: all \
+***Effect target***: notes, bar lines, notefield(s), gameplay screen
 
 Respectively **start** / **end** the region of notechart definition.
 
@@ -1332,7 +1351,8 @@ Respectively **start** / **end** the region of notechart definition.
 ### #BPMCHANGE
 
 ***Scope***: branch, non-before, timing \
-***Late effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll)); (none) (otherwise) \
+***Effect time***: static <sub>objects' distance</sub> + command-time <sub>objects' velocity</sub> \
+***Non-static effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll)); (none) (otherwise) \
 ***Effect target***: notes, bar lines
 
 **Change** the **BPM**.
@@ -1350,7 +1370,7 @@ Respectively **start** / **end** the region of notechart definition.
 ### #MEASURE
 
 ***Scope***: branch, measure non-before, timing \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: notes, bar lines
 
 Change the time signature / meter signature / **measure** signature.
@@ -1382,7 +1402,8 @@ Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby
 ### #DELAY
 
 ***Scope***: branch, non-before, timing, sequential \
-***Late effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll), positive value); (none) (otherwise) \
+***Effect time***: static <sub>objects' timing</sub> + command-time <sub>freeze scrolling</sub> \
+***Non-static effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll), positive value); (none) (otherwise) \
 ***Effect target***: notes, bar lines
 
 Adjust (**delay**) the time position of all notechart object (including commands) non-preceding the `#DELAY` command by the specified time duration.
@@ -1415,7 +1436,8 @@ For the timing of notechart object, multiple `#DELAY` commands placed at the sam
 ### `#GOGOSTART` / `#GOGOEND`
 
 ***Scope***: branch, non-before, scoring, sequential \
-***Late effect scope***: notes: (none), gameplay screen: all \
+***Effect time***: static <sub>per-note scoring</sub> + command-time <sub>visual</sub> \
+***Non-static effect scope***: notes: (none), gameplay screen: all \
 ***Effect target***: notes, gameplay screen
 
 Respectively **start** / **end** a *<ruby>ゴー<rt>Goo</rt> ゴー<rt>Goo</rt> タ<rt>Ta</rt> イ<rt>i</rt> ム<rt>mu</rt></ruby>* **Go-Go** Time section if not already respectively started / ended.
@@ -1430,7 +1452,7 @@ For playing the Go-Go Time entering effects during an existing Go-Go Time sectio
 ### `#DUMMYSTART` / `#DUMMYEND`
 
 ***Scope***: branch, non-before, sequential \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: notes
 
 Respectively **start** / **end** a fake/dummy section if not already respectively started / ended.
@@ -1440,7 +1462,7 @@ Respectively **start** / **end** a fake/dummy section if not already respectivel
 ### #SCROLL
 
 ***Scope***: branch, non-before, gimmicky \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: notes, bar lines
 
 Change the **scroll**ing speed of notes & bar lines, relative to the normal scrolling velocity and direction.
@@ -1490,7 +1512,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 ### `#BARLINESCROLL`
 
 ***Scope***: branch, non-before, gimmicky \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: bar lines
 
 Change the **scroll**ing speed of only **bar** **line**s, relative to the normal scrolling velocity and direction and prevent this speed from being overridden by further [`#SCROLL`](#scroll).
@@ -1504,7 +1526,8 @@ Change the **scroll**ing speed of only **bar** **line**s, relative to the normal
 ### #HISPEED
 
 ***Scope***: branch, non-before, gimmicky \
-***Late effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll)); (none) (otherwise) \
+***Effect time***: static <sub>objects' distance</sub> + command-time <sub>objects' velocity</sub> \
+***Non-static effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll)); (none) (otherwise) \
 ***Effect target***: notes, bar lines
 
 Suddenly change the scrolling speed (**HiSpeed** / **hi**gh-**speed**) of notes & bar lines in BMS scrolling modes, as if the BPM were changed accordingly.
@@ -1519,7 +1542,8 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 ### *Proposal* (IID): #SPEED
 
 ***Scope***: branch, non-before, gimmicky \
-***Late effect scope***: all \
+***Effect time***: command-time \
+***Non-static effect scope***: all \
 ***Effect target***: notes, bar lines
 
 Suddenly change the base scrolling **speed** of notes & bar lines. In other words, suddenly change the normal scrolling velocity and direction.
@@ -1541,7 +1565,7 @@ If the notes & the bar lines are rotated around their center accordingly when a 
 ### #DIRECTION
 
 ***Scope***: branch, non-before, gimmicky \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: notes, bar lines
 
 Change the scrolling **direction** of notes & bar lines.
@@ -1576,7 +1600,7 @@ Change the scrolling **direction** of notes & bar lines.
 ### `#BARLINEOFF` / `#BARLINEON`
 
 ***Scope***: branch, non-before, gimmicky \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: bar lines
 
 Respectively disable ("turn **off**") / enable ("turn **on**") the display of all **bar** **line**s (including the special bar lines indicating the beginning of a *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path section) from the definition position and on.
@@ -1587,7 +1611,7 @@ Respectively disable ("turn **off**") / enable ("turn **on**") the display of al
 ### `#BARLINE`
 
 ***Scope***: branch, beat interval one-shot, gimmicky \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: bar lines
 
 Insert a fake/dummy normal **bar** **line** displayed at the head of the current beat position.
@@ -1598,7 +1622,8 @@ Insert a fake/dummy normal **bar** **line** displayed at the head of the current
 ### #JPOSSCROLL
 
 ***Scope***: branch, non-before, gimmicky \
-***Late effect scope***: all \
+***Effect time***: command-time \
+***Non-static effect scope***: all \
 ***Effect target***: notes, bar lines, judgment mark, note field
 
 Move ("**scroll**") the **pos**ition of the **j**udgment circle from the current position.
@@ -1639,7 +1664,7 @@ The arguments are whitespace-separated.
 ### #JUDGEDELAY
 
 ***Scope***: branch, non-after, gimmicky \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: notes, bar lines
 
 Specify the per&ndash;note/bar line visual **judgment** point to be offset ("**delay**") from the judgment mark.
@@ -1666,7 +1691,8 @@ The arguments are whitespace-separated.
 ### SUDDEN / HIDDEN Commands
 
 ***Scope***: branch, non-before, gimmicky \
-***Late effect scope***: (none) \
+***Effect time***: object-time \
+***Non-static effect scope***: non-before \
 ***Effect target***: notes
 
 Make non-preceding notes and their *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* "Note phoneticization" respectively appear and move **sudden**ly / disappear ("**hidden**") and stop moving suddenly.
@@ -1706,7 +1732,7 @@ The arguments are whitespace-separated.
 ### #NOTESPAWN
 
 ***Scope***: branch, non-before, gimmicky \
-***Late effect scope***: (none) \
+***Effect time***: object-time \
 ***Effect target***: notes
 
 Specify the displaying ("**spawn**") duration of **note**s before the time point of judgment.
@@ -1729,7 +1755,8 @@ The arguments are whitespace-separated.
 ### `#ENABLEDORON` / `#DISABLEDORON`
 
 ***Scope***: branch, non-before, gimmicky \
-***Late effect scope***: all \
+***Effect time***: command-time \
+***Non-static effect scope***: all \
 ***Effect target***: notes
 
 Respectively **enable** / **disable** the ***<ruby>ド<rt>Do</rt> ロ<rt>ro</rt> ン<rt>n</rt></ruby>*** "note-wise stealth" game modifier. The *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* "Note phoneticization" is not hidden by this game modifier.
@@ -1740,7 +1767,8 @@ Respectively **enable** / **disable** the ***<ruby>ド<rt>Do</rt> ロ<rt>ro</rt>
 ### #LYRIC
 
 ***Scope***: branch, non-before, decorative \
-***Late effect scope***: all \
+***Effect time***: command-time \
+***Non-static effect scope***: all \
 ***Effect target***: gameplay screen
 
 Display the specified **lyric**.
@@ -1760,7 +1788,7 @@ Display the specified **lyric**.
 ### #SENOTECHANGE
 
 ***Scope***: branch, note one-shot, gimmicky \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: notes
 
 Override ("**change**") the automatically assigned *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* "**Note** phoneticization" ("**s**ound **e**ffect of a **note**" or "*<ruby>発<rt>Hatsu</rt> **声**<rt>**se**i</rt></ruby>* vocalization of a **note**" (?)) of the nearest note(s) placed non-before the command.
@@ -1841,7 +1869,7 @@ However, in the official Konga games, the general pattern is less consistent and
 ### *Proposal* (IID): #BALLOON (Command)
 
 ***Scope***: branch, note one-shot \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: balloon-type notes
 
 Basically the same as the **[`BALLOON:`](#balloon-headers)** header, except that the `#BALLOON` command only applies to non-preceding notes in the note definition.
@@ -1855,7 +1883,8 @@ The semantics are otherwise the same as the [BALLOON](#balloon-headers) headers.
 ### `#SECTION`
 
 ***Scope***: branch, instant one-shot \
-***Late effect scope***: all (across branches) \
+***Effect time***: static <sub>determine in-section objects</sub> + command-time <sub>switch sections</sub> \
+***Non-static effect scope***: last and current section (across branches) \
 ***Effect target***: (none)
 
 Start a *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart branch"/forked path&ndash;determining **section** by resetting the value of the conditions for determining the next not-yet-determined "branch(es)"/path(s) at the beginning of the section. See the explanation for [the `#BRANCHSTART` command](#branchstart--branchend).
@@ -1882,7 +1911,8 @@ An implicit `#SECTION` is placed at the beginning of every notechart definition.
 ### *Proposal* (IID): #SECTIONRESUME / #SECTIONEND
 
 ***Scope***: branch, instant one-shot \
-***Late effect scope***: all \
+***Effect time***: static <sub>determine in-section objects</sub> + command-time <sub>switch sections</sub> \
+***Non-static effect scope***: last and current section (across branches) \
 ***Effect target***: (none)
 
 **Resume**/**end** a *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart branch"/forked path&ndash;determining **section** by resuming/stopping updating the value of the conditions for determining the next not-yet-determined "branch(es)"/path(s) at the beginning of the section. See the explanation for [the `#BRANCHSTART` command](#branchstart--branchend).
@@ -1895,7 +1925,7 @@ This command can apply to only named "branch"/path-determining sections.
 ### `#LEVELHOLD`
 
 ***Scope***: branch, measure non-before \
-***Late effect scope***: all \
+***Effect time***: static \
 ***Effect target***: (none)
 
 Override the result of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path ("**level**") determination from the definition of this measure and on with the current branch/path ("**hold**").
@@ -1912,7 +1942,7 @@ Override the result of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt>
 ### *Proposal* (IID): #LEVELREDIR
 
 ***Scope***: branch, measure non-before \
-***Late effect scope***: all \
+***Effect time***: static \
 ***Effect target***: (none)
 
 Override the result of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path ("**level**") determination from the definition of this measure and on with specified branches/paths (**redir**ect).
@@ -1963,7 +1993,8 @@ Its effects end at either the next [`#LEVELHOLD`](#levelhold) or another #LEVELR
 ### #BRANCHSTART / `#BRANCHEND`
 
 ***Scope***: notechart, measure non-before, sequential \
-***Late effect scope***: notes, bar lines, & judgment mark(s): non-before, note field(s): non-before the previous measure (`#BRANCHSTART`) or (none) (`#BRANCHEND`) \
+***Effect time***: static <sub>objects' measure position</sub> + command-time <sub>objects' enabling status & visual</sub> \
+***Non-static effect scope***: notes, bar lines, & judgment mark(s): non-before, note field(s): non-before the previous measure (`#BRANCHSTART`) or (none) (`#BRANCHEND`) \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s)
 
 Respectively **start** / **end** the definition of a *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path section.
@@ -2078,7 +2109,7 @@ An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--en
 ### `#N` / `#E` / `#M`
 
 ***Scope***: notechart, measure non-before \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s)
 
 Start the definition of respectively the ***<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>*** **N**ormal / ***<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**E**xpert") / ***<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>*** **M**aster *<ruby>譜<rt>fu</rt> 面<rt>men</rt></ruby> (<ruby>分<rt>bun</rt> 岐<rt>ki</rt></ruby>)* "notechart branch"/forked path section.
@@ -2121,7 +2152,7 @@ The definition of unused "branches"/paths due to forced "branch"/path determinat
 ### *Proposal* (IID): `#LAYERSTART` / `#LAYEREND`
 
 ***Scope***: notechart, non-before, sequential \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s)
 
 Respectively **start** / **end** the definition of a layer section. All layers in a layer section occur simultaneously and all branch-scoped commands not targeting the gameplay screen are applied separately for each layer.
@@ -2146,7 +2177,7 @@ An implicit `#LAYEREND` is placed before `#LAYERSTART` & [`#END`](#start--end) c
 ### *Proposal* (IID): #LAYER
 
 ***Scope***: notechart, non-before \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s)
 
 Start the definition of a layer of the layer section. A layer can span over multiple layer sections.
@@ -2164,7 +2195,7 @@ Start the definition of a layer of the layer section. A layer can span over mult
 ### *Proposal* (IID): #LAYERORDER
 
 ***Scope***: branch, non-before \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s)
 
 Specify the draw **order** of this **layer** relative to other layers in the current layer section for the notes & bar lines non-before the current beat position and the judgment mark(s) & note field(s) (if any) for this layer.
@@ -2176,7 +2207,8 @@ Specify the draw **order** of this **layer** relative to other layers in the cur
 ### #NEXTSONG
 
 ***Scope***: notechart, non-before \
-***Late effect scope***: all \
+***Effect time***: command-time \
+***Non-static effect scope***: all \
 ***Effect target***: all
 
 Switch to the **next song** in the *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode".
@@ -2202,7 +2234,7 @@ See [TJC Header](#tjc-header) for the header version of the `#NEXTSONG` command.
 ### #GAMETYPE
 
 ***Scope***: branch, non-before \
-***Late effect scope***: (none) (?) \
+***Effect time***: static \
 ***Effect target***: notes, bar lines
 
 Specify the **game** mode ("**type**") for the notes non-before the current beat position. The meaning of the note symbols non-before the current beat position is changed accordingly; see [TJA Notechart Definition](#tja-notechart-definition).
@@ -2221,10 +2253,14 @@ See [the `GAME:` header](#game) for specifying the initial game mode for the not
 
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0, OutFox v0.4.18
 
+#### Compatibility Issues
+
+* In OpenTaiko (0auBSQ) v0.6.0 (as for b3), the effect time is command-time, and the non-static effect scope is all. The static behavior has been proposed and will be in a newer version.
+
 ### NOTE / BARLINE Commands
 
 ***Scope***: branch, non-before, gimmicky \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: notes, bar lines
 
 Manipulate the display properties of **note**s & **bar** **line**s.
@@ -2260,13 +2296,13 @@ Setters:
   * Specify the opacity ("**α** channel"/"**alpha** channel") of notes & bar lines.
   * Defaults to `#ALPHA(255)`
 
-
 ***First seen in***: TaikoManyGimmicks
 
 ### #GRADATION
 
-***Scope***: branch, non-before, gimmicky, sequential \
-***Late effect scope***: non-before \
+***Scope***: branch, gradation group, gimmicky, sequential \
+***Effect time***: command-time \
+***Non-static effect scope***: gradation group \
 ***Effect target***: notes, bar lines
 
 Control the commands apply to the starting/ending of the per&ndash;note/bar line approaching phase ("**gradation**").
@@ -2300,11 +2336,14 @@ The arguments are whitespace-separated.
     * `10`, Bounce
   * See <https://easings.net/> for a visual preview and the actual equation.
 * `#GRADATION end` &mdash; TaikoManyGimmicks (TJA)
+  * Start a gradation group.
   * Make the following commands apply to the **end**ing of the approaching phase.
   * Each commands appear after `#GRADATION start <float-seconds-approach-duration> <enum-int-easing-points> <enum-int-easing-function>` are specified again with a possibly different value here.
 * `#GRADATION(Start)` &mdash; TaikoManyGimmicks v0.6.1α
+  * Start a gradation group.
   * End the interpolated command definition section and **start** a section of normal notechart definition.
 * `#GRADATION init` &mdash; TaikoManyGimmicks (TJA) / `#GRADATION(End)` &mdash; TaikoManyGimmicks v0.6.1α
+  * End a gradation group.
   * Stop ("**end**") applying ("**init**ialize") effects specified by the `#GRADATION` command to non-preceding notes and bar lines.
 
 They are conventionally used as follow:
@@ -2330,6 +2369,8 @@ They are conventionally used as follow:
   #GRADATION(End) // Optional sometimes
   ```
 
+If a static effect of a command is specified to be interpolated, the static effect will be overridden by the command-time version of the same effect with the time position relative to the beginning of the gradation group.
+
 *Unspecified*: Which commands are supported by the `#GRADATION` command.
 
 Commands supporting the `#GRADATION` command in TaikoManyGimmicks:
@@ -2344,7 +2385,7 @@ Commands supporting the `#GRADATION` command in TaikoManyGimmicks:
 ### #INCLUDE
 
 ***Scope***: branch (?), (depending on included notechart definition content) \
-***Late effect scope***: (depending on included notechart definition content) \
+***Effect time***: (depending on included notechart definition content) \
 ***Effect target***: (depending on included notechart definition content)
 
 Append ("**include**") the notechart definition content defined the included file to the current definition. The included file can include any headers and commands in the TMG format.
@@ -2356,7 +2397,8 @@ Append ("**include**") the notechart definition content defined the included fil
 ### `#SPLITLANE` / `#MERGELANE`
 
 ***Scope***: branch, non-before \
-***Late effect scope***: all \
+***Effect time***: command-time \
+***Non-static effect scope***: all \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s)
 
 **Split**/**merge** the note field ("**lane**") into/from top and bottom note field, with <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> notes on the top note field, <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> notes on the bottom note field, and other notes on the middle of these 2 note fields.
@@ -2371,7 +2413,8 @@ Append ("**include**") the notechart definition content defined the included fil
 ### OBJ / CAM Commands
 
 ***Scope***: branch, non-before, gimmicky \
-***Late effect scope***: all \
+***Effect time***: command-time \
+***Non-static effect scope***: all \
 ***Effect target***: gameplay screen
 
 Manipulate texture **obj**ects & the game screen **cam**ara.
@@ -2469,7 +2512,8 @@ The approach phase of a `#<property>START` command starts at its definition posi
 ### #BORDERCOLOR
 
 ***Scope***: branch, non-before, decorative \
-***Late effect scope***: all \
+***Effect time***: command-time \
+***Non-static effect scope***: all \
 ***Effect target***: gameplay screen
 
 Set the **color** of the displayed region outside the **border** of the gameplay screen (when the gameplay screen camera is manipulated).
@@ -2482,7 +2526,8 @@ Set the **color** of the displayed region outside the **border** of the gameplay
 ### #CHANGETEXTURE / #RESETTEXTURE
 
 ***Scope***: branch, non-before, decorative \
-***Late effect scope***: all \
+***Effect time***: command-time \
+***Non-static effect scope***: all \
 ***Effect target***: gameplay screen
 
 Respectively **change** / restore ("**reset**") the texture used in the current skin.
@@ -2496,7 +2541,8 @@ Respectively **change** / restore ("**reset**") the texture used in the current 
 ### #SETCONFIG
 
 ***Scope***: branch, non-before, gimmicky \
-***Late effect scope***: all \
+***Effect time***: command-time \
+***Non-static effect scope***: all \
 ***Effect target***: gameplay screen
 
 Override ("**set**") the **config** value read from the `SkinConfig.ini` of the currently used skin.
@@ -2511,7 +2557,8 @@ Override ("**set**") the **config** value read from the `SkinConfig.ini` of the 
 ### #BGAON / #BGAOFF
 
 ***Scope***: branch, non-before, decorative \
-***Late effect scope***: all \
+***Effect time***: command-time \
+***Non-static effect scope***: all \
 ***Effect target***: gameplay screen
 
 Start ("**on**")/stop ("**off**") playing the specified **b**ack**g**round video ("**a**nimation") defined by [the `BGA:` header](#bga) on the gameplay screen.
@@ -2534,7 +2581,7 @@ The arguments are whitespace-separated.
 ### *Proposal* (IID): #LUAMOD
 
 ***Scope***: branch, timing (intended; depending on usage) \
-***Late effect scope***: (none) \
+***Effect time***: static \
 ***Effect target***: notes, bar lines (intended; depending on usage)
 
 Execute the given **Lua** code with predefined variables describing the current beat position, the loaded notechart, *etc.*, after the notechart is loaded.
@@ -2550,7 +2597,8 @@ Inspired by StepMania.
 ### *Proposal*: #LUAFX
 
 ***Scope***: branch, gimmicky (intended; depending on usage) \
-***Late effect scope***: (Depending on usage) \
+***Effect time***: command-time + (optional) object-time <sub>note-path effects</sub> \
+***Non-static effect scope***: (Depending on usage) \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s) (intended; depending on usage)
 
 Execute the given **Lua** code with predefined variables describing the current beat position, the loaded notechart, *etc.*, when the beginning of the approach phase of the command is reached during gameplay.
@@ -2568,40 +2616,41 @@ Inspired by StepMania.
 ### *Proposal* (IID): Command Modifier
 
 ***Scope***: (Part of a command), gimmicky \
-***Late effect scope***: (As specified) \
+***Effect time***: command-time + (optional) object-time <sub>note-path effects</sub> \
+***Non-static effect scope***: (As specified) \
 ***Effect target***: notes, bar lines, note field(s)
 
 A command modifier can be specified to certain branch-scoped commands using the following form:
 
-* `#COMMAND values; <scope-specifier>; <approach-specifier>`
+* `#COMMAND values; <effect-scope-specifier>; <approach-specifier>`
   * The last semicolon-separated element(s) and trailing semicolon(s) (`;`) can be omitted:
     * `<approach-specifier>` defaults to `0:Linear, 0:Linear`
-    * `<scope-specifier>` defaults to (empty).
+    * `<effect-scope-specifier>` defaults to (empty).
 
 The whitespace rule of the [comma (`,`)](#comma) also applies to the semicolon (`;`).
 
 The characters after the first semicolon (`;`) are ignored in TaikoJiro 1 but cause crashes in TaikoJiro 2 when loaded.
 
-`<scope-specifier>` specifies the late effect scope of the command.
+`<effect-scope-specifier>` specifies the non-static effect scope of the command.
 
-* Format: `<affected-range-specifier>, <spline-specifier>`
+* Format: `<command-time-scope-specifier>, <object-time-scope-specifier>`
   * The last comma-separated element(s) can be omitted.
-* `<affected-range-specifier>` can be one of:
+* `<command-time-scope-specifier>` can be one of:
   * (Empty) &mdash; the default.
   * `:` &mdash; (None): Affect no notechart objects.
-  * `:<range-affected-non-before>` &mdash; Non-before: Affect notechart objects non-before the point.
-  * `<range-affected-before>:` / `<range-affected-before>:0` &mdash; Before, sudden: Suddenly affect notechart objects before the point.
-  * `<range-affected-before>:<range-affected-non-before>` &mdash; Both, sudden: Suddenly affect notechart objects near to the point.
-* `<range-affected-before>` & `<range-affected-non-before>` can be one of:
+  * `:<range-command-time-non-before>` &mdash; Non-before: Affect notechart objects non-before the point.
+  * `<range-command-time-before>:` / `<range-command-time-before>:0` &mdash; Before: Affect notechart objects before the point.
+  * `<range-command-time-before>:<range-command-time-non-before>` &mdash; Both: Affect notechart objects near to the point.
+* `<range-command-time-before>` & `<range-command-time-non-before>` can be one of:
   * `*`, the range is unlimited.
   * `<unsigned-int-amount-note>n` specifies the maximum amount of affected notes.
-  * `<range-duration-*>` specifies the time/beat range of affected notes (see below).
-* *Proposal* (IID): `<spline-specifier>`
-  * (Empty), override the effect of the whole scrolling path.
-  * `<range-path-deactivate>:<range-path-activate>` &mdash; Override the effect of the part of scrolling path from `<range-path-activate>` (inclusive) before the judgment time to `<range-path-deactivate>` (inclusive) before the judgment time.
-    * `<range-path-deactivate>` & `<range-path-activate>` can be one of:
+  * `<range-duration-*>` specifies the time/beat range of affected notechart objects (see below).
+* *Proposal* (IID): `<object-time-scope-specifier>`
+  * (Empty), override the effect of the whole scrolling path of affected notechart objects.
+  * `<range-object-time-deactivate>:<range-object-time-activate>` &mdash; Override the effect of the part of scrolling path of affected notechart objects from `<range-object-time-activate>` (inclusive) before the judgment time to `<range-object-time-deactivate>` (inclusive) before the judgment time of each notechart object.
+    * `<range-object-time-deactivate>` & `<range-object-time-activate>` can be one of:
       * `*`, the range is unlimited.
-      * `<range-duration-*>` specifies the time/beat duration (inclusive) before the judgment time (see below).
+      * `<range-duration-*>` specifies the time/beat duration (inclusive) before the judgment time of each notechart object (see below).
 
 `<approach-specifier>` specifies the time or beat interval and easing method of the approach phase.
 
