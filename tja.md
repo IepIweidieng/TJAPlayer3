@@ -219,11 +219,17 @@ For non-string values, whitespaces can immediately occur after `:`, *e.g.*, [`LE
 
 * Although the forms with whitespaces are seldom seen.
 
+#### Post-[#START](#start--end) Header Position
+
+Most headers are expected to be placed outside the notechart definition enclosed between `#START` & `#END`. However, some commands are allowed to be placed within the notechart definition, or "post-`#START` position".
+
+Headers allowed in post-`#START` position will be explicitly denoted.
+
 #### Header Scope
 
-For headers placed outside any notechart definition enclosed between `#START` & `#END`, the effect of each header continues until the next occurrence of the same header or the end of the file, regardless of whether it is per-file or per&ndash;player-side.
+For headers not in post-`#START` position, the effect of each header continues until the next occurrence of the same header or the end of the file, regardless of whether it is per-file or per&ndash;player-side.
 
-Some headers are allowed to be placed in a notechart definition enclosed between `#START` & `#END` (*e.g.*, [the EXAM headers](#exam-headers)) and such usage is listed in their scope. Headers placed in a notechart definition are effectively [commands](#tja-command).
+Headers in post-`#START` position (*e.g.*, [the EXAM headers](#exam-headers)) are effectively [commands](#tja-command).
 
 * *Unspecified*: The behavior when the same header occur multiple times within its scope.
 
@@ -968,8 +974,8 @@ Specify the rounding mode of the **incr**ement of the *<ruby>魂<rt>tamashii</rt
 
 ### EXAM Headers
 
-***Scope*** (placed outside of any notechart definition enclosed between `#START` & `#END`): per&ndash;player-side (?) \
-***Scope*** (placed in a notechart definition enclosed between `#START` & `#END`): per-song (begins with a [`#NEXTSONG` command](#nextsong) and ends with another [`#NEXTSONG` command](#nextsong)) &mdash; TJAPlayer3-Develop-ReWrite
+***Post-[#START](#start--end) position***: forbidden; allowed &mdash; TJAPlayer3-Develop-ReWrite \
+***Scope***: per&ndash;player-side (?) (or per-song (begins with a [`#NEXTSONG` command](#nextsong) and ends with another [`#NEXTSONG` command](#nextsong)))
 
 Specify a requirement for passing the notechart in *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode" ("**exam**ination").
 
@@ -1160,8 +1166,6 @@ No leading non-newline whitespaces are allowed for the `#START` and `#END` comma
 
 However, leading non-newline whitespaces are allowed and ignored in the notechart definition enclosed between `#START` & `#END`.
 
-*Unspecified*: The behavior when any commands are placed before any headers outside the notechart definition, especially for the commands which are expected to be placed before the notechart definition.
-
 The `#COMMAND` part ***MUST*** be written in an all-upper-case manner and ***MUST NOT*** contain whitespaces in-between.
 
 Commands with an unrecognized `#COMMAND` name are ignored.
@@ -1173,6 +1177,14 @@ Commands with an unrecognized `#COMMAND` name are ignored.
 The arguments for commands introduced in TaikoJiro are comma-separated. However, the arguments for commands introduced in TJAPlayer2 for.PC are instead whitespace-separated as in the `.bms` format (which is modified and extended into the `.dtx` format for DTXMania).
 
 *Unspecified*: The behavior when a comma (`,`) is used as the decimal point (normally a full-stop (`.`)).
+
+#### Pre-[#START](#start--end) Command Position
+
+Most commands are expected to be placed within the notechart definition enclosed between `#START` & `#END`. However, some commands are expected to be placed before the notechart definition, or "pre-`#START` position".
+
+Commands allowed in pre-#START position will be explicitly denoted.
+
+*Unspecified*: The behavior when any commands are placed before any headers outside the notechart definition.
 
 #### Command Scope
 
@@ -1205,8 +1217,8 @@ Commands only affect their targeting game objects. The target of each command ca
 
 ### `#BMSCROLL` / `#HBSCROLL` / `#NMSCROLL`
 
-***Scope*** (placed before [the `#START` command](#start--end)): per&ndash;player-side, gimmicky \
-***Scope*** (placed after [the `#START` command](#start--end)): branch, non-before, gimmicky &mdash; OpenTaiko (0auBSQ) v0.6.0 \
+***Pre-[#START](#start--end) position***: required; allowed &mdash; OpenTaiko (0auBSQ) v0.6.0 \
+***Scope***: per&ndash;player-side (or branch, non-before), gimmicky \
 ***Late effect scope***: (none) \
 ***Effect target***: notes, bar lines
 
@@ -1256,7 +1268,8 @@ See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-
 
 ### `#PAPAMAMA`
 
-***Scope***: per&ndash;player-side (placed before [the `#START` command](#start--end)) \
+***Pre-[#START](#start--end) position***: required \
+***Scope***: per&ndash;player-side \
 ***Effect target***: notes
 
 Use the *<ruby>**パ**<rt>**Pa**</rt> **パ**<rt>**pa**</rt> **マ**<rt>**Ma**</rt> **マ**<rt>**ma**</rt> サ<rt>Sa</rt> ポー<rt>poo</rt> ト<rt>to</rt></ruby>* "Parent Support Mode"/Helping Hand Mode gameplay rules from the official arcade games for certain song in the *<ruby>簡<rt>Kan</rt> 単<rt>tan</rt></ruby>/<ruby>か<rt>Ka</rt> ん<rt>n</rt> た<rt>ta</rt> ん<rt>n</rt></ruby>* Easy difficulty, where the amount of players is fixed to 1 and the inputs from all players are combined to play the song.
@@ -1269,7 +1282,8 @@ Reference: <https://taiko.namco-ch.net/taiko/en/howto/papamama.php#papamama>
 
 ### #START / `#END`
 
-***Scope***: per&ndash;player-side (enclosing the notechart definition), sequential
+***Pre-[#START](#start--end) position***: forbidden (enclosing the notechart definition) \
+***Scope***: per&ndash;player-side (or notechart, non-before), sequential \
 
 Respectively **start** / **end** the region of notechart definition.
 
