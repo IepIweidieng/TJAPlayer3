@@ -661,13 +661,14 @@ Specify the amount of seconds past ("**offset**ted") from the time position spec
 
 Equation: `movieoffset` = `time-point-of-video-beginning` − `time-point-of-audio-beginning` (Unit: Seconds)
 
-* `MOVIEOFFSET:<positive-float-seconds-offset>`
+* `MOVIEOFFSET:<float-seconds-offset>`
 * `MOVIEOFFSET:0` / `MOVIEOFFSET:`
 
 ***First seen in***: TJAPlayer2 for.PC ver.2015081100
 
 #### Compatibility Issues
 
+* In TJAPlayer2 for.PC, `<float-seconds-offset>` must be a non-negative number due to the restriction of implementation. For a negative `<float-seconds-offset>`, the absolute value is taken as `movieoffset`.
 * In TJAPlayer3-f, the definition is changed to be relative to the time position of `#START` of the notechart.
   * Equation: `movieoffset_f` = `time-point-of-video-beginning` − `time-point-of-chart-start` (Unit: Seconds)
 
