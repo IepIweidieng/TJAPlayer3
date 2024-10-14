@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2024-10-07 (UTC+8)
+* Last changed: 2024-10-14 (UTC+8)
 
 This is an unofficial compilation and commentation of the TJA format & its related formats.
 
@@ -1250,7 +1250,7 @@ See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-
 
 #### Compatibility Issues
 
-* In TaikoJiro, all notechart objects past the judgment timing and all earlier defined notechart objects (?) become in the normal scrolling mode (with `#SCROLL 1` applied if `#BMSCROLL` is used). Such objects keep a constant velocity even when `#BPMCHANGE` commands are used in BMS scrolling modes. This behavior can be utilized for creating bar drumroll notes which stretch when reaching the judgment timing.
+* In TaikoJiro 1 but not 2, all notechart objects past the judgment timing and all earlier defined notechart objects (?) become in the normal scrolling mode (with `#SCROLL 1` applied if `#BMSCROLL` is used). Such objects keep a constant velocity even when `#BPMCHANGE` commands are used in BMS scrolling modes. This behavior can be utilized for creating bar drumroll notes which stretch when reaching the judgment timing.
 
 ### `#PAPAMAMA`
 
