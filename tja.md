@@ -1696,23 +1696,25 @@ The arguments are whitespace-separated.
 ***Non-static effect scope***: non-before \
 ***Effect target***: notes
 
-Make non-preceding notes and their *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* "Note phoneticization" respectively appear and move **sudden**ly / disappear ("**hidden**") and stop moving suddenly.
+Specify non-preceding notes and their *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* "Note phoneticization" to respectively appear and move **sudden**ly / disappear ("**hidden**") and stop moving suddenly for once as they move through the notefield.
 
 Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 The arguments are whitespace-separated.
 
 * `#SUDDEN <float-seconds-appear-duration> <float-seconds-moving-duration>`
+  * If the time duration specified by `<float-seconds-appear-duration>` is larger than `<float-seconds-moving-duration>`, a note will stop for the length of *appear_duration* − *moving_duration* after it appears.
   * The "note phoneticization" is displayed/hidden along the note.
 * *Proposal* (IID): `#SUDDEN <float-seconds-appear-duration> <float-seconds-moving-duration> <enum-str-affected-type>`
   * See below.
 * *Proposal* (IID): `#HIDDEN <float-seconds-disappear-duration> <float-seconds-stopping-duration>`
+  * If the time duration specified by `<float-seconds-stopping-duration>` is larger than `<float-seconds-disappear-duration>`, a note will stop for the length of *stopping_duration* − *disappear_duration* before it disappears.
   * The "note phoneticization" is displayed/hidden along the note.
 * *Proposal* (IID): `#HIDDEN <float-seconds-disappear-duration> <float-seconds-stopping-duration> <enum-str-affected-type>`
   * See below.
 * Initial value: `#SUDDEN 0 0` & (*Proposal* (IID)) `#HIDDEN 0 0`
 
-`<float-seconds-*-duration>` specifies the time durations (ms; 0.001s) before the time point of judgment is reached; if its absolute value equals to `0`, the time duration is positive infinity (+∞) for the `#SUDDEN` command and is negative infinity (−∞) for the `#HIDDEN` command.
+`<float-seconds-*-duration>` specifies the time durations before the time point of judgment of each note is reached; if its absolute value equals to `0`, the time duration is positive infinity (+∞) for the `#SUDDEN` command and is negative infinity (−∞) for the `#HIDDEN` command.
 
 *Proposal* (IID): `<enum-str-afftect-type>` can be one of:
 
@@ -1728,7 +1730,12 @@ The arguments are whitespace-separated.
 
 #### Compatibility Issues
 
-* In TJAPlayer2 for.PC, the per-note effect is only applied non-before the time position of [the `#START` command](#start--end). (?)
+* In TJAPlayer2 for.PC:
+  * `<float-seconds-*-duration>` has the precision of `0.001` (1 ms), and any value < `0.001` is treated as `0` (positive infinity for `#SUDDEN`).
+  * The per-note effect is only applied non-before the time position of [the `#START` command](#start--end). (?)
+  * The vertical scrolling velocity of a note is not affected during the stopping phase of the note.
+* In OpenTaiko (0auBSQ) (?, as for v0.6.0 b3):
+  * The scrolling velocity of a note is completely not affected during the stopping phase of the note.
 
 ### #NOTESPAWN
 
