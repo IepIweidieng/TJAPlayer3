@@ -340,14 +340,25 @@ The display details are *unspecified*.
 
 Specify whether the corresponding song entry is displayed, regarding the *<ruby>裏<rt>ura</rt> 譜<rt>fu</rt> 面<rt>men</rt> 状<rt>jou</rt> 態<rt>tai</rt></ruby>* "inner notechart state/mode" ("*<ruby>裏 <rt>ura</rt></ruby>* inner or *<ruby>表 <rt>omote</rt></ruby>* outer **side**") of the song selection screen.
 
+This allows the chart creators to specify the inner chart of every difficulty together or with different audio as a separate song entry, as in official AC11&ndash;AC14.
+
+For specifying the inner chart of solely the Oni difficulty with the same audio as in official AC15 and later official games (except only *<ruby>ハ<rt>Ha</rt> レ<rt>re</rt> 晴<rt>Ha</rt> レ<rt>re</rt> ユ<rt>Yu</rt> カ<rt>ka</rt> イ<rt>i</rt></ruby>* inner Hard in AC15), [`COURSE:Edit`](#course) is commonly used instead.
+* Reference: <https://wikiwiki.jp/taiko-fumen/%E5%8F%8E%E9%8C%B2%E6%9B%B2/%E3%82%80%E3%81%9A%E3%81%8B%E3%81%97%E3%81%84/%E3%83%8F%E3%83%AC%E6%99%B4%E3%83%AC%E3%83%A6%E3%82%AB%E3%82%A4#another>
+
+*<ruby>別<rt>betsu</rt> 譜<rt>fu</rt> 面<rt>men</rt></ruby>* "another notechart(s)" was a tentative name used during the development of AC11. The now-official name *<ruby>裏<rt>ura</rt> 譜<rt>fu</rt> 面<rt>men</rt></ruby>* "inner notechart" originated from *POP's MUSIC* 11 (2004), developed by Konami.
+
+* Reference: *まだあるの？「太鼓の達人１１」最後のコマンド大公開！* ("There is still more? The last command of Taiko no Tatsujin 11 greatly revealed!"). (2008-05-15). 開発日記（ブログ）｜太鼓の達人開発ブログ ("Development diary (blog) | Taiko no Tatsujin Development Blog"). <https://web.archive.org/web/20160213010255/http://taikoblog.namco-ch.net/blog/2008/05/post_36.html#more>
+
 *Unspecified*: Whether and how inner mode is implemented.
+
+* TaikoJiro 1 and 2 use the official AC11&ndash;AC14 inner-notechart&ndash;unlocking command for toggling inner notechart mode, which is hitting the drum rims on left and right sides alternatively for a total of 20 hits.
 
 *Proposal* (IID): Make the scope per&ndash;player-side.
 
 * **`SIDE:1`** / **`SIDE:Normal`** / `SIDE:normal`
-  * Displayed only outside the inner notechart mode.
+  * Displayed only outside the inner notechart mode ("**normal**").
 * **`SIDE:2`** / **`SIDE:Ex`** / `SIDE:ex`
-  * Displayed only during the inner notechart mode.
+  * Displayed only during the inner notechart mode ("**ex**tra").
 * **`SIDE:3`** / **`SIDE:Both`** / `SIDE:both` / **`SIDE:`**
   * Always displayed.
 
@@ -787,10 +798,13 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
   * The official English localization of this difficulty was "Oni" in PS2 TDM, "Mania" in the development version of certain PC-generation games (?), and is "Extreme" in the released PC-generation games.
   * In the official game series, before AC7 (specifically AC2&ndash;AC6), this difficulty was named *<ruby>ド<rt>Do</rt> ン<rt>n</rt> ダ<rt>da</rt> フ<rt>fu</rt>ル<rt>ru</rt></ruby>！<ruby>コー<rt>Koo</rt> ス<rt>su</rt></ruby>* "Donderful! Course" and had a different scoring rule from the other difficulties (see [`SCOREMODE:0`](#scoremode)). This difficulty was always named *<ruby>鬼<rt>Oni</rt></ruby>/<ruby>お<rt>O</rt> に<rt>ni</rt></ruby>* Oni in the PS2 console games and is later synchronized into AC7 and on, but the same scoring rule still applied to CS1&ndash;CS5 and AC7.
 * **`COURSE:4`** / **`COURSE:Edit`** / `COURSE:edit`
-  * This difficulty was meant for charters to freely specifying the scoring rules in earlier versions of TaikoJiro 1. However, the restriction of the scoring rules for other difficulties were lifted, which made this difficulty unnecessary for such a purpose.
-  * This difficulty has been re-purposed as the *<ruby>お<rt>O</rt> に<rt>ni</rt></ruby> (<ruby>裏 <rt>Ura</rt></ruby>)* Oni/Extreme (Inner) difficulty.
+  * Now commonly used as the *<ruby>お<rt>O</rt> に<rt>ni</rt></ruby> (<ruby>裏 <rt>Ura</rt></ruby>)* Oni/Extreme (Inner) difficulty.
+  * This difficulty was meant for chart creators to freely specifying the scoring rules in earlier versions of TaikoJiro 1. However, the restriction of the scoring rules for other difficulties were lifted in v1.95, which made this difficulty unnecessary for such a purpose.
+  * As a result, after the official AC15 was released, this difficulty has been re-purposed as the *<ruby>お<rt>O</rt> に<rt>ni</rt></ruby> (<ruby>裏 <rt>Ura</rt></ruby>)* Oni/Extreme (Inner) difficulty.
+  * For specifying the inner chart of every difficulty together or with different audio as a separate song entry, as in official AC11&ndash;AC14, [`SIDE:Ex`](#side) and [the `SIDEREV:` head](#siderev) should be used.
 * `COURSE:Ura` / `COURSE:ura` &mdash; taiko-web
   * Equivalent to `COURSE:Edit`
+  * The *<ruby>お<rt>O</rt> に<rt>ni</rt></ruby> (<ruby>裏 <rt>Ura</rt></ruby>)* Oni/Extreme (Inner) difficulty.
 * **`COURSE:5`** / **`COURSE:Tower`** / `COURSE:tower` &mdash; TaikoJiro v1.79
   * This difficulty refers to the *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt></ruby>* "Taiko Tower" notechart series in the *<ruby>わ<rt>Wa</rt> く<rt>ku</rt> わ<rt>wa</rt>く<rt>ku</rt> 冒<rt>Bou</rt> 険<rt>ken</rt> ラ<rt>Ra</rt> ン<rt>n</rt> ド<rt>do</rt></ruby>* "Wakuwaku (Exciting) Adventure land" mode from the 7th PS2 console game. To further simulate the mode, [the `LIFE:` header](#life) can be used in conjunction.
   * The actual behavior may differ from simulator to simulator.
