@@ -1050,13 +1050,18 @@ When either the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true percussi
   * Only the first 9 notes of a combo reward exactly `init` points per note.
   * The basic score is `init` + *n* × `diff` points.
   * > An equivalent formula: Basic score = `init` + **min**{**floor**(`combo` / 10), 10} × `diff` (points).
+  * `init` is usualy set to between 3&ndash;5 × `diff` in official charts.
   * In TaikoJiro, if the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true performance" option is enabled, the scoring rules of the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true performance" mode from the 14th arcade console version of the official game is followed.
+  * The *<ruby>基<rt>Ki</rt> 本<rt>hon</rt> 天<rt>Ten</rt> 井<rt>joo</rt></ruby>* "basic ceiling" score varies according to the difficulty and difficulty star.
 * `SCOREMODE:2`
   * Follow the scoring rule of the official PS3-generation games (AC15).
   * Combo | 1&ndash;9 | 10&ndash;29 | 30&ndash;49 | 50&ndash;99 | 100&ndash;
     --- | --- | --- | --- | --- | ---
     *n* | 0 | 1 | 2 | 4 | 8
   * The basic score is `init` + *n* × `diff` points.
+  * Combo milestone bonus: 10000 points are rewarded when every 100 combo is reached.
+  * `init` is usualy set to between 3&ndash;5 × `diff` in official charts.
+  * The *<ruby>基<rt>Ki</rt> 本<rt>hon</rt> 天<rt>Ten</rt> 井<rt>joo</rt></ruby>* "basic ceiling" score varies according to the difficulty and difficulty star.
 * `SCOREMODE:3` &mdash; TJAPlayer2 for.PC but not TJAPlayer3 v1.4.0+, TJAPlayer3-f
   * Follow the scoring rule of the official PC-generation games (<ruby>虹<rt>Niji</rt> 色<rt>iro</rt></ruby>/<ruby>ニ<rt>Ni</rt> ジ<rt>ji</rt> イ<rt>i</rt> ロ<rt>ro</rt></ruby> version(s); AC16)
   * All types of score bonus are cancelled.
@@ -1064,6 +1069,7 @@ When either the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true percussi
     --- | ---
     Basic score (points) | `init`
   * The scoring rules are the same regardless of the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true performance" option.
+  * The *<ruby>基<rt>Ki</rt> 本<rt>hon</rt> 天<rt>Ten</rt> 井<rt>joo</rt></ruby>* "basic ceiling" score is close to 1000000 points.
 * `SCOREMODE:`
   * The actual scoring mode used is *unspecified*.
   * In TaikoJiro: `SCOREMODE:1`
