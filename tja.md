@@ -1055,7 +1055,7 @@ When either the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true percussi
   * Follow the scoring rule of the official PS3-generation games (AC15).
   * Combo | 1&ndash;9 | 10&ndash;29 | 30&ndash;49 | 50&ndash;99 | 100&ndash;
     --- | --- | --- | --- | --- | ---
-    *n* | 0 | 1 | 2 | 3 | 4
+    *n* | 0 | 1 | 2 | 4 | 8
   * The basic score is `init` + *n* × `diff` points.
 * `SCOREMODE:3` &mdash; TJAPlayer2 for.PC but not TJAPlayer3 v1.4.0+, TJAPlayer3-f
   * Follow the scoring rule of the official PC-generation games (<ruby>虹<rt>Niji</rt> 色<rt>iro</rt></ruby>/<ruby>ニ<rt>Ni</rt> ジ<rt>ji</rt> イ<rt>i</rt> ロ<rt>ro</rt></ruby> version(s); AC16)
