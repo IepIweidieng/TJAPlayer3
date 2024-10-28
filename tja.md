@@ -1828,6 +1828,14 @@ Display the specified **lyric**.
 * `#LYRIC <str-lyric>`
   * In taiko-web, a `\n` in `<str-lyric>` is displayed as a newline.
 
+*Unspecified*: The behavior when `#LYRIC` commands are not consistent among any of the following:
+
+* For each branches, if in a branched section
+  * In TJAPlayer2 for.PC and taiko-web, a `#LYRIC` command from any branch takes effects regardless of the current branch.
+* For each player sides of a difficulty
+* For each difficulties
+  * In taiko-web ver.22.07.16, for a difficulty with no `#LYRIC` commands, a difficulty (?) with `#LYRIC` commands (if exist) is taken for the lyrics.
+
 ***First seen in***: TJAPlayer2 for.PC \
 ***Supported by***: taiko-web ver.20.03.31, TaikoManyGimmicks v0.6α
 
