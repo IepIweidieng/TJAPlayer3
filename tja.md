@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2024-10-15 (UTC+8)
+* Last changed: 2024-10-28 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -668,7 +668,6 @@ Equation: `movieoffset` = `time-point-of-video-beginning` − `time-point-of-aud
 
 #### Compatibility Issues
 
-* In TJAPlayer2 for.PC, `<float-seconds-offset>` must be a non-negative number due to the restriction of implementation. For a negative `<float-seconds-offset>`, the absolute value is taken as `movieoffset`.
 * In TJAPlayer3-f, the definition is changed to be relative to the time position of `#START` of the notechart.
   * Equation: `movieoffset_f` = `time-point-of-video-beginning` − `time-point-of-chart-start` (Unit: Seconds)
 
