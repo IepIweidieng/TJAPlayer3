@@ -1164,7 +1164,7 @@ See [the `#NEXTSONG` command](#nextsong) for the TJA command version of TJC head
 
 ### SONG:
 
-***Scope***: per-file, sequential
+***Scope***: per-file sequential
 
 Specify a notechart ("**song**") of the notechart set.
 
@@ -1218,7 +1218,9 @@ Except for one-shot commands, the effect of each command continues until the nex
 * For per&ndash;player-side commands, the behavior is *unspecified* when (the same or different) commands in the same command group occur together within its scope.
 * For measure-based&ndash;scoped commands, the behavior is *unspecified* when any [notechart symbols](#notechart-symbols) occur after the last [notechart symbol](#notechart-symbols) (always `,` in TJA) and before such a command in the notechart definition.
 
-Some branch-scoped commands are non-sequential, *i.e.*, they can be arranged freely within the same beat position without causing any behavior changes, as long as both their relative order to the sequential commands and the relative order among commands which override each other are not changed. All commands with other type of scope are implicitly sequential.
+Some branch-scoped commands are non-sequential, *i.e.*, they can be arranged freely within the same beat position without causing any behavior changes, as long as both their relative order to the sequential commands and the relative order among commands which override each other are not changed.
+
+All commands with other type of scope are implicitly sequential.
 
 #### Command Effect Time
 
@@ -1320,7 +1322,7 @@ Reference: <https://taiko.namco-ch.net/taiko/en/howto/papamama.php#papamama>
 ### #START / `#END`
 
 ***Pre-[#START](#start--end) position***: forbidden (enclosing the notechart definition) \
-***Scope***: per&ndash;player-side (or notechart, non-before), sequential \
+***Scope***: per&ndash;player-side (or notechart, non-before) \
 ***Effect time***: static <sub>notechart definition</sub> + command-time <sub>show ending animation</sub> (for `#END` in some simulators) \
 ***Non-static effect scope***: all \
 ***Effect target***: notes, bar lines, notefield(s), gameplay screen
@@ -1422,7 +1424,7 @@ Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby
 
 ### #DELAY
 
-***Scope***: branch, non-before, timing, sequential \
+***Scope***: branch sequential, non-before, timing \
 ***Effect time***: static <sub>objects' timing</sub> + command-time <sub>freeze scrolling</sub> \
 ***Non-static effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll), positive value); (none) (otherwise) \
 ***Effect target***: notes, bar lines
@@ -1456,7 +1458,7 @@ For the timing of notechart object, multiple `#DELAY` commands placed at the sam
 
 ### `#GOGOSTART` / `#GOGOEND`
 
-***Scope***: branch, non-before, scoring, sequential \
+***Scope***: branch sequential, non-before, scoring \
 ***Effect time***: static <sub>per-note scoring</sub> + command-time <sub>visual</sub> \
 ***Non-static effect scope***: notes: (none), gameplay screen: all \
 ***Effect target***: notes, gameplay screen
@@ -1472,7 +1474,7 @@ For playing the Go-Go Time entering effects during an existing Go-Go Time sectio
 
 ### `#DUMMYSTART` / `#DUMMYEND`
 
-***Scope***: branch, non-before, sequential \
+***Scope***: branch sequential, non-before \
 ***Effect time***: static \
 ***Effect target***: notes
 
@@ -1631,7 +1633,7 @@ Respectively disable ("turn **off**") / enable ("turn **on**") the display of al
 
 ### `#BARLINE`
 
-***Scope***: branch, beat interval one-shot, gimmicky \
+***Scope***: branch sequential, instant one-shot, gimmicky \
 ***Effect time***: static \
 ***Effect target***: bar lines
 
@@ -1642,7 +1644,7 @@ Insert a fake/dummy normal **bar** **line** displayed at the head of the current
 
 ### #JPOSSCROLL
 
-***Scope***: branch, non-before, gimmicky \
+***Scope***: branch sequential, non-before, gimmicky \
 ***Effect time***: command-time \
 ***Non-static effect scope***: all \
 ***Effect target***: notes, bar lines, judgment mark, note field
@@ -2038,7 +2040,7 @@ Its effects end at either the next [`#LEVELHOLD`](#levelhold) or another #LEVELR
 
 ### #BRANCHSTART / `#BRANCHEND`
 
-***Scope***: notechart, measure non-before, sequential \
+***Scope***: notechart, measure non-before \
 ***Effect time***: static <sub>objects' measure position</sub> + command-time <sub>objects' enabling status & visual</sub> \
 ***Non-static effect scope***: notes, bar lines, & judgment mark(s): non-before, note field(s): non-before the previous measure (`#BRANCHSTART`) or (none) (`#BRANCHEND`) \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s)
@@ -2197,7 +2199,7 @@ The definition of unused "branches"/paths due to forced "branch"/path determinat
 
 ### *Proposal* (IID): `#LAYERSTART` / `#LAYEREND`
 
-***Scope***: notechart, non-before, sequential \
+***Scope***: notechart, non-before \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s)
 
@@ -2346,7 +2348,7 @@ Setters:
 
 ### #GRADATION
 
-***Scope***: branch, gradation group, gimmicky, sequential \
+***Scope***: branch sequential, gradation group, gimmicky \
 ***Effect time***: command-time \
 ***Non-static effect scope***: gradation group \
 ***Effect target***: notes, bar lines
@@ -2430,7 +2432,7 @@ Commands supporting the `#GRADATION` command in TaikoManyGimmicks:
 
 ### #INCLUDE
 
-***Scope***: branch (?), (depending on included notechart definition content) \
+***Scope***: (depending on included notechart definition content) \
 ***Effect time***: (depending on included notechart definition content) \
 ***Effect target***: (depending on included notechart definition content)
 
@@ -2458,14 +2460,14 @@ Append ("**include**") the notechart definition content defined the included fil
 
 ### OBJ / CAM Commands
 
-***Scope***: branch, non-before, gimmicky \
+***Scope***: branch (some are sequential), non-before, gimmicky \
 ***Effect time***: command-time \
 ***Non-static effect scope***: all \
 ***Effect target***: gameplay screen
 
 Manipulate texture **obj**ects & the game screen **cam**ara.
 
-Loader & unloader:
+Loader & unloader, reset by each other:
 
 * `#ADDOBJECT <str-name-object>, <number-pixel-x>, <number-pixel-y>,<string-filepath-texture>`
 * `#REMOVEOBJECT <str-name-object>`
@@ -2501,14 +2503,15 @@ Display property setters:
 
 Frame-based animation:
 
-* `#OBJANIMSTART <str-name-object>, <positive-number-milliseconds-frame-duration>`
-* `#OBJANIMSTARTLOOP <str-name-object>, <positive-number-milliseconds-frame-duration>`
-* `#OBJANIMEND <str-name-object>`
+* Animating status:
+  * `#OBJANIMSTART <str-name-object>, <positive-number-milliseconds-frame-duration>`
+  * `#OBJANIMSTARTLOOP <str-name-object>, <positive-number-milliseconds-frame-duration>`
+  * `#OBJANIMEND <str-name-object>`
 * `#OBJFRAME <str-name-object>, <unsigned-int-frame-index>`
 
 CAM commands:
 
-* `#CAMRESET`
+* `#CAMRESET`, resets the following
 * `<number-pixel-x>`
   * `#CAMHOFFSET <number-pixel-x-end>`
   * `#CAMHMOVESTART <number-pixel-x-start>, <number-pixel-x-end>, <enum-str-easing-points>, <enum-str-easing-function>`
@@ -2533,6 +2536,8 @@ CAM commands:
   * `#CAMROTATION <number-degrees-rotation-end>`
   * `#CAMROTATIONSTART <number-degrees-rotation-start>, <number-degrees-rotation-end>, <enum-str-easing-points>, <enum-str-easing-function>`
   * `#CAMROTATIONEND`
+
+The `#<property>START` and `#<property>END` commands are sequential.
 
 The approach phase of a `#<property>START` command starts at its definition position and is ended by the nearest non-preceding corresponding `#<property>END` in notechart definition. *Unspecified*: The behavior when a `#<property>START` command either has no such corresponding `#<property>END` or has such `#<property>END` with an earlier time position than the `#<property>START` command itself.
 
@@ -2577,6 +2582,8 @@ Set the **color** of the displayed region outside the **border** of the gameplay
 ***Effect target***: gameplay screen
 
 Respectively **change** / restore ("**reset**") the texture used in the current skin.
+
+Reset by each other.
 
 * `#CHANGETEXTURE <string-filepath-original>,<string-filepath-replacing>`
 * `#RESETTEXTURE <string-filepath-original>`
@@ -2626,7 +2633,7 @@ The arguments are whitespace-separated.
 
 ### *Proposal* (IID): #LUAMOD
 
-***Scope***: branch, timing (intended; depending on usage) \
+***Scope***: branch sequential, timing (intended; depending on usage) \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines (intended; depending on usage)
 
@@ -2642,7 +2649,7 @@ Inspired by StepMania.
 
 ### *Proposal*: #LUAFX
 
-***Scope***: branch, gimmicky (intended; depending on usage) \
+***Scope***: branch sequential, gimmicky (intended; depending on usage) \
 ***Effect time***: command-time + (optional) object-time <sub>note-path effects</sub> \
 ***Non-static effect scope***: (Depending on usage) \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s) (intended; depending on usage)
