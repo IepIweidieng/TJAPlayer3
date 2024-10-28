@@ -922,7 +922,9 @@ For each element of `<comma-separated-list-non-negative-int-amount-of-hits>`, if
 
 #### Compatibility Issues
 
-* TJAPlayer2 for.PC & TJAPlayer3: The `BALLOON:` header is *erroneously* treated as the `BALLOONNOR:` header.
+* TJAPlayer2 for.PC & TJAPlayer3:
+  * Unlike in TaikoJiro, the scope of the BALLOON headers is per-difficulty instead of per&ndash;player-side (see [the `LEVEL:` header](#level)). Specifically, if a BALLOON header is specified multiple times in its scope, the specified hit amount values is appended to the existent values, instead of replacing all the existent values.
+  * The `BALLOON:` header is *erroneously* treated as the `BALLOONNOR:` header.
 * TJAPlayer3 but not TJAPlayer3-Develop: If a balloon-type note is defined in sections after [`#BRANCHEND`](#branchstart--branchend) and before another [`#BRANCHSTART`](#branchstart--branchend), it *erroneously* uses 3 values from the iteration of the `BALLOONNOR:` / `BALLOONEXP:` / `BALLOONMAS:` list according to the last defined "branch"/path before the `#BRANCHEND`. (?; deduced from source code)
   * <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Songs/CDTX.cs#L3719>, <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Songs/CDTX.cs#L4020-L4055>
   * *C.f.*, <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/スコア、曲/CDTX.cs#L3872-L3877>, <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/スコア、曲/CDTX.cs#L4118-L4149>
