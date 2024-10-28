@@ -1760,23 +1760,27 @@ The arguments are whitespace-separated.
 ### #NOTESPAWN
 
 ***Scope***: branch, non-before, gimmicky \
-***Effect time***: object-time \
+***Effect time***: command-time \
+***Non-static effect scope***: non-before \
 ***Effect target***: notes
 
-Specify the displaying ("**spawn**") duration of **note**s before the time point of judgment.
+Specify non-preceding notes and their *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* "Note phoneticization" to respectively appear / disappear ("**hidden**") suddenly when the specified time point before the command is reached.
+
+If multiple `#NOTESPAWN` commands are placed at the same measure position, the first `#NOTESPAWN` resets the previous `#NOTESPAWN` effects to the default, and then all the appear and disappear points specified by the `#NOTESPAWN`s at the same measure position are set simultaneously for non-preceding notes.
 
 Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 The arguments are whitespace-separated.
 
 * `#NOTESPAWN 0`
-  * Reset to the default.
-* `#NOTESPAWN 1 <float-seconds-duration>` / `#NOTESPAWN(Spawn, <float-seconds-duration>)`
-  * Set the sudden point.
-  * Equivalent to `#SUDDEN <float-seconds-duration> 0` after unit conversion.
-* `#NOTESPAWN 2 <float-seconds-duration>` / `#NOTESPAWN(Vanish, <float-seconds-duration>)`
-  * Set the hidden point.
-  * Equivalent to (*Proposal* (IID)) `#HIDDEN <float-seconds-duration> 0` after unit conversion.
+  * Set nothing, used to reset to the default.
+  * In TaikoManyGimmicks, the fallback behavior of a `#NOTESPANW` with an invalid first argument.
+* `#NOTESPAWN 1 <float-seconds-appear-duration>` / `#NOTESPAWN(Spawn, <float-seconds-appear-duration>)`
+  * Set an appear ("**spawn**") point.
+* `#NOTESPAWN 2 <float-seconds-disappear-duration>` / `#NOTESPAWN(Vanish, <float-seconds-disappear-duration>)`
+  * Set a disappear ("**vanish**") point.
+
+`<float-seconds-*-duration>` specifies the time durations before the time point of the command is reached.
 
 ***First seen in***: TaikoManyGimmicks
 
