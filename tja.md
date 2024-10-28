@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2024-10-28 (UTC+8)
+* Last changed: 2024-10-29 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1720,15 +1720,24 @@ Specify non-preceding notes and their *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 
 
 Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
+*Unspecified* (?): The behavior when both [`#NOTESPAWN` command(s)](#notespawn) and the `#SUDDEN` and/or (*proposal* (IID)) `#HIDDEN` command(s) are in effect.
+
+* Proposal (IID): The effects of [`#NOTESPAWN` command(s)](#notespawn) are applied first, and the disappear effect and moving-stop effect of `#SUDDEN` and (*proposal* (IID)) `#HIDDEN` command(s) are then applied.
+
 The arguments are whitespace-separated.
 
 * `#SUDDEN <float-seconds-appear-duration> <float-seconds-moving-duration>`
-  * If the time duration specified by `<float-seconds-appear-duration>` is larger than `<float-seconds-moving-duration>`, a note will stop for the length of *appear_duration* − *moving_duration* after it appears.
+  * Set the appear time point *appear_duration* and the moving-start time point *moving_duration*.
+  * An implicit disappear point and an implicit stop point at positive infinity seconds before the time point of each affected notechart object is reached are also set.
+  * If *appear_duration* > *moving_duration*, a note will stop for the length of *appear_duration* − *moving_duration* after it appears.
   * The "note phoneticization" is displayed/hidden along the note.
 * *Proposal* (IID): `#SUDDEN <float-seconds-appear-duration> <float-seconds-moving-duration> <enum-str-affected-type>`
   * See below.
 * *Proposal* (IID): `#HIDDEN <float-seconds-disappear-duration> <float-seconds-stopping-duration>`
-  * If the time duration specified by `<float-seconds-stopping-duration>` is larger than `<float-seconds-disappear-duration>`, a note will stop for the length of *stopping_duration* − *disappear_duration* before it disappears.
+  * Set the disappear time point *disappear_duration* and the moving-end time point *stopping_duration*.
+  * If *stopping_duration* > *disappear_duration*, a note will stop for the length of *stopping_duration* − *disappear_duration* before it disappears.
+  * If *disappear_duration* ≥ *appear_duration* of the in-effect `#SUDDEN` command, a note never appears.
+  * If *stopping_duration* ≥ *moving_duration* of the in-effect `#SUDDEN`, a note never moves.
   * The "note phoneticization" is displayed/hidden along the note.
 * *Proposal* (IID): `#HIDDEN <float-seconds-disappear-duration> <float-seconds-stopping-duration> <enum-str-affected-type>`
   * See below.
@@ -1770,6 +1779,10 @@ If multiple `#NOTESPAWN` commands are placed at the same measure position, the f
 
 Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
+*Unspecified* (?): The behavior when both `#NOTESPAWN` command(s) and [`#SUDDEN` and/or (*proposal* (IID)) `#HIDDEN` command(s)](#sudden--hidden-commands) are in effect.
+
+* Proposal (IID): The effects of `#NOTESPAWN` command(s) are applied first, and the disappear effect and moving-stop effect of [`#SUDDEN` and (*proposal* (IID)) `#HIDDEN` commands](#sudden--hidden-commands) are then applied.
+
 The arguments are whitespace-separated.
 
 * `#NOTESPAWN 0`
@@ -1777,6 +1790,7 @@ The arguments are whitespace-separated.
   * In TaikoManyGimmicks, the fallback behavior of a `#NOTESPANW` with an invalid first argument.
 * `#NOTESPAWN 1 <float-seconds-appear-duration>` / `#NOTESPAWN(Spawn, <float-seconds-appear-duration>)`
   * Set an appear ("**spawn**") point.
+  * If it resets the previous `#NOTESPAWN`, an implicit disappear point at positive infinity seconds before the command is reached is also set.
 * `#NOTESPAWN 2 <float-seconds-disappear-duration>` / `#NOTESPAWN(Vanish, <float-seconds-disappear-duration>)`
   * Set a disappear ("**vanish**") point.
 
