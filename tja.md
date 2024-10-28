@@ -696,7 +696,8 @@ Not reset by `BGA:` itself.
 * `BGA:`
   * The behavior is *unspecified*.
 
-***First seen in***: OpenTaiko (0auBSQ) v0.6.0
+***First seen in***: C-Taiko \
+***Supported by***: OpenTaiko (0auBSQ) v0.6.0
 
 #### Compatibility Issues
 
@@ -725,13 +726,12 @@ Specify the lyric file(s) for the song to display **lyrics** in the playback scr
 * `LYRICS:` / `LYRICFILE:`
   * Use only the lyric specified by [`#LYRIC`](#lyric) commands (if any).
 
-***First seen in***: taiko-web ver.20.03.31, TJAPlayer3-Develop-ReWrite \
+***First seen in***: taiko-web ver.20.03.31, TJAPlayer3-Develop-ReWrite (parse-only) \
 ***Supported by***: TJAPlayer3-f v1.6.0.0, OpenTaiko (0auBSQ) v0.6.0
 
 #### Compatibility Issues
 
 * In taiko-web, if the lyric file is used, all [`#LYRIC`](#lyric) commands are ignored.
-* In TJAPlayer3-Develop-ReWrite but not OpenTaiko (0auBSQ), no effects.
 
 ### EXPLICIT:
 
