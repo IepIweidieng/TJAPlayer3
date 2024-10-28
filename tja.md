@@ -1851,6 +1851,8 @@ Display the specified **lyric**.
 
 Override ("**change**") the automatically assigned *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* "**Note** phoneticization" ("**s**ound **e**ffect of a **note**" or "*<ruby>発<rt>Hatsu</rt> **声**<rt>**se**i</rt></ruby>* vocalization of a **note**" (?)) of the nearest note(s) placed non-before the command.
 
+Similar to [the `#NOTESCHANGE` command](#noteschange), but with a different range of argument.
+
 * `#SENOTECHANGE <enum-int-note-phoneticization>`
   * In `GAME:Taiko`, `<enum-int-note-phoneticization>` can be one of:
     * | | Note phoneticization | Designed for what note symbol
@@ -1923,6 +1925,31 @@ However, in the official Konga games, the general pattern is less consistent and
 * The short form is used otherwise.
 
 ***First seen in***: TJAPlayer3 v1.4.0
+
+### #NOTESCHANGE
+
+***Scope***: branch, note one-shot (?), gimmicky \
+***Effect time***: static \
+***Effect target***: notes
+
+Override ("**change**") the automatically assigned *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* "**Note** phoneticization" ("**s**ound effect of a **note**" or "*<ruby>発<rt>Hatsu</rt> **声**<rt>**se**i</rt></ruby>* vocalization of a **note**" (?)) of the nearest note(s) (?) placed non-before the command.
+
+Similar to [the `#SENOTECHANGE` command](#senotechange), but with a different range of argument.
+
+* `#NOTESCHANGE <enum-int-note-phoneticization>`
+  * In `GAME:Taiko`, `<enum-int-note-phoneticization>` can be one of:
+    * | | Note phoneticization | Designed for what note symbol
+      | --- | --- | ---
+      | `0` | *<ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby>* Don | `1`
+      | `1` | *<ruby>ド<rt>Do</rt></ruby>* Do | `1`
+      | `2` | *<ruby>コ<rt>Ko</rt></ruby>* (Do) | `1`
+      | `3` | *<ruby>カッ<rt>Ka'</rt></ruby>* Ka | `2`
+      | `4` | *<ruby>カ<rt>Ka</rt></ruby>* (Ka) | `2`
+  * *Unspecified*: The behavior when an `<enum-int-note-phoneticization>` not designed for the applied note is used.
+* Initial value / `#NOTESCHANGE -1`
+  * Use the automatically assigned note phoneticization.
+
+***First seen in***: C-Taiko
 
 ### *Proposal* (IID): #BALLOON (Command)
 
