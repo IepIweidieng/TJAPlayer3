@@ -17,7 +17,7 @@ This article is still *in construction* and will be updated at times. It's recom
 
 Also see [TODO](#todo) for known issues and planned changes of this article.
 
-This article also contains unimplemented proposals, including tentative proposals by the main maintainer of this article and known proposals by simulator developers. These proposals are explicitly expressed to be *Proposal*s and may be subject to changes.
+This article also contains unimplemented proposals, including tentative proposals by the main maintainer of this article and known proposals by simulator developers. These proposals are explicitly expressed to be *Proposal*s and may be subject to changes. See [Proposers](#proposers) for the list of proposers for proposals listed in this article.
 
 See [Terminologies](#terminologies) for the explanation and conventions of some terminologies used in this article.
 
@@ -280,6 +280,19 @@ The display details are *unspecified*.
 ***First seen in***: TaikoJiro v2.64 \
 ***Supported by***: (Universally supported)
 
+### *Proposal* (Komi) ARTIST:
+
+***Scope***: per-file
+
+Specify the **artist** of the song.
+
+Similar to the `--` prefix usage of [the `SUBTITLE:` header](#subtitle-headers), but excluding extra information such as game series, anime series, *etc.*
+
+The display details are *unspecified*.
+
+* `ARTIST:<comma-separated-list-str-artist>`
+  * Every comma (`,`) in the artist name specified in `<comma-separated-list-str-artist>` ***MUST*** be escaped as `\,`
+
 ### MAKER:
 
 ***Scope***: per-file
@@ -289,8 +302,11 @@ Specify the creator ("**maker**") of the notechart.
 The display details are *unspecified*.
 
 * `MAKER:<string-name-notechart-creator>`
+  * *Proposal* (Komi): Every comma (`,`) in `<string-name-notechart-creator>` ***MUST*** be escaped as `\,`
 * `MAKER:<string-name-notechart-creator> <string-notechart-creator-web-url>`
   * `<string-notechart-creator-web-url>` is immediately enclosed by a pair of angle brackets (`<` & `>`).
+* *Proposal* (Komi): `MAKER:<comma-separated-list-string-name-notechart-creator>`
+  * Every comma (`,`) in the chart makers specified in `<comma-separated-list-string-name-notechart-creator>` ***MUST*** be escaped as `\,`
 
 ***First seen in***: taiko-web ver.19.11.25 \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
@@ -306,7 +322,9 @@ The display details are *unspecified*.
 * `NOTESDESIGNER<enum-int-difficulty-course>:<string-name-notechart-creator>` &mdash; (Better)TaikoCatsCaffe (?), OpenTaiko (0auBSQ) v0.6.0
   * `<enum-int-difficulty-course>` can one of the integer argument to [the `COURSE:` header](#course).
   * *Unspecified*: The behavior when the difficulty specified by `<enum-int-difficulty-course>` is different from the difficulty specified by `COURSE:` for the notechart definition.
+  * *Proposal* (Komi): Every comma (`,`) in `<string-name-notechart-creator>` ***MUST*** be escaped as `\,`
 * `NOTESDESIGNER:<string-name-notechart-creator>` &mdash; OpenTaiko (0auBSQ) v0.6.0
+  * *Proposal* (Komi): Every comma (`,`) in `<string-name-notechart-creator>` ***MUST*** be escaped as `\,`
 
 ***First seen in***: (Better)TaikoCatsCaffe (?) \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
@@ -2289,6 +2307,86 @@ Specify the draw **order** of this **layer** relative to other layers in the cur
   * Specify the draw order relative to other layers in the current layer section (default: 0). Notes from a layer with a more positive number are drawn above the notes from layers with less positive draw orders. Notes outsides the current layer section are not affected.
 * Initial value: `#LAYERORDER 0`
 
+### *Proposal* (barrier): #GROUP
+
+***Scope***: branch (?), non-before \
+***Effect time***: static \
+***Effect target***: notes, bar lines, judgment mark(s), note field(s)
+
+Start the definition of a timing **group**. (?)
+
+(TMG syntax, but no known argument)
+
+### *Proposal* (barrier): Conditional SPAWN Commands
+
+***Scope***: branch sequential (?), non-before, timing \
+***Effect time***: command-time \
+***Non-static effect scope***: non-before \
+***Effect target***: notes, bar lines, judgment mark(s), note field(s)
+
+Define conditionally enabled notechart sections which appear / disappear with the effects of [`#NOTESPAWN`](#notespawn) ("**spawn**"), when the specified time point before the command is reached.
+
+* `#IFSPAWN(<bool-condition-enable>, <enum-str-spawntype>, <float-seconds-duration>)`
+  * Starts a conditional spawn definition section, its conditional part, and a conditional notechart definition section.
+* `#UNLESSSPAWN(<bool-condition-disable>, <enum-str-spawntype>, <float-seconds-duration>)`
+  * Starts a conditional spawn definition section, its conditional part, and a conditional notechart definition section.
+  * Equivalent to `#IFSPAWN(<bool-condition-enable>, <enum-str-spawntype>, <float-seconds-duration>)`, where `<bool-condition-enable>` is the boolean invert of `<bool-condition-disable>`. (?)
+* `#ELSEIFSPAWN(<bool-condition-enable>, <enum-str-spawntype>, <float-seconds-duration>)`
+  * Continues the conditional part of a conditional spawn definition section.
+  * Ends the previous conditional notechart definition section and starts a new section.
+* `#ELSESPAWN(<enum-str-spawntype>, <float-seconds-duration>)`
+  * Ends the conditional part of a conditional spawn definition section.
+  * Ends the previous conditional notechart definition section and starts a new section.
+* `#IFSPAWNEND()`
+  * Ends a conditional spawn definition section and the previous conditional notechart definition section.
+
+All `<bool-condition>` within a conditional spawn definition section are (re-)evaluated at each specified `<float-seconds-duration>` seconds before the `#*SPAWN()` command. (?)
+
+Within a conditional spawn definition section, after each (re-)evaluation, the conditional notechart definition section of the first defined `#*SPAWN()` command with `<bool-condition-enable>` being `true`, `<bool-condition-disable>` being `false`, or without specifiable `<bool-condition-*>` is enabled, while all the other sections are disabled.
+
+`<enum-str-spawntype>` must be one of:
+
+* `Spawn`
+  * The section is initially disabled and invisible. (?)
+  * If the section is enabled, the chart objects in the section appears `<float-seconds-duration>` seconds before the time point of the `#*SPAWN()` command.
+  * Otherwise the section disappears or remains invisible.
+* `Vanish`
+  * The section is initially enabled and visible. (?)
+  * If the section is disabled, the chart objects in the section disappears `<float-seconds-duration>` seconds before the time point of the `#*SPAWN()` command. (?)
+  * Otherwise the section appears or remains visible.
+
+Example usages (adapted from barrier15300):
+
+```txt
+// Evaluated at 0 seconds before the `#IFSPAWN()`
+#IFSPAWN(CD.Good == 100, Spawn, 0)
+  // Initially disabled and invisible
+  // If enabled, appears 0 seconds before the command
+  2010201011102010,
+#ELSESPAWN(Vanish, 0)
+  // Initially enabled and visible
+  // If disabled, disappears 0 seconds before the command
+  1011201020101120,
+#IFSPAWNEND()
+```
+
+```txt
+// Evaluated at 0.5, 0, & -1 second before the `#UNLESSSPAWN()`
+#UNLESSSPAWN(CD.Good < 100, Spawn, 0)
+  // Initially disabled and invisible
+  // If enabled, appears 0 seconds before the command
+  2222102222102222,
+#ELSEIFSPAWN(CD.Bad > 0, Vanish, -1)
+  // Initially enabled and visible
+  // If disabled, disappears -1 second before (i.e., 1 second after) the command
+  1111221110102211,
+#ELSESPAWN(Spawn, 0.5)
+  // Initially disabled and invisible
+  // If enabled, appears 0.5 seconds before the command
+  1110111011102220,
+#IFSPAWNEND()
+```
+
 ### #NEXTSONG
 
 ***Scope***: notechart, non-before \
@@ -2996,6 +3094,47 @@ The note handling details of the Taiko mode apply. See the explanation in [Note 
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.4 \
 ***Supported by***: taiko-web (plugin "Donkey Konga Mode"), OutFox
 
+### *Proposal* (Komi): Note Symbols in Beatz Mode
+
+The Beatz mode is based on Squid Beatz 2, a mini game in Splatoon 2, developed by Nintendo.
+
+Squid Beatz 2 is the sequel of Squid Beatz (a mini game in Splatoon, developed by Nintendo). However, Squid Beatz only has 2 note type: left and right notes (similar to Konga mode), while Squid Beatz 2 has more note types but based on instead bottom and top notes (similar to Taiko mode).
+
+Input type | Buttons
+--- | ---
+Top-left | Any left shoulder button
+Top-right | Any right shoulder button
+Bottom-left | Any D-pad button
+Bottom-right | Any face (X/Y/B/A) button
+
+| | Note Type | Note Appearance | Explanations on Clear | Explanations on Fail | Notes
+--- | --- | --- | --- | --- | ---
+`0` | (blank) | (none) | Nothing needs to be done. Consume no input. | (impossible to fail) |
+`1` | Bottom single note | Red circle on the bottom lane | Press a bottom button within the GOOD timing window, consumes a bottom input. <br /> Awards FRESH or GOOD‡ judgment according to the timing. | Press a top button within the GOOD‡ judgment window (consumes a top input), press too off but within the MISS judgment window (?) (consumes an input), or not press within the MISS judgment window (consumes no inputs). <br /> Gives a MISS judgment & combo break. |
+`2` | Top single note | Green or blue circle on the top lane | Press a top button within the GOOD‡ timing window, consumes a top input. <br /> Awards the same as `1`. | Press a bottom button within the GOOD‡ judgment window (consumes a bottom input), press too off but within the MISS judgment window (consumes an input), or not press within the MISS judgment window (consumes no inputs). <br /> Gives the same penalty as `1`. |
+`3` | Bottom double note | Red square on the bottom lane | Press bottom-left or bottom-right within the GOOD‡ timing window **&** the other bottom-left or bottom-right within a certain time duration (consumes a bottom-left and a bottom-right input in total) <br /> Awards the same as `1` according to the timing of the first input. | Press top within the GOOD‡ judgment window (consumes a top input), press too off but within the MISS judgment window (consumes the first input), not press within the MISS judgment window (consumes no inputs), the second input is not given in a certain time duration after the first input (consumes only the first input), or the second input is top or repeated-side bottom (consumes 2 inputs in total). <br /> Gives the same penalty as `1`. |
+`A` | (same as `3`) | (see `3`) | (see `3`) | (see `3`) | By analogy with `GAME:Taiko`. |
+`4` | Top double note | Green or blue square on the top lane | Press top-left or top-right within the GOOD‡ timing window **&** the other top-left or top-right within a certain time duration (consumes a top-left and a top-right input in total). <br /> Awards the same as `1` according to the timing of the first input. | Press bottom within the GOOD‡ judgment window (consumes a botton input), press too off but within MISS judgment window (consumes the first input), not press within the MISS judgment window (consumes no inputs), the second input is not given in a certain time duration after the first input (consumes only the first input), or the second input is bottom or repeated-side top (consumes 2 inputs in total). <br /> Gives the same penalty as `1`. |
+`B` | (same as `4`) | (see `4`) | (see `4`) | (see `4`) | By analogy with `GAME:Taiko`. |
+`E` | Top-single bottom-single note | Green or blue circle on the top lane and red circle on the bottom lane, joined by grey background | Press bottom or top within the GOOD‡ timing window **&** the other bottom or top within a certain time duration (consumes a bottom and a top input in total). <br /> Awards the same as `1` according to the timing of the first input. | Press too off but within MISS judgment window (consumes the first input), not press within the MISS judgment window (consumes no inputs), the second input is not given in a certain time duration after the first input (consumes only the first input), or the second input is repeated bottom or top (consumes 2 bottom or 2 top inputs in total). <br /> Gives the same penalty as `1`. |
+? | Top-single bottom-double note | Green or blue circle on the top lane and red square on the bottom lane, joined by grey background | Press bottom-left/right or top within the GOOD‡ timing window **&** all the other bottom-left/right or top, all within a certain time duration (consumes a bottom-left, a bottom-right, and a top input in total). <br /> Awards the same as `1` according to the timing of the first input. | Press too off but within MISS judgment window (consumes the first input), not press within the MISS judgment window (consumes no inputs), the *n*th input is not given in a certain time duration after the first input (consumes up to the *n*−1-st input), or the *n*th input is repeated-side bottom or repeated top (consumes up to the *n*th input). <br /> Gives the same penalty as `1`. |No note symbols have been assigned. |
+? | Top-double bottom-single note | Green or blue square on the top lane and red circle on the bottom lane, joined by grey background | Press bottom or top-left/right within the GOOD‡ timing window **&** all the other bottom or top-left/right, all within a certain time duration (consumes a bottom, a top-left, and a top-right input in total). <br /> Awards the same as `1` according to the timing of the first input. | Press too off but within MISS judgment window (consumes the first input), not press within the MISS judgment window (consumes no inputs), the *n*th input is not given in a certain time duration after the first input (consumes up to the *n*−1-st input), or the *n*th input is repeated bottom or repeated-side top (consumes up to the *n*th input). <br /> Gives the same penalty as `1`. | No note symbols have been assigned.
+`G` | Top-double bottom-double note | Green or blue square on the top lane and red square on the bottom lane, joined by grey background | Press bottom-left/right or top-left/right within the GOOD‡ timing window **&** all other bottom-left/right or top-left/right, all within a certain time duration (consumes a bottom-left, a bottom-right, a top-left, and a top-right input in total). <br /> Awards the same as `1` according to the timing of the first input. | Press too off but within MISS judgment window (consumes the first input), not press within the MISS judgment window (consumes no inputs), the *n*th input is not given in a certain time duration after the first input (consumes up to the *n*−1-st input), or the *n*th input is repeated-side buttom or repeated-side top (consumes up to the *n*th input). <br /> Gives the same penalty as `1`. |
+`C` | Bomb/mine | (Small dark-blue cherry bomb with ignited fuze 💣) | All presses are too off or not press (both consumes no inputs). <br /> Awards a "bomb/mine-pass" judgment. | Press any button within the GOOD‡ (?) timing window, consumes an input. <br /> Gives a BOOM ("bomb/mine-miss") judgment & a combo-break and decreases healty gauge. | Not in the official games. <br /> By analogy with Taiko mode.
+`F` | *Ad libitum* note (AD-LIB) | (invisible by default) | Press any button within the GOOD‡ timing window, consumes an input. <br /> Awards an AD-LIB judgment. | Not press within the GOOD‡ timing window (consumes no inputs). <br /> Gives no penalties. | Not in the official games. <br> By analogy with Taiko mode.
+`5` | Head of bottom bar drumroll <br /> Examples: `5008`, `5558`, `5001` | Red circle with bar attached behind on the bottom lane | Similar to `6` but only consumes (?) and reacts to bottom inputs. <br /> Awards the same as `6`. | (impossible to fail) | By analogy with `GAME:Konga`. |
+`I` | Head of top bar drumroll <br /> Examples: `I008`, `III8`, `I001` | Green or blue circle with bar attached behind on the top lane | Similar to `6` but only consumes (?) and reacts to top inputs. <br /> Awards the same as `6`. | (impossible to fail) | By analogy with `GAME:Konga`. |
+`6` | Head of both bar drumroll <br /> Examples: `6008`, `6668`, `6001` | Red circle on the bottom lane and green circle on the top lane, each with bar attached behind on the respective lane, joined by grey background | Rapidly press any buttons during its duration, consumes each press with unlimited speed, reacts to each press up to 1 press per 60fps frame. | (impossible to fail) |
+`H` | (same as `6`) <br /> Examples: `H008`, `HHH8`, `H001` | (see `6`) | (see `6`) | By analogy with `GAME:Konga`. |
+`7` | Head of regular *<ruby>激<rt>Geki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt> キ<rt>ki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt> 船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* balloon <br /> Examples: `7008`, `7778`, `7001` | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | Rapidly press bottom buttons with exactly certain amount of reacted presses during its duration, consumes each bottom or top press with unlimited speed, reacts to each bottom press up to 1 press per 60fps frame. | Fail to input enough amount of reacted presses. <br /> Does not give penalties except that notes (except bombs/mines (?)) placed within the duration of the ballon are impossible to press while the balloon is not cleared. | By analogy with Taiko mode.
+`9` | Head of special burst note/balloon | (Vary) | (Vary) <br> Rapldly press bottom buttons with exactly certain amount (summed and shared among players) of reacted presses during its duration, consumes each bottom or top press with unlimited speed, reacts to each bottom press up to 1 press per 60fps frame. | (same as `7`) | Might become `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player. <br /> Not in the official games. <br /> By analogy with Taiko mode.
+`D` | Fuze/fuse drumroll <br /> Examples: `D008`, `DDD8`, `D001` | (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | Similar to `7` but awards a "bomb/mine-pass" judgment. | Similar to `7` but gives a BOOM ("bomb/mine-miss") judgment & a combo-break and decreases healthy gauge. | Not in the official games. <br /> By analogy with Taiko mode.
+`8` | Explicit end of a drumroll-type note (if any), otherwise (blank) | (round end of a bar) (end of a bar drumroll) <br /> (none) (otherwise) | Nothing needs to be done. Consumes no input. | (impossible to miss) | Stop repeately pressing buttons non-after the point (end of drumrolls)
+
+‡: The GOOD judgment in Beatz games corresponds to the *<ruby>可<rt>ka</rt></ruby>* OK judgment in Taiko games.
+
+The note handling details of the Taiko mode apply. See the explanation in [Note Symbols in Taiko Mode](#note-symbols-in-taiko-mode).
+
 ## Terminologies
 
 ### Word Usage of this Article
@@ -3103,6 +3242,18 @@ The honorific title is omitted.
     In comparison, Project OutFox introduces the originally lacking TJA format parsing and Taiko gameplay (as "taitai" mode), among with many new game modes, theming and gameplay gimmick support, and other improvements.
     * ← Derived from StepMania 3.9: By Chris Danford *et al.*
 * TaikoManyGimmicks (aka. taikosimu(NN)): By barrier15300 <https://twitter.com/barrier15300/with_replies>
+
+### Proposers
+
+The honorific title is omitted.
+
+Listed in alphabetic dictionary order.
+
+Screen name used for *proposal* | Other screen names | Notes
+--- | --- | ---
+barrier | barrier15300 | Main maintainer of TaikoManyGimmicks
+IID | Iweidieng Iep | Main maintainer of this article
+Komi | 0auBSQ, <ruby>申<rt>mou</rt> し<rt>shi</rt> コ<rt>ko</rt> ミ<rt>mi</rt></ruby> | Main maintainer of OpenTaiko (0auBSQ)
 
 ## References
 
