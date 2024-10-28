@@ -2833,7 +2833,7 @@ During the defined duration interval within a drumroll-type note, either `0` or 
 
 For special balloons (`9`), the last occurrence of repeated note head symbol (if any) defines the full bonus time point. If the note is cleared, full bonus is awarded only by clearing the note non-after that point and partial bonus is awarded otherwise. The full bonus time point is *unspecified* when no repeated note head symbols ever occur.
 
-* In TaikoJiro, the full bonus time point is implicitly placed at the position 0.6 times of the note duration after the note head.
+* In TaikoJiro, the full bonus time point defaults to the position 0.6 times of the note duration after the note head.
 
 By default, drumroll-type notes are ended non-after one of:
 
