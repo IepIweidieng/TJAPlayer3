@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2024-10-29 (UTC+8)
+* Last changed: 2024-11-04 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -509,7 +509,9 @@ Specify the initial **BPM** (**b**eat **p**er **m**inute) of the notechart.
 
 ***Scope***: per&ndash;player-side, gimmicky
 
-Specify the normal **scroll**ing velocity (before and non-after the beginning ("**head**") of the notechart), relative to the base scrolling velocity.
+Specify the initial **scroll**ing velocity (before and non-after the beginning ("**head**") of the notechart), relative to the base scrolling velocity.
+
+Can be reset by [the `#SCROLL` command](#scroll) non-before the beginning of the notechart. If every player-side for every difficulty has `#SCROLL` defined at the beginning of the chart, `HEADSCROLL:` has no effects.
 
 * `HEADSCROLL:<float-normal-scroll-velocity>`
 * `HEADSCROLL:0`
@@ -1293,9 +1295,8 @@ Use a **scroll**ing mode similar to the scrolling method used in either **B**E**
 
 Scrolling mode comparison: Consider BPM changes occur during notes and bar lines traveling through the whole note field (including the part past the judgment mark).
 
-* `scroll` is the scrolling rate multiplier specified by [the `#SCROLL` command](#scroll) and by [the `HEADSCROLL:` header](#headscroll).
+* `scroll` is the scrolling rate multiplier specified by the in-effect [`#SCROLL` command](#scroll) (if any) or [`HEADSCROLL:` header](#headscroll).
   * Fixed to `1` when either `#BMSCROLL` or REGUL-SPEED (TaikoJiro) is used.
-  * > Formula: `scroll` = `scroll_command` × `headscroll`, otherwise
 * `modifier` is the scrolling rate multiplier specified by the speed modifier options.
   * Its value is the apparent BPM specified by REGUL-SPEED settings if REGUL-SPEED is used.
 
@@ -1511,6 +1512,8 @@ Respectively **start** / **end** a fake/dummy section if not already respectivel
 Change the **scroll**ing speed of notes & bar lines, relative to the normal scrolling velocity and direction.
 
 *Unspecified*: Whether the notes & the bar lines are rotated around their center accordingly when a complex number value is used.
+
+For specifying the same initial scrolling speed for multiple player-sides or difficulties, [the `HEADSCROLL:` header](#headscroll) can be used instead.
 
 Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
@@ -1916,7 +1919,7 @@ In the official games, the note phoneticization is assigned per-note and does no
 
 The general pattern in recent Taiko games seems to be:
 
-* The visual beat duration between `x` & `y` (`d_<x>_to_<y>` below) is used for determining the note phoneticization and is defined as `scroll` × `beat_duration_<x>_to_<y>` = `scroll_command` × `headscroll` × `beat_duration_<x>_to_<y>`.
+* The visual beat duration between `x` & `y` (`d_<x>_to_<y>` below) is used for determining the note phoneticization and is defined as `scroll` × `beat_duration_<x>_to_<y>`.
 * Both the head and end of drumroll-type notes are treated as ordinary notes for determining the note phoneticization.
 * A note is "chain-final" when any of the followings are met (the "? / 3" factors are tentatively determined tolerance values):
   * `d_this_to_next_note` > 1/8th, the end of a chain before a pause.
