@@ -2903,7 +2903,7 @@ Within a measure, there can be any amount of note symbols as long as the *unspec
 
 Each note symbol has the division weight of 1. The measure delimiter symbol `,` at the end of a measure (if any) has the division weight of 0 if there is at least 1 note symbol in this measure, otherwise this delimiter `,` has the division weight of 1.
 
-The total beat duration of the measure is divided equally by the total division weight of the notechart symbols of this measure (including the note symbols and the measure delimiter symbol `,` at the end of this measure (if any)). Each division weight occupies the same amount of beats &mdash; a closed-head, open-end beat interval "measure division beat duration interval". The beat position of the note, note head, or note end for the notechart symbol (if any) is at the beginning of the first duration interval for this notechart symbol. The actual time duration of every such beat duration interval can vary and even become negative.
+The total beat duration of the measure is divided equally by the total division weight of the notechart symbols of this measure (including the note symbols and the measure delimiter symbol `,` at the end of this measure (if any)). Each unit of division weight occupies the same amount of beats &mdash; a closed-head, open-end interval "measure division interval". The beat and time position of the note, note head, or note end for the notechart symbol (if any) is at the beginning of the first division interval for this notechart symbol. The time duration of every division interval can vary and even become negative.
 
 * In TJF format, `,` did not exist and every note symbol occupies the amount of beats of a 1/16th note.
 
@@ -2914,16 +2914,16 @@ Equation: `beat_duration_of_division` (scope: a measure)
 
 Equation: `time_duration_of_division` (unit: seconds)
 
-* = 60 (s) × `beat_duration_of_division` / `defined_bpm_at_beat_duration`
+* = 60 (s) × `beat_duration_of_division` / `defined_bpm_at_division_head`
 
 Compatibility issues:
 
-* In TaikoJiro, the time precision is 1 millisecond, and the time duration of a beat duration is **floor**(**floor**(4 × 60 × 1000 / `defined_bpm_at_beat_duration`) × `beat_duration_of_division` / 4) / 1000 (unit: seconds)
+* In TaikoJiro, the time precision is 1 millisecond, and the time duration of a division interval is **floor**(**floor**(4 × 60 × 1000 / `defined_bpm_at_division_head`) × `beat_duration_of_division` / 4) / 1000 (unit: seconds)
   * Reference: <https://twitter.com/barrier15300/status/1619399304250290180> by @barrier15300
-* In TJAP2fPC until ver.2018040600, each measure with no note symbols has 0 beat duration.
-* In TJAP2fPC since ver.2018040600, TJAPlayer3, but not OpenTaiko (0auBSQ) since v0.6.0.12, each `,` has the division weight of 1 at the beginning of unindented non-command line, and has the division weight of 0 at the beginning of indented non-command line, regardless whether there are any note symbols in this measure.
+* In TJAP2fPC until ver.2018040600, each measure with no note symbols has 0 beat duration and 0 time duration.
+* In TJAP2fPC since ver.2018040600, TJAPlayer3, but not OpenTaiko (0auBSQ) since v0.6.0.12, each `,` has the division weight of 1 at the beginning of unindented non-command line, and has the division weight of 0 (0 beat duration and 0 time duration) at the beginning of indented non-command line, regardless whether there are any note symbols in this measure.
 
-Non&ndash;measure-based&ndash;scoped, non-sequential, non&ndash;one-shot commands have their effects fired when all the beat duration intervals of the nearest preceding notechart symbol ends. If the measure delimiter symbol `,` has the division weight of 0, placing such commands before or after this `,` symbol has the same effects.
+Non&ndash;measure-based&ndash;scoped, non-sequential, non&ndash;one-shot commands have their effects fired when all the division intervals of the nearest preceding notechart symbol ends. If the measure delimiter symbol `,` has the division weight of 0, placing such commands before or after this `,` symbol has the same effects.
 
 The time duration intervals of different notechart symbols are possible to overlap by using [`#BPMCHANGE`](#bpmchange) / [`#MEASURE`](#measure) / [`#DELAY`](#delay) commands with non-positive value.
 
