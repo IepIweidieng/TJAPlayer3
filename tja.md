@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2024-11-04 (UTC+8)
+* Last changed: 2024-11-27 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1238,7 +1238,7 @@ No known per-file commands exist, which would be effectively [headers](#tja-head
 Except for one-shot commands, the effect of each command continues until the next occurrence of any command from the same command group or [`#END`](#start--end).
 
 * For per&ndash;player-side commands, the behavior is *unspecified* when (the same or different) commands in the same command group occur together within its scope.
-* For measure-based&ndash;scoped commands, the behavior is *unspecified* when any [notechart symbols](#notechart-symbols) occur after the last [notechart symbol](#notechart-symbols) (always `,` in TJA) and before such a command in the notechart definition.
+* For measure-based&ndash;scoped commands, the behavior is *unspecified* when any note symbols occur after the measure-delimiter `,` at the end of the previous measure (if any) and before such a command in the notechart definition.
 
 Some branch-scoped commands are non-sequential, *i.e.*, they can be arranged freely within the same beat position without causing any behavior changes, as long as both their relative order to the sequential commands and the relative order among commands which override each other are not changed.
 
@@ -1315,7 +1315,7 @@ Default scrolling changes of [`#SCROLL`](#scroll) command | Set the per-note or 
 
 In OutFox, the Taiko-like scrolling mode can be achieved by using CAMod (AMod/"Average BPM Scroll Mode" with constant per-note or per–bar-line scrolling speed) with the BPM parameter set to 4 × the average BPM of the notechart.
 
-See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-and-timing) for the behavior of timing commands.
+See [The Measure Delimiter Symbol and Timing](#the-measure-delimiter-symbol-and-timing) for the behavior of timing commands.
 
 *Proposal* (IID): See [*Proposal* (IID): Command Modifier](#proposal-iid-command-modifier) for the syntax for mode-invariant commands.
 
@@ -1403,7 +1403,7 @@ Respectively **start** / **end** the region of notechart definition.
 
 * `#BPMCHANGE <non-zero-float-bpm>`
   * A negative value results in "negative BPM" and causes the beat duration and the total note distance to be in the opposite sign. The behavior depend on [the `#MEASURE` command](#measure) used in conjunction.
-    * See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-and-timing) for the behavior.
+    * See [The Measure Delimiter Symbol and Timing](#the-measure-delimiter-symbol-and-timing) for the behavior.
 * `#BPMCHANGE 0`
   * The behavior is *unspecified* (may cause crashes in some existing simulators).
 * Initial value: The BPM specified by [the `BPM:` header](#bpm).
@@ -1425,14 +1425,14 @@ Change the time signature / meter signature / **measure** signature.
   * The measure duration is determined only by the result of dividing the upper numeral by the lower numeral.
   * The lower numeral is conventionally fixed to be positive.
   * A negative measure duration causes the note objects to be positioned backward and can even cause them to overlap.
-    * See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-and-timing) for the behavior.
+    * See [The Measure Delimiter Symbol and Timing](#the-measure-delimiter-symbol-and-timing) for the behavior.
 * `#MEASURE <number-upper-numeral>/0`
   * The behavior is *unspecified* (may cause crashes in some existing simulators).
 * *Proposal* (IID): `#MEASURE <beats-measure>`
   * The `<enum-str-delay-type>` part of the [`beats`](#value-type) value ***MUST*** be `d` or (empty) and specifies whether the specified measure duration includes the time duration of the `#DELAY` commands.
 * Initial value: `#MEASURE 4/4`
 
-Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby>小<rt>shou</rt> 節<rt>setsu</rt></ruby>*** "measure" to fit all note symbols on the following line if placed after the previous measure (if any) and before the first [notechart symbol](#notechart-symbols) of this measure in the notechart definition).
+Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby>小<rt>shou</rt> 節<rt>setsu</rt></ruby>*** "measure" to fit all note symbols on the following line if placed after the previous measure (if any) and before the first note symbol (if any) of this measure in the notechart definition).
 
 ***First seen in***: TaikoJiro \
 ***Supported by***: (Universally supported)
@@ -1461,7 +1461,7 @@ For the timing of notechart object, multiple `#DELAY` commands placed at the sam
 * `#DELAY <non-zero-float-seconds-delay-duration>`
   * In TaikoJiro, when either `#BMSCROLL` or `#HBSCROLL` is used, the notechart stops scrolling for the specified duration even when notechart objects are placed into the stop duration by using negative delays.
   * A negative duration results in "negative delay" and can cause note objects to overlap.
-    * See [The Measure-terminating Symbol and Timing](#the-measure-terminating-symbol-and-timing) for the behavior.
+    * See [The Measure Delimiter Symbol and Timing](#the-measure-delimiter-symbol-and-timing) for the behavior.
 * `#DELAY 0`
   * No effects
 * *Proposal* (IID): `#DELAY <beats-time-duration>`
@@ -2870,6 +2870,11 @@ Most headers are not allowed in notechart definition.
 * In TaikoJiro, such a header is interpreted as note symbols with unrecognized characters ignored and removed.
 * In TJAPlayer2 for.PC, such a header behavior the same as if the header were placed before `#START` and all commands for the current player-side.
 
+A notechart definition line can be one of:
+
+* Command line &mdash; a line starting with an optionally indented command or header.
+* Non-command line &mdash; a line not starting with any optionally indented commands or headers.
+
 ### Whitespaces in Notechart Definition
 
 In non-command lines, all whitespaces are ignored. (TaikoJiro-only?)
@@ -2878,41 +2883,49 @@ In non-command lines, all whitespaces are ignored. (TaikoJiro-only?)
 
 ### Notechart Symbols
 
-Including the measure-terminating symbol (comma; `,`) & note symbols (`<enum-str-note>`).
+Including the measure delimiter symbol (comma; `,`) & note symbols (`<enum-str-note>`).
+
+A measure consists of at least 1 notechart symbol (except for the last measure of the chart) and any number of commands and headers. The measure delimiter symbol `,` must be the last element if present.
+
+*Unspecified*: The behavior if the last measure of the chart is not ended with the measure delimiter symbol `,`. 
 
 *Unspecified*: Whether unrecognized note symbols are ignored (removed) or treated as `0` (blank).
 
 * In TaikoJiro, unrecognized note symbols are ignored and removed.
 
-### The Measure-terminating Symbol and Timing
+### The Measure Delimiter Symbol and Timing
 
-The definition of each measure is ended with a comma (`,`). *Unspecified*: The behavior when there are non-whitespaces, non-comment trailing characters after the first comma (`,`) of the line.
+The definition of each measure is separated with a comma (`,`) in a non-command line. *Unspecified*: The behavior when there are non-whitespaces, non-comment trailing characters after the first comma (`,`) of a non-command line
 
 Within a measure, there can be any amount of note symbols as long as the *unspecified* maximum allowed amount is not exceeded.
 
-If any note symbols present, each note symbol occupies the same amount of beats within the measure &mdash; a closed-head, open-end beat interval "note symbol beat duration interval". The beat position of the note is at the beginning of this duration interval. The actual time duration of every such beat duration interval can vary and even become negative.
+* In TaikoJiro, a measure contains > 511 note symbols crashes the program when the chart is being loaded (in the gameplay screen).
+
+Each note symbol has the division weight of 1. The measure delimiter symbol `,` at the end of a measure (if any) has the division weight of 0 if there is at least 1 note symbol in this measure, otherwise this delimiter `,` has the division weight of 1.
+
+The total beat duration of the measure is divided equally by the total division weight of the notechart symbols of this measure (including the note symbols and the measure delimiter symbol `,` at the end of this measure (if any)). Each division weight occupies the same amount of beats &mdash; a closed-head, open-end beat interval "measure division beat duration interval". The beat position of the note, note head, or note end for the notechart symbol (if any) is at the beginning of the first duration interval for this notechart symbol. The actual time duration of every such beat duration interval can vary and even become negative.
 
 * In TJF format, `,` did not exist and every note symbol occupies the amount of beats of a 1/16th note.
 
-Measures with no note symbols (*i.e.*, `,`-only measures) are equivalent to `0,`
+Equation: `beat_duration_of_division` (scope: a measure)
 
-Equation: `beat_duration_of_symbol` (scope: a measure)
+* = `measure_beat_duration` / `measure_total_division_weight`
+* = 4 (beats) × `measure_upper_numeral` / `measure_lower_numeral` / `measure_total_division_weight`
 
-* = `measure_beat_duration` / `count_of_symbols`
-* = 4 × `measure_upper_numeral` / `measure_lower_numeral` / `count_of_symbols`
+Equation: `time_duration_of_division` (unit: seconds)
 
-Equation: `time_duration_of_symbol` (unit: seconds)
-
-* = 60 × `beat_duration_of_symbol` / `defined_bpm_at_beat_duration`
+* = 60 (s) × `beat_duration_of_division` / `defined_bpm_at_beat_duration`
 
 Compatibility issues:
 
-* In TaikoJiro, the time precision is 1 millisecond, and the time duration of a note symbol is **floor**(**floor**(4 × 60 × 1000 / `defined_bpm_at_beat_duration`) × `beat_duration_of_symbol` / 4) / 1000 (unit: seconds)
+* In TaikoJiro, the time precision is 1 millisecond, and the time duration of a beat duration is **floor**(**floor**(4 × 60 × 1000 / `defined_bpm_at_beat_duration`) × `beat_duration_of_division` / 4) / 1000 (unit: seconds)
   * Reference: <https://twitter.com/barrier15300/status/1619399304250290180> by @barrier15300
+* In TJAP2fPC until ver.2018040600, each measure with no note symbols has 0 beat duration.
+* In TJAP2fPC since ver.2018040600, TJAPlayer3, but not OpenTaiko (0auBSQ) since v0.6.0.12, each `,` has the division weight of 1 at the beginning of unindented non-command line, and has the division weight of 0 at the beginning of indented non-command line, regardless whether there are any note symbols in this measure.
 
-Non&ndash;measure-based&ndash;scoped, non-sequential, non&ndash;one-shot commands have their effects fired when the beat duration interval of the nearest preceding note symbol ends. If such commands are placed after the last note symbol of a measure and before the first [notechart symbol](#notechart-symbols) of the next measure, whether they are placed before or after the `,` symbol has the same effects.
+Non&ndash;measure-based&ndash;scoped, non-sequential, non&ndash;one-shot commands have their effects fired when all the beat duration intervals of the nearest preceding notechart symbol ends. If the measure delimiter symbol `,` has the division weight of 0, placing such commands before or after this `,` symbol has the same effects.
 
-The time duration intervals of different note symbols are possible to overlap by using [`#BPMCHANGE`](#bpmchange) / [`#MEASURE`](#measure) / [`#DELAY`](#delay) commands with non-positive value.
+The time duration intervals of different notechart symbols are possible to overlap by using [`#BPMCHANGE`](#bpmchange) / [`#MEASURE`](#measure) / [`#DELAY`](#delay) commands with non-positive value.
 
 *Unspecified*: The behavior when the time duration intervals of any non-blank note symbols overlap.
 
