@@ -363,7 +363,7 @@ This allows the chart creators to specify the inner chart of every difficulty to
 For specifying the inner chart of solely the Oni difficulty with the same audio as in official AC15 and later official games (except only *<ruby>ハ<rt>Ha</rt> レ<rt>re</rt> 晴<rt>Ha</rt> レ<rt>re</rt> ユ<rt>Yu</rt> カ<rt>ka</rt> イ<rt>i</rt></ruby>* inner Hard in AC15), [`COURSE:Edit`](#course) is commonly used instead.
 * Reference: <https://wikiwiki.jp/taiko-fumen/%E5%8F%8E%E9%8C%B2%E6%9B%B2/%E3%82%80%E3%81%9A%E3%81%8B%E3%81%97%E3%81%84/%E3%83%8F%E3%83%AC%E6%99%B4%E3%83%AC%E3%83%A6%E3%82%AB%E3%82%A4#another>
 
-*<ruby>別<rt>betsu</rt> 譜<rt>fu</rt> 面<rt>men</rt></ruby>* "another notechart(s)" was a tentative name used during the development of AC11. The now-official name *<ruby>裏<rt>ura</rt> 譜<rt>fu</rt> 面<rt>men</rt></ruby>* "inner notechart" originated from *POP's MUSIC* 11 (2004), developed by Konami.
+*<ruby>別<rt>betsu</rt> 譜<rt>fu</rt> 面<rt>men</rt></ruby>* "another notechart(s)" was a tentative name used during the development of AC11. The now-official name *<ruby>裏<rt>ura</rt> 譜<rt>fu</rt> 面<rt>men</rt></ruby>* "inner notechart" originated from *pop'n music* 11 (2004), developed by Konami.
 
 * Reference: *まだあるの？「太鼓の達人１１」最後のコマンド大公開！* ("There is still more? The last command of Taiko no Tatsujin 11 greatly revealed!"). (2008-05-15). 開発日記（ブログ）｜太鼓の達人開発ブログ ("Development diary (blog) | Taiko no Tatsujin Development Blog"). <https://web.archive.org/web/20160213010255/http://taikoblog.namco-ch.net/blog/2008/05/post_36.html#more>
 
