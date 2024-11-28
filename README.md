@@ -5,7 +5,7 @@ An unofficial documentation compilation of TJAPlayer3 by [@IepIweidieng](https:/
 * GitHub repository: <https://github.com/IepIweidieng/TJAPlayer3/tree/gh-pages>
 * GitHub Pages site: <https://iepiweidieng.github.io/TJAPlayer3>
 
-These documentations mainly applies to:
+For TJAPlayer3-specific documentations, they mainly applies to:
 
 * [AioiLight/TJAPlayer3](<https://github.com/AioiLight/TJAPlayer3>)
 * [twopointzero/TJAPlayer3](<https://github.com/twopointzero/TJAPlayer3>)
@@ -17,3 +17,4 @@ Index:
   * See its [README.md](./TJAPlayer3-AioiLight-docs/README.md) for the information of this archive, especially the copyright information.
 * [tja.md](./tja.md)
   * An unofficial compilation and commentation of the TJA format & its related formats
+  * Not restricted to TJAPlayer3 or particular simulators, but currently only PC-compatible simulators are addressed.
