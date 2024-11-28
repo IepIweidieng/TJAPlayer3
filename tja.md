@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2024-11-27 (UTC+8)
+* Last changed: 2024-11-28 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -166,10 +166,15 @@ For multiple values separated by comma (`,`), except for `text`-valued fields, o
     * `<number-real>`, a pure real number where the real component is `<number-real>`.
     * `<optional-sign-imaginary><unsigned-number-imaginary-specifier>`, a pure imaginary number where the imaginary component has the sign of `<optional-sign-imaginary>` (defaults to `+`) and the absolute value specified by `<unsigned-number-imaginary-specifier>`.
     * `<number-real><sign-imaginary><unsigned-number-imaginary-specifier>`, a general complex number where the real component is `<number-real>` and the imaginary component has the sign of `<sign-imaginary>` and the absolute value specified by `<unsigned-number-imaginary-specifier>`.
+      * *Unspecified*: The behavior if `<sign-imaginary>` is `-` and `<unsigned-number-imaginary-specifier>` has the absolute value of 0.
   * `<unsigned-number-imaginary-specifier>` can be one of:
     * `i`, the imaginary component has the absolute value of 1.
     * `<unsigned-number-imaginary>i`, the imaginary component has the absolute value of `<unsigned-float-imaginary>`.
-    * *Unspecified*: whether `j` can be used in place of `i`.
+    * *Unspecified*: whether `j` can be used in place of `i`. 
+  * ***Compatibility issues***:
+    * In TaikoJiro 2, `+<unsigned-number-real>-<unsigned-number-imaginary>i` (?) where `<unsigned-number-imaginary>` is equivalent to 0 is not fully supported.
+    * In TJAP2fPC but not OpenTaiko (0auBSQ) v0.6.0, only the forms `<number-real>` & `<number-real><sign-imaginary><unsigned-number-imaginary>i` are supported; omitting any number parts is not supported.
+    * In TaikoManyGimmicks up to 0.6.6α, omitting the real number component when  `<sign-imaginary>` is not `-` is not supported.
 * `string`: A string. `string` indicates that it is *unspecified* whether leading or trailing non-newline whitespaces are significant. *Unspecified*: The maximum supported length.
   * `text`: A string. Can contain leading or trailing non-newline whitespaces & comments.
   * `str`: A string. Leading and trailing new-newline whitespaces & comments are ignored.
@@ -1554,6 +1559,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
   * This behavior is utilized in some existing notecharts to achieve bar line rotation. Exemplar notechart: <https://www.youtube.com/watch?v=SR94XPuGoyQ> <br />
     <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/SR94XPuGoyQ" title="YouTube video player, playing &quot;【TJAPlayer3】Sense【創作譜面】[BilliumMoto × Silentroom] 《ギミック譜面》&quot;, uploaded by かれーどらい{きつね}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   * The [`#ANGLE`](#note--barline-commands) command introduced in TaikoManyGimmicks can achieve such effects without depending on the *unspecified* behavior.
+* TJAPlayer2 for.PC and TaikoManyGimmicks do not support all existent forms of `<complex-ri-float-scroll-speed-xy>`, see the explanation of compatibility issues in [Value Type](#value-type).
 
 ### `#BARLINESCROLL`
 
@@ -1706,6 +1712,7 @@ The arguments are whitespace-separated.
 #### Compatibility Issues
 
 * In TJAPlayer2 for.PC and TJAPlayer3, the imaginary component of `<complex-ri-number-pixel-distance-xy>` specifies the vertical movement toward the bottom of the screen (↓) instead.
+* TJAPlayer2 for.PC and TaikoManyGimmicks do not support all existent forms of `<complex-ri-float-scroll-speed-xy>`, see the explanation of compatibility issues in [Value Type](#value-type).
 
 ### #JUDGEDELAY
 
