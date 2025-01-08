@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-01-04 (UTC+8)
+* Last changed: 2025-01-09 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -3020,8 +3020,11 @@ By default, drumroll-type notes are ended non-after one of:
     * Otherwise, in other "branch"/path states: 0ms.
   * *Unspecified*: The behavior of the hit-type note which ends a balloon-type note.
     * In TaikoJiro v2.36+, the hit-type note become impossible to hit if the balloon-type note is not cleared.
-      * This behavior is in reference to *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt> 3<rt>San</rt></ruby>（<ruby>辛<rt>kara</rt> 口<rt>kuchi</rt></ruby>）* ("Taiko Tower 3 (hard)"), where the duration interval of balloon-type notes overlaps with the following hit-type note, which can be achieved alternatively by using `#DELAY`s with negative duration to place the hit-type note.
+      * This behavior is in reference to the *<ruby>む<rt>Mu</rt> ず<rt>zu</rt> か<rt>ka</rt> し<rt>shi</rt> い<rt>i</rt></ruby>* Hard  and *<ruby>お<rt>O</rt> に<rt>ni</rt></ruby>* Oni/Extreme difficulties of "<ruby>風<rt>Fu</rt> 雲<rt>un</rt></ruby>！<ruby>バ<rt>Ba</rt> チ<rt>chi</rt> お<rt>o</rt> 先<rt>Sen</rt> 生<rt>sei</rt></ruby>" in AC3&ndash;6, where the duration interval of balloon-type notes overlaps with the following hit-type note. The overlap has been canceled since AC7.
+        * See <https://wikiwiki.jp/taiko-fumen/収録曲/おに/風雲！バチお先生>
+      * This behavior later appeared in *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt> 3<rt>San</rt></ruby>（<ruby>辛<rt>kara</rt> 口<rt>kuchi</rt></ruby>）* ("Taiko Tower 3 (hard)") and a few RPG-mode charts in other games.
         * See <https://wikiwiki.jp/taiko-fumen/収録曲/その他/太鼓タワー3%28辛口%29>
+      * However, this can be achieved alternatively by using `#DELAY`s with negative duration to place the hit-type note.
       * *Proposal* (IID): Restrict this behavior to `COURSE:Tower`.
 * In TaikoJiro, the definition position of the last note symbol of the notechart, except when the note head is in the definition of a "branch"/path other than the *<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>* Normal "branch"/path.
 
