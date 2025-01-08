@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2024-11-28 (UTC+8)
+* Last changed: 2025-01-04 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -841,7 +841,10 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
     * In TJAPlayer2 for.PC, the draw order of bar drumroll notes is determined by the relative scrolling velocity regardless of the value of the `COURSE:` header.
 * **`COURSE:6`** / **`COURSE:Dan`** / `COURSE:dan` &mdash; TJAPlayer3 v1.5.0
   * The special difficulty used for *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 道<rt>Dou</rt> 場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games.
-* `COURSE:`
+* `COURSE:` / Unrecognized value
+  * The behavior is *unspecified*.
+  * In TaikoJiro 1 and 2, treated as an unaccessible difficulty. Causes a crash in TaikoJiro 2 when entering the gameplay screen at any difficulty.
+* Initial value
   * An *unspecified* default difficulty is chosen by the simulator.
   * Usually equivalent to `COURSE:Oni`
 
@@ -873,9 +876,15 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
     * Oni/Extreme and beyond: 1&ndash;10
 * `LEVEL:0`
   * If supported, the difficulty star is displayed as 0 stars in the song selection screen. The other behaviors are *unspecified*.
-* `LEVEL:`
+  * In TaikoJiro 1, appears as 0 stars in song selection but 1 star in gameplay.
+* `LEVEL:` / Unrecognized value
+  * An *unspecified* difficulty star is chosen by the simulator.
+  * In TaikoJiro 1, appears as 0 stars in song selection but 255 stars in gameplay.
+  * In TaikoJiro 2, the command is ignored and the lastly specified difficulty star is kept.
+* Initial value
   * An *unspecified* default difficulty star is chosen by the simulator.
-  * Usually equivalent to `LEVEL:0`.
+  * In TaikoJiro 1, equivalent to `LEVEL:0`.
+  * In TaikoJiro 2, treated as 5 stars.
 * `LEVEL:<non-negative-float-difficulty-star>` &mdash; TaikoJiro v2.78
   * The fraction part is considered for sorting by difficulty star but is not displayed.
 
