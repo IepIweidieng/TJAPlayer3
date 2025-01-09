@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-01-09 (UTC+8)
+* Last changed: 2025-01-10 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -834,11 +834,14 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
   * This difficulty refers to the *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt></ruby>* "Taiko Tower" notechart series in the *<ruby>わ<rt>Wa</rt> く<rt>ku</rt> わ<rt>wa</rt>く<rt>ku</rt> 冒<rt>Bou</rt> 険<rt>ken</rt> ラ<rt>Ra</rt> ン<rt>n</rt> ド<rt>do</rt></ruby>* "Wakuwaku (Exciting) Adventure land" mode from the 7th PS2 console game. To further simulate the mode, [the `LIFE:` header](#life) can be used in conjunction.
   * The actual behavior may differ from simulator to simulator.
   * In TaikoJiro, this cause the bar drumroll notes to be drawn above of all <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> & <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> notes. However, it was stated that *this behavior might be changed later.* (Original quote: "*この仕様は後に変更されるかもしれません。*")
-  * This behavior is in reference to *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt> 6<rt>Roku</rt></ruby>（<ruby>辛<rt>kara</rt> 口<rt>kuchi</rt></ruby>）* ("Taiko Tower 6 (hard)"), where the faster notes are drawn beneath the slower note (mainly the big bar drumroll notes) and thus make the notechart hard to read.
-    * Exemplar Gameplay: <https://www.youtube.com/watch?v=8xU8uh5FSEw> <br />
-      <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8xU8uh5FSEw" title="YouTube video player, playing &quot;【太鼓の達人 CS7】太鼓タワー その6&quot;, uploaded by Lunar. lu" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    * However, near to the end of this notechart, the big bar drumroll notes are drawn beneath the preceding big <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> note with the same scrolling velocity. The draw order is probably determined by the scrolling velocity rather than the note type in this case.
-    * In TJAPlayer2 for.PC, the draw order of bar drumroll notes is determined by the relative scrolling velocity regardless of the value of the `COURSE:` header.
+  * This draw order behavior is in reference to *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt> 6<rt>Roku</rt></ruby>（<ruby>辛<rt>kara</rt> 口<rt>kuchi</rt></ruby>）* ("Taiko Tower 6 (hard)") ([fumen-wiki](wikiwiki.jp/taiko-fumen/収録曲/その他/太鼓タワー3%28辛口%29)), where the faster notes are drawn beneath the slower note (mainly the big bar drumroll notes) and thus make the notechart hard to read.
+    * Exemplar Gameplay: <https://youtu.be/nDsFM6XQwO4?t=23> <br />
+      <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/nDsFM6XQwO4?start=23" title="YouTube video player, playing &quot;太鼓の達人CS7　太鼓タワーその6(辛口) 月下美人　全良&quot;, uploaded by Guest Don" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    * However, this also occur in normal gameplay in some pre-AC15 games. An earlier example is *<ruby>ハ<rt>Ha</rt> ン<rt>n</rt> ガ<rt>ga</rt> リー<rt>rii</rt> 舞<rt>Bu</rt> 曲<rt>kyoku</rt> 第<rt>Dai</rt> ５<rt>go</rt> 番<rt>ban</rt> </ruby>* (Hungarian Dances No.5) ([fumen-wiki](https://wikiwiki.jp/taiko-fumen/収録曲/おに/ハンガリー舞曲第５番)) before Wii1, in all difficulties.
+      * Exemplar Gameplay: <https://www.youtube.com/watch?v=kSQe9xRlWtg> <br />
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/kSQe9xRlWtg" title="YouTube video player, playing &quot;【太鼓の達人7】ハンガリー舞曲第5番【全良】&quot;, uploaded by みっちー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    * The draw order in these game is probably determined by the timepoint of each note passing the [`#SCROLL 1`](#scroll)-equivalent note spawning position right beyond the right edge of the screen. However, in later games such as AC15 and AC16, the draw order is determined instead by notes' definition order in the notechart file.
+    * In TJAPlayer2 for.PC, the relative draw order of bar drumroll notes is determined by the relative scrolling velocity regardless of the value of the `COURSE:` header.
 * **`COURSE:6`** / **`COURSE:Dan`** / `COURSE:dan` &mdash; TJAPlayer3 v1.5.0
   * The special difficulty used for *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 道<rt>Dou</rt> 場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games.
 * `COURSE:` / Unrecognized value
