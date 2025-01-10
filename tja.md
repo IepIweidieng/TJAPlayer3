@@ -1035,8 +1035,8 @@ Specify the rounding mode of the **incr**ement of the *<ruby>魂<rt>tamashii</rt
 ### EXAM Headers
 
 ***First seen in***: TJAPlayer3 v1.5.0 \
-***Post-[#START](#start--end) position***: forbidden; allowed \
-&emsp; (***Supported by***: TJAPlayer3-Develop-ReWrite) \
+***Post-[#START](#start--end) position***: forbidden; \
+&emsp; allowed (***Supported by***: TJAPlayer3-Develop-ReWrite) \
 ***Scope***: per&ndash;player-side (?) (or per-song (begins with a [`#NEXTSONG` command](#nextsong) and ends with another [`#NEXTSONG` command](#nextsong)))
 
 Specify a requirement for passing the notechart in *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode" ("**exam**ination").
@@ -1308,8 +1308,8 @@ Commands only affect their targeting game objects. The target of each command ca
 
 ***First seen in***: TaikoJiro v1.91 \
 ***Supported by***: TaikoJiro 2, TJAPlayer2 for.PC \
-***Pre-[#START](#start--end) position***: required; allowed \
-&emsp; (***Supported by***: OpenTaiko (0auBSQ) v0.6.0) \
+***Pre-[#START](#start--end) position***: required; \
+&emsp; allowed (***Supported by***: OpenTaiko (0auBSQ) v0.6.0) \
 ***Scope***: per&ndash;player-side (or branch, non-before), gimmicky \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines
