@@ -3337,3 +3337,9 @@ Komi | 0auBSQ, <ruby>申<rt>mou</rt> し<rt>shi</rt> コ<rt>ko</rt> ミ<rt>mi</r
 * Add separated recommendation for respectively simulator behavior and chart creators and editors. Currently, the relevant paragraphs have ambiguous phrasing.
 * Add standardization information, especially the OpenTaiko-OutFox standardization and the direction toward behavior unification. Currently, the relevant paragraphs lack clarifications and are misleading.
 * Fix missing and/or unverified information about Project OutFox.
+* Add a dedicated section for explaining gameplay mechanics.
+* GitHub page file managements
+  * Add test TJA files and references for mentioned behaviors for easy re-verification.
+  * Host image resources on GitHub page locally.
+  * Add bundled documentation files (`readme.txt` and on) for referenced simulators.
+  * Update the GitHub page site to add the table-of-content navigation static/popup window
