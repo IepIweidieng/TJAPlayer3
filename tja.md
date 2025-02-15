@@ -2183,6 +2183,10 @@ Override the result of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt>
   * Override the determining result as the current "branch"/path.
   * *Proposal* (IID): Equivalent to `#LEVELREDIR <enum-str-branch-current>, <enum-str-branch-current>, <enum-str-branch-current>`, where `<enum-str-branch-current>` represents the current "branch"/path.
 
+#### Compatibility Issues
+
+* In TJAPlayer2 for.PC, `#LEVELHOLD` affects all branches and all routes.
+
 ### *Proposal* (IID): #LEVELREDIR
 
 ***Scope***: branch \
