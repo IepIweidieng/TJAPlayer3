@@ -2173,7 +2173,7 @@ This command can apply to only named "branch"/path-determining sections.
 ***Scope fineness***: measure \
 ***Effect time***: static \
 ***Effect target***: (none) \
-***Effect branches***: current (only the routes reaching the `#LEVELHOLD`)
+***Effect branches***: current (only the routes reaching the command)
 
 Override the result of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path ("**level**") determination from the definition of this measure and on with the current branch/path ("**hold**").
 
@@ -2189,7 +2189,7 @@ Override the result of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt>
 ***Scope fineness***: measure \
 ***Effect time***: static \
 ***Effect target***: (none) \
-***Effect branches***: current (only the routes reaching the `#LEVELHOLD`)
+***Effect branches***: current (only the routes reaching the command)
 
 Override the result of all *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path ("**level**") determination from the definition of this measure and on with specified branches/paths (**redir**ect).
 
