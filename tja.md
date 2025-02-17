@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-02-15 (UTC+8)
+* Last changed: 2025-02-18 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -2359,6 +2359,11 @@ An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--en
     * Drumroll-type note(s) which share the same terminating note symbol: Behaves as a single drumroll-type note but changes its head position, note type, and length on branch switching.
     * For length-changing notes, the amount of hits done for bar drumrolls is counted independently in each branch, but amount of hits done for balloons is shared across branches.
     * For a bar drumroll note, its visual appearance becomes broken when its head in the target branch is no longer drawn when switching the branch.
+
+#### Compatibility Issues
+
+* In TaikoJiro 1 (and 2 (?)), for `r` branch condition, if a bar-drumroll&ndash;type note starts or overlaps with the branch determination point in definition, the displayed branch will be updated as the drumroll is hit since the branch determination point and until the actually branch point.
+* In TJAPlayer2 for.PC, the Expert branch condition must be fulfilled to take the Master branch.
 
 ### `#N` / `#E` / `#M`
 
