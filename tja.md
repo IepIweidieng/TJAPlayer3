@@ -205,15 +205,6 @@ For multiple values separated by comma (`,`), except for `text`-valued fields, o
     * (empty) / `-` &mdash; the time duration does not contain the `#DELAY` command(s) at the end of beat duration interval (if any).
     * `+` &mdash; the time duration contains the `#DELAY` command(s) at the end of beat duration interval (if any).
     * `d` &mdash; the specified beat duration includes beats which would otherwise pass during all `#DELAY` commands.
-* *Proposal* (IID): `relative-number`: Can be used as a `number` for a real number or the leading part of a compound number value. The specified value (include all numeric parts for a compound number value) is relative to a value equivalent to the last defined value. *Unspecified*: The behavior when being used as an `enum-int`.
-  * Format:
-    * `<relative-specifier><number>` &mdash; the value modified relative to a value equivalent to the last defined value
-    * `=` &mdash; a value equivalent to the last defined value
-  * `<relative-specifier>` can be one of:
-    * `+=` &mdash; relatively increased.
-    * `-=` &mdash; relatively decreased.
-    * `*=` &mdash; relatively multiplied.
-    * `/=` &mdash; relatively divided. The behavior is *unspecified* when `<number>` is 0.
 
 ## TJA Header
 
@@ -1128,8 +1119,8 @@ Used in conjunction with [`COURSE:Dan`](#course).
       ***Supported by***: OpenTaiko (0auBSQ)
       * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
   * `<enum-str-range>` can be one of:
-    * `m` / (*Proposal* (IID)) `>=` &mdash; **m**ore than or equal to ("≥") the given requirement
-    * `l` / (*Proposal* (IID)) `<` &mdash; **l**ess than ("\<") the given requirement
+    * `m` &mdash; **m**ore than or equal to ("≥") the given requirement
+    * `l` &mdash; **l**ess than ("\<") the given requirement
 * `EXAM<exam-requirement-index-specifier>:<enum-str-requirement>, <comma-separated-list-number-pass-and-gold-requirements>, <enum-str-range>` \
   ***Supported by***: TJAPlayer3-f
   * The elements of `<comma-separated-list-number-pass-and-gold-requirements>` are pairs of `<number-pass-requirement>, <number-gold-requirement>` for each song specified by [the `#NEXTSONG` command](#nextsong).
@@ -1549,8 +1540,6 @@ Change the time signature / meter signature / **measure** signature.
     * See [The Measure Delimiter Symbol and Timing](#the-measure-delimiter-symbol-and-timing) for the behavior.
 * `#MEASURE <number-upper-numeral>/0`
   * The behavior is *unspecified* (may cause crashes in some existing simulators).
-* *Proposal* (IID): `#MEASURE <beats-measure>`
-  * The `<enum-str-delay-type>` part of the [`beats`](#value-type) value ***MUST*** be `d` or (empty) and specifies whether the specified measure duration includes the time duration of the `#DELAY` commands.
 * Initial value: `#MEASURE 4/4`
 
 Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby>小<rt>shou</rt> 節<rt>setsu</rt></ruby>*** "measure" to fit all note symbols on the following line if placed after the previous measure (if any) and before the first note symbol (if any) of this measure in the notechart definition).
@@ -1587,9 +1576,6 @@ For the timing of notechart object, multiple `#DELAY` commands placed at the sam
     * See [The Measure Delimiter Symbol and Timing](#the-measure-delimiter-symbol-and-timing) for the behavior.
 * `#DELAY 0`
   * No effects
-* *Proposal* (IID): `#DELAY <beats-time-duration>`
-  * The specified time duration is the beat amount of `<beats-time-duration>` under the current BPM.
-  * The `<enum-str-delay-type>` part of the [`beats`](#value-type) value ***MUST*** be `d` or (empty) and specifies whether the specified measure duration includes the time duration of the `#DELAY` commands with overlapping time interval.
 
 #### Compatibility Issues
 
@@ -1657,9 +1643,6 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
   * `<float-scroll-speed-y>` specifies the vertical scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-scroll-speed-x>`.
 * `#SCROLL 0`
   * The behavior is *unspecified*.
-* *Proposal* (IID): `#SCROLL <value>bpm`
-  * Use the corresponding scrolling speed vector as when the absolute value (velocity) of `<value>` were used for `#BPMCHANGE` and the unit direction of `<value>` were used for `#SCROLL`.
-  * > Formula: `scroll` = `value` / `current_bpm`
 * `#SCROLL <float-scroll-speed>, <number-rotation-lower>, <number-rotation-upper>` \
   ***Supported by***: TaikoManyGimmicks
   * Complex-number&ndash;valued, modeled after the polar form of complex number: *r*∠*φ*
@@ -1844,8 +1827,6 @@ The arguments are whitespace-separated.
     * `<number-distance-x-upper>/<number-distance-x-lower>` \
       ***Supported by***: TaikoManyGimmicks
       * Specify the horizontal movement to be `<number-distance-x-upper>/<number-distance-x-lower>` of the default note field width.
-    * *Proposal* (IID): `<value> deg <float-degrees-angle>`
-      * Specify the moving vector as `<value>` rotated `<float-degrees-angle>` degrees (°) counterclockwise (↺).
     * `default` \
       ***Supported by***: TaikoManyGimmicks
       * Move the judgment mark to the default position, regardless of `<direction-specifier>`.
@@ -2079,8 +2060,6 @@ Similar to [the `#NOTESCHANGE` command](#noteschange), but with a different rang
       * Otherwise the same as `S`.
 * *Proposal* (IID): `#SENOTECHANGE <comma-separated-list-enum-note-phoneticization>`
   * All elements of `<comma-separated-list-enum-note-phoneticization>` are valid `<enum-int-note-phoneticization>` or `<enum-str-note-phoneticization>` and are iterated and applied to multiple notes in their definition order.
-* *Proposal* (IID): `#SENOTECHANGE <string-enum-str-note-phoneticization>`
-  * All non-whitespace characters in `<string-enum-str-note-phoneticization>` are valid `<enum-str-note-phoneticization>` and are iterated and applied to multiple notes in their definition order.
 
 In the official games, the note phoneticization is assigned per-note and does not follow a definite pattern, especially in earlier games.
 
