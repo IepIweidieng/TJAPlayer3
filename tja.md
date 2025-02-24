@@ -2945,7 +2945,7 @@ The exact behavior is *unspecified*.
 
 Inspired by StepMania.
 
-### *Proposal*: #LUAFX
+### *Proposal* (IID): #LUAFX
 
 ***Impact level***: gimmicky ★★・・・ (intended; depending on usage) \
 ***Scope***: branch \
@@ -2959,7 +2959,7 @@ Execute the given **Lua** code with predefined variables describing the current 
 
 Intended for adding decorative visual/audio **effect**s ("**FX**s"), including changing the moving path of notes, (dis)play extra images and sounds, *etc.*
 
-Intended to be used in conjunction with [**Proposed** ( (IID) command modifiers](#proposal-iid-command-modifier).
+Intended to be used in conjunction with [**Proposed** (IID) command modifiers](#proposal-iid-command-modifier).
 
 The exact behavior is *unspecified*.
 
