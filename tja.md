@@ -196,15 +196,6 @@ For multiple values separated by comma (`,`), except for `text`-valued fields, o
       * If not, the value ***MUST*** begin with one of the above forms.
       * Leading non-newline whitespaces are ignored.
       * All trailing characters are ignored in TaikoJiro. (*e.g.*, `Vsomething` / `valuesomething` are also accepted)
-* *Proposal* (IID): `beats`
-  * Format: `<float-upper-numeral>/<unsigned-float-lower-numeral><enum-str-delay-type>`
-  * The beat duration of `<float-upper-numeral>` times of a 1/`unsigned-float-lower-numeral`-th note.
-  * > Formula: Amount of beats = 4 × `upper` / `lower`
-  * Analogy to the argument of [`#MEASURE`](#measure).
-  * `<enum-str-delay-type>` can be one of:
-    * (empty) / `-` &mdash; the time duration does not contain the `#DELAY` command(s) at the end of beat duration interval (if any).
-    * `+` &mdash; the time duration contains the `#DELAY` command(s) at the end of beat duration interval (if any).
-    * `d` &mdash; the specified beat duration includes beats which would otherwise pass during all `#DELAY` commands.
 
 ## TJA Header
 
@@ -1359,7 +1350,7 @@ Commands only affect their targeting game objects. The target of each command ca
 
 * Notes, including fake/dummy notes.
 * Bar lines, including fake/dummy bar lines.
-* Judgment mark(s). There may be multiple judgment marks for a single player when, *e.g.*, [the `#SPLITLANE` command](#splitlane--mergelane) is used or (*Proposed* (IID)) [the `#JPOSSCROLL` command](#jposscroll) is used inconsistently in any layers defined by [the `#LAYER` command](#proposal-iid-layer).
+* Judgment mark(s). There may be multiple judgment marks for a single player when, *e.g.*, [the `#SPLITLANE` command](#splitlane--mergelane) is used or (*Proposed* (IID)) [the `#JPOSSCROLL` command](#jposscroll) is used inconsistently in any groups defined by [the `#GROUP` command](#proposal-barrier-group).
 * Note field(s): Any effects affecting the default scrolling path of notes and bar lines. There may be multiple note fields for a single player when there are multiple judgment marks.
 * Gameplay screen: Any other visible effects not directly targeting the above objects.
 
@@ -1818,7 +1809,6 @@ The arguments are whitespace-separated.
   ***Supported by***: TaikoManyGimmicks v0.6.6α
   * `<approach-duration-specifier>` can be one of:
     * `<positive-float-seconds-approach-duration>`
-    * *Proposal* (IID): `<beats-approach-duration>`
   * `<distance-specifier>` can be one of:
     * `<number-pixel-distance-x>`
     * `<complex-ri-number-pixel-distance-xy>` \
@@ -2430,70 +2420,6 @@ The definition of unused "branches"/paths due to forced "branch"/path determinat
 * In TaikoJiro 1, if a bar drumroll note in a branch has no any earlier-defined notes in the branch or any non-branching sections, hit-type notes whose time position is not >85ms (?) before the note head of the problematic drumroll in other branches become impossible to hit. \
   In each affected branch, hit-type notes become possible to hit again at the note end of any drumroll-type note with the time position not >9ms (?) before the note end of the problematic drumroll.
 
-### *Proposal* (IID): `#LAYERSTART` / `#LAYEREND`
-
-***Impact level***: timing ★★★★・ \
-***Scope***: notechart \
-***Scope fineness***: non-before \
-***Effect time***: static \
-***Effect target***: notes, bar lines, judgment mark(s), note field(s) \
-***Effect branches***: current
-
-Respectively **start** / **end** the definition of a layer section. All layers in a layer section occur simultaneously and all branch-scoped commands not targeting the gameplay screen are applied separately for each layer.
-
-They can be used as follow:
-
-```txt
-#LAYERSTART
-#LAYER // Optional
-    // Default layer section
-
-#LAYER A
-    // Layer A section
-
-#LAYEREND // Sometimes optional, see below
-```
-
-An implicit `#LAYEREND` is placed before `#LAYERSTART` & [`#END`](#start--end) commands. If no commands & [notechart symbols](#notechart-symbols) occur after the explicit defined `#LAYEREND` and before such commands, the `#LAYEREND` can be omitted.
-
-*Unspecified*: The behavior when [the `#BRANCHSTART` commands, `#BRANCHEND`](#branchstart--branchend), [`#N`, `#E`, `#M`](#n--e--m) are placed within the layer section definition.
-
-### *Proposal* (IID): #LAYER
-
-***Impact level***: timing ★★★★・ \
-***Scope***: notechart \
-***Scope fineness***: non-before \
-***Effect time***: static \
-***Effect target***: notes, bar lines, judgment mark(s), note field(s) \
-***Effect branches***: current
-
-Start the definition of a layer of the layer section. A layer can span over multiple layer sections.
-
-* `#LAYER <no-punctuation-str-name-layer>`
-* `#LAYER` / `#LAYER default`
-  * Start the definition of the default layer.
-
-*Unspecified*: The behavior when any of the followings are violated:
-
-* All #LAYER commands should be placed within the region enclosed by the `#LAYERSTART` & (possibly implicit) `#LAYEREND` commands.
-* At most one definition should exist for a layer.
-* The amount of measures and their total time duration should be consistent among all of the defined layers.
-
-### *Proposal* (IID): #LAYERORDER
-
-***Impact level***: gimmicky ★★・・・ \
-***Scope***: branch \
-***Scope fineness***: non-before \
-***Effect time***: static \
-***Effect target***: notes, bar lines, judgment mark(s), note field(s) \
-***Effect branches***: current
-
-Specify the draw **order** of this **layer** relative to other layers in the current layer section for the notes & bar lines non-before the current beat position and the judgment mark(s) & note field(s) (if any) for this layer.
-
-* `#LAYERORDER <int-layer-relative-draw-order>`
-  * Specify the draw order relative to other layers in the current layer section (default: 0). Notes from a layer with a more positive number are drawn above the notes from layers with less positive draw orders. Notes outsides the current layer section are not affected.
-* Initial value: `#LAYERORDER 0`
-
 ### *Proposal* (barrier): #GROUP
 
 ***Impact level***: gimmicky ★★・・・ \
@@ -3098,7 +3024,6 @@ The characters after the first semicolon (`;`) are ignored in TaikoJiro 1 but ca
 `<range-duration-*>` specifies the time/beat duration interval of the approach phase and can be one of:
 
 * `<unsigned-float-seconds-time-duration>` specifies the time duration.
-* `<beats-beat-duration>` specifies the beat duration.
 
 ## TJA Notechart Definition
 
