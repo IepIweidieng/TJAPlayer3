@@ -3366,11 +3366,11 @@ For chart creators: If compatibility is concerned, the chart ***SHOULD NOT*** re
 
 ### Level of Impact
 
-> note ★★★★★
-> timing ★★★★・
-> scoring ★★★・・
-> gimmicky ★★・・・
-> metadata ★・・・・
+> note ★★★★★ \
+> timing ★★★★・ \
+> scoring ★★★・・ \
+> gimmicky ★★・・・ \
+> metadata ★・・・・ \
 > decorative ・・・・・
 
 The maximum level of impact of the headers and commands are listed in the description of their scope.
