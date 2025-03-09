@@ -2710,7 +2710,7 @@ Commands supporting the `#GRADATION` command in TaikoManyGimmicks:
 
 ### #INCLUDE
 
-***Impact level***: (depending on included notechart definition content) \
+***Impact level***: note ★★★★★ (depending on included notechart definition content) \
 ***First seen in***: TaikoManyGimmicks v0.6.1α \
 ***Scope***: (depending on included notechart definition content) \
 ***Scope fineness***: sequential \
