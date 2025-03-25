@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-03-10 (UTC+8)
+* Last changed: 2025-03-26 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1243,6 +1243,144 @@ If enabled, make the *<ruby>譜<rt>fu</rt> 面<rt>men</rt> 分<rt>bun</rt> 岐<r
   * In TJAPlayer2 for.PC: Equivalent to `HIDDENBRANCH:1`
 * `HIDDENBRANCH:`
   * Disable such effects.
+
+### *Proposal* (IID) TJACOMPAT:
+
+***Impact level***: note ★★★★★ (maximum, depends on the compatibility flags) \
+***Scope fineness***: per&ndash;player-side
+
+Specify the intended compatibility mode of the chart.
+
+The supported set of headers & commands and allowed argument forms is not affected. However, the arguments might be interpreted differently dependent on the compatibility mode and flags.
+
+* `TJACOMPAT:<comma-separated-list-enum-str-compat-option>`
+  * The first element of `<comma-separated-list-enum-str-compat-option>` is one of `<enum-str-compat-mode>` & `<enum-str-compat-flag>`, and subsequent elements are `<enum-str-compat-flag>`.
+  * Unrecognized elements are warned (if possible) and then skipped. If the first element is unrecognized, all elements are treated as `<enum-str-compat-flag>`.
+* An *unspecified* compatibility mode is chosen by the simulator.
+  * In OpenTaiko (0auBSQ), defaults to `oos`, unless specified in the TJA file or the `box.def` in the directory containing the TJA file.
+  * Recommendation for simulator developers: Defaults to `oos` unless the simulator is used as a drop-in replacement of a certain existing simulator.
+
+`<enum-str-compat-mode>` can be one of:
+
+* `jiro1` &mdash; Reference: TaikoJiro 1 v2.92
+* `jiro2` &mdash; Reference: TaikoJiro 2 v0.98
+* `tmg` &mdash; Reference: Latest TaikoManyGimmicks (v0.6.6α)
+* `tjap3` &mdash; Reference: TJAPlayer3 v5.2.10
+* `oos` &mdash; OutFox-OpenTaiko standard. Reference: OpenTaiko (0auBSQ)
+
+`<enum-str-compat-flag>` is in the format of `<enum-str-compat-item>=<enum-str-compat-option>` and can be one of:
+
+* `end-at=end`, `end-at=music`, `end-at=music-and-end`
+  * ***Impact level***: note ★★★★★
+  * Specify the ending point, where the gameplay should end at *unspecified* finite duration non-before these ending point.
+  * `end` &mdash; the ending point is the (possibly implicit) [`#END`](#start--end).
+  * `music` &mdash; the default ending point is the end of music. If [the `WAVE:` header](#wave) is not specified or the specified file is missing or unsupported, the ending point is the (possibly implicit) [`#END`](#start--end).
+  * For option `music-and-end`, the ending point is the earliest one specified by `end-at=music` & `end-at=end`.
+* `timing-precision=any`, `timing-precision=ms`, `timing-precision=ms-bpm`
+  * ***Impact level***: timing ★★★★・
+  * Specify the time precision of [measure divisions](#the-measure-delimiter-symbol-and-timing), [`#DELAY`](#delay), and commands.
+  * `any` &mdash; the precision is only limited by the implementation.
+  * `ms` &mdash; the definition cursor has the same precision as `any`, but the resulting time for each measure division has the precision is 0.001 seconds, rounded toward 0.
+  * `ms-bpm` &mdash; the definition cursor has the same precision as `any`, but the time of definition cursor is rounded to 0.001 second (toward 0) when `#BPMCHANGE` is encountered. The resulting time for each measure division and the time duration of `#DELAY` has the precision of 0.001 seconds, rounded toward 0.
+* `timing-effect-order=def`, `timing-effect-order=flat-time-or-def`, `timing-effect-order=time-or-def`, `timing-effect-order=time`
+  * ***Impact level***: gimmicky ★★・・・
+  * Specify the applying order of the per-note static-time effects of `#BPMCHANGE` & `#SCROLL` and the command-time effects of `#BPMCHANGE` & positive `#DELAY`.
+  * `def` &mdash; by the definition order in a branch.
+  * `flat-time-or-def` &mdash; by time order (if differs) or by the definition order in a branch.
+  * `time-or-def` &mdash; by time order (if differs), with later defined commands overrides earlier defined commands, or by the definition order in a branch.
+  * `time` &mdash; by time range, with later defined commands overrides earlier defined commands, rounded according to `timing-precision`.
+* `past-hbscroll=hbscroll`, `past-hbscroll=nmscroll`
+  * ***Impact level***: gimmicky ★★・・・
+  * Specify the past-judgement scroll behavior for notechart objects with [HBScroll or BMScroll mode](#bmscroll--hbscroll--nmscroll).
+  * `hbscroll` &mdash; no scroll behavior changes.
+  * `nmscroll` &mdash; when a such object reaches the judgement timing, these objects and earlier defined such objects in the same branch are positioned as if their scroll mode had been changed to Normal Taiko scroll for the remaining gameplay. (and with [`#SCROLL 1`](#scroll) enforced for BMScroll mode objects)
+* `delay-hbscroll=offset`, `delay-hbscroll=pause`, `delay-hbscroll=freeze`
+  * ***Impact level***: gimmicky ★★・・・
+  * Specify how each positive [`#DELAY`](#delay) pauses the scroll in HBScroll and BMScroll during its effective duration. A negative `#DELAY` always offsets both the time and the beat of the definition cursor regardless of this flag.
+  * `offset` &mdash; does not pause; offsets both the time and the beat of the definition cursor.
+  * `pause` &mdash; pauses while no beat progress happens; offsets only the time of the definition cursor.
+  * `freeze` &mdash; if the `#DELAY` is defined at the maximum time ever reached by the definition cursor in the current branch, pauses until the specified duration after the `#DELAY`; offsets only the time of the definition cursor.
+* `roll-pos=complex`, `roll-pos=real`
+  * ***Impact level***: gimmicky ★★・・・
+  * Specify which components of the scrolling velocity is used to position all drumroll-type notes.
+  * `complex` &mdash; both of the horizontal and vertical components are considered.
+  * `real` &mdash; only the horizontal component is considered; the vertical compoment is treated as 0.
+* `roll-nodes=head`, `roll-nodes=tips`, `roll-nodes=all`
+  * ***Impact level***: gimmicky ★★・・・
+  * Specify which of the end and the (*Proposal* (IID)) [middle points](#duration-of-drumroll-type-notes) of the body of roll-type notes are used as roll nodes. Roll nodes can be positioned and move independently of the roll head, while non-nodes have their position fixed relative to last roll node in the definition order.
+  * `head` &mdash; The roll head is used as the only roll node.
+  * `tips` &mdash; The roll head and end are used as roll nodes.
+  * `all` &mdash; The roll head, middle points, and end are used as roll nodes.
+* `scroll-i=down`, `scroll-i=up`
+  * ***Impact level***: gimmicky ★★・・・
+  * Specify the vertical scroll direction specified by the imaginary component of `<complex-ri-float-xy>` in [`#SCROLL <complex-ri-float-xy>`](#scroll).
+  * `down` &mdash; from the top to the bottom of the screen (↓).
+  * `up` &mdash; from the bottom to the top of the screen (↑).
+* `jposscroll-i=down`, `jposscroll-i=up`
+  * ***Impact level***: gimmicky ★★・・・
+  * Specify the vertical scroll direction specified by the imaginary component of `<complex-ri-float-xy>` in [`#JPOSSCROLL <approach-duration-specifier> <complex-ri-float-xy> 0`](#jposscroll).
+  * `down` &mdash; from the top to the bottom of the screen (↓).
+  * `up` &mdash; from the bottom to the top of the screen (↑).
+* `jposscroll-interrupt=trunc`, `jposscroll-interrupt=jump`, `jposscroll-interrupt=add`
+  * ***Impact level***: gimmicky ★★・・・
+  * Specify the behavior when [a `#JPOSSCROLL` command](#jposscroll) takes effect while a still-in-action `#JPOSSCROLL`.
+  * `trunc` &mdash; The still-in-action `#JPOSSCROLL` is terminated, the judgement mark is kept at the expected current position, and then the next `#JPOSSCROLL` takes effect.
+  * `jump` &mdash; The still-in-action `#JPOSSCROLL` is terminated, the judgement mark is suddenly moved to the destination position, and then the next `#JPOSSCROLL` takes effect.
+  * `add` &mdash; The still-in-action `#JPOSSCROLL` has it movement done independently of the next `#JPOSSCROLL`. The total movement is the sum of all ongoing movements.
+* `sudden-directions=all`, `sudden-directions=x`
+  * ***Impact level***: gimmicky ★★・・・
+  * Specify which directions of notechart object scrolling are affected by [the `#SUDDEN` command](#sudden).
+  * `all` &mdash; all directions are affected.
+  * `x` &mdash; only the horizontal direction is affected.
+* `sudden-precision=any`, `sudden-precision=ms`
+  * ***Impact level***: gimmicky ★★・・・
+  * Specify the precision of `<float-seconds-*-duration>` for [the `#SUDDEN` command](#sudden).
+  * `any` &mdash; The precision is only limited by the implementation. The interpreted duration is positive infinity only when the duration is given without any non-`0` digits in non-exponential part.
+  * `ms` &mdash; The precision is 0.001 (1 ms), rounded toward 0, and any value < 0.001 is treated as 0, which has the interpreted duration of positive infinity.
+* `stack-order=def`, `stack-order=time`, `stack-order=appear-time`
+  * ***Impact level***: gimmicky ★★・・・
+  * Specify the stack order of notes.
+  * `def` &mdash; earlier defined notes are stacked over later defined notes.
+  * `time` &mdash; notes with earlier judgement time are stacked over notes with later judgement time.
+  * `appear-time` &mdash; notes with earlier "appear-on-lane" time are stacked over notes with later "appear-on-lane" time.
+    * > Formula (approximant, in normal Taiko scroll): *appear_time* = *judgement_time* (in seconds) − 4 (beats/scroll_range) × 60 (s/min) ÷ (**abs**(*scroll*) × *BPM_at_note*)
+* `barline-angle=none`, `barline-angle=angle-mirror`, `barline-angle=im`
+  * ***Impact level***: gimmicky ★★・・・
+* `note-angle=none`, `note-angle=angle-mirror`
+  * ***Impact level***: decorative ・・・・・
+* `roll-bar-angle=angle`, `roll-bar-angle=angle-mirror`
+  * ***Impact level***: decorative ・・・・・
+  * Specify how bar lines, the face of note heads, or the bar body of roll notes are rotated and/or or left-right mirroed, around their center, before applying [the `#ANGLE` command](#note--barline-commands).
+  * `none` &mdash; neither rorated nor mirrored.
+  * `angle` &mdash; rotated by the angle of the scroll velocity.
+  * `angle-mirrors` &mdash; rotated by the angle of the scroll velocity; mirroed when the real component of scroll velocity is negative.
+  * `im` &mdash; rotated by the imaginary component of the scroll velocity specified by the effective [`#SCROLL` command](#scroll) (if any) or the [the `HEADSCROLL:` header](#headscroll), where the unit is 90 degrees (°) clockwise (↻).
+
+#### Comparison of Compatibility Modes
+
+Each proposed compatibility-mode behavior is enclosed in parentheses (`()`) for:
+
+* Non-exist behaviors in the reference simulator
+* Potential changes to `oos` behaviors.
+
+Flag \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
+--- | --- | --- | --- | --- | --- | ---
+`end-at` | `music` | `music` | `music` | `music` (?) | `end` | `end` <br /> (`music-and-end`)
+`timing-precision` | ? | `ms-bpm` | `ms` (?) | `any` (?) | `ms` | `ms`
+`timing-effect-order` | `def` | `time` | `time` | `time` (?) | `flat-time-or-def` | `flat-time-or-def`
+`past-hbscroll` | N/A | `nmscroll` | `hbscroll` | `hbscroll` | `hbscroll` | `hbscroll`
+`delay-hbscroll` | N/A | `freeze` | `freeze` | `freeze` (?) | `offset` | `offset`
+`roll-pos` | N/A | N/A <br /> (`complex`) | `complex` | `complex` | `real` | `complex`
+`roll-nodes` | `head` | `tips` | `tips` | `tips` | `head` | `head`
+`scroll-i` | N/A | N/A <br /> (`down`) | `down` | `down` | `up` | `up`
+`jposscroll-i` | N/A | N/A <br /> (`down`) | N/A <br /> (`down`) | `up` | `up` | `up`
+`jposscroll-interrupt` | N/A | N/A <br /> (`trunc`) | N/A <br /> (`trunc`) | `trunc` | `trunc` | `trunc`
+`sudden-directions` | N/A | N/A <br /> (`all`) | N/A <br /> (`all`) | `all` | `x` | N/A <br /> (`x`)
+`sudden-precision` | N/A | N/A <br /> (`ms`) | N/A <br /> (`ms`) | `any` (?) | `ms` | `ms`
+`stack-order` | `appear-time` (PS1/2-gen) <br /> `def` (PS3/PC-gen) | `def` | `def` | `time` (?) | `time` | `def`
+`barline-angle` | N/A | `angle-mirror` (?) | `angle-mirror` (?) | `angle-mirror` (?) | `im` | `none` <br /> (`angle-mirror`)
+`note-angle` | N/A | `angle-mirror` | `angle-mirror` | `angle-mirror` | `none` | `none` <br /> (`angle-mirror`)
+`roll-bar-angle` | N/A | `angle-mirror` | `angle-mirror` | `angle-mirror` | N/A <br /> (`angle-mirror`) | `angle` <br /> (`angle-mirror`)
 
 ## TJC Header
 
