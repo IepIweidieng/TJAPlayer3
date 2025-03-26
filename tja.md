@@ -1255,8 +1255,8 @@ The supported set of headers & commands and allowed argument forms is not affect
 
 * `TJACOMPAT:<comma-separated-list-enum-str-compat-option>`
   * The first element of `<comma-separated-list-enum-str-compat-option>` is one of `<enum-str-compat-mode>` & `<enum-str-compat-flag>`, and subsequent elements are `<enum-str-compat-flag>`.
-  * Unrecognized elements are warned (if possible) and then skipped. If the first element is unrecognized, all elements are treated as `<enum-str-compat-flag>`.
-* An *unspecified* compatibility mode is chosen by the simulator.
+  * Unrecognized or unsupported elements are warned (if possible) and then skipped. If the first element is unrecognized or unsupported, all elements are treated as `<enum-str-compat-flag>`.
+* Initial value: An *unspecified* compatibility mode is chosen by the simulator.
   * In OpenTaiko (0auBSQ), defaults to `oos`, unless specified in the TJA file or the `box.def` in the directory containing the TJA file.
   * Recommendation for simulator developers: Defaults to `oos` unless the simulator is used as a drop-in replacement of a certain existing simulator.
 
@@ -1270,6 +1270,18 @@ The supported set of headers & commands and allowed argument forms is not affect
 
 `<enum-str-compat-flag>` is in the format of `<enum-str-compat-item>=<enum-str-compat-option>` and can be one of:
 
+* `balloon-popcount:common`, `balloon-popcount:n`
+  * ***Impact level***: note ★★★★★
+  * Specify how the required amounts of hits to finish balloon-type notes defined by [the non-branching `BALLOON:` header](#balloon-headers) is assigned in a branched chart.
+  * `common` &mdash; for each balloon-type note head symbol, a value is assigned and consumed if the note symbol is a non-repeated roll head in any branch, in their lexical definition order. The `BALLOONNOR:`, `BALLOONEXP:`, and `BALLOONMAS:` headers are ignored if the `BALLOON:` header is specified.
+  * `n` &mdash; the `BALLOON:` header is treated the same as the `BALLOONNOR:` header.
+* `balloonnem-popcount-nonbranch:1n`, `balloonnem-popcount-nonbranch:1nem`, `balloonnem-popcount-nonbranch:1n-or-end-3last`, `balloonnem-popcount-nonbranch:1n-or-end-1nem`
+  * ***Impact level***: note ★★★★★
+  * Specify how the required amounts of hits to finish balloon-type notes defined by [the BALLOON headers](#balloon-headers) is assigned within non-branched sections.
+  * `1n` &mdash; for each balloon-type note head symbol, a value from `BALLOONNOR:` is assigned and consumed if the note symbol is a non-repeated roll head in any branch.
+  * `1nem` &mdash; for each balloon-type note head symbol, a value (up to 3 total) from the respect branched BALLOON header is assigned and consumed if the note symbol is a non-repeated roll head in a branch, in the order of Normal, Expert, and Master branches.
+  * `1n-or-end-3last` &mdash; before the first [`#BRANCHEND`](#branchstart--branchend), behaviors as `1n`; after the first `#BRANCHEND`, for each balloon-type note head symbol, a value (up to 3 total) from the branched BALLOON header for the last branch specified by [`#N`, `#E`, or `#M`](#n--e--m) is assigned and consumed if the note symbol is a non-repeated roll head in a branch, in the order of Normal, Expert, and Master branches.
+  * `1n-or-end-1nem` &mdash; before the first [`#BRANCHEND`](#branchstart--branchend), behaviors as `1n`; after the first `#BRANCHEND`, behaviors as `1nem`
 * `end-at=end`, `end-at=music`, `end-at=music-and-end`
   * ***Impact level***: note ★★★★★
   * Specify the ending point, where the gameplay should end at *unspecified* finite duration non-before these ending point.
@@ -1365,6 +1377,8 @@ Each proposed compatibility-mode behavior is enclosed in parentheses (`()`) for:
 
 Flag \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
 --- | --- | --- | --- | --- | --- | ---
+`balloon-popcount` | N/A | `common` | `common` | `common` | `n` | `n` <br /> (`common`)
+`balloonnem-popcount-nonbranch` | N/A | N/A <br /> (`1n-or-1nem`) | N/A <br /> (`1n-or-1nem`) | N/A <br /> (`1n-or-1nem`) | `1n-or-3last` | `1nem`
 `end-at` | `music` | `music` | `music` | `music` (?) | `end` | `end` <br /> (`music-and-end`)
 `timing-precision` | ? | `ms-bpm` | `ms` (?) | `any` (?) | `ms` | `ms`
 `timing-effect-order` | `def` | `time` | `time` | `time` (?) | `flat-time-or-def` | `flat-time-or-def`
