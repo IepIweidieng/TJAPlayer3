@@ -2426,6 +2426,10 @@ At the determining point, the "branch"/path&ndash;switching effects are played b
     * (empty) or `m` &mdash; **m**ore than or equal to ("≥") the given requirement
     * `l` &mdash; **l**ess than ("\<") the given requirement
   * If `<no-punctuation-str-name-section>` is not (empty), use the condition values from the specified named "branch"/path determining section. See [#SECTION](#section).
+* *Proposal* (IID): `#BRANCHSTART(<number-condition>, <number-expert-branch-requirement>, <number-master-branch-requirement>, <enum-str-range>, <no-punctuation-str-name-section>)`
+  * This form ***MUST*** be given in TMG syntax for using math expressions.
+  * If `<no-punctuation-str-name-section>` is not (empty), it is used as the default branch determining section for `<number-condition>`.
+  * In `<number-condition>`, a condition value of the default branch determining section is accessed with `<enum-str-condition>`, and a condition value of a non-default branch determining section is accessed with `section(<no-punctuation-str-name-section>).<enum-str-condition>`, where `<enum-str-condition>` is any `<enum-str-condition>` allowed for the `#BRANCHSTART` command except `expr`.
 * *Proposal* (IID): `#BRANCHSTART(expr, <bool-expert-branch-requirement>, <bool-master-branch-requirement>, <no-punctuation-str-name-section>)`
   * When `<enum-str-range>` is `expr`, this special form ***MUST*** be given in TMG syntax for using comparison and logical expressions.
   * If `<no-punctuation-str-name-section>` is not (empty), it is used as the default branch determining section for `<bool-*-branch-requirement>`.
@@ -2439,74 +2443,116 @@ At the determining point, the "branch"/path&ndash;switching effects are played b
 
 Swap note in Taiko mode (`G`) is *not* counted as a type of big note for calculating the condition value.
 
+Except for roll count conditions, only notes whose head is in the taken route are counted.
+
+*Unspecified*: Whether the condition value is updated based on the duration (if exists) or critical judgement time (hit-type note) of the note, or the actual finish-hit time for the note, if they do not happen in the counted determining section for the same branch determining point.
+
 In addition to `expr`, `<enum-str-condition>` can be one of the following:
 
 #### Precision Conditions
 
 * `p` &mdash; percentage (%) of *<ruby>精<rt>sei</rt> 度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy of all missable notes.
-  * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
+  * > Formula: `p` = (`jp` + 0.5 × `jg`) / **max**{`nh`, 1} × 100(%)
 * *Proposal* (IID): `P` &mdash; percentage (%) of "**p**recision"/accuracy of all missable **big** notes.
-* `d` &mdash; percentage (%) of "precision"/accuracy of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes. (**`d`** can be seen as a rotated `p`) \
+  * > Formula: `P` = (`JP` + 0.5 × `JG`) / **max**{`NH`, 1} × 100(%)
+* `d` &mdash; percentage (%) of "precision"/accuracy of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" judgments of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes. (**`d`** can be seen as a rotated `p`) \
   ***First seen in***: TJAPlayer2 for.PC
-  * Defined but unimplemented in TJAPlayer2 for.PC
-  * > Formula (*Proposal* (IID)): (*<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{amount of big missable hit-type notes, 1} × 100(%)
+  * Defined but without formula in TJAPlayer2 for.PC, where this condition is described as "*大音符のみの精度分岐*" ("branching by precision of only big notes"), which would be equivalent to (*Proposal* (IID)) `P`.
+  * In TJAPlayer3-f and OpenTaiko (0auBSQ), the formula is defined but not counted in game, so the condition value is always 0. The formula which would be equivalent to (*Proposal* (IID)) `JG` or (*Proposal* (IID)) `jdg`.
+  * > Formula (*Proposal* (IID)): `d` = (`jdp` + 0.5 × `jdg`) / **max**{`NH`, 1} × 100(%)
 * *Proposal* (IID): `pp` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable notes.
+  * > Formula: `jp` / **max**{`nh`, 1} × 100(%)
 * *Proposal* (IID): `PP` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable **big** notes.
-* *Proposal* (IID): `dp` &mdash; percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+  * > Formula: `JP` / **max**{`NH`, 1} × 100(%)
+* *Proposal* (IID): `dp` &mdash; percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+  * > Formula: `jdp` / **max**{`NH`, 1} × 100(%)
 * *Proposal* (IID): `pg` &mdash; **p**ercentage (%) of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK of all missable notes.
+  * > Formula: `jg` / **max**{`nh`, 1} × 100(%)
 * *Proposal* (IID): `PG` &mdash; **p**ercentage (%) of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK of all missable **big** notes.
-* *Proposal* (IID): `dg` &mdash; percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+  * > Formula: `JG` / **max**{`NH`, 1} × 100(%)
+* *Proposal* (IID): `dg` &mdash; percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+  * > Formula: `jdg` / **max**{`NH`, 1} × 100(%)
 * *Proposal* (IID): `pb` &mdash; **p**ercentage (%) of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD of all missable notes.
+  * > Formula: `jb` / **max**{`nh`, 1} × 100(%)
 * *Proposal* (IID): `PB` &mdash; **p**ercentage (%) of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD of all missable **big** notes.GREAT/GOOD ("**p**erfect") of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+  * > Formula: `JB` / **max**{`NH`, 1} × 100(%)
 * *Proposal* (IID): `pm` &mdash; **p**ercentage (%) of *hit* vs. all bomb/**m**ine notes.
+  * > Formula: `jm` / **max**{`nm`, 1} × 100(%)
 * *Proposal* (IID): `pma` &mdash; **p**ercentage (%) of _**a**voided_ vs. all bomb/**m**ine notes.
+  * > Formula: `jma` / **max**{`nm`, 1} × 100(%)
 * *Proposal* (IID): `pa` &mdash; **p**ercentage (%) of caught vs. all _**A**d libitum_ (**A**D-LIB) notes.
+  * > Formula: `ja` / **max**{`na`, 1} × 100(%)
 * *Proposal* (IID): `ph` &mdash; **p**ercentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD on all missable notes.
+  * > Formula: `jh` / **max**{`nh`, 1} × 100(%)
 * *Proposal* (IID): `PH` &mdash; **p**ercentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD on all **big** missable notes.
-* *Proposal* (IID): `dh` &mdash; the percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments on all missble big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+  * > Formula: `JH` / **max**{`NH`, 1} × 100(%)
+* *Proposal* (IID): `dh` &mdash; the percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" judgments on all missble big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+  * > Formula: `jdh` / **max**{`NH`, 1} × 100(%)
 * *Proposal* (IID): `prb` &mdash; **p**ercentage (%) of popped vs. all **b**alloon-type drum**r**oll-**t**ype notes.
+  * > Formula: `jrb` / **max**{`nrb`, 1} × 100(%)
 * *Proposal* (IID): `PRB` &mdash; **p**ercentage (%) of popped vs. all special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
+  * > Formula: `JRB` / **max**{`NRB`, 1} × 100(%)
 * *Proposal* (IID): `drb` &mdash; percentage (%) of full-bonus popped vs. all special/"big" (<ruby>**大**<rt>**d**ai</rt></ruby>) **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
+  * > Formula: `jdrb` / **max**{`NRB`, 1} × 100(%)
 
 The percentage calculated from notes during the determining section is used.
 
 #### Judgement Count Conditions
 
 * *Proposal* (IID): `jp` &mdash; amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements.
-* *Proposal* (IID): `JP` &mdash; amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
-* *Proposal* (IID): `jdp` &mdash; amount of *strong* *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `JP` &mdash; amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements on **big** notes.
+* *Proposal* (IID): `jdp` &mdash; amount of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
 * *Proposal* (IID): `jg` &mdash; amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements.
-* *Proposal* (IID): `JG` &mdash; amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
-* *Proposal* (IID): `jdg` &mdash; amount of *strong* *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `JG` &mdash; amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements on **big** notes.
+* *Proposal* (IID): `jdg` &mdash; amount of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
 * *Proposal* (IID): `jb` &mdash; amount of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD **j**udgements.
-* *Proposal* (IID): `JB` &mdash; amount of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `JB` &mdash; amount of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD **j**udgements on **big** notes.
 * *Proposal* (IID): `jm` &mdash; amount of *hit* bomb/**m**ine notes.
 * *Proposal* (IID): `jma` &mdash; amount of _**a**voided_ bomb/**m**ine notes.
 * *Proposal* (IID): `ja` &mdash; amount of caught ("**h**it") _**A**d libitum_ (**A**D-LIB) notes.
 * *Proposal* (IID): `jh` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD **j**udgements on missable **h**it-type notes.
-  * > Formula: `jh` = *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK
-* *Proposal* (IID): `JH` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD **j**udgements on big **h**it-type notes.
-* *Proposal* (IID): `jdh` &mdash; amount of *strong* non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+  * > Formula: `jh` = `jp` + `jg`
+* *Proposal* (IID): `JH` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD **j**udgements on **big** **h**it-type notes.
+  * > Formula: `JH` = `JP` + `JG`
+* *Proposal* (IID): `jdh` &mdash; amount of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+  * > Formula: `jdh` = `jdp` + `jdg`
 * *Proposal* (IID): `jrb` &mdash; amount of popped **b**alloon-type drum**r**oll-**t**ype notes.
 * *Proposal* (IID): `JRB` &mdash; amount of popped special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
 * *Proposal* (IID): `jdrb` &mdash; amount of full-bonus popped special/"big" (<ruby>**大**<rt>**d**ai</rt></ruby>) **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
 
 The amount calculated from notes during the determining section is used.
 
+#### Note Count Conditions
+
+* *Proposal* (IID): `nh` &mdash; amount of missable **h**it-type notes.
+  * > Formula: `nh` = `jh` + `jb`
+* *Proposal* (IID): `NH` &mdash; amount of **big** missable **h**it-type notes.
+  * > Formula: `NH` = `JH` + `JB`
+* *Proposal* (IID): `nm` &mdash; amount of bomb/**m**ine notes.
+  * > Formula: `jm` = `jm` + `jma`
+* *Proposal* (IID): `na` &mdash; amount of _**A**d libitum_ (**A**D-LIB) notes.
+* *Proposal* (IID): `nrb` &mdash; amount of **b**alloon-type drum**r**oll-**t**ype notes.
+* *Proposal* (IID): `NRB` &mdash; amount of special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
+
+The amount calculated from notes during the determining section is used.
+
 #### Roll Count Conditions
 
 * `r` &mdash; amount of hits on bar drum**r**oll notes.
+  * Not to be confused with the `r` (including *all* drum**r**oll-type notes) used for the requirement of [the `EXAM` headers](#exam-headers).
 * *Proposal* (IID): `R` &mdash; amount of hits on **big** bar drum**r**oll notes.
-* *Proposal* (IID): `rd` &mdash; amount of *strong* hits on big (<ruby>**大**<rt>**d**ai</rt></ruby>) bar drum**r**oll notes.
+* *Proposal* (IID): `rd` &mdash; amount of _strong/"**d**ouble-hit"_ hits on big (<ruby>**大**<rt>**d**ai</rt></ruby>) bar drum**r**oll notes.
 * *Proposal* (IID): `rb` &mdash; amount of hits on **b**alloon-type drum**r**oll-**t**ype notes.
 * *Proposal* (IID): `RB` &mdash; amount of hits on special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
 * *Proposal* (IID): `rt` &mdash; amount of hits on all (**t**otal) drum**r**oll-**t**ype notes.
+  * > Formula: `rt` = `r` + `rb`
 * *Proposal* (IID): `RT` &mdash; amount of hits on all (**t**otal) **big** (including special balloons (note symbol `9`)) drum**r**oll-**t**ype notes.
+  * > Formula: `RT` = `R` + `RB`
 * *Proposal* (IID): `h` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, non-blank **h**its.
   * > Formula: `h` = `jh` + `rt`
 * *Proposal* (IID): `H` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, non-blank **h**its on all **big** notes.
   * > Formula: `H` = `JH` + `RT`
-* *Proposal* (IID): `hd` &mdash; amount of *strong* **h**its on all big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `hd` &mdash; amount of _strong/"**d**ouble-hit"_ **h**its on all big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
   * > Formula: `hd` = `jdh` + `rd`
 
 If a counted drumroll note is defined as beginning non-after but ending after the default beat position of the determining point, the actual determining point is postponed until the earlier of the definition positions of the ending of that note and an *unspecified* duration before the `#BRANCHSTART` command.
