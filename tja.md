@@ -2445,18 +2445,18 @@ In addition to `expr`, `<enum-str-condition>` can be one of the following:
 
 * `p` &mdash; percentage (%) of *<ruby>精<rt>sei</rt> 度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy of all missable notes.
   * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
-* *Proposal* (IID): `P` &mdash; percentage (%) of "**p**recision"/accuracy of all missable **big** notes during the determining section.
+* *Proposal* (IID): `P` &mdash; percentage (%) of "**p**recision"/accuracy of all missable **big** notes.
 * `d` &mdash; percentage (%) of "precision"/accuracy of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes. (**`d`** can be seen as a rotated `p`) \
   ***First seen in***: TJAPlayer2 for.PC
   * Defined but unimplemented in TJAPlayer2 for.PC
   * > Formula (*Proposal* (IID)): (*<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{amount of big missable hit-type notes, 1} × 100(%)
-* *Proposal* (IID): `pp` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable notes during.
+* *Proposal* (IID): `pp` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable notes.
 * *Proposal* (IID): `PP` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable **big** notes.
 * *Proposal* (IID): `dp` &mdash; percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
-* *Proposal* (IID): `pg` &mdash; **p**ercentage (%) of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK of all missable notes during.
+* *Proposal* (IID): `pg` &mdash; **p**ercentage (%) of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK of all missable notes.
 * *Proposal* (IID): `PG` &mdash; **p**ercentage (%) of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK of all missable **big** notes.
 * *Proposal* (IID): `dg` &mdash; percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
-* *Proposal* (IID): `pb` &mdash; **p**ercentage (%) of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD of all missable notes during.
+* *Proposal* (IID): `pb` &mdash; **p**ercentage (%) of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD of all missable notes.
 * *Proposal* (IID): `PB` &mdash; **p**ercentage (%) of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD of all missable **big** notes.GREAT/GOOD ("**p**erfect") of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
 * *Proposal* (IID): `pm` &mdash; **p**ercentage (%) of *hit* vs. all bomb/**m**ine notes.
 * *Proposal* (IID): `pma` &mdash; **p**ercentage (%) of _**a**voided_ vs. all bomb/**m**ine notes.
@@ -2472,21 +2472,21 @@ The percentage calculated from notes during the determining section is used.
 
 #### Judgement Count Conditions
 
-* *Proposal* (IID): `jp` &mdash; amount (**h**its) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect").
-* *Proposal* (IID): `JP` &mdash; amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
-* *Proposal* (IID): `jdp` &mdash; amount ("hits") of *strong* *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
-* *Proposal* (IID): `jg` &mdash; amount (**h**its) of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK.
-* *Proposal* (IID): `JG` &mdash; amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
-* *Proposal* (IID): `jdg` &mdash; amount ("hits") of *strong* *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
-* *Proposal* (IID): `jb` &mdash; amount (**h**its) of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD.
-* *Proposal* (IID): `JB` &mdash; amount of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `jp` &mdash; amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements.
+* *Proposal* (IID): `JP` &mdash; amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `jdp` &mdash; amount of *strong* *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `jg` &mdash; amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements.
+* *Proposal* (IID): `JG` &mdash; amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `jdg` &mdash; amount of *strong* *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `jb` &mdash; amount of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD **j**udgements.
+* *Proposal* (IID): `JB` &mdash; amount of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
 * *Proposal* (IID): `jm` &mdash; amount of *hit* bomb/**m**ine notes.
 * *Proposal* (IID): `jma` &mdash; amount of _**a**voided_ bomb/**m**ine notes.
 * *Proposal* (IID): `ja` &mdash; amount of caught ("**h**it") _**A**d libitum_ (**A**D-LIB) notes.
-* *Proposal* (IID): `jh` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, missable hit-type note **h**its.
+* *Proposal* (IID): `jh` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD **j**udgements on missable **h**it-type notes.
   * > Formula: `jh` = *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK
-* *Proposal* (IID): `JH` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
-* *Proposal* (IID): `jdh` &mdash; amount ("**h**its") of *strong* non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD ("**h**it") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `JH` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD **j**udgements on big **h**it-type notes.
+* *Proposal* (IID): `jdh` &mdash; amount of *strong* non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD **j**udgements on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
 * *Proposal* (IID): `jrb` &mdash; amount of popped **b**alloon-type drum**r**oll-**t**ype notes.
 * *Proposal* (IID): `JRB` &mdash; amount of popped special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
 * *Proposal* (IID): `jdrb` &mdash; amount of full-bonus popped special/"big" (<ruby>**大**<rt>**d**ai</rt></ruby>) **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
@@ -2522,15 +2522,15 @@ The accumulated amount calculated from notes during the determining section is u
 * `s` &mdash; the current **s**core points, 0 ≤ `s`. \
   ***Supported by***: TaikoJiro v2.66
   * *Unspecified*: The behavior when either unsupported scoring mode or the default value is specified to [the `SCOREMODE:` header](#scoremode) or the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true performance" option is enabled.
-* *Proposal* (IID): `sr` &mdash; **r**egion **r**elative **s**core points, 0 ≤ `sr`. \
+* *Proposal* (IID): `sr` &mdash; **r**egion **r**elative **s**core points, 0 ≤ `sr`.
 * *Proposal* (IID): `g` &mdash; the current percentage (%) of *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge, 0 ≤ `g` ≤ 100.
   * > Formula for [`LIFE:`](#life) life count: *absolute_percentage* = 100 × *remaining_life_count* ÷ *max_life_count*
 * *Proposal* (IID): `gr` &mdash; **r**egion **r**elative percentage (%) of *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge, −100 ≤ `gr` ≤ 100.
 * *Proposal* (IID): `c` &mdash; the current maximum/longest **c**ombo, 0 ≤ `c`.
 * *Proposal* (IID): `cr` &mdash; **r**egion maximum/longest **c**ombo, 0 ≤ `cr`.
 * *Proposal* (IID): `b` &mdash; the current branch, 0 for *<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>* Normal "branch"/path, 1 for *<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path, and 2 for *<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>* Master "branch"/path.
-* *Proposal* (IID): `br` &mdash; **r**egion **r**elative branch, −2 ≤ `br ≤ 2
-* *Proposal* (IID): `?` &mdash; a uniform distribution random value (float), 0 ≤ `?` \< 100
+* *Proposal* (IID): `br` &mdash; **r**egion **r**elative branch, −2 ≤ `br ≤ 2.
+* *Proposal* (IID): `?` &mdash; a uniform distribution random value (float), 0 ≤ `?` \< 100.
 
 For region conditions, the value calculated during the determining section (counted from 0) is used. For other state conditions, the final value at the determining point (may have non-0 initial value) is used.
 
