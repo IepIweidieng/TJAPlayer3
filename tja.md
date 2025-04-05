@@ -2529,7 +2529,7 @@ The amount calculated from notes during the determining section is used.
 * *Proposal* (IID): `NH` &mdash; amount of **big** missable **h**it-type notes.
   * > Formula: `NH` = `JH` + `JB`
 * *Proposal* (IID): `nm` &mdash; amount of bomb/**m**ine notes.
-  * > Formula: `jm` = `jm` + `jma`
+  * > Formula: `nm` = `jm` + `jma`
 * *Proposal* (IID): `na` &mdash; amount of _**A**d libitum_ (**A**D-LIB) notes.
 * *Proposal* (IID): `nrb` &mdash; amount of **b**alloon-type drum**r**oll-**t**ype notes.
 * *Proposal* (IID): `NRB` &mdash; amount of special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
