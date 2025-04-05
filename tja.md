@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-03-26 (UTC+8)
+* Last changed: 2025-04-05 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -2420,74 +2420,136 @@ The determining point of this "branch"/path section is defaulted to be placed at
 At the determining point, the "branch"/path&ndash;switching effects are played but the current "branch"/path is not changed until the actual beginning of the "branch"/path section.
 
 * `#BRANCHSTART <enum-str-condition>, <number-expert-branch-requirement>, <number-master-branch-requirement>`
-* *Proposal* (IID): `#BRANCHSTART <enum-str-condition>, <number-expert-branch-requirement>, <number-master-branch-requirement>, <no-punctuation-str-name-section>`
-  * Use the condition values from the specified named "branch"/path determining section. See [#SECTION](#section).
-* *Proposal* (IID): `#BRANCHSTART <enum-str-combination>, <comma-separated-list-requirements>`
-  * Use the combined result of determining branch/path by each specified requirements.
-  * `<comma-separated-list-requirements>` can be a certain number of argument combinations, each takes a form listed above (including this `<enum-str-combination>` form).
-  * `<enum-str-combination>` can be one of:
-    * `max`: Requires 2 argument combinations. Use the higher ("**max**imum") determined "branch"/fork.
-    * `min`: Requires 2 argument combinations. Use the lower ("**min**imum") determined "branch"/fork.
-    * `rev`: Requires 1 argument combination. Flip ("**rev**erse") the determined "branch"/fork. (*i.e.*, the *<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>* Normal and the *<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>* Master "branches"/paths are swapped for the result of determining)
+* *Proposal* (IID): `#BRANCHSTART <enum-str-condition>, <number-expert-branch-requirement>, <number-master-branch-requirement>, <enum-str-range>, <no-punctuation-str-name-section>`
+  * `<enum-str-range>` & `<no-punctuation-str-name-section>` default to (empty) and can be consecutively omitted from the last.
+  * `<enum-str-range>` can be one of:
+    * (empty) or `m` &mdash; **m**ore than or equal to ("≥") the given requirement
+    * `l` &mdash; **l**ess than ("\<") the given requirement
+  * If `<no-punctuation-str-name-section>` is not (empty), use the condition values from the specified named "branch"/path determining section. See [#SECTION](#section).
+* *Proposal* (IID): `#BRANCHSTART(expr, <bool-expert-branch-requirement>, <bool-master-branch-requirement>, <no-punctuation-str-name-section>)`
+  * When `<enum-str-range>` is `expr`, this special form ***MUST*** be given in TMG syntax for using comparison and logical expressions.
+  * If `<no-punctuation-str-name-section>` is not (empty), it is used as the default branch determining section for `<bool-*-branch-requirement>`.
+  * In `<bool-*-branch-requirement>`, a condition value of the default branch determining section is accessed with `<enum-str-condition>`, and a condition value of a non-default branch determining section is accessed with `section(<no-punctuation-str-name-section>).<enum-str-condition>`, where `<enum-str-condition>` is any `<enum-str-condition>` allowed for the `#BRANCHSTART` command except `expr`.
 * `#BRANCHEND` \
   ***Supported by***: TaikoJiro, TJAPlayer 2 for PC ver.2020031800, TJAPlayer3 v1.5.2, taiko-web
 
-The "branch"/path is determined by a condition value when `<enum-str-condition>` is...
+#### Conditions
 
-* `r` &mdash; accumulated amount of hits on bar drum**r**oll notes during the determining section.
-  * If a bar drumroll note is defined as beginning non-after but ending after the default beat position of the determining point, the actual determining point is postponed until the earlier of the definition positions of the ending of that note and an *unspecified* duration before the `#BRANCHSTART` command.
-    * TaikoJiro: zero-duration.
-    * TJAPlayer2 for.PC and TJAPlayer3: 1 measure (i.e., not postponed).
-    * *Proposed* (IID): **min**{**min**{4 × 60 / bpm / scroll **at** the first note symbol after the `#BRANCHSTART` command (unit: second)}, 1 measure}.
-* *Proposal* (IID): `rt` &mdash; accumulated amount of hits on all (**t**otal) drum**r**oll-**t**ype notes during the determining section. The postponed-determining behavior of the `r` condition applies.
-* `p` &mdash; the percentage (%) of *<ruby>精<rt>sei</rt> 度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy during the determining section.
+`<enum-str-condition>` specifies the condition value for determining the "branch"/path.
+
+Swap note in Taiko mode (`G`) is *not* counted as a type of big note for calculating the condition value.
+
+In addition to `expr`, `<enum-str-condition>` can be one of the following:
+
+#### Precision Conditions
+
+* `p` &mdash; percentage (%) of *<ruby>精<rt>sei</rt> 度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy of all missable notes.
   * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
-* *Proposal* (IID): `pp` &mdash; the **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") during the determining section.
-* *Proposal* (IID): `ph` &mdash; the **p**ercentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its during the determining section.
-* *Proposal* (IID): `pm` &mdash; **p**ercentage (%) of *avoided* bomb/**m**ine notes during the determining section.
-* *Proposal* (IID): `pa` &mdash; **p**ercentage (%) of caught _**A**d libitum_ (**A**D-LIB) notes during the determining section.
-* `d` &mdash; the percentage (%) of "precision"/accuracy of big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section. (**`d`** can be seen as a rotated `p`) \
-  ***Supported by***: TJAPlayer2 for.PC
+* `P` &mdash; percentage (%) of "**p**recision"/accuracy of all missable **big** notes during the determining section.
+* `d` &mdash; percentage (%) of "precision"/accuracy of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes. (**`d`** can be seen as a rotated `p`) \
+  ***First seen in***: TJAPlayer2 for.PC
   * Defined but unimplemented in TJAPlayer2 for.PC
-* *Proposal* (IID): `dp` &mdash; the percentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
-* *Proposal* (IID): `dh` &mdash; the percentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
-* `b` &mdash; the percentage (%) of "precision"/accuracy of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments on **b**ig (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
-  * > Formula: (*<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{amount of big missable hit-type notes, 1} × 100(%)
-* *Proposal* (IID): `bp` &mdash; the percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
-* *Proposal* (IID): `bh` &mdash; the percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
-* *Proposal* (IID): `br` &mdash; accumulated amount of *strong* hits on **b**ig bar drum**r**oll notes during the determining section. The postponed-determining behavior of the `r` condition applies.
-* *Proposal* (IID): `h` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, non-blank **h**its during the determining section.
-  * > Formula: `h` = `hh` + `rt`
-* *Proposal* (IID): `hh` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, missable hit-type note **h**its during the determining section.
-  * > Formula: `hh` = *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK
-* *Proposal* (IID): `hp` &mdash; amount (**h**its) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") during the determining section.
-* *Proposal* (IID): `am` &mdash; amount of _**a**voided_ bomb/**m**ine notes during the determining section.
-* *Proposal* (IID): `ha` &mdash; amount of caught ("**h**it") _**A**d libitum_ (**A**D-LIB) notes during the determining section.
-* *Proposal* (IID): `hdp` &mdash; amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
-* *Proposal* (IID): `hdh` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes during the determining section.
-* *Proposal* (IID): `hb` &mdash; amount of *strong* **h**its on all **b**ig notes during the determining section. (**`b`** can be seen as an `h` with rounded bottom)
-  * > Formula: `hb` = `hbh` + `br`
-* *Proposal* (IID): `hbp` &mdash; amount ("hits") of *strong* *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on **b**ig notes during the determining section.
-* *Proposal* (IID): `hbh` &mdash; amount ("**h**its") of *strong* non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD ("**h**it") on **b**ig notes during the determining section.
-* `s` &mdash; the total **s**core points if (*proposed* (IID)) `<no-punctuation-str-name-section>` is not specified or otherwise (*proposed* (IID)) accumulated **s**core points during the specified named determining section. \
+  * > Formula (*Proposal* (IID)): (*<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{amount of big missable hit-type notes, 1} × 100(%)
+* *Proposal* (IID): `pp` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable notes during.
+* *Proposal* (IID): `PP` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable **big** notes.
+* *Proposal* (IID): `dp` &mdash; percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `pg` &mdash; **p**ercentage (%) of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK of all missable notes during.
+* *Proposal* (IID): `PG` &mdash; **p**ercentage (%) of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK of all missable **big** notes.
+* *Proposal* (IID): `dg` &mdash; percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `pb` &mdash; **p**ercentage (%) of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD of all missable notes during.
+* *Proposal* (IID): `PB` &mdash; **p**ercentage (%) of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD of all missable **big** notes.GREAT/GOOD ("**p**erfect") of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `pm` &mdash; **p**ercentage (%) of *hit* vs. all bomb/**m**ine notes.
+* *Proposal* (IID): `pma` &mdash; **p**ercentage (%) of _**a**voided_ vs. all bomb/**m**ine notes.
+* *Proposal* (IID): `pa` &mdash; **p**ercentage (%) of caught vs. all _**A**d libitum_ (**A**D-LIB) notes.
+* *Proposal* (IID): `ph` &mdash; **p**ercentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD on all missable notes.
+* *Proposal* (IID): `PH` &mdash; **p**ercentage (%) of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD on all **big** missable notes.
+* *Proposal* (IID): `dh` &mdash; the percentage (%) of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments on all missble big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `prb` &mdash; **p**ercentage (%) of popped vs. all **b**alloon-type drum**r**oll-**t**ype notes.
+* *Proposal* (IID): `PRB` &mdash; **p**ercentage (%) of popped vs. all special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
+* *Proposal* (IID): `drb` &mdash; percentage (%) of full-bonus popped vs. all special/"big" (<ruby>**大**<rt>**d**ai</rt></ruby>) **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
+
+The percentage calculated from notes during the determining section is used.
+
+#### Judgement Count Conditions
+
+* *Proposal* (IID): `jp` &mdash; amount (**h**its) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect").
+* *Proposal* (IID): `JP` &mdash; amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `jdp` &mdash; amount ("hits") of *strong* *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `jg` &mdash; amount (**h**its) of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK.
+* *Proposal* (IID): `JG` &mdash; amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `jdg` &mdash; amount ("hits") of *strong* *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `jb` &mdash; amount (**h**its) of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD.
+* *Proposal* (IID): `JB` &mdash; amount of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `jm` &mdash; amount of *hit* bomb/**m**ine notes.
+* *Proposal* (IID): `jma` &mdash; amount of _**a**voided_ bomb/**m**ine notes.
+* *Proposal* (IID): `ja` &mdash; amount of caught ("**h**it") _**A**d libitum_ (**A**D-LIB) notes.
+* *Proposal* (IID): `jh` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, missable hit-type note **h**its.
+  * > Formula: `jh` = *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK
+* *Proposal* (IID): `JH` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, **h**it-type note **h**its on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `jdh` &mdash; amount ("**h**its") of *strong* non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD ("**h**it") on big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+* *Proposal* (IID): `jrb` &mdash; amount of popped **b**alloon-type drum**r**oll-**t**ype notes.
+* *Proposal* (IID): `JRB` &mdash; amount of popped special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
+* *Proposal* (IID): `jdrb` &mdash; amount of full-bonus popped special/"big" (<ruby>**大**<rt>**d**ai</rt></ruby>) **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
+
+The amount calculated from notes during the determining section is used.
+
+#### Roll Count Conditions
+
+* `r` &mdash; amount of hits on bar drum**r**oll notes.
+* *Proposal* (IID): `R` &mdash; amount of hits on **big** bar drum**r**oll notes.
+* *Proposal* (IID): `rd` &mdash; amount of *strong* hits on big (<ruby>**大**<rt>**d**ai</rt></ruby>) bar drum**r**oll notes.
+* *Proposal* (IID): `rb` &mdash; amount of hits on **b**alloon-type drum**r**oll-**t**ype notes.
+* *Proposal* (IID): `RB` &mdash; amount of hits on special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
+* *Proposal* (IID): `rt` &mdash; amount of hits on all (**t**otal) drum**r**oll-**t**ype notes.
+* *Proposal* (IID): `RT` &mdash; amount of hits on all (**t**otal) **big** (including special balloons (note symbol `9`)) drum**r**oll-**t**ype notes.
+* *Proposal* (IID): `h` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, non-blank **h**its.
+  * > Formula: `h` = `jh` + `rt`
+* *Proposal* (IID): `H` &mdash; amount of non-*<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, non-blank **h**its on all **big** notes.
+  * > Formula: `H` = `JH` + `RT`
+* *Proposal* (IID): `hd` &mdash; amount of *strong* **h**its on all big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes.
+  * > Formula: `hd` = `jdh` + `rd`
+
+If a counted drumroll note is defined as beginning non-after but ending after the default beat position of the determining point, the actual determining point is postponed until the earlier of the definition positions of the ending of that note and an *unspecified* duration before the `#BRANCHSTART` command.
+
+* TaikoJiro: zero-duration (live-updated after the default determining point).
+* TJAPlayer2 for.PC and TJAPlayer3: 1 measure (i.e., not postponed).
+* TJAPlayer3-f and OpenTaiko (0auBSQ): zero-duration (updated once at the postponed determining point).
+
+The accumulated amount calculated from notes during the determining section is used.
+
+#### State Conditions
+
+* `s` &mdash; the current **s**core points, 0 ≤ `s`. \
   ***Supported by***: TaikoJiro v2.66
   * *Unspecified*: The behavior when either unsupported scoring mode or the default value is specified to [the `SCOREMODE:` header](#scoremode) or the *<ruby>真<rt>Shin'</rt> 打<rt>uchi</rt></ruby>* "true performance" option is enabled.
-* *Proposal* (IID): `g` &mdash; percentage (%) of *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge change during the determining section, −100 ≤ `g` ≤ 100
-* *Proposal* (IID): `c` &mdash; the maximum/longest **c**ombo during the determining section (counted from 0).
+* *Proposal* (IID): `sr` &mdash; **r**egion **r**elative **s**core points, 0 ≤ `sr`. \
+* *Proposal* (IID): `g` &mdash; the current percentage (%) of *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge, 0 ≤ `g` ≤ 100.
+  * > Formula for [`LIFE:`](#life) life count: *absolute_percentage* = 100 × *remaining_life_count* ÷ *max_life_count*
+* *Proposal* (IID): `gr` &mdash; **r**egion **r**elative percentage (%) of *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge, −100 ≤ `gr` ≤ 100.
+* *Proposal* (IID): `c` &mdash; the current maximum/longest **c**ombo, 0 ≤ `c`.
+* *Proposal* (IID): `cr` &mdash; **r**egion maximum/longest **c**ombo, 0 ≤ `cr`.
+* *Proposal* (IID): `b` &mdash; the current branch, 0 for *<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>* Normal "branch"/path, 1 for *<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path, and 2 for *<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>* Master "branch"/path.
+* *Proposal* (IID): `br` &mdash; **r**egion **r**elative branch, −2 ≤ `br ≤ 2
 * *Proposal* (IID): `?` &mdash; a uniform distribution random value (float), 0 ≤ `?` \< 100
 
-If the condition value...
+For region conditions, the value calculated during the determining section (counted from 0) is used. For other state conditions, the final value at the determining point (may have non-0 initial value) is used.
 
-* ≥ `<number-master-branch-requirement>`: The *<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>* Master "branch"/path will be taken by default.
-* Otherwise, ≥ `<number-expert-branch-requirement>`: The *<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path will be taken by default.
+#### Condition Judgement
+
+For `<number-*-branch-requirement>`, the resulting condition value will be compared to the specified requirement value according to `<enum-str-range>`. For `<bool-*-branch-requirement>`, the expression will be evaluated.
+
+* If `<*-master-branch-requirement>` is fulfilled, the *<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>* Master "branch"/path will be taken by default.
+* Otherwise, if `<*-expert-branch-requirement>` is fulfilled, the *<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path will be taken by default.
 * Otherwise: The *<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>* Normal "branch"/path is taken by default.
-* The value of the requirements can be set out-of-bound to force a "branch"/path to be taken by default.
-* The [`#LEVELHOLD`](#levelhold) command affects the final determining result.
+* To force a "branch"/path to be taken by default, the value of the `<number-*-branch-requirement>` can be set out-of-bound and `<bool-*-branch-requirement>` can be specified as `true` or `false`.
+* The [`#LEVELHOLD`](#levelhold) and the (*Proposal* (IID)) [`#LEVELREDIR`](#proposal-iid-levelredir) commands and `<enum-str-combination>` affect the final determining result.
+
+#### Usage
 
 They are conventionally used as follow:
 
 ```txt
-#BRANCHSTART r, 1, 2 // Exemplar branch/path condition similar to the opening section of the "画竜点睛 (Garyoutensei)" series
+#BRANCHSTART r,1,2 // Exemplar branch/path condition similar to the opening section of the "画竜点睛 (Garyoutensei)" series
 #N
     // 0 hits: "普通 (Futsuu)" Normal branch/path
     // Normal branch/path section
@@ -2504,7 +2566,7 @@ They are conventionally used as follow:
 
 // Some commands or notechart section
 
-#BRANCHSTART p, 0, 101 // Exemplar condition which forces the "玄人 (Kurouto)"/Advanced branch/path to be chosen
+#BRANCHSTART p,0,101 // Exemplar condition which forces the "玄人 (Kurouto)"/Advanced branch/path to be chosen
 // ...
 ```
 
@@ -2512,8 +2574,10 @@ An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--en
 
 *Unspecified*: The behavior when any of the followings are violated:
 
-* No note symbols without ending with `,` should be placed after a branchless measure or `#BRANCHEND` and before the `#BRANCHSTART` command. However, commands are allowed there and apply to all branches in the incoming branch section.
+* No note symbols without ending with `,` should be placed before `#BRANCHSTART` or `#BRANCHEND`. However, commands except [`#DELAY`](#delay) are allowed before them, and multiple `#BRANCHSTART` and `#BRANCHEND` can be placed.
   * In TaikoJiro 1, such note symbols are combined into the first measure of first-occuring branch definition to form a complete measure.
+* No more than 1 `#BRANCHSTART` with different branch condition should be placed in a measure.
+  * In TaikoJiro 1, only the first branch condition takes effects.
 * No drumroll-type notes should be defined as starting before and ending non-before the beginning or the end of the "branch"/path section.
   * In TaikoJiro 1:
     * The position and duration of each drumroll-type note is determined as [Duration of drumroll-type notes](#duration-of-drumroll-type-notes), but is determined independently for each branch. Each note symbol in a non-branching section is treated as a note symbol in every branch.
