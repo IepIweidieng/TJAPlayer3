@@ -2445,7 +2445,7 @@ In addition to `expr`, `<enum-str-condition>` can be one of the following:
 
 * `p` &mdash; percentage (%) of *<ruby>精<rt>sei</rt> 度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy of all missable notes.
   * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
-* `P` &mdash; percentage (%) of "**p**recision"/accuracy of all missable **big** notes during the determining section.
+* *Proposal* (IID): `P` &mdash; percentage (%) of "**p**recision"/accuracy of all missable **big** notes during the determining section.
 * `d` &mdash; percentage (%) of "precision"/accuracy of *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong judgments of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes. (**`d`** can be seen as a rotated `p`) \
   ***First seen in***: TJAPlayer2 for.PC
   * Defined but unimplemented in TJAPlayer2 for.PC
