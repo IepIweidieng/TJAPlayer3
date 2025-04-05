@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-04-05 (UTC+8)
+* Last changed: 2025-04-06 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -2443,7 +2443,7 @@ At the determining point, the "branch"/path&ndash;switching effects are played b
 
 Swap note in Taiko mode (`G`) is *not* counted as a type of big note for calculating the condition value.
 
-Except for roll count conditions, only notes whose head is in the taken route are counted.
+Except for roll count conditions, only notes whose tail (if exists) or critical judgement time is in the taken route are counted.
 
 *Unspecified*: Whether the condition value is updated based on the duration (if exists) or critical judgement time (hit-type note) of the note, or the actual finish-hit time for the note, if they do not happen in the counted determining section for the same branch determining point.
 
