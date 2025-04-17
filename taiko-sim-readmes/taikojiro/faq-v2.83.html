@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
+
+<HTML LANG = "ja-JP">
+
+<HEAD>
+
+<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+<TITLE>太鼓さん次郎</TITLE>
+
+<META http-equiv="Content-Script-Type" content="text/javascript">
+<META http-equiv="Content-Style-Type" content="text/css">
+
+<LINK REL = "stylesheet" HREF = "rms.css" TYPE = "text/css">
+
+</HEAD>
+
+<BODY>
+
+<H1>FAQ</H1>
+
+<H2>よくあるかもしれない質問</H2>
+
+<P>
+動画内でよく見る（かもしれない）質問をまとめてみました。
+</P><P>
+製作者は家庭用ソフトは一切持っていません。
+</P>
+
+<DL>
+<DT>Q.Windows7でいろいろとおかしい</DT>
+<DD>A.こちらにWindows7で実行できる環境が無いので対応が難しいかもしれません。</DD>
+
+<DT>Q.64bit環境でいろいろとおかしい</DT>
+<DD>A.こちらに64bit環境が無い上、移植の面で厳しいかもしれません。</DD>
+
+<DT>Q.～の譜面でエラーが出る</DT>
+<DD>A.それだけの情報だと如何ともしがたいところです。エラーが出る譜面データの内容を教えて頂けると修正できるかもしれません。</DD>
+
+<DT>Q.lame.exeはどこで入手できますか</DT>
+<DD>A.<A HREF = "http://www.rarewares.org/mp3.php">http://www.rarewares.org/mp3.php</A>
+	あたりからダウンロードできると思います。
+　	分からない場合はぐぐってみてください。</DD>
+
+<DT>Q.太鼓の画像の変え方は？</DT>
+<DD>A.imgフォルダ内にある画像ファイルを書き換えてください。
+	それぞれのファイルについての簡易的な説明はimgフォルダ内にあります（exp.txt）。</DD>
+
+<DT>Q.太鼓音の変え方は？</DT>
+<DD>A.sndフォルダ内にある3つのwavファイルを差し替えてください。</DD>
+
+<DT>Q.フルコンボの声だけ音の高さが低い</DT>
+<DD>A.フルコンボコンボ音声のみ、ビットレートが他のファイルと違う可能性があります。他のファイルとビットレートを揃えてください。</DD>
+
+<DT>Q.動画ではimgに入ってるものと画像が違うんだけど</DT>
+<DD>A.どこかから画像を拾うなり作るなりしてnotes.bmpを差し替えてください。
+	本家っぽい画像のものは大抵配布できないと思うのでご諒承ください。</DD>
+
+<DT>Q.12分や24分と16分を一緒に使う方法は？</DT>
+<DD>A.（最小）公倍数。一小節に48文字使うと同時に使えます。</DD>
+
+<DT>Q.譜面データが見づらい</DT>
+<DD>A.仕様です。</DD>
+
+<DT>Q.エディタとかない？</DT>
+<DD>A.寧ろ欲しいので誰か作ってください。</DD>
+
+<DT>Q.TJF / TJAファイルの作り方は？</DT>
+<DD>A.メモ帳等でデータを入力した後、拡張子を.tjf / .tjaに変更して保存。</DD>
+
+<DT>Q.画像ファイルを入れたのに表示されない</DT>
+<DD>A.同名の拡張子が無いファイルが同じフォルダに入っている場合、その画像ファイルは使わないものとして扱われます。
+	拡張子のないファイルを削除してください。</DD>
+
+<DT>Q.BPMは合ってるはずなのにズレる</DT>
+<DD>A.ソフト側の問題により微妙にズレが生じます。BPMの値を調整してください</DD>
+
+<DT>Q.キーコンフィグが欲しい</DT>
+<DD>A.Ver.1.80あたりで（面と縁のキーだけですが）簡易的に実装してみました。
+	keyconf.iniから変更できます。</DD>
+
+<DT>Q.ジョイパッド対応希望</DT>
+<DD>A.今のところは他のフリーソフト（JoyToKey等）を使うことで対応をお願いします m m</DD>
+
+<DT>Q.プレイ時に限り得点の下一桁が変わる</DT>
+<DD>A.JudgeLevelが0以外の時に下一桁が（10-JudgeLevel）になるのは仕様です。</DD>
+
+<DT>Q.PSPでプレイしたい</DT>
+<DD>A.PSP向けのソフトを製作中の方が何人かいるようですので、そちらを調べてみるといいかもしれません。
+	太鼓さん次郎のPSPへの対応予定はありません。</DD>
+
+<DT>Q.OpenGLモードにすると画面が真っ白 / 表示がおかしい</DT>
+<DD>A.OpenGLモードはものすごく投げやりなテスト的な実装なので、動いたらラッキーという程度に考えて下さい（</DD>
+
+<DT>Q.JudgeLevelごとのデフォルトの判定幅は？</DT>
+<DD>A.JudgeRangeGreatは[50×(1+JudgeLevel/5)]、JudgeRangeGoodは[JudgeRangeGreatの2倍]、JudgeRangeBadは[さらに2倍]です。</DD>
+
+<DT>Q.コンボ音声の音の高さがおかしい</DT>
+<DD>A.Wavファイルの中にサンプリングレートの違うファイルが混ざっていると一部のファイルが違う速度で再生されてしまいます。コンボ音声のフォーマットは全て揃えてください。</DD>
+
+<DT>Q.うｐ主の音ゲーのスペックは？</DT>
+<DD>A.現在わりとメジャーなゲームは以下の通り（2011/8/30現在）。
+	<UL>
+	<LI><SPAN class = "notechar">太鼓</SPAN>4-5譜面くらいクリアできない</LI>
+	<LI><SPAN class = "notechar">IIDX</SPAN>SP九段 DP七段（ACRA）</LI>
+	<LI><SPAN class = "notechar">jube</SPAN>White B3（1,2回ほど何かでSを取った程度）（ただし初代jubeat）</LI>
+	<LI><SPAN class = "notechar">DDR</SPAN>足龍（DDRX2）</LI>
+	<LI><SPAN class = "notechar">DM</SPAN>青</LI>
+	<LI><SPAN class = "notechar">GF</SPAN>未プレイ</LI>
+	<LI><SPAN class = "notechar">popn</SPAN>最高レベルは41が数曲</LI>
+	<LI><SPAN class = "notechar">MGG</SPAN>バブルボブルメドレーはクリアできた</LI>
+	</UL>
+	どのゲームにおいてもスコアは殆ど出ません。
+</DD>
+</DL>
+
+<P>
+<A HREF = "readme.html">もどる</A>
+</P>
+
+</HTML>

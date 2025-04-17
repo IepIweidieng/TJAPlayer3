@@ -18,3 +18,5 @@ Index:
 * [tja.md](./tja.md)
   * An unofficial compilation and commentation of the TJA format & its related formats
   * Not restricted to TJAPlayer3 or particular simulators, but currently only PC-compatible simulators are addressed.
+* [taiko-sim-readmes](./taiko-sim-readmes)
+  * An unofficial compilation of readme files of Taiko simulators and tools which are not directly browseable online.

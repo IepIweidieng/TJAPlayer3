@@ -1,0 +1,26 @@
+○音声（効果音）ファイルの簡易説明
+
+●dong.wav
+	面を叩いた時の音。ドン。
+
+●ka.wav
+	縁を叩いた時の音。カツ。
+
+●dong_l.wav
+●ka_l.wav
+	それぞれ大音符を叩いた時の音。
+	ファイルが無い場合はdong.wav, ka.wavが鳴ります。
+
+●balloon.wav
+	ゲキ連打の風船を割った時の音。
+
+●voice_○combo_p1.wav
+●voice_○combo_p2.wav
+	コンボ数が○コンボになった時に鳴る音（声）。
+	○には任意の数字を入れてください（voice_55combo_p1.wavとした場合はプレイヤー1が55コンボ繋いだ時に鳴ります）。
+
+	片方のプレイヤーにつき最大30個くらいまでファイルを置けます（多分）。
+	
+●voice_fullcombo_p1.wav
+●voice_fullcombo_p2.wav
+	フルコンボ後に鳴る音（声）。

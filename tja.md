@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-04-06 (UTC+8)
+* Last changed: 2025-04-18 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -34,20 +34,22 @@ The dates listed here are mostly in UTC+9.
 Extension | Full Name | Content | Supported by | First Release | Specification
 --- | --- | --- | --- | --- | ---
 `.bin` | **Bin**ary (*<ruby>譜<rt>Fu</rt> 面<rt>men</rt></ruby>* Notechart File Format) | Notechart metadata + definition (binary file) | Official games, taiko-web (plugin "Fumen File Format") | 2000 (official local test) <br /> 2001-02-21 (AC1) | Proprietary format, not explained in this article.
-`.tjf` | **T**atsu**j**in *<ruby>**譜**<rt>**F**u</rt> 面<rt>men</rt></ruby>* Notechart Data (?) | Notechart metadata + definition | Taikosan, TaikoJiro 1 | 2006-03-30 (Taikosan nicover) <br /> 2007-07-06 (Taikosan's public release) | Taikosan's `Readme.txt`
+`.tjf` | **T**atsu**j**in *<ruby>**譜**<rt>**F**u</rt> 面<rt>men</rt></ruby>* Notechart Data (?) | Notechart metadata + definition | Taikosan, TaikoJiro 1 | 2004-05-08 (TJF EDIT) <br /> 2006-03-30 (Taikosan nicover) <br /> 2007-07-06 (Taikosan's public release) <br /> 2009-01-16 (Taikosan's public re-release with TJF EDIT's public release) | [Re-released Taikosan's `Readme.txt`](taiko-sim-readmes/Readme-taikosan-plusedit.txt)
 `data.txt` | owatatsujin Notechart **Data** (?) | Notechart set metadata + definition | owatatsujin | 2007-03-04 (owatatsujin v1.31; first release) | See <https://web.archive.org/web/20150527222157/http://www.geocities.jp/syun_k765/flash/owatatsu/seqhowto.html> <br /> Based on the notechart format of CIRRING-S by D4U: <http://noia.g3.xrea.com/parastoic/crs/maker.html> <br /> and CarmBeat by D4U <http://noia.g3.xrea.com/parastoic/carm/maker.html> <br /> Similar to the Simai notation, which is also based on D4U's format: <https://w.atwiki.jp/simai/pages/1003.html>
 `.osu` | **osu**! Beatmap | Notechart metadata + definition | osu!, taiko-web, OutFox (Taiko mode planned) | 2007-07-01 (UTC+?) <br /> 2008-05 (taiko mode) <br /> Non-after 2008-05-23 (first known mentioning) | See <https://osu.ppy.sh/wiki/en/Client/File_formats>. <br/> An `.osu` file with std or Taiko mode can be played as a Taiko chart.
 `.sm` | ***S***tep***M***ania Chart (?) | Notechart metadata + definition | StepMania 3.0, OutFox v0.4.9.9 (taiko mode) (?) | 2002-10-23 (StepMania 3.0 release) <br /> 2008-07-20 (unofficial taiko mode by toach, author of TaikoJiro) <br /> 2021-07-31 (taiko mode) (OutFox v0.4.9.9; first taiko mode release) | No known official full specification. <br /> No official documentation for Taiko chart. For general chart, see <https://outfox.wiki/en/dev/mode-support/sm-support> <br /> No known released charts for toach's unofficial taiko mode, but see <https://www.nicovideo.jp/user/460596/mylist/7250555>
-`.tja` | **T**atsu**j**in Notechart Format **A**(?) (?) | Notechart metadata + definition | TaikoJiro, Malody, TJAPlayer2 for.PC, taiko-web ver.18.10.11, OutFox v0.4.9.9, TaikoManyGimmicks | 2008-12-08 (TaikoJiro v0.80; first release) | TaikoJiro's `readme.txt`. <br/> But many extensions exist
-`.tjc` | **T**atsu**j**in **C**ourse (?) | Notechart set metadata | TaikoJiro v2.34, TaikoJiro 2 v0.98 | 2009-12-28 (TaikoJiro v2.34) | TaikoJiro's `readme.txt`
-`.mc` | **M**alody **C**hart (?) | Notechart metadata + definition (JSON) | Malody | Non-before 2014 (Malody) <br /> Non-after 2017-06-24 (mc2tja) | No known official documentation. See the non-official parser <https://github.com/LuiCat/mc2tja>. <br/> An `.mc` file with Taiko mode can be played as a Taiko chart.
+`.tja` | **T**atsu**j**in Notechart Format **A**(?) (?) | Notechart metadata + definition | TaikoJiro, Malody, TJAPlayer2 for.PC, taiko-web ver.18.10.11, OutFox v0.4.9.9, TaikoManyGimmicks | 2008-12-08 (TaikoJiro v0.80; first release) | [TaikoJiro's `readme.txt`](taiko-sim-readmes/taikojiro/readme-v2.92.txt) <br /> Also see [TaikoJiro 2's `readme.txt`](taiko-sim-readmes/taikojiro2/readme-v0.98.txt) <br /> Many extensions exist
+`.tjc` | **T**atsu**j**in **C**ourse (?) | Notechart set metadata | TaikoJiro v2.34, TaikoJiro 2 v0.98 | 2009-12-28 (TaikoJiro v2.34) | [TaikoJiro's `readme.txt`](taiko-sim-readmes/taikojiro/readme-v2.92.txt)
+`.tps` | **t**aiko**p**sp **S**core (?) | Notechart definition | <ruby>太<rt>Tai</rt>鼓<rt>ko</rt>の<rt>no</rt>玄<rt>Kuro</rt>人<rt>uto</rt></ruby> for PSP (taikopsp) | 2009-06-12 (taikopsp demo version) <br /> 2009-06-18 (taikopsp v0.1.0) <br /> Non-after 2009-08-29 (TPSConverter v0.31 already released) | [taikopsp's `りどみ.html` ("`Readme.html`")](taiko-sim-readmes/りどみ-taikopsp-v0.8.4.html)
+`ot_data.txt` | **O**ni**T**aiko DS **data** | Notechart definition | <ruby>鬼<rt>Gwai2</rt>太<rt>Taai3</rt>鼓<rt>gu2</rt></ruby>DS (OniTaiko DS) | 2009-07-14 (onitaiko DS v0.8.2 test version) <br /> Non-after 2010-03-05 (known first chart file) | See the 31-7-2010 entry of: <br /> <https://web.archive.org/web/20181012220107/http://www.owataiko.com/~aki/onitaiko_past.html> <br /> (zh_HK in UTF-8; need switching page character encoding to read)
+`.mc` | **M**alody **C**hart (?) | Notechart metadata + definition (JSON) | Malody | Non-before 2014 (Malody) <br /> Non-after 2017-06-24 (mc2tja) | No known official documentation. <br /> See the non-official parser <https://github.com/LuiCat/mc2tja>. <br/> An `.mc` file with Taiko mode can be played as a Taiko chart.
 `.dtx` | **DTX**Mania Chart (?) | Notechart metadata + definition | TJAPlayer2 for.PC (early versions, deprecated (?)) | Non-before 2000-01-17 (DTXMania v0.01; first release) <br /> Non-after 2006-06-19 (DTXCreator v0.01; first release) <br /> Non-before 2015-05-15 (taiko mode; <ruby>太<rt>Tai</rt>鼓<rt>ko</rt>さ<rt>sa</rt>ん<rt>n</rt>ア<rt>A</rt>ル<rt>ru</rt>ファ<rt>fa</rt></ruby> (early TJAPlayer2 for.PC) OSDN project registration) | First used in DTXMania, inherited by TJAPlayer2 for.PC. <br/> No official documentation for Taiko chart. For general chart, see (English translation) <https://osdn.net/projects/dtxmania/wiki/DTX%20data%20format>, <br/> (Japanese original) <https://osdn.net/projects/dtxmania/wiki/DTXデータのフォーマット>
 `songtitles.txt` | **Song Titles** | Notechart titles | taiko-web | 2019-04-04 (example) <br /> 2019-04-05 (taiko-web commit) | <blockquote>- A translation text file "songtitle.txt" can be imported <br /> &nbsp; - Titles and translated titles are each on their own line, if a line begins with a language code, it will translate the song title that is above<br /> &nbsp; - An example file can be found here: https://gist.github.com/LoveEevee/65fe66f0b54c0536f96fd2f4862984d4</blockquote> Example: <https://web.archive.org/web/20200630184942/https://gist.github.com/LoveEevee/65fe66f0b54c0536f96fd2f4862984d4>
 `.tci` | Open **T**aiko **C**hart **I**nformation | Notechart metadata (JSON) | Koioto (plugin "OpenTaikoChart"), TJAPlayer3-f v1.6.0.1 | 2019-08-17 (format rev.1) <br /> 2020-05-07 (plugin "OpenTaikoChart") | See <https://github.com/AioiLight/Open-Taiko-Chart>
 `.tcc` | Open **T**aiko **C**hart **C**ourse | Notechart definition (JSON with non-parsed strings) | Koioto (plugin "OpenTaikoChart"), TJAPlayer3-f v1.6.0.1 | 2019-08-17 (format rev.1) <br /> 2020-05-07 (plugin "OpenTaikoChart") | See <https://github.com/AioiLight/Open-Taiko-Chart>
 `.tcm` | Open **T**aiko **C**hart **M**edley | Notechart set metadata (JSON) | Koioto (plugin "OpenTaikoChart" v3.0), TJAPlayer3-f v1.6.0.1 | 2019-11-15 (format rev.2) <br /> 2020-05-07 (plugin "OpenTaikoChart") | See <https://github.com/AioiLight/Open-Taiko-Chart>
-`.ssc` | StepMania 5 (the ***s***pinal ***s***hark ***c***ollective) Chart (?) | Notechart metadata + definition | sm-ssc (early StepMania 5), OutFox v0.4.9.9 (taiko mode) (?) | 2011-02-11 (format introduction) <br /> 2011-02-10 (sm-ssc v1.2.1) <br /> 2021-07-31 (taiko mode) (OutFox v0.4.9.9; first taiko mode release) | No known official full specification. <br /> No official documentation for Taiko chart. For general chart, see <https://outfox.wiki/en/dev/mode-support/ssc-support>
-`.tmg` | **T**aiko**M**any**G**immicks | Notechart metadata + definition | TaikoManyGimmicks v0.6.1α | 2022 (TaikoManyGimmicks) <br /> 2023-04-13 (v0.6.1α, TMG format support) | TaikoManyGimmicks' `Readme.txt`. <br/> The plaintext form is similar to `.tja` but has some syntax differences (explained right below).
+`.ssc` | StepMania 5 (the ***s***pinal ***s***hark ***c***ollective) Chart (?) | Notechart metadata + definition | sm-ssc (early StepMania 5), OutFox v0.4.9.9 (taiko mode) (?) | 2011-02-11 (format introduction) <br /> 2011-02-10 (sm-ssc v1.2.1) <br /> 2021-07-31 (taiko mode) (OutFox v0.4.9.9; first taiko mode release) | No known official full specification. <br /> No official documentation for Taiko chart. <br /> For general chart, see <https://outfox.wiki/en/dev/mode-support/ssc-support>
+`.tmg` | **T**aiko**M**any**G**immicks | Notechart metadata + definition | TaikoManyGimmicks v0.6.1α | 2022 (TaikoManyGimmicks) <br /> 2023-04-13 (v0.6.1α, TMG format support) | [TaikoManyGimmicks' `Readme.txt`](taiko-sim-readmes/TaikoManyGimmicks/readme-v0.6.6α-revised.txt). <br/> The plaintext form is similar to `.tja` but has some syntax differences (explained right below).
 
 `.osu` and `.mc` have corresponding compressed formats, which include multiple notecharts for each difficulty and additional resource files:
 
@@ -72,7 +74,9 @@ The dates listed here are mostly in UTC+9.
 
 Filename/extension | Content | Supported by | First Release | Notes
 --- | --- | --- | --- | ---
-`genre.ini` | Genre definition for notecharts in the (sub)directory/ies. INI config file. | TaikoJiro, taiko-web | 2009-06-17 (TaikoJiro v1.90)
+`genre.ini` | Genre definition for notecharts in the (sub)directory/ies. INI config file. | TaikoJiro, taiko-web | 2009-06-17 (TaikoJiro v1.90) |
+`musiclist.txt` | List of file paths to notecharts | TJAPlayer (for PSP) | Non-after 2010-02-10 (musiclistGenerator v6) <br /> Non-after 2010-02-24 (TJAPlayer Ver ?×7 already released) | Similar to the later `.t3u8`, but in native encoding (assumedly Shift-JIS) <br /> and with the first occurrence of a line being `#END` (if exist) and all subsequent line ignored.
+`song.txt` | Number of notechart directories + List of directory name of notechart directories | <ruby>鬼<rt>Gwai2</rt>太<rt>Taai3</rt>鼓<rt>gu2</rt></ruby>DS (OniTaiko DS) | Non-after 2010-06-27 (OniTaiko DS F C v.1.2.1X fat) | See <https://web.archive.org/web/20100726082352/http://www.owataiko.com/~aki/_onitaikods/readme.txt>
 `box.def` | Genre definition for notecharts in the (sub)directory/ies. `.dtx`-syntax headers. | TJAPlayer2 for.PC, taiko-web | Non-before 2000-01-17 (DTXMania v0.01; first release) <br /> Non-before 2015-05-15 (taiko mode; <ruby>太<rt>Tai</rt>鼓<rt>ko</rt>さ<rt>sa</rt>ん<rt>n</rt>ア<rt>A</rt>ル<rt>ru</rt>ファ<rt>fa</rt></ruby> (early TJAPlayer2 for.PC) OSDN project registration) | First used in DTXMania, inherited by TJAPlayer2 for.PC
 `folder.json` | Genre definition for notecharts in the (sub)directory/ies. (JSON) | 2021-02-18 (bundled sample) <br /> 2021-03-09 (Koioto Ver.0.39; first release) | Koioto |
 `.t3u8` | List of file paths to notecharts | TJAPlayer3 v4.7.0 | 2019-07-18 (TJAPlayer3 [commit 9261ee0271](https://github.com/twopointzero/TJAPlayer3/commit/9261ee0271dd3cabd5e0f4f2222ef28a23555135)) <br /> 2020-02-03 (TJAPlayer3 v4.7.0) | See <https://github.com/twopointzero/TJAPlayer3/blob/develop/docs/song-list-files.md>. <br /> Based on and having identical syntax with `.m3u8`. <br /> `.m3u8` is a UTF-8&ndash;encoded variant of `.m3u` (**M**P**3** **U**RL).
@@ -3474,7 +3478,7 @@ In TJA files, within non-command lines, all whitespaces are ignored by TaikoJiro
 
 #### Example
 
-(This example is adapted from the `README.txt` distributed along with TaikoJiro)
+(This example is adapted from the [`readme.txt`](taiko-sim-readmes/taikojiro/readme-v2.92.txt) distributed along with TaikoJiro)
 
 ```txt
 Note Layout → 0/1 Notation → Note Symbol (Hexadecimal Digit)
@@ -3731,10 +3735,10 @@ Komi | 0auBSQ, <ruby>申<rt>mou</rt> し<rt>shi</rt> コ<rt>ko</rt> ミ<rt>mi</r
 ## References
 
 * *太鼓の達人 譜面とか Wiki\** ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/>
-* tjfフォーマット ("tjf Format"). (2007, July 6). *太鼓さん太郎 nicover* ("Taikosan Nico(nico) ver."). `Readme.txt`
+* tjfフォーマット ("tjf Format"). (2009, January 16). *太鼓さん太郎 nicover* ("Taikosan Nico(nico) ver.") plusedit. [`Readme.txt`](taiko-sim-readmes/Readme-taikosan-plusedit.txt)
   * This file is distributed along with Taikosan.
 * touch (2013, September 12). tjaフォーマット ("tja Format"). *太鼓さん次郎    Ver. 2.92くらい* ("TaikoJiro    Ver. 2.92 or so").
-  * This section of the documentation can be retrieved from both the files `readme.txt` & `readme.html` distributed along with TaikoJiro.
+  * This section of the documentation can be retrieved from both the files [`readme.txt`](taiko-sim-readmes/taikojiro/readme-v2.92.txt) & [`readme.html`](taiko-sim-readmes/taikojiro/readme-v2.92.html) distributed along with TaikoJiro.
   * Some of its paragraphs are cited in other web pages:
     * dispconf (2014, January 1). *４－２．譜面追加　自分で作る* ("4-2 - Add Notecharts: Make You Own"). 太鼓さん次郎解説!! ("TaikoJiro Explanation!!"). <https://taikosanjiro.hatenablog.com/entry/譜面-2>
     * 仕様 ("Specifications"). (2021, August 28). *太鼓さん次郎* ("TaikoJiro"). 太鼓さん次郎交流 Wiki ("TaikoJiro Communication Wiki"). <https://wikiwiki.jp/jiro/太鼓さん次郎#specifications>
@@ -3751,8 +3755,8 @@ Komi | 0auBSQ, <ruby>申<rt>mou</rt> し<rt>shi</rt> コ<rt>ko</rt> ミ<rt>mi</r
 * *OpenTaiko/CDTX.cs at main*. (2024, May 3). 0auBSQ/OpenTaiko. GitHub. <https://github.com/0auBSQ/OpenTaiko/blob/main/OpenTaiko/src/Songs/CDTX.cs>
 * *OpenTaiko/NotesManager.cs at main*. (2024, April 15). 0auBSQ/OpenTaiko. GitHub. <https://github.com/0auBSQ/OpenTaiko/blob/main/OpenTaiko/src/Stages/07.Game/Taiko/NotesManager.cs>
 * Squirrel (2023, November 4). *TJA Compatibility*. Project OutFox Wiki. <https://outfox.wiki/dev/mode-support/tja-support/>
-* barrier (2023, May 1). *Readme.txt*. *TaikoManyGimmicks ver0.6.6α*.
-  * This file is distributed along with TaikoManyGimmicks.
+* barrier (2023, June 19). [*readme.txt*](taiko-sim-readmes/TaikoManyGimmicks/readme-v0.6.6α-revised.txt). *TaikoManyGimmicks ver0.6.6α*.
+  * This version is not bundled with TaikoManyGimmicks but is published in the *TaikoManyGimmicks配布鯖* "TaikoManyGimmicks Release Server" Discord Server.
 * nyoro (2023, November 11). *TJA Format Support*. Visual Studio Marketplace. <https://marketplace.visualstudio.com/items?itemName=nyoro.tja-format-support>
   * This vscode extension provides short explanations for TJA headers/commands, including headers/commands introduced by TaikoManyGimmicks.
 
@@ -3776,5 +3780,4 @@ Komi | 0auBSQ, <ruby>申<rt>mou</rt> し<rt>shi</rt> コ<rt>ko</rt> ミ<rt>mi</r
 * GitHub page file managements
   * Add test TJA files and references for mentioned behaviors for easy re-verification.
   * Host image resources on GitHub page locally.
-  * Add bundled documentation files (`readme.txt` and on) for referenced simulators.
   * Update the GitHub page site to add the table-of-content navigation static/popup window
