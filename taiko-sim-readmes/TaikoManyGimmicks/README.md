@@ -15,7 +15,7 @@ Compiled File Name | Original File Name | Modification Time
 --- | --- | ---
 [`readme-v0.6.6α-revised.txt`](readme-v0.6.6α-revised.txt) | `readme.txt` <br /> As Discord attachment | 2023-06-19 23:49:?? UTC+9
 [`readme-Android-verβ20230529-verβ20230612.txt`](readme-Android-verβ20230529-verβ20230612.txt) | `readme.txt` | 2023-05-29 14:43:14 UTC+9
-[`readme-v0.6.4α-v0.6.6α.txt`](readme-v0.6.4α-v0.6.6α.txt) | &bullet; `readme.txt` <br /> &bullet; `前提ファイル.zip/前提ファイル/readme.txt` <br /> For Android verβ20230529 &ndash; verβ20230612 | 2023-05-01 20:14:32 UTC+9
+[`readme-v0.6.4α-v0.6.6α.txt`](readme-v0.6.4α-v0.6.6α.txt) | &bull; `readme.txt` <br /> &bull; `前提ファイル.zip/前提ファイル/readme.txt` <br /> For Android verβ20230529 &ndash; verβ20230612 | 2023-05-01 20:14:32 UTC+9
 [`readme-v0.6.3α.txt`](readme-v0.6.3α.txt) | `readme.txt` | 2023-04-29 03:26:08 UTC+9
 [`readme-v0.6.2α.txt`](readme-v0.6.2α.txt) | `readme.txt` | 2023-04-24 22:36:10 UTC+9
 [`readme-v0.6.1α.txt`](readme-v0.6.1α.txt) | `readme.txt` | 2023-04-13 01:31:00 UTC+9

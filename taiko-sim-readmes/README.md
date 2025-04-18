@@ -12,7 +12,7 @@ Compiled Directory Name | Simulator | Supported Chart Format(s)
 [`taikojiro`](taikojiro) | <ruby>太<rt>Tai</rt>鼓<rt>ko</rt>さ<rt>sa</rt>ん<rt>n</rt>次<rt>Ji</rt>郎<rt>rou</rt></ruby> (TaikoJiro (1)) v0.80 &ndash; v2.92 | `.tjf` (<ruby>***太***<rt>***T***ai</rt>鼓<rt>ko</rt>の<rt>no</rt>達<rt>Tatsu</rt>***人***<rt>***j***in</rt>***譜***<rt>***F***u</rt>面<rt>men</rt></ruby> (?)) <br /> `.tja` (<ruby>***太***<rt>***T***ai</rt>鼓<rt>ko</rt>の<rt>no</rt>達<rt>Tatsu</rt>***人***<rt>***j***in</rt>譜<rt>Fu</rt>面<rt>men</rt></ruby> ***A***nother (?))
 [`taikojiro2`](taikojiro2) | <ruby>太<rt>Tai</rt>鼓<rt>ko</rt>さ<rt>sa</rt>ん<rt>n</rt>次<rt>Ji</rt>郎<rt>rou</rt></ruby>2 (TaikoJiro 2) v0.60 &ndash; v0.98 | `.tja`
 [`onitaiko`](onitaiko) | <ruby>鬼<rt>Gwai2</rt>太<rt>Taai3</rt>鼓<rt>gu2</rt></ruby>DS (OniTaiko DS) v1.2X.11 fat &ndash; v1.4x.20 fat (web archived) | `ot_data.txt` (**O**ni**T**aiko DS **data**) <br /> `data.txt` (owatatsujin **data**) (with OTC (OniTaiko DS Converter)) <br /> `.tja` (with TJA2OWT (TJA to OWATA Converter))
-[`TJAPlayer2`](TJAPlayer2) | TJAPlayer2(<ruby>仮<rt>Kari</rt></ruby>) (for PSP) original version & IMARER-v0.01 &ndash; IMARER-v0.07 | `tja`
+[`TJAPlayer2`](TJAPlayer2) | TJAPlayer2(<ruby>仮<rt>Kari</rt></ruby>) (for PSP) original version & IMARER-v0.01 &ndash; IMARER-v0.07 | `.tja`
 [`TaikoManyGimmicks`](TaikoManyGimmicks) | TaikoManyGimmicks (For Windows) v0.6.1α &ndash; v0.6.6α <br /> TaikoManyGimmicks For Android verβ20230318 &ndash; verβ20230612 | `.tja` <br /> `.tmg` (**T**aiko**M**any**G**immicks)
 
 ## File List
