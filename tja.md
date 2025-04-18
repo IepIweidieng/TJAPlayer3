@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-04-18 (UTC+8)
+* Last changed: 2025-04-19 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -163,6 +163,7 @@ Except when within a `string` value and around a `text` value, consecutive white
 For multiple values separated by comma (`,`), except for `text`-valued fields, optional whitespaces can occur before and/or after the comma.
 
 * A trailing comma may present but is not universally supported.
+  * Known to be supported in TaikoJiro 1 and OpenTaiko (0auBSQ).
 
 ### Value Type
 
@@ -248,7 +249,7 @@ For headers, the coarsest fineness is per-file. The finest fineness other than s
 
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TJF format \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per-file
 
 Specify the **title** of the song.
@@ -282,7 +283,7 @@ Specify the **title** of the song.
 
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro v2.64 \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per-file
 
 Specify the **subtitle** (not of the meaning of *caption*) of the song (could be artist, game series, *etc.*).
@@ -436,7 +437,7 @@ Specify the filename of the *<ruby>裏<rt>ura</rt> 譜<rt>fu</rt> 面<rt>men</rt
 
 ***Impact level***: timing ★★★★・ \
 ***First seen in***: TJF format \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per-file
 
 Specify the audio file ("**wave**form audio file") of the song.
@@ -460,7 +461,7 @@ Specify the audio file ("**wave**form audio file") of the song.
 
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TaikoJiro v2.37 \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per-file
 
 Specify the amount of seconds into the song audio for **start**ing playing the preview ("**demo**nstration") audio in the song selection screen.
@@ -472,7 +473,7 @@ Specify the amount of seconds into the song audio for **start**ing playing the p
 
 ***Impact level***: timing ★★★★・ \
 ***First seen in***: TaikoJiro \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per&ndash;player-side (?)
 
 Specify the amount of seconds past ("**offset**ted") from the time position of `#START` of the notechart which the song audio should start playing from the beginning.
@@ -524,13 +525,15 @@ Specify the relative amplitude percentage (%) of the desired **vol**ume gain of 
 
 ***Impact level***: timing ★★★★・ \
 ***First seen in***: TJF format \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per&ndash;player-side
 
 Specify the initial **BPM** (**b**eat **p**er **m**inute) of the notechart.
 
+* **`BPM:<non-zero-int-initial-bpm>`**
 * **`BPM:<non-zero-float-initial-bpm>`** \
-  ***Supported by***: (Universally supported)
+  ***First seen in***: TaikoJiro v1.29 \
+  ***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9)
 * `BPM:0`
   * The behavior is *unspecified* (may cause crashes in some existing simulators).
 * `BPM:`
@@ -841,7 +844,7 @@ See [the `#GAMETYPE` command](#gametype) for specifying the game mode for specif
 
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.76 \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per&ndash;player-side
 
 Specify the *<ruby>コー<rt>koo</rt> ス<rt>su</rt></ruby> "course"/<ruby>む<rt>mu</rt> ず<rt>zu</rt> か<rt>ka</rt> し<rt>shi</rt> い<rt>i</rt></ruby> "difficulty"/<ruby>難<rt>nan'</rt> 易<rt>i</rt> 度<rt>do</rt></ruby> "difficulty (or easiness) level"* difficulty/difficulty level ("**course**").
@@ -905,7 +908,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
 
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TJF format \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per&ndash;player-side
 
 Specify the *<ruby>難<rt>nan'</rt> 易<rt>i</rt> **度**<rt>do</rt></ruby>* "difficulty (or easiness) **level**"/difficulty star/? ("**level**").
@@ -915,7 +918,7 @@ Since the Japanese terminology is easily confused with the fore-mentioned "diffi
 Depending on the simulator and/or user settings, the `LEVEL:` header may affect the default scoring, the default increasing rate of the *<ruby>魂<rt>tamashii</rt> ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge, *etc.*
 
 * `LEVEL:<positive-int-difficulty-star>` \
-  ***Supported by***: (Universally supported)
+  ***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9)
   * *Unspecified*: The upper limit.
   * Universally supported range (as in the latest official games):
     * Easy: 1&ndash;5
@@ -978,7 +981,7 @@ Reference: *ダブルプレイ* ("Double Play"; "Two-player Charts"). 太鼓の�
 
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per&ndash;player-side
 
 Specify the required amount of hits of *<ruby>激<rt>geki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>/<ruby>ゲ<rt>ge</rt> キ<rt>ki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>fuu</rt> 船<rt>sen</rt></ruby>/<ruby>ふ <rt>fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* **balloon**&ndash;type notes (denoted by `7`, `9`, or `D` in the notechart definition), in the order of their definition, ***NOT*** the hit order during playing.
@@ -1197,7 +1200,7 @@ Reference: *配点* ("Scoring"). 太鼓の達人 譜面とか Wiki\* ("Taiko no 
 
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v1.67 \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC) \
 ***Scope fineness***: per&ndash;player-side
 
 Specify the *<ruby>**初**<rt>sho</rt> 項<rt>kou</rt></ruby>* **init**ial term (refers to an arithmetic progression) (`init`) used for calculate the basic **score**. See the explanation for [the `SCOREMODE:` header](#scoremode).
@@ -1215,7 +1218,7 @@ Specify the *<ruby>**初**<rt>sho</rt> 項<rt>kou</rt></ruby>* **init**ial term 
 
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v1.67 \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC) \
 ***Scope fineness***: per&ndash;player-side
 
 Specify the *<ruby>公<rt>kou</rt> **差**<rt>sa</rt></ruby>* common **diff**erence (refers to an arithmetic progression) (`diff`) used for calculate the basic **score**. See the explanation for [the `SCOREMODE:` header](#scoremode).
@@ -1414,7 +1417,7 @@ See [the `#NEXTSONG` command](#nextsong) for the TJA command version of TJC head
 
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v2.34 \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: sequential
 
 Specify a notechart ("**song**") of the notechart set.
@@ -1593,7 +1596,7 @@ Reference: <https://taiko.namco-ch.net/taiko/en/howto/papamama.php#papamama>
 
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TJF format \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Pre-[#START](#start--end) position***: forbidden (enclosing the notechart definition) \
 ***Scope***: per&ndash;player-side (or notechart) \
 ***Scope fineness***: per&ndash;player-side (or non-before) \
@@ -1648,7 +1651,7 @@ Respectively **start** / **end** the region of notechart definition.
 
 ***Impact level***: timing ★★★★・ \
 ***First seen in***: TJF format \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope***: branch \
 ***Scope fineness***: non-before \
 ***Effect time***: static <sub>objects' distance</sub> + command-time <sub>objects' velocity</sub> \
@@ -1669,7 +1672,7 @@ Respectively **start** / **end** the region of notechart definition.
 
 ***Impact level***: timing ★★★★・ \
 ***First seen in***: TaikoJiro \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope***: branch \
 ***Scope fineness***: measure \
 ***Effect time***: static \
@@ -1701,7 +1704,7 @@ Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby
 
 ***Impact level***: timing ★★★★・ \
 ***First seen in***: TaikoJiro v1.60 \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC) \
 ***Scope***: branch \
 ***Scope fineness***: sequential \
 ***Effect time***: static <sub>objects' timing</sub> + command-time <sub>freeze scrolling</sub> \
@@ -1734,7 +1737,7 @@ For the timing of notechart object, multiple `#DELAY` commands placed at the sam
 
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope***: branch \
 ***Scope fineness***: sequential \
 ***Effect time***: static <sub>per-note scoring</sub> + command-time <sub>visual</sub> \
@@ -1764,7 +1767,7 @@ Respectively **start** / **end** a fake/dummy section if not already respectivel
 
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoJiro \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope***: branch \
 ***Scope fineness***: non-before \
 ***Effect time***: static \
@@ -1916,7 +1919,7 @@ Change the scrolling **direction** of notes & bar lines.
 
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoJiro v2.69 \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC) \
 ***Scope***: branch \
 ***Scope fineness***: non-before \
 ***Effect time***: static \
@@ -2285,7 +2288,7 @@ The semantics are otherwise the same as the [BALLOON](#balloon-headers) headers.
 
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.63 \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC) \
 ***Scope***: branch, instant one-shot \
 ***Scope fineness***: non-before \
 ***Effect time***: static <sub>determine in-section objects</sub> + command-time <sub>switch sections</sub> \
@@ -2409,7 +2412,7 @@ Its effects end at either the next [`#LEVELHOLD`](#levelhold) or another #LEVELR
 
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.63 \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC) \
 ***Scope***: notechart \
 ***Scope fineness***: measure \
 ***Effect time***: static <sub>objects' measure position</sub> + command-time <sub>objects' enabling status & visual</sub> \
@@ -2645,7 +2648,7 @@ An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--en
 
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.63 \
-***Supported by***: (Universally supported) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC) \
 ***Scope***: notechart \
 ***Scope fineness***: measure \
 ***Effect time***: static \
@@ -3370,7 +3373,7 @@ The time duration intervals of different notechart symbols are possible to overl
 ### Note Symbols in Taiko Mode
 
 ***First seen in***: TJF format \
-***Supported by***: (Universally supported)
+***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9)
 
 Effective when [`GAME:Taiko`](#game) or [`#GAMETYPE Taiko`](#gametype) is in effect.
 
