@@ -880,7 +880,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
   * This difficulty refers to the *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt></ruby>* "Taiko Tower" notechart series in the *<ruby>わ<rt>Wa</rt> く<rt>ku</rt> わ<rt>wa</rt>く<rt>ku</rt> 冒<rt>Bou</rt> 険<rt>ken</rt> ラ<rt>Ra</rt> ン<rt>n</rt> ド<rt>do</rt></ruby>* "Wakuwaku (Exciting) Adventure land" mode from the 7th PS2 console game. To further simulate the mode, [the `LIFE:` header](#life) can be used in conjunction.
   * The actual behavior may differ from simulator to simulator.
   * In TaikoJiro, this cause the bar drumroll notes to be drawn above of all <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> & <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> notes. However, it was stated that *this behavior might be changed later.* (Original quote: "*この仕様は後に変更されるかもしれません。*")
-  * This draw order behavior is in reference to *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt> 6<rt>Roku</rt></ruby>（<ruby>辛<rt>kara</rt> 口<rt>kuchi</rt></ruby>）* ("Taiko Tower 6 (hard)") ([fumen-wiki](wikiwiki.jp/taiko-fumen/収録曲/その他/太鼓タワー3%28辛口%29)), where the faster notes are drawn beneath the slower note (mainly the big bar drumroll notes) and thus make the notechart hard to read.
+  * This draw order behavior is in reference to *<ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> タ<rt>Ta</rt> ワー<rt>waa</rt> 6<rt>Roku</rt></ruby>（<ruby>辛<rt>kara</rt> 口<rt>kuchi</rt></ruby>）* ("Taiko Tower 6 (hard)") ([fumen-wiki](https://wikiwiki.jp/taiko-fumen/収録曲/その他/太鼓タワー3%28辛口%29)), where the faster notes are drawn beneath the slower note (mainly the big bar drumroll notes) and thus make the notechart hard to read.
     * Exemplar Gameplay: <https://youtu.be/nDsFM6XQwO4?t=23> <br />
       <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/nDsFM6XQwO4?start=23" title="YouTube video player, playing &quot;太鼓の達人CS7　太鼓タワーその6(辛口) 月下美人　全良&quot;, uploaded by Guest Don" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     * However, this also occur in normal gameplay in some pre-AC15 games. An earlier example is *<ruby>ハ<rt>Ha</rt> ン<rt>n</rt> ガ<rt>ga</rt> リー<rt>rii</rt> 舞<rt>Bu</rt> 曲<rt>kyoku</rt> 第<rt>Dai</rt> ５<rt>go</rt> 番<rt>ban</rt> </ruby>* (Hungarian Dances No.5) ([fumen-wiki](https://wikiwiki.jp/taiko-fumen/収録曲/おに/ハンガリー舞曲第５番)) before Wii1, in all difficulties.
@@ -1348,12 +1348,12 @@ The supported set of headers & commands and allowed argument forms is not affect
   * `add` &mdash; The still-in-action `#JPOSSCROLL` has it movement done independently of the next `#JPOSSCROLL`. The total movement is the sum of all ongoing movements.
 * `sudden-directions=all`, `sudden-directions=x`
   * ***Impact level***: gimmicky ★★・・・
-  * Specify which directions of notechart object scrolling are affected by [the `#SUDDEN` command](#sudden).
+  * Specify which directions of notechart object scrolling are affected by [the `#SUDDEN` command](#sudden--hidden-commands).
   * `all` &mdash; all directions are affected.
   * `x` &mdash; only the horizontal direction is affected.
 * `sudden-precision=any`, `sudden-precision=ms`
   * ***Impact level***: gimmicky ★★・・・
-  * Specify the precision of `<float-seconds-*-duration>` for [the `#SUDDEN` command](#sudden).
+  * Specify the precision of `<float-seconds-*-duration>` for [the `#SUDDEN` command](#sudden--hidden-commands).
   * `any` &mdash; The precision is only limited by the implementation. The interpreted duration is positive infinity only when the duration is given without any non-`0` digits in non-exponential part.
   * `ms` &mdash; The precision is 0.001 (1 ms), rounded toward 0, and any value < 0.001 is treated as 0, which has the interpreted duration of positive infinity.
 * `stack-order=def`, `stack-order=time`, `stack-order=appear-time`
@@ -3508,7 +3508,7 @@ Effective when [`GAME:Konga`](#game) or [`#GAMETYPE Konga`](#gametype) is in eff
 
 See the exemplar actual gameplays:
 
-* <https://www.youtube.com/watch?v=G70HoWO1umc> <br /> <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/G70HoWO1umc" title="YouTube video player, playing &quot;Donkey Konga [29] GameCube Longplay&quot;, uploaded by Mutch Games" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+* <https://www.youtube.com/watch?v=G70HoWO1umc> <br /> <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/G70HoWO1umc" title="YouTube video player, playing &quot;Donkey Konga &lbrack;29&rbrack; GameCube Longplay&quot;, uploaded by Mutch Games" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 * <https://www.youtube.com/watch?v=myci706YXss> <br /> <iframe width="560" height="315" src="https://www.youtube.com/embed/myci706YXss?si=AKOnV2vJgvUB63gU" title="YouTube video player, playing &quot;Longplay of Donkey Konga 3&quot;, uploaded by LongplayArchive" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 See [#SENOTECHANGE](#senotechange) for the general patterns of how the alternative forms of *<ruby>口<rt>Kuchi</rt> 唱<rt>Shou</rt> 歌<rt>ga</rt></ruby>* <br> "Note phoneticizations" are used.
