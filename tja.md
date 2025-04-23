@@ -947,7 +947,7 @@ See [the `#GAMETYPE` command](#gametype) for specifying the game mode for specif
 
 ### COURSE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (any value except `Ura`/`ura`) \
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (minimum, unless stated otherwise) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.76 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro, Malody, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
@@ -978,6 +978,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
   * As a result, after the official AC15 was released, this difficulty has been re-purposed as the *<ruby>お<rt>O</rt> に<rt>ni</rt></ruby> (<ruby>裏 <rt>Ura</rt></ruby>)* Oni/Extreme (Inner) difficulty.
   * For specifying the inner chart of every difficulty together or with different audio as a separate song entry, as in official AC11&ndash;AC14, [`SIDE:Ex`](#side) and [the `SIDEREV:` head](#siderev) should be used.
 * `COURSE:Ura` / `COURSE:ura` \
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
   ***Supported by***: taiko-web
   * Equivalent to `COURSE:Edit`
   * The *<ruby>お<rt>O</rt> に<rt>ni</rt></ruby> (<ruby>裏 <rt>Ura</rt></ruby>)* Oni/Extreme (Inner) difficulty.
@@ -998,6 +999,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
   ***Supported by***: TJAPlayer3 v1.5.0
   * The special difficulty used for *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 道<rt>Dou</rt> 場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games.
 * `COURSE:<str-difficulty-name>` \
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
   ***Supported by***: Malody
   * The difficulty name, commonly one of:
     * `Easy` / `Kantan` &mdash; Equivalent to `COURSE:Easy` in other simulators.
@@ -1006,7 +1008,8 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
     * `Extreme` / `Oni` &mdash; Equivalent to `COURSE:Oni` in other simulators.
     * `Extra` / `Ura Oni` &mdash; Equivalent to `COURSE:Edit` in other simulators.
   * This is the only form expected by Malody
-* `COURSE:` / Unrecognized value
+* `COURSE:` / Unrecognized value \
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard)
   * The behavior is *unspecified*.
   * In TaikoJiro 1 and 2, treated as an unaccessible difficulty. Causes a crash in TaikoJiro 2 when entering the gameplay screen at any difficulty.
 * Initial value
