@@ -293,7 +293,9 @@ Specify the **title** of the song.
 ***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per-file
 
-Specify the **subtitle** (not of the meaning of *caption*) of the song (could be artist, game series, *etc.*).
+Specify the **subtitle** (not of the meaning of *caption*) of the song (could be artist, game series, *etc.*), or alternatively as the second line ("**sub**") of the **title**.
+
+If the artist of the song should be specified while the subtitle is already used as the second line of the title, [the `ARTIST:` header](#artist) can be used to specifying the artist of the song.
 
 The display details are *unspecified*.
 
@@ -306,7 +308,8 @@ The display details are *unspecified*.
       ***Supported by***: TaikoJiro, TJAPlayer2 for.PC, taiko-web ver.19.03.10 \
       / `<str-displayed-subtitle>` \
       ***Supported by***: TaikoJiro, TJAPlayer2 for.PC ver.2021xxxxxx, TJAPlayer3-f v1.7.2.0, OpenTaiko (0auBSQ) v0.6.0, taiko-web
-      * Also show the subtitle during the gameplay screen & the result screen.
+      * Show the subtitle in all screens, including the gameplay screen & the result screen.
+      * Such subtitle is considered the second half part of the title, but is moved to the second line in song selection screen & result screen.
       * The `++` prefix needs to be prepended to the displayed subtitle when the subtitle begins with either `++` or `--`.
 * `SUBTITLE<enum-str-lang>:<str-displayed-subtitle-localized>` \
   ***Supported by***: taiko-web ver.19.03.10, OpenTaiko (0auBSQ) v0.5.1
