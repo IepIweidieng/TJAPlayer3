@@ -245,17 +245,22 @@ For headers, the coarsest fineness is per-file. The finest fineness other than s
 * *Unspecified*: For non-sequential scope fineness, the behavior when the same header or command occur multiple times within its scope fineness in its scope.
   * In TaikoJiro 1 and 2: Only the last occuring valid header or command in the scope fineness takes effect.
 
+#### Compatibility Issues
+
+* In TaikoJiro 1 before v1.95 & Malody, only one notechart definition is supported within a single TJA file. The per&ndash;player-side scope fineness is identical to the per-file scope fineness in these simulators.
+
 ### TITLE Headers
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (including any `<enum-str-lang>` forms) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TJF format \
-***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
+***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, Malody, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per-file
 
 Specify the **title** of the song.
 
 * `TITLE:<str-title>`
+  * In Malody, the romanized name should be used.
 * `TITLE<enum-str-lang>:<str-title-localized>` \
   ***Supported by***: taiko-web ver.19.03.10, OpenTaiko (0auBSQ) v0.5.1
   * Specify the localized title.
@@ -308,10 +313,11 @@ The display details are *unspecified*.
   * Specify the localized subtitle. The display mode (`++`/`--`) is instead specified by the `SUBTITLE:` header.
   * `<enum-str-lang>` can be one of the possible `<enum-str-lang>` for [the `TITLE<enum-str-lang>:` header](#title-headers).
 
-### *Proposal* (Komi) ARTIST:
+### ARTIST:
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
 ***Impact level***: metadata ★・・・・ \
+***First seen in***: Malody \
 ***Scope fineness***: per-file
 
 Specify the **artist** of the song.
@@ -321,7 +327,8 @@ Similar to the `--` prefix usage of [the `SUBTITLE:` header](#subtitle-headers),
 The display details are *unspecified*.
 
 * `ARTIST:<comma-separated-list-str-artist>`
-  * Every comma (`,`) in the artist name specified in `<comma-separated-list-str-artist>` ***MUST*** be escaped as `\,`
+  * In Malody, the romanized name should be used.
+  * *Proposal* (Komi): Every comma (`,`) in the artist name specified in `<comma-separated-list-str-artist>` ***MUST*** be escaped as `\,`
 
 ### MAKER:
 
@@ -362,6 +369,21 @@ The display details are *unspecified*.
 * `NOTESDESIGNER:<string-name-notechart-creator>` \
   ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
   * *Proposal* (Komi): Every comma (`,`) in `<string-name-notechart-creator>` ***MUST*** be escaped as `\,`
+
+### AUTHOR:
+
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+***Impact level***: metadata ★・・・・ \
+***First seen in***: Malody \
+***Scope fineness***: per-file (?)
+
+Specify the creator ("**author**") of the notechart.
+
+In Malody, it can be the Malody account name of the creator, but it is not enforced.
+
+The display details are *unspecified*.
+
+* `MAKER:<string-name-notechart-creator>`
 
 ### GENRE:
 
@@ -614,6 +636,21 @@ Specify the jacket ("**pre**view") **image** of the song.
 * `PREIMAGE:<string-filepath-background-image>`
 * `PREIMAGE:`
   * No jacket image will be displayed.
+
+### COVER:
+
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+***Impact level***: decorative ・・・・・ \
+***First seen in***: Malody \
+***Scope fineness***: per-file
+
+Specify the jacket ("**cover**") image of the song.
+
+* `COVER:<string-filepath-background-image>`
+  * `<string-filepath-background-image>` ***MUST*** be in the same directory as the TJA file.
+  * In Malody, the preferred format is `.jpg`
+* `COVER:`
+  * No jacket image will be displayed. (?)
 
 ### TAIKOWEBSKIN:
 
@@ -910,7 +947,7 @@ See [the `#GAMETYPE` command](#gametype) for specifying the game mode for specif
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (any value except `Ura`/`ura`) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.76 \
-***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, Malody, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per&ndash;player-side
 
 Specify the *<ruby>コー<rt>koo</rt> ス<rt>su</rt></ruby> "course"/<ruby>む<rt>mu</rt> ず<rt>zu</rt> か<rt>ka</rt> し<rt>shi</rt> い<rt>i</rt></ruby> "difficulty"/<ruby>難<rt>nan'</rt> 易<rt>i</rt> 度<rt>do</rt></ruby> "difficulty (or easiness) level"* difficulty/difficulty level ("**course**").
@@ -957,6 +994,15 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
 * **`COURSE:6`** / **`COURSE:Dan`** / `COURSE:dan` \
   ***Supported by***: TJAPlayer3 v1.5.0
   * The special difficulty used for *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 道<rt>Dou</rt> 場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games.
+* `COURSE:<str-difficulty-name>` \
+  ***Supported by***: Malody
+  * The difficulty name, commonly one of:
+    * `Easy` / `Kantan` &mdash; Equivalent to `COURSE:Easy` in other simulators.
+    * `Normal` / `Futsuu` &mdash; Equivalent to `COURSE:Normal` in other simulators.
+    * `Hard` / `Muzukashii` &mdash; Equivalent to `COURSE:Hard` in other simulators.
+    * `Extreme` / `Oni` &mdash; Equivalent to `COURSE:Oni` in other simulators.
+    * `Extra` / `Ura Oni` &mdash; Equivalent to `COURSE:Edit` in other simulators.
+  * This is the only form expected by Malody
 * `COURSE:` / Unrecognized value
   * The behavior is *unspecified*.
   * In TaikoJiro 1 and 2, treated as an unaccessible difficulty. Causes a crash in TaikoJiro 2 when entering the gameplay screen at any difficulty.
@@ -975,7 +1021,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (minimum, see each form) \
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TJF format \
-***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
+***Supported by***: (assumedly universally supported, including TaikoJiro, Malody, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per&ndash;player-side
 
 Specify the *<ruby>難<rt>nan'</rt> 易<rt>i</rt> **度**<rt>do</rt></ruby>* "difficulty (or easiness) **level**"/difficulty star/? ("**level**").
@@ -989,12 +1035,26 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
   ***Supported by***: (assumedly universally supported, including TaikoJiro, TJAPlayer2 for.PC, OutFox v0.4.9.9)
   * *Unspecified*: The upper limit.
   * Universally supported range (as in the latest official games):
-    * Easy: 1&ndash;5
+    * Easy: 1&ndash;5 (up to 6 only for *<ruby>ケ<rt>Ke</rt>チャ<rt>cha</rt>ド<rt>Do</rt>ン<rt>n</rt>2000<rt>Nisen</rt></ruby>*/*Kecha-Don 2000* in CS4 and *<ruby>恋文<rt>Koibumi</rt>2000<rt>Nisen</rt></ruby>*/*KOIBUMI 2000* in CS5)
     * Normal: 1&ndash;7
     * Hard: 1&ndash;8
     * Oni/Extreme and beyond: 1&ndash;10
+  * OpenTaiko scale:
+    * Easy: 0&ndash;8
+    * Normal: 0&ndash;8
+    * Hard: 0&ndash;10
+    * Oni/Extreme and beyond: 0&ndash;13
+  * Malody scale:
+    * Easy: 1 &ndash; 4
+    * Normal: 2 &ndash; 9+
+    * Hard: 6 &ndash; 17+
+    * Oni/Extreme and beyond: 11- &ndash; 40+
+* `LEVEL:<positive-int-difficulty-star>+` \
+  & `LEVEL:<positive-int-difficulty-star>-` \
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+  ***First seen in***: Malody (?)
 * `LEVEL:0` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2
   * If supported, the difficulty star is displayed as 0 stars in the song selection screen. The other behaviors are *unspecified*.
   * In TaikoJiro 1, appears as 0 stars in song selection but 1 star in gameplay.
 * `LEVEL:<non-negative-float-difficulty-star>` \
@@ -3971,6 +4031,7 @@ The honorific title is omitted.
   * The TJF format was modified and extended into the TJA format for this simulator.
   * Inspired by <ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> さ<rt>sa</rt> ん<rt>n</rt> 太<rt>Ta</rt> 郎<rt>rou</rt></ruby> (*Taikosan*): By VIL.
     * The TJF format was developed and used for this simulator.
+* Malody: By Mugzone (multiple developers) <https://m.mugzone.net/index>
 * TJAPlayer2 for.PC (aka. <ruby>太<rt>Tai</rt> 鼓<rt>ko</rt> さ<rt>sa</rt> ん<rt>n</rt> ア<rt>A</rt> ル<rt>ru</rt> ファ<rt>fa</rt></ruby> (*TaikosanAlpha*)): By J.MIR (kairera0467) <https://github.com/kairera0467/TJAP2fPC>
   * Inspired by TJAPlayer2 (for PSP): (Unknown author)
   * ← Derived from DTXManiaXG (Ver.K): By J.MIR (kairera0467) <https://osdn.net/projects/dtxmaniaxg-verk/>, <https://github.com/kairera0467/DTXManiaXG_VerK_Old> \
@@ -4017,6 +4078,7 @@ Komi | 0auBSQ, <ruby>申<rt>mou</rt> し<rt>shi</rt> コ<rt>ko</rt> ミ<rt>mi</r
   * Some of its paragraphs are cited in other web pages:
     * dispconf (2014, January 1). *４－２．譜面追加　自分で作る* ("4-2 - Add Notecharts: Make You Own"). 太鼓さん次郎解説!! ("TaikoJiro Explanation!!"). <https://taikosanjiro.hatenablog.com/entry/譜面-2>
     * 仕様 ("Specifications"). (2021, August 28). *太鼓さん次郎* ("TaikoJiro"). 太鼓さん次郎交流 Wiki ("TaikoJiro Communication Wiki"). <https://wikiwiki.jp/jiro/太鼓さん次郎#specifications>
+* *How to upload tja_tjaのアップロード方法*. (n.d., before 2025, April 23). Malody. <https://m.mugzone.net/wiki/1964>
 * kairera0467 (2021, April 30). *TJAPlayer2 for.PC(仮) by.kairera0467*. kairera0467/TJAP2fPC. GitHub. <https://github.com/kairera0467/TJAP2fPC/blob/work-s/実行時フォルダ/readme.txt>
 * *TJAPlayer3/CDTX.cs at ver-1.6.x*. (2019, Mar 2). AioiLight/TJAPlayer3. GitHub. <https://github.com/AioiLight/TJAPlayer3/blob/ver-1.6.x/TJAPlayer3/Songs/CDTX.cs>
 * AioiLight (2019, April 17). *.tja フォーマット* (".tja Format"). AioiLight.space. <https://web.archive.org/web/20190914085205/https://aioilight.space/taiko/tjap3/doc/tja/>
