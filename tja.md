@@ -3548,10 +3548,10 @@ Local charter-defined variable setters:
 Global charter-defined variable setters:
 
 * `#ELEVATEC <str-global-value-counter-written>, <str-local-value-counter-read>`
-* `#ELEVATECF <str-global-value-counter-written>, <str-local-formula-counter-read>`
+* *Proposal* (IID): `#ELEVATECF <str-global-value-counter-written>, <str-local-formula-counter-read>`
   * `<str-global-value-counter-written>` is the key of the stored global value counter and must not have the form of a [`float`](#value-type).
 * `#ELEVATET <str-global-value-trigger-written>, <str-local-value-trigger-read>`
-* `#ELEVATETF <str-global-value-trigger-written>, <str-local-formula-trigger-read>`
+* *Proposal* (IID): `#ELEVATETF <str-global-value-trigger-written>, <str-local-formula-trigger-read>`
   * `<str-global-value-trigger-written>` is the key of the stored global value trigger and must not be one of `True`, `False`, and any string different from them only by their letter case.
 
 Recommendation for charters: Global charter-defined variable setters should be used only when necessary and are preferredly used as late (by time position) as possible in the notechart, such as before [`#END`](#start--end) or [(*proposal* (Komi)) the `#SONGJUMP` command](#proposal-komi-songjump).
@@ -3709,7 +3709,7 @@ Reading point: The value of a charter-defined variable is read when:
 Writing point of values: The value of a charter-defined value variable is written only when:
 
 * For a charter-defined value variable setter command, (*proposal* (IID)) when its command time is reached.
-* For an enabled and effective [`#GIANTNOTE` command](#proposal-komi-giantnote), when the note is judged.
+* For an enabled and effective [(*proposal* (Komi)) `#GIANTNOTE` command](#proposal-komi-giantnote), when the note is judged.
 
 *Proposal* (IID): Writing point of formulae: The cached value of a charter-defined formula variable is invalidated when:
 
@@ -3721,7 +3721,7 @@ When a store expression of a charter-defined formula variable is (re-)evaluated,
 *Proposal* (IID): Evaluation stages in each game update frame:
 
 1. Update pre-defined variables: The gameplay state variables except `<t*:t>` (**t**otal amount of encountered certain notes whose critical judgement **t**iming has been reached before now) are updated. \
-  [`#GIANTNOTE` commands](#proposal-komi-giantnote) have the triggers updated in this stage.
+  [(*Proposal* (Komi)) `#GIANTNOTE` commands](#proposal-komi-giantnote) have the triggers updated in this stage.
 2. Update charter-defined variables: After stage 1, the to-be-executed reading or writing of charter-defined variables have their reading and writing executed in their definition order (for [the `#BRANCHSTART` command](#branchstart--branchend), assumed to be right before the first note symbol (if any) at the previous measure). \
   For each reading or writing which requires evaluating any store expressions (including re-evaluating charter-defined formula variables), the `<t*:t>` variables are increased to include uncounted notes whose both definition position and time position is before the reading or writing point, and then the store expressions (if any) are evaluated. \
   For reading a formula variable with invalidated cached value, all invalidated formula variables which is (directly or indirectly) accessed by store expression of the current formula variable are re-evaluated in the definition order of the last `#STORECF` or `#STORETF` command setting them.
