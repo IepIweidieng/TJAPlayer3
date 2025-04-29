@@ -2890,6 +2890,98 @@ An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--en
     * For length-changing notes, the amount of hits done for bar drumrolls is counted independently in each branch, but amount of hits done for balloons is shared across branches.
     * For a bar drumroll note, its visual appearance becomes broken when its head in the target branch is no longer drawn when switching the branch.
 
+#### Examples
+
+Following are known special conditions (beyond `r` & `p`) used in official games.
+
+Reference: *譜面分岐条件* ("Notechart branch conditions"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/譜面分岐条件>
+
+* The measure number is based on the non-internal measure number listed in the corresponding page for the difficulty of the song.
+
+(`s` is only used in older official games)
+
+* KAGEKIYO, Inner oni difficulty
+  * Measure 80: `#BRANCHSTART PP,42.8,100` (3/7 × 100, 7/7 × 100)
+* <ruby>ケ<rt>Ke</rt>チャ<rt>cha</rt>ド<rt>Do</rt>ン<rt>n</rt>2000</ruby>, Oni difficulty, in Wii1
+  ```txt
+  #BARLINEOFF
+  // ...
+  #MEASURE 2/4
+  1068, // Measure 19 (0/4 to 2/4 of 6/4) // The roll in the official game is 1/48th shorter than this notation
+  #BPMCHANGE 220
+  #MEASURE 4/4
+  0333, // Measure 19 (2/4 to 6/4 of 6/4)
+  #MEASURE 0/4 // or 1/240000 (less than 1 ms)
+  #BRANCHSTART p,0.01,0.01
+    #N
+    #LEVELHOLD
+    ,
+    #M
+    ,
+  #BRANCHEND
+  #BPMCHANGE 240
+  #MEASURE 8/4
+  #BARLINEON
+  #BRANCHSTART r,1,2
+  // ... // Measure 20 and on
+  ```
+* "<ruby>聖<rt>Shou</rt> 徳<rt>doku</rt> た<rt>Ta</rt> い<rt>i</rt> こ<rt>ko</rt> の<rt>no</rt>「<rt></rt> 日<rt>Hi</rt> い<rt>I</rt> ず<rt>zu</rt> る<rt>ru</rt> ま<rt>ma</rt> で<rt>de</rt> 飛鳥<rt>Asuka</rt>」</ruby>", Oni difficulty: See [the example of `#LEVELREDIR`](#proposal-iid-levelredir).
+* "<ruby>ま<rt>Ma</rt>だ<rt>da</rt>さ<rt>Sa</rt>い<rt>i</rt>た<rt>ta</rt>ま<rt>ma</rt></ruby>2000"
+  * `#SECTION` at measure 41, and the following `#BRANCHSTART` command at measure 47:
+    * Easy difficulty: `#BRANCHSTART rb,38,38`
+    * Normal difficulty: `#BRANCHSTART rb,46,46`
+    * Hard difficulty: `#BRANCHSTART rb,60,60`
+    * Oni difficulty: `#BRANCHSTART pp,76,76` (60 / 78 × 100(%))
+* *"<ruby>限<rt>Gen</rt>界<rt>kai</rt>突<rt>Top</rt>破<rt>pa</rt></ruby>×<ruby>サ<rt>Sa</rt>バ<rt>ba</rt>イ<rt>i</rt>バー<rt>baa</rt></ruby>"* "Genkai Toppa x Survivor", Inner oni difficulty
+  * Measure 45: `#BRANCHSTART JB,1,1,l`
+* "Nesin Amatias", Oni difficulty:
+  * Measure 2: `#BRANCHSTART p,0,0` (forced Master branch)
+  * Measure 8, 16, 24, 34, 44, 60, 67: A `#BRANCHSTART` command with `p` condition.
+  * Measure 83: Unknown condition
+* "<ruby>森<rt>Shin</rt>羅<rt>ra</rt>万<rt>Ban</rt>象<rt>shou</rt></ruby>", Oni difficulty:
+  * Measure 118: `#BRANCHSTART rb,0,1`
+* *"<ruby>め<rt>Me</rt>た<rt>ta</rt>め<rt>Me</rt>た<rt>ta</rt></ruby>☆<ruby>ゆ<rt>Yu</rt>に<rt>ni</rt>ば～<rt>baa</rt>すっ<rt>su'</rt></ruby>！"* "METAMETA☆Universe!", Oni difficulty
+  ```txt
+  // ...
+  #BRANCHSTART p,80.837,101
+  #N
+    // ... // Measure 47 and on
+  #E
+    #LEVELREDIR N,N,M
+    // ...
+  #BRANCHSTART r,0,1
+  #N
+    // ... // Measure 60 and on
+  #E
+    // ...
+  #M
+    // ...
+  #BRANCHSTART p,101,101 // forced Normal branch
+  #N
+    // ... // Measure 64 and on
+  ```
+* *"<ruby>ダー<rt>Daa</rt>ク<rt>ku</rt></ruby>・<ruby>エ<rt>E</rt>ク<rt>ku</rt>ス<rt>su</rt></ruby>・<ruby>マ<rt>Ma</rt>キ<rt>ki</rt>ナ<rt>na</rt></ruby>♡"* "Dark Ex Machina♡", Oni difficulty
+  ```txt
+  #BPMCHANGE 300
+  1001001001001001,
+  #MEASURE 3/8
+  0010 01, // Measure 77 (0/8 to 3/8 of 7/8)
+  // Branch determining point for Measure 79
+  #MEASURE 4/4
+  #BARLINEOFF
+  00100100 // Measure 77 (3/8 to 7/8 of 7/8)
+  #BARLINE
+  #SCROLL 9
+  60000800, // Measure 78 (2/4) // The roll in the official game is 1/48th shorter than this notation
+  #SCROLL 1
+  #BARLINEON
+  #BRANCHSTART jb,1,1,l
+  // ... // Measure 79 and on
+  #BRANCHSTART p,101,101 // forced Normal branch
+  #BRANCHEND // Empty branch section
+  // ... // Measure 122 and on
+  ```
+
 #### Compatibility Issues
 
 * In TaikoJiro 1 (and 2 (?)), for `r` branch condition, if a bar-drumroll&ndash;type note starts or overlaps with the branch determination point in definition, the displayed branch will be updated as the drumroll is hit since the branch determination point and until the actually branch point.
