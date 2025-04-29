@@ -1820,11 +1820,11 @@ Respectively **start** / **end** the region of notechart definition.
   * The notechart definition is for the only player-side if [the `STYLE:` header](#style) is ignored or this header specifies the amount of player-sides to be 1.
 * `#START <enum-str-player-side>` \
   ***Supported by***: TaikoJiro v1.99 but not TaikoJiro 2
-  * The notechart definition is for the player-side specified by `<enum-str-combination>`, which can be one of:
+  * The notechart definition is for the player-side specified by `<enum-str-player-side>`, which can be one of:
     * `P1` &mdash; for the 1st player-side (1P).
     * `P2` &mdash; for the 2nd player-side (2P) if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ 2.
-  * *Unspecified*: The behavior when other `<enum-str-combination>` is used.
-    * In TaikoJiro, using any other `<enum-str-combination>` is treated as if the 0-argument `#START` were used.
+  * *Unspecified*: The behavior when other `<enum-str-player-side>` is used.
+    * In TaikoJiro, using any other `<enum-str-player-side>` is treated as if the 0-argument `#START` were used.
 * *Proposal* (IID): `#START P<positive-int-player-side>`
   * The notechart definition is for the `<positive-int-player-side>`-th player-side if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ `<positive-int-player-side>`.
 * `#END`
