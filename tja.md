@@ -195,7 +195,7 @@ For multiple values separated by comma (`,`), except for `text`-valued fields, o
   * `text`: A string. Can contain leading or trailing non-newline whitespaces & comments.
   * `str`: A string. Leading and trailing new-newline whitespaces & comments are ignored.
   * In TJAPlayer3, in comma-separated lists, every comma (`,`) in `string` ***MUST*** be escaped as `\,` (while `\` itself requires no escaping).
-  * `str-enum` (enum-like, string-form): A `str` with specific accepted values. Can be spelt in a form of one of `Value` / `VALUE` / `value`. *Unspecified*: Whether other spellings can be used.
+  * `enum-str` (enum-like, string-form): A `str` with specific accepted values. Can be spelt in a form of one of `Value` / `VALUE` / `value`. *Unspecified*: Whether other spellings can be used.
     * In TaikoJiro:
       * If the string-form value begins with an upper-case letter and only this value begins with this letter, only the first 1 letter have effect (*e.g.*, `V` is also accepted).
       * If not, the value ***MUST*** begin with one of the above forms.
@@ -1694,9 +1694,11 @@ static | Theoretically negative infinity (−∞) measures (presumely −∞ sec
 command-time | A specific time position relative to the time position of the command.
 object-time | A specific time position relative to the time position of notechart objects (including notes and bar lines).
 
+An object-time effect can be enabled or disabled at either static time or command-time. Static-enabled object-time effects are a sub-type of static effects. Command-time&ndash;enabled object-time effects are a sub-type of command-time effects.
+
 If an effect can be interpreted as different effect time types, the effect is classified as the most static-ness type interpreted.
 
-As a special case, for an effect affecting the scrolling path of notechart objects, the effect is classified as object-time only if the path is a direct or indirect function of the time position of notechart objects, otherwise the effect is classified as command-time or static.
+As a special case, for an effect affecting the scrolling path of notechart objects, the effect is classified as object-time only if the path is a direct or indirect function of the time position of notechart objects.
 
 #### Non-static Effect Scope
 
@@ -2266,7 +2268,7 @@ The arguments are whitespace-separated.
 ***Supported by***: TaikoManyGimmicks v0.6α \
 ***Scope***: branch \
 ***Scope fineness***: non-before \
-***Effect time***: object-time \
+***Effect time***: static-enabled object-time \
 ***Non-static effect scope***: non-before \
 ***Effect target***: notes \
 ***Effect branches***: *Unspecified*
@@ -2530,6 +2532,98 @@ Override the assigned hit amount specified by the one of the BALLOON headers if 
 
 The semantics are otherwise the same as the [BALLOON](#balloon-headers) headers.
 
+### *Proposal* (Komi): `#PARTNERNOTE`
+
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+***Impact level***: note ★★★★★ \
+***Scope***: branch, note one-shot \
+***Scope fineness***: non-before \
+***Effect time***: static \
+***Effect target***: notes \
+***Effect branches***: current
+
+Specify the next **note** to be hand-holding ("**partner**"), like [note symbols `A` and `B`](#note-symbols-in-taiko-mode), which awards extra score bonus (except in PC-generation scoring) or (*proposal* (IID)) (for a hand-holding bomb/mine) extra gauge penalty if all players hit within a certain time duration.
+
+If the next note is already a hand-holding note or (*proposal* (IID)) is not a hit-type note, the command has no effects.
+
+*Proposal* (IID): If the hand-holding note has no any hit-type notes to hand-hold at other player-sides, it becomes a non&ndash;hand-holding note, regardless of whether it is specified to be hand-holding by the note symbol or the `#PARTNERNOTE` command.
+
+Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF` or (*proposal* (IID)) `#COMMANDIFF` command](#proposal-komi-commandif-commands).
+
+### *Proposal* (Komi): #GIANTNOTE
+
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+***Impact level***: note ★★★★★ \
+***Scope***: branch, note one-shot \
+***Scope fineness***: non-before \
+***Effect time***: static \
+***Effect target***: notes \
+***Effect branches***: current
+
+Specify the next **note** to be **giant**, as in the official Wii games. A giant notes receive input and reward points the same as a regular note, but sets certain specified [(*proposal* (Komi)) triggers](#proposal-komi-counter--trigger-commands) to true based on its received judgement.
+
+*Proposal* (IID): If the next note is already a giant note or is not a hit-type note, the command has no effects. If the next note is a big note, it is converted to a regular note and then becomes a giant note.
+
+Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF` or (*proposal* (IID)) `#COMMANDIFF` command](#proposal-komi-commandif-commands).
+
+* `#GIANTNOTE <str-local-value-trigger-written-on-ok>, <str-local-value-trigger-written-on-great>, <enum-str-bool-great-activates-ok>`
+  * `<str-local-value-trigger-written-on-ok>` specifies the local trigger to set to true when the giant note receives *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK judgement.
+  * `<str-local-value-trigger-written-on-great>` specifies the local trigger to set to true when the giant note receives *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement.
+  * `<enum-str-bool-great-activates-ok>` defaults to `False` and specifies whether the trigger specified by `<str-local-value-trigger-written-on-ok>` is also set to true when the giant note receives *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement. If given, it can be one of:
+    * `False` &mdash; the default; `<str-local-value-trigger-written-on-ok>` will be untouched on *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement.
+    * `True` &mdash; `<str-local-value-trigger-written-on-ok>` will be set to true on *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement.
+
+### *Proposal* (Komi): NOTEIF Commands
+
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+***Impact level***: note ★★★★★ \
+***Scope***: branch, note one-shot \
+***Scope fineness***: non-before \
+***Effect time***: static \
+***Effect target***: notes \
+***Effect branches***: current
+
+Conditionally ("**if**") enable the next **note**.
+
+*Proposal* (IID): If the next note is not a hit-type note, the command has no effects.
+
+* `#NOTEIF <str-local-trigger-read-enable>, <enum-str-bool-glow-effect>`
+* *Proposal* (IID): `#NOTEIFF <str-local-formula-trigger-read-enable>, <enum-str-bool-glow-effect>`
+  * If the bool value of the [(value or (*proposal* (IID)) formula) trigger](#proposal-komi-counter--trigger-commands) specified by `<str-local-*-trigger-read-enable>` is true, the note is enabled, *i.e.*, displays and receives input. \
+    Otherwise the note is disabled, *i.e.*, hides and does not receive input, like [note symbol `0`](#note-symbols-in-taiko-mode).
+  * `<enum-str-bool-glow-effect>` defaults to `False` and specifies whether the note has the glow effect like the notes added after hitting giant notes in the official Wii games. \
+    If given, it can be one of:
+    * `False` &mdash; the default; the note appears as if the `#NOTEIF` or (*proposal* (IID)) `#NOTEIFF` command were not applied if the note is enabled.
+    * `True` &mdash; the note has the glow effect if enabled. Intended to be used in conjunction with [the (*proposal* (Komi)) `#GIANTNOTE` command](#proposal-komi-giantnote).
+  * *Unspecified*: The display details of the glow effect.
+
+### *Proposal* (Komi): COMMANDIF Commands
+
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+***Impact level***: note ★★★★★ (maximum, depends on the usage) \
+***Scope***: branch, command one-shot \
+***Scope fineness***: sequential \
+***Effect time***: static \
+***Effect target***: notes \
+***Effect branches***: current
+
+Conditionally ("**if**") enable the next **command**.
+
+*Proposal* (IID): If the next command is a `#COMMANDIF` or `#COMMANDIFF` command, is not a supported command, or is placed after any note symbols, the current `#COMMANDIF` or `#COMMANDIFF` command has no effects.
+
+* `#COMMANDIF <str-local-value-trigger-read-enable>`
+* *Proposal* (IID): `#COMMANDIFF <str-local-formula-trigger-read-enable>`
+  * If the bool value of the [(3*proposal* (IID)) formula) trigger](#proposal-komi-counter--trigger-commands) specified `<str-local-*-trigger-read-enable>` is true, the next command is enabled, *i.e.*, has its static-time effects (re-)applied immediately, and has its command-time effects fired when its command time is reached. \
+    Otherwise the next command is disabled, *i.e.*, has its static-time effects reverted immediately as if it were not present, and has its command-time effects not fired when its command time is reached.
+  * *Proposal* (IID): If the command-time of the next command have already passed, the command-time effects (if exist) of the next command are neither reapplied nor canceled.
+
+Commands supporting the `#COMMANDIF` and (*proposal* (IID)) `#COMMANDIFF` command:
+
+* [The (*proposal* (Komi)) `#PARTNERNOTE` command](#proposal-komi-partnernote)
+* [The (*proposal* (Komi)) `#GIANTNOTE` command](#proposal-komi-giantnote)
+* [The (*Proposal* (Komi)) `#SONGJUMP` command](#proposal-komi-songjump)
+* [(*Proposal* (Komi)) COUNTER / TRIGGER Commands](#proposal-komi-counter--trigger-commands)
+
 ### `#SECTION`
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (except proposed forms) \
@@ -2688,10 +2782,20 @@ At the determining point, the "branch"/path&ndash;switching effects are played b
   * This form ***MUST*** be given in TMG syntax for using math expressions.
   * If `<no-punctuation-str-name-section>` is not (empty), it is used as the default branch determining section for `<number-condition>`.
   * In `<number-condition>`, a condition value of the default branch determining section is accessed with `<enum-str-condition>`, and a condition value of a non-default branch determining section is accessed with `section(<no-punctuation-str-name-section>).<enum-str-condition>`, where `<enum-str-condition>` is any `<enum-str-condition>` allowed for the `#BRANCHSTART` command except `expr`.
+* *Proposal* (Komi): `#BRANCHSTART lc:<str-local-value-counter-read-value>, <number-expert-branch-requirement>, <number-master-branch-requirement>` \
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+* *Proposal* (IID): `#BRANCHSTART lcf:<str-local-formula-counter-read-value>, <number-expert-branch-requirement>, <number-master-branch-requirement>`
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  * The value of the [local (value or formula) counter](#proposal-komi-counter--trigger-commands) specified by `<str-local-*-counter-read-value>` is fetched at the branch determining point as the condition value.
 * *Proposal* (IID): `#BRANCHSTART(expr, <bool-expert-branch-requirement>, <bool-master-branch-requirement>, <no-punctuation-str-name-section>)`
   * When `<enum-str-range>` is `expr`, this special form ***MUST*** be given in TMG syntax for using comparison and logical expressions.
   * If `<no-punctuation-str-name-section>` is not (empty), it is used as the default branch determining section for `<bool-*-branch-requirement>`.
   * In `<bool-*-branch-requirement>`, a condition value of the default branch determining section is accessed with `<enum-str-condition>`, and a condition value of a non-default branch determining section is accessed with `section(<no-punctuation-str-name-section>).<enum-str-condition>`, where `<enum-str-condition>` is any `<enum-str-condition>` allowed for the `#BRANCHSTART` command except `expr`.
+* *Proposal* (Komi): `#BRANCHSTART lt, <str-local-value-trigger-read-expert-branch-requirement>, <str-local-value-trigger-read-master-branch-requirement>` \
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+* *Proposal* (IID): `#BRANCHSTART ltf, <str-local-formula-trigger-read-expert-branch-requirement>, <str-local-formula-trigger-read-master-branch-requirement>` \
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  * The bool value of the [local (value or formula) triggers](#proposal-komi-counter--trigger-commands) specified by `<str-local-*-trigger-*-read-*-branch-requirement>` will be used for [judging the target branch](#condition-judgement).
 * `#BRANCHEND` \
   ***Supported by***: TaikoJiro, TJAPlayer 2 for PC ver.2020031800, TJAPlayer3 v1.5.2, taiko-web
 
@@ -2840,7 +2944,7 @@ For region conditions, the value calculated during the determining section (coun
 
 #### Condition Judgement
 
-For `<number-*-branch-requirement>`, the resulting condition value will be compared to the specified requirement value according to `<enum-str-range>`. For `<bool-*-branch-requirement>`, the expression will be evaluated.
+For `<number-*-branch-requirement>`, the resulting condition value will be compared to the specified requirement value according to `<enum-str-range>`. For `<bool-*-branch-requirement>`, the expression will be evaluated. For `<str-local-trigger-read-*-branch-requirement>`, the bool value of the [local trigger](#proposal-komi-counter--trigger-commands) will be fetched.
 
 * If `<*-master-branch-requirement>` is fulfilled, the *<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>* Master "branch"/path will be taken by default.
 * Otherwise, if `<*-expert-branch-requirement>` is fulfilled, the *<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path will be taken by default.
@@ -3051,15 +3155,36 @@ See [TJC Header](#tjc-header) for the header version of the `#NEXTSONG` command.
 
 * `#NEXTSONG <string-song-title>,<string-song-subtitle>, <str-genre>,<string-filepath-song-wave>, <non-negative-int-score-init>, <non-negative-int-score-diff>`
   * Basically has the effects of the [`TITLE:`](#title-headers), [`SUBTITLE:`](#subtitle-headers), [`GENRE:`](#genre), [`WAVE:`](#wave), [`SCOREINIT:`](#scoreinit), and [`SCOREDIFF:`](#scorediff) headers combined, except that every comma (`,`) in each `string` values ***MUST*** be escaped as `\,`
-* `#NEXTSONG <string-song-title>,<string-song-subtitle>, <str-genre>,<string-filepath-song-wave>, <non-negative-int-score-init>, <non-negative-int-score-diff>,<non-negative-number-level>, <enum-course>, <enum-bool-hide-title>` \
+* `#NEXTSONG <string-song-title>,<string-song-subtitle>, <str-genre>,<string-filepath-song-wave>, <non-negative-int-score-init>, <non-negative-int-score-diff>,<non-negative-number-level>, <enum-course>, <enum-str-bool-hide-title>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
   ***Supported by***: TJAPlayer3-Develop-ReWrite, OpenTaiko (0auBSQ)
-  * `<non-negative-number-level>, <enum-course>, <enum-bool-hide-title>` are optional parameters where the last one(s) can be omitted:
-    * `<enum-bool-hide-title>` defaults to `False` and specifies whether the title of the song is obscured ("hidden") in the certification challenge selection screen of the *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 道<rt>Dou</rt> 場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games. If given, it can be one of:
+  * `<non-negative-number-level>, <enum-course>, <enum-str-bool-hide-title>` are optional parameters where the last one(s) can be omitted:
+    * `<enum-str-bool-hide-title>` defaults to `False` and specifies whether the title of the song is obscured ("hidden") in the certification challenge selection screen of the *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 認<rt>nin</rt> 定<rt>tei</rt> モー<rt>Moo</rt> ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt> 位<rt>i</rt> 道<rt>Dou</rt> 場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games. If given, it can be one of:
       * `False` &mdash; the default; the title is displayed as-is.
       * `True` &mdash; the title is obscured (*e.g.*, displayed as "`???`").
     * `<enum-course>` has the effects and the default value of [the `COURSE:` header](#course).
     * `<non-negative-number-level>` has the effects and the default value of [the `LEVEL:` header](#level).
+
+### *Proposal* (Komi): #SONGJUMP
+
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+***Impact level***: note ★★★★★ \
+***Scope***: notechart \
+***Scope fineness***: non-before \
+***Effect time***: command-time \
+***Non-static effect scope***: all \
+***Effect target***: all \
+***Effect branches***: current
+
+Immediately **jump** to the loading screen of the specified **song**. The results (including [(*proposal* (Komi)) local counters and local triggers](#proposal-komi-counter--trigger-commands)) of the current gameplay is discarded.
+
+Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF` or (*proposal* (IID)) `#COMMANDIFF` command](#proposal-komi-commandif-commands).
+
+* `#SONGJUMP <str-song-unique-id>, <enum-difficulty>`
+  * `<str-song-unique-id>` is a unique alphanumeric string representing the specified song.
+  * `<enum-difficulty-course>` can one of the argument to [the `COURSE:` header](#course).
+    * In OpenTaiko (0auBSQ), it is stored in the `uniqueID.json` file in the same directory as the TJA file for the song. The `uniqueID.json` is automatically generated if not present when the TJA file is being scanned.
+  * If either the specified song or (*proposal* (IID)) the specified difficulty does not exist, the song jump is canceled.
 
 ### #GAMETYPE
 
@@ -3265,7 +3390,7 @@ Append ("**include**") the notechart definition content defined the included fil
 
 **Split**/**merge** the note field ("**lane**") into/from top and bottom note field, with <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> notes on the top note field, <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> notes on the bottom note field, and other notes on the middle of these 2 note fields.
 
-* `#SPLITLANE` / (*Proposed*) `#SPLITLANE 1`
+* `#SPLITLANE` / (*Proposed* (IID)) `#SPLITLANE 1`
 * *Proposal* (IID): `#SPLITLANE <float-split-amount>`
   * Specify the split amount, 1 for `#SPLITLANE` & 0 for `#MERGELANE`. A negative split amount makes <ruby>ド<rt>Do</rt> ン<rt>n</rt></ruby> notes on the bottom note field and <ruby>カ<rt>Ka</rt> ツ<rt>tsu</rt></ruby> notes on the top note field intead.
 * Initial value / `#MERGELANE` / (*Proposed* (IID)) `#SPLITLANE 0`
@@ -3461,6 +3586,360 @@ The arguments are whitespace-separated.
   * Only the halfwidth space ("` `") is allowed for separating arguments
   * `<unsigned-int-video-index>` must be exactly 2 decimal digits (with `0` prefixed if necessary).
 
+### *Proposal* (Komi): COUNTER / TRIGGER Commands
+
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+***Impact level***: note ★★★★★ (depending on usage) \
+***Scope***: branch \
+***Scope fineness***: sequential \
+***Effect time***: command-time \
+***Non-static effect scope***: specified target counter or trigger \
+***Effect target***: (none) \
+***Effect branches***: current
+
+Specification by Komi: <https://docs.google.com/document/d/1PZXLStZs8RQGbB62jnf7FKxbDEdjuKO482yatI6oXyA/edit?usp=sharing>
+
+Manipulate the value of **counter**s & **trigger**s (collectively called charter-defined variables).
+
+Value types:
+
+* Counter: Such variables have a (direct or cached) value of floating-number type.
+* Trigger: Such variables have a (direct or cached) value of Boolean type.
+
+Persistence:
+
+* Local: Such charter-defined variables do not persist after retrying or exiting the song.
+* Global: Such charter-defined variables may persist until explicitly overwritten.
+
+The accessible set of global or local charter-defined variables is independent for each song and for each player, regardless of difficulty and player-side.
+
+Evaluation method:
+
+* Value: Such charter-defined variables are directly accessed.
+* *Proposal* (IID): Formula: Such charter-defined variables are re-evaluated and have the result cached (see [Store Expression Evaluation](#store-expression-evaluation)), and the cached value is accessed.
+
+*Unspecified*: The behavior when a specified charter-defined variable is defined but has unmatched persistence, value type, or evaluation method to those expected by a command or variable accessing tag.
+
+Local charter-defined variable setters:
+
+* `#STOREC <str-local-value-counter-written>, <string-store-expr-float>`
+* *Proposal* (IID): `#STORECF <str-local-formula-counter-written>, <string-store-expr-float>`
+  * `<str-local-*-counter-written>` is the key of the stored local (value or formula) counter and must not have the form of a [`float`](#value-type).
+* `#STORET <str-local-value-trigger-written>, <string-store-expr-bool>`
+* *Proposal* (IID): `#STORETF <str-local-formula-trigger-written>, <string-store-expr-bool>`
+  * `<str-local-*-trigger-written>` is the key of the stored local (value or formula) trigger and must not be one of `True`, `False`, and any string different from them only by their letter case.
+  * See [Store Expression Syntax](#store-expression-syntax) for the syntax of `<store-expr-*>`
+
+Global charter-defined variable setters:
+
+* `#ELEVATEC <str-global-value-counter-written>, <str-local-value-counter-read>`
+* `#ELEVATECF <str-global-value-counter-written>, <str-local-formula-counter-read>`
+  * `<str-global-value-counter-written>` is the key of the stored global value counter and must not have the form of a [`float`](#value-type).
+* `#ELEVATET <str-global-value-trigger-written>, <str-local-value-trigger-read>`
+* `#ELEVATETF <str-global-value-trigger-written>, <str-local-formula-trigger-read>`
+  * `<str-global-value-trigger-written>` is the key of the stored global value trigger and must not be one of `True`, `False`, and any string different from them only by their letter case.
+
+Recommendation for charters: Global charter-defined variable setters should be used only when necessary and are preferredly used as late (by time position) as possible in the notechart, such as before [`#END`](#start--end) or [(*proposal* (Komi)) the `#SONGJUMP` command](#proposal-komi-songjump).
+
+If the global charter-defined variables are disabled by user option or unimplemented by the simulator, the global charter-defined variable setters have no effects.
+
+For each charter-defined variable setter, if `<str-*-*-*-written>` contains one of the `<>,` characters, the command has no effects.
+
+#### Store Expression Syntax
+
+Examplar evaluator implementation in C#: <https://dotnetfiddle.net/LtjtCQ>
+
+Operations (in descending precedence):
+
+Syntax | Functionality | Precedence Level | Example | Meaning
+--- | --- | --- | --- | ---
+`< <str-tag> : <str-arg0> : <str-arg1> : ... >` | Variable access <br /> (see below) | (preprocess) | &bull; `<jp>` <br /> &bull; `<gc:acc_oni_p1>` | &bull; The current number of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement. <br /> &bull; The value of the global counter with key `acc_oni_p1`.
+`<unsigned-float>` | Unsigned [`float`](#value-type) literal | `primary` | `42` / `.1` / `3.` | `42` / `0.1` / `3.0`
+`( <expr-or> )` | Grouping | `primary` | `(2+2)/2` | → `4 / 2` → `2`
+*Proposal* (IID): <br /> `<expr-funcioncall-func> ( <expr-or-arg0> : <expr-or-arg1> : ... )` | Function call | `funcioncall` | `<math:min>(<lc:acc>:<a>)` | The minimum of the value of local counter with key `acc` and the current accuracy.
+`- <expr-unary>` | Number negation | `unary` | `--42` | → `-(-42)` → `42`
+`! <expr-bool-unary>` | Boolean NOT | `unary` | `!!42` | → `!(!42)` → `!(!1)` (emits warning) → `!0` → `1`
+`<expr-muldiv> * <expr-unary>` | Multiplication | `muldiv` | `2*2*2` | → `(2 * 2) * 2` → `8`
+`<expr-muldiv> / <expr-unary>` | Division | `muldiv` | `9/4/2` | → `(9 / 4) / 2` → `1.125`
+`<expr-muldiv> + <expr-unary>` | Addition | `addsub` | `1+2+3` | → `(1 + 2) + 3` → `6`
+`<expr-muldiv> - <expr-unary>` | Substraction | `addsub` | `1-2-3` | → `(1 - 2) - 3` → `-4`
+`<expr-comparison> > <expr-addsub>` | Greater-than <br /> Results in `0` (false) or `1` (true) | `comparison` | `<foo>><bar>><baz>` | → `(<foo> > <bar>) > <baz>`
+`<expr-comparison> >= <expr-addsub>` | Greater-than-or-equal-to | `comparison` | `4>=3>=2` | → `(4 >= 3) >= 2` → `1 >= 2` → `0`
+`<expr-comparison> <= <expr-addsub>` | Less-than-or-equal-to | `comparison` | `-4<=-3<=-2` | → `(-4 <= -3) <= -2` → `1<=-2` → `0`
+`<expr-comparison> < <expr-addsub>` | Less-than | `comparison` | `<foo><<bar><<baz>` | → `(<foo> < <bar>) < <baz>`
+`<expr-equality> == <expr-comparison>` | Equal-to | `equality` | &bull; `0==0==0` <br /> &bull; `<a>>=.5==<lc:acc>>=.5` | &bull; → `(0 == 0) == 0` → `1 == 0` → `0` <br /> &bull; → `(<a> >= 0.5) == (<lc:acc> >= 0.5)`
+`<expr-equality> != <expr-comparison>` | Not-equal-to | `equality` | &bull; `1!=1!=1` <br /> &bull; `<foo>!=<foo>` | &bull; → `(1 != 1) != 1` → `0 != 1` → `1` &bull; 1 (true) if `<foo>` is NaN, 0 (false) otherwise
+`<expr-bool-and> & <expr-bool-equality>` | Boolean AND | `and` | `0&1&2` | → `(0 & 1) & 2` → `0 & 2` → `0 & 1` (emits warning) → `0`
+`<expr-bool-xor> ^ <expr-bool-and>` | Boolean XOR | `xor` | `1^0&1^1` | → `1 ^ (0 & 1) ^ 1` → `1 ^ 0 ^ 1` → `(1 ^ 0) ^ 1` → `1 ^ 1` → `0`
+<code>&lt;expr-bool-or> &vert; &lt;expr-bool-xor></code> | Boolean OR | `or` | <code>0&1&vert;1&0^1&vert;1^1</code> | → <code>(0 & 1) &vert; ((1 & 0) ^ 1) &vert; (1 ^ 1)</code> → <code>0 &vert; 1 &vert; 0</code> → <code>(0 &vert; 1) &vert; 0</code> → <code>1 &vert; 0</code> → `1`
+
+For Boolean operators, if the resulting value of `<expr-bool-*>` is equal to neither 0 (false) or 1 (true), it is converted to 1 (true) (*i.e.*, `<expr-bool-*> != 0`) and a warning is emitted.
+
+The result of `comparison` and `equality` operators is 0 (false) or 1 (true).
+
+#### Store Expression Variable Access
+
+The variable access operation `< <str-tag> : <str-arg0> : <str-arg1> : ... >` is replaced with the [`float`](#value-type) literal of the resolved value before the whole expression is parsed.
+
+If the lookup fails, a warning is emitted and the result is `0`.
+
+*Proposal* (IID): If any of the following are violated, the opening `<` is instead parsed as (part of) a comparison operator:
+
+* If `<str-tag>` starts with `=`, it should be separated from the opening `<` by at least one whitespace, otherwise the operator `<=` is formed.
+* `<str-tag>` should not start with any of `.()!-` or a digit, *i.e.*, the non-whitespace characters possible after the operator `<`, and their paired character (if exists).
+* `<str-tag>` & `<str-arg*>` should not contain any `<` &mdash; Nested variable accesses are not allowed.
+* At least one `>` should present after the opening `<`. If present, the first occuring `>` character is parsed as the closing `>`.
+
+Pre-defined variable tags:
+
+The list of (*Proposal* (IID)) pre-defined constants and functions are separately listed below.
+
+Excessive arguments are ignored. Lacking arguments cause the lookup to fail and cause the result to be `0`.
+
+Tag | Arguments | Value
+--- | --- | ---
+`cl` | (none) | The [**`LEVEL:`**](#level) value of the **c**urrent player-side.
+`cd` | (none) | The [`COURSE:`](#course) ("**d**ifficulty") value (integer form) of the **c**urrent player-side.
+`pc` | (none) | Amount ("**c**ount") of **p**layer-sides in this gameplay.
+`ss` | (none) | Current value of **s**ong **s**peed multiplier modifier.
+`sc` | (none) | **C**urrent value of **s**crolling rate multiplier modifier.
+`jp` | (none) | Current amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements.
+`jg` | (none) | Current amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements.
+`jb` | (none) | Current amount of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* **B**AD **j**udgements on missable **n**otes. <br /> &bull; `t` &mdash; Also counts combo-break penalties.
+`jbt` | (none) | Current amount of combo-break **j**udgements, including ("**t**otal") *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* **B**AD (both for notes and for empty hits) and **B**OOM.
+*Proposal* (IID): <br /> `JP` | &bull; (none) <br /> &bull; `d` | Current amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements on **big** notes (not including note symbol `G`). <br /> &bull; `d` &mdash; Only counts *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" judgements.
+*Proposal* (IID): <br /> `JG` | &bull; (none) <br /> &bull; `d` | Current amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements on **big** notes (not including note symbol `G`). <br /> &bull; `d` &mdash; Only counts *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" judgements.
+*Proposal* (IID): <br /> `JB` | (none) <br /> `d` | Current amount of *<ruby>不<rt>Fu</rt> 可<rt>ka</rt></ruby>* **B**AD **j**udgements on **big** notes.
+`ja` | (none) | Current amount of caught _**A**d libitum_ (**A**D-LIB) notes.
+`jm` | (none) | Current amount of caught BOOM ("**m**ine caught") **j**udgements.
+*Proposal* (IID): <br /> `jmb` | (none) | Current amount of caught **b**omb/**m**ine.
+*Proposal* (IID): <br /> `jrb` | (none) | Current amount of popped **b**alloon-type drum**r**oll-**t**ype notes.
+*Proposal* (IID): <br /> `JRB` | &bull; (none) <br /> &bull; `d` | Current amount of popped special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`). <br /> &bull; `d` &mdash; Only counts pops with full bonus.
+`a` <br /> `p` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | Current percentage (%) of *<ruby>精<rt>sei</rt> 度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/**a**ccuracy of all missable notes, based on (*Proposal* (IID)) (for `j`) amount of actual **j**udgements or (for `t`) amount of notes whose critical judgement **t**iming has been reached before now.
+`tn` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | **T**otal amount of encountered missable **n**otes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now.
+`TN` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | **T**otal amount of encountered missable **big** **n**otes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now.
+`ta` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | **T**otal amount of encountered _**A**d libitum_ (**A**D-LIB) notes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now.
+`tm` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | **T**otal amount of encountered notes which can give a BOOM ("**m**ine caught") judgement (*Proposal* (IID)) (for `j`) **j**udged (hit, popped, or failed to pop) or (for `t`) whose critical judgement **t**iming or beginning or ending **t**iming has been reached before now.
+*Proposal* (IID): <br /> `tmb` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | **T**otal amount of encountered **b**omb/**m**ine notes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now.
+*Proposal* (IID): <br /> `trb` | &bull; (none) or `j` <br /> &bull; `t` | **T**otal amount of encountered **b**alloon-type drum**r**oll-**t**ype notes (for `j`) popped or failed to pop or (for `t`) whose beginning or ending **t**iming has been reached before now.
+*Proposal* (IID): <br /> `TRB` | &bull; (none) or `j` <br /> &bull; `t` | **T**otal amount of encountered special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`) (for `j`) popped or failed to pop or (for `t`) whose beginning or ending **t**iming has been reached before now.
+*Proposal* (IID): `rt` | (none) | Current amount of hits on all (**t**otal) drum**r**oll-**t**ype notes.
+*Proposal* (IID): `RT` | &bull; (none) <br /> &bull; `d` | Current amount of hits on all (**t**otal) **big** (including special balloons (note symbol `9`)) drum**r**oll-**t**ype notes. <br /> &bull; `d` &mdash; Only counts _strong/"**d**ouble-hit"_ hits on big bar drumrolls.
+*Proposal* (IID): `rb` | (none) | Current amount of hits on **b**alloon-type drum**r**oll-**t**ype notes.
+*Proposal* (IID): `RB` | (none) | Current amount of hits on special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
+*Proposal* (IID): `s` | (none) | Current **s**core.
+`cc` | (none) | **C**urrent **c**ombo earned.
+`g` | (none) | Percentage (%) of *<ruby>魂<rt>tamashii</rt> **ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge. <br /> *Proposal* (IID): For [`LIFE:`](#life) life count, the initial life count is defined as 100%.
+*Proposal* (IID): <br /> `cs` | (none) | `0` for failed, `1` for assisted passed, `2` for non-assisted passed, `3` for passed and full combo (`<jb:t> == 0`), `4` for passed and perfect (`<jg> + <jb:t> == 0`).
+`mc` <br /> `c` | (none) | **M**aximum/longest **c**ombo ever earned.
+`cb` | (none) | **C**urrent displayed target **b**ranch (0 for Normal, 1 for Expert, 2 for Master)
+`cg` | (none) | **C**urrent **g**ame mode (-1 for [Jube](#note-symbols-in-jube-mode) (reserved, non-standard), 0 for [Taiko](#note-symbols-in-taiko-mode), 1 For [Konga (Bongo)](#note-symbols-in-konga-mode))
+`lc` | `<str-local-value-counter-read>` | Current value of **l**ocal value **c**ounter (`0` if undefined)
+`lt` | `<str-local-value-trigger-read>` | Current value of **l**ocal value **t**rigger (false if undefined) (`0` for false, `1` for true)
+*Proposal* (IID): <br /> `lcf` | `<str-local-formula-counter-read>` | Current cached value of **l**ocal **c**ounter **f**ormula (`0` if undefined)
+*Proposal* (IID): <br /> `ltf` | `<str-local-formula-trigger-read>` | Current cached value of **l**ocal **t**rigger **f**ormula (false if undefined) (`0` for false, `1` for true)
+`gc` | `<str-global-value-counter-read>` | Current value of **g**lobal value **c**ounter (`0` if undefined)
+`gt` | `<str-global-value-trigger-read>` | Current value of **g**lobal value **t**rigger (false if undefined) (`0` for false, `1` for true)
+*Proposal* (IID): <br /> `func` | `<str-function-name>` | Utility functions
+*Proposal* (IID): <br /> `math` | `<str-constant-or-function-name>` | Mathematical constants and functions
+
+*Proposal* (IID): Pre-defined constants:
+
+Variable | Value
+--- | ---
+`<math:e>` | Base of natural logarithm; *e* ≈ 2.718
+`<math:nan>` | An *unspecified* fixed NaN value
+`<math:inf>` | Positive infinity; +∞
+
+*Proposal* (IID): Pre-defined functions:
+
+A pre-defined function is a pre-defined variable but with a fixed *unspecified* value. Each distinct function is represented by a certain floating-number value.
+
+Recommendation for charters: The function to call should never be specified directly with a [`float`](#value-type) literal. The value of the pre-defined functions should be considered varying each time the store expression is evaluated.
+
+Excessive argument are ignored without warnings. Lacking arguments default to `0` and cause a warning to be emitted.
+
+If a `<bool-*>` argument evaluates to neither 0 (false) or 1 (true), it is converted to 1 (true) (*i.e.*, `<bool-*> != 0`) and a warning is emitted.
+
+Variable | Arguments | Function
+--- | --- | ---
+`<func:index>` | `<bool-cond0>` : `<bool-cond1>` : ... | Returns the index (counted from 0) of the first condition evaluating to 1 (true) (if exist) or returns `-1`; the least `n` such that `<bool-condn>` = 1, or `-1` if all `<bool-condn>` = 0
+`<func:select>` | `<i>` : `<opt0>` : `<opt1>` : ... | Returns the *i*th option (counted from 0) (if exist) or returns `0`; `<optn>` with `n` = ⌊*i*⌋ if 0 ≤ ⌊*i*⌋ \< *Amount of `<opt*>`*, `0` otherwise
+`<func:cond>` | `<bool-cond0>` : `<opt0>` : `<bool-cond1>` : `<opt1>` : ... | Returns the first option with the condition evaluating to 1 (true) (if any) or returns `0`; `<optn>` with the least `n` such that `<bool-condn>` = 1, or `0` if all `<bool-condn>` = 0
+`<math:rand>` | `<min>` : `<max>` | Random integer between `<min>` & `<max>` with uniform distribution.
+`<math:abs>` | `<x>` | Absolute value; &vert;*x*&vert;, `<x>` for NaN
+`<math:sign>` | `<x>` | Sign; `-1` for negative, `0` for zero, `1` for positive, `<x>` for NaN
+`<math:min>` | `<x>` : `<y>` | The minimum of `<x>` and `<y>`.
+`<math:max>` | `<x>` : `<y>` | The maximum of `<x>` and `<y>`.
+`<math:exp>` | `<p>` | Exponentiation with the base of natural logarithm; *e*<sup>*p*</sup>
+`<math:pow>` | `<b>` : `<p>` | Exponentiation with given base; *b*<sup>*p*</sup>
+`<math:log>` | `<x>` | Natural logarithm; **log**<sub>*e*</sub>(*x*), NaN for negative
+`<math:log10>` | `<x>` | Common logarithm (with base 10); **log**<sub>10</sub>(*x*), NaN for negative
+`<math:sqrt>` | `<x>` | Square root; √(*x*), NaN for negative
+`<math:cbrt>` | `<x>` | Cubic root; ∛(*x*)
+`<math:ceil>` | `<x>` | Ceiling; ⌈*x*⌉; the least integer ≥ *x*
+`<math:round>` | `<x>` | Rounding; **sign**(*x*) × ⌈**abs**(*x*) − 0.5⌉; the nearest integer with magnitute ≥ that of *x*
+`<math:trunc>` | `<x>` | Truncate; **trunc**(*x*); **sign**(*x*) × ⌊**abs**(*x*)⌋; the nearest integer with magnitute ≤ that of *x*
+`<math:floor>` | `<x>` | Floor; ⌊*x*⌋; the greatest integer ≤ *x*
+`<math:fmod>` | `<x>` : `<y>` | Floating-number remainder; *x* − **trunc**(*x* / *y*) × *y*
+
+#### Store Expression Evaluation
+
+Reading point: The value of a charter-defined variable is read when:
+
+* For a charter-defined setter command, (*proposal* (IID)) when its command time is reached.
+* For [the `#BRANCHSTART` command with local charter-defined variable condition](#branchstart--branchend), when its branch-determining point (at the previous measure) is reached.
+* For the [(*proposal* (Komi)) `#NOTEIF`, (*proposal* (IID)) `#NOTEIFF`](#proposal-komi-noteif-commands), [(*proposal* (Komi)) `#COMMANDIF`, and (*proposal* (IID)) `#COMMANDIFF` commands](#proposal-komi-commandif-commands), whenever the (direct or cached) value of the accessed variable is changed or invalidated.
+
+Writing point of values: The value of a charter-defined value variable is written only when:
+
+* For a charter-defined setter command, (*proposal* (IID)) when its command time is reached.
+* For an enabled and effective [`#GIANTNOTE` command](#proposal-komi-giantnote), when the note is judged.
+
+*Proposal* (IID): Writing point of formulae: The cached value of a charter-defined formula variable is invalidated when:
+
+* For a charter-defined setter command, (*proposal* (IID)) when its command time is reached, after the store expression is written. The cached value is untouched (if already defined) or set to 0 or false otherwise.
+* When the charter-defined formula variable is being read and the (direct or cached) value any of the variables accessed in the store expression and further variables accessed by the accessed charter-defined formula variables and on recursively (including `<t*:t>` as mentioned below) are changed or invalidated. The store expression will be re-evaluated and have the cached value updates to the result value.
+
+When a store expression of a charter-defined formula variable is (re-)evaluated, the cached value of all accessed charter-defined formula variables is always used regardless whether the cached value is invalidated.
+
+*Proposal* (IID): Evaluation stages in each game update frame:
+
+1. Update pre-defined variables: The gameplay state variables except `<t*:t>` (**t**otal amount of encountered certain notes whose critical judgement **t**iming has been reached before now) are updated. \
+  [`#GIANTNOTE` commands](#proposal-komi-giantnote) have the triggers updated in this stage.
+2. Update charter-defined variables: After stage 1, the to-be-executed reading or writing of charter-defined variables have their reading and writing executed in their definition order (for [the `#BRANCHSTART` command](#branchstart--branchend), assumed to be right before the first note symbol (if any) at the previous measure). \
+  For each reading or writing which requires evaluating any store expressions (including re-evaluating charter-defined formula variables), the `<t*:t>` variables are increased to include uncounted notes whose both definition position and time position is before the reading or writing point, and then the store expressions (if any) are evaluated.
+3. Update conditional command states: Commands which have read the charter-defined values in stage 2 have their states updated immediately.
+4. (For order reference) After stage 2 and 3, the to-be-executed [`#SECTION` commands](#section) are executed.
+
+Evaluation Behavior Examples:
+
+Notation | Meaning
+--- | ---
+`x<lcf:foo>` | `<lcf:foo>` has been invalidated
+`<lcf:foo>'` | `<lcf:foo>` has been re-evaluated and has updated cached value
+`<lcf:foo>x` | `<lcf:foo>` will be invalidated
+
+Self-reference example:
+
+```txt
+#STORECF foo, <lcf:foo> + 1
+#STORETF odd, <math:fmod>(<lcf:foo> : 2) != 0
+0 // ...
+// ...
+#NOTEIFF odd, True
+1,
+  ```
+
+Value updating anology in the C programing language:
+
+```c
+double foo = 0;
+bool odd = false;
+
+void update(void)
+{
+    foo = foo + 1;
+    odd = fmod(foo, 2) != 0;
+}
+```
+
+<details><summary>Evaluation by frame</summary>
+
+* Frame 0 (counted from the note symbol `0`):
+  * `#STORECF` &mdash; `<lcf:foo>x`, `#STORETF` &mdash; `<ltf:odd>x`
+  * `#NOTEIFF` &mdash;
+    * `x<lcf:foo>'x` = \[`x<lcf:foo>` → 0] + 1 → 1 \[`<ltf:odd>x`]
+    * `x<ltf:odd>'x` = `<math:fmod>`(\[`x<lcf:foo>'` → 1] : 2) != 0 → 1 != 0 → 1 (true) → enabled
+* Frame 1: `#NOTEIFF` &mdash;
+  * `x<lcf:foo>'x` = \[`x<lcf:foo>` → 1] + 1 → 2 \[`<ltf:odd>x`]
+  * `x<ltf:odd>'x` = `<math:fmod>`(\[`x<lcf:foo>'` → 2] : 2) != 0 → 0 != 0 → 0 (false) → disabled
+* Frame 2: `#NOTEIFF` &mdash;
+  * `x<lcf:foo>'x` = \[`x<lcf:foo>` → 2] + 1 → 3 \[`<ltf:odd>x`]
+  * `x<ltf:odd>'x` = `<math:fmod>`(\[`x<lcf:foo>'` → 3] : 2) != 0 → 1 != 0 → 1 (true) → enabled
+* ...
+</details>
+
+<p></p>
+
+`<lcf:foo>` becomes a frame counter. The note symbol `1` will only visible and hittable every odd frame.
+
+Notice that if `#NOTEIFF odd, True` appeared twice in the notechart, `<lcf:foo>` increases by 2 instead.
+
+Circula self-reference example:
+
+```txt
+#STORECF foo, <lcf:bar>
+#STORECF bar, <lcf:baz>
+#STORECF baz, (<lcf:bar> == 0) + <lcf:foo> + <lcf:bar>
+#STORETF odd, <math:fmod>(<lcf:bar> : 2) != 0
+0 // ...
+// ...
+#NOTEIFF odd, True
+1,
+```
+
+Value updating anology in the C programing language:
+
+```c
+double foo = 0, bar = 0, baz = 0;
+bool odd = false;
+
+void update(void)
+{
+    foo = bar;
+    bar = baz;
+    baz = (bar == 0) + foo + bar;
+    odd = fmod(bar, 2) != 0;
+}
+```
+
+<details><summary>Evaluation by frame</summary>
+
+* Frame 0 (counted from the note symbol `0`):
+  * `#STORECF` &mdash; `<lcf:foo>x`, `<lcf:bar>x`, `<lcf:baz>x`; `#STORETF` &mdash; `<ltf:odd>x`
+  * `#NOTEIFF` &mdash;
+    * `x<lcf:foo>'` = \[`x<lcf:bar>` → 0] → 0
+    * `x<lcf:bar>'` = \[`x<lcf:baz>` → 0] → 0
+    * `x<lcf:baz>'x` = (\[`x<lcf:bar>'` → 0] == 0) + `x<lcf:bar>'` + \[`x<lcf:foo>'` → 0] → 1 \[`<lcf:foo>'`, `<lcf:bar>`, `<ltf:odd>x`]
+    * `x<ltf:odd>'` → `<math:fmod>`(\[`x<lcf:bar>'` → 0] : 2) != 0 → 0 (false) → disabled
+* Frame 1: `#NOTEIFF` &mdash;
+  * `x<lcf:foo>'` = \[`x<lcf:bar>` → 0] → 0
+  * `x<lcf:bar>'x` = \[`x<lcf:baz>` → 1] → 1 \[`<lcf:foo>x`, `<lcf:baz>x`, `<ltf:odd>x`]
+  * `x<lcf:baz>'` = (\[`x<lcf:bar>'` → 1] == 0) + `x<lcf:bar>'` + \[`x<lcf:foo>'` → 0] → 1
+  * `x<ltf:odd>'` → `<math:fmod>`(\[`x<lcf:bar>'` → 1] : 2) != 0 → 1 (true) → enabled
+* Frame 2: `#NOTEIFF` &mdash;
+  * `x<lcf:foo>'x` = \[`x<lcf:bar>` → 1] → 1 \[`<lcf:bar>x`, `<lcf:baz>x`, `<ltf:odd>x`]
+  * `x<lcf:bar>'` = \[`x<lcf:baz>` → 1] → 1
+  * `x<lcf:baz>'x` = (\[`x<lcf:bar>'` → 1] == 0) + `x<lcf:bar>'` + \[`x<lcf:foo>'` → 1] → 2 \[`<lcf:foo>x`, `<lcf:bar>`, `<ltf:odd>'`]
+  * `x<ltf:odd>'` → `<math:fmod>`(\[`x<lcf:bar>'` → 1] : 2) != 0 → 1 (true) → enabled
+* Frame 3: `#NOTEIFF` &mdash;
+  * `x<lcf:foo>'` = \[`x<lcf:bar>` → 1] → 1
+  * `x<lcf:bar>'x` = \[`x<lcf:baz>` → 2] → 2 \[`<lcf:foo>x`, `<lcf:baz>x`, `<ltf:odd>x`]
+  * `x<lcf:baz>'x` = (\[`x<lcf:bar>'` → 2] == 0) + `x<lcf:bar>'` + \[`x<lcf:foo>'` → 1] → 3 \[`<lcf:foo>x`, `<lcf:bar>`, `<ltf:odd>x`]
+  * `x<ltf:odd>'` → `<math:fmod>`(\[`x<lcf:bar>'` → 2] : 2) != 0 → 0 (false) → disabled
+* Frame 4: `#NOTEIFF` &mdash;
+  * `x<lcf:foo>'` = \[`x<lcf:bar>` → 2] → 2 \[`<lcf:bar>x`, `<lcf:baz>x`, `<ltf:odd>x`]
+  * `x<lcf:bar>'x` = \[`x<lcf:baz>` → 3] → 3 \[`<lcf:foo>x`, `<lcf:baz>x`, `<ltf:odd>x`]
+  * `x<lcf:baz>'x` = (\[`x<lcf:bar>'` → 3] == 0) + `x<lcf:bar>'` + \[`x<lcf:foo>'` → 2] → 5 \[`<lcf:foo>x`, `<lcf:bar>`, `<ltf:odd>x`]
+  * `x<ltf:odd>'` → `<math:fmod>`(\[`x<lcf:bar>'` → 3] : 2) != 1 → 1 (true) → enabled
+* Frame 5: `#NOTEIFF` &mdash;
+  * `x<lcf:foo>'` = \[`x<lcf:bar>` → 3] → 3 \[`<lcf:bar>x`, `<lcf:baz>x`, `<ltf:odd>x`]
+  * `x<lcf:bar>'x` = \[`x<lcf:baz>` → 5] → 5 \[`<lcf:foo>x`, `<lcf:baz>x`, `<ltf:odd>x`]
+  * `x<lcf:baz>'x` = (\[`x<lcf:bar>'` → 5] == 0) + `x<lcf:bar>'` + \[`x<lcf:foo>'` → 3] → 8 \[`<lcf:foo>x`, `<lcf:bar>`, `<ltf:odd>x`]
+  * `x<ltf:odd>'` → `<math:fmod>`(\[`x<lcf:bar>'` → 5] : 2) != 1 → 1 (true) → enabled
+* Frame 6: `#NOTEIFF` &mdash;
+  * `x<lcf:foo>'` = \[`x<lcf:bar>` → 5] → 5 \[`<lcf:bar>x`, `<lcf:baz>x`, `<ltf:odd>x`]
+  * `x<lcf:bar>'x` = \[`x<lcf:baz>` → 8] → 8 \[`<lcf:foo>x`, `<lcf:baz>x`, `<ltf:odd>x`]
+  * `x<lcf:baz>'x` = (\[`x<lcf:bar>'` → 8] == 0) + `x<lcf:bar>'` + \[`x<lcf:foo>'` → 5] → 13 \[`<lcf:foo>x`, `<lcf:bar>`, `<ltf:odd>x`]
+  * `x<ltf:odd>'` → `<math:fmod>`(\[`x<lcf:bar>'` → 8] : 2) != 0 → 0 (false) → disabled
+* ...
+</details>
+
+<p></p>
+
+`<lcf:bar>` becomes the *n*th element of the Fibonacci sequence at the *n*th frame since the note symbol `0`. The note symbol `1` will be visible and hittable except every 3 × *n* frame.
+
 ### *Proposal* (IID): #LUAMOD
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
@@ -3487,7 +3966,7 @@ Inspired by StepMania.
 ***Impact level***: gimmicky ★★・・・ (intended; depending on usage) \
 ***Scope***: branch \
 ***Scope fineness***: sequential \
-***Effect time***: command-time + (optional) object-time <sub>note-path effects</sub> \
+***Effect time***: command-time + (optional) command-time&ndash;enabled object-time <sub>note-path effects</sub> \
 ***Non-static effect scope***: (Depending on usage) \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s) (intended; depending on usage) \
 ***Effect branches***: current
@@ -3510,7 +3989,7 @@ Inspired by StepMania.
 ***Impact level***: gimmicky ★★・・・ \
 ***Scope***: (Part of a command) \
 ***Scope fineness***: (Part of a command) \
-***Effect time***: command-time + (optional) object-time <sub>note-path effects</sub> \
+***Effect time***: command-time + (optional) command-time&ndash;enabled object-time <sub>note-path effects</sub> \
 ***Non-static effect scope***: (As specified) \
 ***Effect target***: notes, bar lines, note field(s) \
 ***Effect branches***: (Part of a command)
