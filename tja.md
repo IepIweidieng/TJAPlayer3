@@ -186,7 +186,7 @@ For multiple values separated by comma (`,`), except for `text`-valued fields, o
   * `<unsigned-number-imaginary-specifier>` can be one of:
     * `i` &mdash; the imaginary component has the absolute value of 1.
     * `<unsigned-number-imaginary>i` &mdash; the imaginary component has the absolute value of `<unsigned-float-imaginary>`.
-    * *Unspecified*: whether `j` can be used in place of `i`. 
+    * *Unspecified*: whether `j` can be used in place of `i`.
   * ***Compatibility issues***:
     * In TaikoJiro 2, `+<unsigned-number-real>-<unsigned-number-imaginary>i` (?) where `<unsigned-number-imaginary>` is equivalent to 0 is not fully supported.
     * In TJAP2fPC but not OpenTaiko (0auBSQ) v0.6.0, only the forms `<number-real>` & `<number-real><sign-imaginary><unsigned-number-imaginary>i` are supported; omitting any number parts is not supported.
@@ -426,6 +426,7 @@ Specify whether the corresponding song entry is displayed, regarding the *<ruby>
 This allows the chart creators to specify the inner chart of every difficulty together or with different audio as a separate song entry, as in official AC11&ndash;AC14.
 
 For specifying the inner chart of solely the Oni difficulty with the same audio as in official AC15 and later official games (except only *<ruby>ハ<rt>Ha</rt> レ<rt>re</rt> 晴<rt>Ha</rt> レ<rt>re</rt> ユ<rt>Yu</rt> カ<rt>ka</rt> イ<rt>i</rt></ruby>* inner Hard in AC15), [`COURSE:Edit`](#course) is commonly used instead.
+
 * Reference: <https://wikiwiki.jp/taiko-fumen/%E5%8F%8E%E9%8C%B2%E6%9B%B2/%E3%82%80%E3%81%9A%E3%81%8B%E3%81%97%E3%81%84/%E3%83%8F%E3%83%AC%E6%99%B4%E3%83%AC%E3%83%A6%E3%82%AB%E3%82%A4#another>
 
 *<ruby>別<rt>betsu</rt> 譜<rt>fu</rt> 面<rt>men</rt></ruby>* "another notechart(s)" was a tentative name used during the development of AC11. The now-official name *<ruby>裏<rt>ura</rt> 譜<rt>fu</rt> 面<rt>men</rt></ruby>* "inner notechart" originated from *pop'n music* 11 (2004), developed by Konami.
@@ -3537,7 +3538,6 @@ Set the **color** of the displayed region outside the **border** of the gameplay
 ***Effect target***: gameplay screen \
 ***Effect branches***: *Unspecified*
 
-
 Respectively **change** / restore ("**reset**") the texture used in the current skin.
 
 Reset by each other.
@@ -3558,7 +3558,6 @@ Reset by each other.
 ***Effect target***: gameplay screen \
 ***Effect branches***: *Unspecified*
 
-
 Override ("**set**") the **config** value read from the `SkinConfig.ini` of the currently used skin.
 
 *Unspecified*: The exact list of valid configs, allowed values, and the behaviors.
@@ -3576,7 +3575,6 @@ Override ("**set**") the **config** value read from the `SkinConfig.ini` of the 
 ***Non-static effect scope***: all \
 ***Effect target***: gameplay screen \
 ***Effect branches***: *Unspecified*
-
 
 Start ("**on**")/stop ("**off**") playing the specified **b**ack**g**round video ("**a**nimation") defined by [the `BGA:` header](#bga) on the gameplay screen.
 
@@ -3866,6 +3864,7 @@ void update(void)
   * `x<lcf:foo>'x` = \[`x<lcf:foo>` → 2] + 1 → 3 \[`<ltf:odd>x`]
   * `x<ltf:odd>'x` = `<math:fmod>`(\[`x<lcf:foo>'` → 3] : 2) != 0 → 1 != 0 → 1 (true) → enabled
 * ...
+
 </details>
 
 <p></p>
@@ -3874,7 +3873,7 @@ void update(void)
 
 Notice that if `#NOTEIFF odd, True` appeared twice in the notechart, `<lcf:foo>` increases by 2 instead.
 
-Circula self-reference example:
+Circular self-reference example:
 
 ```txt
 #STORECF foo, <lcf:bar>
@@ -3942,6 +3941,7 @@ void update(void)
   * `x<lcf:baz>'x` = (\[`x<lcf:bar>'` → 8] == 0) + `x<lcf:bar>'` + \[`x<lcf:foo>'` → 5] → 13 \[`<lcf:foo>x`, `<lcf:bar>`, `<ltf:odd>x`]
   * `x<ltf:odd>'` → `<math:fmod>`(\[`x<lcf:bar>'` → 8] : 2) != 0 → 0 (false) → disabled
 * ...
+
 </details>
 
 <p></p>
@@ -4392,18 +4392,18 @@ Bottom-right | Any face (X/Y/B/A) button
 `1` | Bottom single note | Red circle on the bottom lane | Press a bottom button within the GOOD‡ timing window, consumes a bottom input. <br /> Awards FRESH or GOOD‡ judgment according to the timing. | Press a top button within the GOOD‡ judgment window (consumes a top input), press too off but within the MISS judgment window (?) (consumes an input), or not press within the MISS judgment window (consumes no inputs). <br /> Gives a MISS judgment & combo break. |
 `2` | Top single note | Green or blue circle on the top lane | Press a top button within the GOOD‡ timing window, consumes a top input. <br /> Awards the same as `1`. | Press a bottom button within the GOOD‡ judgment window (consumes a bottom input), press too off but within the MISS judgment window (consumes an input), or not press within the MISS judgment window (consumes no inputs). <br /> Gives the same penalty as `1`. |
 `3` | Bottom double note | Red square on the bottom lane | Press bottom-left or bottom-right within the GOOD‡ timing window **&** the other bottom-left or bottom-right within a certain time duration (consumes a bottom-left and a bottom-right input in total) <br /> Awards the same as `1` according to the timing of the first input. | Press top within the GOOD‡ judgment window (consumes a top input), press too off but within the MISS judgment window (consumes the first input), not press within the MISS judgment window (consumes no inputs), the second input is not given in a certain time duration after the first input (consumes only the first input), or the second input is top or repeated-side bottom (consumes 2 inputs in total). <br /> Gives the same penalty as `1`. |
-`A` | (same as `3`) | (see `3`) | (see `3`) | (see `3`) | By analogy with `GAME:Taiko`. |
+`A` | (same as `3`) | (see `3`) | (see `3`) | (see `3`) | By analogy with `GAME:Taiko`.
 `4` | Top double note | Green or blue square on the top lane | Press top-left or top-right within the GOOD‡ timing window **&** the other top-left or top-right within a certain time duration (consumes a top-left and a top-right input in total). <br /> Awards the same as `1` according to the timing of the first input. | Press bottom within the GOOD‡ judgment window (consumes a botton input), press too off but within MISS judgment window (consumes the first input), not press within the MISS judgment window (consumes no inputs), the second input is not given in a certain time duration after the first input (consumes only the first input), or the second input is bottom or repeated-side top (consumes 2 inputs in total). <br /> Gives the same penalty as `1`. |
-`B` | (same as `4`) | (see `4`) | (see `4`) | (see `4`) | By analogy with `GAME:Taiko`. |
+`B` | (same as `4`) | (see `4`) | (see `4`) | (see `4`) | By analogy with `GAME:Taiko`.
 `E` | Top-single bottom-single note | Green or blue circle on the top lane and red circle on the bottom lane, joined by grey background | Press bottom or top within the GOOD‡ timing window **&** the other bottom or top within a certain time duration (consumes a bottom and a top input in total). <br /> Awards the same as `1` according to the timing of the first input. | Press too off but within MISS judgment window (consumes the first input), not press within the MISS judgment window (consumes no inputs), the second input is not given in a certain time duration after the first input (consumes only the first input), or the second input is repeated bottom or top (consumes 2 bottom or 2 top inputs in total). <br /> Gives the same penalty as `1`. |
-? | Top-single bottom-double note | Green or blue circle on the top lane and red square on the bottom lane, joined by grey background | Press bottom-left/right or top within the GOOD‡ timing window **&** all the other bottom-left/right or top, all within a certain time duration (consumes a bottom-left, a bottom-right, and a top input in total). <br /> Awards the same as `1` according to the timing of the first input. | Press too off but within MISS judgment window (consumes the first input), not press within the MISS judgment window (consumes no inputs), the *n*th input is not given in a certain time duration after the first input (consumes up to the *n*−1-st input), or the *n*th input is repeated-side bottom or repeated top (consumes up to the *n*th input). <br /> Gives the same penalty as `1`. |No note symbols have been assigned. |
+? | Top-single bottom-double note | Green or blue circle on the top lane and red square on the bottom lane, joined by grey background | Press bottom-left/right or top within the GOOD‡ timing window **&** all the other bottom-left/right or top, all within a certain time duration (consumes a bottom-left, a bottom-right, and a top input in total). <br /> Awards the same as `1` according to the timing of the first input. | Press too off but within MISS judgment window (consumes the first input), not press within the MISS judgment window (consumes no inputs), the *n*th input is not given in a certain time duration after the first input (consumes up to the *n*−1-st input), or the *n*th input is repeated-side bottom or repeated top (consumes up to the *n*th input). <br /> Gives the same penalty as `1`. | No note symbols have been assigned.
 ? | Top-double bottom-single note | Green or blue square on the top lane and red circle on the bottom lane, joined by grey background | Press bottom or top-left/right within the GOOD‡ timing window **&** all the other bottom or top-left/right, all within a certain time duration (consumes a bottom, a top-left, and a top-right input in total). <br /> Awards the same as `1` according to the timing of the first input. | Press too off but within MISS judgment window (consumes the first input), not press within the MISS judgment window (consumes no inputs), the *n*th input is not given in a certain time duration after the first input (consumes up to the *n*−1-st input), or the *n*th input is repeated bottom or repeated-side top (consumes up to the *n*th input). <br /> Gives the same penalty as `1`. | No note symbols have been assigned.
 `G` | Top-double bottom-double note | Green or blue square on the top lane and red square on the bottom lane, joined by grey background | Press bottom-left/right or top-left/right within the GOOD‡ timing window **&** all other bottom-left/right or top-left/right, all within a certain time duration (consumes a bottom-left, a bottom-right, a top-left, and a top-right input in total). <br /> Awards the same as `1` according to the timing of the first input. | Press too off but within MISS judgment window (consumes the first input), not press within the MISS judgment window (consumes no inputs), the *n*th input is not given in a certain time duration after the first input (consumes up to the *n*−1-st input), or the *n*th input is repeated-side buttom or repeated-side top (consumes up to the *n*th input). <br /> Gives the same penalty as `1`. |
 `C` | Bomb/mine | (Small dark-blue cherry bomb with ignited fuze 💣) | All presses are too off or not press (both consumes no inputs). <br /> Awards a "bomb/mine-pass" judgment. | Press any button within the GOOD‡ (?) timing window, consumes an input. <br /> Gives a BOOM ("bomb/mine-miss") judgment & a combo-break and decreases healty gauge. | Not in the official games. <br /> By analogy with Taiko mode.
 `F` | *Ad libitum* note (AD-LIB) | (invisible by default) | Press any button within the GOOD‡ timing window, consumes an input. <br /> Awards an AD-LIB judgment. | Not press within the GOOD‡ timing window (consumes no inputs). <br /> Gives no penalties. | Not in the official games. <br> By analogy with Taiko mode.
-`5` | Head of bottom bar drumroll <br /> Examples: `5008`, `5558`, `5001` | Red circle with bar attached behind on the bottom lane | Similar to `6` but only consumes (?) and reacts to bottom inputs. <br /> Awards the same as `6`. | (impossible to fail) | By analogy with `GAME:Konga`. |
-`I` | Head of top bar drumroll <br /> Examples: `I008`, `III8`, `I001` | Green or blue circle with bar attached behind on the top lane | Similar to `6` but only consumes (?) and reacts to top inputs. <br /> Awards the same as `6`. | (impossible to fail) | By analogy with `GAME:Konga`. |
-`6` | Head of both bar drumroll <br /> Examples: `6008`, `6668`, `6001` | Red circle on the bottom lane and green circle on the top lane, each with bar attached behind on the respective lane, joined by grey background | Rapidly press any buttons during its duration, consumes each press with unlimited speed, reacts to each press up to 1 press per 60fps frame. | (impossible to fail) | By analogy with `GAME:Konga`. |
+`5` | Head of bottom bar drumroll <br /> Examples: `5008`, `5558`, `5001` | Red circle with bar attached behind on the bottom lane | Similar to `6` but only consumes (?) and reacts to bottom inputs. <br /> Awards the same as `6`. | (impossible to fail) | By analogy with `GAME:Konga`.
+`I` | Head of top bar drumroll <br /> Examples: `I008`, `III8`, `I001` | Green or blue circle with bar attached behind on the top lane | Similar to `6` but only consumes (?) and reacts to top inputs. <br /> Awards the same as `6`. | (impossible to fail) | By analogy with `GAME:Konga`.
+`6` | Head of both bar drumroll <br /> Examples: `6008`, `6668`, `6001` | Red circle on the bottom lane and green circle on the top lane, each with bar attached behind on the respective lane, joined by grey background | Rapidly press any buttons during its duration, consumes each press with unlimited speed, reacts to each press up to 1 press per 60fps frame. | (impossible to fail) | By analogy with `GAME:Konga`.
 `H` | (same as `6`) <br /> Examples: `H008`, `HHH8`, `H001` | (see `6`) | (see `6`) | (see `6`) | By analogy with `GAME:Konga`. |
 `7` | Head of regular *<ruby>激<rt>Geki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt> キ<rt>ki</rt> 連<rt>ren</rt> 打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt> 船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt> う<rt>u</rt> せ<rt>se</rt> ん<rt>n</rt></ruby>* balloon <br /> Examples: `7008`, `7778`, `7001` | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | Rapidly press bottom buttons with exactly certain amount of reacted presses during its duration, consumes each bottom or top press with unlimited speed, reacts to each bottom press up to 1 press per 60fps frame. | Fail to input enough amount of reacted presses. <br /> Does not give penalties except that notes (except bombs/mines (?)) placed within the duration of the balloon are impossible to press while the balloon is not cleared. | By analogy with Taiko mode.
 `9` | Head of special burst note/balloon <br /> Examples: `9008`, `9998`, `9001` | (Vary) | (Vary) <br> Rapldly press bottom buttons with exactly certain amount (summed and shared among players) of reacted presses during its duration, consumes each bottom or top press with unlimited speed, reacts to each bottom press up to 1 press per 60fps frame. | (same as `7`) | Might become `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player. <br /> Not in the official games. <br /> By analogy with Taiko mode.
