@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-04-23 (UTC+8)
+* Last changed: 2025-04-29 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -2786,16 +2786,16 @@ At the determining point, the "branch"/path&ndash;switching effects are played b
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
 * *Proposal* (IID): `#BRANCHSTART lcf:<str-local-formula-counter-read-value>, <number-expert-branch-requirement>, <number-master-branch-requirement>`
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
-  * The value of the [local (value or formula) counter](#proposal-komi-counter--trigger-commands) specified by `<str-local-*-counter-read-value>` is fetched at the branch determining point as the condition value.
-* *Proposal* (IID): `#BRANCHSTART(expr, <bool-expert-branch-requirement>, <bool-master-branch-requirement>, <no-punctuation-str-name-section>)`
+  * The value of the [local (value or formula) counter](#proposal-komi-counter--trigger-commands) specified by `<str-local-*-counter-read-value>` is read at the branch determining point as the condition value.
+* *Proposal* (IID): `#BRANCHSTART(expr, <bool-expert-branch-condition>, <bool-master-branch-condition>, <no-punctuation-str-name-section>)`
   * When `<enum-str-range>` is `expr`, this special form ***MUST*** be given in TMG syntax for using comparison and logical expressions.
-  * If `<no-punctuation-str-name-section>` is not (empty), it is used as the default branch determining section for `<bool-*-branch-requirement>`.
-  * In `<bool-*-branch-requirement>`, a condition value of the default branch determining section is accessed with `<enum-str-condition>`, and a condition value of a non-default branch determining section is accessed with `section(<no-punctuation-str-name-section>).<enum-str-condition>`, where `<enum-str-condition>` is any `<enum-str-condition>` allowed for the `#BRANCHSTART` command except `expr`.
-* *Proposal* (Komi): `#BRANCHSTART lt, <str-local-value-trigger-read-expert-branch-requirement>, <str-local-value-trigger-read-master-branch-requirement>` \
+  * If `<no-punctuation-str-name-section>` is not (empty), it is used as the default branch determining section for `<bool-*-branch-condition>`.
+  * In `<bool-*-branch-condition>`, a condition value of the default branch determining section is accessed with `<enum-str-condition>`, and a condition value of a non-default branch determining section is accessed with `section(<no-punctuation-str-name-section>).<enum-str-condition>`, where `<enum-str-condition>` is any `<enum-str-condition>` allowed for the `#BRANCHSTART` command except `expr`.
+* *Proposal* (Komi): `#BRANCHSTART lt, <str-local-value-trigger-read-expert-branch-condition>, <str-local-value-trigger-read-master-branch-condition>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
-* *Proposal* (IID): `#BRANCHSTART ltf, <str-local-formula-trigger-read-expert-branch-requirement>, <str-local-formula-trigger-read-master-branch-requirement>` \
+* *Proposal* (IID): `#BRANCHSTART ltf, <str-local-formula-trigger-read-expert-branch-condition>, <str-local-formula-trigger-read-master-branch-condition>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
-  * The bool value of the [local (value or formula) triggers](#proposal-komi-counter--trigger-commands) specified by `<str-local-*-trigger-*-read-*-branch-requirement>` will be used for [judging the target branch](#condition-judgement).
+  * Each Boolean value of the [local (value or formula) triggers](#proposal-komi-counter--trigger-commands) specified by `<str-local-*-trigger-*-read-*-branch-condition>` is read at the branch determining point as a condition value, with the requirement value being 1 (true).
 * `#BRANCHEND` \
   ***Supported by***: TaikoJiro, TJAPlayer 2 for PC ver.2020031800, TJAPlayer3 v1.5.2, taiko-web
 
@@ -2944,13 +2944,17 @@ For region conditions, the value calculated during the determining section (coun
 
 #### Condition Judgement
 
-For `<number-*-branch-requirement>`, the resulting condition value will be compared to the specified requirement value according to `<enum-str-range>`. For `<bool-*-branch-requirement>`, the expression will be evaluated. For `<str-local-trigger-read-*-branch-requirement>`, the bool value of the [local trigger](#proposal-komi-counter--trigger-commands) will be fetched.
+For number conditions (the arguement forms with `<number-*-branch-requirement>` specified), the condition value will be compared with the specified requirement value. \
+For Boolean conditions (the `expr`, `lt`, & `ltf` conditions), the condition values for Expert condition and Master condition will be compared with 1 (true).
 
-* If `<*-master-branch-requirement>` is fulfilled, the *<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>* Master "branch"/path will be taken by default.
-* Otherwise, if `<*-expert-branch-requirement>` is fulfilled, the *<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path will be taken by default.
+If `<enum-str-range>` is (empty) or `m`, the requirement is fulfilled if the value is more than or equal to ("≥") the given requirement (is 1 (true) for a Boolean value). \
+If `<enum-str-range>` is `l`, the requirement is fulfilled if the value is less than ("\<") the given requirement (is 0 (false) for a Boolean value).
+
+* If the Master requirement is fulfilled, the *<ruby>達<rt>Tatsu</rt> 人<rt>jin</rt></ruby>* Master "branch"/path will be taken by default.
+* Otherwise, if the Expert requirement is fulfilled, the *<ruby>玄<rt>Kuro</rt> 人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path will be taken by default.
 * Otherwise: The *<ruby>普<rt>Fu</rt> 通<rt>tsuu</rt></ruby>* Normal "branch"/path is taken by default.
-* To force a "branch"/path to be taken by default, the value of the `<number-*-branch-requirement>` can be set out-of-bound and `<bool-*-branch-requirement>` can be specified as `true` or `false`.
-* The [`#LEVELHOLD`](#levelhold) and the (*Proposal* (IID)) [`#LEVELREDIR`](#proposal-iid-levelredir) commands and `<enum-str-combination>` affect the final determining result.
+* To force a "branch"/path to be taken by default, for a number condition, the requirement value for the branch can be set out-of-bound; for a Boolean condition, the condition value for the branch can be specified as false or true.
+* The [`#LEVELHOLD`](#levelhold) and the (*Proposal* (IID)) [`#LEVELREDIR`](#proposal-iid-levelredir) commands affect the final determining result.
 
 #### Usage
 
@@ -3787,18 +3791,18 @@ Variable | Arguments | Function
 
 Reading point: The value of a charter-defined variable is read when:
 
-* For a charter-defined setter command, (*proposal* (IID)) when its command time is reached.
+* For a charter-defined value variable setter command, (*proposal* (IID)) when its command time is reached.
 * For [the `#BRANCHSTART` command with local charter-defined variable condition](#branchstart--branchend), when its branch-determining point (at the previous measure) is reached.
 * For the [(*proposal* (Komi)) `#NOTEIF`, (*proposal* (IID)) `#NOTEIFF`](#proposal-komi-noteif-commands), [(*proposal* (Komi)) `#COMMANDIF`, and (*proposal* (IID)) `#COMMANDIFF` commands](#proposal-komi-commandif-commands), whenever the (direct or cached) value of the accessed variable is changed or invalidated.
 
 Writing point of values: The value of a charter-defined value variable is written only when:
 
-* For a charter-defined setter command, (*proposal* (IID)) when its command time is reached.
+* For a charter-defined value variable setter command, (*proposal* (IID)) when its command time is reached.
 * For an enabled and effective [`#GIANTNOTE` command](#proposal-komi-giantnote), when the note is judged.
 
 *Proposal* (IID): Writing point of formulae: The cached value of a charter-defined formula variable is invalidated when:
 
-* For a charter-defined setter command, (*proposal* (IID)) when its command time is reached, after the store expression is written. The cached value is untouched (if already defined) or set to 0 or false otherwise.
+* For a charter-defined formula variable command, (*proposal* (IID)) when its command time is reached, after the store expression is written. The cached value is untouched (if already defined) or set to 0 or false otherwise.
 * When the charter-defined formula variable is being read and the (direct or cached) value any of the variables accessed in the store expression and further variables accessed by the accessed charter-defined formula variables and on recursively (including `<t*:t>` as mentioned below) are changed or invalidated. The store expression will be re-evaluated and have the cached value updates to the result value.
 
 When a store expression of a charter-defined formula variable is (re-)evaluated, the cached value of all accessed charter-defined formula variables is always used regardless whether the cached value is invalidated.
@@ -3808,8 +3812,9 @@ When a store expression of a charter-defined formula variable is (re-)evaluated,
 1. Update pre-defined variables: The gameplay state variables except `<t*:t>` (**t**otal amount of encountered certain notes whose critical judgement **t**iming has been reached before now) are updated. \
   [`#GIANTNOTE` commands](#proposal-komi-giantnote) have the triggers updated in this stage.
 2. Update charter-defined variables: After stage 1, the to-be-executed reading or writing of charter-defined variables have their reading and writing executed in their definition order (for [the `#BRANCHSTART` command](#branchstart--branchend), assumed to be right before the first note symbol (if any) at the previous measure). \
-  For each reading or writing which requires evaluating any store expressions (including re-evaluating charter-defined formula variables), the `<t*:t>` variables are increased to include uncounted notes whose both definition position and time position is before the reading or writing point, and then the store expressions (if any) are evaluated.
-3. Update conditional command states: Commands which have read the charter-defined values in stage 2 have their states updated immediately.
+  For each reading or writing which requires evaluating any store expressions (including re-evaluating charter-defined formula variables), the `<t*:t>` variables are increased to include uncounted notes whose both definition position and time position is before the reading or writing point, and then the store expressions (if any) are evaluated. \
+  For reading a formula variable with invalidated cached value, all invalidated formula variables which is (directly or indirectly) accessed by store expression of the current formula variable are re-evaluated in the definition order of the last `#STORECF` or `#STORETF` command setting them.
+3. Update conditional command states: Commands which have read the charter-defined values in stage 2 have their states updated immediately, including the branch determining point for the `#BRANCHSTART` command.
 4. (For order reference) After stage 2 and 3, the to-be-executed [`#SECTION` commands](#section) are executed.
 
 Evaluation Behavior Examples:
