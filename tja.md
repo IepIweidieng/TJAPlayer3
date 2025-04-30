@@ -134,7 +134,7 @@ Property formats from the official games are not listed here.
 
 </small>
 
-* TJA is likely also inspired by the SM format. Apart from several syntax similarities mentioned in this article, toach has released several videos featuring Taiko mode emulated in StepMania by skinning before the initial release of TaikoJiro, see [Notechart Formats](#notechart-formats)
+* TJA is likely also inspired by the SM format. Apart from several syntax similarities mentioned in this article, toach has released several videos featuring Taiko mode simulated in StepMania by skinning before the initial release of TaikoJiro, see [Notechart Formats](#notechart-formats)
 
 A possible derivation/inspiration route non-after TJA:
 
@@ -1827,7 +1827,7 @@ Use a **scroll**ing mode similar to the scrolling method used in either **B**E**
 * `#BMSCROLL` \
   ***Supported by***: TaikoJiro v1.91
   * The [`#SCROLL`](#scroll) command is ignored.
-  * Emulates the scrolling behavior of Taikosan.
+  * Replicate the scrolling behavior of Taikosan.
 * `#HBSCROLL` \
   ***Supported by***: TaikoJiro v2.31
   * Likes `#BMSCROLL` ("**B**E**M**ANI-like"), but [the `#SCROLL` command](#scroll) ("(per-note) **H**iSpeed") is not ignored and is effective.
