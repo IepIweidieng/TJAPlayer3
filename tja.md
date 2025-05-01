@@ -96,7 +96,7 @@ The etymology of both `.tjf` & `.tja` were unexplained.
 * `a` could just be an alphabetic number, or could mean "**a**dvanced" (refers to *<ruby>次<rt>Ji</rt></ruby>* "next"), "**a**dd" (refers to *<ruby>＋<rt>**a**dd</rt></ruby>* "plus"), *etc*. A possibility referenced later within TaikoJiro is "**A**NOTHER" (also refers to *<ruby>次<rt>Ji</rt></ruby>* "next").
   * TaikoJiro has a hidden gameplay modifier "G.Judge-A" (**G**AMBOL **Judge** **A**NOTHER), which is enabled by holding <kbd>⇧ Shift</kbd> and then pressing <kbd>G</kbd>, <kbd>J</kbd>, & <kbd>A</kbd>. This is a reference to the *ANOTHER* difficulty of the song *GAMBOL* in *beatmania IIDX 11 IIDX RED CS* (released 2006-05-18) and the hidden enabling method for the judgement window modifier replicating this difficulty of the song in *beatmania IIDX 15 DJ TROOPERS CS* (released 2008-12-18, later than the initial release of TaikoJiro), both games developed by Konami. See <https://remywiki.com/GAMBOL>
 
-Thus, `.tja` possibly means "*<ruby>**太**<rt>**T**ai</rt>鼓<rt>ko</rt>の<rt>no</rt>**達**<rt>**T**atsu</rt>**人**<rt>**j**in</rt></ruby> (simulator) <ruby>譜<rt>fu</rt>面<rt>men</rt></ruby> **A**nother*" "**A**nother **T**aiko no **T**atsu**j**in (Simulator) Notechart Format".
+Thus, `.tja` possibly means "*<ruby>**太**<rt>**T**ai</rt>鼓<rt>ko</rt>の<rt>no</rt>**達**<rt>**T**atsu</rt>**人**<rt>**j**in</rt></ruby> (simulator) <ruby>譜<rt>fu</rt>面<rt>men</rt></ruby> (format) **A**nother*" "**A**nother **T**aiko no **T**atsu**j**in (simulator) Notechart (format)".
 
 ### Notechart Formats Inspiring TJA
 
