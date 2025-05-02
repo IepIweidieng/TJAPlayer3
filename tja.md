@@ -2836,6 +2836,9 @@ Respectively **start** / **end** the definition of a *<ruby>譜<rt>fu</rt>面<rt
 
 The determining point of this "branch"/path section is defaulted to be placed at the beginning of the previous measure from the `#BRANCHSTART` command.
 
+* In the official games, the determining point is fixed to 4 beats (the length of 4 1/4th notes) before the branch point, calculated using the defined BPM of the branch point. So the determining point can occur more or less than 1 measure before the branch point.
+  * In "*<ruby>夏<rt>Natsu</rt>祭<rt>Matsu</rt>り<rt>ri</rt></ruby> / <ruby>ジッ<rt>Jit</rt>タ<rt>ta</rt>リ<rt>ri</rt>ン<rt>n</rt></ruby>・<ruby>ジ<rt>Ji</rt>ン<rt>n</rt></ruby>*" (JITTERIN'JINN version), Easy, Normal, Hard, and Oni difficulties, the branch determining point is in the middle of measure 46, and the notes in measure 47 can be seen to suddenly change from the Normal branch pattern to Master branch pattern. <https://wikiwiki.jp/taiko-fumen/%E5%8F%8E%E9%8C%B2%E6%9B%B2/%E3%81%8A%E3%81%AB/%E5%A4%8F%E7%A5%AD%E3%82%8A%20%EF%BC%8F%20%E3%82%B8%E3%83%83%E3%82%BF%E3%83%AA%E3%83%B3%E3%83%BB%E3%82%B8%E3%83%B3>
+
 At the determining point, the "branch"/path&ndash;switching effects are played but the current "branch"/path is not changed until the actual beginning of the "branch"/path section.
 
 * `#BRANCHSTART <enum-str-condition>, <number-expert-branch-requirement>, <number-master-branch-requirement>`
@@ -2987,74 +2990,32 @@ Reference: *譜面分岐条件* ("Notechart branch conditions"). 太鼓の達人
 
 * The measure number is based on the non-internal measure number listed in the corresponding page for the difficulty of the song.
 
-(`s` is only used in older official games)
+`s` can be used for simulating older official games (including AC6 and earlier games), but is also useful for simulating the "getting *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD on anything and hitting no rolls to take certain branch" condition in current official games.
 
-* KAGEKIYO, Inner oni difficulty
-  * Measure 80: `#BRANCHSTART PP,42.8,100` (3/7 × 100, 7/7 × 100)
-* <ruby>ケ<rt>Ke</rt>チャ<rt>cha</rt>ド<rt>Do</rt>ン<rt>n</rt>2000</ruby>, Oni difficulty, in Wii1
-  ```txt
-  #BARLINEOFF
-  // ...
-  #MEASURE 2/4
-  1068, // Measure 19 (0/4 to 2/4 of 6/4) // The roll in the official game is 1/48th shorter than this notation
-  #BPMCHANGE 220
-  #MEASURE 4/4
-  0333, // Measure 19 (2/4 to 6/4 of 6/4)
-  #MEASURE 0/4 // or 1/240000 (less than 1 ms)
-  #BRANCHSTART p,0.01,0.01
-    #N
-    #LEVELHOLD
-    ,
-    #M
-    ,
-  #BRANCHEND
-  #BPMCHANGE 240
-  #MEASURE 8/4
-  #BARLINEON
-  #BRANCHSTART r,1,2
-  // ... // Measure 20 and on
-  ```
-* "<ruby>聖<rt>Shou</rt>徳<rt>doku</rt>た<rt>Ta</rt>い<rt>i</rt>こ<rt>ko</rt>の<rt>no</rt>「<rt></rt>日<rt>Hi</rt>い<rt>I</rt>ず<rt>zu</rt>る<rt>ru</rt>ま<rt>ma</rt>で<rt>de</rt>飛鳥<rt>Asuka</rt>」</ruby>", Oni difficulty: See [the example of `#LEVELREDIR`](#proposal-iid-levelredir).
+Single condition:
+
+* "KAGEKIYO", Inner oni difficulty
+  * Measure 80: `#BRANCHSTART PP,42.8,100` &mdash; 3/7 × 100, 7/7 × 100(%)
+* "*<ruby>ハ<rt>Ha</rt>ロー<rt>roo</rt>！</ruby> <ruby>ハ<rt>Ha</rt>ロ<rt>ro</rt>ウィ<rt>wi</rt>ン<rt>n</rt></ruby>*" "Hello! Halloween", Oni difficulty, before AC16: <https://wikiwiki.jp/taiko-fumen/%E5%8F%8E%E9%8C%B2%E6%9B%B2/%E3%81%8A%E3%81%AB/%E3%83%8F%E3%83%AD%E3%83%BC%EF%BC%81%20%E3%83%8F%E3%83%AD%E3%82%A6%E3%82%A3%E3%83%B3>
+  * `#SECTION` at measure 59, `#BRANCHSTART p,50,90` at measure 63, but strong/double-hit required for branch condition (not required after AC16)
 * "<ruby>ま<rt>Ma</rt>だ<rt>da</rt>さ<rt>Sa</rt>い<rt>i</rt>た<rt>ta</rt>ま<rt>ma</rt></ruby>2000"
   * `#SECTION` at measure 41, and the following `#BRANCHSTART` command at measure 47:
     * Easy difficulty: `#BRANCHSTART rb,38,38`
     * Normal difficulty: `#BRANCHSTART rb,46,46`
     * Hard difficulty: `#BRANCHSTART rb,60,60`
-    * Oni difficulty: `#BRANCHSTART pp,76,76` (60 / 78 × 100(%))
+    * Oni difficulty: `#BRANCHSTART pp,76,76` &mdash; 60 / 78 × 100(%)
 * *"<ruby>限<rt>Gen</rt>界<rt>kai</rt>突<rt>Top</rt>破<rt>pa</rt></ruby>×<ruby>サ<rt>Sa</rt>バ<rt>ba</rt>イ<rt>i</rt>バー<rt>baa</rt></ruby>"* "Genkai Toppa x Survivor", Inner oni difficulty
   * Measure 45: `#BRANCHSTART JB,1,1,l`
-* "Nesin Amatias", Oni difficulty:
-  * Measure 2: `#BRANCHSTART p,0,0` (forced Master branch)
-  * Measure 8, 16, 24, 34, 44, 60, 67: A `#BRANCHSTART` command with `p` condition.
-  * Measure 83: Unknown condition
-* "<ruby>森<rt>Shin</rt>羅<rt>ra</rt>万<rt>Ban</rt>象<rt>shou</rt></ruby>", Oni difficulty:
-  * Measure 118: `#BRANCHSTART rb,0,1`
-* *"<ruby>め<rt>Me</rt>た<rt>ta</rt>め<rt>Me</rt>た<rt>ta</rt></ruby>☆<ruby>ゆ<rt>Yu</rt>に<rt>ni</rt>ば～<rt>baa</rt>すっ<rt>su'</rt></ruby>！"* "METAMETA☆Universe!", Oni difficulty
-  ```txt
-  // ...
-  #BRANCHSTART p,80.837,101
-  #N
-    // ... // Measure 47 and on
-  #E
-    #LEVELREDIR N,N,M
-    // ...
-  #BRANCHSTART r,0,1
-  #N
-    // ... // Measure 60 and on
-  #E
-    // ...
-  #M
-    // ...
-  #BRANCHSTART p,101,101 // forced Normal branch
-  #N
-    // ... // Measure 64 and on
-  ```
+* "*<ruby>ス<rt>Su</rt>カー<rt>kaa</rt>レッ<rt>ret</rt>ト<rt>to</rt>警<rt>Kei</rt>察<rt>satsu</rt>の<rt>no</rt>ゲッ<rt>Get</rt>トー<rt>too</rt>パ<rt>Pa</rt>ト<rt>to</rt>ロー<rt>roo</rt>ル<rt>ru</rt>24<rt>Nijuuyon</rt>時<rt>ji</rt></ruby>*" "Scarlet Police Getto Patrol 24 hour", Inner oni difficulty
+  * Measure 75: `#BRANCHSTART PP,100,100` &mdash; 24 / 24 × 100(%)
+* "INTERNET YAMERO", Oni difficulty
+  * Measure 116: `#BRANCHSTART PP,100,100` &mdash; 96 / 96 × 100(%)
 * *"<ruby>ダー<rt>Daa</rt>ク<rt>ku</rt></ruby>・<ruby>エ<rt>E</rt>ク<rt>ku</rt>ス<rt>su</rt></ruby>・<ruby>マ<rt>Ma</rt>キ<rt>ki</rt>ナ<rt>na</rt></ruby>♡"* "Dark Ex Machina♡", Oni difficulty
   ```txt
   #BPMCHANGE 300
   1001001001001001,
   #MEASURE 3/8
-  0010 01, // Measure 77 (0/8 to 3/8 of 7/8)
+  001001, // Measure 77 (0/8 to 3/8 of 7/8)
   // Branch determining point for Measure 79
   #MEASURE 4/4
   #BARLINEOFF
@@ -3070,6 +3031,60 @@ Reference: *譜面分岐条件* ("Notechart branch conditions"). 太鼓の達人
   #BRANCHEND // Empty branch section
   // ... // Measure 122 and on
   ```
+  * Measure 79: `#BRANCHSTART jb,1,1,l`
+  * Measure 122: `#BRANCHSTART p,101,101`
+
+Compound condition:
+
+* "<ruby>ケ<rt>Ke</rt>チャ<rt>cha</rt>ド<rt>Do</rt>ン<rt>n</rt>2000<rt>Nisen</rt></ruby>", Oni difficulty, in Wii1
+  ```txt
+  #BARLINEOFF
+  // ...
+  #MEASURE 2/4
+  1068, // Measure 19 (0/4 to 2/4 of 6/4) // The roll in the official game is 1/48th shorter than this notation
+  #BPMCHANGE 220
+  #MEASURE 4/4
+  0333, // Measure 19 (2/4 to 6/4 of 6/4)
+  #MEASURE 0/4 // or 1/240000 (less than 1 ms)
+  #BRANCHSTART p,0.01,0.01 // Any non-BADs on missable notes to Master
+    #N
+    #LEVELHOLD
+    ,
+    #M
+    ,
+  #BRANCHEND
+  #BPMCHANGE 240
+  #MEASURE 8/4
+  #BARLINEON
+  #BRANCHSTART r,1,2
+  // ... // Measure 20 and on
+  ```
+  * Denoted below as: Measure 20: `#BRANCHSTART p,0.01,0.01` with `#LEVELHOLD` in `#N` + `#BRANCHSTART r,1,2`.
+* "<ruby>十<rt>So</rt>露<rt>ro</rt>盤<rt>ban</rt>2000<rt>Nisen</rt></ruby>", all difficulties, in CS7 and AC10 and later games
+  * Until PSPDX and AC16: Measure 47: `#BRANCHSTART r,0,1` with `#LEVELHOLD` in `#M` &mdash; any bar drumrolls to Master \
+  \+ `#BRANCHSTART p,0,0.01` with `#LEVELHOLD` in `#E` & `#LEVELREDIR N,E,M` (unhold) in `#M` &mdash; or any non-*<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>*/BADs on missable notes to Master
+  * Since PSPDX and AC16: Measure 47: `#BRANCHSTART s,0,1` with `#LEVELHOLD` in `#E`
+* "*<ruby>タ<rt>Ta</rt>イ<rt>i</rt>コ<rt>ko</rt>タ<rt>Ta</rt>イ<rt>i</rt>ム<rt>mu</rt></ruby>*" "Taiko Time", Oni difficulty, except Wii U2, 3DS3, NS2/DF:
+  * Measure 17: `#BRANCHSTART p,98,98` with `#LEVELHOLD` in `#M` &mdash; 27+ *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOODs + 1− *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK to Master \
+  \+ `#BRANCHSTART jb,1,1,l` with `#LEVELHOLD` in `#N` \
+  \+ `#BRANCHSTART pp,1,1,l` with `#LEVELHOLD` in `#N` \
+  \+ (until AC16) `#BRANCHSTART p,1,1,l` (but only counting strong/double-hit judgements on big notes) with `#LEVELHOLD` in `#N` &mdash; or 28 weak/single-hit *<ruby>可<rt>Ka</rt></ruby>* GOOD/OKs to Master
+* "*<ruby>六<rt>Rop</rt>本<rt>pon</rt>の<rt>no</rt>薔薇<rt>Bara</rt>と<rt>to</rt>采<rt>Sai</rt>の<rt>no</rt>歌<rt>Uta</rt></ruby>*", Inner Oni difficulty
+  * Measure 5, 17, 29, 46, 61, 81, 96, 120: `#BRANCHSTART p,86,94` (but with each balloon hit count as certain unknown amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD and as certain unknown amount of missable notes)
+* "<ruby>森<rt>Shin</rt>羅<rt>ra</rt>万<rt>Ban</rt>象<rt>shou</rt></ruby>", Oni difficulty:
+  * Measure 118: `#BRANCHSTART p,?,87.8` (`?` for certain unknown values) (but with each balloon hit count as 0.45 *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD and as 0.45 missable notes) &mdash; 100% acc on 87 notes + 1+ (of 28) balloon hits, or 86%+ acc on 87 notes + all 28 balloon hits
+
+Branch-dependent condition:
+
+* "<ruby>聖<rt>Shou</rt>徳<rt>doku</rt>た<rt>Ta</rt>い<rt>i</rt>こ<rt>ko</rt>の<rt>no</rt>「<rt></rt>日<rt>Hi</rt>い<rt>I</rt>ず<rt>zu</rt>る<rt>ru</rt>ま<rt>ma</rt>で<rt>de</rt>飛鳥<rt>Asuka</rt>」</ruby>", Oni difficulty: See [the example of `#LEVELREDIR`](#proposal-iid-levelredir).
+* "Nesin Amatias", Oni difficulty:
+  * Measure 2: `#BRANCHSTART p,0,0` (forced Master branch)
+  * Measure 8, 16, 24, 34, 44, 60, 67: A `#BRANCHSTART` command with `p` condition.
+  * Measure 83: Unknown condition
+* *"<ruby>め<rt>Me</rt>た<rt>ta</rt>め<rt>Me</rt>た<rt>ta</rt></ruby>☆<ruby>ゆ<rt>Yu</rt>に<rt>ni</rt>ば～<rt>baa</rt>すっ<rt>su'</rt></ruby>！"* "METAMETA☆Universe!", Oni difficulty
+  * Measure 47: `#BRANCHSTART p,80.837,101` with `#LEVELREDIR N,N,M` on `#E`
+  * Measure 60: `#BRANCHSTART r,0,1`
+  * Measure 64: `#BRANCHSTART p,101,101`
 
 #### Compatibility Issues
 
