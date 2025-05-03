@@ -3014,7 +3014,7 @@ Single condition:
 * "KAGEKIYO", Inner oni difficulty
   * Measure 80: `#BRANCHSTART PP,42.8,100` &mdash; 3/7 × 100, 7/7 × 100(%)
 * "*<ruby>ハ<rt>Ha</rt>ロー<rt>roo</rt>！</ruby> <ruby>ハ<rt>Ha</rt>ロ<rt>ro</rt>ウィ<rt>wi</rt>ン<rt>n</rt></ruby>*" "Hello! Halloween", Oni difficulty, before AC16: <https://wikiwiki.jp/taiko-fumen/%E5%8F%8E%E9%8C%B2%E6%9B%B2/%E3%81%8A%E3%81%AB/%E3%83%8F%E3%83%AD%E3%83%BC%EF%BC%81%20%E3%83%8F%E3%83%AD%E3%82%A6%E3%82%A3%E3%83%B3>
-  * `#SECTION` at measure 59, `#BRANCHSTART lcf:f,50,90` at measure 63, with `f` being `(<sect:JP:d> + <sect:JG:d> / 2) / <sect:TN>` &mdash; Strong/double-hit precision (not required after AC16, where `#BRANCHSTART p,50,90` is enough)
+  * `#SECTION` at measure 59, `#BRANCHSTART lcf:f,50,90` at measure 63, with `f` being `100 * (<sect:JP:d> + <sect:JG:d> / 2) / <sect:TN>` &mdash; Strong/double-hit precision (not required after AC16, where `#BRANCHSTART p,50,90` is enough)
 * "<ruby>ま<rt>Ma</rt>だ<rt>da</rt>さ<rt>Sa</rt>い<rt>i</rt>た<rt>ta</rt>ま<rt>ma</rt></ruby>2000"
   * `#SECTION` at measure 41, and the following `#BRANCHSTART` command at measure 47:
     * Easy difficulty: `#BRANCHSTART rb,38,38`
@@ -3086,9 +3086,9 @@ Compound condition:
 * "*<ruby>タ<rt>Ta</rt>イ<rt>i</rt>コ<rt>ko</rt>タ<rt>Ta</rt>イ<rt>i</rt>ム<rt>mu</rt></ruby>*" "Taiko Time", Oni difficulty, except Wii U2, 3DS3, NS2/DF:
   * Measure 17: `#BRANCHSTART ltf,f,f` with `f` being `<sect:p> >= 0.98 | (<sect:jg> - <sect:JG:d> == 28)`
 * "*<ruby>六<rt>Rop</rt>本<rt>pon</rt>の<rt>no</rt>薔薇<rt>Bara</rt>と<rt>to</rt>采<rt>Sai</rt>の<rt>no</rt>歌<rt>Uta</rt></ruby>*", Inner Oni difficulty
-  * Measure 5, 17, 29, 46, 61, 81, 96, 120: `#BRANCHSTART lcf:f,86,94` with `f` being `(<sect:jp> + <sect:jg> / 2 + x * <sect:rb>) / (<sect:tn> + x * <sect:trbh>)` (`x` is certain unknown value)
+  * Measure 5, 17, 29, 46, 61, 81, 96, 120: `#BRANCHSTART lcf:f,86,94` with `f` being `100 * (<sect:jp> + <sect:jg> / 2 + x * <sect:rb>) / (<sect:tn> + x * <sect:trbh>)` (`x` is certain unknown value)
 * "<ruby>森<rt>Shin</rt>羅<rt>ra</rt>万<rt>Ban</rt>象<rt>shou</rt></ruby>", Oni difficulty:
-  * Measure 118: `#BRANCHSTART lcf:f,x,87.8` (`x` is certain unknown value) with `f` being `(<sect:jp> + <sect:jg> / 2 + 0.45 * <sect:rb>) / (<sect:tn> + 0.45 * <sect:rb>)` &mdash; 100% acc on 87 notes + 1+ (of 28) balloon hits, or 86%+ acc on 87 notes + all 28 balloon hits
+  * Measure 118: `#BRANCHSTART lcf:f,x,87.8` (`x` is certain unknown value) with `f` being `100 * (<sect:jp> + <sect:jg> / 2 + 0.45 * <sect:rb>) / (<sect:tn> + 0.45 * <sect:rb>)` &mdash; 100% acc on 87 notes + 1+ (of 28) balloon hits, or 86%+ acc on 87 notes + all 28 balloon hits
 
 Branch-dependent condition:
 
