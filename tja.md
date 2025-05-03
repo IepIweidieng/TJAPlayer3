@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-05-01 (UTC+8)
+* Last changed: 2025-05-04 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -2864,7 +2864,7 @@ At the determining point, the "branch"/path&ndash;switching effects are played b
   * `<enum-str-range>` specifies how the requirement is fulfilled, see [Condition Judgement](#condition-judgement). It can be one of:
     * (empty) or `m` &mdash; **m**ore than or equal to ("≥") the given requirement
     * `l` &mdash; **l**ess than ("\<") the given requirement
-  * Recommendation for charters: For `lc:<str-local-value-counter-read-value>`, `lcf:<str-local-formula-counter-read-value>`, `lt`, & `ltf` conditions, negating the value is prefered over specifying `l` as `<enum-str-range>`.
+  * Recommendation for charters: For `lc:<str-local-value-counter-read-value>`, `lcf:<str-local-formula-counter-read-value>`, `lt`, & `ltf` conditions, negating the value is preferred over specifying `l` as `<enum-str-range>`.
 * *Proposal* (IID): `#BRANCHSTART` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
   * No condition and requirements specified. Intended to be specified later by [the `#BRANCHNOR`, `#BRANCHEXP`, & `#BRANCHMAS`](#proposal-iid-branchnor--branchexp--branchmas) commands.
@@ -2947,8 +2947,8 @@ For other conditions, the percentage or amount calculated during the determining
 For number conditions (`<enum-str-condition>`, `lc:<str-local-value-counter-read-value>`, & `lcf:<str-local-value-counter-read-value>`), the condition value will be compared with the specified requirement value. \
 For Boolean conditions (`lt` & `ltf`), the condition values for Expert condition and Master condition will be compared with 1 (true).
 
-If `<enum-str-range>` is (empty) or `m`, the requirement is fulfilled if the value is more than or equal to ("≥") the given requirement (is 1 (true) for a Boolean value). \
-If `<enum-str-range>` is `l`, the requirement is fulfilled if the value is less than ("\<") the given requirement (is 0 (false) for a Boolean value).
+If `<enum-str-range>` is (empty) or `m`, the requirement is fulfilled if the value is more than or equal to ("≥") the given requirement (for a Boolean condition, when the value is 1 (true)). \
+If `<enum-str-range>` is `l`, the requirement is fulfilled if the value is less than ("\<") the given requirement (for a Boolean condition, when the value is 0 (false)).
 
 * If no condition and requirements are specified, the currently taken branch will be taken by default.
 * If the Master requirement is fulfilled, the *<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>* Master "branch"/path will be taken by default.
@@ -3014,7 +3014,7 @@ Single condition:
 * "KAGEKIYO", Inner oni difficulty
   * Measure 80: `#BRANCHSTART PP,42.8,100` &mdash; 3/7 × 100, 7/7 × 100(%)
 * "*<ruby>ハ<rt>Ha</rt>ロー<rt>roo</rt>！</ruby> <ruby>ハ<rt>Ha</rt>ロ<rt>ro</rt>ウィ<rt>wi</rt>ン<rt>n</rt></ruby>*" "Hello! Halloween", Oni difficulty, before AC16: <https://wikiwiki.jp/taiko-fumen/%E5%8F%8E%E9%8C%B2%E6%9B%B2/%E3%81%8A%E3%81%AB/%E3%83%8F%E3%83%AD%E3%83%BC%EF%BC%81%20%E3%83%8F%E3%83%AD%E3%82%A6%E3%82%A3%E3%83%B3>
-  * `#SECTION` at measure 59, `#BRANCHSTART lcf:f,50,90` at measure 63, with `f` being `100 * (<sect:JP:d> + <sect:JG:d> / 2) / <sect:TN>` &mdash; Strong/double-hit precision (not required after AC16, where `#BRANCHSTART p,50,90` is enough)
+  * `#SECTION` at measure 59, `#BRANCHSTART lcf:f,50,90` at measure 63, with the store expression of `f` being `100 * (<sect:JP:d> + <sect:JG:d> / 2) / <sect:TN>` &mdash; Strong/double-hit precision (not required after AC16, where `#BRANCHSTART p,50,90` is enough)
 * "<ruby>ま<rt>Ma</rt>だ<rt>da</rt>さ<rt>Sa</rt>い<rt>i</rt>た<rt>ta</rt>ま<rt>ma</rt></ruby>2000"
   * `#SECTION` at measure 41, and the following `#BRANCHSTART` command at measure 47:
     * Easy difficulty: `#BRANCHSTART rb,38,38`
@@ -3077,18 +3077,18 @@ Compound condition:
   // ... // Measure 20 and on
   ```
   * Denoted below as: Measure 20: `#BRANCHSTART p,0.01,0.01` with `#LEVELHOLD` in `#N` + `#BRANCHSTART r,1,2`.
-  * Alternatively `#BRANCHSTART lcf:f,1,2` at measure 20 with `f` being `2 * (<sect:jp> + <sect:jg>) + <sect:rt>`
+  * Alternatively `#BRANCHSTART lcf:f,1,2` at measure 20 with the store expression of `f` being `2 * (<sect:jp> + <sect:jg>) + <sect:rt>`
 * "<ruby>十<rt>So</rt>露<rt>ro</rt>盤<rt>ban</rt>2000<rt>Nisen</rt></ruby>", all difficulties, in CS7 and AC10 and later games
   * Until PSPDX and AC16: Measure 47: `#BRANCHSTART r,0,1` with `#LEVELHOLD` in `#M` &mdash; any bar drumrolls to Master \
   \+ `#BRANCHSTART p,0,0.01` with `#LEVELHOLD` in `#E` & `#LEVELREDIR N,E,M` (unhold) in `#M` &mdash; or any non-*<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>*/BADs on missable notes to Master
-    * Or `#BRANCHSTART lcf:f,0,1` with `f` being `<sect:jp> + <sect:jg> + <sect:rt> - <sect:rb>` and with `#LEVELHOLD` in `#E`
+    * Or `#BRANCHSTART lcf:f,0,1` with the store expression of `f` being `<sect:jp> + <sect:jg> + <sect:rt> - <sect:rb>` and with `#LEVELHOLD` in `#E`
   * Since PSPDX and AC16: Measure 47: `#BRANCHSTART s,0,1` with `#LEVELHOLD` in `#E`
 * "*<ruby>タ<rt>Ta</rt>イ<rt>i</rt>コ<rt>ko</rt>タ<rt>Ta</rt>イ<rt>i</rt>ム<rt>mu</rt></ruby>*" "Taiko Time", Oni difficulty, except Wii U2, 3DS3, NS2/DF:
-  * Measure 17: `#BRANCHSTART ltf,f,f` with `f` being `<sect:p> >= 0.98 | (<sect:jg> - <sect:JG:d> == 28)`
+  * Measure 17: `#BRANCHSTART ltf,f,f` with the store expression of `f` being `<sect:p> >= 0.98 | (<sect:jg> - <sect:JG:d> == 28)`
 * "*<ruby>六<rt>Rop</rt>本<rt>pon</rt>の<rt>no</rt>薔薇<rt>Bara</rt>と<rt>to</rt>采<rt>Sai</rt>の<rt>no</rt>歌<rt>Uta</rt></ruby>*", Inner Oni difficulty
-  * Measure 5, 17, 29, 46, 61, 81, 96, 120: `#BRANCHSTART lcf:f,86,94` with `f` being `100 * (<sect:jp> + <sect:jg> / 2 + x * <sect:rb>) / (<sect:tn> + x * <sect:trbh>)` (`x` is certain unknown value)
+  * Measure 5, 17, 29, 46, 61, 81, 96, 120: `#BRANCHSTART lcf:f,86,94` with the store expression of `f` being `100 * (<sect:jp> + <sect:jg> / 2 + x * <sect:rb>) / (<sect:tn> + x * <sect:trbh>)` (`x` is certain unknown value)
 * "<ruby>森<rt>Shin</rt>羅<rt>ra</rt>万<rt>Ban</rt>象<rt>shou</rt></ruby>", Oni difficulty:
-  * Measure 118: `#BRANCHSTART lcf:f,x,87.8` (`x` is certain unknown value) with `f` being `100 * (<sect:jp> + <sect:jg> / 2 + 0.45 * <sect:rb>) / (<sect:tn> + 0.45 * <sect:rb>)` &mdash; 100% acc on 87 notes + 1+ (of 28) balloon hits, or 86%+ acc on 87 notes + all 28 balloon hits
+  * Measure 118: `#BRANCHSTART lcf:f,x,87.8` (`x` is certain unknown value) with the store expression of `f` being `100 * (<sect:jp> + <sect:jg> / 2 + 0.45 * <sect:rb>) / (<sect:tn> + 0.45 * <sect:rb>)` &mdash; 100% acc on 87 notes + 1+ (of 28) balloon hits, or 86%+ acc on 87 notes + all 28 balloon hits
 
 Branch-dependent condition:
 
