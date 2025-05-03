@@ -1682,7 +1682,7 @@ If the TJA file uses any features outside the specified feature set, a warning s
     * `1.0` &ndash; The feature set common in PC-gen official AC games and TJAPlayer3, including Dan-i certification mode.
     * `1.1` &ndash; The feature set of TJAPlayer3 v1.6.x, including enhancements originate from TaikoJiro 1 and 2.
     * `1.2` &ndash; The current stable feature set of the OpenTaiko-OutFox standard, based on the gameplay-focused enhancements of OpenTaiko (0auBSQ) v0.6.0, including a more complete feature of Tower mode and the Konga game mode.
-    * `1.3` &ndash; A developing feature set including TJA state and compatibility support.
+    * `1.3` &ndash; A developing feature set including enhanced branch conditions, TJA state, and compatibility support.
     * `2.0` &ndash; A developing feature set including the Beatz game mode and a standardized version of TJAPlayer3-Extended features.
 
 ## TJC Header
@@ -2368,7 +2368,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 *Unspecified* (?): The behavior when both [`#NOTESPAWN` command(s)](#notespawn) and the `#SUDDEN` and/or (*proposal* (IID)) `#HIDDEN` command(s) are in effect.
 
-* Proposal (IID): The effects of [`#NOTESPAWN` command(s)](#notespawn) are applied first, and the disappear effect and moving-stop effect of `#SUDDEN` and (*proposal* (IID)) `#HIDDEN` command(s) are then applied.
+* *Proposal* (IID): The effects of [`#NOTESPAWN` command(s)](#notespawn) are applied first, and the disappear effect and moving-stop effect of `#SUDDEN` and (*proposal* (IID)) `#HIDDEN` command(s) are then applied.
 
 The arguments are whitespace-separated.
 
@@ -2429,7 +2429,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 *Unspecified* (?): The behavior when both `#NOTESPAWN` command(s) and [`#SUDDEN` and/or (*proposal* (IID)) `#HIDDEN` command(s)](#sudden--hidden-commands) are in effect.
 
-* Proposal (IID): The effects of `#NOTESPAWN` command(s) are applied first, and the disappear effect and moving-stop effect of [`#SUDDEN` and (*proposal* (IID)) `#HIDDEN` commands](#sudden--hidden-commands) are then applied.
+* *Proposal* (IID): The effects of `#NOTESPAWN` command(s) are applied first, and the disappear effect and moving-stop effect of [`#SUDDEN` and (*proposal* (IID)) `#HIDDEN` commands](#sudden--hidden-commands) are then applied.
 
 The arguments are whitespace-separated.
 
@@ -2631,11 +2631,17 @@ The semantics are otherwise the same as the [BALLOON](#balloon-headers) headers.
 ***Effect target***: notes \
 ***Effect branches***: current
 
-Specify the next **note** to be hand-holding ("**partner**"), like [note symbols `A` and `B`](#note-symbols-in-taiko-mode), which awards extra score bonus (except in PC-generation scoring) or (*proposal* (IID)) (for a hand-holding bomb/mine) extra gauge penalty if all players hit within a certain time duration.
+Specify the next **note** to be hand-holding ("**partner**"), like [note symbols `A` and `B`](#note-symbols-in-taiko-mode).
+
+*proposal* (IID): A hand-holding bomb/mine gives extra gauge penalty if all players hit the hand-held notes within a certain time duration.
+
+*Unspecified*: Whether an originally non&ndash;hand-holding note with `#PARTNERNOTE` applied awards extra score bonus (except in PC-generation scoring) on successful hand-holding judgement.
 
 If the next note is already a hand-holding note or (*proposal* (IID)) is not a hit-type note, the command has no effects.
 
-*Proposal* (IID): If the hand-holding note has no any hit-type notes to hand-hold at other player-sides, it becomes a non&ndash;hand-holding note, regardless of whether it is specified to be hand-holding by the note symbol or the `#PARTNERNOTE` command.
+*Proposal* (IID): If the hand-holding note has no hand-holding notes to hand-hold at any of the other player-sides, it becomes a non&ndash;hand-holding note, regardless of whether it is specified to be hand-holding by the note symbol or the `#PARTNERNOTE` command.
+
+*Unspecified*: In [Taiko mode](#note-symbols-in-taiko-mode), whether big notes `3` and `4` with `#PARTNERNOTE` applied are equivalent to the hand-holding notes `A` & `B`.
 
 Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF` or (*proposal* (IID)) `#COMMANDIFF` command](#proposal-komi-commandif-commands).
 
@@ -2766,7 +2772,7 @@ Override the result of all *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>�
 
 ### *Proposal* (IID): #LEVELREDIR
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (?; to be discussed) \
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
 ***Impact level***: note ★★★★★ \
 ***Scope***: branch \
 ***Scope fineness***: measure \
@@ -2853,13 +2859,14 @@ At the determining point, the "branch"/path&ndash;switching effects are played b
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
   * Each bool value of the [local (value or formula) triggers](#proposal-komi-counter--trigger-commands) specified by `<str-local-*-trigger-*-read-*-branch-condition>` is read at the branch determining point as a condition value, with the requirement value being 1 (true).
 * *Proposal* (IID): `#BRANCHSTART <comma-separated-list-branchstart-arguments>, <enum-str-range>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (?; to be discussed)
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
   * `<comma-separated-list-branchstart-arguments>` is any argument form above without trailing commas.
   * `<enum-str-range>` specifies how the requirement is fulfilled, see [Condition Judgement](#condition-judgement). It can be one of:
     * (empty) or `m` &mdash; **m**ore than or equal to ("≥") the given requirement
     * `l` &mdash; **l**ess than ("\<") the given requirement
-* Proposal* (IID): `#BRANCHSTART` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (?; to be discussed)
+  * Recommendation for charters: For `lc:<str-local-value-counter-read-value>`, `lcf:<str-local-formula-counter-read-value>`, `lt`, & `ltf` conditions, negating the value is prefered over specifying `l` as `<enum-str-range>`.
+* *Proposal* (IID): `#BRANCHSTART` \
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
   * No condition and requirements specified. Intended to be specified later by [the `#BRANCHNOR`, `#BRANCHEXP`, & `#BRANCHMAS`](#proposal-iid-branchnor--branchexp--branchmas) commands.
   * If the condition and requirements for a branch is left unspecified, when that branch is currently taken, the currently taken branch is taken as the target branch before the [`#LEVELHOLD`](#levelhold) and the (*Proposal* (IID)) [`#LEVELREDIR`](#proposal-iid-levelredir) commands are applied, see [judging the target branch](#condition-judgement).
 * `#BRANCHEND` \
@@ -2872,48 +2879,58 @@ The possible conditions includes `<enum-str-condition>`, `lc:<str-local-value-co
 `<enum-str-condition>` specifies the condition value for determining the "branch"/path can be one of the following:
 
 * `p` &mdash; percentage (%) of *<ruby>精<rt>sei</rt>度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy of all missable notes.
-  * > Formula: (`<jp>` + 0.5 × `<jg>`) / **max**{`<tn>`, 1} × 100(%)
+  * *Proposal* (IID): The value is limited between 0(%) and 100(%).
+  * > Formula: **min**{100(%), (`<sect:jp>` + 0.5 × `<sect:jg>`) / **max**{`<sect:tn>`, 1} × 100(%)}
+* *Proposal* (IID): `P` &mdash; percentage (%) of *<ruby>精<rt>sei</rt>度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy of all missable **big** notes. \
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  * > Formula: **min**{100(%), (`<sect:jp>` + 0.5 × `<sect:jg>`) / **max**{`<sect:tn>`, 1} × 100(%)}
 * `d` &mdash; (*Proposal* (IID)) Percentage (%) of "precision"/accuracy of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes. (**`d`** can be seen as a rotated `p`) \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
   ***First seen in***: TJAPlayer2 for.PC
   * Defined but without formula in TJAPlayer2 for.PC, where this condition is described as "*大音符のみの精度分岐*" ("branching by precision of only big notes").
   * In [TJAPlayer3 (Akasoko-Master)](https://github.com/Akasoko-Master/TJAPlayer3), and later ported to TJAPlayer3-f, TJAPlayer3-Develop, & TJAPlayer3-Develop-ReWrite, the formula is defined but not counted in gameplay, so the condition value is always 0.
-  * > Formula (TJAPlayer3 (Akasoko-Master), intended): `<JP>`
-  * > Formula (*Proposal* (IID)): (`<JP>` + 0.5 × `<JG>`) / **max**{`<TN>`, 1} × 100(%)
+  * > Formula (TJAPlayer3 (Akasoko-Master), intended): `<sect:JP>`
+  * > Formula (*Proposal* (IID)): **min**{100(%), (`<sect:JP>` + 0.5 × `<sect:JG>`) / **max**{`<sect:TN>`, 1} × 100(%)}
 * *Proposal* (IID): `pp` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable notes. \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (?; to be discussed)
-  * > Formula: `<jp>` / **max**{`<tn>`, 1} × 100(%)
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  * > Formula: **min**{100(%), `<sect:jp>` / **max**{`<sect:tn>`, 1} × 100(%)}
 * *Proposal* (IID): `PP` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable **big** notes. \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (?; to be discussed)
-  * > Formula: `<JP>` / **max**{`<TN>`, 1} × 100(%)
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  * > Formula: **min**{100(%), `<sect:JP>` / **max**{`<sect:TN>`, 1} × 100(%)}
 * *Proposal* (IID): `jb` &mdash; amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD **j**udgements. \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (?; to be discussed)
-  * > Formula: `<jb>`
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  * > Formula: `<sect:jb>`
 * *Proposal* (IID): `JB` &mdash; amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD **j**udgements on **big** notes. \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (?; to be discussed)
-  * > Formula: `<JB>`
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  * > Formula: `<sect:JB>`
 * `r` &mdash; amount of hits on bar drum**r**oll notes.
   * Not to be confused with the `r` (including *all* drum**r**oll-type notes) used for the requirement of [the `EXAM` headers](#exam-headers).
-  * > Formula: `<rt>` − `<rb>`
+  * > Formula: `<sect:rt>` − `<sect:rb>`
+* `R` &mdash; amount of hits on **big** bar drum**r**oll notes.
+  * Not to be confused with the `r` (including *all* drum**r**oll-type notes) used for the requirement of [the `EXAM` headers](#exam-headers).
+  * > Formula: `<sect:RT>` − `<sect:RB>`
 * *Proposal* (IID): `rb` &mdash; amount of hits on **b**alloon-type drum**r**oll-**t**ype notes. \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (?; to be discussed)
-  * > Formula: `<rb>`
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  * > Formula: `<sect:rb>`
+* *Proposal* (IID): `RB` &mdash; amount of hits on special ("**b**ig") **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`). \
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  * > Formula: `<sect:RB>`
 * `s` &mdash; the current **s**core points. \
   ***Supported by***: TaikoJiro v2.66, [TJAPlayer3 (Akasoko-Master)](https://github.com/Akasoko-Master/TJAPlayer3), TJAPlayer3-f, TJAPlayer3-Develop, TJAPlayer3-Develop-ReWrite
   * > Formula: `<s>`
-  * *Unspecified*: The behavior when either unsupported scoring mode or the default value is specified to [the `SCOREMODE:` header](#scoremode) or the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option is enabled.
+  * *Unspecified*: The behavior when any of the requirement values are greater than 1 and either unsupported scoring mode or the default value is specified to [the `SCOREMODE:` header](#scoremode) or the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option is enabled.
 
-The variables in the above formulae are written in the form of [(*proposal* (Komi)) pre-defined store expression variables](#store-expression-syntax), but only the basic definition is used and only the notes or judgements within the branch-determining section are counted.
+The variables in the above formulae are [(*proposal* (Komi)) pre-defined store expression variables](#store-expression-variable-access). See there for the explanation about calculating the condition value regarding big notes.
 
-Swap note in Taiko mode (`G`) is *not* counted as a type of big note for calculating the condition value.
-
-For roll count conditions (`r` & `rb`), if a counted drumroll note is defined as beginning non-after but ending after the default beat position of the determining point, the actual determining point is postponed until the earlier of the definition positions of the ending of that note and an *unspecified* duration before the `#BRANCHSTART` command:
+For roll count conditions (`r`, `R`, `rb`, & `RB`), if a counted drumroll note is defined as beginning non-after but ending after the default beat position of the determining point, the actual determining point is postponed until the earlier of the definition positions of the ending of that note and an *unspecified* duration before the `#BRANCHSTART` command:
 
 * TaikoJiro: zero-duration (live-updated after the default determining point).
 * TJAPlayer2 for.PC and TJAPlayer3: 1 measure (i.e., not postponed).
 * TJAPlayer3-f and OpenTaiko (0auBSQ): zero-duration (updated once at the postponed determining point).
 
 The accumulated roll count calculated during the determining section is used.
+
+If a roll count condition is replaced by a charter-defined variable condition (`lc:<str-local-value-counter-read-value>`, `lcf:<str-local-value-counter-read-value>`, `lt`, `ltf`), the actual determining point is not postponed.
 
 For the score condition (`s`), the final value at the determining point is used.
 
@@ -2923,7 +2940,7 @@ For other conditions, the percentage or amount calculated during the determining
 
 * Whether the condition value is updated based on the duration (if exists) or critical judgement time (hit-type note) of the note, or the actual finish-hit time for the note, if they do not happen in the counted determining section for the same branch determining point.
 * Except for the score condition (`s`), whether only notes whose tail (if exists) or critical judgement time is in the taken route are counted, or all judgements made in the taken route are counted.
-* For percentage conditions (`p`, `d`, `pp`, & `PP`), whether the note count variable is based on notes whose tail (if exists) or critical judgement time is in the taken route (as pre-defined store expression variable `<t*:t>`), or based on the total amount of judgements (as pre-defined store expression variable `<t*:j>`).
+* For percentage conditions (`p`, `P`, `d`, `pp`, & `PP`), whether the note count variable is based on notes whose tail (if exists) or critical judgement time is in the taken route (as pre-defined store expression variable `<t*:t>`), or based on the total amount of judgements (as pre-defined store expression variable `<t*:j>`).
 
 #### Condition Judgement
 
@@ -2997,7 +3014,7 @@ Single condition:
 * "KAGEKIYO", Inner oni difficulty
   * Measure 80: `#BRANCHSTART PP,42.8,100` &mdash; 3/7 × 100, 7/7 × 100(%)
 * "*<ruby>ハ<rt>Ha</rt>ロー<rt>roo</rt>！</ruby> <ruby>ハ<rt>Ha</rt>ロ<rt>ro</rt>ウィ<rt>wi</rt>ン<rt>n</rt></ruby>*" "Hello! Halloween", Oni difficulty, before AC16: <https://wikiwiki.jp/taiko-fumen/%E5%8F%8E%E9%8C%B2%E6%9B%B2/%E3%81%8A%E3%81%AB/%E3%83%8F%E3%83%AD%E3%83%BC%EF%BC%81%20%E3%83%8F%E3%83%AD%E3%82%A6%E3%82%A3%E3%83%B3>
-  * `#SECTION` at measure 59, `#BRANCHSTART p,50,90` at measure 63, but strong/double-hit required for branch condition (not required after AC16)
+  * `#SECTION` at measure 59, `#BRANCHSTART lcf:f,50,90` at measure 63, with `f` being `(<sect:JP:d> + <sect:JG:d> / 2) / <sect:TN>` &mdash; Strong/double-hit precision (not required after AC16, where `#BRANCHSTART p,50,90` is enough)
 * "<ruby>ま<rt>Ma</rt>だ<rt>da</rt>さ<rt>Sa</rt>い<rt>i</rt>た<rt>ta</rt>ま<rt>ma</rt></ruby>2000"
   * `#SECTION` at measure 41, and the following `#BRANCHSTART` command at measure 47:
     * Easy difficulty: `#BRANCHSTART rb,38,38`
@@ -3060,19 +3077,18 @@ Compound condition:
   // ... // Measure 20 and on
   ```
   * Denoted below as: Measure 20: `#BRANCHSTART p,0.01,0.01` with `#LEVELHOLD` in `#N` + `#BRANCHSTART r,1,2`.
+  * Alternatively `#BRANCHSTART lcf:f,1,2` at measure 20 with `f` being `2 * (<sect:jp> + <sect:jg>) + <sect:rt>`
 * "<ruby>十<rt>So</rt>露<rt>ro</rt>盤<rt>ban</rt>2000<rt>Nisen</rt></ruby>", all difficulties, in CS7 and AC10 and later games
   * Until PSPDX and AC16: Measure 47: `#BRANCHSTART r,0,1` with `#LEVELHOLD` in `#M` &mdash; any bar drumrolls to Master \
   \+ `#BRANCHSTART p,0,0.01` with `#LEVELHOLD` in `#E` & `#LEVELREDIR N,E,M` (unhold) in `#M` &mdash; or any non-*<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>*/BADs on missable notes to Master
+    * Or `#BRANCHSTART lcf:f,0,1` with `f` being `<sect:jp> + <sect:jg> + <sect:rt> - <sect:rb>` and with `#LEVELHOLD` in `#E`
   * Since PSPDX and AC16: Measure 47: `#BRANCHSTART s,0,1` with `#LEVELHOLD` in `#E`
 * "*<ruby>タ<rt>Ta</rt>イ<rt>i</rt>コ<rt>ko</rt>タ<rt>Ta</rt>イ<rt>i</rt>ム<rt>mu</rt></ruby>*" "Taiko Time", Oni difficulty, except Wii U2, 3DS3, NS2/DF:
-  * Measure 17: `#BRANCHSTART p,98,98` with `#LEVELHOLD` in `#M` &mdash; 27+ *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOODs + 1− *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK to Master \
-  \+ `#BRANCHSTART jb,1,1,l` with `#LEVELHOLD` in `#N` \
-  \+ `#BRANCHSTART pp,1,1,l` with `#LEVELHOLD` in `#N` \
-  \+ (until AC16) `#BRANCHSTART p,1,1,l` (but only counting strong/double-hit judgements on big notes) with `#LEVELHOLD` in `#N` &mdash; or 28 weak/single-hit *<ruby>可<rt>Ka</rt></ruby>* GOOD/OKs to Master
+  * Measure 17: `#BRANCHSTART ltf,f,f` with `f` being `<sect:p> >= 0.98 | (<sect:jg> - <sect:JG:d> == 28)`
 * "*<ruby>六<rt>Rop</rt>本<rt>pon</rt>の<rt>no</rt>薔薇<rt>Bara</rt>と<rt>to</rt>采<rt>Sai</rt>の<rt>no</rt>歌<rt>Uta</rt></ruby>*", Inner Oni difficulty
-  * Measure 5, 17, 29, 46, 61, 81, 96, 120: `#BRANCHSTART p,86,94` (but with each balloon hit count as certain unknown amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD and as certain unknown amount of missable notes)
+  * Measure 5, 17, 29, 46, 61, 81, 96, 120: `#BRANCHSTART lcf:f,86,94` with `f` being `(<sect:jp> + <sect:jg> / 2 + x * <sect:rb>) / (<sect:tn> + x * <sect:trbh>)` (`x` is certain unknown value)
 * "<ruby>森<rt>Shin</rt>羅<rt>ra</rt>万<rt>Ban</rt>象<rt>shou</rt></ruby>", Oni difficulty:
-  * Measure 118: `#BRANCHSTART p,?,87.8` (`?` for certain unknown values) (but with each balloon hit count as 0.45 *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD and as 0.45 missable notes) &mdash; 100% acc on 87 notes + 1+ (of 28) balloon hits, or 86%+ acc on 87 notes + all 28 balloon hits
+  * Measure 118: `#BRANCHSTART lcf:f,x,87.8` (`x` is certain unknown value) with `f` being `(<sect:jp> + <sect:jg> / 2 + 0.45 * <sect:rb>) / (<sect:tn> + 0.45 * <sect:rb>)` &mdash; 100% acc on 87 notes + 1+ (of 28) balloon hits, or 86%+ acc on 87 notes + all 28 balloon hits
 
 Branch-dependent condition:
 
@@ -3093,7 +3109,7 @@ Branch-dependent condition:
 
 ### *Proposal* (IID) #BRANCHNOR / #BRANCHEXP / #BRANCHMAS
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (?) \
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
 ***Impact level***: note ★★★★★ \
 ***Scope***: notechart \
 ***Scope fineness***: measure \
@@ -3805,6 +3821,12 @@ The list of (*Proposal* (IID)) pre-defined constants and functions are separatel
 
 Excessive arguments are ignored. Lacking arguments cause the lookup to fail and cause the result to be `0`.
 
+*Proposal* (IID): For calculating the pre-defined variables regarding big note statistics:
+
+* The hand-holding notes [`A` & `B` in Taiko mode](#note-symbols-in-taiko-mode) (*not* including notes with an enabled [(*proposal* (Komi)) `#PARTNERNOTE` command](#proposal-komi-partnernote) applied) are counted as big notes. No pre-defined judgement statistic variables separate these notes from originally non&ndash;hand-holding big notes which are made hand-holding by the (*proposal* (Komi)) `#PARTNERNOTE` command.
+* A Swap note in Taiko mode (`G`) is *not* counted as a big note.
+* A Giant note (notes with an enabled [(*proposal* (Komi)) `#GIANTNOTE` command](#proposal-komi-giantnote) applied) is *not* counted as a big note.
+
 Tag | Arguments | Value
 --- | --- | ---
 `cl` | (none) | The [**`LEVEL:`**](#level) value of the **c**urrent player-side.
@@ -3812,30 +3834,34 @@ Tag | Arguments | Value
 `pc` | (none) | Amount ("**c**ount") of **p**layer-sides in this gameplay.
 `ss` | (none) | Current value of **s**ong **s**peed multiplier modifier.
 `sc` | (none) | **C**urrent value of **s**crolling rate multiplier modifier.
-`jp` | (none) | Current amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements.
-`jg` | (none) | Current amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements.
-`jb` | (none) | Current amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* **B**AD **j**udgements on missable **n**otes. <br /> &bull; `t` &mdash; Also counts combo-break penalties.
-`jbt` | (none) | Current amount of combo-break **j**udgements, including ("**t**otal") *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* **B**AD (both for notes and for empty hits) and **B**OOM.
-*Proposal* (IID): <br /> `JP` | &bull; (none) <br /> &bull; `d` | Current amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements on **big** notes (not including note symbol `G`). <br /> &bull; `d` &mdash; Only counts *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" judgements.
-*Proposal* (IID): <br /> `JG` | &bull; (none) <br /> &bull; `d` | Current amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements on **big** notes (not including note symbol `G`). <br /> &bull; `d` &mdash; Only counts *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" judgements.
-*Proposal* (IID): <br /> `JB` | (none) <br /> `d` | Current amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* **B**AD **j**udgements on **big** notes.
-`ja` | (none) | Current amount of caught _**A**d libitum_ (**A**D-LIB) notes.
-`jm` | (none) | Current amount of caught BOOM ("**m**ine caught") **j**udgements.
-*Proposal* (IID): <br /> `jmb` | (none) | Current amount of caught **b**omb/**m**ine.
+`jp` | &bull; (none) <br /> &bull; `l` | Current amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements. <br /> &bull; `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
+`jg` | &bull; (none) <br /> &bull; `l` | Current amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements. <br /> &bull; `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
+`jb` | &bull; (none) <br /> &bull; `l` | Current amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* **B**AD **j**udgements on missable **n**otes. <br /> &bull; `l` &mdash; Only counts hand-holding ("**l**"inked) notes.
+*Proposal* (IID): `jbt` | (none) | Current amount of combo-break **j**udgements, including ("**t**otal") *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* **B**AD (both for notes and for empty hits) and **B**OOM.
+*Proposal* (IID): <br /> `JP` | &bull; (none) <br /> &bull; `d` <br /> &bull; `l` | Current amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements on **big** notes (not including note symbol `G`). <br /> &bull; `d` &mdash; Only counts *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" judgements and successful hand-holding judgements. <br /> &bull; `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
+*Proposal* (IID): <br /> `JG` | &bull; (none) <br /> &bull; `d` <br /> &bull; `l` | Current amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements on **big** notes (not including note symbol `G`). <br /> &bull; `d` &mdash; Only counts *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" judgements and successful hand-holding judgements. <br /> &bull; `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
+*Proposal* (IID): <br /> `JB` | &bull; (none) or `d` <br /> &bull; `l` | Current amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* **B**AD **j**udgements on **big** notes. <br /> &bull; `l` &mdash; Only counts hand-holding ("**l**"inked) big notes.
+`ja` | &bull; (none) <br /> &bull; `l` | Current amount of caught _**A**d libitum_ (**A**D-LIB) notes. <br /> `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
+`jm` | &bull; (none) | Current amount of caught BOOM ("**m**ine caught") **j**udgements.
+*Proposal* (IID): <br /> `jmb` | &bull; (none) <br /> &bull; `l` | Current amount of caught **b**omb/**m**ine. <br /> `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
 *Proposal* (IID): <br /> `jrb` | (none) | Current amount of popped **b**alloon-type drum**r**oll-**t**ype notes.
 *Proposal* (IID): <br /> `JRB` | &bull; (none) <br /> &bull; `d` | Current amount of popped special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`). <br /> &bull; `d` &mdash; Only counts pops with full bonus.
-`a` <br /> `p` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | Current percentage (%) of *<ruby>精<rt>sei</rt>度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/**a**ccuracy of all missable notes, based on (*Proposal* (IID)) (for `j`) amount of actual **j**udgements or (for `t`) amount of notes whose critical judgement **t**iming has been reached before now.
-`tn` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | **T**otal amount of encountered missable **n**otes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now.
-`TN` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | **T**otal amount of encountered missable **big** **n**otes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now.
-`ta` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | **T**otal amount of encountered _**A**d libitum_ (**A**D-LIB) notes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now.
+`tn` | (in any order) <br /> (&bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t`) : <br /> (&bull; (none) <br /> &bull; *Proposal* (IID): `l`) | **T**otal amount of encountered missable **n**otes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now. <br /> &bull; `l` &mdash; Only count hand-holding notes.
+*Proposal* (IID): `TN` | (in any order) <br /> (&bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t`) : <br /> (&bull; (none) or `d` <br /> &bull; *Proposal* (IID): `l`) | **T**otal amount of encountered missable **big** **n**otes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now. <br /> &bull; `l` &mdash; Only count hand-holding notes.
+`ta` | (same as `tn`) | **T**otal amount of encountered _**A**d libitum_ (**A**D-LIB) notes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now. <br /> &bull; `l` &mdash; Only count hand-holding notes.
 `tm` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | **T**otal amount of encountered notes which can give a BOOM ("**m**ine caught") judgement (*Proposal* (IID)) (for `j`) **j**udged (hit, popped, or failed to pop) or (for `t`) whose critical judgement **t**iming or beginning or ending **t**iming has been reached before now.
-*Proposal* (IID): <br /> `tmb` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | **T**otal amount of encountered **b**omb/**m**ine notes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now.
+*Proposal* (IID): <br /> `tmb` | (same as `tn`) | **T**otal amount of encountered **b**omb/**m**ine notes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now. <br /> &bull; `l` &mdash; Only count hand-holding notes.
 *Proposal* (IID): <br /> `trb` | &bull; (none) or `j` <br /> &bull; `t` | **T**otal amount of encountered **b**alloon-type drum**r**oll-**t**ype notes (for `j`) popped or failed to pop or (for `t`) whose beginning or ending **t**iming has been reached before now.
 *Proposal* (IID): <br /> `TRB` | &bull; (none) or `j` <br /> &bull; `t` | **T**otal amount of encountered special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`) (for `j`) popped or failed to pop or (for `t`) whose beginning or ending **t**iming has been reached before now.
+*Proposal* (IID): <br /> `trbh` | &bull; (none) or `j` <br /> &bull; `t` | **T**otal required amount of **h**its of all encountered **b**alloon-type drum**r**oll-**t**ype notes (for `j`) popped or failed to pop or (for `t`) whose beginning or ending **t**iming has been reached before now.
+*Proposal* (IID): <br /> `TRBH` | &bull; (none) or `j` <br /> &bull; `t` | **T**otal required amount of **h**its of all encountered special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`) (for `j`) popped or failed to pop or (for `t`) whose beginning or ending **t**iming has been reached before now.
 *Proposal* (IID): `rt` | (none) | Current amount of hits on all (**t**otal) drum**r**oll-**t**ype notes.
 *Proposal* (IID): `RT` | &bull; (none) <br /> &bull; `d` | Current amount of hits on all (**t**otal) **big** (including special balloons (note symbol `9`)) drum**r**oll-**t**ype notes. <br /> &bull; `d` &mdash; Only counts _strong/"**d**ouble-hit"_ hits on big bar drumrolls.
 *Proposal* (IID): `rb` | (none) | Current amount of hits on **b**alloon-type drum**r**oll-**t**ype notes.
 *Proposal* (IID): `RB` | (none) | Current amount of hits on special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
+*Proposal* (IID): `sect` | (One of above tags from `jp` to `RB`) : <br /> (One of (none), `d`, & `l`) | The current judgement statistic counted since the last [`#SECTION`](#section) (if any) or the start of the chart. <br /> The `d` or `l` option is applied to the tag if applicable.
+*Proposal* (IID): `sect` | (One of `p`, `P`, `pp`, `PP`, `r`, `R`) : (One of (none), `d`, & `l`) | The current value calculated using the formula of the corresponding `<enum-str-condition>` of [the `#BRANCHSTART` command](#branchstart--branchend) since the last [`#SECTION`](#section) (if any) or the start of the chart. <br /> The `d` or `l` option is applied to the `<sect:*>` variables in the formula if applicable.
+`a` <br /> `p` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | Current percentage (%) of *<ruby>精<rt>sei</rt>度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/**a**ccuracy of all missable notes, based on (*Proposal* (IID)) (for `j`) amount of actual **j**udgements or (for `t`) amount of notes whose critical judgement **t**iming has been reached before now.
 *Proposal* (IID): `s` | (none) | Current **s**core.
 `cc` | (none) | **C**urrent **c**ombo earned.
 `g` | (none) | Percentage (%) of *<ruby>魂<rt>tamashii</rt>**ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge. <br /> *Proposal* (IID): For [`LIFE:`](#life) life count, the initial life count is defined as 100%.
@@ -4321,9 +4347,9 @@ See [#SENOTECHANGE](#senotechange) for the general patterns of how the alternati
 `H` | (same as `6`) (OpenTaiko (0auBSQ)) <br /> Head of regular <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> (bar) *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>* drumroll (OutFox's OpenTaiko-OutFox standard draft (?)) <br /> Examples: `H008`, `HHH8`, `H001` | (see `6`) <br /> Small orange-ish red circle with bar attached behind (OutFox) | (see `6`) | (same as `5`) (OpenTaiko (0auBSQ)) <br /> Similar to `5` but only consumes (?) and reacts to surface inputs. (OutFox's OpenTaiko-OutFox standard draft) <br /> Awards the same as `5`. | (impossible to fail) | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 <br /> ***First seen in***: (first proposed from OutFox), OpenTaiko (0auBSQ) v0.5.4 <br /> By analogy with Konga mode
 `7` | Head of regular *<ruby>激<rt>Geki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt>キ<rt>ki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt>船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* balloon <br /> Examples: `7008`, `7778`, `7001` | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | *<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* Balloon | Roll on the drum surface with exactly certain amount of reacted hits during its duration, consumes each surface or rim (?) hit with unlimited speed, reacts to each surface hit up to 1 hit per 60fps frame (official games). <br /> Each reacted hit increases score (except for CS4&ndash;5, TDM, & PSP1&ndash;2). <br /> Awards extra score bonus† when cleared. | Fail to input enough amount of reacted hits. <br /> Does not give penalties except that notes (except bombs/mines (?)) placed within the duration of the balloon are impossible to hit while the balloon is not cleared. |
 `8` | Explicit end of a drumroll-type note (if any), otherwise (blank) | (round end of a bar) (end of bar drumrolls) <br /> (none) (otherwise) | (っ!!) (end of bar drumrolls) <br /> (none) (otherwise) | Nothing needs to be done. Consumes no input. | (impossible to fail) | Stopping rolling the drum non-after the point (end of drumrolls) <br /> Introduced to replaced the TJF syntax for specifying drumroll duration (`5555` / `7777`) (explained below).
-`9` | Head of special burst note/balloon <br> (Differ from game to game) <br /> Examples: `9008`, `9998`, `9001` | (Vary) <br> Big yellow circle with potato attached (PS2-generation) <br> Big yellow circle in the shape of a confetti ball 🎊 (PS3- and PC-generation) <br> Has particle decorative visual effects in AC. | *<ruby>く<rt>Ku</rt>す<rt>su</rt>玉<rt>dama</rt></ruby>* Party Popper <br> (Strictly speaking, *<ruby>薬<rt>Kusu</rt>玉<rt>dama</rt></ruby>/<ruby>く<rt>Ku</rt>す<rt>su</rt>玉<rt>dama</rt></ruby>* "Confetti Ball" 🎊 & party popper 🎉 only resemble each other and are not the same thing) | (Vary) <br> In AC, roll on the drum surface with exactly certain amount (summed and shared among players) of reacted hits during its duration, consumes each surface or rim (?) hit with unlimited speed, reacts to each surface hit up to 1 hit per 60fps frame (official games). <br /> Each reacted hit increases score. <br /> Awards vary extra score bonus† when cleared, according to the timing of an additional final hit (consumed) hinted by the player character's face (AC7) or whether the note is cleared quickly enough (later AC) <br> | (same as `7`) | ***First seen in***: TaikoJiro v2.75 <br /> In the official games, becomes `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player.
-`A` | Hand-holding big <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> | Big orange-ish red circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "DON (Hand)" (in 4-player mode) | Similar to `3` but awards extra score bonus† if all players hit within a certain time duration <br> | (same as `3`) | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2018040100 <br /> ***Supported by***: OutFox v0.4.9.9 <br /> In the official games, becomes `3` when no missable hit-type notes exist at the same time position for any of the player above or below the current player.
-`B` | Hand-holding big <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> | Big sky-blue circle with hands holding with other note(s) for other player(s) | (none) <br> *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "KA (Hand)" (in 4-player mode) | Similar to `4` but awards extra score bonus† if all players hit within a certain time duration. | (same as `4`) | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2018040100 <br /> ***Supported by***: OutFox v0.4.9.9 <br /> In the official games, becomes `4` when no missable hit-type notes exist at the same time position for any of the player above or below the current player.
+`9` | Head of special burst note/balloon <br> (Differ from game to game) <br /> Examples: `9008`, `9998`, `9001` | (Vary) <br> Big yellow circle with potato attached (PS2-generation) <br> Big yellow circle in the shape of a confetti ball 🎊 (PS3- and PC-generation) <br> Has particle decorative visual effects in AC. | *<ruby>く<rt>Ku</rt>す<rt>su</rt>玉<rt>dama</rt></ruby>* Party Popper <br> (Strictly speaking, *<ruby>薬<rt>Kusu</rt>玉<rt>dama</rt></ruby>/<ruby>く<rt>Ku</rt>す<rt>su</rt>玉<rt>dama</rt></ruby>* "Confetti Ball" 🎊 & party popper 🎉 only resemble each other and are not the same thing) | (Vary) <br> In AC, roll on the drum surface with exactly certain amount (summed and shared among players) of reacted hits during its duration, consumes each surface or rim (?) hit with unlimited speed, reacts to each surface hit up to 1 hit per 60fps frame (official games). <br /> Each reacted hit increases score. <br /> Awards vary extra score bonus† to all players when cleared, according to the timing of an additional final hit (consumed) hinted by the player character's face (AC7) or whether the note is cleared quickly enough (later AC) <br> | (same as `7`) | ***First seen in***: TaikoJiro v2.75 <br /> In the official games, becomes `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player.
+`A` | Hand-holding big <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> | Big orange-ish red circle with hands holding with other note(s) for other player(s) <br /> Its face resembles `1` rather than `3` until being hit. | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "DON (Hand)" | Similar to `1` or `3` (strong or double-hit not required in some official games (?)) but awards extra score bonus† if all players hit within a certain time duration. | (same as `1`) | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2018040100 <br /> ***Supported by***: OutFox v0.4.9.9 <br /> In the official games, becomes `3` when no hand-holding notes exist at the same time position for any of the other players.
+`B` | Hand-holding big <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> | Big sky-blue circle with hands holding with other note(s) for other player(s) <br /> Its face resembles `2` rather than `4` until being hit. | *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "KA (Hand)" | Similar to `2` or `4` (strong or double-hit not required in some official games (?)) but awards extra score bonus† if all players hit within a certain time duration. | (same as `2`) | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2018040100 <br /> ***Supported by***: OutFox v0.4.9.9 <br /> In the official games, becomes `4` when no hand-holding notes exist at the same time position for any of the other players.
 `C` | Bomb/mine | Small dark-blue cherry bomb with ignited fuze 💣 | (none) | All hits are too off or not hit (both consumes no inputs). <br /> Awards a "bomb/mine-pass" judgment. | Hit the drum surface or rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK (?) timing window, consumes an input. <br /> Gives a BOOM ("bomb/mine-miss") judgment & a combo-break and decreases *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge. | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 <br /> ***First seen in***: OpenTaiko-OutFox standard 1.2 (proposed from OutFox) <br /> ***Supported by***: OpenTaiko (0auBSQ) v0.5.4
 `D` | Fuze/fuse drumroll <br /> Examples: `D008`, `DDD8`, `D001` | ? <br /> (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt>爆<rt>baku</rt>弾<rt>dan</rt></ruby> "Time bomb"/Fuseroll) | Similar to `7` but awards a "bomb/mine-pass" judgment. | Similar to `7` but gives a BOOM ("bomb/mine-miss") judgment & a combo-break and decreases *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge. | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 <br /> ***First seen in***: (first proposed from OutFox), OpenTaiko (0auBSQ) v0.6.0 <br /> Not in the official games.
 `F` | *Ad libitum* note (AD-LIB) | (invisible by default) | (none) | Hit the drum surface or rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window, consumes an input. <br /> Awards an AD-LIB judgment but keep combo unchanged. | Not hit within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window (consumes no inputs). <br /> Gives no penalties. | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2016081500 <br /> Not in the official games. <br> Inspired by another rhythm game *GROOVE COASTER*, developed by TAITO
@@ -4458,9 +4484,9 @@ See [#SENOTECHANGE](#senotechange) for the general patterns of how the alternati
 `H` | Head of clap bar applause <br /> Examples: `H008`, `HHH8`, `H001` | Sky-blue circle with star-ish edge and with bar attached behind | *<ruby>拍<rt>Haku</rt>手<rt>shu</rt></ruby>～* "Applaud~" | Applaud above the bongo drums during its duration, consumes each left (?), right (?), or clap hit with unlimited speed, reacts to each clap hit up to 1 hit per 60fps frame (official games). <br /> Increases score per reacted hit. | (impossible to fail) |
 `7` | Head of regular *<ruby>激<rt>Geki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt>キ<rt>ki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt>船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* balloon <br /> Examples: `7008`, `7778`, `7001` | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | (*<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* Balloon) | Roll on either bongo drum with exactly certain amount of reacted hits during its duration, consumes each left, right, and clap (?) hit with unlimited speed, reacts to each left or right hit up to 1 hit per 60fps frame (official games). <br /> Each reacted hit increases score. <br /> Awards extra score bonus† when cleared. | Fail to input enough amount of reacted hits. <br /> Does not give penalties except that notes (except bombs/mines (?)) placed within the duration of the balloon are impossible to hit while the balloon is not cleared. | ***First seen in***: OpenTaiko-OutFox standard 1.2 <br /> By analogy with Taiko mode.
 `8` | Explicit end of a drumroll-type or applause note (if any), otherwise (blank) | (round end of a bar) (end of a bar drumroll or applause) <br /> (none) (otherwise) | (none) | Nothing needs to be done. Consumes no input. | (impossible to fail) | Stop rolling both the bongo drums or clapping non-after the point (end of drumrolls)
-`9` | Head of special burst note/balloon <br /> Examples: `9008`, `9998`, `9001` | (Vary) | (*<ruby>く<rt>Ku</rt>す<rt>su</rt>玉<rt>dama</rt></ruby>* Party Popper) | (Vary) <br> Roll on either bongo drum with exactly certain amount (summed and shared among players) of reacted hits during its duration, consumes each left, right, or clap (?) hit with unlimited speed, reacts to each left or right hit up to 1 hit per 60fps frame (official games). <br /> Each reacted hit increases score. <br /> Awards vary extra score bonus† when cleared, according to whether the note is cleared quickly enough. | (same as `7`) | ***First seen in***: OpenTaiko-OutFox standard 1.2 <br /> Might become `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player. <br /> Not in the official games. <br /> By analogy with Taiko mode.
-`A` | Hand-holding both drum beats | (Pink circle with hands holding with other note(s) for other player(s)) | ? | Similar to `3` but awards extra score bonus† if all players hit within a certain time duration <br> | (same as `3`) | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ), OutFox <br /> Might becomes `3` when no hit-type notes exist at the same time position for any of the player above or below the current player. <br> Not in the official games. <br> By analogy with `GAME:Taiko`.
-`B` | Hand-holding clap beat | (Sky-blue circle with star-ish edge and with hands holding with other note(s) for other player(s)) | ? | Similar to `4` but awards extra score bonus† if all players hit within a certain time duration. | (same as `4`) | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ), OutFox <br /> Might becomes `4` when no hit-type notes exist at the same time position for any of the player above or below the current player. <br> Not in the official games. <br> By analogy with Taiko mode.
+`9` | Head of special burst note/balloon <br /> Examples: `9008`, `9998`, `9001` | (Vary) | (*<ruby>く<rt>Ku</rt>す<rt>su</rt>玉<rt>dama</rt></ruby>* Party Popper) | (Vary) <br> Roll on either bongo drum with exactly certain amount (summed and shared among players) of reacted hits during its duration, consumes each left, right, or clap (?) hit with unlimited speed, reacts to each left or right hit up to 1 hit per 60fps frame (official games). <br /> Each reacted hit increases score. <br /> Awards vary extra score bonus† to all players when cleared, according to whether the note is cleared quickly enough. | (same as `7`) | ***First seen in***: OpenTaiko-OutFox standard 1.2 <br /> Might become `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player. <br /> Not in the official games. <br /> By analogy with Taiko mode.
+`A` | Hand-holding both drum beats | (Pink circle with hands holding with other note(s) for other player(s)) | ? | Similar to `3` but awards extra score bonus† if all players hit within a certain time duration <br> | (same as `3`) | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ), OutFox <br /> Might becomes `3` when no hand-holding notes exist at the same time position for any of the other players. <br> Not in the official games. <br> By analogy with `GAME:Taiko`.
+`B` | Hand-holding clap beat | (Sky-blue circle with star-ish edge and with hands holding with other note(s) for other player(s)) | ? | Similar to `4` but awards extra score bonus† if all players hit within a certain time duration. | (same as `4`) | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ), OutFox <br /> Might becomes `4` when no hand-holding notes exist at the same time position for any of the other players. <br> Not in the official games. <br> By analogy with Taiko mode.
 `C` | Bomb/mine | (Small dark-blue cherry bomb with ignited fuze 💣) | (none) | All hits are too off or not hit (both consumes no inputs). <br /> Awards a "bomb/mine-pass" judgment. | Hit either bongo drum or clap within the OK (?) timing window, consumes an input. <br /> Gives a BOOM ("bomb/mine-miss") judgment & a combo-break and decreases healty gauge. | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ) <br /> Not in the official games. <br /> By analogy with Taiko mode.
 `D` | Fuze/fuse drumroll <br /> Examples: `D008`, `DDD8`, `D001` | (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt>爆<rt>baku</rt>弾<rt>dan</rt></ruby> "Time bomb"/Fuseroll) | Similar to `7` but awards a "bomb/mine-pass" judgment. | Similar to `7` but gives a BOOM ("bomb/mine-miss") judgment & a combo-break and decreases healthy gauge. | ***First seen in***: OpenTaiko-OutFox standard 1.2 (first proposed from OutFox), OpenTaiko (0auBSQ) v0.6.0 <br /> Not in the official games. <br /> By analogy with Taiko mode.
 `F` | *Ad libitum* note (AD-LIB) | (invisible by default) | (none) | Hit either bongo drum or clap within the OK timing window, consumes an input. <br /> Awards an AD-LIB judgment but keep combo unchanged. | Not hit within the OK timing window (consumes no inputs). <br /> Gives no penalties. | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ) <br /> Not in the official games. <br> By analogy with Taiko mode.
