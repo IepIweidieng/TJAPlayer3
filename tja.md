@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-05-04 (UTC+8)
+* Last changed: 2025-05-05 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1645,7 +1645,7 @@ Each proposed compatibility-mode behavior is enclosed in parentheses (`()`) for:
 Flag \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
 --- | --- | --- | --- | --- | --- | ---
 `balloon-popcount` | N/A | `common` | `common` | `common` | `n` | `n` <br /> (`common`)
-`balloonnem-popcount-nonbranch` | N/A | N/A <br /> (`1n-or-1nem`) | N/A <br /> (`1n-or-1nem`) | N/A <br /> (`1n-or-1nem`) | `1n-or-3last` | `1nem`
+`balloonnem-popcount-nonbranch` | N/A | N/A <br /> (`1n-or-end-1nem`) | N/A <br /> (`1n-or-end-1nem`) | N/A <br /> (`1n-or-end-1nem`) | `1n-or-end-3last` | `1nem`
 `end-at` | `music` | `music` | `music` | `music` (?) | `end` | `end` <br /> (`music-and-end`)
 `timing-precision` | ? | `ms-bpm` | `ms` (?) | `any` (?) | `ms` | `ms`
 `timing-effect-order` | `def` | `time` | `time` | `time` (?) | `flat-time-or-def` | `flat-time-or-def`
