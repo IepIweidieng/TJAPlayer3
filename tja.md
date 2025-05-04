@@ -2782,48 +2782,51 @@ Override the result of all *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>�
 
 Override the result of all *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path ("**level**") determination from the definition of this measure and on with specified branches/paths (**redir**ect).
 
-Its effects end at either the next [`#LEVELHOLD`](#levelhold) or another #LEVELREDIR command.
+Its effects end at either the next [`#LEVELHOLD`](#levelhold) or another  `#LEVELREDIR` command.
 
 * *Proposal* (IID): `#LEVELREDIR <enum-str-branch-from-normal>, <enum-str-branch-from-expert>, <enum-str-branch-from-master>`
   * Override the determining result as respectively `<enum-str-branch-from-normal>` / `<enum-str-branch-from-expert>` / `<enum-str-branch-from-master>` when the default "branch"/path is determined to be respectively the ***<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>*** **N**ormal / ***<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**E**xpert") / ***<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>*** **M**aster "branch"/path. See the explanation of [the `#BRANCHSTART` command](#branchstart--branchend).
-  * Example: The "branch"/path behavior of the *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby>* Oni/Extreme difficulty of "<ruby>聖<rt>Shou</rt>徳<rt>doku</rt>た<rt>Ta</rt>い<rt>i</rt>こ<rt>ko</rt>の<rt>no</rt>「<rt></rt>日<rt>Hi</rt>い<rt>I</rt>ず<rt>zu</rt>る<rt>ru</rt>ま<rt>ma</rt>で<rt>de</rt>飛鳥<rt>Asuka</rt>」</ruby>" can be achieved using:
-
-    ```txt
-    // Measure 15 - 16
-
-    #BRANCHSTART r, 5, 6
-    #N
-        #LEVELHOLD
-    #M
-        #LEVELREDIR N, N, M
-    #BRANCHEND
-    #SECTION
-    // Measure 17 - 18
-
-    #BRANCHSTART r, 7, 8
-    #N
-        #LEVELHOLD
-    #M
-        #LEVELREDIR N, N, M
-    #BRANCHEND
-    #SECTION
-    // Measure 19 - 20
-
-    #BRANCHSTART r, 4, 5
-    #N
-      // Measure 21 - 25
-    #E
-      // Measure 21 - 25
-    #M
-      // Measure 21 - 25
-
-    #BRANCHSTART p, 101, 101
-    #BRANCHEND
-    // Measure 26 -
-    ```
-
-    * Reference: <https://wikiwiki.jp/taiko-fumen/収録曲/おに/聖徳たいこの%E3%80%8C日いずるまで飛鳥%E3%80%8D>
 * *Proposal* (IID): Initial value: `#LEVELREDIR N, E, M`
+
+#### Examples
+
+The "branch"/path behavior of the *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby>* Oni/Extreme difficulty of "<ruby>聖<rt>Shou</rt>徳<rt>doku</rt>た<rt>Ta</rt>い<rt>i</rt>こ<rt>ko</rt>の<rt>no</rt>「<rt></rt>日<rt>Hi</rt>い<rt>I</rt>ず<rt>zu</rt>る<rt>ru</rt>ま<rt>ma</rt>で<rt>de</rt>飛鳥<rt>Asuka</rt>」</ruby>" can be achieved as:
+
+```txt
+// Measure 15 - 16
+
+#BRANCHSTART r, 5, 6
+#N
+    #LEVELHOLD
+#M
+    #LEVELREDIR N, N, M
+#BRANCHEND
+#SECTION
+// Measure 17 - 18
+
+#BRANCHSTART r, 7, 8
+#N
+    #LEVELHOLD
+#M
+    #LEVELREDIR N, N, M
+#BRANCHEND
+#SECTION
+// Measure 19 - 20
+
+#BRANCHSTART r, 4, 5
+#N
+  // Measure 21 - 25
+#E
+  // Measure 21 - 25
+#M
+  // Measure 21 - 25
+
+#BRANCHSTART p, 101, 101
+#BRANCHEND
+// Measure 26 -
+```
+
+* Reference: <https://wikiwiki.jp/taiko-fumen/収録曲/おに/聖徳たいこの%E3%80%8C日いずるまで飛鳥%E3%80%8D>
 
 ### #BRANCHSTART / `#BRANCHEND`
 
@@ -2845,7 +2848,7 @@ The determining point of this "branch"/path section is defaulted to be placed at
 * In the official games, the determining point is fixed to 4 beats (the length of 4 1/4th notes) before the branch point, calculated using the defined BPM of the branch point. So the determining point can occur more or less than 1 measure before the branch point.
   * In "*<ruby>夏<rt>Natsu</rt>祭<rt>Matsu</rt>り<rt>ri</rt></ruby> / <ruby>ジッ<rt>Jit</rt>タ<rt>ta</rt>リ<rt>ri</rt>ン<rt>n</rt></ruby>・<ruby>ジ<rt>Ji</rt>ン<rt>n</rt></ruby>*" (JITTERIN'JINN version), Easy, Normal, Hard, and Oni difficulties, the branch determining point is in the middle of measure 46, and the notes in measure 47 can be seen to suddenly change from the Normal branch pattern to Master branch pattern. <https://wikiwiki.jp/taiko-fumen/%E5%8F%8E%E9%8C%B2%E6%9B%B2/%E3%81%8A%E3%81%AB/%E5%A4%8F%E7%A5%AD%E3%82%8A%20%EF%BC%8F%20%E3%82%B8%E3%83%83%E3%82%BF%E3%83%AA%E3%83%B3%E3%83%BB%E3%82%B8%E3%83%B3>
 
-At the determining point, the "branch"/path&ndash;switching effects are played but the current "branch"/path is not changed until the actual beginning of the "branch"/path section.
+At the determining point, the "branch"/path&ndash;switching effects are played and the targeted branch is updated, but only the notes and bar lines whose definition position is non-before the actual beginning of the "branch"/path section have their pattern changed.
 
 * `#BRANCHSTART <enum-str-condition>, <number-expert-branch-requirement>, <number-master-branch-requirement>`
 * *Proposal* (Komi): `#BRANCHSTART lc:<str-local-value-counter-read-value>, <number-expert-branch-requirement>, <number-master-branch-requirement>` \
@@ -2867,8 +2870,8 @@ At the determining point, the "branch"/path&ndash;switching effects are played b
   * Recommendation for charters: For `lc:<str-local-value-counter-read-value>`, `lcf:<str-local-formula-counter-read-value>`, `lt`, & `ltf` conditions, negating the value is preferred over specifying `l` as `<enum-str-range>`.
 * *Proposal* (IID): `#BRANCHSTART` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
-  * No condition and requirements specified. Intended to be specified later by [the `#BRANCHNOR`, `#BRANCHEXP`, & `#BRANCHMAS`](#proposal-iid-branchnor--branchexp--branchmas) commands.
-  * If the condition and requirements for a branch is left unspecified, when that branch is currently taken, the currently taken branch is taken as the target branch before the [`#LEVELHOLD`](#levelhold) and the (*Proposal* (IID)) [`#LEVELREDIR`](#proposal-iid-levelredir) commands are applied, see [judging the target branch](#condition-judgement).
+  * No condition and requirements specified. Intended to be specified later by [the `#FROMNOR`, `#FROMEXP`, & `#FROMMAS`](#proposal-iid-fromnor--fromexp--frommas) commands.
+  * If the condition and requirements for a branch is left unspecified, when that branch is currently targeted, the currently targeted branch is taken as the next target branch before the [`#LEVELHOLD`](#levelhold) and the (*Proposal* (IID)) [`#LEVELREDIR`](#proposal-iid-levelredir) commands are applied, see [judging the target branch](#condition-judgement).
 * `#BRANCHEND` \
   ***Supported by***: TaikoJiro, TJAPlayer 2 for PC ver.2020031800, TJAPlayer3 v1.5.2, taiko-web
 
@@ -2950,7 +2953,7 @@ For Boolean conditions (`lt` & `ltf`), the condition values for Expert condition
 If `<enum-str-range>` is (empty) or `m`, the requirement is fulfilled if the value is more than or equal to ("≥") the given requirement (for a Boolean condition, when the value is 1 (true)). \
 If `<enum-str-range>` is `l`, the requirement is fulfilled if the value is less than ("\<") the given requirement (for a Boolean condition, when the value is 0 (false)).
 
-* If no condition and requirements are specified, the currently taken branch will be taken by default.
+* If no condition and requirements are specified, the currently targeted branch will be taken by default.
 * If the Master requirement is fulfilled, the *<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>* Master "branch"/path will be taken by default.
 * Otherwise, if the Expert requirement is fulfilled, the *<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path will be taken by default.
 * Otherwise: The *<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>* Normal "branch"/path is taken by default.
@@ -3089,14 +3092,14 @@ Compound condition:
   * Measure 5, 17, 29, 46, 61, 81, 96, 120: `#BRANCHSTART lcf:f,86,94` with the store expression of `f` being `100 * (<sect:jp> + <sect:jg> / 2 + x * <sect:rb>) / (<sect:tn> + x * <sect:trbh>)` (`x` is certain unknown value)
 * "<ruby>森<rt>Shin</rt>羅<rt>ra</rt>万<rt>Ban</rt>象<rt>shou</rt></ruby>", Oni difficulty:
   * Measure 118: `#BRANCHSTART lcf:f,x,87.8` (`x` is certain unknown value) with the store expression of `f` being `100 * (<sect:jp> + <sect:jg> / 2 + 0.45 * <sect:rb>) / (<sect:tn> + 0.45 * <sect:rb>)` &mdash; 100% acc on 87 notes + 1+ (of 28) balloon hits, or 86%+ acc on 87 notes + all 28 balloon hits
-
-Branch-dependent condition:
-
-* "<ruby>聖<rt>Shou</rt>徳<rt>doku</rt>た<rt>Ta</rt>い<rt>i</rt>こ<rt>ko</rt>の<rt>no</rt>「<rt></rt>日<rt>Hi</rt>い<rt>I</rt>ず<rt>zu</rt>る<rt>ru</rt>ま<rt>ma</rt>で<rt>de</rt>飛鳥<rt>Asuka</rt>」</ruby>", Oni difficulty: See [the example of `#LEVELREDIR`](#proposal-iid-levelredir).
 * "Nesin Amatias", Oni difficulty:
   * Measure 2: `#BRANCHSTART p,0,0` (forced Master branch)
   * Measure 8, 16, 24, 34, 44, 60, 67: A `#BRANCHSTART` command with `p` condition.
   * Measure 83: Unknown condition
+
+Branch-dependent condition:
+
+* "<ruby>聖<rt>Shou</rt>徳<rt>doku</rt>た<rt>Ta</rt>い<rt>i</rt>こ<rt>ko</rt>の<rt>no</rt>「<rt></rt>日<rt>Hi</rt>い<rt>I</rt>ず<rt>zu</rt>る<rt>ru</rt>ま<rt>ma</rt>で<rt>de</rt>飛鳥<rt>Asuka</rt>」</ruby>", Oni difficulty: See [the example of `#LEVELREDIR`](#proposal-iid-levelredir).
 * *"<ruby>め<rt>Me</rt>た<rt>ta</rt>め<rt>Me</rt>た<rt>ta</rt></ruby>☆<ruby>ゆ<rt>Yu</rt>に<rt>ni</rt>ば～<rt>baa</rt>すっ<rt>su'</rt></ruby>！"* "METAMETA☆Universe!", Oni difficulty
   * Measure 47: `#BRANCHSTART p,80.837,101` with `#LEVELREDIR N,N,M` on `#E`
   * Measure 60: `#BRANCHSTART r,0,1`
@@ -3107,7 +3110,7 @@ Branch-dependent condition:
 * In TaikoJiro 1 (and 2 (?)), for `r` branch condition, if a bar-drumroll&ndash;type note starts or overlaps with the branch determination point in definition, the displayed branch will be updated as the drumroll is hit since the branch determination point and until the actually branch point.
 * In TJAPlayer2 for.PC, the Expert branch condition must be fulfilled to take the Master branch.
 
-### *Proposal* (IID) #BRANCHNOR / #BRANCHEXP / #BRANCHMAS
+### *Proposal* (IID) #FROMNOR / #FROMEXP / #FROMMAS
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
 ***Impact level***: note ★★★★★ \
@@ -3117,14 +3120,50 @@ Branch-dependent condition:
 ***Effect target***: The last defined [`#BRANCHSTART` or `#BRANCHEND`](#branchstart--branchend). \
 ***Effect branches***: all
 
-Specify or override the **branch** condition and requirements for when the ***<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>*** **Nor**mal / ***<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**Exp**ert") / ***<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>*** **Mas**ter *<ruby>譜<rt>fu</rt>面<rt>men</rt></ruby> (<ruby>分<rt>bun</rt>岐<rt>ki</rt></ruby>)* "notechart branch"/forked path is currently taken.
+Specify or override the branch condition and requirements for when the ***<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>*** **Nor**mal / ***<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**Exp**ert") / ***<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>*** **Mas**ter *<ruby>譜<rt>fu</rt>面<rt>men</rt></ruby> (<ruby>分<rt>bun</rt>岐<rt>ki</rt></ruby>)* "notechart branch"/forked path is currently targeted ("**from**").
 
-The branch determining point for different currently taken branch may vary.
+The branch determining point for different currently targeted branch may vary.
 
-* *Proposal* (IID): `#BRANCHNOR <comma-separated-list-branchstart-arguments>`
-* *Proposal* (IID): `#BRANCHEXP <comma-separated-list-branchstart-arguments>`
-* *Proposal* (IID): `#BRANCHMAS <comma-separated-list-branchstart-arguments>`
+* *Proposal* (IID): `#FROMNOR <comma-separated-list-branchstart-arguments>`
+* *Proposal* (IID): `#FROMEXP <comma-separated-list-branchstart-arguments>`
+* *Proposal* (IID): `#FROMMAS <comma-separated-list-branchstart-arguments>`
   * `<comma-separated-list-branchstart-arguments>` is any argument form for [the `#BRANCHSTART`](#branchstart--branchend).
+
+#### Examples
+
+[The example of `#LEVELREDIR` for *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby>* Oni/Extreme difficulty of "<ruby>聖<rt>Shou</rt>徳<rt>doku</rt>た<rt>Ta</rt>い<rt>i</rt>こ<rt>ko</rt>の<rt>no</rt>「<rt></rt>日<rt>Hi</rt>い<rt>I</rt>ず<rt>zu</rt>る<rt>ru</rt>ま<rt>ma</rt>で<rt>de</rt>飛鳥<rt>Asuka</rt>」</ruby>"](#proposal-iid-levelredir) can be alternatively achieved as:
+
+```txt
+// Measure 15 - 16
+
+#BRANCHSTART r, 5, 6
+#BRANCHEND
+#SECTION
+// Measure 17 - 18
+
+#BRANCHSTART
+#FROMEXP r, 7, 8
+#FROMMAS r, 8, 8
+#BRANCHEND
+#SECTION
+// Measure 19 - 20
+
+#BRANCHSTART
+#FROMEXP r, 4, 5
+#FROMMAS r, 5, 5
+#N
+  // Measure 21 - 25
+#E
+  // Measure 21 - 25
+#M
+  // Measure 21 - 25
+
+#BRANCHSTART p, 101, 101
+#BRANCHEND
+// Measure 26 -
+```
+
+* Reference: <https://wikiwiki.jp/taiko-fumen/収録曲/おに/聖徳たいこの%E3%80%8C日いずるまで飛鳥%E3%80%8D>
 
 ### `#N` / `#E` / `#M`
 
