@@ -1,13 +1,15 @@
 # TaikoManyGimmicks Readme Files
 
 * First created: 2025-04-15 (UTC+8)
-* Last changed: 2025-04-18 (UTC+8)
+* Last changed: 2025-05-16 (UTC+8)
 
 ## Source
 
 Original zip, uploaded to uploader.jp: by barrier15300 (author of TaikoManyGimmicks).
 
 Links obtainable in the *TaikoManyGimmicks<ruby>配<rt>Hai</rt>布<rt>fu</rt>鯖<rt>Saba</rt></ruby>* "TaikoManyGimmicks Release Server" Discord server: <https://discord.gg/T9uKVZWY7E>
+
+Currently only the latest source code version is distributed.
 
 ## File List
 
