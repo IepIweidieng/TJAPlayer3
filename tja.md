@@ -2002,14 +2002,14 @@ Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby
     * See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior.
 * `#MEASURE <number-upper-numeral>/0`
   * The behavior is *unspecified* (may cause crashes in some existing simulators).
+  * In TaikoJiro 1, the time duration of measure divisions become 0.
 * Initial value: `#MEASURE 4/4`
 
 #### Compatibility Issues
 
-* In TaikoJiro 1 but not 2, only integers are allowed for `<number-upper-numeral>` and `<number-lower-numeral>`.
-* In TaikoJiro 1 but not 2, for `<number-upper-numeral>`, only non-zero integers are supported. Zero-duration measures can be constructed using a large `<number-upper-numeral>` value due to the limited timing precision.
+* In TaikoJiro 1 but not 2, `<number-upper-numeral>` being 0 fails to set measures' timing spacing, but still sets the time duration of measure divisions in each measure to 0. Zero-duration measures can be alternatively constructed using a large `<number-upper-numeral>` value due to the limited timing precision.
 * In TaikoJiro, the last defined `#MEASURE` in a measure applies to the whole measure regardless of where it is defined.
-* In TaikoJiro 1, `#MEASURE`s defined in [a branch definition](#n--e--m) are partially reverted after [a `#BRANCHEND` or another `#BRANCHSTART` command](#branchstart--branchend). Not explicit defining `#MEASURE` after the branch definition section causes unintended behaviors. See [the `#N` / `#E` / `#M` commands](#n--e--m) for details.
+* In TaikoJiro 1, `#MEASURE`s defined in [a branch definition](#n--e--m) are partially reverted (only affects measure divisions in the measure) after [a `#BRANCHEND` or another `#BRANCHSTART` command](#branchstart--branchend). Not explicit defining `#MEASURE` after the branch definition section causes unintended behaviors. See [the `#N` / `#E` / `#M` commands](#n--e--m) for details.
 
 ### #DELAY
 
