@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-05-05 (UTC+8)
+* Last changed: 2025-06-04 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -231,6 +231,7 @@ For multiple values separated by comma (`,`), except for `text`-valued fields, o
     * *Unspecified*: Whether a comma (`,`) can be used as the decimal point instead of a full-stop (`.`).
     * *Unspecified*: The supported precision.
     * *Proposal* (IID): `+inf` for positive infinity (+∞) & `-inf` for negative infinity (−∞).
+    * In TaikoJiro 1 and 2, exponential notation is supported, *e.g.*, `1e4`, `-3.14e-6`.
   * `enum-int` (enum-like, int-form): An `int` with specific accepted values.
   * *Unspecified*: Whether the positive sign (`+`) may appear for a non-negative or positive value, unless the type is indicated as `unsigned-`.
   * In TaikoJiro, leading non-newline whitespaces are always ignored.
@@ -255,8 +256,7 @@ For multiple values separated by comma (`,`), except for `text`-valued fields, o
   * In TJAPlayer3, in comma-separated lists, every comma (`,`) in `string` ***MUST*** be escaped as `\,` (while `\` itself requires no escaping).
   * `enum-str` (enum-like, string-form): A `str` with specific accepted values. Can be spelt in a form of one of `Value` / `VALUE` / `value`. *Unspecified*: Whether other spellings can be used.
     * In TaikoJiro:
-      * If the string-form value begins with an upper-case letter and only this value begins with this letter, only the first 1 letter have effect (*e.g.*, `V` is also accepted).
-      * If not, the value ***MUST*** begin with one of the above forms.
+      * For some headers as denoted below, only the first 1 letter have effect (*e.g.*, `V` is also accepted).
       * Leading non-newline whitespaces are ignored.
       * All trailing characters are ignored in TaikoJiro. (*e.g.*, `Vsomething` / `valuesomething` are also accepted)
 
@@ -482,7 +482,7 @@ The display details are *unspecified*.
 &emsp; 1.2 (per&ndash;player-side usage for [`COURSE:Tower`](#course)) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro v2.49 \
-***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
+***Supported by***: TaikoJiro 2, OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope fineness***: per-file
 
 Specify whether the corresponding song entry is displayed, regarding the *<ruby>裏<rt>ura</rt>譜<rt>fu</rt>面<rt>men</rt>状<rt>jou</rt>態<rt>tai</rt></ruby>* "inner notechart state/mode" ("*<ruby>裏 <rt>ura</rt></ruby>* inner or *<ruby>表 <rt>omote</rt></ruby>* outer **side**") of the song selection screen.
@@ -503,15 +503,16 @@ For specifying the inner chart of solely the Oni difficulty with the same audio 
 
 *Proposal* (IID): Make the scope per&ndash;player-side.
 
-* **`SIDE:1`** / **`SIDE:Normal`** / `SIDE:normal`
+* **`SIDE:1`** / **`SIDE:Normal`** / `SIDE:NORMAL` / `SIDE:normal`
   * Displayed only outside the inner notechart mode ("**normal**").
-* **`SIDE:2`** / **`SIDE:Ex`** / `SIDE:ex`
+* **`SIDE:2`** / **`SIDE:Ex`** / `SIDE:EX` / `SIDE:ex`
   * Displayed only during the inner notechart mode ("**ex**tra").
-* **`SIDE:3`** / **`SIDE:Both`** / `SIDE:both` / **`SIDE:`**
+* **`SIDE:3`** / **`SIDE:Both`** / `SIDE:BOTH` / `SIDE:both` / **`SIDE:`**
   * Always displayed.
 
 #### Compatibility Issues
 
+* In TaikoJiro 1, one-letter form (`SIDE:N` / `SIDE:n`, `SIDE:E` / `SIDE:e`, & `SIDE:B` / `SIDE:b`) are recognized, and `SIDE:Ex`/`SIDE:EX`/`SIDE:ex` is considered a short form of `SIDE:Extra`/`SIDE:EXTRA`/`SIDE:extra`.
 * In TaikoJiro, `SIDE:` has per-file scope and notechart definitions for `SIDE:Normal` & `SIDE:Ex` should be separated into 2 files and for `SIDE:Both` should be duplicated into these 2 files.
   * In OpenTaiko (0auBSQ), `SIDE:` has per&ndash;player-side scope.
 * In OpenTaiko (0auBSQ), `SIDE:` has been re-purposed to be used in conjunction with [`COURSE:Tower`](#course) to specify the actual difficulty in the tower mode and can be one of:
@@ -615,6 +616,7 @@ Specify the relative amplitude percentage (%) of the desired **vol**ume gain of 
 
 #### Compatibility Issues
 
+* In TaikoJiro 1 but not 2, the value is parsed as a non-negative integer number.
 * Handled but ignored by TJAPlayer2 for.PC & TJAPlayer3 before v1.5.2
 
 ### SEVOL:
@@ -636,6 +638,7 @@ Specify the relative amplitude percentage (%) of the desired **vol**ume gain of 
 
 #### Compatibility Issues
 
+* In TaikoJiro 1 but not 2, the value is parsed as a non-negative integer number.
 * Handled but ignored by TJAPlayer2 for.PC
 
 ### BPM:
@@ -1009,13 +1012,15 @@ Specify the **game** mode. The meaning of the symbols used in the notechart defi
 
 See [the `#GAMETYPE` command](#gametype) for specifying the game mode for specific notechart sections.
 
-* `GAME:Taiko` / `GAME:`
+* **`GAME:Taiko`** / `GAME:TAIKO` / `GAME:taiko` / `GAME:`
   * A game mode similar to *<ruby>太<rt>Tai</rt>鼓<rt>ko</rt>の<rt>no</rt>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>*, developed by Namco (now Bandai Namco)
   * See [Note Symbols in Taiko Mode](#note-symbols-in-taiko-mode)
-* `GAME:Jube` \
+* **`GAME:Jube`** / `GAME:JUBE` / `GAME:jube` \
   ***Supported by***: TaikoJiro 1
   * A game mode similar to *Jubeat*, developed by Konami
   * See [Note Symbols in Jube Mode](#note-symbols-in-jube-mode)
+* `GAME:Bm` / `GAME:BM` / `GAME:bm` \
+  ***First seen in***: TaikoJiro 1 (unimplemented)
 * `GAME:Konga` / `GAME:Bongo` \
   ***Supported by***: taiko-web (plugin "Donkey Konga Mode")
   * A game mode similar to *Donkey Konga*, developed by Namco
@@ -1041,18 +1046,18 @@ Not to be confused with the difficulty star specified by [the `LEVEL:` header](#
 
 Depending on the simulator, the `COURSE:` header may affect the judgment window, default scoring, the default increasing rate of the *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge, *etc.*
 
-* **`COURSE:0`** / **`COURSE:Easy`** / `COURSE:easy`
+* **`COURSE:0`** / **`COURSE:Easy`** / `COURSE:EASY` / `COURSE:easy`
   * The *<ruby>簡<rt>Kan</rt>単<rt>tan</rt></ruby>/<ruby>か<rt>Ka</rt>ん<rt>n</rt>た<rt>ta</rt>ん<rt>n</rt></ruby>* Easy difficulty.
-* **`COURSE:1`** / **`COURSE:Normal`** / `COURSE:normal`
+* **`COURSE:1`** / **`COURSE:Normal`** / `COURSE:NORMAL` / `COURSE:normal`
   * The *<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>/<ruby>ふ<rt>Fu</rt>つ<rt>tsu</rt>う<rt>u</rt></ruby>* Normal difficulty.
-* **`COURSE:2`** / **`COURSE:Hard`** / `COURSE:hard`
+* **`COURSE:2`** / **`COURSE:Hard`** / `COURSE:HARD` / `COURSE:hard`
   * The *<ruby>難<rt>Muzuka</rt>し<rt>shi</rt>い<rt>i</rt></ruby>/<ruby>む<rt>Mu</rt>ず<rt>zu</rt>か<rt>ka</rt>し<rt>shi</rt>い<rt>i</rt></ruby>* Hard difficulty.
-* **`COURSE:3`** / **`COURSE:Oni`** / `COURSE:oni`
+* **`COURSE:3`** / **`COURSE:Oni`** / `COURSE:ONI` / `COURSE:oni`
   * The *<ruby>鬼<rt>Oni</rt></ruby>/<ruby>お<rt>O</rt>に<rt>ni</rt></ruby>* Oni/Extreme difficulty.
   * The official English localization of this difficulty was "Oni" in PS2 TDM, "Mania" in the development version of certain PC-generation games (?), and is "Extreme" in the released PC-generation games.
   * The "Extreme" as the name of the 4th difficulty is identical to *<ruby>初<rt>Hatsu</rt>音<rt>ne</rt>ミ<rt>Mi</rt>ク<rt>ku</rt></ruby> -Project DIVA- 2nd* "Hatsune Miku: Project DIVA 2nd" (2010), developed by Sega, Crypton Future Media, and Dingo. The game features "Easy", "Normal", "Hard", & "Extreme" difficulties, with the 5th difficulty "Extra Extreme" added in newer games in the Project DIVA series.
   * In the official game series, before AC7 (specifically AC2&ndash;AC6), this difficulty was named *<ruby>ド<rt>Do</rt>ン<rt>n</rt>ダ<rt>da</rt>フ<rt>fu</rt>ル<rt>ru</rt></ruby>！<ruby>コー<rt>Koo</rt>ス<rt>su</rt></ruby>* "Donderful! Course" and had a different scoring rule from the other difficulties (see [`SCOREMODE:0`](#scoremode)). This difficulty was always named *<ruby>鬼<rt>Oni</rt></ruby>/<ruby>お<rt>O</rt>に<rt>ni</rt></ruby>* Oni in the PS2 console games and is later synchronized into AC7 and on, but the same scoring rule still applied to CS1&ndash;CS5 and AC7.
-* **`COURSE:4`** / **`COURSE:Edit`** / `COURSE:edit`
+* **`COURSE:4`** / **`COURSE:Edit`** / `COURSE:EDIT` / `COURSE:edit`
   * Now commonly used as the *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby> (<ruby>裏 <rt>Ura</rt></ruby>)* Oni/Extreme (Inner) difficulty.
   * This difficulty was meant for chart creators to freely specifying the scoring rules in earlier versions of TaikoJiro 1. However, the restriction of the scoring rules for other difficulties were lifted in v1.95, which made this difficulty unnecessary for such a purpose.
   * As a result, after the official AC15 was released, this difficulty has been re-purposed as the *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby> (<ruby>裏 <rt>Ura</rt></ruby>)* Oni/Extreme (Inner) difficulty.
@@ -1062,7 +1067,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
   ***Supported by***: taiko-web
   * Equivalent to `COURSE:Edit`
   * The *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby> (<ruby>裏 <rt>Ura</rt></ruby>)* Oni/Extreme (Inner) difficulty.
-* **`COURSE:5`** / **`COURSE:Tower`** / `COURSE:tower` \
+* **`COURSE:5`** / **`COURSE:Tower`** / `COURSE:TOWER` / `COURSE:tower` \
   ***Supported by***: TaikoJiro v1.79
   * This difficulty refers to the *<ruby>太<rt>Tai</rt>鼓<rt>ko</rt>タ<rt>Ta</rt>ワー<rt>waa</rt></ruby>* "Taiko Tower" notechart series in the *<ruby>わ<rt>Wa</rt>く<rt>ku</rt>わ<rt>wa</rt>く<rt>ku</rt>冒<rt>Bou</rt>険<rt>ken</rt>ラ<rt>Ra</rt>ン<rt>n</rt>ド<rt>do</rt></ruby>* "Wakuwaku (Exciting) Adventure land" mode from the 7th PS2 console game. To further simulate the mode, [the `LIFE:` header](#life) can be used in conjunction.
   * The actual behavior may differ from simulator to simulator.
@@ -1160,6 +1165,7 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
 
 #### Compatibility Issues
 
+* In TaikoJiro 1 and 2, the difficulty star is parsed an unsigned integer, but affects song's sorting order in TaikoJiro 1. In TaikoJiro 1, the maximum possible value displayed is 65535 (2¹⁶ − 1) In TaikoJiro 2, the maximum possible value parsed is 65535 (2¹⁶ − 1)
 * In TaikoJiro and TJAPlayer2 for.PC, the difficulty star displayed in the song selection screen for each difficulty is determined differently from the actual difficulty star in the gameplay screen. For the difficulty star displayed in the song selection screen:
   * The scope and the scope fineness of the `LEVEL:` header are instead both per-difficulty. Each per-difficulty scope starts or resumes at `COURSE:` headers specifying the target difficulty and ends at another `COURSE:` header specifying a different difficulty.
     * A "deceptive difficulty star" (a displayed difficulty star in the song selection screen which is different from the actual difficulty star in the gameplay screen) can be defined by placing the `LEVEL:` for the deceptive difficulty star after all notechart definitions in the per-difficulty scope.
@@ -1172,7 +1178,7 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
 &emsp; 1.2 (up to 5 player-sides) (?) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.99 \
-***Supported by***: TJAPlayer2 for.PC \
+***Supported by***: TaikoJiro 2, TJAPlayer2 for.PC \
 ***Scope fineness***: per&ndash;player-side \
 ***Inspired by***: (likely) DWI and earlier MSD format `#<enum-str-style>:<enum-str-difficulty-type>:<positive-int-difficulty-stars>:<colon-separated-list-str-notechart-definitions>;` where `<enum-str-style>` is one of `SINGLE`, `DOUBLE`, `COUPLE`, & (DWI) `SOLO`.
 
@@ -1188,15 +1194,11 @@ In the official games, some difficulties may have only 2-player-side notecharts 
 
 If the specified amount of player-sides is not 1, [`#START <enum-str-player-side>`](#start--end) should be used for specifying the player-side of the notechart.
 
-* `STYLE:1` / `STYLE:Single` / `STYLE:single` / `STYLE:`
-* `STYLE:2` / `STYLE:Double` / `STYLE:double` / `STYLE:Couple` / `STYLE:couple`
+* `STYLE:1` / `STYLE:Single` / `STYLE:SINGLE` / `STYLE:single` / `STYLE:`
+* `STYLE:2` / `STYLE:Double` / `STYLE:DOUBLE` / `STYLE:double` / `STYLE:Couple` / `STYLE:couple`
 * *Proposal* (IID): `STYLE:<positive-int-amount-of-player-sides>`
 
 Reference: *ダブルプレイ* ("Double Play"; "Two-player Charts"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/ダブルプレイ>
-
-#### Compatibility Issues
-
-* Ignored in TaikoJiro 2.
 
 ### BALLOON Headers
 
@@ -1273,6 +1275,10 @@ A *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD judgment decreases the life co
   * The behavior is *unspecified*.
   * In TaikoJiro, equivalent to `LIFE:0`.
   * In OpenTaiko (0auBSQ), equivalent to `LIFE:5` when used in conjunction with `COURSE:Tower`.
+
+#### Compatibility issues
+
+In TaikoJiro 1 (the header is not supported in TaikoJiro 2), the maximum possible value is 65535 (2¹⁶ − 1).
 
 ### TOTAL:
 
@@ -1905,10 +1911,10 @@ Respectively **start** / **end** the region of notechart definition.
 * `#START`
   * The notechart definition is for the only player-side if [the `STYLE:` header](#style) is ignored or this header specifies the amount of player-sides to be 1.
 * `#START <enum-str-player-side>` \
-  ***Supported by***: TaikoJiro v1.99 but not TaikoJiro 2
+  ***Supported by***: TaikoJiro v1.99
   * The notechart definition is for the player-side specified by `<enum-str-player-side>`, which can be one of:
-    * `P1` &mdash; for the 1st player-side (1P).
-    * `P2` &mdash; for the 2nd player-side (2P) if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ 2.
+    * **`P1`** / `p1` &mdash; for the 1st player-side (1P).
+    * **`P2`** / `p2` &mdash; for the 2nd player-side (2P) if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ 2.
   * *Unspecified*: The behavior when other `<enum-str-player-side>` is used.
     * In TaikoJiro, using any other `<enum-str-player-side>` is treated as if the 0-argument `#START` were used.
 * *Proposal* (IID): `#START P<positive-int-player-side>`
@@ -2007,6 +2013,8 @@ Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby
 
 #### Compatibility Issues
 
+* In TaikoJiro 1 and 2, no whitespaces are allowed before the `/`
+* In TaikoJiro 1 but not 2, `<number-lower-numeral>` is parsed as an integer, and decimal places are thus ignored.
 * In TaikoJiro 1 but not 2, `<number-upper-numeral>` being 0 fails to set measures' timing spacing, but still sets the time duration of measure divisions in each measure to 0. Zero-duration measures can be alternatively constructed using a large `<number-upper-numeral>` value due to the limited timing precision.
 * In TaikoJiro, the last defined `#MEASURE` in a measure applies to the whole measure regardless of where it is defined.
 * In TaikoJiro 1, `#MEASURE`s defined in [a branch definition](#n--e--m) are partially reverted (only affects measure divisions in the measure) after [a `#BRANCHEND` or another `#BRANCHSTART` command](#branchstart--branchend). Not explicit defining `#MEASURE` after the branch definition section causes unintended behaviors. See [the `#N` / `#E` / `#M` commands](#n--e--m) for details.
@@ -3107,6 +3115,8 @@ Branch-dependent condition:
 
 #### Compatibility Issues
 
+* In TaikoJiro 1 but not 2, no whitespaces are allowed before the `,` separating the requirement values
+* In TaikoJiro 1 and 2, the branch condition is case-insensitive, and any unrecognized branch condition is treated as `p`.
 * In TaikoJiro 1 (and 2 (?)), for `r` branch condition, if a bar-drumroll&ndash;type note starts or overlaps with the branch determination point in definition, the displayed branch will be updated as the drumroll is hit since the branch determination point and until the actually branch point.
 * In TJAPlayer2 for.PC, the Expert branch condition must be fulfilled to take the Master branch.
 
