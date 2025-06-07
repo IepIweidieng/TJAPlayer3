@@ -4467,7 +4467,7 @@ In the official games, drumroll-type notes are usually intentionally made to end
 *Unspecified*: The behavior when a drumroll-type note with non-positive time duration is formed, possibly from a drumroll-type note ended by a hit-type note (*e.g.*, `51` / `56` / `65`, where the time duration of the drumroll may be shortened as mentioned above) or by using timing settings.
 
 * In Taikosan, bar drumroll notes with zero time duration can be created by using an isolated drumroll-type note symbol. However, such notes are not accepted and an error message is displayed, although balloon notes with zero time duration are allowed. \
-  ![Taikosan's Error Message for Zero-duration Bar Drumroll Note](https://i.imgur.com/MDdNzKX.png)
+  ![Taikosan's Error Message for Zero-duration Bar Drumroll Note](tja-assets/Taikosan_zero-duration-roll-error.png)
 * In TaikoJiro, drumroll-type notes with zero time duration are allowed and may receive inputs in occasion, while drumroll-type notes with negative time duration never receive inputs. Bar-less balloon-type notes with negative time duration teleport to the judgment mark when the time position of the note end is reached.
 
 #### Compatibility Issues
@@ -4597,7 +4597,7 @@ Note Layout → 0/1 Notation → Note Symbol (Hexadecimal Digit)
 
 The above note combination is written `D610`.
 
-![GAME:Jube Example](https://i.imgur.com/eOqpsO8.gif)
+![GAME:Jube Example](tja-assets/GAME_Jube_Example.gif)
 
 ### Note Symbols in Bm Mode
 
