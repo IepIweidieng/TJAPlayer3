@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-06-04 (UTC+8)
+* Last changed: 2025-06-07 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1020,7 +1020,10 @@ See [the `#GAMETYPE` command](#gametype) for specifying the game mode for specif
   * A game mode similar to *Jubeat*, developed by Konami
   * See [Note Symbols in Jube Mode](#note-symbols-in-jube-mode)
 * `GAME:Bm` / `GAME:BM` / `GAME:bm` \
-  ***First seen in***: TaikoJiro 1 (unimplemented)
+  ***First seen in***: TaikoJiro 1
+  * A game mode similar to *beatmania IIDX*, developed by Konami
+  * Never documented nor mentioned by toach, author of TaikoJiro
+  * See [Note Symbols in Bm Mode](#note-symbols-in-bm-mode)
 * `GAME:Konga` / `GAME:Bongo` \
   ***Supported by***: taiko-web (plugin "Donkey Konga Mode")
   * A game mode similar to *Donkey Konga*, developed by Namco
@@ -3917,7 +3920,7 @@ Tag | Arguments | Value
 *Proposal* (IID): <br /> `cs` | (none) | `0` for failed, `1` for assisted passed, `2` for non-assisted passed, `3` for passed and full combo (`<jb:t> == 0`), `4` for passed and perfect (`<jg> + <jb:t> == 0`).
 `mc` <br /> `c` | (none) | **M**aximum/longest **c**ombo ever earned.
 `cb` | (none) | **C**urrent displayed target **b**ranch (0 for Normal, 1 for Expert, 2 for Master)
-`cg` | (none) | **C**urrent **g**ame mode (-1 for [Jube](#note-symbols-in-jube-mode) (reserved, non-standard), 0 for [Taiko](#note-symbols-in-taiko-mode), 1 For [Konga (Bongo)](#note-symbols-in-konga-mode))
+`cg` | (none) | **C**urrent **g**ame mode <br /> Non-negative for 1-digit note symbol game modes: 0 for [Taiko](#note-symbols-in-taiko-mode), 1 for [Konga (Bongo)](#note-symbols-in-konga-mode), 2 for *proposal* (Komi) [Beatz](#proposal-komi-note-symbols-in-beatz-mode). <br /> Negative for multi-digit note symbol modes (reserved, non-standard): -1 for [Jube](#note-symbols-in-jube-mode), -2 for [Bm](#note-symbols-in-bm-mode).
 `lc` | `<str-local-value-counter-read>` | Current value of **l**ocal value **c**ounter (`0` if undefined)
 `lt` | `<str-local-value-trigger-read>` | Current value of **l**ocal value **t**rigger (false if undefined) (`0` for false, `1` for true)
 *Proposal* (IID): <br /> `lcf` | `<str-local-formula-counter-read>` | Current cached value of **l**ocal **c**ounter **f**ormula (`0` if undefined)
@@ -4472,37 +4475,6 @@ In the official games, drumroll-type notes are usually intentionally made to end
 * In TJAPlayer2 for.PC, drumroll-type notes must be ended with `8`.
 * In TJAPlayer2 for.PC, The head of balloon-type notes has a timing window of the time duration of 1 frame under 60fps.
 
-### Note Symbols in Jube Mode
-
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
-***First seen in***: TaikoJiro v2.13
-
-Effective when [`GAME:Jube`](#game) is in effect.
-
-Unlike `GAME:Taiko`, every 4 hexadecimal digits are grouped together to represent a note combination and occupy the same beat duration interval.
-
-In TJA files, within non-command lines, all whitespaces are ignored by TaikoJiro. In this game mode, every 4 digits are conventionally separated with a space for readability.
-
-#### Example
-
-(This example is adapted from the [`readme.txt`](taiko-sim-readmes/taikojiro/utf-8/readme-v2.92.txt) distributed along with TaikoJiro)
-
-```txt
-Note Layout → 0/1 Notation → Note Symbol (Hexadecimal Digit)
-■■□■ → 1101 → D
-□■■□ → 0110 → 6
-□□□■ → 0001 → 1
-□□□□ → 0000 → 0
-```
-
-* `■` &mdash; Tap note
-* `□` &mdash; Blank
-* Hold notes were not supported.
-
-The above note combination is written `D610`.
-
-![GAME:Jube Example](https://i.imgur.com/eOqpsO8.gif)
-
 ### Note Symbols in Konga Mode
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (unless stated otherwise) \
@@ -4595,6 +4567,74 @@ Bottom-right | Any face (X/Y/B/A) button
 ‡: The GOOD judgment in Beatz games corresponds to the *<ruby>可<rt>ka</rt></ruby>* OK judgment in Taiko games.
 
 The note handling details of the Taiko mode apply. See the explanation in [Note Symbols in Taiko Mode](#note-symbols-in-taiko-mode).
+
+### Note Symbols in Jube Mode
+
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+***First seen in***: TaikoJiro v2.13
+
+Effective when [`GAME:Jube`](#game) is in effect.
+
+Unlike the above game modes, every 4 hexadecimal digits are grouped together to represent a note combination and occupy the same beat duration interval.
+
+In TJA files, within non-command lines, all whitespaces are ignored by TaikoJiro. In this game mode, every 4 digits are conventionally separated with a space for readability.
+
+#### Example
+
+(This example is adapted from the [`readme.txt`](taiko-sim-readmes/taikojiro/utf-8/readme-v2.92.txt) distributed along with TaikoJiro)
+
+```txt
+Note Layout → 0/1 Notation → Note Symbol (Hexadecimal Digit)
+■■□■ → 1101 → D
+□■■□ → 0110 → 6
+□□□■ → 0001 → 1
+□□□□ → 0000 → 0
+```
+
+* `■` &mdash; Tap note
+* `□` &mdash; Blank
+* Hold notes were not supported.
+
+The above note combination is written `D610`.
+
+![GAME:Jube Example](https://i.imgur.com/eOqpsO8.gif)
+
+### Note Symbols in Bm Mode
+
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+***First seen in***: TaikoJiro 1 (unknown version)
+
+Effective when [`GAME:Bm`](#game) is in effect.
+
+The game mode was never documented nor mentioned by toach, author of TaikoJiro. No bundled graphics are provided for this mode.
+
+Similar to `GAME:Jube`, every 4 hexadecimal digits are grouped together to represent a note combination and occupy the same beat duration interval.
+
+```txt
+Note Layout → 0/1 Notation → Note Symbol (Hexadecimal Digit)
+■ ■□■□■■□ □□□□□□□ □ → 1_101 0110 0000 000_0 → D600
+(P1 scratch) (P1 keys) (P2 keys?) (P2 scratch?)
+```
+
+* `■` &mdash; Tap/scratch note
+* `□` &mdash; Blank
+* Hold notes were not supported.
+* Key sounds were not supported.
+
+#### Example
+
+(This example is adopted from the first measures of *DIAVOLO* Single-player ANOTHER, by <ruby>度<rt>Do</rt>胸<rt>kyou</rt>兄<rt>Kyou</rt>弟<rt>dai</rt></ruby> (arrangement of *Grandes études de Paganini No.6 (Theme and Variations)* by Franz Liszt, arrangement of *Caprice No. 24* by Niccolo Paganini), from game *beatmania IIDX*, developed by Konami)
+
+See [GAME_Bm_Example.tja](tja-assets/GAME_Bm_Example.tja)
+
+![GAME:Bm Example](tja-assets/GAME_Bm_Example.gif)
+
+Behaviors in TaikoJiro 1:
+
+* The P1 scratch is displayed at the right of P1 keys. P2 keys are displayed left-aligned to the left of P1 scratch lane. The P2 scratch (?) is displayed off-screen, so it is unclear whether it is a regular key lane or an actuall scratch lane.
+* In [HBScroll or BMScroll mode](#bmscroll--hbscroll--nmscroll), [`#BPMCHANGE`](#bpmchange) causes the notes to be scrolled abnormally.
+* The autoplay always misses the first note of the chart (but not counted as a miss in the result screen). Also, the first note of the chart is the only note expectedly aligned to the bar line on with note's bottom.
+* The autoplay is unable to play branched sections of the chart.
 
 ## Terminologies
 
