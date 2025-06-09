@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-06-07 (UTC+8)
+* Last changed: 2025-06-09 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1569,7 +1569,8 @@ These compatibility flags are considered for internal uses by the simulator and 
   * Specify the time precision of [measure divisions](#the-measure-delimiter-symbol-and-timing), [`#DELAY`](#delay), and commands.
   * `any` &mdash; the precision is only limited by the implementation.
   * `ms` &mdash; the definition cursor has the same precision as `any`, but the resulting time for each measure division has the precision is 0.001 seconds, rounded toward 0.
-  * `ms-bpm` &mdash; the definition cursor has the same precision as `any`, but the time of definition cursor is rounded to 0.001 second (toward 0) when `#BPMCHANGE` is encountered. The resulting time for each measure division and the time duration of `#DELAY` has the precision of 0.001 seconds, rounded toward 0.
+  * `ms-bpm` &mdash; the definition cursor has the same precision as `any`, but the elapsed time between elapse points is rounded to 0.001 second (toward 0). The elapsed point is one of chart start, the `#BPMCHANGE` command, and the end of a measure with `#BPMCHANGE` defined. The resulting time for each measure division and the time duration of `#DELAY` has the precision of 0.001 seconds, rounded toward 0. Notes' beat position is also aligned to pixels when a `#BPMCHANGE` comment is encountered (?).
+    * Reference: K. *太鼓さん次郎 Ver.2.92 の内部仕様雑記*. ("Miscellaneous notes on the internal behaviors of TaikoJiro Ver.2.92"). <https://note.com/lime_5137/n/n672c0a41495d>
 * `timing-effect-order=def`, `timing-effect-order=flat-time-or-def`, `timing-effect-order=time-or-def`, `timing-effect-order=time`
   * ***Impact level***: gimmicky ★★・・・
   * Specify the applying order of the per-note static-time effects of `#BPMCHANGE` & `#SCROLL` and the command-time effects of `#BPMCHANGE` & positive `#DELAY`.
@@ -1875,7 +1876,11 @@ See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior of timi
 #### Compatibility Issues
 
 * In TaikoJiro 1 (and 2 (?)), only the BMScroll mode entered by pressing <kbd>F3</kbd> fixes `scroll` to 1, but the BMScroll mode entered by specifying the `#BMSCROLL` command behaviors the same as the HBScroll mode.
-* In TaikoJiro 1 but not 2, all notechart objects past the judgment timing and all earlier defined notechart objects (?) become in the normal scrolling mode (with `#SCROLL 1` applied if the BMScroll entered by <kbd>F3</kbd> is used). Such objects keep a constant velocity even when `#BPMCHANGE` commands are used in BMS scrolling modes. This behavior can be utilized for creating bar drumroll notes which stretch when reaching the judgment timing.
+* In TaikoJiro 1 but not 2, the following notechart objects become in the normal scrolling mode (with `#SCROLL 1` applied if the BMScroll entered by <kbd>F3</kbd> is used). Such objects keep a constant velocity even when `#BPMCHANGE` commands are used in BMS scrolling modes, except that such objects stop moving during an in-effect positive delay.
+    * The objects past the judgement timing, or past the time of the start point of an in-effect positive delay on the beat-time diagram.
+        * This behavior can be utilized for creating bar drumroll notes which stretch when reaching the judgment timing.
+    * The objects defined non-before but having its time before the next [`#BPMCHANGE` command](#bpmchange) during gameplay.
+        * This behavior can be utilized for achieving the *<ruby>途<rt>To</rt>中<rt>chuu</rt>出<rt>Shutsu</rt>現<rt>gen</rt></ruby>* "appearing in middle" (including "disappearing in middle") when combined with [forward beat warps](#sign-of-timing-commands).
 
 ### `#PAPAMAMA`
 
@@ -2002,22 +2007,21 @@ Change the time signature / meter signature / **measure** signature.
 
 Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby>小<rt>shou</rt>節<rt>setsu</rt></ruby>*** "measure" to fit all note symbols on the following line if placed after the previous measure (if any) and before the first note symbol (if any) of this measure in the notechart definition).
 
-* `#MEASURE <number-upper-numeral>/<non-zero-number-lower-numeral>`
+* `#MEASURE <number-upper-numeral>/<positive-number-lower-numeral>`
   * > Formula: Amount of beats = 4 × `upper` / `lower`
   * The definition of beat is unaffected by the specified lower numeral. *Unspecified*: The decorative visual/audio effects.
-  * The measure duration is determined only by the result of dividing the upper numeral by the lower numeral.
-  * The lower numeral is conventionally fixed to be positive.
-  * A negative measure duration causes the note objects to be positioned backward and can even cause them to overlap.
+  * The measure duration in beats is determined only by the result of dividing the upper numeral by the lower numeral.
+  * A negative measure duration in beats causes the note objects to be positioned backward and can even cause them to overlap.
     * See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior.
-* `#MEASURE <number-upper-numeral>/0`
-  * The behavior is *unspecified* (may cause crashes in some existing simulators).
-  * In TaikoJiro 1, the time duration of measure divisions become 0.
+* `#MEASURE <number-upper-numeral>/<non-positive-lower-numeral>`
+  * The behavior is *unspecified* (for `<non-positive-lower-numeral>` being 0, may cause crashes in some existing simulators).
+  * In TaikoJiro 1, the lower numeral becomes `<non-positive-lower-numeral>` + 4294967296 (2³²).
 * Initial value: `#MEASURE 4/4`
 
 #### Compatibility Issues
 
 * In TaikoJiro 1 and 2, no whitespaces are allowed before the `/`
-* In TaikoJiro 1 but not 2, `<number-lower-numeral>` is parsed as an integer, and decimal places are thus ignored.
+* In TaikoJiro 1 but not 2, `<number-lower-numeral>` is parsed as an integer, decimal places are thus ignored, and non-positive values are treated as the value plus 4294967296 (2³²).
 * In TaikoJiro 1 but not 2, `<number-upper-numeral>` being 0 fails to set measures' timing spacing, but still sets the time duration of measure divisions in each measure to 0. Zero-duration measures can be alternatively constructed using a large `<number-upper-numeral>` value due to the limited timing precision.
 * In TaikoJiro, the last defined `#MEASURE` in a measure applies to the whole measure regardless of where it is defined.
 * In TaikoJiro 1, `#MEASURE`s defined in [a branch definition](#n--e--m) are partially reverted (only affects measure divisions in the measure) after [a `#BRANCHEND` or another `#BRANCHSTART` command](#branchstart--branchend). Not explicit defining `#MEASURE` after the branch definition section causes unintended behaviors. See [the `#N` / `#E` / `#M` commands](#n--e--m) for details.
@@ -2044,7 +2048,7 @@ For the timing of notechart object, multiple `#DELAY` commands placed at the sam
 *Unspecified*: The visual note positioning behavior in [BMS scrolling modes](#bmscroll--hbscroll--nmscroll) when note objects are placed into the time interval of positive delays.
 
 * `#DELAY <non-zero-float-seconds-delay-duration>`
-  * In TaikoJiro, in HBScroll or BMScroll mode, a delay with positive duration makes the notefield stop scrolling for the specified duration even when notechart objects are placed into the stop duration by using delays with negative duration.
+  * In TaikoJiro, in HBScroll or BMScroll mode, a delay with positive duration makes the notechart objects stops moving up to the specified duration.
   * A negative duration results in "negative delay" and can cause note objects to overlap.
     * See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior.
 * `#DELAY 0`
@@ -2052,8 +2056,8 @@ For the timing of notechart object, multiple `#DELAY` commands placed at the sam
 
 #### Compatibility Issues
 
-* In TaikoJiro, delays with the absolute value of duration < 0.001 are treated as 0 due to limited timing precision.
-* In TaikoJiro, in HBScroll or BMScroll mode, delays with positive duration can cause the notefield to stop scrolling up to the specified duration even when notechart objects are placed into the stop duration by using negative delays.
+* In TaikoJiro, the delay duration is rounded toward 0 to the nearest 0.001 seconds.
+* In TaikoJiro, the destination beat and time of a delay with negative duration is not considered for calculating the played beat by time, so a positive delay cannot be canceled by negative delays in HBScroll or BMScroll mode, but can be canceled by measures with negative time duration.
 * In TJAPlayer2 for PC, a positive delay does not make the notefield stop scrolling even in HBScroll or BMScroll mode.
 
 ### `#GOGOSTART` / `#GOGOEND`
@@ -2264,7 +2268,12 @@ Change the scrolling **direction** of notes & bar lines.
 ***Effect target***: bar lines \
 ***Effect branches***: *Unspecified* (?)
 
-Respectively disable ("turn **off**") / enable ("turn **on**") the display of all **bar** **line**s (including the special bar lines indicating the beginning of a *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path section) from the definition position and on.
+Respectively disable ("turn **off**") / enable ("turn **on**") the display of all **bar** **line**s (including the special yellow bar lines indicating the beginning of a *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path section) from the definition position and on.
+
+#### Compatibility Issues
+
+* In TaikoJiro 1, only up to 8 bar lines are displayed. A bar line "expires" 1 second past its judgement timing. In each frame, when at least 2 bar lines (including bar lines with disabled display) are allowed to be displayed and there are more bar lines which have not been allowed to be displayed, the first expired bar line is no longer allowed to be displayed. If less than 8 bar lines are left, the first not-yet-allowed bar line in the definition order is then allowed to be displayed.
+* In TaikoJiro 1, only the first bar line which is after the played time and is allowed to be displayed can be displayed as a special yellow bar line indicating the start of a branch section.
 
 ### `#BARLINE`
 
@@ -4352,7 +4361,7 @@ Negative | Negative | ![Musical beat-time diagram for negative delay duration](t
   * The direction and length in *t*-axis is determined by the delay duration.
   * Negative delays behavior as if an extra beat duration (can also be negative) were inserted, which causes the musical beat duration (*b<sub>a</sub>*) and visual beat duration (*b<sub>v</sub>*) to differ. In these conditions, the definition vector has the slope determined by the current BPM on the visual beat-time diagram.
 * Zero delay duration has no effects and is a point (zero vector) on the beat-time diagram.
-* In TaikoJiro 1 and 2, a forced freezed (indicated by slashed background) is inserted if a positive delay is defined at the maximum time position ever reached during chart definition (?). A forced freeze freezes the visual beat position during its duration regardless of other overlapped forced freezes, and resumes the visual beat position as if this freeze were not present and resumes the freeze effects of remaining overlapped forced freezes when the duration ends.
+* In TaikoJiro 1 and 2, the destination beat and time of a delay with negative duration is not considered for calculating the played beat by time, so a positive delay cannot be canceled by negative delays, but can be canceled by measures with negative time duration. If a positive delay beat-time segment is the last-defined beat-time segment at a given time during gameplay, the first defined positive delay beat-time segment takes effect.
 
 The visual beat duration behavior between positive and negative delay is not symmetrical, so the visual effects of positive delays and negative delays with total delay duration being zero do not cancel out. The behavior is as follows:
 
@@ -4370,7 +4379,7 @@ Examplar Combination | Musical Beat-time Diagram | Visual Beat-time Diagram
 * In TaikoJiro 2, if the time position of the definition cursor is rewound by measure division intervals with negative time durations, the next measure division segments (consecutive measure division interval without timing changes in middle) until the next measure and the bar lines and notes on it are shifted, so that the beginning of the next measure division segment starts at the end of the internal measure division with the maximum time position ever reached during definition. The internal time position of the definition cursor is unaffected by the shift and the next measure onward are not affected.
   * To work around this issue, some gimmick charts targeting TaikoJiro 2 split the measure at each negative delay into two, and place the negative delay right before the measure delimiter `,` of the first half measure.
 * In TJAPlayer2 for PC, beat duration ÷ BPM being negative causes incorrect lookup of the played beat position and might make notes not aligned to the judgement mark on their judgement timing in [HBScroll or BMScroll mode](#bmscroll--hbscroll--nmscroll).
-* In TJAPlayer2 for PC, a positive delay neither stops nor freezes the visual beat position from progressing.
+* In TJAPlayer2 for PC, a positive delay does not stop the visual beat position from progressing.
 
 ### Note Symbols in Taiko Mode
 
@@ -4815,13 +4824,7 @@ Komi | 0auBSQ, <ruby>申<rt>mou</rt>し<rt>shi</rt>コ<rt>ko</rt>ミ<rt>mi</rt><
 ## TODO
 
 * Reorder headers & commands by their categories & popularity and possibility of being supported: Pending.
-* List & explain known gimmicks, especially the gimmicks which have appeared in multiple charts by different chart creators and received terminologies: Planned. Gimmicks with uncertain mechanics:
-  * *<ruby>途<rt>To</rt>中<rt>chuu</rt>出<rt>Shutsu</rt>現<rt>gen</rt></ruby>* "appearing in middle" (including "disappearing in middle").
-    * Similar to a warp in definition.
-    * Interfering with amount of displayed beats before/after judgment?
-    * Utilizing the constant speed past judgment in TaikoJiro?
-  * Bar lines that disappears.
-    * Unknown threshold to hide bar lines past judgment in TaikoJiro.
+* List & explain known gimmicks, especially the gimmicks which have appeared in multiple charts by different chart creators and received terminologies: Planned.
 * Add (unimplemented) *proposal*s from simulator developers.
 * Add separated recommendation for respectively simulator behavior and chart creators and editors. Currently, the relevant paragraphs have ambiguous phrasing.
 * Add standardization information, especially the OpenTaiko-OutFox standardization and the direction toward behavior unification. Currently, the relevant paragraphs lack clarifications and are misleading.
