@@ -1295,6 +1295,11 @@ Specify the **total** *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt
 
 * `TOTAL:<non-negative-number-total-gauge-increment>`
   * The increasing rate of spirit gauge/soul gauge is calculated from the given total spirit gauge/soul gauge increment.
+  * *Unspecified*: Whether the total gauge increment is calculated using defined branch of notes or by considering specific possible branching route of notes.
+* *Proposal* (IID): `TOTAL:<non-negative-number-total-gauge-increment-normal>, <non-negative-number-total-gauge-increment-expert>, <non-negative-number-total-gauge-increment-master>`
+  * > Formula: *gauge_increment_great_unrounded_branch* = *total_gauge_increment_branch* / **n**(*defined_notes_in_branch*)
+  * The increasing rate of spirit gauge/soul gauge for each branch is calculated from the given total spirit gauge/soul gauge increment.
+  * If the simulator chooses to ignore branch-less total gauge increment, the total gauge increment for an *unspecified* branch is calculated, and then the relative increments between branches are used for the gauge increment in other branches.
 * `TOTAL:`
   * The increasing rate of spirit gauge/soul gauge is determined by the simulator. *Unspecified*: The details for determining it; usually one of the official games is followed.
 
