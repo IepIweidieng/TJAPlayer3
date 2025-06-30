@@ -337,7 +337,7 @@ Specify the **title** of the song.
 * `TITLE<trimmed-enum-str-lang>:<text-title-localized>` \
   ***Supported by***: taiko-web ver.19.03.10, OpenTaiko (0auBSQ) v0.5.1
   * Specify the localized title.
-  * `<trimmed-enum-str-lang>` is an IETF BCP 47 language or region tag (see <https://en.wikipedia.org/wiki/IETF_language_tag>) and can be one of:
+  * `<trimmed-enum-str-lang>` is an IETF BCP 47 language or region tag (see <https://en.wikipedia.org/wiki/IETF_language_tag>) and can be one of but not limited to:
     * `EN` &mdash; **En**glish
     * `JA` &mdash; **Ja**panese \
       ***Supported by***: taiko-web, OpenTaiko (0auBSQ) v0.6.0+
@@ -351,12 +351,18 @@ Specify the **title** of the song.
       ***Supported by***: OpenTaiko (0auBSQ) v0.5.3
     * `CN` &mdash; Simplified **C**hi**n**ese (mainland **C**hi**n**a) (region tag) \
       ***Supported by***: taiko-web
+    * *Proposal* (IID): `ZH_TW` &dash; *<ruby>**臺**<rt>**T**ái</rt>**灣**<rt>**w**ān</rt></ruby>/<ruby>**台**<rt>**T**ái</rt>**灣**<rt>**w**ān</rt></ruby><ruby>正<rt>Zhèng</rt>體<rt>tǐ</rt>**中**<rt>**Zh**ōng</rt>文<rt>wén</rt></ruby>* "Taiwanese Orthodox Variant of Chinese" Traditional Chinese
     * `TW` &mdash; Traditional Chinese (<ruby>**臺**<rt>**T**ái</rt>**灣**<rt>**w**ān</rt></ruby>/<ruby>**台**<rt>**T**ái</rt>**灣**<rt>**w**ān</rt></ruby>) (region tag) \
       ***Supported by***: taiko-web
     * `NL` &mdash; _**N**eder**l**ands_ Dutch \
       ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
+    * `RU` &mdash; _<ruby>**Ру**сский<rt>**Ru**sskiy</rt></ruby></ruby>_ Russian \
+      ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
+    * `DE` &mdash; _**De**utsch_ German \
+      ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
     * `KO` &mdash; **Ko**rean \
       ***Supported by***: taiko-web, OpenTaiko (0auBSQ) v0.6.0
+  * In OpenTaiko (0auBSQ) v0.6.0, any `<trimmed-enum-str-lang>` is recognized and can be used if the corresponding localization for the game interface has been defined.
 
 ### SUBTITLE Headers
 
@@ -487,6 +493,7 @@ The display details are *unspecified*.
     * *`クラシック` (Kurashikku)* "Classic"
     * *`ゲームミュージック` (Geemu Myuujikku)* "Game Music"
     * *`ナムコオリジナル` (Namuko Orijinaru)* "Namco Original"
+  * In OpenTaiko (0auBSQ), any `<str-genre>` is recognized.
 
 ### SIDE:
 
