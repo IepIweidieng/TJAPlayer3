@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-06-09 (UTC+8)
+* Last changed: 2025-06-30 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -198,27 +198,28 @@ Lines containing only whitespaces or nothing at all are ignored.
 
 ### Comment & Whitespaces
 
-Except when preceded by a `text` value, `//` starts a comment which ends at the end of the line and is ignored along with the `//`.
+Except when preceded by a `rawstr` value, `//` starts a comment which ends at the end of the line and is ignored along with the `//`.
 
 * Comments were never allowed in the original TJF format.
 * The comment syntax is (likely) borrowed from the SM format, which is borrowed from the DWI format, which is likely inspired from the C(++) programming language.
 
-Except when preceded by a `text` value, line-final whitespaces (after ignoring comments) are ignored.
+Except when preceded by a `rawstr` value, line-final whitespaces (after ignoring comments) are ignored.
 
-* *Unspecified*: Whether line-final whitespaces or optional whitespaces + comment after a `text` value is ignored.
-  * In TaikoJiro, their are not ignored and are kept as-is in such a case
+* *Unspecified*: Whether line-final whitespaces or optional whitespaces + comment after a `rawstr` value is ignored.
+  * In TaikoJiro, they are not ignored and are kept as-is in such a case
+  * In TJAPlayer2 for.PC, they are ignored and removed
 
 Line-initial whitespaces are allowed and ignored only within the notechart definition enclosed between `#START` & `#END` (excluding themselves).
 
 * Line-initial whitespaces before headers & commands were never allowed in the original TJF format.
 
-Except when within a `string` value and around a `text` value, consecutive whitespaces within a line is treated as a single space.
+Except when within a `text` value and around a `rawstr` value, consecutive whitespaces within a line is treated as a single space.
 
 * Non-newline whitespaces in non-command lines within the notechart definition were not ignored in the original TJF format but ignored by TaikoJiro.
 
 ### Comma
 
-For multiple values separated by comma (`,`), except for `text`-valued fields, optional whitespaces can occur before and/or after the comma.
+For multiple values separated by comma (`,`), except for `rawstr`-valued fields, optional whitespaces can occur before and/or after the comma.
 
 * A trailing comma may present but is not universally supported.
   * Known to be supported in TaikoJiro 1 and OpenTaiko (0auBSQ).
@@ -233,7 +234,7 @@ For multiple values separated by comma (`,`), except for `text`-valued fields, o
     * *Proposal* (IID): `+inf` for positive infinity (+∞) & `-inf` for negative infinity (−∞).
     * In TaikoJiro 1 and 2, exponential notation is supported, *e.g.*, `1e4`, `-3.14e-6`.
   * `enum-int` (enum-like, int-form): An `int` with specific accepted values.
-  * *Unspecified*: Whether the positive sign (`+`) may appear for a non-negative or positive value, unless the type is indicated as `unsigned-`.
+  * *Unspecified*: Whether the positive sign (`+`) may appear for a non-negative or positive value, except for `unsigned-*`.
   * In TaikoJiro, leading non-newline whitespaces are always ignored.
 * `complex-ri-number`: A complex number in the form of a real number, an imaginary number, or both added together. `complex-ri-number` indicates that it is *unspecified* whether a number with a fraction part is allowed for any of the real and imaginary components.
   * `complex-ri-float`: A complex number where each of the real and imaginary components can either be an integer or have the fraction part, *e.g.*, `1` / `i` / `.3+.3i`.
@@ -250,15 +251,26 @@ For multiple values separated by comma (`,`), except for `text`-valued fields, o
     * In TaikoJiro 2, `+<unsigned-number-real>-<unsigned-number-imaginary>i` (?) where `<unsigned-number-imaginary>` is equivalent to 0 is not fully supported.
     * In TJAP2fPC but not OpenTaiko (0auBSQ) v0.6.0, only the forms `<number-real>` & `<number-real><sign-imaginary><unsigned-number-imaginary>i` are supported; omitting any number parts is not supported.
     * In TaikoManyGimmicks up to 0.6.6α, omitting the real number component when  `<sign-imaginary>` is not `-` is not supported.
-* `string`: A string. `string` indicates that it is *unspecified* whether leading or trailing non-newline whitespaces are significant. *Unspecified*: The maximum supported length.
-  * `text`: A string. Can contain leading or trailing non-newline whitespaces & comments.
+* `text`: A string. `text` indicates that it is *unspecified* whether leading or trailing non-newline whitespaces are significant. *Unspecified*: The maximum supported length.
+  * `rawstr`: A string. Can contain leading or trailing non-newline whitespaces & comments.
+    * *Unspecified*: Whether line-final whitespaces or optional whitespaces + comment after a `rawstr` value is ignored.
+      * In TaikoJiro, they are not ignored and are kept as-is in such a case
+      * In TJAPlayer2 for.PC, they are ignored and removed
   * `str`: A string. Leading and trailing new-newline whitespaces & comments are ignored.
-  * In TJAPlayer3, in comma-separated lists, every comma (`,`) in `string` ***MUST*** be escaped as `\,` (while `\` itself requires no escaping).
+  * In TJAPlayer3, in comma-separated lists, every comma (`,`) in `text` ***MUST*** be escaped as `\,` (while `\` itself requires no escaping).
   * `enum-str` (enum-like, string-form): A `str` with specific accepted values. Can be spelt in a form of one of `Value` / `VALUE` / `value`. *Unspecified*: Whether other spellings can be used.
     * In TaikoJiro:
       * For some headers as denoted below, only the first 1 letter have effect (*e.g.*, `V` is also accepted).
       * Leading non-newline whitespaces are ignored.
       * All trailing characters are ignored in TaikoJiro. (*e.g.*, `Vsomething` / `valuesomething` are also accepted)
+
+Formatting notations:
+
+* (empty): The value is written as either an empty string (trimmed-empty) or a whitespaces-only string.
+* `trimmed-*`: The value is written without leading and trailing new-newline whitespaces & comments.
+* `unsigned-*`: The value is written without preceding positive sign (`+`) or negative sign (`-`).
+* `<separator>-separated-list-*`: Multiple values are given and are separated by the separator indicated by `<separator>`
+  * *E.g.*, exemplar valid values for `comma-separated-list-int`: (empty) / `42` / `8, 7, 6`
 
 ## TJA Header
 
@@ -309,23 +321,23 @@ For headers, the coarsest fineness is per-file. The finest fineness other than s
 
 ### TITLE Headers
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (including any `<enum-str-lang>` forms) \
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (including any `<trimmed-enum-str-lang>` forms) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, Malody, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per-file \
 ***Inspired by***: TJF format \
-&emsp; (likely) from DWI and earlier MSD format `#TITLE:<str-title>;` \
-&emsp; from BMS format `#TITLE <str-title>`
+&emsp; (likely) from DWI and earlier MSD format `#TITLE:<text-title>;` \
+&emsp; from BMS format `#TITLE <text-title>`
 
 Specify the **title** of the song.
 
-* `TITLE:<str-title>`
+* `TITLE:<text-title>`
   * In Malody, the romanized name should be used.
-* `TITLE<enum-str-lang>:<str-title-localized>` \
+* `TITLE<trimmed-enum-str-lang>:<text-title-localized>` \
   ***Supported by***: taiko-web ver.19.03.10, OpenTaiko (0auBSQ) v0.5.1
   * Specify the localized title.
-  * `<enum-str-lang>` is an IETF BCP 47 language or region tag (see <https://en.wikipedia.org/wiki/IETF_language_tag>) and can be one of:
+  * `<trimmed-enum-str-lang>` is an IETF BCP 47 language or region tag (see <https://en.wikipedia.org/wiki/IETF_language_tag>) and can be one of:
     * `EN` &mdash; **En**glish
     * `JA` &mdash; **Ja**panese \
       ***Supported by***: taiko-web, OpenTaiko (0auBSQ) v0.6.0+
@@ -348,12 +360,12 @@ Specify the **title** of the song.
 
 ### SUBTITLE Headers
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (including any `<enum-str-lang>` forms) \
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (including any `<trimmed-enum-str-lang>` forms) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro v2.64 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: per-file \
-***Inspired by***: (likely) SM format `#SUBTITLE:<str-displayed-subtitle>;`
+***Inspired by***: (likely) SM format `#SUBTITLE:<text-displayed-subtitle>;`
 
 Specify the **subtitle** (not of the meaning of *caption*) of the song (could be artist, game series, *etc.*), or alternatively as the second line ("**sub**") of the **title**.
 
@@ -361,22 +373,22 @@ If the artist of the song should be specified while the subtitle is already used
 
 The display details are *unspecified*.
 
-* `SUBTITLE:<str-subtitle>`
-  * `<str-subtitle>` can be one of:
-    * `--<str-displayed-subtitle>`
+* `SUBTITLE:<text-subtitle>`
+  * `<text-subtitle>` can be one of:
+    * `--<text-displayed-subtitle>`
       * Only show the subtitle in the song selection screen. Usually used for artist name.
       * The `--` prefix needs to be prepended to the displayed subtitle when the subtitle already begins with `--`.
-    * `++<str-displayed-subtitle>` \
+    * `++<text-displayed-subtitle>` \
       ***Supported by***: TaikoJiro, TJAPlayer2 for.PC, taiko-web ver.19.03.10 \
-      / `<str-displayed-subtitle>` \
+      / `<text-displayed-subtitle>` \
       ***Supported by***: TaikoJiro, TJAPlayer2 for.PC ver.2021xxxxxx, TJAPlayer3-f v1.7.2.0, OpenTaiko (0auBSQ) v0.6.0, taiko-web
       * Show the subtitle in all screens, including the gameplay screen & the result screen.
       * Such subtitle is considered the second half part of the title, but is moved to the second line in song selection screen & result screen.
       * The `++` prefix needs to be prepended to the displayed subtitle when the subtitle begins with either `++` or `--`.
-* `SUBTITLE<enum-str-lang>:<str-displayed-subtitle-localized>` \
+* `SUBTITLE<trimmed-enum-str-lang>:<text-displayed-subtitle-localized>` \
   ***Supported by***: taiko-web ver.19.03.10, OpenTaiko (0auBSQ) v0.5.1
   * Specify the localized subtitle. The display mode (`++`/`--`) is instead specified by the `SUBTITLE:` header.
-  * `<enum-str-lang>` can be one of the possible `<enum-str-lang>` for [the `TITLE<enum-str-lang>:` header](#title-headers).
+  * `<trimmed-enum-str-lang>` can be one of the possible `<trimmed-enum-str-lang>` for [the `TITLE<trimmed-enum-str-lang>:` header](#title-headers).
 
 ### ARTIST:
 
@@ -384,7 +396,7 @@ The display details are *unspecified*.
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: Malody \
 ***Scope fineness***: per-file \
-***Inspired by***: (likely) `.osu` format `Artist:<str-artist>`
+***Inspired by***: (likely) `.osu` format `Artist:<text-artist>`
 
 Specify the **artist** of the song.
 
@@ -392,10 +404,10 @@ Similar to the `--` prefix usage of [the `SUBTITLE:` header](#subtitle-headers),
 
 The display details are *unspecified*.
 
-* `ARTIST:<str-artist>`
+* `ARTIST:<text-artist>`
   * In Malody, the romanized name should be used.
-* *Proposal* (Komi): `ARTIST:<comma-separated-list-str-artist>`
-  * Every comma (`,`) in the artist name specified in `<comma-separated-list-str-artist>` ***MUST*** be escaped as `\,`
+* *Proposal* (Komi): `ARTIST:<comma-separated-list-text-artist>`
+  * Every comma (`,`) in the artist name specified in `<comma-separated-list-text-artist>` ***MUST*** be escaped as `\,`
 
 ### MAKER:
 
@@ -409,16 +421,16 @@ Specify the creator ("**maker**") of the notechart.
 
 The display details are *unspecified*.
 
-* `MAKER:<string-name-notechart-creator>`
-  * *Proposal* (Komi): Every comma (`,`) in `<string-name-notechart-creator>` ***MUST*** be escaped as `\,`
-* `MAKER:<string-name-notechart-creator> <string-notechart-creator-web-url>`
-  * `<string-notechart-creator-web-url>` is immediately enclosed by a pair of angle brackets (`<` & `>`).
-* *Proposal* (Komi): `MAKER:<comma-separated-list-string-name-notechart-creator>`
-  * Every comma (`,`) in the chart makers specified in `<comma-separated-list-string-name-notechart-creator>` ***MUST*** be escaped as `\,`
+* `MAKER:<text-name-notechart-creator>`
+  * *Proposal* (Komi): Every comma (`,`) in `<text-name-notechart-creator>` ***MUST*** be escaped as `\,`
+* `MAKER:<text-name-notechart-creator> <text-notechart-creator-web-url>`
+  * `<text-notechart-creator-web-url>` is immediately enclosed by a pair of angle brackets (`<` & `>`).
+* *Proposal* (Komi): `MAKER:<comma-separated-list-text-name-notechart-creator>`
+  * Every comma (`,`) in the chart makers specified in `<comma-separated-list-text-name-notechart-creator>` ***MUST*** be escaped as `\,`
 
 ### NOTESDESIGNER Headers
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) (including both forms of `<enum-int-difficulty-course>` being `0`&ndash;`4` and being omitted) \
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) (including both forms of `<trimmed-enum-int-difficulty-course>` being `0`&ndash;`4` and being omitted) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: (Better)TaikoCatsCaffe (?) \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
@@ -428,14 +440,14 @@ Specify the creator ("**designer**") of the notechart ("**notes**").
 
 The display details are *unspecified*.
 
-* `NOTESDESIGNER<enum-int-difficulty-course>:<string-name-notechart-creator>` \
+* `NOTESDESIGNER<trimmed-enum-int-difficulty-course>:<text-name-notechart-creator>` \
   ***Supported by***: (Better)TaikoCatsCaffe (?), OpenTaiko (0auBSQ) v0.6.0
-  * `<enum-int-difficulty-course>` can one of the integer argument to [the `COURSE:` header](#course).
+  * `<trimmed-enum-int-difficulty-course>` can one of the integer argument to [the `COURSE:` header](#course).
   * *Unspecified*: The behavior when the difficulty specified by `<enum-int-difficulty-course>` is different from the difficulty specified by `COURSE:` for the notechart definition.
-  * *Proposal* (Komi): Every comma (`,`) in `<string-name-notechart-creator>` ***MUST*** be escaped as `\,`
-* `NOTESDESIGNER:<string-name-notechart-creator>` \
+  * *Proposal* (Komi): Every comma (`,`) in `<text-name-notechart-creator>` ***MUST*** be escaped as `\,`
+* `NOTESDESIGNER:<text-name-notechart-creator>` \
   ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
-  * *Proposal* (Komi): Every comma (`,`) in `<string-name-notechart-creator>` ***MUST*** be escaped as `\,`
+  * *Proposal* (Komi): Every comma (`,`) in `<text-name-notechart-creator>` ***MUST*** be escaped as `\,`
 
 ### AUTHOR:
 
@@ -450,7 +462,7 @@ In Malody, it can be the Malody account name of the creator, but it is not enfor
 
 The display details are *unspecified*.
 
-* `MAKER:<string-name-notechart-creator>`
+* `MAKER:<text-name-notechart-creator>`
 
 ### GENRE:
 
@@ -528,7 +540,7 @@ For specifying the inner chart of solely the Oni difficulty with the same audio 
 
 Specify the filename of the *<ruby>裏<rt>ura</rt>譜<rt>fu</rt>面<rt>men</rt></ruby>* "inner notechart" or *<ruby>表<rt>omote</rt>譜<rt>fu</rt>面<rt>men</rt></ruby>* "outer notechart" version ("the **rev**erse **side**") of this notechart file.
 
-* `SIDEREV:<string-filename-tja-inner-or-outer>`
+* `SIDEREV:<text-filename-tja-inner-or-outer>`
   * If `SIDE:Normal` is used, specify the filename of the inner notechart.
   * If `SIDE:Ex` is used, specify the filename of the outer notechart.
   * If `SIDE:Both` is used, the behavior is *unspecified*.
@@ -548,8 +560,8 @@ Specify the audio file ("**wave**form audio file") of the song.
 
 *Unspecified*: Whether the notechart ends at the end of the audio file playback (if the audio file exist).
 
-* `WAVE:<string-filepath-song-audio-file>`
-  * `<string-filepath-song-audio-file>` has a file extension of one of, *e.g.*:
+* `WAVE:<text-filepath-song-audio-file>`
+  * `<text-filepath-song-audio-file>` has a file extension of one of, *e.g.*:
     * `.wav` \
       ***Supported by***: TaikoJiro
     * `.ogg` \
@@ -714,11 +726,11 @@ Can be reset by [the `#SCROLL` command](#scroll) non-before the beginning of the
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.4 \
 ***Scope fineness***: per&ndash;player-side (?) \
-***Inspired by***: DTX format `#PREIMAGE: <string-filepath-preview-image>`
+***Inspired by***: DTX format `#PREIMAGE: <text-filepath-preview-image>`
 
 Specify the jacket ("**pre**view") **image** of the song.
 
-* `PREIMAGE:<string-filepath-preview-image>`
+* `PREIMAGE:<text-filepath-preview-image>`
 * `PREIMAGE:`
   * No jacket image will be displayed.
 
@@ -731,8 +743,8 @@ Specify the jacket ("**pre**view") **image** of the song.
 
 Specify the jacket ("**cover**") image of the song.
 
-* `COVER:<string-filepath-background-image>`
-  * `<string-filepath-background-image>` ***MUST*** be in the same directory as the TJA file.
+* `COVER:<text-filepath-background-image>`
+  * `<text-filepath-background-image>` ***MUST*** be in the same directory as the TJA file.
   * In Malody, the preferred format is `.jpg`
 * `COVER:`
   * No jacket image will be displayed. (?)
@@ -748,15 +760,15 @@ Specify the **skin** in the gameplay screen for **taiko-web**.
 
 *Unspecified*: The behavior in other simulators.
 
-* `TAIKOWEBSKIN:<comma-separated-list-string-key-value>`
+* `TAIKOWEBSKIN:<comma-separated-list-text-key-value>`
 
-Each element of `<comma-separated-list-string-key-value>` can be one of:
+Each element of `<comma-separated-list-text-key-value>` can be one of:
 
-* `dir <string-dirpath-skin>`
-  * `<string-dirpath-skin>` defaults to (empty).
-* `name <str-skin-variation>`
-  * Specify the `<text-suffix-skin-variation>` to be `_<str-skin-variation>` if not empty or to be (empty) if empty.
-  * `<str-skin-variation>` defaults to (empty).
+* `dir <text-dirpath-skin>`
+  * `<text-dirpath-skin>` defaults to (trimmed-empty).
+* `name <text-skin-variation>`
+  * Specify the `<rawstr-suffix-skin-variation>` to be `_<text-skin-variation>` if not empty or to be (trimmed-empty) if empty.
+  * `<text-skin-variation>` defaults to (trimmed-empty).
 * `<enum-str-element> <enum-str-type>`, at least 1 element is required
   * `<enum-str-element>` can be one of:
     * `song` &mdash; the dancer background ("**song**" background) of the lower playback screen for single player.
@@ -765,9 +777,9 @@ Each element of `<comma-separated-list-string-key-value>` can be one of:
   * `<enum-str-type>` can be one of:
     * (Empty) &mdash; use the element from the default skin.
     * `none` &mdash; blank
-    * `static` &mdash; a still image, requires `bg_<str-element><text-suffix-skin-variation>.<text-file-extension>` to exist
-    * `<enum-str-animation-type>` &mdash; animated image with pre-defined animation type, requires both `bg_<str-element><text-suffix-skin-variation>_a.<text-file-extension>` & `bg_<str-element><text-suffix-skin-variation>_b.<text-file-extension>` to exist.
-      * Cannot be used when `<str-element>` is `stage`.
+    * `static` &mdash; a still image, requires `bg_<enum-str-element><rawstr-suffix-skin-variation>.<rawstr-file-extension>` to exist
+    * `<enum-str-animation-type>` &mdash; animated image with pre-defined animation type, requires both `bg_<enum-str-element><rawstr-suffix-skin-variation>_a.<rawstr-file-extension>` & `bg_<enum-str-element><rawstr-suffix-skin-variation>_b.<rawstr-file-extension>` to exist.
+      * Cannot be used when `<enum-str-element>` is `stage`.
 
 ### SCENEPRESET:
 
@@ -778,7 +790,7 @@ Each element of `<comma-separated-list-string-key-value>` can be one of:
 
 Specify the pre-defined ("**preset**") skin ("**scene**") in the gameplay screen.
 
-* `SCENEPRESET:<string-filepath-scene-preset>`
+* `SCENEPRESET:<text-filepath-scene-preset>`
 * `SCENEPRESET:`
   * The default skin is used.
 
@@ -838,8 +850,8 @@ Used in conjunction with [`COURSE:Dan`](#course).
 
 * `DANTICKCOLOR:<str-color-filter>`
   * `<str-color-filter>` can be one of:
-    * `#<string-6-digit-24bit-rgb>`
-    * `#<string-3-digit-12bit-rgb>`
+    * `#<trimmed-rawstr-6-digit-24bit-rgb>`
+    * `#<trimmed-rawstr-3-digit-12bit-rgb>`
     * `<enum-str-html-color-name>`
 * `DANTICKCOLOR:#FFFFFF` / `DANTICKCOLOR:`
 
@@ -852,7 +864,7 @@ Used in conjunction with [`COURSE:Dan`](#course).
 
 Specify the **b**ack**g**round image of the song **select**ion screen. Override the skin settings.
 
-* `SELECTBG:<string-filepath-selection-background-image>`
+* `SELECTBG:<text-filepath-selection-background-image>`
 * `SELECTBG:`
   * The default song selection background for the containing song folder is used.
 
@@ -862,13 +874,13 @@ Specify the **b**ack**g**round image of the song **select**ion screen. Override 
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TJAPlayer2 for.PC ver.2016021300 \
 ***Scope fineness***: per&ndash;player-side (?) \
-***Inspired by***: DTX format `#BACKGROUND <string-filepath-background-image>`
+***Inspired by***: DTX format `#BACKGROUND <text-filepath-background-image>`
 
 Specify the **b**ack**g**round **image** of the gameplay screen. Override the skin settings.
 
 *Unspecified*: Whether the image is scaled or stretched to fill the gameplay screen.
 
-* `BGIMAGE:<string-filepath-background-image>`
+* `BGIMAGE:<text-filepath-background-image>`
 * `BGIMAGE:`
   * No background images will be displayed.
 
@@ -898,7 +910,7 @@ Specify the **b**ack**g**round video ("**movie**") of the gameplay screen. Overr
 
 *Unspecified*: Whether the video is scaled or stretched to fill the gameplay screen.
 
-* `BGMOVIE:<string-filepath-background-video>`
+* `BGMOVIE:<text-filepath-background-video>`
 * `BGMOVIE:`
   * No background videos will be displayed.
 
@@ -935,14 +947,14 @@ Specify a **b**ack**g**round video ("**a**nimation") to be used in the gameplay 
 
 Not reset by `BGA:` itself.
 
-* `BGA:<string-filepath-background-video>`
+* `BGA:<text-filepath-background-video>`
 * `BGA:`
   * The behavior is *unspecified*.
 
 #### Compatibility Issues
 
 * In OpenTaiko (0auBSQ) v0.6.0:
-  * `<string-filepath-background-animation>` must start with `<unsigned-int-video-index>`, which must be exactly 2 decimal digits (with `0` prefixed if necessary) and is used to specify the background animation by [the `#BGAON` and `#BGAOFF` commands](#bgaon--bgaoff).
+  * `<text-filepath-background-animation>` must start with `<unsigned-int-video-index>`, which must be exactly 2 decimal digits (with `0` prefixed if necessary) and is used to specify the background animation by [the `#BGAON` and `#BGAOFF` commands](#bgaon--bgaoff).
 
 ### LYRICS: / LYRICFILE:
 
@@ -958,23 +970,23 @@ Specify the lyric file(s) for the song to display **lyrics** in the playback scr
 
 *Unspecified*: Whether [`#LYRIC`](#lyric) commands are ignored if the lyric file is used.
 
-* `LYRICS:<string-filepath-lyric-file>` \
+* `LYRICS:<text-filepath-lyric-file>` \
   ***Supported by***: taiko-web, OpenTaiko (0auBSQ) v0.6.0 \
-  / `LYRICFILE:<string-filepath-lyric-file>` \
+  / `LYRICFILE:<text-filepath-lyric-file>` \
   ***Supported by***: TJAPlayer3-Develop-ReWrite, TJAPlayer3-f v1.6.0.0
-  * `<string-filepath-lyric-file>` has a file extension of one of, *e.g.*:
+  * `<text-filepath-lyric-file>` has a file extension of one of, *e.g.*:
     * `.vtt` &mdash; WebVTT, see <https://en.wikipedia.org/wiki/WebVTT> \
       ***Supported by***: taiko-web, OpenTaiko (0auBSQ) v0.6.0 (only for the `LYRICS:` header)
     * `.lrc` &mdash; LRC, see <https://en.wikipedia.org/wiki/LRC_(file_format)> \
       ***Supported by***: TJAPlayer3-Develop-ReWrite, TJAPlayer3-f v1.6.0.0
-  * In TJAPlayer3-f & OpenTaiko (0auBSQ) v0.6.0, every comma (`,`) in `<string-filepath-lyric-file>` ***MUST*** be escaped as `\,`
-* `LYRICS:<comma-separated-list-string-filepath-lyric-file>` \
+  * In TJAPlayer3-f & OpenTaiko (0auBSQ) v0.6.0, every comma (`,`) in `<text-filepath-lyric-file>` ***MUST*** be escaped as `\,`
+* `LYRICS:<comma-separated-list-text-filepath-lyric-file>` \
   ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
-  / `LYRICFILE:<comma-separated-list-string-filepath-lyric-file>` \
+  / `LYRICFILE:<comma-separated-list-text-filepath-lyric-file>` \
   ***Supported by***: TJAPlayer3-f v1.6.0.0, OpenTaiko (0auBSQ) v0.6.0
   * Specify the lyric file used for each song specified by [the `#NEXTSONG` command](#nextsong).
   * Used in conjunction with `COURSE:Dan`.
-  * In TJAPlayer3-f & OpenTaiko (0auBSQ) v0.6.0, every comma (`,`) in the filepath specified in `<comma-separated-list-string-filepath-lyric-file>` ***MUST*** be escaped as `\,`
+  * In TJAPlayer3-f & OpenTaiko (0auBSQ) v0.6.0, every comma (`,`) in the filepath specified in `<comma-separated-list-text-filepath-lyric-file>` ***MUST*** be escaped as `\,`
 * `LYRICS:` / `LYRICFILE:`
   * Use only the lyric specified by [`#LYRIC`](#lyric) commands (if any).
 
@@ -1086,7 +1098,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
 * **`COURSE:6`** / **`COURSE:Dan`** / `COURSE:dan` \
   ***Supported by***: TJAPlayer3 v1.5.0
   * The special difficulty used for *<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games.
-* `COURSE:<str-difficulty-name>` \
+* `COURSE:<text-difficulty-name>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
   ***Supported by***: Malody
   * The difficulty name, commonly one of:
@@ -1335,8 +1347,8 @@ Specify a requirement for passing the notechart in *<ruby>段<rt>Dan'</rt>位<rt
 
 Used in conjunction with [`COURSE:Dan`](#course).
 
-* `EXAM<exam-requirement-index-specifier>:<enum-str-requirement>, <number-pass-requirement>, <number-gold-requirement>, <enum-str-range>`
-  * `<exam-requirement-index-specifier>` specifies the displayed order of this requirement. The display details are *unspecified*. Its value range is:
+* `EXAM<trimmed-exam-requirement-index-specifier>:<enum-str-requirement>, <number-pass-requirement>, <number-gold-requirement>, <enum-str-range>`
+  * `<trimmed-exam-requirement-index-specifier>` specifies the displayed order of this requirement. The display details are *unspecified*. Its value range is:
     * `1`&ndash;`3`
     * `1`&ndash;`4` \
       [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
@@ -1368,7 +1380,7 @@ Used in conjunction with [`COURSE:Dan`](#course).
   * `<enum-str-range>` can be one of:
     * `m` &mdash; **m**ore than or equal to ("≥") the given requirement
     * `l` &mdash; **l**ess than ("\<") the given requirement
-* `EXAM<exam-requirement-index-specifier>:<enum-str-requirement>, <comma-separated-list-number-pass-and-gold-requirements>, <enum-str-range>` \
+* `EXAM<trimmed-exam-requirement-index-specifier>:<enum-str-requirement>, <comma-separated-list-number-pass-and-gold-requirements>, <enum-str-range>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
   ***Supported by***: TJAPlayer3-f
   * The elements of `<comma-separated-list-number-pass-and-gold-requirements>` are pairs of `<number-pass-requirement>, <number-gold-requirement>` for each song specified by [the `#NEXTSONG` command](#nextsong).
@@ -1719,11 +1731,11 @@ See [the `#NEXTSONG` command](#nextsong) for the TJA command version of TJC head
 ***First seen in***: TaikoJiro v2.34 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope fineness***: sequential \
-***Inspired by***: StepMania and earlier Dance With Intensity CRS format `#SONG:<string-no-extension-filepath-notechart-file-from-root-song-directory>:<optional-enum-str-difficulty-type>;` (among other forms)
+***Inspired by***: StepMania and earlier Dance With Intensity CRS format `#SONG:<text-no-extension-filepath-notechart-file-from-root-song-directory>:<optional-enum-str-difficulty-type>;` (among other forms)
 
 Specify a notechart ("**song**") of the notechart set.
 
-* `SONG:<string-filepath-tja-from-game-root-directory>`
+* `SONG:<text-filepath-tja-from-game-root-directory>`
 
 ## TJA Command
 
@@ -1930,8 +1942,8 @@ Respectively **start** / **end** the region of notechart definition.
     * **`P2`** / `p2` &mdash; for the 2nd player-side (2P) if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ 2.
   * *Unspecified*: The behavior when other `<enum-str-player-side>` is used.
     * In TaikoJiro, using any other `<enum-str-player-side>` is treated as if the 0-argument `#START` were used.
-* *Proposal* (IID): `#START P<positive-int-player-side>`
-  * The notechart definition is for the `<positive-int-player-side>`-th player-side if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ `<positive-int-player-side>`.
+* *Proposal* (IID): `#START P<trimmed-unsigned-positive-int-player-side>`
+  * The notechart definition is for the `<unsigned-positive-int-player-side>`-th player-side if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ `<unsigned-positive-int-player-side>`.
 * `#END`
 
 *Unspecified*: The behavior when any of the followings are violated when defining each difficulty:
@@ -3346,9 +3358,9 @@ Used in conjunction with [`COURSE:Dan`](#course).
 
 See [TJC Header](#tjc-header) for the header version of the `#NEXTSONG` command.
 
-* `#NEXTSONG <string-song-title>,<string-song-subtitle>, <str-genre>,<string-filepath-song-wave>, <non-negative-int-score-init>, <non-negative-int-score-diff>`
-  * Basically has the effects of the [`TITLE:`](#title-headers), [`SUBTITLE:`](#subtitle-headers), [`GENRE:`](#genre), [`WAVE:`](#wave), [`SCOREINIT:`](#scoreinit), and [`SCOREDIFF:`](#scorediff) headers combined, except that every comma (`,`) in each `string` values ***MUST*** be escaped as `\,`
-* `#NEXTSONG <string-song-title>,<string-song-subtitle>, <str-genre>,<string-filepath-song-wave>, <non-negative-int-score-init>, <non-negative-int-score-diff>,<non-negative-number-level>, <enum-course>, <enum-str-bool-hide-title>` \
+* `#NEXTSONG <text-song-title>,<text-song-subtitle>, <str-genre>,<text-filepath-song-wave>, <non-negative-int-score-init>, <non-negative-int-score-diff>`
+  * Basically has the effects of the [`TITLE:`](#title-headers), [`SUBTITLE:`](#subtitle-headers), [`GENRE:`](#genre), [`WAVE:`](#wave), [`SCOREINIT:`](#scoreinit), and [`SCOREDIFF:`](#scorediff) headers combined, except that every comma (`,`) in each `text` values ***MUST*** be escaped as `\,`
+* `#NEXTSONG <text-song-title>,<text-song-subtitle>, <str-genre>,<text-filepath-song-wave>, <non-negative-int-score-init>, <non-negative-int-score-diff>,<non-negative-number-level>, <enum-course>, <enum-str-bool-hide-title>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
   ***Supported by***: TJAPlayer3-Develop-ReWrite, OpenTaiko (0auBSQ)
   * `<non-negative-number-level>, <enum-course>, <enum-str-bool-hide-title>` are optional parameters where the last one(s) can be omitted:
@@ -3568,7 +3580,7 @@ Commands supporting the `#GRADATION` command in TaikoManyGimmicks:
 
 Append ("**include**") the notechart definition content defined the included file to the current definition. The included file can include any headers and commands in the TMG format.
 
-* `#INCLUDE(<string-filepath-notechart-definition>)`
+* `#INCLUDE(<text-filepath-notechart-definition>)`
 
 ### `#SPLITLANE` / `#MERGELANE`
 
@@ -3606,7 +3618,7 @@ Manipulate texture **obj**ects & the game screen **cam**ara.
 
 Loader & unloader, reset by each other:
 
-* `#ADDOBJECT <str-name-object>, <number-pixel-x>, <number-pixel-y>,<string-filepath-texture>`
+* `#ADDOBJECT <str-name-object>, <number-pixel-x>, <number-pixel-y>,<text-filepath-texture>`
 * `#REMOVEOBJECT <str-name-object>`
 
 Display property setters:
@@ -3728,8 +3740,8 @@ Respectively **change** / restore ("**reset**") the texture used in the current 
 
 Reset by each other.
 
-* `#CHANGETEXTURE <string-filepath-original>,<string-filepath-replacing>`
-* `#RESETTEXTURE <string-filepath-original>`
+* `#CHANGETEXTURE <text-filepath-original>,<text-filepath-replacing>`
+* `#RESETTEXTURE <text-filepath-original>`
 
 ### #SETCONFIG
 
@@ -3748,7 +3760,7 @@ Override ("**set**") the **config** value read from the `SkinConfig.ini` of the 
 
 *Unspecified*: The exact list of valid configs, allowed values, and the behaviors.
 
-* `#SETCONFIG <str-config-key>=<text-config-value>`
+* `#SETCONFIG <str-config-key>=<rawstr-config-value>`
 
 ### #BGAON / #BGAOFF
 
@@ -3813,13 +3825,13 @@ Evaluation method:
 
 Local charter-defined variable setters:
 
-* `#STOREC <str-local-value-counter-written>, <string-store-expr-float>`
-* *Proposal* (IID): `#STORECF <str-local-formula-counter-written>, <string-store-expr-float>`
+* `#STOREC <str-local-value-counter-written>, <text-store-expr-float>`
+* *Proposal* (IID): `#STORECF <str-local-formula-counter-written>, <text-store-expr-float>`
   * `<str-local-*-counter-written>` is the key of the stored local (value or formula) counter and must not have the form of a [`float`](#value-type).
-* `#STORET <str-local-value-trigger-written>, <string-store-expr-bool>`
-* *Proposal* (IID): `#STORETF <str-local-formula-trigger-written>, <string-store-expr-bool>`
+* `#STORET <str-local-value-trigger-written>, <text-store-expr-bool>`
+* *Proposal* (IID): `#STORETF <str-local-formula-trigger-written>, <text-store-expr-bool>`
   * `<str-local-*-trigger-written>` is the key of the stored local (value or formula) trigger and must not be one of `True`, `False`, and any string different from them only by their letter case.
-  * See [Store Expression Syntax](#store-expression-syntax) for the syntax of `<store-expr-*>`
+  * See [Store Expression Syntax](#store-expression-syntax) for the syntax of `<text-store-expr-*>`
 
 Global charter-defined variable setters:
 
