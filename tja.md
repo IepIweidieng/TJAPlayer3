@@ -300,9 +300,34 @@ Headers allowed in post-`#START` position will be explicitly denoted.
 
 #### Header Scope
 
-For headers not in post-`#START` position, the effect of each header continues until the next occurrence of the same header or the end of the file.
+For headers, the widest possible scope is per-file and the narrowest possible scope is notechart.
 
-Headers in post-`#START` position (*e.g.*, [the EXAM headers](#exam-headers)) are effectively [commands](#tja-command).
+> notechart \< difficulty \< file
+
+For headers not in post-`#START` position, within the scope of a header, the effect of the header continues until the next occurrence of the same header within the same scope or the end of the file.
+
+Non&ndash;post-`#START` headers with per-file scope-fineness have file scope and works independent of difficulty.
+
+Non&ndash;post-`#START` headers with finer scope-fineness have difficulty scope and work independently of the headers from other difficulty scopes.
+
+Each difficulty scope starts at [a `COURSE:` header](#course) specifying the target difficulty and ends at another `COURSE:` header specifying any difficulty. The file section before the first `COURSE:` header is in the default difficulty scope.
+
+* *Unspecified*: The behavior when the difficulty scope for the same difficulty is defined at multiple file sections.
+  * In TaikoJiro: All such sections are effective and are considered to be a single difficulty scope. The headers with difficulty scope from the earlier defined section are used as the default value for the later defined sections.
+  * In TJAPlayer2 for.PC: All headers with difficulty scope and notechart definitions in such sections except for the last defined section are ignored.
+* *Unspecified*: The behavior when headers with difficulty scope and notechart definitions are defined within the default difficulty scope.
+  * In TaikoJiro: Such headers are used as the default value for each difficulty. Such notecharts have the default difficulty of `COURSE:Oni`.
+  * In TJAPlayer2 for.PC: When any `COURSE:` headers are defined, all such headers and notechart definitions are ignore. Otherwise, the default scope is treated as a `COURSE:Oni` scope.
+* *Unspecified*: The behavior when a header with possible per-file scope-fineness is defined after the default difficulty scope.
+  * In TaikoJiro 1 (?) & TJAPlayer2 for.PC: If the header is implemented with per-file scope-fineness, the last occurence of such header is used.
+  * In TaikoJiro 2 (?): If the header is implemented with per-file scope-fineness, the last occurence of such header in the difficulty scope(s) of selected difficulty is used.
+  * *Proposal* (IID): The last defined such header in the default difficulty scope (if any) or the first defined such header after the default difficulty scope is used as the default value for all difficulty scopes. If the header is implemented with per-file scope-fineness, all other occurrences of this header are ignored.
+
+Headers in post-`#START` position (*e.g.*, [the EXAM headers](#exam-headers)) are effectively [commands](#tja-command) and have notechart scope.
+
+#### Compatibility Issues
+
+* In TaikoJiro 1 before v1.95 & Malody, only one notechart definition is supported within a single TJA file. The difficulty scope is identical to the file scope in these simulators.
 
 #### Header Scope Fineness
 
@@ -1188,11 +1213,8 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
 #### Compatibility Issues
 
 * In TaikoJiro 1 and 2, the difficulty star is parsed an unsigned integer, but affects song's sorting order in TaikoJiro 1. In TaikoJiro 1, the maximum possible value displayed is 65535 (2¹⁶ − 1) In TaikoJiro 2, the maximum possible value parsed is 65535 (2¹⁶ − 1)
-* In TaikoJiro and TJAPlayer2 for.PC, the difficulty star displayed in the song selection screen for each difficulty is determined differently from the actual difficulty star in the gameplay screen. For the difficulty star displayed in the song selection screen:
-  * The scope and the scope fineness of the `LEVEL:` header are instead both per-difficulty. Each per-difficulty scope starts or resumes at `COURSE:` headers specifying the target difficulty and ends at another `COURSE:` header specifying a different difficulty.
-    * A "deceptive difficulty star" (a displayed difficulty star in the song selection screen which is different from the actual difficulty star in the gameplay screen) can be defined by placing the `LEVEL:` for the deceptive difficulty star after all notechart definitions in the per-difficulty scope.
-  * In TaikoJiro, if a `LEVEL:` header is defined before any `COURSE:` headers with difficulty specified, the specified difficulty star instead of 0 stars will be used as the default difficulty star.
-  * In TJAPlayer2 for.PC, if a `LEVEL:` header is defined before any `COURSE:` headers with value, the specified difficulty star become the difficulty star for the *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby>* Oni/Extreme difficulty, even if no notecharts are defined for the Oni/Extreme difficulty.
+* In TaikoJiro & TJAPlayer2 for.PC, the `LEVEL:` header is treated as having per-difficulty scope-fineness for the difficulty star displayed in the song selection screen. In TJAPlayer2 for.PC, the `LEVEL:` header also has per-difficulty scope-fineness for the actual difficulty star in the gameplay screen.
+  * In TaikoJiro, a "deceptive difficulty star" (a displayed difficulty star in the song selection screen which is different from the actual difficulty star in the gameplay screen) can be defined by placing the `LEVEL:` for the deceptive difficulty star after all notechart definitions in the difficulty scope.
 
 ### STYLE:
 
