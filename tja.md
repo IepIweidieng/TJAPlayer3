@@ -1281,7 +1281,7 @@ For each element of `<comma-separated-list-non-negative-int-amount-of-hits>`, if
 
 #### Compatibility Issues
 
-* Recommendation for charters: If the correctness of balloon count is significant, for branched charts, the branch-less `BALLOON:` should be always specified and should be specified after `BALLOONNOR:`, `BALLOONEXP:`, and `BALLOONMAS?`. [The `TJACOMPAT:` header](#proposal-iid-tjacompat) can be specified if necessary.
+* Recommendation for charters: If the correctness of balloon count is significant, for branched charts, the branch-less `BALLOON:` should be always specified and should be specified after `BALLOONNOR:`, `BALLOONEXP:`, & `BALLOONMAS:`. [The `TJACOMPAT:` header](#proposal-iid-tjacompat) can be specified if necessary.
 * TJAPlayer2 for.PC & TJAPlayer3:
   * Unlike in TaikoJiro, the scope fineness of the BALLOON headers is per-difficulty instead of per&ndash;player-side (see [the `LEVEL:` header](#level)). Specifically, if a BALLOON header is specified multiple times in its scope, the specified hit amount values is appended to the existent values, instead of replacing all the existent values.
   * The `BALLOON:` header is *erroneously* treated as the `BALLOONNOR:` header.
@@ -3185,7 +3185,7 @@ Branch-dependent condition:
 * In TaikoJiro 1 and 2, the branch condition is case-insensitive, and any unrecognized branch condition is treated as `p`.
 * In TaikoJiro 1 (and 2 (?)), for `r` branch condition, if a bar-drumroll&ndash;type note starts or overlaps with the branch determination point in definition, the displayed branch will be updated as the drumroll is hit since the branch determination point and until the actually branch point.
 * In TJAPlayer2 for.PC, the Expert branch condition must be fulfilled to take the Master branch.
-* Recommendation for charters: To prevent the Expert branch from begin taken, for a number condition, the requirement or the condition value for the Expert branch should be the same value as the requirement or condition value for the Master branch.
+* Recommendation for charters: To prevent the Expert branch from being taken, for a number condition, the requirement or the condition value for the Expert branch should be the same value as the requirement or condition value for the Master branch.
 
 ### *Proposal* (IID) #FROMNOR / #FROMEXP / #FROMMAS
 
