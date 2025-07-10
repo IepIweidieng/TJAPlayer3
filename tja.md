@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-06-30 (UTC+8)
+* Last changed: 2025-07-10 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1256,7 +1256,8 @@ Specify the required amount of hits of *<ruby>激<rt>geki</rt>連<rt>ren</rt>打
 
 Each balloon-type note with unassigned hit amount requires an *unspecified* default amount of hits.
 
-* In TaikoJiro & TJAPlayer2 for.PC, the default amount of hits is `5`.
+* In TaikoJiro, the default amount of hits is `5`.
+* In TJAPlayer2 for.PC, if the balloon header for the corresponding branch is specified, the default amount of hits in the branch is `0`. Otherwise, the default amount of hits in the branch is `5`.
 
 *Proposal* (IID): The [`#BALLOON`](#proposal-iid-balloon-command) command can be used in the notechart definition for the same purpose instead.
 
@@ -1280,6 +1281,7 @@ For each element of `<comma-separated-list-non-negative-int-amount-of-hits>`, if
 
 #### Compatibility Issues
 
+* Recommendation for charters: If the correctness of balloon count is significant, for branched charts, the branch-less `BALLOON:` should be always specified and should be specified after `BALLOONNOR:`, `BALLOONEXP:`, and `BALLOONMAS?`. [The `TJACOMPAT:` header](#proposal-iid-tjacompat) can be specified if necessary.
 * TJAPlayer2 for.PC & TJAPlayer3:
   * Unlike in TaikoJiro, the scope fineness of the BALLOON headers is per-difficulty instead of per&ndash;player-side (see [the `LEVEL:` header](#level)). Specifically, if a BALLOON header is specified multiple times in its scope, the specified hit amount values is appended to the existent values, instead of replacing all the existent values.
   * The `BALLOON:` header is *erroneously* treated as the `BALLOONNOR:` header.
@@ -1569,9 +1571,9 @@ The supported set of headers & commands and allowed argument forms is not affect
 
 * `jiro1` &mdash; Reference: TaikoJiro 1 v2.92
 * `jiro2` &mdash; Reference: TaikoJiro 2 v0.98
-* `tmg` &mdash; Reference: Latest TaikoManyGimmicks (v0.6.6α)
+* `tmg` &mdash; Reference: TaikoManyGimmicks v0.6.6α. Proposed here as a more idealized form of `jiro1`.
 * `tjap3` &mdash; Reference: TJAPlayer3 v5.2.10
-* `oos` &mdash; OpenTaiko-OutFox standard. Reference: OpenTaiko (0auBSQ)
+* `oos` &mdash; OpenTaiko-OutFox standard. Reference: OpenTaiko (0auBSQ). Proposed here as a more idealized form of `tjap3`
 
 `<enum-str-compat-flag>` is in the format of `<enum-str-compat-item>=<enum-str-compat-option>`.
 
@@ -1705,12 +1707,12 @@ Flag \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
 `end-at` | `music` | `music` | `music` | `music` (?) | `end` | `end` <br /> (`music-and-end`)
 `timing-precision` | ? | `ms-bpm` | `ms` (?) | `any` (?) | `ms` | `ms`
 `timing-effect-order` | `def` | `time` | `time` | `time` (?) | `flat-time-or-def` | `flat-time-or-def`
-`hbscroll-past` | N/A | `nmscroll` | `hbscroll` | `hbscroll` | `hbscroll` | `hbscroll`
+`hbscroll-past` | N/A | `nmscroll` | `hbscroll` | `nmscroll` | `hbscroll` | `hbscroll`
 `hbscroll-delay` | N/A | `freeze` | `freeze` | `freeze` (?) | `offset` | `offset`
 `roll-pos` | N/A | N/A <br /> (`complex`) | `complex` | `complex` | `real` | `complex`
 `roll-nodes` | `head` | `tips` | `tips` | `tips` | `head` | `head`
 `scroll-i` | N/A | N/A <br /> (`down`) | `down` | `down` | `up` | `up`
-`jposscroll-i` | N/A | N/A <br /> (`down`) | N/A <br /> (`down`) | `up` | `up` | `up`
+`jposscroll-i` | N/A | N/A <br /> (`up`) | N/A <br /> (`up`) | `up` | `up` | `up`
 `jposscroll-interrupt` | N/A | N/A <br /> (`trunc`) | N/A <br /> (`trunc`) | `trunc` | `trunc` | `trunc`
 `sudden-directions` | N/A | N/A <br /> (`all`) | N/A <br /> (`all`) | `all` | `x` | N/A <br /> (`x`)
 `sudden-precision` | N/A | N/A <br /> (`ms`) | N/A <br /> (`ms`) | `any` (?) | `ms` | `ms`
@@ -2277,6 +2279,8 @@ If the notes & the bar lines are rotated around their center accordingly when a 
 
 Change the scrolling **direction** of notes & bar lines.
 
+Recommendation for charters: [The `#SCROLL` command](#scroll) should be used instead. If the vertical scroll direction is significant, [the `TJACOMPAT:` header](#proposal-iid-tjacompat) should be specified.
+
 *Unspecified*: Whether the notes & the bar lines are rotated around their center accordingly.
 
 *Unspecified*: The behavior when a [`#SCROLL` command](#scroll) with complex value is active.
@@ -2288,19 +2292,17 @@ Change the scrolling **direction** of notes & bar lines.
     * | | Rotation (degrees CCW) | Scrolling direction under `#SCROLL 1`
       | --- | --- | ---
       | `0` | 0° ↺/↻ (no changes) | ←
-      | `1` | 270° ↺ (≡ 90° ↻) | ↑
-      | `2` | 90° ↺ | ↓
-      | `3` | 315° ↺ (≡ 45° ↻) | ↖
-      | `4` | 45° ↺ | ↙
+      | `1` | 90° ↺ | ↓
+      | `2` | 270° ↺ (≡ 90° ↻) | ↑
+      | `3` | 45° ↺ | ↙
+      | `4` | 315° ↺ (≡ 45° ↻) | ↖
       | `5` | 180° ↺ (≡ 180° ↻) | →
-      | `6` | 225° ↺ (≡ 135° ↻) | ↗
-      | `7` | 135° ↺ | ↘
-* *Proposal* (IID): `#DIRECTION <number-degrees>deg`
-  * `<number-degrees-rotation>` specifies the degrees (°) of the counterclockwise (↺) rotation.
+      | `6` | 135° ↺ | ↘
+      | `7` | 225° ↺ (≡ 135° ↻) | ↗
 
 #### Compatibility Issues
 
-* In TJAPlayer2 for.PC and TJAPlayer3, `<enum-int-direction>` specifies the degrees (°) of the clockwise (↻) rotation instead due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑).
+* In TJAPlayer2 for.PC and TJAPlayer3, due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑), the equivalent [`#SCROLL` command](#scroll) for each `<enum-int-direction>` except for 0 (←) and 5 (→) differ from other simulators including TaikoJiro 2 and TaikoManyGimmicks.
 
 ### `#BARLINEOFF` / `#BARLINEON`
 
@@ -2367,7 +2369,8 @@ The arguments are whitespace-separated.
     * `<number-pixel-distance-x>`
     * `<complex-ri-number-pixel-distance-xy>` \
       ***Supported by***: TJAPlayer3 v1.6.x, OpenTaiko (0auBSQ) v0.6.0
-      * The imaginary component of `<complex-ri-number-pixel-distance-xy>` specifies the vertical movement toward the top of the screen (↑).
+      * The imaginary component of `<complex-ri-number-pixel-distance-xy>` specifies the vertical movement toward the bottom of the screen (↓).
+        * In TaikoJiro 2 and TaikoManyGimmicks, this vertical movement direction is in the opposite direction of the direction of the [`#SCROLL` command] in these simulators.
     * `<number-distance-x-upper>/<number-distance-x-lower>` \
       ***Supported by***: TaikoManyGimmicks
       * Specify the horizontal movement to be `<number-distance-x-upper>/<number-distance-x-lower>` of the default note field width.
@@ -2382,7 +2385,8 @@ The arguments are whitespace-separated.
 
 #### Compatibility Issues
 
-* In TJAPlayer2 for.PC and TJAPlayer3, the imaginary component of `<complex-ri-number-pixel-distance-xy>` specifies the vertical movement toward the bottom of the screen (↓) instead.
+* Recommendation for charters: If the vertical scroll direction is significant, [the `TJACOMPAT:` header](#proposal-iid-tjacompat) should be specified.
+* In TJAPlayer3, where the imaginary component of `<complex-ri-number-pixel-distance-xy>` is introduced, due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑), the vertical movement direction is in the same direction as the direction of the [`#SCROLL` command](#scroll), but is in the opposite direction of the `#SCROLL` command in other simulators including TaikoJiro 2 and TaikoManyGimmicks.
 * TJAPlayer2 for.PC and TaikoManyGimmicks do not support all existent forms of `<complex-ri-float-scroll-speed-xy>`, see the explanation of compatibility issues in [Value Type](#value-type).
 
 ### #JUDGEDELAY
@@ -3024,6 +3028,10 @@ If `<enum-str-range>` is `l`, the requirement is fulfilled if the value is less 
 * Otherwise, if the Expert requirement is fulfilled, the *<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path will be taken by default.
 * Otherwise: The *<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>* Normal "branch"/path is taken by default.
 * To force a "branch"/path to be taken by default, for a number condition, the requirement value for the branch can be set out-of-bound; for a Boolean condition, the condition value for the branch can be specified as false or true.
+  * For example, with `<enum-str-condition>` being `p`:
+    * To prevent the Normal branch from being taken: `#BRANCHSTART p,0,Y`, with `Y` being any number.
+    * To prevent the Expert branch from being taken: `#BRANCHSTART p,Y,Y`, with `Y` being any number.
+    * To prevent the Master branch from being taken: `#BRANCHSTART p,X,101`, with `X` being any number.
 * The [`#LEVELHOLD`](#levelhold) and the (*Proposal* (IID)) [`#LEVELREDIR`](#proposal-iid-levelredir) commands affect the final determining result.
 
 #### Usage
@@ -3177,6 +3185,7 @@ Branch-dependent condition:
 * In TaikoJiro 1 and 2, the branch condition is case-insensitive, and any unrecognized branch condition is treated as `p`.
 * In TaikoJiro 1 (and 2 (?)), for `r` branch condition, if a bar-drumroll&ndash;type note starts or overlaps with the branch determination point in definition, the displayed branch will be updated as the drumroll is hit since the branch determination point and until the actually branch point.
 * In TJAPlayer2 for.PC, the Expert branch condition must be fulfilled to take the Master branch.
+* Recommendation for charters: To prevent the Expert branch from begin taken, for a number condition, the requirement or the condition value for the Expert branch should be the same value as the requirement or condition value for the Master branch.
 
 ### *Proposal* (IID) #FROMNOR / #FROMEXP / #FROMMAS
 
