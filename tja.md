@@ -4516,7 +4516,8 @@ By default, drumroll-type notes are ended non-after one of:
       * This behavior later appeared in *<ruby>太<rt>Tai</rt>鼓<rt>ko</rt>タ<rt>Ta</rt>ワー<rt>waa</rt>3<rt>San</rt></ruby>（<ruby>辛<rt>kara</rt>口<rt>kuchi</rt></ruby>）* ("Taiko Tower 3 (hard)") and a few RPG-mode charts in other games.
         * See <https://wikiwiki.jp/taiko-fumen/収録曲/その他/太鼓タワー3%28辛口%29>
       * However, this can be achieved alternatively by using `#DELAY`s with negative duration to place the hit-type note.
-      * *Proposal* (IID): Restrict this behavior to `COURSE:Tower`.
+      * *Proposal* (IID): The hit-type note which ends a balloon-type note cannot be hit until the balloon-type note is broken or missed. If the balloon-type note has been broken or missed, the hit-type note ending the balloon-type note becomes possible to hit.
+  * *Proposal* (IID): If a roll-type notes would end by hit-type note symbol, but an isolated `8` occurs after the hit-type note and before any roll-type note head symbol, the roll-type note ends instead at a position earlier than the `8` by an *unspecified* duration as if the hit-type notes were irrelevant for determining the roll length.
 * In TaikoJiro, the definition position of the last note symbol of the notechart, except when the note head is in the definition of a "branch"/path other than the *<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>* Normal "branch"/path.
 
 In the official games, drumroll-type notes are usually intentionally made to end earlier than the designed ending beat position by the amount of beats of a 1/48th note.
