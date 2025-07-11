@@ -2629,6 +2629,8 @@ Similar to [the `#NOTESCHANGE` command](#noteschange), but with a different rang
 * *Proposal* (IID): `#SENOTECHANGE <comma-separated-list-enum-note-phoneticization>`
   * All elements of `<comma-separated-list-enum-note-phoneticization>` are valid `<enum-int-note-phoneticization>` or `<enum-str-note-phoneticization>` and are iterated and applied to multiple notes in their definition order.
 
+#### Usual Patterns of Note Phoneticization in the Offical Games
+
 In the official games, the note phoneticization is assigned per-note and does not follow a definite pattern, especially in earlier games.
 
 The general pattern in recent Taiko games seems to be:
@@ -2641,23 +2643,23 @@ The general pattern in recent Taiko games seems to be:
 * The long form is avoided for notes in any of the following conditions ("non-long conditions"), to ensure the readability of note phoneticization:
   * `vd_this_to_previous_note` \< 1/16th, to avoid the texts from overlapping.
   * `vd_this_to_next_note` \< 1/8th, with `scroll` upper-limited to 1.0 for calculation, to avoid the text for a note from being extended below the next note.
-* The alternate form is used for every even notes in an "alternative chain", which all the followings are met:
+* The alternate form is used for every even notes in an "alternative chain", where all the followings are met:
   * Each of the previous chain & the next chain is either sparser than this chain or separated from this chain by a pause.
   * The chain contains only odd amount of notes of the same type (*i.e.*, using the same note symbol) and the same drumroll duration (if applicable).
   * The notes are spaced evenly in time duration.
   * The "chain-final" note of this chain does not meet any of the "non-long conditions".
   * The time duration between the first note & the last note ≤ 0.5 seconds. (This has known exceptions in few charts)
   * Exceptions: In some older official charts, "alternative chains" can begin within a regular chain and even contain even amount of notes.
-* For hit-type notes, the long form is used when:
-  * The note is "chain-final" and which do not meet any of the "non-long conditions".
-  * The note is not in an "alternative chain" and `vd_this_to_next_note` > 1/8th.
+* The long form is used for a hit-type note when:
+  * The note is "chain-final" and do not meet any of the "non-long conditions".
+  * The note is not in an "alternative chain" and `vd_this_to_next_note` > 1/8th. ("pre-pause")
 * There is only one form for drumroll-type notes and applause notes in the official games: The short form had been used in earlier games until the long form was introduced in PS3-generation and has been used onward.
 * The short form is used for all other notes and is preferred in other obscure cases.
 * For notes near a non-forced branch point, the results of branching from and into each different branch are considered. The long or alternate form is used only if the same form would be used in all branch results, while the short form is used otherwise.
 
 However, in the official Konga games, the general pattern is less consistent and "chain-final" is defined less strictly:
 
-* Both the long and final forms can used for "chain-final" notes which do not meet any of the "non-long conditions".
+* Both the long and final forms can used for "chain-final" and "pre-pause" notes which do not meet any of the "non-long conditions".
 * There is only one form for drumroll-type notes and applause notes in the official games: Only the short form has been used because all the Konga games were released before the PS3-generation of Taiko games.
 * The short form is used otherwise.
 
@@ -4464,7 +4466,7 @@ Effective when [`GAME:Taiko`](#game) or [`#GAMETYPE Taiko`](#gametype) is in eff
 
 See <https://taiko.namco-ch.net/taiko/en/howto/onpu.php> for the appearance of notes in the official PC-generation arcade games.
 
-See [#SENOTECHANGE](#senotechange) for the general patterns of how the alternative forms of *<ruby>口<rt>Kuchi</rt>唱<rt>Shou</rt>歌<rt>ga</rt></ruby>* <br> "Note phoneticizations" are used.
+See [Usual Patterns of Note Phoneticization in the Offical Games](#usual-patterns-of-note-phoneticization-in-the-offical-games) for the general patterns of how the alternative forms of *<ruby>口<rt>Kuchi</rt>唱<rt>Shou</rt>歌<rt>ga</rt></ruby>* <br> "Note phoneticizations" are used.
 
 | | Note Type | Note Appearance | *<ruby>口<rt>Kuchi</rt>唱<rt>Shou</rt>歌<rt>ga</rt></ruby>* <br> "Note phoneticizations" in PC-generation arcade games | Explanations on Clear | Explanations on Fail | Notes
 --- | --- | --- | --- | --- | --- | ---
@@ -4569,7 +4571,7 @@ See the exemplar actual gameplays:
 * <https://www.youtube.com/watch?v=G70HoWO1umc> <br /> <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/G70HoWO1umc" title="YouTube video player, playing &quot;Donkey Konga &lbrack;29&rbrack; GameCube Longplay&quot;, uploaded by Mutch Games" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 * <https://www.youtube.com/watch?v=myci706YXss> <br /> <iframe width="560" height="315" src="https://www.youtube.com/embed/myci706YXss?si=AKOnV2vJgvUB63gU" title="YouTube video player, playing &quot;Longplay of Donkey Konga 3&quot;, uploaded by LongplayArchive" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-See [#SENOTECHANGE](#senotechange) for the general patterns of how the alternative forms of *<ruby>口<rt>Kuchi</rt>唱<rt>Shou</rt>歌<rt>ga</rt></ruby>* <br> "Note phoneticizations" are used.
+See [Usual Patterns of Note Phoneticization in the Offical Games](#usual-patterns-of-note-phoneticization-in-the-offical-games) for the general patterns of how the alternative forms of *<ruby>口<rt>Kuchi</rt>唱<rt>Shou</rt>歌<rt>ga</rt></ruby>* <br> "Note phoneticizations" are used.
 
 | | Note Type | Note Appearance | *<ruby>口<rt>Kuchi</rt>唱<rt>Shou</rt>歌<rt>ga</rt></ruby>* <br> "Note phoneticizations" in *Donkey Konga 3* | Explanations on Clear | Explanations on Fail | Notes
 --- | --- | --- | --- | --- | --- | ---
