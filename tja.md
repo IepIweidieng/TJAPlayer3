@@ -1460,7 +1460,7 @@ When either the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussio
     *n* | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
   * Only the first 9 notes of a combo reward exactly `init` points per note.
   * The basic score is **floor**((`init` + *n* × `diff`) / 10) × 10 points.
-  * > An equivalent formula: Basic score = **floor**(`(init` + **min**{**floor**(`combo` / 10), 10} × `diff`) / 10) × 10 (points).
+  * > An equivalent formula: Basic score = **floor**((`init` + **min**{**floor**(`combo` / 10), 10} × `diff`) / 10) × 10 (points).
   * `init` is usualy set to between 3&ndash;5 × `diff` in official charts.
   * In TaikoJiro, if the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option is enabled, the scoring rules of the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" mode from the 14th arcade console version of the official game is followed.
   * The *<ruby>基<rt>Ki</rt>本<rt>hon</rt>天<rt>Ten</rt>井<rt>joo</rt></ruby>* "basic ceiling" score varies according to the difficulty and difficulty star.
@@ -1512,7 +1512,7 @@ Recommendation for charters: The `SCOREMODE:`, `SCOREINIT:`, & [`SCOREDIFF:`](#s
 
 * `SCOREINIT:<non-negative-int-score-init>`
 * `SCOREINIT:<non-negative-int-score-init>, <non-negative-int-score-init-shin'uchi>` \
-  ***Supported by***: TaikoJiro v2.70
+  ***Supported by***: TaikoJiro v2.70, TJAPlayer2 for.PC
   * If supported, `<non-negative-int-score-init-shin'uchi>` is used for `init` when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" option ("stable") is enabled
 * `SCOREINIT:0`
   * The behavior is *unspecified*.
@@ -1542,6 +1542,7 @@ In the official game, `diff` is not required to be a multiple of 10. Instead, th
     Basic score | **floor**(`init` / 10) × 10 | **floor**(`init` + `diff` / 10) × 10
 * `SCOREDIFF:0`
   * `diff` is `0`.
+  * Recommendation for charters: To specify the basic score when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" option ("stable") is enabled, the non–*<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" score should also be specified, and [`SCOREINIT:<non-negative-int-score-init>, <non-negative-int-score-init-shin'uchi>`](#scoreinit) should be used and `SCOREDIFF:0` should not be used.
 * Initial value / `SCOREDIFF:`
   * `diff` is determined by the simulator. *Unspecified*: The details for determining it; usually one of the official games is followed.
 
