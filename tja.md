@@ -2608,14 +2608,15 @@ Similar to [the `#NOTESCHANGE` command](#noteschange), but with a different rang
       | `12` | *<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* Balloon | `7`
   * *Unspecified*: The behavior when an `<enum-int-note-phoneticization>` not designed for the applied note is used.
   * *Proposal* (IID): The `<enum-int-note-phoneticization>` `1` to `5` can be used on and is consumed by any other non-blank note symbol, including `8`.
-    * | Game Mode & Note Symbol \\ Phoneticization for | `1` (long) | `2` / `5` (short) | `3` (alternate) | `4` (final)
+    * | Note Symbol \\ phone. | `1` (long) | `2` / `5` (short) | `3` (alternate) | `4` (final)
       | --- | --- | --- | --- | ---
       | Taiko `1` | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>* Don | *<ruby>ド<rt>Do</rt></ruby>* Do | *<ruby>コ<rt>Ko</rt></ruby>* (Do) | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>* Don
       | Taiko `2` | *<ruby>カッ<rt>Ka'</rt></ruby>* Ka | *<ruby>カ<rt>Ka</rt></ruby>* (Ka) | *<ruby>カ<rt>Ka</rt></ruby>* (Ka) | *<ruby>カッ<rt>Ka'</rt></ruby>* Ka
       | Konga `1` | <ruby>パン<rt>Pan</rt></ruby> | <ruby>パ<rt>Pa</rt></ruby> | <ruby>パ<rt>Pa</rt></ruby> | <ruby>パッ<rt>Pa'</rt></ruby>
       | Konga `2` | <ruby>ポン<rt>Pon</rt></ruby> | <ruby>ポ<rt>Po</rt></ruby> | <ruby>ポ<rt>Po</rt></ruby> | <ruby>ポッ<rt>Po'</rt></ruby>
       | Konga `4` | <ruby>チャン<rt>Chan</rt></ruby> | <ruby>チャ<rt>Cha</rt></ruby> | <ruby>チャ<rt>Cha</rt></ruby> | <ruby>チャッ<rt>Cha'</rt></ruby>
-      | End of roll-type notes with bar (after Taiko & Konga `5`, `6`, `D`, `H`, & `I`) | *ーっ!!* &ndash;!! | (none) | (none) | *ーっ!!* &ndash;!!
+      | End of bar | *ーっ!!* &ndash;!! | (none) | (none) | *ーっ!!* &ndash;!!
+      * End of bar: End of roll-type notes with bar (after Taiko & Konga `5`, `6`, `D`, `H`, & `I`)
     * For roll-type notes, If the roll end is an `8`, the nearest non-yet-consumed `#SENOTECHANGE` command non-after the `8` takes effect, otherwise the nearest non-yet-consumed `#SENOTECHANGE` command non-after the non-repeated roll head takes effect.
     * No effects on other note symbols but consumed.
   * *Proposal* (IID): If the `<enum-int-note-phoneticization>` is `0` or `-1`, the automatically assigned note phoneticization is used.
