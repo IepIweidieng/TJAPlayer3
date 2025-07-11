@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-07-10 (UTC+8)
+* Last changed: 2025-07-11 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1432,6 +1432,8 @@ Used in conjunction with [`COURSE:Dan`](#course).
 
 Specify the **scoring mode**.
 
+Recommendation for charters: The `SCOREMODE:`, [`SCOREINIT:`](#scoreinit), & [`SCOREDIFF:`](#scorediff) headers should not be manually specified for custom charts, unless the precise control of total score is significant, *e.g.*, [any `#BRANCHSTART` commands](#branchstart--branchend) with `s` (score) condition appear for the player-side, complex forced branch route, special number of maximum possible score for charts without rolls.
+
 Affects combo bonus, combo milestone bonus, *<ruby>ゴー<rt>Goo</rt>ゴー<rt>Goo</rt>タ<rt>Ta</rt>イ<rt>i</rt>ム<rt>mu</rt></ruby>* Go-Go Time bonus, & big note bonus.
 
 The main scoring formula has two `int` variables: `init` & `diff`.
@@ -1457,8 +1459,8 @@ When either the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussio
     --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
     *n* | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
   * Only the first 9 notes of a combo reward exactly `init` points per note.
-  * The basic score is `init` + *n* × `diff` points.
-  * > An equivalent formula: Basic score = `init` + **min**{**floor**(`combo` / 10), 10} × `diff` (points).
+  * The basic score is **floor**((`init` + *n* × `diff`) / 10) × 10 points.
+  * > An equivalent formula: Basic score = **floor**(`(init` + **min**{**floor**(`combo` / 10), 10} × `diff`) / 10) × 10 (points).
   * `init` is usualy set to between 3&ndash;5 × `diff` in official charts.
   * In TaikoJiro, if the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option is enabled, the scoring rules of the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" mode from the 14th arcade console version of the official game is followed.
   * The *<ruby>基<rt>Ki</rt>本<rt>hon</rt>天<rt>Ten</rt>井<rt>joo</rt></ruby>* "basic ceiling" score varies according to the difficulty and difficulty star.
@@ -1467,7 +1469,7 @@ When either the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussio
   * Combo | 1&ndash;9 | 10&ndash;29 | 30&ndash;49 | 50&ndash;99 | 100&ndash;
     --- | --- | --- | --- | --- | ---
     *n* | 0 | 1 | 2 | 4 | 8
-  * The basic score is `init` + *n* × `diff` points.
+  * The basic score is **floor**((`init` + *n* × `diff`) / 10) × 10 points.
   * Combo milestone bonus: 10000 points are rewarded when every 100 combo is reached.
   * `init` is usualy set to between 3&ndash;5 × `diff` in official charts.
   * The *<ruby>基<rt>Ki</rt>本<rt>hon</rt>天<rt>Ten</rt>井<rt>joo</rt></ruby>* "basic ceiling" score varies according to the difficulty and difficulty star.
@@ -1477,13 +1479,18 @@ When either the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussio
   * All types of score bonus are cancelled.
   * Combo | 1&ndash;
     --- | ---
-    Basic score (points) | `init`
+    Basic score (points) | **floor**(`init` / 10) × 10
   * The scoring rules are the same regardless of the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option.
   * The *<ruby>基<rt>Ki</rt>本<rt>hon</rt>天<rt>Ten</rt>井<rt>joo</rt></ruby>* "basic ceiling" score is close to 1000000 points.
 * Initial value / `SCOREMODE:`
   * The actual scoring mode used is *unspecified*.
   * In TaikoJiro: `SCOREMODE:1`
   * In TJAPlayer3: Depending on the user settings
+
+During gameplay, the last digit of the total score during is kept as an *unspecified* digit after the first score-rewarding hit-type note is hit.
+
+* In the official game, the digit is 0.
+* In TaikoJiro 1, a score penalty of at most 10 points is subtracted from the total score at the first score-rewarding hit according to the judge window setting.
 
 Reference: *配点* ("Scoring"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/システム/配点>
 
@@ -1500,6 +1507,8 @@ Reference: *配点* ("Scoring"). 太鼓の達人 譜面とか Wiki\* ("Taiko no 
 ***Scope fineness***: per&ndash;player-side
 
 Specify the *<ruby>**初**<rt>sho</rt>項<rt>kou</rt></ruby>* **init**ial term (refers to an arithmetic progression) (`init`) used for calculate the basic **score**. See the explanation for [the `SCOREMODE:` header](#scoremode).
+
+Recommendation for charters: The `SCOREMODE:`, `SCOREINIT:`, & [`SCOREDIFF:`](#scorediff) headers should not be manually specified for custom charts, unless the precise control of total score is significant, *e.g.*, [any `#BRANCHSTART` commands](#branchstart--branchend) with `s` (score) condition appear for the player-side, complex forced branch route, special number of maximum possible score for charts without rolls.
 
 * `SCOREINIT:<non-negative-int-score-init>`
 * `SCOREINIT:<non-negative-int-score-init>, <non-negative-int-score-init-shin'uchi>` \
@@ -1520,13 +1529,17 @@ Specify the *<ruby>**初**<rt>sho</rt>項<rt>kou</rt></ruby>* **init**ial term (
 
 Specify the *<ruby>公<rt>kou</rt>**差**<rt>sa</rt></ruby>* common **diff**erence (refers to an arithmetic progression) (`diff`) used for calculate the basic **score**. See the explanation for [the `SCOREMODE:` header](#scoremode).
 
+Recommendation for charters: The `SCOREMODE:`, [`SCOREINIT:`](#scoreinit), & `SCOREDIFF:` headers should not be manually specified for custom charts, unless the precise control of total score is significant, *e.g.*, [any `#BRANCHSTART` commands](#branchstart--branchend) with `s` (score) condition appear for the player-side, complex forced branch route, special number of maximum possible score for charts without rolls.
+
+In the official game, `diff` is not required to be a multiple of 10. Instead, the basic score is rounded to the nearest 10 toward 0.
+
 * `SCOREDIFF:<non-negative-int-score-diff>`
 * `SCOREDIFF:<non-negative-int-score-diff>d` \
   ***Supported by***: TaikoJiro v2.49
   * If supported, a scoring rule similar to *<ruby>ド<rt>Do</rt>ン<rt>n</rt>ダ<rt>da</rt>フ<rt>fu</rt>ル<rt>ru</rt></ruby>！<ruby>コー<rt>Koo</rt>ス<rt>su</rt></ruby>* "Donderful! Course" is used as if `SCOREMODE:0` were used, except that the `SCOREINIT:` & `SCOREDIFF:` are not ignored.
   * Combo | 1&ndash;199 | 200&ndash;
     --- | --- | ---
-    Basic score | `init` | `init` + `diff`
+    Basic score | **floor**(`init` / 10) × 10 | **floor**(`init` + `diff` / 10) × 10
 * `SCOREDIFF:0`
   * `diff` is `0`.
 * Initial value / `SCOREDIFF:`
