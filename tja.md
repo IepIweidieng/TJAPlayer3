@@ -2659,7 +2659,7 @@ The general pattern in recent Taiko games seems to be:
 
 However, in the official Konga games, the general pattern is less consistent and "chain-final" is defined less strictly:
 
-* Both the long and final forms can used for "chain-final" and "pre-pause" notes which do not meet any of the "non-long conditions".
+* Both the long and final forms can be used for "chain-final" and "pre-pause" notes which do not meet any of the "non-long conditions".
 * There is only one form for drumroll-type notes and applause notes in the official games: Only the short form has been used because all the Konga games were released before the PS3-generation of Taiko games.
 * The short form is used otherwise.
 
