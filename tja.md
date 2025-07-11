@@ -2607,27 +2607,20 @@ Similar to [the `#NOTESCHANGE` command](#noteschange), but with a different rang
       | `11` | *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* ROLL | note head of `6`
       | `12` | *<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* Balloon | `7`
   * *Unspecified*: The behavior when an `<enum-int-note-phoneticization>` not designed for the applied note is used.
-* *Proposal* (IID): `#SENOTECHANGE <enum-str-note-phoneticization>`
-  * `<enum-str-note-phoneticization>` can be one of:
-    * `D` &mdash; the default, use the automatically assigned note phoneticization.
-    * `L` &mdash; **l**ong:
-      * In Taiko mode, use *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>* Don for note symbol `1` and *<ruby>カッ<rt>Ka'</rt></ruby>* Ka for note symbol `2`
-      * In Konga mode, use <ruby>パン<rt>Pan</rt></ruby> for note symbol `1`, <ruby>ポン<rt>Pon</rt></ruby> for `2`, and <ruby>チャン<rt>Chan</rt></ruby> for `4`.
-      * For bar drumroll notes, make the ending *ーっ!!* &ndash;!! displayed.
-      * Otherwise the same as `D`.
-    * `F` &mdash; **f**inal:
-      * In Konga mode, use <ruby>パッ<rt>Pa'</rt></ruby> for note symbol `1`, <ruby>ポッ<rt>Po'</rt></ruby> for `2`, and <ruby>チャッ<rt>Cha'</rt></ruby> for `4`.
-      * Otherwise the same as `L`.
-    * `S` &mdash; **s**hort:
-      * In Taiko mode, use *<ruby>ド<rt>Do</rt></ruby>* Do for note symbol `1` and <ruby>カ<rt>Ka</rt></ruby> (Ka) Ka for note symbol `2`
-      * In Konga mode, use <ruby>パ<rt>Pa</rt></ruby> for note symbol `1`, <ruby>ポ<rt>Po</rt></ruby> for `2`, and <ruby>チャ<rt>Cha</rt></ruby> for `4`.
-      * For bar drumroll notes, make the ending *ーっ!!* &ndash;!! hidden.
-      * Otherwise the same as `D`.
-    * `A` &mdash; **a**lternate:
-      * In Taiko mode, use *<ruby>コ<rt>Ko</rt></ruby>* (Do) for note symbol `1`
-      * Otherwise the same as `S`.
-* *Proposal* (IID): `#SENOTECHANGE <comma-separated-list-enum-note-phoneticization>`
-  * All elements of `<comma-separated-list-enum-note-phoneticization>` are valid `<enum-int-note-phoneticization>` or `<enum-str-note-phoneticization>` and are iterated and applied to multiple notes in their definition order.
+  * *Proposal* (IID): The `<enum-int-note-phoneticization>` `1` to `5` can be used on and is consumed by any other non-blank note symbol, including `8`.
+    * | Game Mode & Note Symbol \\ Phoneticization for | `1` (long) | `2` / `5` (short) | `3` (alternate) | `4` (final)
+      | --- | --- | --- | --- | ---
+      | Taiko `1` | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>* Don | *<ruby>ド<rt>Do</rt></ruby>* Do | *<ruby>コ<rt>Ko</rt></ruby>* (Do) | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>* Don
+      | Taiko `2` | *<ruby>カッ<rt>Ka'</rt></ruby>* Ka | *<ruby>カ<rt>Ka</rt></ruby>* (Ka) | *<ruby>カ<rt>Ka</rt></ruby>* (Ka) | *<ruby>カッ<rt>Ka'</rt></ruby>* Ka
+      | Konga `1` | <ruby>パン<rt>Pan</rt></ruby> | <ruby>パ<rt>Pa</rt></ruby> | <ruby>パ<rt>Pa</rt></ruby> | <ruby>パッ<rt>Pa'</rt></ruby>
+      | Konga `2` | <ruby>ポン<rt>Pon</rt></ruby> | <ruby>ポ<rt>Po</rt></ruby> | <ruby>ポ<rt>Po</rt></ruby> | <ruby>ポッ<rt>Po'</rt></ruby>
+      | Konga `4` | <ruby>チャン<rt>Chan</rt></ruby> | <ruby>チャ<rt>Cha</rt></ruby> | <ruby>チャ<rt>Cha</rt></ruby> | <ruby>チャッ<rt>Cha'</rt></ruby>
+      | End of roll-type notes with bar (after Taiko & Konga `5`, `6`, `D`, `H`, & `I`) | *ーっ!!* &ndash;!! | (none) | (none) | *ーっ!!* &ndash;!!
+    * For roll-type notes, If the roll end is an `8`, the nearest non-yet-consumed `#SENOTECHANGE` command non-after the `8` takes effect, otherwise the nearest non-yet-consumed `#SENOTECHANGE` command non-after the non-repeated roll head takes effect.
+    * No effects on other note symbols but consumed.
+  * *Proposal* (IID): If the `<enum-int-note-phoneticization>` is `0` or `-1`, the automatically assigned note phoneticization is used.
+* *Proposal* (IID): `#SENOTECHANGE <comma-separated-list-enum-int-note-phoneticization>`
+  * All elements of `<comma-separated-list-enum-int-note-phoneticization>` are valid `<enum-int-note-phoneticization>` and are iterated and applied to multiple notes in their definition order.
 
 #### Usual Patterns of Note Phoneticization in the Offical Games
 
