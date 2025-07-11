@@ -2633,22 +2633,24 @@ In the official games, the note phoneticization is assigned per-note and does no
 
 The general pattern in recent Taiko games seems to be:
 
-* The visual beat duration between `x` & `y` (`d_<x>_to_<y>` below) is used for determining the note phoneticization and is defined as `scroll` × `beat_duration_<x>_to_<y>`.
+* The time duration between `x` & `y` is denoted as `td_<x>_to_<y>` below. The visual beat duration between `x` & `y` (`vd_<x>_to_<y>` below) is defined as `scroll` × `beat_duration_<x>_to_<y>`. Both the time duration and the visual beat duration are used for determining the note phoneticization.
 * Both the head and end of drumroll-type notes are treated as ordinary notes for determining the note phoneticization.
 * A note is "chain-final" when any of the followings are met (the "? / 3" factors are tentatively determined tolerance values):
-  * `d_this_to_next_note` > 1/8th, the end of a chain before a pause.
-  * `d_this_to_next_note` ≥ 4.0 / 3 × `d_this_to_previous_note`, the end of a chain before a short pause or a sparser chain.
-  * `d_next_to_2nd_next_note` ≤ 2.0 / 3 × `d_this_to_next_note`, the end of a chain before a denser chain.
+  * `td_this_to_next_note` ≥ 4.0 / 3 × `td_this_to_previous_note`, the end of a chain before a short pause or a sparser chain.
+  * `td_next_to_2nd_next_note` ≤ 2.0 / 3 × `td_this_to_next_note`, the end of a chain before a denser chain.
 * The long form is avoided for notes in any of the following conditions ("non-long conditions"), to ensure the readability of note phoneticization:
-  * `d_this_to_previous_note` \< 1/16th, to avoid the texts from overlapping.
-  * `d_this_to_next_note` \< 1/8th, with `scroll` upper-limited to 1.0 for calculation, to avoid the text for a note from being extended below the next note.
-* The alternate form is used for every even notes in a chain when all the followings are met for this chain:
+  * `vd_this_to_previous_note` \< 1/16th, to avoid the texts from overlapping.
+  * `vd_this_to_next_note` \< 1/8th, with `scroll` upper-limited to 1.0 for calculation, to avoid the text for a note from being extended below the next note.
+* The alternate form is used for every even notes in an "alternative chain", which all the followings are met:
   * Each of the previous chain & the next chain is either sparser than this chain or separated from this chain by a pause.
   * The chain contains only odd amount of notes of the same type (*i.e.*, using the same note symbol) and the same drumroll duration (if applicable).
   * The notes are spaced evenly in time duration.
   * The "chain-final" note of this chain does not meet any of the "non-long conditions".
-  * The time duration between the first note & the last note ≤ 0.5 seconds.
-* The long form is used for "chain-final" hit-type notes which do not meet any of the "non-long conditions".
+  * The time duration between the first note & the last note ≤ 0.5 seconds. (This has known exceptions in few charts)
+  * Exceptions: In some older official charts, "alternative chains" can begin within a regular chain and even contain even amount of notes.
+* For hit-type notes, the long form is used when:
+  * The note is "chain-final" and which do not meet any of the "non-long conditions".
+  * The note is not in an "alternative chain" and `vd_this_to_next_note` > 1/8th.
 * There is only one form for drumroll-type notes and applause notes in the official games: The short form had been used in earlier games until the long form was introduced in PS3-generation and has been used onward.
 * The short form is used for all other notes and is preferred in other obscure cases.
 * For notes near a non-forced branch point, the results of branching from and into each different branch are considered. The long or alternate form is used only if the same form would be used in all branch results, while the short form is used otherwise.
