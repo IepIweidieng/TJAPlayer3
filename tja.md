@@ -1075,7 +1075,7 @@ See [the `#GAMETYPE` command](#gametype) for specifying the game mode for specif
 
 #### Compatibility Issues
 
-* In TaikoJiro 1, the gameplay of `GAME:Jube` was unimplemented and was autoplay-only.
+* In TaikoJiro 1, the gameplay of `GAME:Jube` & `GAME:Bm` was unimplemented and was autoplay-only.
 
 ### COURSE:
 
