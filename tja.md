@@ -1490,7 +1490,7 @@ When either the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussio
   * The *<ruby>基<rt>Ki</rt>本<rt>hon</rt>天<rt>Ten</rt>井<rt>joo</rt></ruby>* "basic ceiling" score varies according to the difficulty and difficulty star.
 * `SCOREMODE:3` \
   ***Supported by***: TJAPlayer2 for.PC but not TJAPlayer3 v1.4.0+, TJAPlayer3-f
-  * Follow the scoring rule of the official PC-generation games (<ruby>虹<rt>Niji</rt>色<rt>iro</rt></ruby>/<ruby>ニ<rt>Ni</rt>ジ<rt>ji</rt>イ<rt>i</rt>ロ<rt>ro</rt></ruby> version(s); AC16)
+  * Follow the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)"/"true performance" scoring rules of the official PS3-generation games (AC15).
   * All types of score bonus are cancelled.
   * Combo | 1&ndash;
     --- | ---
@@ -1512,6 +1512,7 @@ Reference: *配点* ("Scoring"). 太鼓の達人 譜面とか Wiki\* ("Taiko no 
 #### Compatibility Issues
 
 * In TJAPlayer3 v1.4.0+ but not TJAPlayer3-f, `SCOREMODE:3` is treated the same as `SCOREMODE:2`, where the behavior of the former `SCOREMODE:3` can be enabled by enabling the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option.
+* In TJAPlayer3-Develop & TJAPlayer3-Develop-ReWrite (?), the former `SCOREMODE:3` behavior cannot be enabled because the scoring rules when enabling the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option follows the scoring rule of the official PC-generation games (<ruby>虹<rt>Niji</rt>色<rt>iro</rt></ruby>/<ruby>ニ<rt>Ni</rt>ジ<rt>ji</rt>イ<rt>i</rt>ロ<rt>ro</rt></ruby> version(s); AC16). 
 
 ### SCOREINIT:
 
