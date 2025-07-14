@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-07-11 (UTC+8)
+* Last changed: 2025-07-15 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1526,6 +1526,8 @@ Specify the *<ruby>**初**<rt>sho</rt>項<rt>kou</rt></ruby>* **init**ial term (
 
 Recommendation for charters: The `SCOREMODE:`, `SCOREINIT:`, & [`SCOREDIFF:`](#scorediff) headers should not be manually specified for custom charts, unless the precise control of total score is significant, *e.g.*, [any `#BRANCHSTART` commands](#branchstart--branchend) with `s` (score) condition appear for the player-side, complex forced branch route, special number of maximum possible score for charts without rolls.
 
+*Unspecified*: Whether the specified `init` is ignored when the simulator chooses a set of scoring rules different from the scoring rules specified by the `SCOREMODE:` header.
+
 * `SCOREINIT:<non-negative-int-score-init>`
 * `SCOREINIT:<non-negative-int-score-init>, <non-negative-int-score-init-shin'uchi>` \
   ***Supported by***: TaikoJiro v2.70, TJAPlayer2 for.PC
@@ -1548,6 +1550,8 @@ Specify the *<ruby>公<rt>kou</rt>**差**<rt>sa</rt></ruby>* common **diff**eren
 Recommendation for charters: The `SCOREMODE:`, [`SCOREINIT:`](#scoreinit), & `SCOREDIFF:` headers should not be manually specified for custom charts, unless the precise control of total score is significant, *e.g.*, [any `#BRANCHSTART` commands](#branchstart--branchend) with `s` (score) condition appear for the player-side, complex forced branch route, special number of maximum possible score for charts without rolls.
 
 In the official game, `diff` is not required to be a multiple of 10. Instead, the basic score is rounded to the nearest 10 toward 0.
+
+*Unspecified*: Whether the specified `diff` is ignored when the simulator chooses a set of scoring rules different from the scoring rules specified by the `SCOREMODE:` header.
 
 * `SCOREDIFF:<non-negative-int-score-diff>`
 * `SCOREDIFF:<non-negative-int-score-diff>d` \
