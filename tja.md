@@ -617,11 +617,12 @@ Specify the audio file ("**wave**form audio file") of the song.
 ***Inspired by***: (likely) SM format `#SAMPLESTART:<non-negative-float-seconds-preview-audio-offset>;` (?) \
 &emsp; from DWI format `#SAMPLESTART:<float-with-decimal-places-seconds-preview-audio-offset>;` (among other forms)
 
-
 Specify the amount of seconds into the song audio for **start**ing playing the preview ("**demo**nstration") audio in the song selection screen.
 
+*Unspecified*: The behavior when the preview duration would be non-positive because the preview start time of the audio  is non-before the end time of the song audio.
+
 * `DEMOSTART:<non-negative-float-seconds-preview-audio-offset>`
-* `DEMOSTART:0` / `DEMOSTART:`
+* Initial value / `DEMOSTART:0`
 
 ### OFFSET:
 
@@ -641,7 +642,7 @@ Replaced the TJF command `#GOMUSIC` (starting ("**go**") playing the song audio 
 Equation: `music-offset` = `time-point-of-audio-beginning` − `time-point-of-chart-start` (Unit: Seconds)
 
 * `OFFSET:<float-seconds-music-offset>`
-* `OFFSET:0` / `OFFSET:`
+* Initial value / `OFFSET:0`
 
 ### SONGVOL:
 
@@ -654,14 +655,22 @@ Equation: `music-offset` = `time-point-of-audio-beginning` − `time-point-of-ch
 
 Specify the relative amplitude percentage (%) of the desired **vol**ume gain of the **song** audio.
 
+*Unspecified*: The reference amplitude, especially in simulators which support automatic loudness normalization.
+
+Recommendation for simulator developers: The reference amplitude is the amplitude of the song audio after applying the volume settings of the simulator. If the automatic loudness normalization gain is used, this header is ignored.
+
 * `SONGVOL:<non-negative-number-percent-amplitude-gain>`
 * `SONGVOL:`
   * The behavior is *unspecified*.
+* Initial value / `SONGVOL:100`
+
+Recommendation for chart creators: `<non-negative-number-percent-amplitude-gain>` should not exceed `100` unless the waveform of the song audio after interpolated by the audio player would not exceed the maximum amplitude after the gain, otherwise the song audio might be distorted on simulators without volume limiters.
 
 #### Compatibility Issues
 
 * In TaikoJiro 1 but not 2, the value is parsed as a non-negative integer number.
 * Handled but ignored by TJAPlayer2 for.PC & TJAPlayer3 before v1.5.2
+* In TaikoManyGimmicks, as for v0.6.6α, the initial value is `SONGVOL:0` (?)
 
 ### SEVOL:
 
@@ -672,18 +681,24 @@ Specify the relative amplitude percentage (%) of the desired **vol**ume gain of 
 ***Scope fineness***: per&ndash;player-side (?) \
 ***Inspired by***: BMS format `#VOLWAV <non-negative-number-percent-amplitude-gain>` (?)
 
-Specify the relative amplitude percentage (%) of the desired **vol**ume gain of the taiko sound ("**s**ound **e**ffect").
+Specify the relative amplitude percentage (%) of the desired **vol**ume gain of the sound of the instrument which the player chooses ("**s**ound **e**ffect").
+
+Recommendation for chart creators: The `SEVOL:` header should not be used for finished charts. Setting [the `SONGVOL:` header](#songvol) or modifying the instrument sound is preferred.
+
+Recommendation for simulator developers: The reference amplitude is the amplitude of the sound of the instrument which the player chooses after applying the volume settings of the simulator.
 
 *Unspecified*: Whether the volume of system voice is affected.
 
 * `SEVOL:<non-negative-number-percent-amplitude-gain>`
 * `SEVOL:`
   * The behavior is *unspecified*.
+* Initial value / `SEVOL:100`
 
 #### Compatibility Issues
 
 * In TaikoJiro 1 but not 2, the value is parsed as a non-negative integer number.
 * Handled but ignored by TJAPlayer2 for.PC
+* In TaikoManyGimmicks, as for v0.6.6α, the initial value is `SEVOL:0` (?)
 
 ### BPM:
 
