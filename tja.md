@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-07-15 (UTC+8)
+* Last changed: 2025-07-19 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -74,7 +74,7 @@ The dates listed here are mostly in UTC+9.
 
 Filename/extension | Content | Supported by | First Release | Notes
 --- | --- | --- | --- | ---
-`genre.ini` | Genre definition for notecharts in the (sub)directory/ies. INI config file. | TaikoJiro, taiko-web | 2009-06-17 (TaikoJiro v1.90) |
+`genre.ini` | Genre definition for notecharts in the (sub)directory/ies. INI config file. | TaikoJiro, taiko-web, TJAPlayer2 for.PC Ver.2018110400 | 2009-06-17 (TaikoJiro v1.90) |
 `musiclist.txt` | List of file paths to notecharts | TJAPlayer (for PSP) | Non-after 2010-02-10 (musiclistGenerator v6) <br /> Non-after 2010-02-24 (TJAPlayer Ver ?×7 already released) | Similar to the later `.t3u8`, but in native encoding (assumedly Shift-JIS) <br /> and with the first occurrence of a line being `#END` (if exist) and all subsequent line ignored.
 `song.txt` | Number of notechart directories + List of directory name of notechart directories | <ruby>鬼<rt>Gwai2</rt>太<rt>Taai3</rt>鼓<rt>gu2</rt></ruby>DS (OniTaiko DS) | Non-after 2010-06-27 (OniTaiko DS F C v.1.2.1X fat) | See <https://web.archive.org/web/20100726082352/http://www.owataiko.com/~aki/_onitaikods/readme.txt>
 `box.def` | Genre definition for notecharts in the (sub)directory/ies. `.dtx`-syntax headers. | TJAPlayer2 for.PC, taiko-web | Non-before 2000-01-17 (DTXMania v0.01; first release) <br /> Non-before 2015-05-15 (taiko mode; <ruby>太<rt>Tai</rt>鼓<rt>ko</rt>さ<rt>sa</rt>ん<rt>n</rt>ア<rt>A</rt>ル<rt>ru</rt>ファ<rt>fa</rt></ruby> (early TJAPlayer2 for.PC) OSDN project registration) | First used in DTXMania, inherited by TJAPlayer2 for.PC
@@ -518,7 +518,14 @@ The display details are *unspecified*.
     * *`クラシック` (Kurashikku)* "Classic"
     * *`ゲームミュージック` (Geemu Myuujikku)* "Game Music"
     * *`ナムコオリジナル` (Namuko Orijinaru)* "Namco Original"
-  * In OpenTaiko (0auBSQ), any `<str-genre>` is recognized.
+  * In TJAPlayer2 for.PC, any non&ndash;pre-defined `<str-genre>` is recognized and displayed but is treated as uncategorized for genre sort order and decorations. However, in TJAPlayer2 for.PC but not OpenTaiko (0auBSQ), non&ndash;pre-defined `<str-genre>` is not displayed during gameplay.
+  * Recommendation for charters: The `GENRE:` header should not be used for non&ndash;pre-defined genres. Instead, for simulators supporting `genre.ini`, specify the `GenreName=` option in `[Genre]` section in `genre.ini`. For simulators supports `box.def`, specify the `#TITLE:` and `#GENRE:` headers in the `box.def`. In OpenTaiko (0auBSQ), decorations for non&ndash;pre-defined genres can be further customized in `box.def`.
+* Initial value / `GENRE:`
+  * In TJAPlayer2 for.PC, defaults to the value of the `#GENRE:` header of the `box.def` in the song directory or nearest upper song directory (if exist), or (empty).
+
+#### Compatibility Issues
+
+* In TJAPlayer2 for.PC Ver.2018110400, the `GenreName=` option in `[Genre]` section in `genre.ini` in the song directory or nearest upper song directory (if exist) is used if specified, and the `GENRE:` header will be ignored.
 
 ### SIDE:
 
@@ -779,7 +786,8 @@ Specify the jacket ("**pre**view") **image** of the song.
 
 * `PREIMAGE:<text-filepath-preview-image>`
 * `PREIMAGE:`
-  * No jacket image will be displayed.
+  * The default jacket image is used.
+    * In OpenTaiko (0auBSQ), defaults to the value of the `#DEFAULTPREIMAGE:` header of the `box.def` in the song directory or nearest upper song directory (if exist), otherwise the default jacket image of the interface skin is used.
 
 ### COVER:
 
@@ -805,7 +813,7 @@ Specify the jacket ("**cover**") image of the song.
 
 Specify the **skin** in the gameplay screen for **taiko-web**.
 
-*Unspecified*: The behavior in other simulators.
+*Unspecified*: The available pre-defined values and behavior in other simulators.
 
 * `TAIKOWEBSKIN:<comma-separated-list-text-key-value>`
 
@@ -837,9 +845,25 @@ Each element of `<comma-separated-list-text-key-value>` can be one of:
 
 Specify the pre-defined ("**preset**") skin ("**scene**") in the gameplay screen.
 
+*Unspecified*: The available pre-defined values.
+
 * `SCENEPRESET:<text-filepath-scene-preset>`
-* `SCENEPRESET:`
-  * The default skin is used.
+  * In OpenTaiko (0auBSQ), there are 4 independent sets ("preset sections") of pre-defined `<text-filepath-scene-preset>` values:
+    * `Tower` &mdash; for difficulties with [`COURSE:Tower`](#course)
+    * `Dan` &mdash; for difficulties with `COURSE:Dan`.
+    * `AI` &mdash; for other difficulties ("regular charts") in AI battle mode
+    * `Regular` &mdash; for other difficulties ("regular charts") in regular mode
+* *Proposal* (IID): `SCENEPRESET:<comma-separated-list-text-filepath-scene-preset>`
+  * A random gameplay skin is chosen from the specified list.
+* Unavailable value / `SCENEPRESET:`
+  * The default gameplay skin is used.
+    * In OpenTaiko (0auBSQ), defaults to the value of the `#SCENEPRESET:` header of the `box.def` in the song directory or nearest upper song directory (if exist), otherwise a random gameplay skin is chosen from all pre-defined values in the interface skin.
+
+Available pre-defined values in officially-supported interface skins of OpenTaiko (0auBSQ):
+
+* Open-World Memories:
+<https://github.com/OpenTaiko/OpenTaiko-Skins/blob/main/System/Open-World%20Memories/Graphics/5_Game/5_Background/Presets.json>
+* SimpleStyle: <https://github.com/OpenTaiko/OpenTaiko-Skins/blob/main/System/SimpleStyle%20(1080p)/Graphics/5_Game/5_Background/Presets.json>
 
 ### TOWERTYPE:
 
@@ -854,7 +878,18 @@ Specify the dedicated **tower** skin ("**type**") to use.
 Used in conjunction with [`COURSE:Tower`](#course).
 
 * `TOWERTYPE:<non-negative-int-tower-skin>`
-* `TOWERTYPE:0` / `TOWERTYPE:`
+* `TOWERTYPE:<text-tower-skin>` \
+  ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
+* Unavailable value / `TOWERTYPE:0` / `TOWERTYPE:`
+
+Available values in officially-supported interface skins of OpenTaiko (0auBSQ):
+
+* Open-World Memories:
+  * Gameplay screen: <https://github.com/OpenTaiko/OpenTaiko-Skins/tree/main/System/Open-World%20Memories/Graphics/5_Game/20_Tower/Tower_Floors>
+  * Result screen: <https://github.com/OpenTaiko/OpenTaiko-Skins/tree/main/System/Open-World%20Memories/Graphics/8_TowerResult/Tower>
+* SimpleStyle:
+  * Gameplay screen: <https://github.com/OpenTaiko/OpenTaiko-Skins/tree/main/System/SimpleStyle%20(1080p)/Graphics/5_Game/20_Tower/Tower_Floors>
+  * Result screen: <https://github.com/OpenTaiko/OpenTaiko-Skins/tree/main/System/SimpleStyle%20(1080p)/Graphics/8_TowerResult/Tower>
 
 ### DANTICK:
 
@@ -882,6 +917,8 @@ Used in conjunction with [`COURSE:Dan`](#course).
       * Reference: <https://taiko.namco-ch.net/taiko/en/special/dani_dojo_gaiden/about.php>
 * `DANTICK:0` / `DANTICK:`
 
+In OpenTaiko (0auBSQ), no effects for the custom single dan-i plate (`Dan_Plate.png`) provided in the song folder.
+
 ### DANTICKCOLOR:
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
@@ -901,6 +938,9 @@ Used in conjunction with [`COURSE:Dan`](#course).
     * `#<trimmed-rawstr-3-digit-12bit-rgb>`
     * `<enum-str-html-color-name>`
 * `DANTICKCOLOR:#FFFFFF` / `DANTICKCOLOR:`
+  * In OpenTaiko (0auBSQ), in dan-i selection screen, defaults to the value of the `#BOXCOLOR:` header of the `box.def` in the song directory or nearest upper song directory (if exist), otherwise defaults to original color (`#FFFFFF`).
+
+In OpenTaiko (0auBSQ), no effects for the custom single dan-i plate (`Dan_Plate.png`) and exam panel in dan-i selection screen (`Bar_Center.png`) provided in the song folder.
 
 ### SELECTBG:
 
@@ -914,6 +954,7 @@ Specify the **b**ack**g**round image of the song **select**ion screen. Override 
 * `SELECTBG:<text-filepath-selection-background-image>`
 * `SELECTBG:`
   * The default song selection background for the containing song folder is used.
+    * In OpenTaiko (0auBSQ), defaults to the value of the `#SELECTBG:` header of the `box.def` in the song directory or nearest upper song directory (if exist), otherwise the default song selection background of the interface skin is used.
 
 ### BGIMAGE:
 
