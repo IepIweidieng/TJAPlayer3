@@ -1456,7 +1456,7 @@ Used in conjunction with [`COURSE:Dan`](#course).
       ***Supported by***: OpenTaiko (0auBSQ)
     * `s` &mdash; final **s**core.
     * `r` &mdash; amount of hits on *all* drum**r**oll-type notes.
-      * Not to be confused with the `r` (bar drum**r**oll notes&ndash;only) used for the condition of [the `#BRANCHSTART` command](#branchstart--branchend).
+      * Not to be confused with the `r` (includes bar drum**r**oll notes, *unspecified* whether balloon-type notes are included) used for the condition of [the `#BRANCHSTART` command](#branchstart--branchend).
     * `h` &mdash; amount of non-*<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD, non-blank hits.
       * > Formula: `h` = `jp` + `jg` + `r`
     * `c` &mdash; maximum/longest **c**ombo.
@@ -3054,12 +3054,13 @@ The possible conditions includes `<enum-str-condition>`, `lc:<str-local-value-co
 * *Proposal* (IID): `JB` &mdash; amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD **j**udgements on **big** notes. \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
   * > Formula: `<sect:JB>`
-* `r` &mdash; amount of hits on bar drum**r**oll notes.
-  * Not to be confused with the `r` (including *all* drum**r**oll-type notes) used for the requirement of [the `EXAM` headers](#exam-headers).
-  * > Formula: `<sect:rt>` − `<sect:rb>`
-* `R` &mdash; amount of hits on **big** bar drum**r**oll notes.
-  * Not to be confused with the `r` (including *all* drum**r**oll-type notes) used for the requirement of [the `EXAM` headers](#exam-headers).
-  * > Formula: `<sect:RT>` − `<sect:RB>`
+* `r` &mdash; amount of hits on bar drum**r**oll notes. *Unspecified*: Whether hits on balloon-type notes are also included.
+  * Not to be confused with the `r` (always includes *all* drum**r**oll-type notes) used for the requirement of [the `EXAM` headers](#exam-headers).
+  * > Formula (TaikoJiro (1 and 2 (?))): `<sect:rt>` − `<sect:rb>`
+  * > Formula (TJAPlayer2 for.PC): `<sect:rt>`
+* *Proposal* (IID): `R` &mdash; amount of hits on **big** bar drum**r**oll notes. If `r` includes hits on balloon-type notes, hits on special ("**big**") balloons (note symbol `9`) are also included, otherwise such hits are excluded.
+  * > Formula (if `r` = `<sect:rt>` − `<sect:rb>`): `<sect:RT>` − `<sect:RB>`
+  * > Formula (if `r` = `<sect:rt>`): `<sect:RT>`
 * *Proposal* (IID): `rb` &mdash; amount of hits on **b**alloon-type drum**r**oll-**t**ype notes. \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
   * > Formula: `<sect:rb>`
@@ -3158,7 +3159,7 @@ An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--en
 
 Following are known special conditions (beyond `r` & `p`) used in official games.
 
-Reference: *譜面分岐条件* ("Notechart branch conditions"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/譜面分岐条件>
+Reference: *譜面分岐条件* ("Notechart branch conditions"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/分岐譜面/分岐条件>
 
 * The measure number is based on the non-internal measure number listed in the corresponding page for the difficulty of the song.
 
