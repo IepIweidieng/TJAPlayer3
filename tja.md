@@ -329,20 +329,20 @@ Headers in post-`#START` position (*e.g.*, [the EXAM headers](#exam-headers)) ar
 
 * In TaikoJiro 1 before v1.95 & Malody, only one notechart definition is supported within a single TJA file. The difficulty scope is identical to the file scope in these simulators.
 
-#### Header Scope Fineness
+#### Header Scope-Fineness
 
-See [scope fineness](#scope-fineness).
+See [scope-fineness](#scope-fineness).
 
 For headers, the coarsest fineness is per-file. The finest fineness other than sequential is per&ndash;player-side.
 
 > sequential > per&ndash;player-side > per-file
 
-* *Unspecified*: For non-sequential scope fineness, the behavior when the same header or command occur multiple times within its scope fineness in its scope.
-  * In TaikoJiro 1 and 2: Only the last occuring valid header or command in the scope fineness takes effect.
+* *Unspecified*: For non-sequential scope-fineness, the behavior when the same header or command occur multiple times within its scope-fineness in its scope.
+  * In TaikoJiro 1 and 2: Only the last occuring valid header or command in the scope-fineness takes effect.
 
 #### Compatibility Issues
 
-* In TaikoJiro 1 before v1.95 & Malody, only one notechart definition is supported within a single TJA file. The per&ndash;player-side scope fineness is identical to the per-file scope fineness in these simulators.
+* In TaikoJiro 1 before v1.95 & Malody, only one notechart definition is supported within a single TJA file. The per&ndash;player-side scope-fineness is identical to the per-file scope-fineness in these simulators.
 
 ### TITLE Headers
 
@@ -350,7 +350,7 @@ For headers, the coarsest fineness is per-file. The finest fineness other than s
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, Malody, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
-***Scope fineness***: per-file \
+***Scope-fineness***: per-file \
 ***Inspired by***: TJF format \
 &emsp; (likely) from DWI and earlier MSD format `#TITLE:<text-title>;` \
 &emsp; from BMS format `#TITLE <text-title>`
@@ -395,7 +395,7 @@ Specify the **title** of the song.
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro v2.64 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
-***Scope fineness***: per-file \
+***Scope-fineness***: per-file \
 ***Inspired by***: (likely) SM format `#SUBTITLE:<text-displayed-subtitle>;`
 
 Specify the **subtitle** (not of the meaning of *caption*) of the song (could be artist, game series, *etc.*), or alternatively as the second line ("**sub**") of the **title**.
@@ -426,7 +426,7 @@ The display details are *unspecified*.
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: Malody \
-***Scope fineness***: per-file \
+***Scope-fineness***: per-file \
 ***Inspired by***: (likely) `.osu` format `Artist:<text-artist>`
 
 Specify the **artist** of the song.
@@ -446,7 +446,7 @@ The display details are *unspecified*.
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: taiko-web ver.19.11.25 \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
-***Scope fineness***: per-file
+***Scope-fineness***: per-file
 
 Specify the creator ("**maker**") of the notechart.
 
@@ -465,7 +465,7 @@ The display details are *unspecified*.
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: (Better)TaikoCatsCaffe (?) \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
-***Scope fineness***: per&ndash;player-side (?)
+***Scope-fineness***: per&ndash;player-side (?)
 
 Specify the creator ("**designer**") of the notechart ("**notes**").
 
@@ -485,7 +485,7 @@ The display details are *unspecified*.
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: Malody \
-***Scope fineness***: per-file (?)
+***Scope-fineness***: per-file (?)
 
 Specify the creator ("**author**") of the notechart.
 
@@ -501,7 +501,7 @@ The display details are *unspecified*.
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TJAPlayer2 for.PC \
 ***Supported by***: taiko-web ver.19.01.06 \
-***Scope fineness***: per-file
+***Scope-fineness***: per-file
 
 Specify the **genre** of the song.
 
@@ -534,7 +534,7 @@ The display details are *unspecified*.
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro v2.49 \
 ***Supported by***: TaikoJiro 2, OpenTaiko (0auBSQ) v0.6.0 \
-***Scope fineness***: per-file
+***Scope-fineness***: per-file
 
 Specify whether the corresponding song entry is displayed, regarding the *<ruby>裏<rt>ura</rt>譜<rt>fu</rt>面<rt>men</rt>状<rt>jou</rt>態<rt>tai</rt></ruby>* "inner notechart state/mode" ("*<ruby>裏 <rt>ura</rt></ruby>* inner or *<ruby>表 <rt>omote</rt></ruby>* outer **side**") of the song selection screen.
 
@@ -564,8 +564,8 @@ For specifying the inner chart of solely the Oni difficulty with the same audio 
 #### Compatibility Issues
 
 * In TaikoJiro 1, one-letter form (`SIDE:N` / `SIDE:n`, `SIDE:E` / `SIDE:e`, & `SIDE:B` / `SIDE:b`) are recognized, and `SIDE:Ex`/`SIDE:EX`/`SIDE:ex` is considered a short form of `SIDE:Extra`/`SIDE:EXTRA`/`SIDE:extra`.
-* In TaikoJiro, `SIDE:` has per-file scope and notechart definitions for `SIDE:Normal` & `SIDE:Ex` should be separated into 2 files and for `SIDE:Both` should be duplicated into these 2 files.
-  * In OpenTaiko (0auBSQ), `SIDE:` has per&ndash;player-side scope.
+* In TaikoJiro, `SIDE:` has per-file scope-fineness and notechart definitions for `SIDE:Normal` & `SIDE:Ex` should be separated into 2 files and for `SIDE:Both` should be duplicated into these 2 files.
+  * In OpenTaiko (0auBSQ), `SIDE:` has per&ndash;player-side scope-fineness.
 * In OpenTaiko (0auBSQ), `SIDE:` has been re-purposed to be used in conjunction with [`COURSE:Tower`](#course) to specify the actual difficulty in the tower mode and can be one of:
   * `SIDE:Normal` &mdash; the *<ruby>甘<rt>ama</rt>口<rt>kuchi</rt></ruby>* "easy" difficulty.
   * `SIDE:Ex` / `SIDE:` / any other unrecognized argument &mdash; the *<ruby>辛<rt>kara</rt>口<rt>kuchi</rt></ruby>* "hard" difficulty.
@@ -575,7 +575,7 @@ For specifying the inner chart of solely the Oni difficulty with the same audio 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro 2 v0.70 \
-***Scope fineness***: per-file
+***Scope-fineness***: per-file
 
 Specify the filename of the *<ruby>裏<rt>ura</rt>譜<rt>fu</rt>面<rt>men</rt></ruby>* "inner notechart" or *<ruby>表<rt>omote</rt>譜<rt>fu</rt>面<rt>men</rt></ruby>* "outer notechart" version ("the **rev**erse **side**") of this notechart file.
 
@@ -590,7 +590,7 @@ Specify the filename of the *<ruby>裏<rt>ura</rt>譜<rt>fu</rt>面<rt>men</rt><
 ***Impact level***: timing ★★★★・ \
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
-***Scope fineness***: per-file \
+***Scope-fineness***: per-file \
 ***Inspired by***: TJF format
 
 Specify the audio file ("**wave**form audio file") of the song.
@@ -620,7 +620,7 @@ Specify the audio file ("**wave**form audio file") of the song.
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TaikoJiro v2.37 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
-***Scope fineness***: per-file \
+***Scope-fineness***: per-file \
 ***Inspired by***: (likely) SM format `#SAMPLESTART:<non-negative-float-seconds-preview-audio-offset>;` (?) \
 &emsp; from DWI format `#SAMPLESTART:<float-with-decimal-places-seconds-preview-audio-offset>;` (among other forms)
 
@@ -637,7 +637,7 @@ Specify the amount of seconds into the song audio for **start**ing playing the p
 ***Impact level***: timing ★★★★・ \
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
-***Scope fineness***: per&ndash;player-side (?) \
+***Scope-fineness***: per&ndash;player-side (?) \
 ***Inspired by***: (likely) SM format `#OFFSET:<float-seconds-music-offset>;` (with same signness) \
 &emsp; from DWI format `#GAP:<float-seconds-chart-offset>;` (with opposite signness) \
 &emsp; from MSD format `#GAP:<number-1/192nd-chart-offset>;`
@@ -657,7 +657,7 @@ Equation: `music-offset` = `time-point-of-audio-beginning` − `time-point-of-ch
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TaikoJiro v1.66 \
 ***Supported by***: TaikoJiro 2, TJAPlayer3 v1.5.2 \
-***Scope fineness***: per-file \
+***Scope-fineness***: per-file \
 ***Inspired by***: BMS format `#VOLWAV <non-negative-number-percent-amplitude-gain>` (?)
 
 Specify the relative amplitude percentage (%) of the desired **vol**ume gain of the **song** audio.
@@ -685,7 +685,7 @@ Recommendation for chart creators: `<non-negative-number-percent-amplitude-gain>
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TaikoJiro v1.66 \
 ***Supported by***: TaikoJiro 2 \
-***Scope fineness***: per&ndash;player-side (?) \
+***Scope-fineness***: per&ndash;player-side (?) \
 ***Inspired by***: BMS format `#VOLWAV <non-negative-number-percent-amplitude-gain>` (?)
 
 Specify the relative amplitude percentage (%) of the desired **vol**ume gain of the sound of the instrument which the player chooses ("**s**ound **e**ffect").
@@ -713,7 +713,7 @@ Recommendation for simulator developers: The reference amplitude is the amplitud
 ***Impact level***: timing ★★★★・ \
 ***FIrst seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
-***Scope fineness***: per&ndash;player-side \
+***Scope-fineness***: per&ndash;player-side \
 ***Inspired by***: TJF format `BPM:<positive-int-initial-bpm>` \
 &emsp; (likely) from DWI format `#BPM:<positive-number-initial-bpm>;` \
 &emsp; from MSD format `#BPM:<positive-float-bpm>;`
@@ -760,7 +760,7 @@ Specify the initial **BPM** (**b**eat **p**er **m**inute) of the notechart.
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) (minimum; unless stated otherwise) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer2 for.PC \
-***Scope fineness***: per&ndash;player-side
+***Scope-fineness***: per&ndash;player-side
 
 Specify the initial **scroll**ing velocity (before and non-after the beginning ("**head**") of the notechart), relative to the base scrolling velocity.
 
@@ -779,7 +779,7 @@ Can be reset by [the `#SCROLL` command](#scroll) non-before the beginning of the
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.4 \
-***Scope fineness***: per&ndash;player-side (?) \
+***Scope-fineness***: per&ndash;player-side (?) \
 ***Inspired by***: DTX format `#PREIMAGE: <text-filepath-preview-image>`
 
 Specify the jacket ("**pre**view") **image** of the song.
@@ -794,7 +794,7 @@ Specify the jacket ("**pre**view") **image** of the song.
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: Malody \
-***Scope fineness***: per-file
+***Scope-fineness***: per-file
 
 Specify the jacket ("**cover**") image of the song.
 
@@ -809,7 +809,7 @@ Specify the jacket ("**cover**") image of the song.
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: taiko-web ver.19.02.03 \
-***Scope fineness***: per-file
+***Scope-fineness***: per-file
 
 Specify the **skin** in the gameplay screen for **taiko-web**.
 
@@ -841,7 +841,7 @@ Each element of `<comma-separated-list-text-key-value>` can be one of:
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0 \
-***Scope fineness***: per&ndash;player-side (?)
+***Scope-fineness***: per&ndash;player-side (?)
 
 Specify the pre-defined ("**preset**") skin ("**scene**") in the gameplay screen.
 
@@ -871,7 +871,7 @@ Available pre-defined values in officially-supported interface skins of OpenTaik
 &emsp; (non-standard) (otherwise) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.0 \
-***Scope fineness***: per&ndash;player-side (?)
+***Scope-fineness***: per&ndash;player-side (?)
 
 Specify the dedicated **tower** skin ("**type**") to use.
 
@@ -897,7 +897,7 @@ Available values in officially-supported interface skins of OpenTaiko (0auBSQ):
 &emsp; (non-standard) (otherwise) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.1 \
-***Scope fineness***: per-file
+***Scope-fineness***: per-file
 
 Specify the dedicated *<ruby>**段**<rt>**Dan**'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" skin (*<ruby>コ<rt>ko</rt>ス<rt>su</rt>メ<rt>me</rt>**チッ**<rt>**chik**</rt>**ク**<rt>**ku**</rt></ruby>* "cosme**tic**" (?)) to use in the certification challenge selection screen.
 
@@ -924,7 +924,7 @@ In OpenTaiko (0auBSQ), no effects for the custom single dan-i plate (`Dan_Plate.
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.1 \
-***Scope fineness***: per-file
+***Scope-fineness***: per-file
 
 Specify the **color** filter to apply to the *<ruby>**段**<rt>**Dan**'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" skin (*<ruby>コ<rt>ko</rt>ス<rt>su</rt>メ<rt>me</rt>**チッ**<rt>**chik**</rt>**ク**<rt>**ku**</rt></ruby>* "cosme**tic**" (?)) objects in the certification challenge selection screen.
 
@@ -947,7 +947,7 @@ In OpenTaiko (0auBSQ), no effects for the custom single dan-i plate (`Dan_Plate.
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0 \
-***Scope fineness***: per&ndash;player-side (?)
+***Scope-fineness***: per&ndash;player-side (?)
 
 Specify the **b**ack**g**round image of the song **select**ion screen. Override the skin settings.
 
@@ -961,7 +961,7 @@ Specify the **b**ack**g**round image of the song **select**ion screen. Override 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TJAPlayer2 for.PC ver.2016021300 \
-***Scope fineness***: per&ndash;player-side (?) \
+***Scope-fineness***: per&ndash;player-side (?) \
 ***Inspired by***: DTX format `#BACKGROUND <text-filepath-background-image>`
 
 Specify the **b**ack**g**round **image** of the gameplay screen. Override the skin settings.
@@ -978,7 +978,7 @@ Specify the **b**ack**g**round **image** of the gameplay screen. Override the sk
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: ? \
 ***Reference***: TJA Format Support (vscode extension) \
-***Scope fineness***: per&ndash;player-side (?)
+***Scope-fineness***: per&ndash;player-side (?)
 
 Specify the amount of seconds past ("**offset**ted") from the time position specified by [the `OFFSET:` header](#offset) which the background image ("**image**") should start displaying.
 
@@ -992,7 +992,7 @@ Equation: `bgoffset` = `time-point-of-image-displaying` − `time-point-of-audio
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TJAPlayer2 for.PC ver.2016021300 \
-***Scope fineness***: per&ndash;player-side (?)
+***Scope-fineness***: per&ndash;player-side (?)
 
 Specify the **b**ack**g**round video ("**movie**") of the gameplay screen. Override the skin settings.
 
@@ -1007,7 +1007,7 @@ Specify the **b**ack**g**round video ("**movie**") of the gameplay screen. Overr
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TJAPlayer2 for.PC ver.2015081100 \
-***Scope fineness***: per&ndash;player-side (?)
+***Scope-fineness***: per&ndash;player-side (?)
 
 Specify the amount of seconds past ("**offset**ted") from the time position specified by [the `OFFSET:` header](#offset) which the background video ("**movie**") should start playing from the beginning.
 
@@ -1027,7 +1027,7 @@ Equation: `movieoffset` = `time-point-of-video-beginning` − `time-point-of-aud
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: C-Taiko \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
-***Scope fineness***: per&ndash;player-side (?)
+***Scope-fineness***: per&ndash;player-side (?)
 
 Specify a **b**ack**g**round video ("**a**nimation") to be used in the gameplay screen by [the `#BGAON` and `#BGAOFF` commands](#bgaon--bgaoff).
 
@@ -1050,7 +1050,7 @@ Not reset by `BGA:` itself.
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: taiko-web ver.20.03.31, TJAPlayer3-Develop-ReWrite (parse-only) \
 ***Supported by***: TJAPlayer3-f v1.6.0.0, OpenTaiko (0auBSQ) v0.6.0 \
-***Scope fineness***: per-file
+***Scope-fineness***: per-file
 
 Specify the lyric file(s) for the song to display **lyrics** in the playback screen.
 
@@ -1087,7 +1087,7 @@ Specify the lyric file(s) for the song to display **lyrics** in the playback scr
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0 \
-***Scope fineness***: per-file
+***Scope-fineness***: per-file
 
 If enabled, specify that the song has **explicit** (of the meaning of *not safe for work (NSFW)*) lyrics.
 
@@ -1104,7 +1104,7 @@ The display details are *unspecified*.
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v2.13 \
 ***Supported by***: taiko-web (plugin "Donkey Konga Mode") \
-***Scope fineness***: per&ndash;player-side (?)
+***Scope-fineness***: per&ndash;player-side (?)
 
 Specify the **game** mode. The meaning of the symbols used in the notechart definition is changed accordingly; see [TJA Notechart Definition](#tja-notechart-definition).
 
@@ -1139,7 +1139,7 @@ See [the `#GAMETYPE` command](#gametype) for specifying the game mode for specif
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.76 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, Malody, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
-***Scope fineness***: per&ndash;player-side
+***Scope-fineness***: per&ndash;player-side
 
 Specify the *<ruby>コー<rt>koo</rt>ス<rt>su</rt></ruby> "course"/<ruby>む<rt>mu</rt>ず<rt>zu</rt>か<rt>ka</rt>し<rt>shi</rt>い<rt>i</rt></ruby> "difficulty"/<ruby>難<rt>nan'</rt>易<rt>i</rt>度<rt>do</rt></ruby> "difficulty (or easiness) level"* difficulty/difficulty level ("**course**").
 
@@ -1216,7 +1216,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, Malody, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
-***Scope fineness***: per&ndash;player-side \
+***Scope-fineness***: per&ndash;player-side \
 ***Inspired by***: TJF format `LEVEL:<positive-int-difficulty-star>`
 
 Specify the *<ruby>難<rt>nan'</rt>易<rt>i</rt>**度**<rt>do</rt></ruby>* "difficulty (or easiness) **level**"/difficulty star/? ("**level**").
@@ -1279,7 +1279,7 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.99 \
 ***Supported by***: TaikoJiro 2, TJAPlayer2 for.PC \
-***Scope fineness***: per&ndash;player-side \
+***Scope-fineness***: per&ndash;player-side \
 ***Inspired by***: (likely) DWI and earlier MSD format `#<enum-str-style>:<enum-str-difficulty-type>:<positive-int-difficulty-stars>:<colon-separated-list-str-notechart-definitions>;` where `<enum-str-style>` is one of `SINGLE`, `DOUBLE`, `COUPLE`, & (DWI) `SOLO`.
 
 Specify the total amount of player-**side**s of the notechart(s).
@@ -1306,7 +1306,7 @@ Reference: *ダブルプレイ* ("Double Play"; "Two-player Charts"). 太鼓の�
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
-***Scope fineness***: per&ndash;player-side
+***Scope-fineness***: per&ndash;player-side
 
 Specify the required amount of hits of *<ruby>激<rt>geki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>/<ruby>ゲ<rt>ge</rt>キ<rt>ki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>fuu</rt>船<rt>sen</rt></ruby>/<ruby>ふ <rt>fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* **balloon**&ndash;type notes (denoted by `7`, `9`, or `D` in the notechart definition), in the order of their definition, ***NOT*** the hit order during playing.
 
@@ -1339,7 +1339,7 @@ For each element of `<comma-separated-list-non-negative-int-amount-of-hits>`, if
 
 * Recommendation for charters: If the correctness of balloon count is significant, for branched charts, the branch-less `BALLOON:` should be always specified and should be specified after `BALLOONNOR:`, `BALLOONEXP:`, & `BALLOONMAS:`. [The `TJACOMPAT:` header](#proposal-iid-tjacompat) can be specified if necessary.
 * TJAPlayer2 for.PC & TJAPlayer3:
-  * Unlike in TaikoJiro, the scope fineness of the BALLOON headers is per-difficulty instead of per&ndash;player-side (see [the `LEVEL:` header](#level)). Specifically, if a BALLOON header is specified multiple times in its scope, the specified hit amount values is appended to the existent values, instead of replacing all the existent values.
+  * Unlike in TaikoJiro, the scope-fineness of the BALLOON headers is per-difficulty instead of per&ndash;player-side (see [the `LEVEL:` header](#level)). Specifically, if a BALLOON header is specified multiple times in its scope, the specified hit amount values is appended to the existent values, instead of replacing all the existent values.
   * The `BALLOON:` header is *erroneously* treated as the `BALLOONNOR:` header.
 * TJAPlayer3 but not TJAPlayer3-Develop: If a balloon-type note is defined in sections after [`#BRANCHEND`](#branchstart--branchend) and before another [`#BRANCHSTART`](#branchstart--branchend), it *erroneously* uses 3 values from the iteration of the `BALLOONNOR:` / `BALLOONEXP:` / `BALLOONMAS:` list according to the last defined "branch"/path before the `#BRANCHEND`. (?; deduced from source code)
   * <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Songs/CDTX.cs#L3719>, <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Songs/CDTX.cs#L4020-L4055>
@@ -1355,7 +1355,7 @@ For each element of `<comma-separated-list-non-negative-int-amount-of-hits>`, if
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v2.19 \
 ***Supported by***: OpenTaiko (0auBSQ) v0.4.3 \
-***Scope fineness***: per&ndash;player-side \
+***Scope-fineness***: per&ndash;player-side \
 ***Inspired by***: StepMania and earlier Dance With Intensity CRS format `#LIVES:<positive-int-life-count>;` (?)
 
 Specify the initial **life** count of the life count gauge (if used).
@@ -1387,7 +1387,7 @@ In TaikoJiro 1 (the header is not supported in TaikoJiro 2), the maximum possibl
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (despite ignored in TJAPlayer3) \
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v2.92 & TaikoJiro 2 v0.93 \
-***Scope fineness***: per&ndash;player-side \
+***Scope-fineness***: per&ndash;player-side \
 ***Inspired by***: BMS format `#TOTAL <non-negative-number-total-gauge-increment>`
 
 Specify the **total** *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge increment of the notechart when all hit-type notes are hit with *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgment, *i.e.*, *<ruby>ド<rt>Do</rt>ン<rt>n</rt>ダ<rt>da</rt>フ<rt>fu</rt>ル<rt>ru</rt>コ<rt>ko</rt>ン<rt>n</rt>ボ<rt>bo</rt></ruby>* Donderful Combo.
@@ -1407,7 +1407,7 @@ Specify the **total** *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TJAPlayer3 v1.5.4 \
-***Scope fineness***: per&ndash;player-side
+***Scope-fineness***: per&ndash;player-side
 
 Specify the rounding mode of the **incr**ement of the *<ruby>魂<rt>tamashii</rt>**ゲー**<rt>**gee**</rt>**ジ**<rt>**ji**</rt></ruby>* spirit **gauge**/soul **gauge**.
 
@@ -1426,7 +1426,7 @@ Specify the rounding mode of the **incr**ement of the *<ruby>魂<rt>tamashii</rt
 ***First seen in***: TJAPlayer3 v1.5.0 \
 ***Post-[#START](#start--end) position***: forbidden; \
 &emsp; allowed (***Supported by***: TJAPlayer3-Develop-ReWrite) \
-***Scope fineness***: per&ndash;player-side (?) (or per-song (begins with a [`#NEXTSONG` command](#nextsong) and ends with another [`#NEXTSONG` command](#nextsong)))
+***Scope-fineness***: per&ndash;player-side (?) (or per-song (begins with a [`#NEXTSONG` command](#nextsong) and ends with another [`#NEXTSONG` command](#nextsong)))
 
 Specify a requirement for passing the notechart in *<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" ("**exam**ination").
 
@@ -1484,7 +1484,7 @@ Used in conjunction with [`COURSE:Dan`](#course).
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v2.85 \
 ***Supported by***: TaikoJiro 2 v0.72, TJAPlayer2 for.PC \
-***Scope fineness***: per&ndash;player-side
+***Scope-fineness***: per&ndash;player-side
 
 Specify the **scoring mode**.
 
@@ -1561,7 +1561,7 @@ Reference: *配点* ("Scoring"). 太鼓の達人 譜面とか Wiki\* ("Taiko no 
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v1.67 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC) \
-***Scope fineness***: per&ndash;player-side
+***Scope-fineness***: per&ndash;player-side
 
 Specify the *<ruby>**初**<rt>sho</rt>項<rt>kou</rt></ruby>* **init**ial term (refers to an arithmetic progression) (`init`) used for calculate the basic **score**. See the explanation for [the `SCOREMODE:` header](#scoremode).
 
@@ -1584,7 +1584,7 @@ Recommendation for charters: The `SCOREMODE:`, `SCOREINIT:`, & [`SCOREDIFF:`](#s
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v1.67 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC) \
-***Scope fineness***: per&ndash;player-side
+***Scope-fineness***: per&ndash;player-side
 
 Specify the *<ruby>公<rt>kou</rt>**差**<rt>sa</rt></ruby>* common **diff**erence (refers to an arithmetic progression) (`diff`) used for calculate the basic **score**. See the explanation for [the `SCOREMODE:` header](#scoremode).
 
@@ -1612,7 +1612,7 @@ In the official game, `diff` is not required to be a multiple of 10. Instead, th
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (except 0 or omitted forms) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TJAPlayer2 for.PC \
-***Scope fineness***: per&ndash;player-side
+***Scope-fineness***: per&ndash;player-side
 
 If enabled, make the *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path indicator **hidden** in the song selection screen; hide the "branch"/path mark on the note field from the beginning of the notechart until time point when the "branch"/path&ndash;switching effects should play for the first "branch"/path section in the gameplay screen.
 
@@ -1629,7 +1629,7 @@ If enabled, make the *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>k
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
 ***Impact level***: note ★★★★★ (maximum, depends on the compatibility flags) \
-***Scope fineness***: per&ndash;player-side
+***Scope-fineness***: per&ndash;player-side
 
 Specify the intended compatibility mode of the chart.
 
@@ -1800,7 +1800,7 @@ Flag \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
 Impact level: note ★★★★★ (restrictive usage) / metadata ★・・・・ (non-mandatory usage) \
-Scope fineness: per-file
+Scope-fineness: per-file
 
 Specification by Komi: <https://docs.google.com/document/d/17GKK9U5S_eT97oTwgB6tMMNQsQm2uhp-OIhBMv2Mgso>
 
@@ -1836,7 +1836,7 @@ See [the `#NEXTSONG` command](#nextsong) for the TJA command version of TJC head
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v2.34 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
-***Scope fineness***: sequential \
+***Scope-fineness***: sequential \
 ***Inspired by***: StepMania and earlier Dance With Intensity CRS format `#SONG:<text-no-extension-filepath-notechart-file-from-root-song-directory>:<optional-enum-str-difficulty-type>;` (among other forms)
 
 Specify a notechart ("**song**") of the notechart set.
@@ -1881,24 +1881,24 @@ Commands allowed in pre-#START position will be explicitly denoted.
 
 #### Command Scope
 
-Commands with per&ndash;player-side scope are similar to [headers](#tja-header) but the effects of these commands reset at the end of their scope.
+Commands with per&ndash;player-side scope-fineness are similar to [headers](#tja-header) but the effects of these commands reset at the end of their scope.
 
 Except for one-shot commands, the effect of each command continues until the next occurrence of any command from the same command group or [`#END`](#start--end).
 
-#### Command Scope Fineness
+#### Command Scope-Fineness
 
-See [scope fineness](#scope-fineness).
+See [scope-fineness](#scope-fineness).
 
 For commands, the coarsest fineness is per&ndash;player-side. The finest fineness other than sequential is non-before
 
 > sequential > non-before > measure & (other) > per&ndash;player-side
 
-* For commands with per&ndash;player-side or measure scope fineness, the behavior is *unspecified* when (the same or different) commands in the same command group occur together within its scope fineness.
-  * Specifically, for commands with measure scope fineness, the behavior is *unspecified* when any note symbols occur after the measure-delimiter `,` at the end of the previous measure (if any) and before such a command in the notechart definition.
+* For commands with per&ndash;player-side or measure scope-fineness, the behavior is *unspecified* when (the same or different) commands in the same command group occur together within its scope-fineness.
+  * Specifically, for commands with measure scope-fineness, the behavior is *unspecified* when any note symbols occur after the measure-delimiter `,` at the end of the previous measure (if any) and before such a command in the notechart definition.
 
-Some branch-scoped commands have non-before scope fineness, *i.e.*, they can be arranged freely within the same beat position without causing any behavior changes, as long as both their relative order to the sequential commands and the relative order among commands which override each other are not changed.
+Some branch-scoped commands have non-before scope-fineness, *i.e.*, they can be arranged freely within the same beat position without causing any behavior changes, as long as both their relative order to the sequential commands and the relative order among commands which override each other are not changed.
 
-All commands with other type of scope implicitly have sequential scope fineness.
+All commands with other type of scope implicitly have sequential scope-fineness.
 
 #### Command Effect Time
 
@@ -1950,7 +1950,7 @@ Due to the incoherent behaviors, many commands introduced in TJAPlayer2 for.PC a
 ***Pre-[#START](#start--end) position***: required; \
 &emsp; allowed (***Supported by***: OpenTaiko (0auBSQ) v0.6.0) \
 ***Scope***: per&ndash;player-side (or branch) \
-***Scope fineness***: per&ndash;player-side (or non-before) \
+***Scope-fineness***: per&ndash;player-side (or non-before) \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines \
 ***Effect branches***: *Unspecified*
@@ -2012,7 +2012,7 @@ See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior of timi
 ***First seen in***: TJAPlayer3-f v1.7.2.0 \
 ***Pre-[#START](#start--end) position***: required \
 ***Scope***: per&ndash;player-side \
-***Scope fineness***: per&ndash;player-side \
+***Scope-fineness***: per&ndash;player-side \
 ***Effect target***: notes \
 ***Effect branches***: *Unspecified*
 
@@ -2030,7 +2030,7 @@ Reference: <https://taiko.namco-ch.net/taiko/en/howto/papamama.php#papamama>
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Pre-[#START](#start--end) position***: forbidden (enclosing the notechart definition) \
 ***Scope***: per&ndash;player-side (or notechart) \
-***Scope fineness***: per&ndash;player-side (or non-before) \
+***Scope-fineness***: per&ndash;player-side (or non-before) \
 ***Effect time***: static <sub>notechart definition</sub> + command-time <sub>show ending animation</sub> (for `#END` in some simulators) \
 ***Non-static effect scope***: all \
 ***Effect target***: notes, bar lines, notefield(s), gameplay screen \
@@ -2088,7 +2088,7 @@ Respectively **start** / **end** the region of notechart definition.
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static <sub>objects' distance</sub> + command-time <sub>objects' velocity</sub> \
 ***Non-static effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll)); (none) (otherwise) \
 ***Effect target***: notes, bar lines \
@@ -2121,7 +2121,7 @@ Respectively **start** / **end** the region of notechart definition.
 ***First seen in***: TaikoJiro \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope***: branch \
-***Scope fineness***: measure \
+***Scope-fineness***: measure \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines \
 ***Effect branches***: *Unspecified* (with *Unspecified* behaviors)
@@ -2156,7 +2156,7 @@ Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby
 ***First seen in***: TaikoJiro v1.60 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC) \
 ***Scope***: branch \
-***Scope fineness***: sequential \
+***Scope-fineness***: sequential \
 ***Effect time***: static <sub>objects' timing</sub> + command-time <sub>freeze scrolling</sub> \
 ***Non-static effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll), positive value); (none) (otherwise) \
 ***Effect target***: notes, bar lines \
@@ -2190,7 +2190,7 @@ For the timing of notechart object, multiple `#DELAY` commands placed at the sam
 ***First seen in***: TaikoJiro \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope***: branch \
-***Scope fineness***: sequential \
+***Scope-fineness***: sequential \
 ***Effect time***: static <sub>per-note scoring</sub> + command-time <sub>visual</sub> \
 ***Non-static effect scope***: notes: (none), gameplay screen: all \
 ***Effect target***: notes, gameplay screen \
@@ -2208,7 +2208,7 @@ For playing the Go-Go Time entering effects during an existing Go-Go Time sectio
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoManyGimmicks \
 ***Scope***: branch \
-***Scope fineness***: sequential \
+***Scope-fineness***: sequential \
 ***Effect time***: static \
 ***Effect target***: notes  \
 ***Effect branches***: current
@@ -2222,7 +2222,7 @@ Respectively **start** / **end** a fake/dummy section if not already respectivel
 ***First seen in***: TaikoJiro \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines \
 ***Effect branches***: current
@@ -2286,7 +2286,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: taiko-web (plugin "Custom Barlines") \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static \
 ***Effect target***: bar lines \
 ***Effect branches***: current (?)
@@ -2303,7 +2303,7 @@ Change the **scroll**ing speed of only **bar** **line**s, relative to the normal
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoManyGimmicks v0.6.1α \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static <sub>objects' distance</sub> + command-time <sub>objects' velocity</sub> \
 ***Non-static effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll)); (none) (otherwise) \
 ***Effect target***: notes, bar lines \
@@ -2321,7 +2321,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: command-time \
 ***Non-static effect scope***: all \
 ***Effect target***: notes, bar lines \
@@ -2347,7 +2347,7 @@ If the notes & the bar lines are rotated around their center accordingly when a 
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer2 for.PC \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines \
 ***Effect branches***: *Unspecified*
@@ -2386,7 +2386,7 @@ Recommendation for charters: [The `#SCROLL` command](#scroll) should be used ins
 ***First seen in***: TaikoJiro v2.69 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC) \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static \
 ***Effect target***: bar lines \
 ***Effect branches***: *Unspecified* (?)
@@ -2405,7 +2405,7 @@ Respectively disable ("turn **off**") / enable ("turn **on**") the display of al
 ***First seen in***: taiko-web (plugin "Custom Barlines") \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope***: branch, instant one-shot \
-***Scope fineness***: sequential \
+***Scope-fineness***: sequential \
 ***Effect time***: static \
 ***Effect target***: bar lines \
 ***Effect branches***: current
@@ -2419,7 +2419,7 @@ Insert a fake/dummy normal **bar** **line** displayed at the head of the current
 ***First seen in***: TJAPlayer2 for.PC \
 ***Supported by***: TaikoManyGimmicks v0.6α \
 ***Scope***: branch \
-***Scope fineness***: sequential \
+***Scope-fineness***: sequential \
 ***Effect time***: command-time \
 ***Non-static effect scope***: all \
 ***Effect target***: notes, bar lines, judgment mark, note field \
@@ -2470,7 +2470,7 @@ The arguments are whitespace-separated.
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoManyGimmicks \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines \
 ***Effect branches***: *Unspecified* (?)
@@ -2501,7 +2501,7 @@ The arguments are whitespace-separated.
 ***First seen in***: TJAPlayer2 for.PC \
 ***Supported by***: TaikoManyGimmicks v0.6α \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static-enabled object-time \
 ***Non-static effect scope***: non-before \
 ***Effect target***: notes \
@@ -2560,7 +2560,7 @@ The arguments are whitespace-separated.
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoManyGimmicks \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: command-time \
 ***Non-static effect scope***: non-before \
 ***Effect target***: notes \
@@ -2596,7 +2596,7 @@ The arguments are whitespace-separated.
 ***First seen in***: TJAPlayer3-Extended \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: command-time \
 ***Non-static effect scope***: all \
 ***Effect target***: notes \
@@ -2611,7 +2611,7 @@ Respectively **enable** / **disable** the ***<ruby>ド<rt>Do</rt>ロ<rt>ro</rt>�
 ***First seen in***: TJAPlayer2 for.PC \
 ***Supported by***: taiko-web ver.20.03.31, TaikoManyGimmicks v0.6α \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: command-time \
 ***Non-static effect scope***: all \
 ***Effect target***: gameplay screen \
@@ -2642,7 +2642,7 @@ Display the specified **lyric**.
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer3 v1.4.0 \
 ***Scope***: branch, note one-shot \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static \
 ***Effect target***: notes \
 ***Effect branches***: *Unspecified*
@@ -2724,7 +2724,7 @@ However, in the official Konga games, the general pattern is less consistent and
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: C-Taiko \
 ***Scope***: branch, note one-shot (?) \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static \
 ***Effect target***: notes \
 ***Effect branches***: current (?)
@@ -2751,7 +2751,7 @@ Similar to [the `#SENOTECHANGE` command](#senotechange), but with a different ra
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
 ***Impact level***: note ★★★★★ \
 ***Scope***: branch, note one-shot \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static \
 ***Effect target***: balloon-type notes \
 ***Effect branches***: current
@@ -2769,7 +2769,7 @@ The semantics are otherwise the same as the [BALLOON](#balloon-headers) headers.
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
 ***Impact level***: note ★★★★★ \
 ***Scope***: branch, note one-shot \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static \
 ***Effect target***: notes \
 ***Effect branches***: current
@@ -2793,7 +2793,7 @@ Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
 ***Impact level***: note ★★★★★ \
 ***Scope***: branch, note one-shot \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static \
 ***Effect target***: notes \
 ***Effect branches***: current
@@ -2816,7 +2816,7 @@ Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
 ***Impact level***: note ★★★★★ \
 ***Scope***: branch, note one-shot \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static \
 ***Effect target***: notes \
 ***Effect branches***: current
@@ -2840,7 +2840,7 @@ Conditionally ("**if**") enable the next **note**.
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
 ***Impact level***: note ★★★★★ (maximum, depends on the usage) \
 ***Scope***: branch, command one-shot \
-***Scope fineness***: sequential \
+***Scope-fineness***: sequential \
 ***Effect time***: static \
 ***Effect target***: notes \
 ***Effect branches***: current
@@ -2869,7 +2869,7 @@ Commands supporting the `#COMMANDIF` and (*proposal* (IID)) `#COMMANDIFF` comman
 ***First seen in***: TaikoJiro v1.63 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC) \
 ***Scope***: branch, instant one-shot \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static <sub>determine in-section objects</sub> + command-time <sub>switch sections</sub> \
 ***Non-static effect scope***: last and current section (across branches) \
 ***Effect target***: (none) \
@@ -2896,7 +2896,7 @@ The value of the condition for determining the "branch"/path by score (the `s` c
 ***First seen in***: TaikoJiro v1.63 \
 ***Supported by***: TaikoJiro 2, TJAPlayer2 for.PC \
 ***Scope***: branch \
-***Scope fineness***: measure \
+***Scope-fineness***: measure \
 ***Effect time***: static \
 ***Effect target***: (none) \
 ***Effect branches***: current (only the routes reaching the command)
@@ -2918,7 +2918,7 @@ Override the result of all *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>�
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
 ***Impact level***: note ★★★★★ \
 ***Scope***: branch \
-***Scope fineness***: measure \
+***Scope-fineness***: measure \
 ***Effect time***: static \
 ***Effect target***: (none) \
 ***Effect branches***: current (only the routes reaching the command)
@@ -2978,7 +2978,7 @@ The "branch"/path behavior of the *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby>* Oni
 ***First seen in***: TaikoJiro v1.63 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC) \
 ***Scope***: notechart \
-***Scope fineness***: measure \
+***Scope-fineness***: measure \
 ***Effect time***: static <sub>objects' measure position</sub> + command-time <sub>objects' enabling status & visual</sub> \
 ***Non-static effect scope***: notes, bar lines, & judgment mark(s): non-before, note field(s): non-before the previous measure (`#BRANCHSTART`) or (none) (`#BRANCHEND`) \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s) \
@@ -3265,7 +3265,7 @@ Branch-dependent condition:
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
 ***Impact level***: note ★★★★★ \
 ***Scope***: notechart \
-***Scope fineness***: measure \
+***Scope-fineness***: measure \
 ***Effect time***: static \
 ***Effect target***: The last defined [`#BRANCHSTART` or `#BRANCHEND`](#branchstart--branchend). \
 ***Effect branches***: all
@@ -3322,7 +3322,7 @@ The branch determining point for different currently targeted branch may vary.
 ***First seen in***: TaikoJiro v1.63 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC) \
 ***Scope***: notechart \
-***Scope fineness***: measure \
+***Scope-fineness***: measure \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s) \
 ***Effect branches***: all
@@ -3366,7 +3366,7 @@ The definition of unused "branches"/paths due to forced "branch"/path determinat
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***Scope***: branch (?) \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s) \
 ***Effect branches***: current (?)
@@ -3380,7 +3380,7 @@ Start the definition of a timing **group**. (?)
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
 ***Impact level***: note ★★★★★ \
 ***Scope***: branch (?) \
-***Scope fineness***: sequential \
+***Scope-fineness***: sequential \
 ***Effect time***: command-time \
 ***Non-static effect scope***: non-before \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s) \
@@ -3455,7 +3455,7 @@ Example usages (adapted from barrier15300):
 ***Impact level***: timing ★★★★・ \
 ***First seen in***: TJAPlayer3 v1.5.0 \
 ***Scope***: notechart \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: command-time \
 ***Non-static effect scope***: all \
 ***Effect target***: all \
@@ -3486,7 +3486,7 @@ See [TJC Header](#tjc-header) for the header version of the `#NEXTSONG` command.
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
 ***Impact level***: note ★★★★★ \
 ***Scope***: notechart \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: command-time \
 ***Non-static effect scope***: all \
 ***Effect target***: all \
@@ -3508,7 +3508,7 @@ Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF
 ***Impact level***: note ★★★★★ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0, OutFox v0.4.18 \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines \
 ***Effect branches***: *Unspecified*
@@ -3537,7 +3537,7 @@ See [the `GAME:` header](#game) for specifying the initial game mode for the not
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoManyGimmicks \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines \
 ***Effect branches***: branch (?)
@@ -3587,7 +3587,7 @@ Setters:
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoManyGimmicks v0.6α \
 ***Scope***: branch \
-***Scope fineness***: gradation group \
+***Scope-fineness***: gradation group \
 ***Effect time***: command-time \
 ***Non-static effect scope***: gradation group \
 ***Effect target***: notes, bar lines \
@@ -3683,7 +3683,7 @@ Commands supporting the `#GRADATION` command in TaikoManyGimmicks:
 ***Impact level***: note ★★★★★ (depending on included notechart definition content) \
 ***First seen in***: TaikoManyGimmicks v0.6.1α \
 ***Scope***: (depending on included notechart definition content) \
-***Scope fineness***: sequential \
+***Scope-fineness***: sequential \
 ***Effect time***: (depending on included notechart definition content) \
 ***Effect target***: (depending on included notechart definition content) \
 ***Effect branches***: (depending on included notechart definition content) \
@@ -3699,7 +3699,7 @@ Append ("**include**") the notechart definition content defined the included fil
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: command-time \
 ***Non-static effect scope***: all \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s) \
@@ -3719,7 +3719,7 @@ Append ("**include**") the notechart definition content defined the included fil
 ***First seen in***: TJAPlayer3-Extended \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope***: branch \
-***Scope fineness***: non-before (some are sequential) \
+***Scope-fineness***: non-before (some are sequential) \
 ***Effect time***: command-time \
 ***Non-static effect scope***: all \
 ***Effect target***: gameplay screen \
@@ -3824,7 +3824,7 @@ The approach phase of a `#<property>START` command starts at its definition posi
 ***First seen in***: TJAPlayer3-Extended \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: command-time \
 ***Non-static effect scope***: all \
 ***Effect target***: gameplay screen \
@@ -3841,7 +3841,7 @@ Set the **color** of the displayed region outside the **border** of the gameplay
 ***First seen in***: TJAPlayer3-Extended \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: command-time \
 ***Non-static effect scope***: all \
 ***Effect target***: gameplay screen \
@@ -3861,7 +3861,7 @@ Reset by each other.
 ***First seen in***: TJAPlayer3-Extended \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: command-time \
 ***Non-static effect scope***: all \
 ***Effect target***: gameplay screen \
@@ -3879,7 +3879,7 @@ Override ("**set**") the **config** value read from the `SkinConfig.ini` of the 
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope***: branch \
-***Scope fineness***: non-before \
+***Scope-fineness***: non-before \
 ***Effect time***: command-time \
 ***Non-static effect scope***: all \
 ***Effect target***: gameplay screen \
@@ -3905,7 +3905,7 @@ The arguments are whitespace-separated.
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
 ***Impact level***: note ★★★★★ (depending on usage) \
 ***Scope***: branch \
-***Scope fineness***: sequential \
+***Scope-fineness***: sequential \
 ***Effect time***: command-time \
 ***Non-static effect scope***: specified target counter or trigger \
 ***Effect target***: (none) \
@@ -4272,7 +4272,7 @@ void update(void)
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
 ***Impact level***: note ★★★★★ (intended; depending on usage) \
 ***Scope***: branch \
-***Scope fineness***: sequential \
+***Scope-fineness***: sequential \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines (intended; depending on usage) \
 ***Effect branches***: current \
@@ -4291,7 +4291,7 @@ The exact behavior is *unspecified*.
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ (intended; depending on usage) \
 ***Scope***: branch \
-***Scope fineness***: sequential \
+***Scope-fineness***: sequential \
 ***Effect time***: command-time + (optional) command-time&ndash;enabled object-time <sub>note-path effects</sub> \
 ***Non-static effect scope***: (Depending on usage) \
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s) (intended; depending on usage) \
@@ -4313,7 +4313,7 @@ The exact behavior is *unspecified*.
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***Scope***: (Part of a command) \
-***Scope fineness***: (Part of a command) \
+***Scope-fineness***: (Part of a command) \
 ***Effect time***: command-time + (optional) command-time&ndash;enabled object-time <sub>note-path effects</sub> \
 ***Non-static effect scope***: (As specified) \
 ***Effect target***: notes, bar lines, note field(s) \
@@ -4435,7 +4435,7 @@ Equation: `time_duration_of_division` (unit: seconds)
 * In TJAP2fPC until ver.2018040600, each measure with no note symbols has 0 beat duration and 0 time duration.
 * In TJAP2fPC since ver.2018040600, TJAPlayer3, but not OpenTaiko (0auBSQ) since v0.6.0.12, each `,` has the division weight of 1 at the beginning of unindented non-command line, and has the division weight of 0 (0 beat duration and 0 time duration) at the beginning of indented non-command line, regardless whether there are any note symbols in this measure.
 
-Commands with non-before scope fineness have their effects fired when all the measure division intervals of the nearest preceding notechart symbol ends. If the measure delimiter symbol `,` has the division weight of 0, placing such commands before or after this `,` symbol has the same effects.
+Commands with non-before scope-fineness have their effects fired when all the measure division intervals of the nearest preceding notechart symbol ends. If the measure delimiter symbol `,` has the division weight of 0, placing such commands before or after this `,` symbol has the same effects.
 
 ### Sign of Timing Commands
 
@@ -4803,20 +4803,20 @@ If a usage causes *unspecified* behavior or the behavior itself is *unspecified*
 
 Because this article is still *in construction* and the TJA format is still evolving, this is possible that some usages or behaviors are stated as *unspecified* but the actual or intended behaviors are/have become consistent among most simulators.
 
-### Scope Fineness
+### Scope-Fineness
 
-Includes [header scope fineness](#header-scope-fineness) and [command scope fineness](#command-scope-fineness).
+Includes [header scope-fineness](#header-scope-fineness) and [command scope-fineness](#command-scope-fineness).
 
-The scope fineness is how often the header or command value changes can be handled by the simulator. The coarsest possible fineness is per&ndash;file. The finest possible fineness is sequential.
+The scope-fineness is how often the header or command value changes can be handled by the simulator. The coarsest possible fineness is per&ndash;file. The finest possible fineness is sequential.
 
-* *Unspecified*: For scope finenesses other than non-before and sequential, the behavior when the same header or command occur multiple times within its scope fineness in its scope.
-  * In TaikoJiro 1 and 2: Only the last occuring valid header or command in the scope fineness takes effect.
+* *Unspecified*: For scope-finenesses other than non-before and sequential, the behavior when the same header or command occur multiple times within its scope-fineness in its scope.
+  * In TaikoJiro 1 and 2: Only the last occuring valid header or command in the scope-fineness takes effect.
 
-The scope fineness listed in this article is the coarsest of usually supported fineness.
+The scope-fineness listed in this article is the coarsest of usually supported fineness.
 
-For simulator developers: A simulator ***MAY*** implement a finer scope fineness but ***SHOULD NOT*** implement a coarser scope fineness.
+For simulator developers: A simulator ***MAY*** implement a finer scope-fineness but ***SHOULD NOT*** implement a coarser scope-fineness.
 
-For chart creators: If compatibility is concerned, the chart ***SHOULD NOT*** relies on a finer scope fineness than the scope fineness listed in this article.
+For chart creators: If compatibility is concerned, the chart ***SHOULD NOT*** relies on a finer scope-fineness than the scope-fineness listed in this article.
 
 ### Level of Impact
 
