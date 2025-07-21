@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-07-19 (UTC+8)
+* Last changed: 2025-07-22 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -2360,20 +2360,25 @@ Recommendation for charters: [The `#SCROLL` command](#scroll) should be used ins
 
 *Unspecified*: The behavior when a [`#SCROLL` command](#scroll) with complex value is active.
 
-*Proposal* (IID): The direction is relative to the scrolling direction specified by [the `#SCROLL` command](#scroll).
+* In TJAPlayer2 for.PC until OpenTaiko (0auBSQ) v0.6.0.56, if the active [`#SCROLL` command](#scroll) has non-0 vertical scroll velocity, the resulting vertical position is not affected by `#DIRECTION`.
+* In OpenTaiko (0auBSQ) since v0.6.0.56, the vertical scroll velocity of the active [`#SCROLL` command](#scroll) is ignored except when `<enum-int-direction>` is 0 (←) and 5 (→).
+
+Only the horizontal scroll velocity of the active [`#SCROLL` command](#scroll) is used to calculate the resulting scroll velocity.
 
 * `#DIRECTION <enum-int-direction>`
-  * `<enum-int-direction>` specifies the degrees (°) of the counterclockwise (↺) rotation and can be one of:
-    * | | Rotation (degrees CCW) | Scrolling direction under `#SCROLL 1`
-      | --- | --- | ---
-      | `0` | 0° ↺/↻ (no changes) | ←
-      | `1` | 90° ↺ | ↓
-      | `2` | 270° ↺ (≡ 90° ↻) | ↑
-      | `3` | 45° ↺ | ↙
-      | `4` | 315° ↺ (≡ 45° ↻) | ↖
-      | `5` | 180° ↺ (≡ 180° ↻) | →
-      | `6` | 135° ↺ | ↘
-      | `7` | 225° ↺ (≡ 135° ↻) | ↗
+  * `<enum-int-direction>` specifies the scrolling direction and can be one of:
+    * | | Direction under `#SCROLL 1` | Equivalent `#SCROLL` command if `i` = ↑ | if `i` = ↓ for `#SCROLL x` | Speed relative to `#SCROLL x`
+      | --- | --- | --- | --- | ---
+      | `0` | ← | `#SCROLL x` | `#SCROLL x` | 1
+      | `1` | ↓ | `#SCROLL -xi` | `#SCROLL xi` | 1
+      | `2` | ↑ | `#SCROLL xi` | `#SCROLL -xi` | 1
+      | `3` | ↙ | `#SCROLL x-xi` | `#SCROLL x+xi` | √(2)
+      | `4` | ↖ | `#SCROLL x+xi` | `#SCROLL x-xi` | √(2)
+      | `5` | → | `#SCROLL -x` | `#SCROLL -x` | 1
+      | `6` | ↘ | `#SCROLL -x-xi` | `#SCROLL -x+xi` | √(2)
+      | `7` | ↗ | `#SCROLL -x+xi` | `#SCROLL -x-xi` | √(2)
+
+Notice that the scrolling speed of diagonal directions is √(2) times of the scrolling speed of non-diagonal directions.
 
 #### Compatibility Issues
 
