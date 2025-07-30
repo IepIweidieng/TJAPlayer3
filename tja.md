@@ -3059,7 +3059,7 @@ The possible conditions includes `<enum-str-condition>`, `lc:<str-local-value-co
 * `r` &mdash; amount of hits on non-balloon bar drum**r**oll notes. *Unspecified*: Whether hits on balloon-type notes are also included.
   * Not to be confused with the `r` (always includes *all* drum**r**oll-type notes) used for the requirement of [the `EXAM` headers](#exam-headers).
   * > Formula (TaikoJiro (1 and 2 (?))): `<sect:rt>` − `<sect:rb>`
-  * > Formula (TJAPlayer2 for.PC): `<sect:rt>`
+  * > Formula (TJAPlayer2 for.PC, TaikoManyGimmicks): `<sect:rt>`
 * *Proposal* (IID): `R` &mdash; amount of hits on **big** non-balloon bar drum**r**oll notes. If `r` includes hits on balloon-type notes, hits on special ("**big**") balloons (note symbol `9`) are also included, otherwise such hits are excluded.
   * > Formula (if `r` = `<sect:rt>` − `<sect:rb>`): `<sect:RT>` − `<sect:RB>`
   * > Formula (if `r` = `<sect:rt>`): `<sect:RT>`
@@ -3156,6 +3156,7 @@ An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--en
     * Drumroll-type note(s) which share the same terminating note symbol: Behaves as a single drumroll-type note but changes its head position, note type, and length on branch switching.
     * For length-changing notes, the amount of hits done for non-balloon bar drumrolls is counted independently in each branch, but amount of hits done for balloons is shared across branches.
     * For a bar-type drumroll note, its visual appearance becomes broken when its head in the target branch is no longer drawn when switching the branch.
+  * Recommendation for developers: The behaviors of TaikoJiro 1 is followed for such drumroll-type notes, but the visual appearance of bar-type drumrolls should not be broken.
 
 #### Examples
 
