@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-07-22 (UTC+8)
+* Last changed: 2025-07-30 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1504,10 +1504,12 @@ When either the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussio
 
 * `SCOREMODE:0`
   * Follow the special scoring rule of *<ruby>ド<rt>Do</rt>ン<rt>n</rt>ダ<rt>da</rt>フ<rt>fu</rt>ル<rt>ru</rt></ruby>！<ruby>コー<rt>Koo</rt>ス<rt>su</rt></ruby>* "Donderful! Course" from AC2&ndash;AC7 (see [`COURSE:3`](#course) for explanation).
-  * `init` & `diff` are both fixed to 1000 points and the [`SCOREINIT:`](#scoreinit) and [`SCOREDIFF:`](#scorediff) headers are both ignored.
+  * Both `init` & `diff` default to 1000 points. *Unspecified*: Whether the [`SCOREINIT:`](#scoreinit) and [`SCOREDIFF:`](#scorediff) headers are both used or ignored.
+    * Ignored in TaikoJiro (?) & TJAPlayer2 for.PC
   * Combo | 1&ndash;199 | 200&ndash;
     --- | --- | ---
-    Basic score (points) | 1000 | 2000
+    Basic score (points) <br /> If `SCOREINIT:` & `SCOREDIFF:` ignored | 1000 | 2000
+    If `SCOREINIT:` & `SCOREDIFF:` used | **floor**(`init` / 10) × 10 | **floor**(`init` + `diff` / 10) × 10
   * *Unspecified*: The behavior when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option is enabled.
 * `SCOREMODE:1`
   * Follow the normal scoring rule of the official PS1- and PS2-generation games (*<ruby>旧<rt>kyuu</rt>筐<rt>kyou</rt>体<rt>tai</rt></ruby>* "old (arcade) cabinet"; AC1&ndash;AC14).
@@ -1553,7 +1555,7 @@ Reference: *配点* ("Scoring"). 太鼓の達人 譜面とか Wiki\* ("Taiko no 
 #### Compatibility Issues
 
 * In TJAPlayer3 v1.4.0+ but not TJAPlayer3-f, `SCOREMODE:3` is treated the same as `SCOREMODE:2`, where the behavior of the former `SCOREMODE:3` can be enabled by enabling the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option.
-* In TJAPlayer3-Develop & TJAPlayer3-Develop-ReWrite (?), the former `SCOREMODE:3` behavior cannot be enabled because the scoring rules when enabling the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option follows the scoring rule of the official PC-generation games (<ruby>虹<rt>Niji</rt>色<rt>iro</rt></ruby>/<ruby>ニ<rt>Ni</rt>ジ<rt>ji</rt>イ<rt>i</rt>ロ<rt>ro</rt></ruby> version(s); AC16). 
+* In TJAPlayer3-Develop (?), TJAPlayer3-Develop-ReWrite (?), & OpenTaiko (0auBSQ), the former `SCOREMODE:3` behavior cannot be enabled because the scoring rules when enabling the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option follows the scoring rule of the official PC-generation games (<ruby>虹<rt>Niji</rt>色<rt>iro</rt></ruby>/<ruby>ニ<rt>Ni</rt>ジ<rt>ji</rt>イ<rt>i</rt>ロ<rt>ro</rt></ruby> version(s); AC16), although charts without big notes & balloon-type notes behave the same in both scoring rules.
 
 ### SCOREINIT:
 
@@ -1597,7 +1599,7 @@ In the official game, `diff` is not required to be a multiple of 10. Instead, th
 * `SCOREDIFF:<non-negative-int-score-diff>`
 * `SCOREDIFF:<non-negative-int-score-diff>d` \
   ***Supported by***: TaikoJiro v2.49
-  * If supported, a scoring rule similar to *<ruby>ド<rt>Do</rt>ン<rt>n</rt>ダ<rt>da</rt>フ<rt>fu</rt>ル<rt>ru</rt></ruby>！<ruby>コー<rt>Koo</rt>ス<rt>su</rt></ruby>* "Donderful! Course" is used as if `SCOREMODE:0` were used, except that the `SCOREINIT:` & `SCOREDIFF:` are not ignored.
+  * If supported, a scoring rule similar to *<ruby>**ド<rt>Do</rt>**ン<rt>n</rt>ダ<rt>da</rt>フ<rt>fu</rt>ル<rt>ru</rt></ruby>！<ruby>コー<rt>Koo</rt>ス<rt>su</rt></ruby>* "**D**onderful! Course" is used as if `SCOREMODE:0` were used, except that the `SCOREINIT:` & `SCOREDIFF:` headers are always used.
   * Combo | 1&ndash;199 | 200&ndash;
     --- | --- | ---
     Basic score | **floor**(`init` / 10) × 10 | **floor**(`init` + `diff` / 10) × 10
