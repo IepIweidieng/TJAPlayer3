@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-07-30 (UTC+8)
+* Last changed: 2025-08-07 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1319,35 +1319,37 @@ Each balloon-type note with unassigned hit amount requires an *unspecified* defa
 
 * `BALLOON:<comma-separated-list-non-negative-int-amount-of-hits>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0
-  * The list of amount is iterated over all sections of all *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>ki</rt></ruby>* "notechart branches"/forked paths.
+  * The list of amount is iterated over non-repeated head of balloon-type notes in all sections of all *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>ki</rt></ruby>* "notechart branches"/forked paths.
 * `BALLOONNOR:<comma-separated-list-non-negative-int-amount-of-hits>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 \
   ***Supported by***: TJAPlayer2 for.PC
-  * The list of amount is iterated over only sections of common & ***<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>*** **Nor**mal "branches"/paths.
 * `BALLOONEXP:<comma-separated-list-non-negative-int-amount-of-hits>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 \
   ***Supported by***: TJAPlayer2 for.PC
-  * The list of amount is iterated over only sections of ***<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**Exp**ert") "branches"/paths.
 * `BALLOONMAS:<comma-separated-list-non-negative-int-amount-of-hits>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 \
   ***Supported by***: TJAPlayer2 for.PC
-  * The list of amount is iterated over only sections of ***<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>*** **Mas**ter "branches"/paths.
+  * The list of amount is iterated over non-repeated head of balloon-type notes in sections of respectively ***<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>*** **Nor**mal, ***<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**Exp**ert"), & ***<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>*** **Mas**ter "branches"/paths.
+  * *Unspecified*: How the list of amount is iterated non-branched sections.
+    * TJAPlayer2 for.PC & TJAPlayer3, but not OpenTaiko (0auBSQ) v0.6.0: In the non-branched section before the first [`#BRANCHEND`](#branchstart--branchend), only 1 value is iterated from the `BALLOONNOR:` header.
+      * TJAPlayer2 for.PC ver.2018110400: Same as above in also non-branched sections after `#BRANCHEND`.
+    * TJAPlayer3 v1.5.2, but not TJAPlayer3-Develop & TJAPlayer3-Develop-ReWrite: In non-branched sections after `#BRANCHEND`, 3 values are iterated from the BALLOON header for the last-defined branch in the last branched section.
+    * TJAPlayer3-Develop & TJAPlayer3-Develop-ReWrite: In non-branched sections after `#BRANCHEND`, 3 values are iterated, where each is iterated from respectively the `BALLOONNOR:`, `BALLOONEXP:`, & `BALLOONMAS:` headers. For score calculation, all 3 iterated values are considered for the corresponding branch. However, in gameplay, only the value iterated from `BALLOONNOR:` is used.
+      * OpenTaiko (0auBSQ) v0.6.0: Same as above in also the non-branched section before the first `#BRANCHEND`.
 
 For each element of `<comma-separated-list-non-negative-int-amount-of-hits>`, if the amount of hits is `0`, the per-note behavior is *unspecified*.
 
 #### Compatibility Issues
 
-* Recommendation for charters: If the correctness of balloon count is significant, for branched charts, the branch-less `BALLOON:` should be always specified and should be specified after `BALLOONNOR:`, `BALLOONEXP:`, & `BALLOONMAS:`. [The `TJACOMPAT:` header](#proposal-iid-tjacompat) can be specified if necessary.
-* TJAPlayer2 for.PC & TJAPlayer3:
-  * Unlike in TaikoJiro, the scope-fineness of the BALLOON headers is per-difficulty instead of per&ndash;player-side (see [the `LEVEL:` header](#level)). Specifically, if a BALLOON header is specified multiple times in its scope, the specified hit amount values is appended to the existent values, instead of replacing all the existent values.
-  * The `BALLOON:` header is *erroneously* treated as the `BALLOONNOR:` header.
-* TJAPlayer3 but not TJAPlayer3-Develop: If a balloon-type note is defined in sections after [`#BRANCHEND`](#branchstart--branchend) and before another [`#BRANCHSTART`](#branchstart--branchend), it *erroneously* uses 3 values from the iteration of the `BALLOONNOR:` / `BALLOONEXP:` / `BALLOONMAS:` list according to the last defined "branch"/path before the `#BRANCHEND`. (?; deduced from source code)
-  * <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Songs/CDTX.cs#L3719>, <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Songs/CDTX.cs#L4020-L4055>
-  * *C.f.*, <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/スコア、曲/CDTX.cs#L3872-L3877>, <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/スコア、曲/CDTX.cs#L4118-L4149>
-* TJAPlayer3-Develop & TJAPlayer3-Develop-ReWrite: If a balloon-type note is defined in sections after [`#BRANCHEND`](#branchstart--branchend) and before another [`#BRANCHSTART`](#branchstart--branchend), it use 1 value from each iteration of `BALLOONNOR:`, `BALLOONEXP:`, & `BALLOONMAS:` instead of only `BALLOONNOR:`.
-  * <https://github.com/TJAPlayer3-Develop/TJAPlayer3-Develop/blame/b6ab37cbdc25a4257c7d685de48b6997ae81fe95/TJAPlayer3/Songs/CDTX.cs#L4173-L4217>
-  * <https://github.com/touhourenren/TJAPlayer3-Develop-ReWrite/blame/9cce1fac9c4a8988b950e1c646a749832c85cfd8/TJAPlayer3/Songs/CDTX.cs#L4315-L4358>
-  * See commits: <https://github.com/TJAPlayer3-Develop/TJAPlayer3-Develop/commit/abffd3204c437abaaf49fbd2ae890729a5485682> and <https://github.com/touhourenren/TJAPlayer3-Develop-ReWrite/commit/e1440cc349143fe2c820c8759e7e8512dba073e0>
+* Recommendation for charters: If the correctness of balloon count is significant, for branched charts, if any balloons are defined in non-branched sections, the branch-less `BALLOON:` should be always specified and should be specified after `BALLOONNOR:`, `BALLOONEXP:`, & `BALLOONMAS:`. [The `TJACOMPAT:` header](#proposal-iid-tjacompat) can be specified if necessary.
+* TJAPlayer2 for.PC & TJAPlayer3, but not OpenTaiko (0auBSQ) v0.6.0.73: Unlike in TaikoJiro, the scope-fineness of the BALLOON headers is per-difficulty instead of per&ndash;player-side (see [the `LEVEL:` header](#level)). Specifically, if a BALLOON header is specified multiple times in its scope, the specified hit amount values is appended to the existent values, instead of replacing all the existent values.
+* TJAPlayer2 for.PC & TJAPlayer3: The `BALLOON:` header is *erroneously* treated equivalent to the `BALLOONNOR:` header.
+* *Unspecified* iteration behavior over non-branched sections:
+  * For TJAPlayer3, but not TJAPlayer3-Develop & TJAPlayer3-Develop-ReWrite: <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Songs/CDTX.cs#L3719>, <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Songs/CDTX.cs#L4020-L4055>
+  * *C.f.* TJAPlayer2 for.PC ver.2018110400: <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/スコア、曲/CDTX.cs#L3872-L3877>, <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/スコア、曲/CDTX.cs#L4118-L4149>
+  * For TJAPlayer3-Develop & TJAPlayer3-Develop-ReWrite: <https://github.com/TJAPlayer3-Develop/TJAPlayer3-Develop/blame/b6ab37cbdc25a4257c7d685de48b6997ae81fe95/TJAPlayer3/Songs/CDTX.cs#L4173-L4217> & <https://github.com/touhourenren/TJAPlayer3-Develop-ReWrite/blame/9cce1fac9c4a8988b950e1c646a749832c85cfd8/TJAPlayer3/Songs/CDTX.cs#L4315-L4358>
+    * See commits: <https://github.com/TJAPlayer3-Develop/TJAPlayer3-Develop/commit/abffd3204c437abaaf49fbd2ae890729a5485682> & <https://github.com/touhourenren/TJAPlayer3-Develop-ReWrite/commit/e1440cc349143fe2c820c8759e7e8512dba073e0>
+  * For OpenTaiko (0auBSQ) v0.6.0, see commit: <https://github.com/0auBSQ/OpenTaiko/commit/b9bcca4fc8822f8c036389c77dcc1be9589195d0#diff-7f92963cc5d5680495fe517029ecb3745bd9345f203ba30dac990209b29c717bR1344>
 
 ### LIFE:
 
@@ -3023,7 +3025,7 @@ At the determining point, the "branch"/path&ndash;switching effects are played a
   * No condition and requirements specified. Intended to be specified later by [the `#FROMNOR`, `#FROMEXP`, & `#FROMMAS`](#proposal-iid-fromnor--fromexp--frommas) commands.
   * If the condition and requirements for a branch is left unspecified, when that branch is currently targeted, the currently targeted branch is taken as the next target branch before the [`#LEVELHOLD`](#levelhold) and the (*Proposal* (IID)) [`#LEVELREDIR`](#proposal-iid-levelredir) commands are applied, see [judging the target branch](#condition-judgement).
 * `#BRANCHEND` \
-  ***Supported by***: TaikoJiro, TJAPlayer 2 for PC ver.2020031800, TJAPlayer3 v1.5.2, taiko-web
+  ***Supported by***: TaikoJiro, TJAPlayer 2 for PC ver.2018110400, TJAPlayer3 v1.5.2, taiko-web
 
 #### Conditions
 
