@@ -1329,7 +1329,7 @@ Each balloon-type note with unassigned hit amount requires an *unspecified* defa
 * `BALLOONMAS:<comma-separated-list-non-negative-int-amount-of-hits>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 \
   ***Supported by***: TJAPlayer2 for.PC
-  * The list of amount is iterated over non-repeated head of balloon-type notes in sections of respectively ***<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>*** **Nor**mal, ***<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**Exp**ert"), & ***<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>*** **Mas**ter "branches"/paths.
+  * The list of amount is iterated over non-repeated head of balloon-type notes in "branched"/forked sections of only ***<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>*** **Nor**mal, ***<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**Exp**ert"), or ***<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>*** **Mas**ter "branch"/path.
   * *Unspecified*: How the list of amount is iterated non-branched sections.
     * TJAPlayer2 for.PC & TJAPlayer3, but not OpenTaiko (0auBSQ) v0.6.0: In the non-branched section before the first [`#BRANCHEND`](#branchstart--branchend), only 1 value is iterated from the `BALLOONNOR:` header.
       * TJAPlayer2 for.PC ver.2018110400: Same as above in also non-branched sections after `#BRANCHEND`.
