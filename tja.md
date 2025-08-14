@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-08-07 (UTC+8)
+* Last changed: 2025-08-14 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1021,7 +1021,7 @@ Equation: `movieoffset` = `time-point-of-video-beginning` − `time-point-of-aud
 * In TJAPlayer3-f, the definition is changed to be relative to the time position of `#START` of the notechart.
   * Equation: `movieoffset_f` = `time-point-of-video-beginning` − `time-point-of-chart-start` (Unit: Seconds)
 
-### BGA:
+### BGA Headers
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
 ***Impact level***: decorative ・・・・・ \
@@ -1033,16 +1033,14 @@ Specify a **b**ack**g**round video ("**a**nimation") to be used in the gameplay 
 
 *Unspecified*: Whether the video is scaled or stretched to fill the gameplay screen.
 
-Not reset by `BGA:` itself.
-
-* `BGA:<text-filepath-background-video>`
-* `BGA:`
-  * The behavior is *unspecified*.
+* `BGA<trimmed-unsigned-int-video-index>:<text-filepath-background-video>`
+  * `<trimmed-unsigned-int-video-index>` specifies the index of the background animation used by [the `#BGAON` and `#BGAOFF` commands](#bgaon--bgaoff).
+* `BGA<trimmed-unsigned-int-video-index>:`
+  * No background animations will be displayed for the specified index.
 
 #### Compatibility Issues
 
-* In OpenTaiko (0auBSQ) v0.6.0:
-  * `<text-filepath-background-animation>` must start with `<unsigned-int-video-index>`, which must be exactly 2 decimal digits (with `0` prefixed if necessary) and is used to specify the background animation by [the `#BGAON` and `#BGAOFF` commands](#bgaon--bgaoff).
+* In OpenTaiko (0auBSQ) v0.6.0, `<trimmed-unsigned-int-video-index>` must be at least 2 decimal digits (including prefixing `0` if necessary). Only the leading 2 digits are significant.
 
 ### LYRICS: / LYRICFILE:
 
@@ -3850,7 +3848,7 @@ Set the **color** of the displayed region outside the **border** of the gameplay
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 2.0 \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer3-Extended \
-***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
+***Supported by***: OpenTaiko (0auBSQ) v0.6.0 (no effects) \
 ***Scope***: branch \
 ***Scope-fineness***: non-before \
 ***Effect time***: command-time \
@@ -3865,12 +3863,16 @@ Reset by each other.
 * `#CHANGETEXTURE <text-filepath-original>,<text-filepath-replacing>`
 * `#RESETTEXTURE <text-filepath-original>`
 
+#### Compatibility Issues
+
+* In OpenTaiko (0auBSQ) v0.6.0, these commands have no effects because no textures are tracked for allowing changing.
+
 ### #SETCONFIG
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 2.0 \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer3-Extended \
-***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
+***Supported by***: OpenTaiko (0auBSQ) v0.6.0 (no effects) \
 ***Scope***: branch \
 ***Scope-fineness***: non-before \
 ***Effect time***: command-time \
@@ -3884,6 +3886,10 @@ Override ("**set**") the **config** value read from the `SkinConfig.ini` of the 
 
 * `#SETCONFIG <str-config-key>=<rawstr-config-value>`
 
+#### Compatibility Issues
+
+* In OpenTaiko (0auBSQ) v0.6.0, the `#SETCONFIG` command has its effects disabled.
+
 ### #BGAON / #BGAOFF
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
@@ -3896,20 +3902,18 @@ Override ("**set**") the **config** value read from the `SkinConfig.ini` of the 
 ***Effect target***: gameplay screen \
 ***Effect branches***: *Unspecified*
 
-Start ("**on**")/stop ("**off**") playing the specified **b**ack**g**round video ("**a**nimation") defined by [the `BGA:` header](#bga) on the gameplay screen.
+Start ("**on**")/stop ("**off**") playing the specified **b**ack**g**round video ("**a**nimation") defined by [the `BGA` headers](#bga-headers) on the gameplay screen.
 
 The arguments are whitespace-separated.
 
 * `#BGAON <unsigned-int-video-index> <float-milliseconds-video-offset>`
   * Start playing the specified background video from `<float-milliseconds-video-offset>` milliseconds into the video. The background video specified by [`BGMOVIE:`](#bgmovie) (if any) is hidden but is still playing.
 * `#BGAOFF <unsigned-int-video-index>`
-  * Stop the specified backgound video. The background video specified by [`BGMOVIE:`](#bgmovie) (if any) is shown and is still playing.
+  * Stop and hide the specified background video. The background video specified by [`BGMOVIE:`](#bgmovie) (if any) is shown and is still playing.
 
 #### Compatibility Issues
 
-* In OpenTaiko (0auBSQ) v0.6.0:
-  * Only the halfwidth space ("` `") is allowed for separating arguments
-  * `<unsigned-int-video-index>` must be exactly 2 decimal digits (with `0` prefixed if necessary).
+* In OpenTaiko (0auBSQ) v0.6.0, `<unsigned-int-video-index>` must be at least 2 decimal digits (including prefixing `0` if necessary). Only the leading 2 digits are significant.
 
 ### *Proposal* (Komi): COUNTER / TRIGGER Commands
 
