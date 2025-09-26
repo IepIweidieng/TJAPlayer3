@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-08-14 (UTC+8)
+* Last changed: 2025-09-26 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -2558,8 +2558,10 @@ The arguments are whitespace-separated.
   * `<float-seconds-*-duration>` has the precision of `0.001` (1 ms), and any value < `0.001` is treated as `0` (positive infinity for `#SUDDEN`).
   * The per-note effect is only applied non-before the time position of [the `#START` command](#start--end). (?)
   * The vertical scrolling velocity of a note is not affected during the stopping phase of the note.
+  * `#SUDDEN <float-seconds-appear-duration> 0` with positive `<float-seconds-appear-duration>` makes roll-type notes completely invisible. To make roll-type notes appear normally, use a positive `<float-seconds-moving-duration>`.
 * In OpenTaiko (0auBSQ) (?, as for v0.6.0 b3):
   * The scrolling velocity of a note is completely not affected during the stopping phase of the note.
+  * The note phoneticization is never hidden.
 
 ### #NOTESPAWN
 
