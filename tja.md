@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-09-26 (UTC+8)
+* Last changed: 2025-09-30 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -4186,7 +4186,7 @@ void update(void)
 }
 ```
 
-<details><summary>Evaluation by frame</summary>
+Evaluation by frame:
 
 * Frame 0 (counted from the note symbol `0`):
   * `#STORECF` &mdash; `<lcf:foo>x`, `#STORETF` &mdash; `<ltf:odd>x`
@@ -4200,10 +4200,6 @@ void update(void)
   * `x<lcf:foo>'x` = \[`x<lcf:foo>` → 2] + 1 → 3 \[`<ltf:odd>x`]
   * `x<ltf:odd>'x` = `<math:fmod>`(\[`x<lcf:foo>'` → 3] : 2) != 0 → 1 != 0 → 1 (true) → enabled
 * ...
-
-</details>
-
-<p></p>
 
 `<lcf:foo>` becomes a frame counter. The note symbol `1` will only visible and hittable every odd frame.
 
@@ -4237,7 +4233,7 @@ void update(void)
 }
 ```
 
-<details><summary>Evaluation by frame</summary>
+Evaluation by frame:
 
 * Frame 0 (counted from the note symbol `0`):
   * `#STORECF` &mdash; `<lcf:foo>x`, `<lcf:bar>x`, `<lcf:baz>x`; `#STORETF` &mdash; `<ltf:odd>x`
@@ -4277,10 +4273,6 @@ void update(void)
   * `x<lcf:baz>'x` = (\[`x<lcf:bar>'` → 8] == 0) + `x<lcf:bar>'` + \[`x<lcf:foo>'` → 5] → 13 \[`<lcf:foo>x`, `<lcf:bar>`, `<ltf:odd>x`]
   * `x<ltf:odd>'` → `<math:fmod>`(\[`x<lcf:bar>'` → 8] : 2) != 0 → 0 (false) → disabled
 * ...
-
-</details>
-
-<p></p>
 
 `<lcf:bar>` becomes the *n*th element of the Fibonacci sequence at the *n*th frame since the note symbol `0`. The note symbol `1` will be visible and hittable except every 3 × *n* frame.
 
