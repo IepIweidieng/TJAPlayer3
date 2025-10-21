@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-09-30 (UTC+8)
+* Last changed: 2025-10-22 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -2682,8 +2682,8 @@ Similar to [the `#NOTESCHANGE` command](#noteschange), but with a different rang
       | --- | --- | --- | --- | ---
       | Taiko `1` | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>* Don | *<ruby>ド<rt>Do</rt></ruby>* Do | *<ruby>コ<rt>Ko</rt></ruby>* (Do) | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>* Don
       | Taiko `2` | *<ruby>カッ<rt>Ka'</rt></ruby>* Ka | *<ruby>カ<rt>Ka</rt></ruby>* (Ka) | *<ruby>カ<rt>Ka</rt></ruby>* (Ka) | *<ruby>カッ<rt>Ka'</rt></ruby>* Ka
-      | Konga `1` | <ruby>パン<rt>Pan</rt></ruby> | <ruby>パ<rt>Pa</rt></ruby> | <ruby>パ<rt>Pa</rt></ruby> | <ruby>パッ<rt>Pa'</rt></ruby>
-      | Konga `2` | <ruby>ポン<rt>Pon</rt></ruby> | <ruby>ポ<rt>Po</rt></ruby> | <ruby>ポ<rt>Po</rt></ruby> | <ruby>ポッ<rt>Po'</rt></ruby>
+      | Konga `1` | <ruby>ポン<rt>Pon</rt></ruby> | <ruby>ポ<rt>Po</rt></ruby> | <ruby>ポ<rt>Po</rt></ruby> | <ruby>ポッ<rt>Po'</rt></ruby>
+      | Konga `2` | <ruby>パン<rt>Pan</rt></ruby> | <ruby>パ<rt>Pa</rt></ruby> | <ruby>パ<rt>Pa</rt></ruby> | <ruby>パッ<rt>Pa'</rt></ruby>
       | Konga `4` | <ruby>チャン<rt>Chan</rt></ruby> | <ruby>チャ<rt>Cha</rt></ruby> | <ruby>チャ<rt>Cha</rt></ruby> | <ruby>チャッ<rt>Cha'</rt></ruby>
       | End of bar | *ーっ!!* &ndash;!! | (none) | (none) | *ーっ!!* &ndash;!!
       * End of bar: End of roll-type notes with bar (after Taiko & Konga `5`, `6`, `D`, `H`, & `I`)
@@ -4680,22 +4680,22 @@ See [Usual Patterns of Note Phoneticization in the Offical Games](#usual-pattern
 
 Input Type | DK Bongos | Nintendo GameCube controller
 --- | --- | ---
-Left | Hit the left drum | Any left face buttons (left stick/D-pad)
 Right | Hit the right drum | Any right face buttons (X/Y/B/A/C-stick)
+Left | Hit the left drum | Any left face buttons (left stick/D-pad)
 Clap | Clap above both drum <br /> (sound-level activated) | Any back trigger buttons (L/R) or right shoulder button (Z)
 
-Timing Window | Explanation
---- | ---
-GREAT |
-OK | Widest non&ndash;combo-break timing window.
-BAD | Widest timing window. <br /> ‡ Corresponds to a hit *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD judgment in Taiko games
-MISS | ‡ Corresponds to a unhit *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD judgment in Taiko games.
+Timing Window | Official default range | Explanation
+--- | --- | ---
+GREAT | ±25ms
+OK | ±75ms | Widest non&ndash;combo-break timing window.
+BAD | ±125ms | Widest timing window. <br /> ‡ Corresponds to a hit *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD judgment in Taiko games
+MISS | (miss) | ‡ Corresponds to a unhit *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD judgment in Taiko games.
 
 | | Note Type | Note Appearance | *<ruby>口<rt>Kuchi</rt>唱<rt>Shou</rt>歌<rt>ga</rt></ruby>* <br> "Note phoneticizations" in *Donkey Konga 3* | Explanations on Clear | Explanations on Fail | Notes
 --- | --- | --- | --- | --- | --- | ---
 `0` | (blank) | (none) | (none) | Nothing needs to be done. Consume no input. | (impossible to fail) |
-`1` | Right drum beat | Red circle with its right half filled | <ruby>パ<rt>Pa</rt></ruby> / <ruby>パッ<rt>Pa'</rt></ruby> / <ruby>パン<rt>Pan</rt></ruby> | [Correctly input](#judgement-expection-type) Right within the OK timing window, consumes the note. [Propogates wrong inputs](#judgement-expection-type). <br /> Awards GREAT or OK judgment according to the timing and increases combo. <br /> Increases healthy gauge, & score according to awarded judgment. | Otherwise, correctly input within the BAD judgment window (consumes the note) or [missing input](#judgement-expection-type) (keeps note's visibility). <br /> Gives a BAD (if hit) or MISS‡ (if not hit) judgment & combo break and decreases healthy gauge. |
-`2` | Left drum beat | Yellow circle with its left half filled | <ruby>ポ<rt>Po</rt></ruby> / <ruby>ポッ<rt>Po'</rt></ruby> / <ruby>ポン<rt>Pon</rt></ruby> | [Correctly input](#judgement-expection-type) Left within the OK timing window, consumes the note. [Propogates wrong inputs](#judgement-expection-type) <br /> Awards the same as `1`. | Otherwise, correctly input within the BAD judgment window (consumes the note) or [missing input](#judgement-expection-type) (keeps note's visibility). <br /> Gives the same penalty as `1`. |
+`1` | Right drum beat | Red circle with its right half filled | <ruby>ポ<rt>Po</rt></ruby> / <ruby>ポッ<rt>Po'</rt></ruby> / <ruby>ポン<rt>Pon</rt></ruby> | [Correctly input](#judgement-expection-type) Right within the OK timing window, consumes the note. [Propogates wrong inputs](#judgement-expection-type). <br /> Awards GREAT or OK judgment according to the timing and increases combo. <br /> Increases healthy gauge, & score according to awarded judgment. | Otherwise, correctly input within the BAD judgment window (consumes the note) or [missing input](#judgement-expection-type) (keeps note's visibility). <br /> Gives a BAD (if hit) or MISS‡ (if not hit) judgment & combo break and decreases healthy gauge. |
+`2` | Left drum beat | Yellow circle with its left half filled | <ruby>パ<rt>Pa</rt></ruby> / <ruby>パッ<rt>Pa'</rt></ruby> / <ruby>パン<rt>Pan</rt></ruby> | [Correctly input](#judgement-expection-type) Left within the OK timing window, consumes the note. [Propogates wrong inputs](#judgement-expection-type) <br /> Awards the same as `1`. | Otherwise, correctly input within the BAD judgment window (consumes the note) or [missing input](#judgement-expection-type) (keeps note's visibility). <br /> Gives the same penalty as `1`. |
 `3` | Both drum beats | Pink circle | D | [Correctly input](#judgement-expection-type) Left + Right with the first input within the OK timing window. [Consumes incomplete input (?) and propogates wrong inputs](#judgement-expection-type). <br /> Awards the same as `1` according to the timing of the first input. | Otherwise, correctly input but with the first input within the BAD judgment window (consumes the note) or [missing inputs](#judgement-expection-type) (keeps note's visibility). <br /> Gives the same penalty as `1`. |
 `G` | (same as `3`) | (see `3`) | (see `3`) | (see `3`) | (see `3`) | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ) v0.5.4, OutFox v0.4.18 <br /> By analogy with Taiko mode.
 `4` | Clap | Sky-blue circle with star-ish edge | <ruby>チャ<rt>Cha</rt></ruby> / <ruby>チャッ<rt>Cha'</rt></ruby> / <ruby>チャン<rt>Chan</rt></ruby> | [Correctly input](#judgement-expection-type) Clap within the OK timing window, consumes the note. [Propogates wrong inputs](#judgement-expection-type) <br /> Awards the same as `1`. | Otherwise, correctly input but only within the BAD judgment window (consumes the note) or [missing input](#judgement-expection-type) (keeps note's visibility). <br /> Gives the same penalty as `1`. |
