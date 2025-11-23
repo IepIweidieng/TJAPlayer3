@@ -1339,7 +1339,7 @@ For each element of `<comma-separated-list-non-negative-int-amount-of-hits>`, if
 
 #### Compatibility Issues
 
-* Recommendation for charters: If the correctness of balloon count is significant, for branched charts, if any balloons are defined in non-branched sections, the branch-less `BALLOON:` should be always specified and should be specified after `BALLOONNOR:`, `BALLOONEXP:`, & `BALLOONMAS:`. [The `TJACOMPAT:` header](#proposal-iid-tjacompat) can be specified if necessary.
+* Recommendation for charters: If the correctness of balloon count is significant, for branched charts, if any balloons are defined in non-branched sections, the branch-less `BALLOON:` should be always specified and should be specified after `BALLOONNOR:`, `BALLOONEXP:`, & `BALLOONMAS:`. [The `COMPAT:` header](#proposal-iid-compat) can be specified if necessary.
 * TJAPlayer2 for.PC & TJAPlayer3, but not OpenTaiko (0auBSQ) v0.6.0.73: Unlike in TaikoJiro, the scope-fineness of the BALLOON headers is per-difficulty instead of per&ndash;player-side (see [the `LEVEL:` header](#level)). Specifically, if a BALLOON header is specified multiple times in its scope, the specified hit amount values is appended to the existent values, instead of replacing all the existent values.
 * TJAPlayer2 for.PC & TJAPlayer3: The `BALLOON:` header is *erroneously* treated equivalent to the `BALLOONNOR:` header.
 * *Unspecified* iteration behavior over non-branched sections:
@@ -1627,7 +1627,7 @@ If enabled, make the *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>k
   * The behavior is *unspecified*.
   * In TJAPlayer2 for.PC: Ignored
 
-### *Proposal* (IID) TJACOMPAT:
+### *Proposal* (IID) COMPAT:
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
 ***Impact level***: note ★★★★★ (maximum, depends on the compatibility flags) \
@@ -1637,7 +1637,7 @@ Specify the intended compatibility mode of the chart.
 
 The supported set of headers & commands and allowed argument forms is not affected. However, the arguments might be interpreted differently dependent on the compatibility mode and flags.
 
-* `TJACOMPAT:<comma-separated-list-enum-str-compat-option>`
+* `COMPAT:<comma-separated-list-enum-str-compat-option>`
   * The first element of `<comma-separated-list-enum-str-compat-option>` is one of `<enum-str-compat-mode>` & `<enum-str-compat-flag>`, and subsequent elements are `<enum-str-compat-flag>`.
   * Unrecognized or unsupported elements are warned (if possible) and then skipped. If the first element is unrecognized or unsupported, all elements are treated as `<enum-str-compat-flag>`.
 * Initial value: An *unspecified* compatibility mode is chosen by the simulator.
@@ -2356,7 +2356,7 @@ If the notes & the bar lines are rotated around their center accordingly when a 
 
 Change the scrolling **direction** of notes & bar lines.
 
-Recommendation for charters: [The `#SCROLL` command](#scroll) should be used instead. If the vertical scroll direction is significant, [the `TJACOMPAT:` header](#proposal-iid-tjacompat) should be specified.
+Recommendation for charters: [The `#SCROLL` command](#scroll) should be used instead. If the vertical scroll direction is significant, [the `COMPAT:` header](#proposal-iid-compat) should be specified.
 
 *Unspecified*: Whether the notes & the bar lines are rotated around their center accordingly.
 
@@ -2467,7 +2467,7 @@ The arguments are whitespace-separated.
 
 #### Compatibility Issues
 
-* Recommendation for charters: If the vertical scroll direction is significant, [the `TJACOMPAT:` header](#proposal-iid-tjacompat) should be specified.
+* Recommendation for charters: If the vertical scroll direction is significant, [the `COMPAT:` header](#proposal-iid-compat) should be specified.
 * In TJAPlayer3, where the imaginary component of `<complex-ri-number-pixel-distance-xy>` is introduced, due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑), the vertical movement direction is in the same direction as the direction of the [`#SCROLL` command](#scroll), but is in the opposite direction of the `#SCROLL` command in other simulators including TaikoJiro 2 and TaikoManyGimmicks.
 * TJAPlayer2 for.PC and TaikoManyGimmicks do not support all existent forms of `<complex-ri-float-scroll-speed-xy>`, see the explanation of compatibility issues in [Value Type](#value-type).
 
@@ -4439,7 +4439,7 @@ Equation: `time_duration_of_division` (unit: seconds)
 
 #### Compatibility issues:
 
-* In TaikoJiro 1, if `#BPMCHANGE` is encountered, the time of the definition cursor is rounded to the nearest 0.001 second toward 0. See the [`timing-precision=ms-bpm`](#proposal-iid-tjacompat) behavior.
+* In TaikoJiro 1, if `#BPMCHANGE` is encountered, the time of the definition cursor is rounded to the nearest 0.001 second toward 0. See the [`timing-precision=ms-bpm`](#proposal-iid-compat) behavior.
 * In TaikoJiro 2, notes are placed at the end of division interval if the time duration of the division is negative.
 * In TJAP2fPC until ver.2018040600, each measure with no note symbols has 0 beat duration and 0 time duration.
 * In TJAP2fPC since ver.2018040600, TJAPlayer3, but not OpenTaiko (0auBSQ) since v0.6.0.12, each `,` has the division weight of 1 at the beginning of unindented non-command line, and has the division weight of 0 (0 beat duration and 0 time duration) at the beginning of indented non-command line, regardless whether there are any note symbols in this measure.
