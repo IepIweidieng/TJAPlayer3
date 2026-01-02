@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2025-12-20 (UTC+8)
+* Last changed: 2026-01-02 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -3579,7 +3579,7 @@ Setters:
   * Specify the **size** of **bar** **line**s.
 * `#ANGLE <number-degrees-rotation>` \
   ***Supported by***: TaikoManyGimmicks v0.6α
-  * Specify the per-object rotation ("**angle**") of notes & bar lines to be `<number-degrees-rotation>` degrees (°) counterclockwise (↺).
+  * Specify the per-object rotation ("**angle**") of notes & bar lines to be `<number-degrees-rotation>` degrees (°) clockwise (↻).
 * `#COLOR <unsigned-number-9bit-r> <unsigned-number-9bit-g> <unsigned-number-9bit-b> <unsigned-number-8bit-a>` \
   ***Supported by***: TaikoManyGimmicks v0.6α \
   / `#COLOR(<unsigned-number-9bit-r>, <unsigned-number-9bit-g>, <unsigned-number-9bit-b>)` \
