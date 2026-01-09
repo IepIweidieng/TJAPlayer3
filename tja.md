@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-01-09 (UTC+8)
+* Last changed: 2026-01-10 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -227,29 +227,31 @@ For multiple values separated by comma (`,`), except for `rawstr`-valued fields,
 ### Value Type
 
 * `number`: A real number. `number` indicates that it is *unspecified* whether a number with a fraction part is allowed. *Unspecified*: The supported upper limit & lower limit of the numeric range, unless stated otherwise.
+  * Recommendation for simulator developers: `number` is handled as `float` and the fraction part is allowed.
   * `int`: An integer number in decimal, *e.g.*, `0` / `+10` / `-012`
   * `float`: A real number in decimal which can either be an integer or have the fraction part, *e.g.*, `0` / `+.3` / `-1.`
     * *Unspecified*: Whether a comma (`,`) can be used as the decimal point instead of a full-stop (`.`).
     * *Unspecified*: The supported precision.
-    * *Proposal* (IID): `+inf` for positive infinity (+∞) & `-inf` for negative infinity (−∞).
-    * In TaikoJiro 1 and 2, exponential notation is supported, *e.g.*, `1e4`, `-3.14e-6`.
+    * In TaikoJiro 1 and 2, TJAPlayer2 for.PC, taiko-web: Exponential notation is supported, *e.g.*, `1e4`, `-3.14e-6`.
+    * In TJAPlayer2 for.PC, taiko-web: Infinity (∞) is supported, *e.g.*, `inf`, `+INF`, `-Infinity`.
   * `enum-int` (enum-like, int-form): An `int` with specific accepted values.
   * *Unspecified*: Whether the positive sign (`+`) may appear for a positive-or-zero value, except for `unsigned-*`.
   * In TaikoJiro, leading non-newline whitespaces are always ignored.
 * `complex-ri-number`: A complex number in the form of a real number, an imaginary number, or both added together. `complex-ri-number` indicates that it is *unspecified* whether a number with a fraction part is allowed for any of the real and imaginary components.
   * `complex-ri-float`: A complex number where each of the real and imaginary components can either be an integer or have the fraction part, *e.g.*, `1` / `i` / `.3+.3i`.
   * The format is one of:
-    * `<number-real>` &mdash; a pure real number where the real component is `<number-real>`.
-    * `<optional-sign-imaginary><unsigned-number-imaginary-specifier>` &mdash; a pure imaginary number where the imaginary component has the sign of `<optional-sign-imaginary>` (defaults to `+`) and the absolute value specified by `<unsigned-number-imaginary-specifier>`.
-    * `<number-real><sign-imaginary><unsigned-number-imaginary-specifier>` &mdash; a general complex number where the real component is `<number-real>` and the imaginary component has the sign of `<sign-imaginary>` and the absolute value specified by `<unsigned-number-imaginary-specifier>`.
+    * `<(number)real>` &mdash; a pure real number where the real component is `<real>`.
+    * `[sign-imaginary]<unsigned-number-imaginary-specifier>` &mdash; a pure imaginary number where the imaginary component has the sign of `[sign-imaginary]` (defaults to `+`) and the absolute value specified by `<unsigned-number-imaginary-specifier>`.
+    * `<(number)real><sign-imaginary><unsigned-number-imaginary-specifier>` &mdash; a general complex number where the real component is `<real>` and the imaginary component has the sign of `<sign-imaginary>` and the absolute value specified by `<unsigned-number-imaginary-specifier>`.
       * *Unspecified*: The behavior if `<sign-imaginary>` is `-` and `<unsigned-number-imaginary-specifier>` has the absolute value of 0.
+        * In TaikoJiro 2, `#SCROLL -1.-.0i` applies normally, but `#SCROLL +1.4-0.i` does not.
   * `<unsigned-number-imaginary-specifier>` can be one of:
     * `i` &mdash; the imaginary component has the absolute value of 1.
-    * `<unsigned-number-imaginary>i` &mdash; the imaginary component has the absolute value of `<unsigned-float-imaginary>`.
+    * `<(unsigned-number)imaginary>i` &mdash; the imaginary component has the absolute value of `<imaginary>`.
     * *Unspecified*: whether `j` can be used in place of `i`.
   * ***Compatibility issues***:
-    * In TaikoJiro 2, `+<unsigned-number-real>-<unsigned-number-imaginary>i` (?) where `<unsigned-number-imaginary>` is equivalent to 0 is not fully supported.
-    * In TJAP2fPC but not OpenTaiko (0auBSQ) v0.6.0, only the forms `<number-real>` & `<number-real><sign-imaginary><unsigned-number-imaginary>i` are supported; omitting any number parts is not supported.
+    * In TaikoJiro 2, `+<(unsigned-number)real>-<(unsigned-number)imaginary>i` (?) where `<imaginary>` is equivalent to 0 is not fully supported.
+    * In TJAP2fPC but not OpenTaiko (0auBSQ) v0.6.0, only the forms `<(number)real>` & `<(number)real><sign-imaginary><(unsigned-number)imaginary>i` are supported; omitting any number parts is not supported.
     * In TaikoManyGimmicks up to 0.6.6α, omitting the real number component when  `<sign-imaginary>` is not `-` is not supported.
 * `text`: A string. `text` indicates that it is *unspecified* whether leading or trailing non-newline whitespaces are significant. *Unspecified*: The maximum supported length.
   * `rawstr`: A string. Can contain leading or trailing non-newline whitespaces & comments.
@@ -268,9 +270,13 @@ Formatting notations:
 
 * (empty): The value is written as either an empty string (trimmed-empty) or a whitespaces-only string.
 * `trimmed-*`: The value is written without leading and trailing new-newline whitespaces & comments.
+  * `start-trimmed-*` and `end-trimmed-*`: Without leading and without trailing new-newline whitespaces & comments, respectively.
 * `unsigned-*`: The value is written without preceding positive sign (`+`) or negative sign (`-`).
-* `<separator>-separated-list-*`: Multiple values are given and are separated by the separator indicated by `<separator>`
-  * *E.g.*, exemplar valid values for `comma-separated-list-int`: (empty) / `42` / `8, 7, 6`
+* `<separator>-separated-list:*`: Multiple values are given and are separated by the separator indicated by `<separator>`
+  * *E.g.*, exemplar valid values for `comma-separated-list:int`: (empty) / `42` / `8, 7, 6`
+* `<(type)name>`: The value `name` has the value type `type` and can be refered to just `<name>`.
+* `[name=<default>]`: The value `name` is optional and defaults to `<default>`.
+  * *E.g.*, `[(enum-str)difficulty-type=Oni]` means the value `difficulty-type` defaults to `Oni`.
 
 ## TJA Header
 
@@ -346,23 +352,23 @@ For headers, the coarsest fineness is per-file. The finest fineness other than s
 
 ### TITLE Headers
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (including any `<trimmed-enum-str-lang>` forms) \
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (including any `<lang>` forms) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, Malody, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope-fineness***: per-file \
 ***Inspired by***: TJF format \
-&emsp; (likely) from DWI and earlier MSD format `#TITLE:<text-title>;` \
-&emsp; from BMS format `#TITLE <text-title>`
+&emsp; (likely) from DWI and earlier MSD format `#TITLE:<(text)title>;` \
+&emsp; from BMS format `#TITLE <(text)title>`
 
 Specify the **title** of the song.
 
-* `TITLE:<text-title>`
+* `TITLE:<(text)title>`
   * In Malody, the romanized name should be used.
-* `TITLE<trimmed-enum-str-lang>:<text-title-localized>` \
+* `TITLE<(trimmed-enum-str)lang>:<(text)title-localized>` \
   ***Supported by***: taiko-web ver.19.03.10, OpenTaiko (0auBSQ) v0.5.1
   * Specify the localized title.
-  * `<trimmed-enum-str-lang>` is an IETF BCP 47 language or region tag (see <https://en.wikipedia.org/wiki/IETF_language_tag>) and can be one of but not limited to:
+  * `<lang>` is an IETF BCP 47 language or region tag (see <https://en.wikipedia.org/wiki/IETF_language_tag>) and can be one of but not limited to:
     * `EN` &mdash; **En**glish
     * `JA` &mdash; **Ja**panese \
       ***Supported by***: taiko-web, OpenTaiko (0auBSQ) v0.6.0+
@@ -387,16 +393,16 @@ Specify the **title** of the song.
       ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
     * `KO` &mdash; **Ko**rean \
       ***Supported by***: taiko-web, OpenTaiko (0auBSQ) v0.6.0
-  * In OpenTaiko (0auBSQ) v0.6.0, any `<trimmed-enum-str-lang>` is recognized and can be used if the corresponding localization for the game interface has been defined.
+  * In OpenTaiko (0auBSQ) v0.6.0, any `<lang>` is recognized and can be used if the corresponding localization for the game interface has been defined.
 
 ### SUBTITLE Headers
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (including any `<trimmed-enum-str-lang>` forms) \
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (including any `<lang>` forms) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro v2.64 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope-fineness***: per-file \
-***Inspired by***: (likely) SM format `#SUBTITLE:<text-displayed-subtitle>;`
+***Inspired by***: (likely) SM format `#SUBTITLE:<(text)displayed-subtitle>;`
 
 Specify the **subtitle** (not of the meaning of *caption*) of the song (could be artist, game series, *etc.*), or alternatively as the second line ("**sub**") of the **title**.
 
@@ -404,22 +410,22 @@ If the artist of the song should be specified while the subtitle is already used
 
 The display details are *unspecified*.
 
-* `SUBTITLE:<text-subtitle>`
-  * `<text-subtitle>` can be one of:
-    * `--<text-displayed-subtitle>`
+* `SUBTITLE:<(text)subtitle>`
+  * `<subtitle>` can be one of:
+    * `--<(text)displayed-subtitle>`
       * Only show the subtitle in the song selection screen. Usually used for artist name.
       * The `--` prefix needs to be prepended to the displayed subtitle when the subtitle already begins with `--`.
-    * `++<text-displayed-subtitle>` \
+    * `++<(text)displayed-subtitle>` \
       ***Supported by***: TaikoJiro, TJAPlayer2 for.PC, taiko-web ver.19.03.10 \
-      / `<text-displayed-subtitle>` \
+      / `<(text)displayed-subtitle>` \
       ***Supported by***: TaikoJiro, TJAPlayer2 for.PC ver.2021xxxxxx, TJAPlayer3-f v1.7.2.0, OpenTaiko (0auBSQ) v0.6.0, taiko-web
       * Show the subtitle in all screens, including the gameplay screen & the result screen.
       * Such subtitle is considered the second half part of the title, but is moved to the second line in song selection screen & result screen.
       * The `++` prefix needs to be prepended to the displayed subtitle when the subtitle begins with either `++` or `--`.
-* `SUBTITLE<trimmed-enum-str-lang>:<text-displayed-subtitle-localized>` \
+* `SUBTITLE<(trimmed-enum-str)lang>:<(text)displayed-subtitle-localized>` \
   ***Supported by***: taiko-web ver.19.03.10, OpenTaiko (0auBSQ) v0.5.1
   * Specify the localized subtitle. The display mode (`++`/`--`) is instead specified by the `SUBTITLE:` header.
-  * `<trimmed-enum-str-lang>` can be one of the possible `<trimmed-enum-str-lang>` for [the `TITLE<trimmed-enum-str-lang>:` header](#title-headers).
+  * `<lang>` can be one of the possible `<lang>` for [the `TITLE<lang>:` header](#title-headers).
 
 ### ARTIST:
 
@@ -427,7 +433,7 @@ The display details are *unspecified*.
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: Malody \
 ***Scope-fineness***: per-file \
-***Inspired by***: (likely) `.osu` format `Artist:<text-artist>`
+***Inspired by***: (likely) `.osu` format `Artist:<(text)artist>`
 
 Specify the **artist** of the song.
 
@@ -435,10 +441,10 @@ Similar to the `--` prefix usage of [the `SUBTITLE:` header](#subtitle-headers),
 
 The display details are *unspecified*.
 
-* `ARTIST:<text-artist>`
+* `ARTIST:<(text)artist>`
   * In Malody, the romanized name should be used.
-* *Proposal* (Komi): `ARTIST:<comma-separated-list-text-artist>`
-  * Every comma (`,`) in the artist name specified in `<comma-separated-list-text-artist>` ***MUST*** be escaped as `\,`
+* *Proposal* (Komi): `ARTIST:<(comma-separated-list:text)artist>`
+  * Every comma (`,`) in the artist name specified in `<(comma-separated-list:text)artist>` ***MUST*** be escaped as `\,`
 
 ### MAKER:
 
@@ -452,16 +458,16 @@ Specify the creator ("**maker**") of the notechart.
 
 The display details are *unspecified*.
 
-* `MAKER:<text-name-notechart-creator>`
-  * *Proposal* (Komi): Every comma (`,`) in `<text-name-notechart-creator>` ***MUST*** be escaped as `\,`
-* `MAKER:<text-name-notechart-creator> <text-notechart-creator-web-url>`
-  * `<text-notechart-creator-web-url>` is immediately enclosed by a pair of angle brackets (`<` & `>`).
-* *Proposal* (Komi): `MAKER:<comma-separated-list-text-name-notechart-creator>`
-  * Every comma (`,`) in the chart makers specified in `<comma-separated-list-text-name-notechart-creator>` ***MUST*** be escaped as `\,`
+* `MAKER:<(text)name-notechart-creator>`
+  * *Proposal* (Komi): Every comma (`,`) in `<name-notechart-creator>` ***MUST*** be escaped as `\,`
+* `MAKER:<(text)name-notechart-creator> <(text)notechart-creator-web-url>`
+  * `<notechart-creator-web-url>` is immediately enclosed by a pair of angle brackets (`<` & `>`).
+* *Proposal* (Komi): `MAKER:<(comma-separated-list:text)name-notechart-creator>`
+  * Every comma (`,`) in the chart makers specified in `<name-notechart-creator>` ***MUST*** be escaped as `\,`
 
 ### NOTESDESIGNER Headers
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) (including both forms of `<trimmed-enum-int-difficulty-course>` being `0`&ndash;`4` and being omitted) \
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) (including both forms of `<difficulty-course>` being `0`&ndash;`4` and being omitted) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: (Better)TaikoCatsCaffe (?) \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
@@ -471,14 +477,14 @@ Specify the creator ("**designer**") of the notechart ("**notes**").
 
 The display details are *unspecified*.
 
-* `NOTESDESIGNER<trimmed-enum-int-difficulty-course>:<text-name-notechart-creator>` \
+* `NOTESDESIGNER<(trimmed-enum-int)difficulty-course>:<(text)name-notechart-creator>` \
   ***Supported by***: (Better)TaikoCatsCaffe (?), OpenTaiko (0auBSQ) v0.6.0
-  * `<trimmed-enum-int-difficulty-course>` can one of the integer argument to [the `COURSE:` header](#course).
-  * *Unspecified*: The behavior when the difficulty specified by `<enum-int-difficulty-course>` is different from the difficulty specified by `COURSE:` for the notechart definition.
-  * *Proposal* (Komi): Every comma (`,`) in `<text-name-notechart-creator>` ***MUST*** be escaped as `\,`
-* `NOTESDESIGNER:<text-name-notechart-creator>` \
+  * `<difficulty-course>` can one of the integer argument to [the `COURSE:` header](#course).
+  * *Unspecified*: The behavior when the difficulty specified by `<difficulty-course>` is different from the difficulty specified by `COURSE:` for the notechart definition.
+  * *Proposal* (Komi): Every comma (`,`) in `<name-notechart-creator>` ***MUST*** be escaped as `\,`
+* `NOTESDESIGNER:<(text)name-notechart-creator>` \
   ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
-  * *Proposal* (Komi): Every comma (`,`) in `<text-name-notechart-creator>` ***MUST*** be escaped as `\,`
+  * *Proposal* (Komi): Every comma (`,`) in `<name-notechart-creator>` ***MUST*** be escaped as `\,`
 
 ### AUTHOR:
 
@@ -493,11 +499,11 @@ In Malody, it can be the Malody account name of the creator, but it is not enfor
 
 The display details are *unspecified*.
 
-* `MAKER:<text-name-notechart-creator>`
+* `MAKER:<(text)name-notechart-creator>`
 
 ### GENRE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (including any `<str-genre>` value (?)) \
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (including any `<genre>` value (?)) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TJAPlayer2 for.PC \
 ***Supported by***: taiko-web ver.19.01.06 \
@@ -507,8 +513,8 @@ Specify the **genre** of the song.
 
 The display details are *unspecified*.
 
-* `GENRE:<str-genre>`
-  * *Unspecified*: The exact list of all supported `<str-genre>` and their aliases.
+* `GENRE:<(str)genre>`
+  * *Unspecified*: The exact list of all supported `<genre>` and their aliases.
   * Usually supported:
     * `J-POP`
     * *`アニメ` (Anime)* "Animation"
@@ -518,7 +524,7 @@ The display details are *unspecified*.
     * *`クラシック` (Kurashikku)* "Classic"
     * *`ゲームミュージック` (Geemu Myuujikku)* "Game Music"
     * *`ナムコオリジナル` (Namuko Orijinaru)* "Namco Original"
-  * In TJAPlayer2 for.PC, any non&ndash;pre-defined `<str-genre>` is recognized and displayed but is treated as uncategorized for genre sort order and decorations. However, in TJAPlayer2 for.PC but not OpenTaiko (0auBSQ), non&ndash;pre-defined `<str-genre>` is not displayed during gameplay.
+  * In TJAPlayer2 for.PC, any non&ndash;pre-defined `<genre>` is recognized and displayed but is treated as uncategorized for genre sort order and decorations. However, in TJAPlayer2 for.PC but not OpenTaiko (0auBSQ), non&ndash;pre-defined `<genre>` is not displayed during gameplay.
   * Recommendation for charters: The `GENRE:` header should not be used for non&ndash;pre-defined genres. Instead, for simulators supporting `genre.ini`, specify the `GenreName=` option in `[Genre]` section in `genre.ini`. For simulators supports `box.def`, specify the `#TITLE:` and `#GENRE:` headers in the `box.def`. In OpenTaiko (0auBSQ), decorations for non&ndash;pre-defined genres can be further customized in `box.def`.
 * Initial value / `GENRE:`
   * In TJAPlayer2 for.PC, defaults to the value of the `#GENRE:` header of the `box.def` in the song directory or nearest upper song directory (if exist), or (empty).
@@ -579,7 +585,7 @@ For specifying the inner chart of solely the Oni difficulty with the same audio 
 
 Specify the filename of the *<ruby>裏<rt>ura</rt>譜<rt>fu</rt>面<rt>men</rt></ruby>* "inner notechart" or *<ruby>表<rt>omote</rt>譜<rt>fu</rt>面<rt>men</rt></ruby>* "outer notechart" version ("the **rev**erse **side**") of this notechart file.
 
-* `SIDEREV:<text-filename-tja-inner-or-outer>`
+* `SIDEREV:<(text-filename)tja-inner-or-outer>`
   * If `SIDE:Normal` is used, specify the filename of the inner notechart.
   * If `SIDE:Ex` is used, specify the filename of the outer notechart.
   * If `SIDE:Both` is used, the behavior is *unspecified*.
@@ -599,8 +605,8 @@ Specify the audio file ("**wave**form audio file") of the song.
 
 *Unspecified*: Whether the notechart ends at the end of the audio file playback (if the audio file exist).
 
-* `WAVE:<text-filepath-song-audio-file>`
-  * `<text-filepath-song-audio-file>` has a file extension of one of, *e.g.*:
+* `WAVE:<(text-filepath)song-audio-file>`
+  * `<song-audio-file>` has a file extension of one of, *e.g.*:
     * `.wav` \
       ***Supported by***: TaikoJiro
     * `.ogg` \
@@ -621,14 +627,14 @@ Specify the audio file ("**wave**form audio file") of the song.
 ***First seen in***: TaikoJiro v2.37 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope-fineness***: per-file \
-***Inspired by***: (likely) SM format `#SAMPLESTART:<positive-or-zero-float-seconds-preview-audio-offset>;` (?) \
-&emsp; from DWI format `#SAMPLESTART:<float-with-decimal-places-seconds-preview-audio-offset>;` (among other forms)
+***Inspired by***: (likely) SM format `#SAMPLESTART:<(positive-or-zero-float-seconds)preview-audio-offset>;` (?) \
+&emsp; from DWI format `#SAMPLESTART:<(float-with-decimal-places-seconds)preview-audio-offset>;` (among other forms)
 
 Specify the amount of seconds into the song audio for **start**ing playing the preview ("**demo**nstration") audio in the song selection screen.
 
 *Unspecified*: The behavior when the preview duration would be negative or zero because the preview start time of the audio is at-or-after the end time of the song audio.
 
-* `DEMOSTART:<positive-or-zero-float-seconds-preview-audio-offset>`
+* `DEMOSTART:<(positive-or-zero-float-seconds)preview-audio-offset>`
 * Initial value / `DEMOSTART:0`
 
 ### OFFSET:
@@ -638,9 +644,9 @@ Specify the amount of seconds into the song audio for **start**ing playing the p
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope-fineness***: per&ndash;player-side (?) \
-***Inspired by***: (likely) SM format `#OFFSET:<float-seconds-music-offset>;` (with same signness) \
-&emsp; from DWI format `#GAP:<float-seconds-chart-offset>;` (with opposite signness) \
-&emsp; from MSD format `#GAP:<number-1/192nd-chart-offset>;`
+***Inspired by***: (likely) SM format `#OFFSET:<(float-seconds)music-offset>;` (with same signness) \
+&emsp; from DWI format `#GAP:<(float-seconds)chart-offset>;` (with opposite signness) \
+&emsp; from MSD format `#GAP:<(number-1/192nd)chart-offset>;`
 
 Specify the amount of seconds past ("**offset**ted") from the time position of `#START` of the notechart which the song audio should start playing from the beginning.
 
@@ -648,7 +654,7 @@ Replaced the TJF command `#GOMUSIC` (starting ("**go**") playing the song audio 
 
 Equation: `music-offset` = `time-point-of-audio-beginning` − `time-point-of-chart-start` (Unit: Seconds)
 
-* `OFFSET:<float-seconds-music-offset>`
+* `OFFSET:<(float-seconds)music-offset>`
 * Initial value / `OFFSET:0`
 
 ### SONGVOL:
@@ -658,7 +664,7 @@ Equation: `music-offset` = `time-point-of-audio-beginning` − `time-point-of-ch
 ***First seen in***: TaikoJiro v1.66 \
 ***Supported by***: TaikoJiro 2, TJAPlayer3 v1.5.2 \
 ***Scope-fineness***: per-file \
-***Inspired by***: BMS format `#VOLWAV <positive-or-zero-number-percent-amplitude-gain>` (?)
+***Inspired by***: BMS format `#VOLWAV <(positive-or-zero-number-percent)amplitude-gain>` (?)
 
 Specify the relative amplitude percentage (%) of the desired **vol**ume gain of the **song** audio.
 
@@ -666,12 +672,12 @@ Specify the relative amplitude percentage (%) of the desired **vol**ume gain of 
 
 Recommendation for simulator developers: The reference amplitude is the amplitude of the song audio after applying the volume settings of the simulator. If the automatic loudness normalization gain is used, this header is ignored.
 
-* `SONGVOL:<positive-or-zero-number-percent-amplitude-gain>`
+* `SONGVOL:<(positive-or-zero-number-percent)amplitude-gain>`
 * `SONGVOL:`
   * The behavior is *unspecified*.
 * Initial value / `SONGVOL:100`
 
-Recommendation for chart creators: `<positive-or-zero-number-percent-amplitude-gain>` should not exceed `100` unless the waveform of the song audio after interpolated by the audio player would not exceed the maximum amplitude after the gain, otherwise the song audio might be distorted on simulators without volume limiters.
+Recommendation for chart creators: `<amplitude-gain>` should not exceed `100` unless the waveform of the song audio after interpolated by the audio player would not exceed the maximum amplitude after the gain, otherwise the song audio might be distorted on simulators without volume limiters.
 
 #### Compatibility Issues
 
@@ -686,7 +692,7 @@ Recommendation for chart creators: `<positive-or-zero-number-percent-amplitude-g
 ***First seen in***: TaikoJiro v1.66 \
 ***Supported by***: TaikoJiro 2 \
 ***Scope-fineness***: per&ndash;player-side (?) \
-***Inspired by***: BMS format `#VOLWAV <positive-or-zero-number-percent-amplitude-gain>` (?)
+***Inspired by***: BMS format `#VOLWAV <(positive-or-zero-number-percent)amplitude-gain>` (?)
 
 Specify the relative amplitude percentage (%) of the desired **vol**ume gain of the sound of the instrument which the player chooses ("**s**ound **e**ffect").
 
@@ -696,7 +702,7 @@ Recommendation for simulator developers: The reference amplitude is the amplitud
 
 *Unspecified*: Whether the volume of system voice is affected.
 
-* `SEVOL:<positive-or-zero-number-percent-amplitude-gain>`
+* `SEVOL:<(positive-or-zero-number-percent)amplitude-gain>`
 * `SEVOL:`
   * The behavior is *unspecified*.
 * Initial value / `SEVOL:100`
@@ -714,20 +720,20 @@ Recommendation for simulator developers: The reference amplitude is the amplitud
 ***FIrst seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope-fineness***: per&ndash;player-side \
-***Inspired by***: TJF format `BPM:<positive-int-initial-bpm>` \
-&emsp; (likely) from DWI format `#BPM:<positive-number-initial-bpm>;` \
-&emsp; from MSD format `#BPM:<positive-float-bpm>;`
-&emsp; from BMS format `#BPM <positive-int-bpm>`
+***Inspired by***: TJF format `BPM:<(positive-int)initial-bpm>` \
+&emsp; (likely) from DWI format `#BPM:<(positive-number)initial-bpm>;` \
+&emsp; from MSD format `#BPM:<(positive-float)bpm>;`
+&emsp; from BMS format `#BPM <(positive-int)bpm>`
 
 Specify the initial **BPM** (**b**eat **p**er **m**inute) of the notechart.
 
-* **`BPM:<positive-int-initial-bpm>`** \
+* **`BPM:<(positive-int)initial-bpm>`** \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0
-* **`BPM:<positive-float-initial-bpm>`** \
+* **`BPM:<(positive-float)initial-bpm>`** \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
   ***First seen in***: TaikoJiro v1.29 \
   ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9)
-* `BPM:<negative-float-initial-bpm>` \
+* `BPM:<(negative-float)initial-bpm>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (?; to be discussed)
   * The behavior is *unspecified* (may cause crashes in some existing simulators).
   * In TaikoJiro 1:
@@ -766,7 +772,7 @@ Specify the initial **scroll**ing velocity (at-and-before the beginning ("**head
 
 Can be reset by [the `#SCROLL` command](#scroll) at-or-after the beginning of the notechart. If every player-side for every difficulty has `#SCROLL` defined at the beginning of the chart, `HEADSCROLL:` has no effects.
 
-* `HEADSCROLL:<float-normal-scroll-velocity>`
+* `HEADSCROLL:<(float)initial-scroll-velocity>`
 * `HEADSCROLL:0` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 (?; to be discussed)
   * The behavior is the same as if [`#SCROLL 0`](#scroll) were applied at-or-before the beginning of the notechart.
@@ -780,11 +786,11 @@ Can be reset by [the `#SCROLL` command](#scroll) at-or-after the beginning of th
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.4 \
 ***Scope-fineness***: per&ndash;player-side (?) \
-***Inspired by***: DTX format `#PREIMAGE: <text-filepath-preview-image>`
+***Inspired by***: DTX format `#PREIMAGE: <(text-filepath)preview-image>`
 
 Specify the jacket ("**pre**view") **image** of the song.
 
-* `PREIMAGE:<text-filepath-preview-image>`
+* `PREIMAGE:<(text-filepath)preview-image>`
 * `PREIMAGE:`
   * The default jacket image is used.
     * In OpenTaiko (0auBSQ), defaults to the value of the `#DEFAULTPREIMAGE:` header of the `box.def` in the song directory or nearest upper song directory (if exist), otherwise the default jacket image of the interface skin is used.
@@ -798,8 +804,8 @@ Specify the jacket ("**pre**view") **image** of the song.
 
 Specify the jacket ("**cover**") image of the song.
 
-* `COVER:<text-filepath-background-image>`
-  * `<text-filepath-background-image>` ***MUST*** be in the same directory as the TJA file.
+* `COVER:<(text-filepath)background-image>`
+  * `<background-image>` ***MUST*** be in the same directory as the TJA file.
   * In Malody, the preferred format is `.jpg`
 * `COVER:`
   * No jacket image will be displayed. (?)
@@ -815,26 +821,26 @@ Specify the **skin** in the gameplay screen for **taiko-web**.
 
 *Unspecified*: The available pre-defined values and behavior in other simulators.
 
-* `TAIKOWEBSKIN:<comma-separated-list-text-key-value>`
+* `TAIKOWEBSKIN:<(comma-separated-list:text)key-value>`
 
-Each element of `<comma-separated-list-text-key-value>` can be one of:
+Each element of `<key-value>` can be one of:
 
-* `dir <text-dirpath-skin>`
-  * `<text-dirpath-skin>` defaults to (trimmed-empty).
-* `name <text-skin-variation>`
-  * Specify the `<rawstr-suffix-skin-variation>` to be `_<text-skin-variation>` if not empty or to be (trimmed-empty) if empty.
-  * `<text-skin-variation>` defaults to (trimmed-empty).
-* `<enum-str-element> <enum-str-type>`, at least 1 element is required
-  * `<enum-str-element>` can be one of:
+* `dir <(text-dirpath)skin>`
+  * `<skin>` defaults to (trimmed-empty).
+* `name <(text)skin-variation>`
+  * Specify the `<(rawstr)suffix-skin-variation>` to be `_<skin-variation>` if not empty or to be (trimmed-empty) if empty.
+  * `<skin-variation>` defaults to (trimmed-empty).
+* `<(enum-str)element> <(enum-str)type>`, at least 1 element is required
+  * `<element>` can be one of:
     * `song` &mdash; the dancer background ("**song**" background) of the lower playback screen for single player.
     * `stage` &mdash; the horizontally repeating dancer floor ("**stage**") of the lower playback screen for single player.
     * `don` &mdash; the horizontally repeating and scrolling background behind the player character ("<ruby>**ど**<rt>**Do**</rt>**ん**<rt>**n**</rt>ちゃ<rt>cha</rt>ん<rt>n</rt></ruby>").
-  * `<enum-str-type>` can be one of:
+  * `<type>` can be one of:
     * (Empty) &mdash; use the element from the default skin.
     * `none` &mdash; blank
-    * `static` &mdash; a still image, requires `bg_<enum-str-element><rawstr-suffix-skin-variation>.<rawstr-file-extension>` to exist
-    * `<enum-str-animation-type>` &mdash; animated image with pre-defined animation type, requires both `bg_<enum-str-element><rawstr-suffix-skin-variation>_a.<rawstr-file-extension>` & `bg_<enum-str-element><rawstr-suffix-skin-variation>_b.<rawstr-file-extension>` to exist.
-      * Cannot be used when `<enum-str-element>` is `stage`.
+    * `static` &mdash; a still image, requires `bg_<element><suffix-skin-variation>.<(rawstr)file-extension>` to exist
+    * `<(enum-str)animation-type>` &mdash; animated image with pre-defined animation type, requires both `bg_<element><suffix-skin-variation>_a.<(rawstr)file-extension>` & `bg_<element><skin-variation>_b.<(rawstr)file-extension>` to exist.
+      * Cannot be used when `<element>` is `stage`.
 
 ### SCENEPRESET:
 
@@ -847,13 +853,13 @@ Specify the pre-defined ("**preset**") skin ("**scene**") in the gameplay screen
 
 *Unspecified*: The available pre-defined values.
 
-* `SCENEPRESET:<text-filepath-scene-preset>`
-  * In OpenTaiko (0auBSQ), there are 4 independent sets ("preset sections") of pre-defined `<text-filepath-scene-preset>` values:
+* `SCENEPRESET:<(text-filepath)scene-preset>`
+  * In OpenTaiko (0auBSQ), there are 4 independent sets ("preset sections") of pre-defined `<scene-preset>` values:
     * `Tower` &mdash; for difficulties with [`COURSE:Tower`](#course)
     * `Dan` &mdash; for difficulties with `COURSE:Dan`.
     * `AI` &mdash; for other difficulties ("regular charts") in AI battle mode
     * `Regular` &mdash; for other difficulties ("regular charts") in regular mode
-* *Proposal* (IID): `SCENEPRESET:<comma-separated-list-text-filepath-scene-preset>`
+* *Proposal* (IID): `SCENEPRESET:<(comma-separated-list:text-filepath)scene-preset>`
   * A random gameplay skin is chosen from the specified list.
 * Unavailable value / `SCENEPRESET:`
   * The default gameplay skin is used.
@@ -867,7 +873,7 @@ Available pre-defined values in officially-supported interface skins of OpenTaik
 
 ### TOWERTYPE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) (with `<positive-or-zero-int-tower-skin>` being `0`&ndash;`9` (?) or omitted, as in the *<ruby>わ<rt>Wa</rt>く<rt>ku</rt>わ<rt>wa</rt>く<rt>ku</rt>冒<rt>Bou</rt>険<rt>ken</rt>ラ<rt>Ra</rt>ン<rt>n</rt>ド<rt>do</rt></ruby>* "Wakuwaku (Exciting) Adventure land" mode from the 7th PS2 console game) \
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) (with `<tower-skin>` being `0`&ndash;`9` (?) or omitted, as in the *<ruby>わ<rt>Wa</rt>く<rt>ku</rt>わ<rt>wa</rt>く<rt>ku</rt>冒<rt>Bou</rt>険<rt>ken</rt>ラ<rt>Ra</rt>ン<rt>n</rt>ド<rt>do</rt></ruby>* "Wakuwaku (Exciting) Adventure land" mode from the 7th PS2 console game) \
 &emsp; (non-standard) (otherwise) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.0 \
@@ -877,8 +883,8 @@ Specify the dedicated **tower** skin ("**type**") to use.
 
 Used in conjunction with [`COURSE:Tower`](#course).
 
-* `TOWERTYPE:<positive-or-zero-int-tower-skin>`
-* `TOWERTYPE:<text-tower-skin>` \
+* `TOWERTYPE:<(positive-or-zero-int)tower-skin>`
+* `TOWERTYPE:<(text)tower-skin>` \
   ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
 * Unavailable value / `TOWERTYPE:0` / `TOWERTYPE:`
 
@@ -893,7 +899,7 @@ Available values in officially-supported interface skins of OpenTaiko (0auBSQ):
 
 ### DANTICK:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compat) (with `<enum-int-dan-tick-skin>` being `0`&ndash;`5` or omitted, as in AC15.8 (*<ruby>レッ<rt>Red</rt>ド<rt>do</rt></ruby>Ver.* "Red Ver.") and onward); \
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compat) (with `<dan-tick-skin>` being `0`&ndash;`5` or omitted, as in AC15.8 (*<ruby>レッ<rt>Red</rt>ド<rt>do</rt></ruby>Ver.* "Red Ver.") and onward); \
 &emsp; (non-standard) (otherwise) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.1 \
@@ -905,7 +911,7 @@ Specify the dedicated *<ruby>**段**<rt>**Dan**'</rt>位<rt>i</rt>認<rt>nin</rt
 
 Used in conjunction with [`COURSE:Dan`](#course).
 
-* `DANTICK:<enum-int-dan-tick-skin>`
+* `DANTICK:<(enum-int)dan-tick-skin>`
   * *Unspecified*: The support values.
   * In OpenTaiko (0auBSQ):
     * `0`: For ranks below the *<ruby>初<rt>Sho</rt>級<rt>kyuu</rt></ruby>* "first level" rank
@@ -932,11 +938,11 @@ Specify the **color** filter to apply to the *<ruby>**段**<rt>**Dan**'</rt>位<
 
 Used in conjunction with [`COURSE:Dan`](#course).
 
-* `DANTICKCOLOR:<str-color-filter>`
-  * `<str-color-filter>` can be one of:
-    * `#<trimmed-rawstr-6-digit-24bit-rgb>`
-    * `#<trimmed-rawstr-3-digit-12bit-rgb>`
-    * `<enum-str-html-color-name>`
+* `DANTICKCOLOR:<(str)color-filter>`
+  * `<color-filter>` can be one of:
+    * `#<(trimmed-rawstr-6-digit)24bit-rgb>`
+    * `#<(trimmed-rawstr-3-digit)12bit-rgb>`
+    * `<(enum-str)html-color-name>`
 * `DANTICKCOLOR:#FFFFFF` / `DANTICKCOLOR:`
   * In OpenTaiko (0auBSQ), in dan-i selection screen, defaults to the value of the `#BOXCOLOR:` header of the `box.def` in the song directory or nearest upper song directory (if exist), otherwise defaults to original color (`#FFFFFF`).
 
@@ -951,7 +957,7 @@ In OpenTaiko (0auBSQ), no effects for the custom single dan-i plate (`Dan_Plate.
 
 Specify the **b**ack**g**round image of the song **select**ion screen. Override the skin settings.
 
-* `SELECTBG:<text-filepath-selection-background-image>`
+* `SELECTBG:<(text-filepath)selection-background-image>`
 * `SELECTBG:`
   * The default song selection background for the containing song folder is used.
     * In OpenTaiko (0auBSQ), defaults to the value of the `#SELECTBG:` header of the `box.def` in the song directory or nearest upper song directory (if exist), otherwise the default song selection background of the interface skin is used.
@@ -962,13 +968,13 @@ Specify the **b**ack**g**round image of the song **select**ion screen. Override 
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TJAPlayer2 for.PC ver.2016021300 \
 ***Scope-fineness***: per&ndash;player-side (?) \
-***Inspired by***: DTX format `#BACKGROUND <text-filepath-background-image>`
+***Inspired by***: DTX format `#BACKGROUND <(text-filepath)background-image>`
 
 Specify the **b**ack**g**round **image** of the gameplay screen. Override the skin settings.
 
 *Unspecified*: Whether the image is scaled or stretched to fill the gameplay screen.
 
-* `BGIMAGE:<text-filepath-background-image>`
+* `BGIMAGE:<(text-filepath)background-image>`
 * `BGIMAGE:`
   * No background images will be displayed.
 
@@ -984,7 +990,7 @@ Specify the amount of seconds past ("**offset**ted") from the time position spec
 
 Equation: `bgoffset` = `time-point-of-image-displaying` − `time-point-of-audio-beginning` (Unit: Seconds)
 
-* `BGOFFSET:<float-seconds-offset>`
+* `BGOFFSET:<(float-seconds)offset>`
 * `BGOFFSET:0` / `BGOFFSET:`
 
 ### BGMOVIE:
@@ -998,7 +1004,7 @@ Specify the **b**ack**g**round video ("**movie**") of the gameplay screen. Overr
 
 *Unspecified*: Whether the video is scaled or stretched to fill the gameplay screen.
 
-* `BGMOVIE:<text-filepath-background-video>`
+* `BGMOVIE:<(text-filepath)background-video>`
 * `BGMOVIE:`
   * No background videos will be displayed.
 
@@ -1013,11 +1019,12 @@ Specify the amount of seconds past ("**offset**ted") from the time position spec
 
 Equation: `movieoffset` = `time-point-of-video-beginning` − `time-point-of-audio-beginning` (Unit: Seconds)
 
-* `MOVIEOFFSET:<float-seconds-offset>`
+* `MOVIEOFFSET:<(float-seconds)offset>`
 * `MOVIEOFFSET:0` / `MOVIEOFFSET:`
 
 #### Compatibility Issues
 
+* In TJAPlayer2 for.PC (?) but not OpenTaiko (0auBSQ) 0.6.0.42 and TJAPlayer3-f, the actual movie offset is 0 for a negative `<offset>`, and twice of `<offset>` for a positive `<offset>`.
 * In TJAPlayer3-f, the definition is changed to be relative to the time position of `#START` of the notechart.
   * Equation: `movieoffset_f` = `time-point-of-video-beginning` − `time-point-of-chart-start` (Unit: Seconds)
 
@@ -1033,14 +1040,14 @@ Specify a **b**ack**g**round video ("**a**nimation") to be used in the gameplay 
 
 *Unspecified*: Whether the video is scaled or stretched to fill the gameplay screen.
 
-* `BGA<trimmed-unsigned-int-video-index>:<text-filepath-background-video>`
-  * `<trimmed-unsigned-int-video-index>` specifies the index of the background animation used by [the `#BGAON` and `#BGAOFF` commands](#bgaon--bgaoff).
-* `BGA<trimmed-unsigned-int-video-index>:`
+* `BGA<(trimmed-unsigned-int)video-index>:<(text-filepath)background-video>`
+  * `<video-index>` specifies the index of the background animation used by [the `#BGAON` and `#BGAOFF` commands](#bgaon--bgaoff).
+* `BGA<(trimmed-unsigned-int)video-index>:`
   * No background animations will be displayed for the specified index.
 
 #### Compatibility Issues
 
-* In OpenTaiko (0auBSQ) v0.6.0, `<trimmed-unsigned-int-video-index>` must be at least 2 decimal digits (including prefixing `0` if necessary). Only the leading 2 digits are significant.
+* In OpenTaiko (0auBSQ) v0.6.0, `<video-index>` must be at least 2 decimal digits (including prefixing `0` if necessary). Only the leading 2 digits are significant.
 
 ### LYRICS: / LYRICFILE:
 
@@ -1056,23 +1063,23 @@ Specify the lyric file(s) for the song to display **lyrics** in the playback scr
 
 *Unspecified*: Whether [`#LYRIC`](#lyric) commands are ignored if the lyric file is used.
 
-* `LYRICS:<text-filepath-lyric-file>` \
+* `LYRICS:<(text-filepath)lyric-file>` \
   ***Supported by***: taiko-web, OpenTaiko (0auBSQ) v0.6.0 \
-  / `LYRICFILE:<text-filepath-lyric-file>` \
+  / `LYRICFILE:<(text-filepath)lyric-file>` \
   ***Supported by***: TJAPlayer3-Develop-ReWrite, TJAPlayer3-f v1.6.0.0
-  * `<text-filepath-lyric-file>` has a file extension of one of, *e.g.*:
+  * `<lyric-file>` has a file extension of one of, *e.g.*:
     * `.vtt` &mdash; WebVTT, see <https://en.wikipedia.org/wiki/WebVTT> \
       ***Supported by***: taiko-web, OpenTaiko (0auBSQ) v0.6.0 (only for the `LYRICS:` header)
     * `.lrc` &mdash; LRC, see <https://en.wikipedia.org/wiki/LRC_(file_format)> \
       ***Supported by***: TJAPlayer3-Develop-ReWrite, TJAPlayer3-f v1.6.0.0
-  * In TJAPlayer3-f & OpenTaiko (0auBSQ) v0.6.0, every comma (`,`) in `<text-filepath-lyric-file>` ***MUST*** be escaped as `\,`
-* `LYRICS:<comma-separated-list-text-filepath-lyric-file>` \
+  * In TJAPlayer3-f & OpenTaiko (0auBSQ) v0.6.0, every comma (`,`) in `<lyric-file>` ***MUST*** be escaped as `\,`
+* `LYRICS:<(comma-separated-list:text-filepath)lyric-file>` \
   ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
-  / `LYRICFILE:<comma-separated-list-text-filepath-lyric-file>` \
+  / `LYRICFILE:<(comma-separated-list:text-filepath)lyric-file>` \
   ***Supported by***: TJAPlayer3-f v1.6.0.0, OpenTaiko (0auBSQ) v0.6.0
   * Specify the lyric file used for each song specified by [the `#NEXTSONG` command](#nextsong).
   * Used in conjunction with `COURSE:Dan`.
-  * In TJAPlayer3-f & OpenTaiko (0auBSQ) v0.6.0, every comma (`,`) in the filepath specified in `<comma-separated-list-text-filepath-lyric-file>` ***MUST*** be escaped as `\,`
+  * In TJAPlayer3-f & OpenTaiko (0auBSQ) v0.6.0, every comma (`,`) in the filepath specified in `<lyric-file>` ***MUST*** be escaped as `\,`
 * `LYRICS:` / `LYRICFILE:`
   * Use only the lyric specified by [`#LYRIC`](#lyric) commands (if any).
 
@@ -1215,7 +1222,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, Malody, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope-fineness***: per&ndash;player-side \
-***Inspired by***: TJF format `LEVEL:<positive-int-difficulty-star>`
+***Inspired by***: TJF format `LEVEL:<(positive-int)difficulty-star>`
 
 Specify the *<ruby>難<rt>nan'</rt>易<rt>i</rt>**度**<rt>do</rt></ruby>* "difficulty (or easiness) **level**"/difficulty star/? ("**level**").
 
@@ -1223,7 +1230,7 @@ Since the Japanese terminology is easily confused with the fore-mentioned "diffi
 
 Depending on the simulator and/or user settings, the `LEVEL:` header may affect the default scoring, the default increasing rate of the *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge, *etc.*
 
-* `LEVEL:<positive-int-difficulty-star>` \
+* `LEVEL:<(positive-int)difficulty-star>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
   ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9)
   * *Unspecified*: The upper limit.
@@ -1242,15 +1249,15 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
     * Normal: 2 &ndash; 9+
     * Hard: 6 &ndash; 17+
     * Oni/Extreme and beyond: 11- &ndash; 40+
-* `LEVEL:<positive-int-difficulty-star>+` \
-  & `LEVEL:<positive-int-difficulty-star>-` \
+* `LEVEL:<(positive-int)difficulty-star>+` \
+  & `LEVEL:<(positive-int)difficulty-star>-` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
   ***First seen in***: Malody (?)
 * `LEVEL:0` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2
   * If supported, the difficulty star is displayed as 0 stars in the song selection screen. The other behaviors are *unspecified*.
   * In TaikoJiro 1, appears as 0 stars in song selection but 1 star in gameplay.
-* `LEVEL:<positive-or-zero-float-difficulty-star>` \
+* `LEVEL:<(positive-or-zero-float)difficulty-star>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
   ***Supported by***: TaikoJiro v2.78
   * The fraction part is considered for sorting by difficulty star but is not displayed.
@@ -1278,7 +1285,7 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
 ***First seen in***: TaikoJiro v1.99 \
 ***Supported by***: TaikoJiro 2, TJAPlayer2 for.PC \
 ***Scope-fineness***: per&ndash;player-side \
-***Inspired by***: (likely) DWI and earlier MSD format `#<enum-str-style>:<enum-str-difficulty-type>:<positive-int-difficulty-stars>:<colon-separated-list-str-notechart-definitions>;` where `<enum-str-style>` is one of `SINGLE`, `DOUBLE`, `COUPLE`, & (DWI) `SOLO`.
+***Inspired by***: (likely) DWI and earlier MSD format `#<(enum-str)style>:<(enum-str)difficulty-type>:<(positive-int)difficulty-stars>:<(colon-separated-list:str)notechart-definitions>;` where `<style>` is one of `SINGLE`, `DOUBLE`, `COUPLE`, & (DWI) `SOLO`.
 
 Specify the total amount of player-**side**s of the notechart(s).
 
@@ -1290,11 +1297,11 @@ In the official games, some difficulties may have only 2-player-side notecharts 
 
 * In TaikoJiro 1, such notecharts are chosen as if all other players had chosen the same difficulty for each player.
 
-If the specified amount of player-sides is not 1, [`#START <enum-str-player-side>`](#start--end) should be used for specifying the player-side of the notechart.
+If the specified amount of player-sides is not 1, [`#START <player-side>`](#start--end) should be used for specifying the player-side of the notechart.
 
 * `STYLE:1` / `STYLE:Single` / `STYLE:SINGLE` / `STYLE:single` / `STYLE:`
 * `STYLE:2` / `STYLE:Double` / `STYLE:DOUBLE` / `STYLE:double` / `STYLE:Couple` / `STYLE:couple`
-* *Proposal* (IID): `STYLE:<positive-int-amount-of-player-sides>`
+* *Proposal* (IID): `STYLE:<(positive-int)amount-of-player-sides>`
 
 Reference: *ダブルプレイ* ("Double Play"; "Two-player Charts"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/ダブルプレイ>
 
@@ -1315,16 +1322,16 @@ Each balloon-type note with unassigned hit amount requires an *unspecified* defa
 
 *Proposal* (IID): The [`#BALLOON`](#proposal-iid-balloon-command) command can be used in the notechart definition for the same purpose instead.
 
-* `BALLOON:<comma-separated-list-positive-or-zero-int-amount-of-hits>` \
+* `BALLOON:<(comma-separated-list:positive-or-zero-int)amount-of-hits>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0
   * The list of amount is iterated over non-repeated head of balloon-type notes in all sections of all *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>ki</rt></ruby>* "notechart branches"/forked paths.
-* `BALLOONNOR:<comma-separated-list-positive-or-zero-int-amount-of-hits>` \
+* `BALLOONNOR:<(comma-separated-list:positive-or-zero-int)amount-of-hits>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 \
   ***Supported by***: TJAPlayer2 for.PC
-* `BALLOONEXP:<comma-separated-list-positive-or-zero-int-amount-of-hits>` \
+* `BALLOONEXP:<(comma-separated-list:positive-or-zero-int)amount-of-hits>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 \
   ***Supported by***: TJAPlayer2 for.PC
-* `BALLOONMAS:<comma-separated-list-positive-or-zero-int-amount-of-hits>` \
+* `BALLOONMAS:<(comma-separated-list:positive-or-zero-int)amount-of-hits>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 \
   ***Supported by***: TJAPlayer2 for.PC
   * The list of amount is iterated over non-repeated head of balloon-type notes in "branched"/forked sections of only ***<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>*** **Nor**mal, ***<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**Exp**ert"), or ***<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>*** **Mas**ter "branch"/path.
@@ -1335,7 +1342,7 @@ Each balloon-type note with unassigned hit amount requires an *unspecified* defa
     * TJAPlayer3-Develop & TJAPlayer3-Develop-ReWrite: In non-branched sections after `#BRANCHEND`, 3 values are iterated, where each is iterated from respectively the `BALLOONNOR:`, `BALLOONEXP:`, & `BALLOONMAS:` headers. For score calculation, all 3 iterated values are considered for the corresponding branch. However, in gameplay, only the value iterated from `BALLOONNOR:` is used.
       * OpenTaiko (0auBSQ) v0.6.0: Same as above in also the non-branched section before the first `#BRANCHEND`.
 
-For each element of `<comma-separated-list-positive-or-zero-int-amount-of-hits>`, if the amount of hits is `0`, the per-note behavior is *unspecified*.
+For each element of `<amount-of-hits>`, if the amount of hits is `0`, the per-note behavior is *unspecified*.
 
 #### Compatibility Issues
 
@@ -1356,7 +1363,7 @@ For each element of `<comma-separated-list-positive-or-zero-int-amount-of-hits>`
 ***First seen in***: TaikoJiro v2.19 \
 ***Supported by***: OpenTaiko (0auBSQ) v0.4.3 \
 ***Scope-fineness***: per&ndash;player-side \
-***Inspired by***: StepMania and earlier Dance With Intensity CRS format `#LIVES:<positive-int-life-count>;` (?)
+***Inspired by***: StepMania and earlier Dance With Intensity CRS format `#LIVES:<(positive-int)life-count>;` (?)
 
 Specify the initial **life** count of the life count gauge (if used).
 
@@ -1369,7 +1376,7 @@ A *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD judgment decreases the life co
 
 *Unspecified*: The behavior when a non-zero value is used not in conjunction with [`COURSE:Tower`](#course).
 
-* `LIFE:<positive-int-life-count>`
+* `LIFE:<(positive-int)life-count>`
   * Use the life count gauge rules.
 * `LIFE:0`
   * Use the normal *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge rules unless there are other overriding user settings.
@@ -1388,14 +1395,14 @@ In TaikoJiro 1 (the header is not supported in TaikoJiro 2), the maximum possibl
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v2.92 & TaikoJiro 2 v0.93 \
 ***Scope-fineness***: per&ndash;player-side \
-***Inspired by***: BMS format `#TOTAL <positive-or-zero-number-total-gauge-increment>`
+***Inspired by***: BMS format `#TOTAL <(positive-or-zero-number)total-gauge-increment>`
 
 Specify the **total** *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge increment of the notechart when all hit-type notes are hit with *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgment, *i.e.*, *<ruby>ド<rt>Do</rt>ン<rt>n</rt>ダ<rt>da</rt>フ<rt>fu</rt>ル<rt>ru</rt>コ<rt>ko</rt>ン<rt>n</rt>ボ<rt>bo</rt></ruby>* Donderful Combo.
 
-* `TOTAL:<positive-or-zero-number-total-gauge-increment>`
+* `TOTAL:<(positive-or-zero-number)total-gauge-increment>`
   * The increasing rate of spirit gauge/soul gauge is calculated from the given total spirit gauge/soul gauge increment.
   * *Unspecified*: Whether the total gauge increment is calculated using defined branch of notes or by considering specific possible branching route of notes.
-* *Proposal* (IID): `TOTAL:<positive-or-zero-number-total-gauge-increment-normal>, <positive-or-zero-number-total-gauge-increment-expert>, <positive-or-zero-number-total-gauge-increment-master>`
+* *Proposal* (IID): `TOTAL:<(positive-or-zero-number)total-gauge-increment-normal>, <(positive-or-zero-number)total-gauge-increment-expert>, <(positive-or-zero-number)total-gauge-increment-master>`
   * > Formula: *gauge_increment_great_unrounded_branch* = *total_gauge_increment_branch* / **n**(*defined_notes_in_branch*)
   * The increasing rate of spirit gauge/soul gauge for each branch is calculated from the given total spirit gauge/soul gauge increment.
   * If the simulator chooses to ignore branch-less total gauge increment, the total gauge increment for an *unspecified* branch is calculated, and then the relative increments between branches are used for the gauge increment in other branches.
@@ -1411,8 +1418,8 @@ Specify the **total** *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt
 
 Specify the rounding mode of the **incr**ement of the *<ruby>魂<rt>tamashii</rt>**ゲー**<rt>**gee**</rt>**ジ**<rt>**ji**</rt></ruby>* spirit **gauge**/soul **gauge**.
 
-* `GAUGEINCR:<enum-str-gauge-increment-rounding-mode>`
-  * `<enum-str-gauge-increment-rounding-mode>` can be one of:
+* `GAUGEINCR:<(enum-str)gauge-increment-rounding-mode>`
+  * `<gauge-increment-rounding-mode>` can be one of:
     * (Empty) / `Normal`
     * `Floor`
     * `Round` &mdash; round to the nearest.
@@ -1434,18 +1441,18 @@ Specify a requirement for passing the notechart in *<ruby>段<rt>Dan'</rt>位<rt
 
 Used in conjunction with [`COURSE:Dan`](#course).
 
-* `EXAM<trimmed-exam-requirement-index-specifier>:<enum-str-requirement>, <number-pass-requirement>, <number-gold-requirement>, <enum-str-range>`
+* `EXAM<trimmed-exam-requirement-index-specifier>:<(enum-str)requirement>, <(number)pass-requirement>, <(number)gold-requirement>, <(enum-str)range>`
   * `<trimmed-exam-requirement-index-specifier>` specifies the displayed order of this requirement. The display details are *unspecified*. Its value range is:
     * `1`&ndash;`3`
     * `1`&ndash;`4` \
       [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
       ***Supported by***: TJAPlayer3-Develop-ReWrite
-      * For `1`, `<enum-str-requirement>` is expected to be `g`.
+      * For `1`, `<requirement>` is expected to be `g`.
     * `1`&ndash;`7` \
       [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
       ***Supported by***: OpenTaiko (0auBSQ)
-      * For `1`, `<enum-str-requirement>` is expected to be `g`.
-  * `<enum-str-requirement>` can be one of:
+      * For `1`, `<requirement>` is expected to be `g`.
+  * `<requirement>` can be one of:
     * `g` &mdash; final percentage (%) of *<ruby>魂<rt>tamashii</rt>**ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge.
     * `jp` &mdash; amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgment.
     * `jg` &mdash; amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgment.
@@ -1464,18 +1471,18 @@ Used in conjunction with [`COURSE:Dan`](#course).
       [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
       ***Supported by***: OpenTaiko (0auBSQ)
       * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
-  * `<enum-str-range>` can be one of:
+  * `<range>` can be one of:
     * `m` &mdash; **m**ore than or equal to ("≥") the given requirement
     * `l` &mdash; **l**ess than ("\<") the given requirement
-* `EXAM<trimmed-exam-requirement-index-specifier>:<enum-str-requirement>, <comma-separated-list-number-pass-and-gold-requirements>, <enum-str-range>` \
+* `EXAM<trimmed-exam-requirement-index-specifier>:<(enum-str)requirement>, <(comma-separated-list:number)pass-and-gold-requirements>, <(enum-str)range>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
   ***Supported by***: TJAPlayer3-f
-  * The elements of `<comma-separated-list-number-pass-and-gold-requirements>` are pairs of `<number-pass-requirement>, <number-gold-requirement>` for each song specified by [the `#NEXTSONG` command](#nextsong).
+  * The elements of `<pass-and-gold-requirements>` are pairs of `<(number)pass-requirement>, <(number)gold-requirement>` for each song specified by [the `#NEXTSONG` command](#nextsong).
   * Corresponding to the per-song&ndash;scoped usage in TJAPlayer3-Develop-ReWrite & OpenTaiko (0auBSQ).
-* `EXAMGAUGE:<number-pass-requirement>, <number-gold-requirement>, <enum-str-range>` \
+* `EXAMGAUGE:<(number)pass-requirement>, <(number)gold-requirement>, <(enum-str)range>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (?; to be discussed) \
   ***Supported by***: TJAPlayer3-f
-  * The `<enum-str-requirement>` is implicitly fixed to `g`.
+  * The `<requirement>` is implicitly fixed to `g`.
   * Corresponding to the `EXAM1:` header in TJAPlayer3-Develop-ReWrite & OpenTaiko (0auBSQ).
 
 ### SCOREMODE:
@@ -1571,10 +1578,10 @@ Recommendation for charters: The `SCOREMODE:`, `SCOREINIT:`, & [`SCOREDIFF:`](#s
 
 *Unspecified*: Whether the specified `init` is ignored when the simulator chooses a set of scoring rules different from the scoring rules specified by the `SCOREMODE:` header.
 
-* `SCOREINIT:<positive-or-zero-int-score-init>`
-* `SCOREINIT:<positive-or-zero-int-score-init>, <positive-or-zero-int-score-init-shin'uchi>` \
+* `SCOREINIT:<(positive-or-zero-int)score-init>`
+* `SCOREINIT:<(positive-or-zero-int)score-init>, <(positive-or-zero-int)score-init-shin-uchi>` \
   ***Supported by***: TaikoJiro v2.70, TJAPlayer2 for.PC
-  * If supported, `<positive-or-zero-int-score-init-shin'uchi>` is used for `init` when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" option ("stable") is enabled
+  * If supported, `<score-init-shin-uchi>` is used for `init` when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" option ("stable") is enabled
 * `SCOREINIT:0`
   * The behavior is *unspecified*.
 * Initial value / `SCOREINIT:`
@@ -1596,8 +1603,8 @@ In the official game, `diff` is not required to be a multiple of 10. Instead, th
 
 *Unspecified*: Whether the specified `diff` is ignored when the simulator chooses a set of scoring rules different from the scoring rules specified by the `SCOREMODE:` header.
 
-* `SCOREDIFF:<positive-or-zero-int-score-diff>`
-* `SCOREDIFF:<positive-or-zero-int-score-diff>d` \
+* `SCOREDIFF:<(positive-or-zero-int)score-diff>`
+* `SCOREDIFF:<(end-trimmed-positive-or-zero-int)score-diff>d` \
   ***Supported by***: TaikoJiro v2.49
   * If supported, a scoring rule similar to *<ruby>**ド<rt>Do</rt>**ン<rt>n</rt>ダ<rt>da</rt>フ<rt>fu</rt>ル<rt>ru</rt></ruby>！<ruby>コー<rt>Koo</rt>ス<rt>su</rt></ruby>* "**D**onderful! Course" is used as if `SCOREMODE:0` were used, except that the `SCOREINIT:` & `SCOREDIFF:` headers are always used.
   * Combo | 1&ndash;199 | 200&ndash;
@@ -1605,7 +1612,7 @@ In the official game, `diff` is not required to be a multiple of 10. Instead, th
     Basic score | **floor**(`init` / 10) × 10 | **floor**(`init` + `diff` / 10) × 10
 * `SCOREDIFF:0`
   * `diff` is `0`.
-  * Recommendation for charters: To specify the basic score when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" option ("stable") is enabled, the non–*<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" score should also be specified, and [`SCOREINIT:<positive-or-zero-int-score-init>, <positive-or-zero-int-score-init-shin'uchi>`](#scoreinit) should be used and `SCOREDIFF:0` should not be used.
+  * Recommendation for charters: To specify the basic score when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" option ("stable") is enabled, the non–*<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" score should also be specified, and [`SCOREINIT:<score-init>, <score-init-shin-uchi>`](#scoreinit) should be used and `SCOREDIFF:0` should not be used.
 * Initial value / `SCOREDIFF:`
   * `diff` is determined by the simulator. *Unspecified*: The details for determining it; usually one of the official games is followed.
 
@@ -1637,14 +1644,14 @@ Specify the intended compatibility mode of the chart.
 
 The supported set of headers & commands and allowed argument forms is not affected. However, the arguments might be interpreted differently dependent on the compatibility mode and flags.
 
-* `COMPAT:<comma-separated-list-enum-str-compat-option>`
-  * The first element of `<comma-separated-list-enum-str-compat-option>` is one of `<enum-str-compat-mode>` & `<enum-str-compat-flag>`, and subsequent elements are `<enum-str-compat-flag>`.
-  * Unrecognized or unsupported elements are warned (if possible) and then skipped. If the first element is unrecognized or unsupported, all elements are treated as `<enum-str-compat-flag>`.
+* `COMPAT:<(comma-separated-list:enum-str)compat-option>`
+  * The first element of `<(comma-separated-list:enum-str)compat-option>` is one of `<(enum-str)compat-mode>` & `<(enum-str)compat-flag>`, and subsequent elements are `<(enum-str)compat-flag>`.
+  * Unrecognized or unsupported elements are warned (if possible) and then skipped. If the first element is unrecognized or unsupported, all elements are treated as `<compat-flag>`.
 * Initial value: An *unspecified* compatibility mode is chosen by the simulator.
   * In OpenTaiko (0auBSQ), defaults to `oos`, unless specified in the TJA file or the `box.def` in the directory containing the TJA file.
   * Recommendation for simulator developers: Defaults to `oos` unless the simulator is used as a drop-in replacement of a certain existing simulator.
 
-`<enum-str-compat-mode>` can be one of:
+`<compat-mode>` can be one of:
 
 * `jiro1` &mdash; Reference: TaikoJiro 1 v2.92
 * `jiro2` &mdash; Reference: TaikoJiro 2 v0.98
@@ -1652,11 +1659,11 @@ The supported set of headers & commands and allowed argument forms is not affect
 * `tjap3` &mdash; Reference: TJAPlayer3 v5.2.10
 * `oos` &mdash; OpenTaiko-OutFox standard. Reference: OpenTaiko (0auBSQ). Proposed here as a more idealized form of `tjap3`
 
-`<enum-str-compat-flag>` is in the format of `<enum-str-compat-item>=<enum-str-compat-option>`.
+`<compat-flag>` is in the format of `<(enum-str)compat-item>=<(enum-str)compat-option>`.
 
 #### Preset Compatibility Flags
 
-These compatibility flags are in the form of `<enum-str-compat-item>=<enum-str-compat-mode>`. Charters should only use these flags if necessary.
+These compatibility flags are in the form of `<(enum-str)compat-item>=<(enum-str)compat-mode>`. Charters should only use these flags if necessary.
 
 See [Comparison of Compatibility Modes](#comparison-of-compatibility-modes) for the value of internal flags for each compatibility mode.
 
@@ -1812,8 +1819,8 @@ Simulators may choose to keep the enabled set of TJA features unchanged. If the 
 
 If the TJA file uses any features outside the specified feature set, a warning should be emitted, and the simulator may choose to accept the usage, ignored the usage (treated as a comment for headers and commands, treated as blank `0` for uppercase notechart symbols), or reject such TJA files.
 
-* `VERSION:<enum-str-version>`
-  * `<enum-str-version>` can be one of:
+* `VERSION:<(enum-str)version>`
+  * `<version>` can be one of:
     * `1.0` &ndash; The feature set common in PC-gen official AC games and TJAPlayer3, including Dan-i certification mode.
     * `1.1` &ndash; The feature set of TJAPlayer3 v1.6.x, including enhancements originate from TaikoJiro 1 and 2.
     * `1.2` &ndash; The current stable feature set of the OpenTaiko-OutFox standard, based on the gameplay-focused enhancements of OpenTaiko (0auBSQ) v0.6.0, including a more complete feature of Tower mode and the Konga game mode.
@@ -1839,11 +1846,11 @@ See [the `#NEXTSONG` command](#nextsong) for the TJA command version of TJC head
 ***First seen in***: TaikoJiro v2.34 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope-fineness***: sequential \
-***Inspired by***: StepMania and earlier Dance With Intensity CRS format `#SONG:<text-no-extension-filepath-notechart-file-from-root-song-directory>:<optional-enum-str-difficulty-type>;` (among other forms)
+***Inspired by***: StepMania and earlier Dance With Intensity CRS format `#SONG:<(text-no-extension-filepath)notechart-file-from-root-song-directory>:[(optional-enum-str)difficulty-type];` (among other forms)
 
 Specify a notechart ("**song**") of the notechart set.
 
-* `SONG:<text-filepath-tja-from-game-root-directory>`
+* `SONG:<(text-filepath)tja-from-game-root-directory>`
 
 ## TJA Command
 
@@ -2043,21 +2050,21 @@ Respectively **start** / **end** the region of notechart definition.
 
 * `#START`
   * The notechart definition is for the only player-side if [the `STYLE:` header](#style) is ignored or this header specifies the amount of player-sides to be 1.
-* `#START <enum-str-player-side>` \
+* `#START <(enum-str)player-side>` \
   ***Supported by***: TaikoJiro v1.99
-  * The notechart definition is for the player-side specified by `<enum-str-player-side>`, which can be one of:
+  * The notechart definition is for the player-side specified by `<player-side>`, which can be one of:
     * **`P1`** / `p1` &mdash; for the 1st player-side (1P).
     * **`P2`** / `p2` &mdash; for the 2nd player-side (2P) if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ 2.
-  * *Unspecified*: The behavior when other `<enum-str-player-side>` is used.
-    * In TaikoJiro, using any other `<enum-str-player-side>` is treated as if the 0-argument `#START` were used.
-* *Proposal* (IID): `#START P<trimmed-unsigned-positive-int-player-side>`
-  * The notechart definition is for the `<unsigned-positive-int-player-side>`-th player-side if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ `<unsigned-positive-int-player-side>`.
+  * *Unspecified*: The behavior when other `<player-side>` is used.
+    * In TaikoJiro, using any other `<player-side>` is treated as if the 0-argument `#START` were used.
+* *Proposal* (IID): `#START P<(trimmed-unsigned-positive-int)player-side>`
+  * The notechart definition is for the `<player-side>`-th player-side if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ `<player-side>`.
 * `#END`
 
 *Unspecified*: The behavior when any of the followings are violated when defining each difficulty:
 
 * The 1-player-side notechart should be defined using the 0-argument `#START`
-* Each multiple-player-side notechart should be defined using the 1-argument `#START <enum-str-player-side>` or *proposed* (IID) `P<positive-int-player-side>`.
+* Each multiple-player-side notechart should be defined using the 1-argument `#START <(enum-str)player-side>` or *proposed* (IID) `P<(positive-int)player-side>`.
 * At most 1 definition should exist for each player-side of each amount of player-sides
   * In TaikoJiro 1, only the earliest definition is used when multiple such definitions exist.
 * Every player-side notechart should be defined if any notecharts for the same amount of player-sides are defined, otherwise the 1-player-side notechart should be the earliest defined notechart.
@@ -2095,12 +2102,12 @@ Respectively **start** / **end** the region of notechart definition.
 ***Non-static effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll)); (none) (otherwise) \
 ***Effect target***: notes, bar lines \
 ***Effect branches***: all \
-***Inspired by***: TJF format `#BPMCHANGE <positive-int-bpm>` \
-&emsp; (likely) from DWI format `#CHANGEBPM:<comma-separated-list-bpmchanges>;`, where each element is `<number-beat-position>=<positive-number-bpm>` (?)
+***Inspired by***: TJF format `#BPMCHANGE <(positive-int)bpm>` \
+&emsp; (likely) from DWI format `#CHANGEBPM:<(comma-separated-list)bpmchanges>;`, where each element is `<(number-beat)position>=<(positive-number)bpm>` (?)
 
 **Change** the **BPM**.
 
-* `#BPMCHANGE <non-zero-float-bpm>`
+* `#BPMCHANGE <(non-zero-float)bpm>`
   * A negative value results in "negative BPM" and causes the beat duration and the total note distance to be in the opposite sign. The behavior depend on [the `#MEASURE` command](#measure) used in conjunction.
     * See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior.
 * `#BPMCHANGE 0`
@@ -2132,22 +2139,22 @@ Change the time signature / meter signature / **measure** signature.
 
 Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby>小<rt>shou</rt>節<rt>setsu</rt></ruby>*** "measure" to fit all note symbols on the following line if placed after the previous measure (if any) and before the first note symbol (if any) of this measure in the notechart definition).
 
-* `#MEASURE <number-upper-numeral>/<positive-number-lower-numeral>`
+* `#MEASURE <(number)upper-numeral>/<(positive-number)lower-numeral>`
   * > Formula: Amount of beats = 4 × `upper` / `lower`
   * The definition of beat is unaffected by the specified lower numeral. *Unspecified*: The decorative visual/audio effects.
   * The measure duration in beats is determined only by the result of dividing the upper numeral by the lower numeral.
   * A negative measure duration in beats causes the note objects to be positioned backward and can even cause them to overlap.
     * See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior.
-* `#MEASURE <number-upper-numeral>/<negative-or-zero-lower-numeral>`
-  * The behavior is *unspecified* (for `<negative-or-zero-lower-numeral>` being 0, may cause crashes in some existing simulators).
-  * In TaikoJiro 1, the lower numeral becomes `<negative-or-zero-lower-numeral>` + 4294967296 (2³²).
+* `#MEASURE <(number)upper-numeral>/<(negative-or-zero-number)lower-numeral>`
+  * The behavior is *unspecified* (for `<lower-numeral>` being 0, may cause crashes in some existing simulators).
+  * In TaikoJiro 1, the lower numeral becomes `<lower-numeral>` + 4294967296 (2³²).
 * Initial value: `#MEASURE 4/4`
 
 #### Compatibility Issues
 
 * In TaikoJiro 1 and 2, no whitespaces are allowed before the `/`
-* In TaikoJiro 1 but not 2, `<number-lower-numeral>` is parsed as an integer, decimal places are thus ignored, and negative-or-zero values are treated as the value plus 4294967296 (2³²).
-* In TaikoJiro 1 but not 2, `<number-upper-numeral>` being 0 fails to set measures' timing spacing, but still sets the time duration of measure divisions in each measure to 0. Zero-duration measures can be alternatively constructed using a large `<number-upper-numeral>` value due to the limited timing precision.
+* In TaikoJiro 1 but not 2, `<lower-numeral>` is parsed as an integer, decimal places are thus ignored, and negative-or-zero values are treated as the value plus 4294967296 (2³²).
+* In TaikoJiro 1 but not 2, `<upper-numeral>` being 0 fails to set measures' timing spacing, but still sets the time duration of measure divisions in each measure to 0. Zero-duration measures can be alternatively constructed using a large `<upper-numeral>` value due to the limited timing precision.
 * In TaikoJiro, the last defined `#MEASURE` in a measure applies to the whole measure regardless of where it is defined.
 * In TaikoJiro 1, `#MEASURE`s defined in [a branch definition](#n--e--m) are partially reverted (only affects measure divisions in the measure) after [a `#BRANCHEND` or another `#BRANCHSTART` command](#branchstart--branchend). Not explicit defining `#MEASURE` after the branch definition section causes unintended behaviors. See [the `#N` / `#E` / `#M` commands](#n--e--m) for details.
 
@@ -2172,7 +2179,7 @@ For the timing of notechart object, multiple `#DELAY` commands placed at the sam
 
 *Unspecified*: The visual note positioning behavior in [BMS scrolling modes](#bmscroll--hbscroll--nmscroll) when note objects are placed into the time interval of positive delays.
 
-* `#DELAY <non-zero-float-seconds-delay-duration>`
+* `#DELAY <(non-zero-float-seconds)delay-duration>`
   * In TaikoJiro, in HBScroll or BMScroll mode, a delay with positive duration makes the notechart objects stops moving up to the specified duration.
   * A negative duration results in "negative delay" and can cause note objects to overlap.
     * See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior.
@@ -2237,33 +2244,31 @@ For specifying the same initial scrolling speed for multiple player-sides or dif
 
 Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
-* `#SCROLL <positive-float-scroll-speed-x>` \
+* `#SCROLL <(positive-float)scroll-speed-x>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0
-* `#SCROLL <negative-float-scroll-speed-x>` \
+* `#SCROLL <(negative-float)scroll-speed-x>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1
-* `#SCROLL <non-zero-complex-ri-float-scroll-speed-xy>` \
+* `#SCROLL <(non-zero-complex-ri-float)scroll-speed-xy>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 \
   ***Supported by***: TaikoJiro 2 v0.97, TJAPlayer2 for.PC, TaikoManyGimmicks (TJA)
   * Complex-number&ndash;valued, modeled after the rectangular form of complex number: *x* ± *yi*
   * Notecharts with this type of command are usually referred as *<ruby>複<rt>Fuku</rt>素<rt>so</rt>数<rt>suu</rt>譜<rt>fu</rt>面<rt>men</rt></ruby>* "Complex number notechart".
-  * The imaginary component of `<complex-ri-float-scroll-speed-xy>` specifies the vertical scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-scroll-speed-x>`.
-* `#SCROLL(<float-scroll-speed-x>, <float-scroll-speed-y>)` \
+  * The imaginary component of `<scroll-speed-xy>` specifies the vertical scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-scroll-speed-x>`.
+* `#SCROLL(<(float)scroll-speed-x>, <(float)scroll-speed-y>)` \
   ***Supported by***: TaikoManyGimmicks v0.6.1α
-  * `<float-scroll-speed-y>` specifies the vertical scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-scroll-speed-x>`.
+  * `<scroll-speed-y>` specifies the vertical scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<scroll-speed-x>`.
 * `#SCROLL 0` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 (?; to be discussed)
-  * The behavior is *unspecified*. (?)
-    * In TaikoJiro 1 and 2, the notes and bar lines will stay on the judgement mark expectedly.
-    * In TJAPlayer2 for.PC, the notes and bar lines are drawn expectedly, but the "note-end" judgement of drumroll-type notes isn't handled correctly.
-* `#SCROLL <float-scroll-speed>, <number-rotation-lower>, <number-rotation-upper>` \
+  * The notes and bar lines stay on the judgement mark, or where they should be when expected to be hit if the [`#JUDGEDELAY` command](#judgedelay) is used.
+* `#SCROLL <(float)scroll-speed>, <(number)rotation-lower>, <(number)rotation-upper>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
   ***Supported by***: TaikoManyGimmicks
   * Complex-number&ndash;valued, modeled after the polar form of complex number: *r*∠*φ*
-  * Set the scrolling speed vector to `<float-scroll-speed>` rotated `<number-degrees-upper>/<number-degrees-lower>` turns counterclockwise (↺).
-    * In other words, the unit of `<number-rotation-upper>` depends on the `<number-rotation-lower>`, *e.g.*:
-      * Turn (tr/pla), when `<number-rotation-lower>` is 1.
-      * Degree (deg), when `<number-rotation-lower>` is 360.
-      * Gradian (grad), when `<number-rotation-lower>` is 400.
+  * Set the scrolling speed vector to `<scroll-speed>` rotated `<degrees-upper>/<degrees-lower>` turns counterclockwise (↺).
+    * In other words, the unit of `<rotation-upper>` depends on the `<rotation-lower>`, *e.g.*:
+      * Turn (tr/pla), when `<rotation-lower>` is 1.
+      * Degree (deg), when `<rotation-lower>` is 360.
+      * Gradian (grad), when `<rotation-lower>` is 400.
   * > Formula: `scroll_speed_x` = `scroll_speed` × **cos**(2*π* × `rotation_upper` ÷ `rotation_lower`)
   * > Formula: `scroll_speed_y` = `scroll_speed` × **sin**(2*π* × `rotation_upper` ÷ `rotation_lower`)
 * Initial value: `#SCROLL 1` / `#SCROLL 1+0i` / (TaikoManyGimmicks) `#SCROLL 1, 180, 0`
@@ -2273,14 +2278,15 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 * In TaikoJiro, when multiple `#SCROLL` commands are placed within the same millisecond, only the last defined command has effects even if the `#SCROLL` commands are defined at different beat positions.
 * In TaikoJiro 1 but not TaikoJiro 2, if the notechart definition contains any `#BRANCHSTART` commands, `#SCROLL` will have measure-based&ndash;scope (specifically, the last defined `#SCROLL` in a measure applies at the definition position of the first defined `#SCROLL` in the measure and onward), so splitting the measures using [`#MEASURE`](#measure) & [`#BARLINEOFF`](#barlineoff--barlineon) is needed to make multiple `#SCROLL`s visually work in the same measure for branched charts.
-* In TJAPlayer2 for.PC and TJAPlayer3, the imaginary component of `<complex-ri-float-scroll-speed-xy>` specifies the vertical scrolling speed from the bottom to the top of the screen (↑) instead.
-* In TJAPlayer2 for.PC and TJAPlayer3, the imaginary component of `<complex-ri-float-scroll-speed-xy>` makes bar lines rotate around their center. However, it is misinterpreted as the amount of rotation and the unit is 90 degrees (°) clockwise (↻), see:
+* In TJAPlayer2 for.PC and TJAPlayer3, the imaginary component of `<scroll-speed-xy>` specifies the vertical scrolling speed from the bottom to the top of the screen (↑) instead.
+* In TJAPlayer2 for.PC and TJAPlayer3, the imaginary component of `<scroll-speed-xy>` makes bar lines rotate around their center. However, it is misinterpreted as the amount of rotation and the unit is 90 degrees (°) clockwise (↻), see:
   * <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/ステージ/07.演奏/ドラム画面/CStage演奏ドラム画面.cs#L2026>
   * <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Stages/07.Game/Taiko/CStage演奏ドラム画面.cs#L2034>
   * This behavior is utilized in some existing notecharts to achieve bar line rotation. Exemplar notechart: <https://www.youtube.com/watch?v=SR94XPuGoyQ> <br />
     <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/SR94XPuGoyQ" title="YouTube video player, playing &quot;【TJAPlayer3】Sense【創作譜面】[BilliumMoto × Silentroom] 《ギミック譜面》&quot;, uploaded by かれーどらい{きつね}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   * The [`#ANGLE`](#note--barline-commands) command introduced in TaikoManyGimmicks can achieve such effects without depending on the *unspecified* behavior.
-* TJAPlayer2 for.PC and TaikoManyGimmicks do not support all existent forms of `<complex-ri-float-scroll-speed-xy>`, see the explanation of compatibility issues in [Value Type](#value-type).
+* TJAPlayer2 for.PC and TaikoManyGimmicks do not support all existent forms of `<scroll-speed-xy>`, see the explanation of compatibility issues in [Value Type](#value-type).
+* In TJAPlayer2 for.PC but not OpenTaiko (0auBSQ) v0.6.0.47, because the end of roll-type notes are judged by display position, roll-type notes in scroll speed with negative or zero real part makes notes right before it unable to receive just or late judgement.
 
 ### `#BARLINESCROLL`
 
@@ -2295,7 +2301,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 Change the **scroll**ing speed of only **bar** **line**s, relative to the normal scrolling velocity and direction and prevent this speed from being overridden by further [`#SCROLL`](#scroll).
 
-* `#BARLINESCROLL <positive-or-zero-float-scroll-speed-x>`
+* `#BARLINESCROLL <(positive-or-zero-float)scroll-speed-x>`
 * **`#BARLINESCROLL Off`** / `#BARLINESCROLL off` / `#BARLINESCROLL`
   * Reset the scrolling speed of bar lines to the scrolling speed of notes and allow this speed to be overridden by further [`#SCROLL`](#scroll).
 
@@ -2315,8 +2321,8 @@ Suddenly change the scrolling speed (**HiSpeed** / **hi**gh-**speed**) of notes 
 
 Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
-* `#HISPEED(<float-scroll-speed-x>)`
-  * Suddenly change the scrolling speed as if the BPM were changed into `<float-scroll-speed-x>` × BPM.
+* `#HISPEED(<(float)scroll-speed-x>)`
+  * Suddenly change the scrolling speed as if the BPM were changed into `<(float)scroll-speed-x>` × BPM.
 
 ### *Proposal* (IID): #SPEED
 
@@ -2328,7 +2334,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 ***Non-static effect scope***: all \
 ***Effect target***: notes, bar lines \
 ***Effect branches***: current \
-***Inspired by***: SSC format `#SPEEDS:<comma-separated-list-speed-changes>;`, where each element is `<float-beat-position>=<float-base-speed>=<float-beat-or-second-approach-length>=<enum-int-bool-use-second-length>`
+***Inspired by***: SSC format `#SPEEDS:<(comma-separated-list)speed-changes>;`, where each element is `<(float-beat)position>=<(float)base-speed>=<(float-beat-or-second)approach-length>=<(enum-int-bool)use-second-length>`
 
 Suddenly change the base scrolling **speed** of notes & bar lines. In other words, suddenly change the normal scrolling velocity and direction.
 
@@ -2336,11 +2342,11 @@ Targeted notes & bar lines have their distance and/or direction to the visual ju
 
 If the notes & the bar lines are rotated around their center accordingly when a [`#SCROLL`](#scroll) command with complex number value is used, they are also rotated accordingly when a `#SPEED` command with complex number value is used.
 
-* `#SPEED <float-base-speed-x>`
-* `#SPEED <complex-ri-float-base-speed-xy>`
-  * The imaginary component of `<complex-ri-float-base-speed-xy>` specifies the vertical normal scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<float-base-speed-x>`.
-* `#SPEED <float-base-speed>, <number-pixel-rotation-center-x>, <float-degrees-angle>`
-  * Set the normal scrolling velocity to `<float-base-speed>` and the normal scrolling direction to `<float-degrees-angle>` degrees (°) counterclockwise (↺) centered around the position `<number-pixel-rotation-center-x>` from the visual judgment position.
+* `#SPEED <(float)base-speed-x>`
+* `#SPEED <(complex-ri-float)base-speed-xy>`
+  * The imaginary component of `<base-speed-xy>` specifies the vertical normal scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<base-speed-x>`.
+* `#SPEED <(float)base-speed>, <(number-pixel)rotation-center-x>, <(float-degrees)angle>`
+  * Set the normal scrolling velocity to `<base-speed>` and the normal scrolling direction to `<degrees-angle>` degrees (°) counterclockwise (↺) centered around the position `<rotation-center-x>` from the visual judgment position.
 * Initial value: `#SPEED 1` / `#SPEED 1+0i` / `#SPEED 1, 0, 0`
 
 ### #DIRECTION
@@ -2367,8 +2373,8 @@ Recommendation for charters: [The `#SCROLL` command](#scroll) should be used ins
 
 Only the horizontal scroll velocity of the active [`#SCROLL` command](#scroll) is used to calculate the resulting scroll velocity.
 
-* `#DIRECTION <enum-int-direction>`
-  * `<enum-int-direction>` specifies the scrolling direction and can be one of:
+* `#DIRECTION <(enum-int)direction>`
+  * `<direction>` specifies the scrolling direction and can be one of:
     * | | Direction under `#SCROLL 1` | Equivalent `#SCROLL` command if `i` = ↑ | if `i` = ↓ for `#SCROLL x` | Speed relative to `#SCROLL x`
       | --- | --- | --- | --- | ---
       | `0` | ← | `#SCROLL x` | `#SCROLL x` | 1
@@ -2384,7 +2390,7 @@ Notice that the scrolling speed of diagonal directions is √(2) times of the sc
 
 #### Compatibility Issues
 
-* In TJAPlayer2 for.PC and TJAPlayer3, due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑), the equivalent [`#SCROLL` command](#scroll) for each `<enum-int-direction>` except for 0 (←) and 5 (→) differ from other simulators including TaikoJiro 2 and TaikoManyGimmicks.
+* In TJAPlayer2 for.PC and TJAPlayer3, due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑), the equivalent [`#SCROLL` command](#scroll) for each `<direction>` except for 0 (←) and 5 (→) differ from other simulators including TaikoJiro 2 and TaikoManyGimmicks.
 
 ### `#BARLINEOFF` / `#BARLINEON`
 
@@ -2441,35 +2447,35 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 The arguments are whitespace-separated.
 
 * `#JPOSSCROLL <approach-duration-specifier> <distance-specifier> <direction-specifier>`\
-  / `#JPOSSCROLL(<approach-duration-specifier>, <number-pixel-distance-x>)` \
+  / `#JPOSSCROLL(<approach-duration-specifier>, <(number-pixel)distance-x>)` \
   ***Supported by***: TaikoManyGimmicks v0.6.1α\
-  / `#JPOSSCROLL(<approach-duration-specifier>, <number-pixel-distance-x>, <number-pixel-distance-y>)` \
+  / `#JPOSSCROLL(<approach-duration-specifier>, <(number-pixel)distance-x>, <(number-pixel)distance-y>)` \
   ***Supported by***: TaikoManyGimmicks v0.6.6α
   * `<approach-duration-specifier>` can be one of:
-    * `<positive-float-seconds-approach-duration>`
+    * `<(positive-float-seconds)approach-duration>`
   * `<distance-specifier>` can be one of:
-    * `<number-pixel-distance-x>`
-    * `<complex-ri-number-pixel-distance-xy>` \
+    * `<(number-pixel)distance-x>`
+    * `<(complex-ri-number-pixel)distance-xy>` \
       ***Supported by***: TJAPlayer3 v1.6.x, OpenTaiko (0auBSQ) v0.6.0
-      * The imaginary component of `<complex-ri-number-pixel-distance-xy>` specifies the vertical movement toward the bottom of the screen (↓).
+      * The imaginary component of `<distance-xy>` specifies the vertical movement toward the bottom of the screen (↓).
         * In TaikoJiro 2 and TaikoManyGimmicks, this vertical movement direction is in the opposite direction of the direction of the [`#SCROLL` command] in these simulators.
-    * `<number-distance-x-upper>/<number-distance-x-lower>` \
+    * `<(number-distance)x-upper>/<(number-distance)x-lower>` \
       ***Supported by***: TaikoManyGimmicks
-      * Specify the horizontal movement to be `<number-distance-x-upper>/<number-distance-x-lower>` of the default note field width.
+      * Specify the horizontal movement to be `<(number-distance)x-upper>/<(number-distance)x-lower>` of the default note field width.
     * `default` \
       ***Supported by***: TaikoManyGimmicks
       * Move the judgment mark to the default position, regardless of `<direction-specifier>`.
   * `<direction-specifier>` can be one of:
     * (Empty) / `0`
-      * Specify the moving direction as toward from where the notes and bar lines would scroll if `<pixel-distance-specifier>` were the argument of [the `#SCROLL` command](#scroll) when the BPM is positive.
+      * Specify the moving direction as toward from where the notes and bar lines would scroll if `<distance-specifier>` were the argument of [the `#SCROLL` command](#scroll) when the BPM is positive.
     * `1`
       * The moving direction is reversed (rotated 180 degrees (°) (counter)clockwise (↺/↻)) compared to when `<direction-specifier>` is `0`.
 
 #### Compatibility Issues
 
 * Recommendation for charters: If the vertical scroll direction is significant, [the `COMPAT:` header](#proposal-iid-compat) should be specified.
-* In TJAPlayer3, where the imaginary component of `<complex-ri-number-pixel-distance-xy>` is introduced, due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑), the vertical movement direction is in the same direction as the direction of the [`#SCROLL` command](#scroll), but is in the opposite direction of the `#SCROLL` command in other simulators including TaikoJiro 2 and TaikoManyGimmicks.
-* TJAPlayer2 for.PC and TaikoManyGimmicks do not support all existent forms of `<complex-ri-float-scroll-speed-xy>`, see the explanation of compatibility issues in [Value Type](#value-type).
+* In TJAPlayer3, where the imaginary component of `<pixel-distance-xy>` is introduced, due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑), the vertical movement direction is in the same direction as the direction of the [`#SCROLL` command](#scroll), but is in the opposite direction of the `#SCROLL` command in other simulators including TaikoJiro 2 and TaikoManyGimmicks.
+* TJAPlayer2 for.PC and TaikoManyGimmicks do not support all existent forms of `<scroll-speed-xy>`, see the explanation of compatibility issues in [Value Type](#value-type).
 
 ### #JUDGEDELAY
 
@@ -2491,15 +2497,15 @@ The arguments are whitespace-separated.
 * `#JUDGEDELAY 0`
   * **0**-parameter form.
   * Reset the effects.
-* `#JUDGEDELAY 1 <float-seconds-duration>` / `#JUDGEDELAY(Sec, <float-seconds-duration>)`
+* `#JUDGEDELAY 1 <(float-seconds)duration>` / `#JUDGEDELAY(Sec, <(float-seconds)duration>)`
   * **1**-parameter form.
-  * Specify the visual judgment point to be visually `<float-seconds-duration>` before the judgment mark.
-* `#JUDGEDELAY 2 <float-pixel-position-x> <float-pixel-position-y>` / `#JUDGEDELAY(Pos, <float-pixel-position-x>, <float-pixel-position-y>)`
+  * Specify the visual judgment point to be visually `<(float-seconds)duration>` before the judgment mark.
+* `#JUDGEDELAY 2 <(float-pixel)position-x> <(float-pixel)position-y>` / `#JUDGEDELAY(Pos, <(float-pixel)position-x>, <(float-pixel)position-y>)`
   * **2**-parameter form.
   * Specify the visual judgment point to be the given position relative to the judgment mark.
-* `#JUDGEDELAY 3 <float-seconds-duration> <float-pixel-position-x> <float-pixel-position-y>` / `#JUDGEDELAY(Sec_Pos, <float-seconds-duration, <float-pixel-position-x>, <float-pixel-position-y>)`
+* `#JUDGEDELAY 3 <(float-seconds)duration> <(float-pixel)position-x> <(float-pixel)position-y>` / `#JUDGEDELAY(Sec_Pos, <(float-seconds)duration, <(float-pixel)position-x>, <(float-pixel)position-y>)`
   * **3**-parameter form.
-  * Specify the visual judgment point to be visually `<float-seconds-duration>` before the given position relative to the judgment mark.
+  * Specify the visual judgment point to be visually `<(float-seconds)duration>` before the given position relative to the judgment mark.
 
 ### SUDDEN / HIDDEN Commands
 
@@ -2524,26 +2530,26 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 The arguments are whitespace-separated.
 
-* `#SUDDEN <float-seconds-appear-duration> <float-seconds-moving-duration>`
+* `#SUDDEN <(float-seconds)appear-duration> <(float-seconds)moving-duration>`
   * Set the appear time point *appear_duration* and the moving-start time point *moving_duration*.
   * An implicit disappear point and an implicit stop point at positive infinity seconds before the time point of each affected notechart object is reached are also set.
   * If *appear_duration* > *moving_duration*, a note will stop for the length of *appear_duration* − *moving_duration* after it appears.
   * The "note phoneticization" is displayed/hidden along the note.
-* *Proposal* (IID): `#SUDDEN <float-seconds-appear-duration> <float-seconds-moving-duration> <enum-str-affected-type>`
+* *Proposal* (IID): `#SUDDEN <(float-seconds)appear-duration> <(float-seconds)moving-duration> <(enum-str)affected-type>`
   * See below.
-* *Proposal* (IID): `#HIDDEN <float-seconds-disappear-duration> <float-seconds-stopping-duration>`
+* *Proposal* (IID): `#HIDDEN <(float-seconds)disappear-duration> <(float-seconds)stopping-duration>`
   * Set the disappear time point *disappear_duration* and the moving-end time point *stopping_duration*.
   * If *stopping_duration* > *disappear_duration*, a note will stop for the length of *stopping_duration* − *disappear_duration* before it disappears.
   * If *disappear_duration* ≥ *appear_duration* of the in-effect `#SUDDEN` command, a note never appears.
   * If *stopping_duration* ≥ *moving_duration* of the in-effect `#SUDDEN`, a note never moves.
   * The "note phoneticization" is displayed/hidden along the note.
-* *Proposal* (IID): `#HIDDEN <float-seconds-disappear-duration> <float-seconds-stopping-duration> <enum-str-affected-type>`
+* *Proposal* (IID): `#HIDDEN <(float-seconds)disappear-duration> <(float-seconds)stopping-duration> <(enum-str)affected-type>`
   * See below.
 * Initial value: `#SUDDEN 0 0` & (*Proposal* (IID)) `#HIDDEN 0 0`
 
-`<float-seconds-*-duration>` specifies the time durations before the time point of judgment of each note is reached; if its absolute value equals to `0`, the time duration is positive infinity (+∞) for the `#SUDDEN` command and is negative infinity (−∞) for the `#HIDDEN` command.
+`<*-duration>` specifies the time durations before the time point of judgment of each note is reached; if its absolute value equals to `0`, the time duration is positive infinity (+∞) for the `#SUDDEN` command and is negative infinity (−∞) for the `#HIDDEN` command.
 
-*Proposal* (IID): `<enum-str-afftect-type>` can be one of:
+*Proposal* (IID): `<afftect-type>` can be one of:
 
 * `n` / `Doron` &mdash; Affect only the **n**otes, as in the ***<ruby>ド<rt>Do</rt>ロ<rt>ro</rt>ン<rt>n</rt></ruby>*** "**n**ote-wise stealth" game modifier.
 * `t` &mdash; Affect only the "note phoneticization" ("the **t**exts on the lower note field").
@@ -2555,10 +2561,10 @@ The arguments are whitespace-separated.
 #### Compatibility Issues
 
 * In TJAPlayer2 for.PC:
-  * `<float-seconds-*-duration>` has the precision of `0.001` (1 ms), and any value < `0.001` is treated as `0` (positive infinity for `#SUDDEN`).
+  * `<*-duration>` has the precision of `0.001` (1 ms), and any value < `0.001` is treated as `0` (positive infinity for `#SUDDEN`).
   * The per-note effect is only applied at-or-after the time position of [the `#START` command](#start--end). (?)
   * The vertical scrolling velocity of a note is not affected during the stopping phase of the note.
-  * `#SUDDEN <float-seconds-appear-duration> 0` with positive `<float-seconds-appear-duration>` makes roll-type notes completely invisible. To make roll-type notes appear normally, use a positive `<float-seconds-moving-duration>`.
+  * `#SUDDEN <appear-duration> 0` with positive `<appear-duration>` makes roll-type notes completely invisible. To make roll-type notes appear normally, use a positive `<moving-duration>`.
 * In OpenTaiko (0auBSQ) (?, as for v0.6.0 b3):
   * The scrolling velocity of a note is completely not affected during the stopping phase of the note.
   * The note phoneticization is never hidden.
@@ -2590,13 +2596,13 @@ The arguments are whitespace-separated.
 * `#NOTESPAWN 0`
   * Set nothing, used to reset to the default.
   * In TaikoManyGimmicks, the fallback behavior of a `#NOTESPANW` with an invalid first argument.
-* `#NOTESPAWN 1 <float-seconds-appear-duration>` / `#NOTESPAWN(Spawn, <float-seconds-appear-duration>)`
+* `#NOTESPAWN 1 <(float-seconds)appear-duration>` / `#NOTESPAWN(Spawn, <(float-seconds)appear-duration>)`
   * Set an appear ("**spawn**") point.
   * If it resets the previous `#NOTESPAWN`, an implicit disappear point at positive infinity seconds before the command is reached is also set.
-* `#NOTESPAWN 2 <float-seconds-disappear-duration>` / `#NOTESPAWN(Vanish, <float-seconds-disappear-duration>)`
+* `#NOTESPAWN 2 <(float-seconds)disappear-duration>` / `#NOTESPAWN(Vanish, <(float-seconds)disappear-duration>)`
   * Set a disappear ("**vanish**") point.
 
-`<float-seconds-*-duration>` specifies the time durations before the time point of the command is reached.
+`<*-duration>` specifies the time durations before the time point of the command is reached.
 
 ### `#ENABLEDORON` / `#DISABLEDORON`
 
@@ -2630,8 +2636,8 @@ Display the specified **lyric**.
 
 *Unspecified*: Whether `#LYRIC` commands are ignored if the lyric file specified by [the `LYRICS:` or `LYRICFILE:` header](#lyrics--lyricfile) is used.
 
-* `#LYRIC <str-lyric>`
-  * In taiko-web, a `\n` in `<str-lyric>` is displayed as a newline.
+* `#LYRIC <(str)lyric>`
+  * In taiko-web, a `\n` in `<lyric>` is displayed as a newline.
 
 *Unspecified*: The behavior when `#LYRIC` commands are not consistent among any of the following:
 
@@ -2643,7 +2649,7 @@ Display the specified **lyric**.
 
 #### Compatibility Issues
 
-* In TJAPlayer2 for.PC but not TJAPlayer3, the first whitespace in the middle of `<str-lyric>` terminators the loaded lyric.
+* In TJAPlayer2 for.PC but not TJAPlayer3, the first whitespace in the middle of `<lyric>` terminators the loaded lyric.
 
 ### #SENOTECHANGE
 
@@ -2660,8 +2666,8 @@ Override ("**change**") the automatically assigned *<ruby>口<rt>Kuchi</rt>唱<r
 
 Similar to [the `#NOTESCHANGE` command](#noteschange), but with a different range of argument.
 
-* `#SENOTECHANGE <enum-int-note-phoneticization>`
-  * In `GAME:Taiko`, `<enum-int-note-phoneticization>` can be one of:
+* `#SENOTECHANGE <(enum-int)note-phoneticization>`
+  * In `GAME:Taiko`, `<note-phoneticization>` can be one of:
     * | | Note phoneticization | Designed for what note symbol
       | --- | --- | ---
       | `1` | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>* Don | `1`
@@ -2676,8 +2682,8 @@ Similar to [the `#NOTESCHANGE` command](#noteschange), but with a different rang
       | `10` | *ーっ!!* &ndash;!! | note end of `5` & `6`
       | `11` | *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* ROLL | note head of `6`
       | `12` | *<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* Balloon | `7`
-  * *Unspecified*: The behavior when an `<enum-int-note-phoneticization>` not designed for the applied note is used.
-  * *Proposal* (IID): The `<enum-int-note-phoneticization>` `1` to `5` can be used on and is consumed by any other non-blank note symbol, including `8`.
+  * *Unspecified*: The behavior when an `<note-phoneticization>` not designed for the applied note is used.
+  * *Proposal* (IID): The `<note-phoneticization>` `1` to `5` can be used on and is consumed by any other non-blank note symbol, including `8`.
     * | Note Symbol \\ phone. | `1` (long) | `2` / `5` (short) | `3` (alternate) | `4` (final)
       | --- | --- | --- | --- | ---
       | Taiko `1` | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>* Don | *<ruby>ド<rt>Do</rt></ruby>* Do | *<ruby>コ<rt>Ko</rt></ruby>* (Do) | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>* Don
@@ -2689,9 +2695,9 @@ Similar to [the `#NOTESCHANGE` command](#noteschange), but with a different rang
       * End of bar: End of roll-type notes with bar (after Taiko & Konga `5`, `6`, `D`, `H`, & `I`)
     * For roll-type notes, If the roll end is an `8`, the nearest non-yet-consumed `#SENOTECHANGE` command at-or-after the `8` takes effect, otherwise the nearest non-yet-consumed `#SENOTECHANGE` command at-or-before the non-repeated roll head takes effect.
     * No effects on other note symbols but consumed.
-  * *Proposal* (IID): If the `<enum-int-note-phoneticization>` is `0` or `-1`, the automatically assigned note phoneticization is used.
-* *Proposal* (IID): `#SENOTECHANGE <comma-separated-list-enum-int-note-phoneticization>`
-  * All elements of `<comma-separated-list-enum-int-note-phoneticization>` are valid `<enum-int-note-phoneticization>` and are iterated and applied to multiple notes in their definition order.
+  * *Proposal* (IID): If the `<note-phoneticization>` is `0` or `-1`, the automatically assigned note phoneticization is used.
+* *Proposal* (IID): `#SENOTECHANGE <(comma-separated-list:enum-int)note-phoneticization>`
+  * All elements of `<note-phoneticization>` are valid `<(enum-int)note-phoneticization>` and are iterated and applied to multiple notes in their definition order.
 
 #### Usual Patterns of Note Phoneticization in the Offical Games
 
@@ -2742,8 +2748,8 @@ Override ("**change**") the automatically assigned *<ruby>口<rt>Kuchi</rt>唱<r
 
 Similar to [the `#SENOTECHANGE` command](#senotechange), but with a different range of argument.
 
-* `#NOTESCHANGE <enum-int-note-phoneticization>`
-  * In `GAME:Taiko`, `<enum-int-note-phoneticization>` can be one of:
+* `#NOTESCHANGE <(enum-int)note-phoneticization>`
+  * In `GAME:Taiko`, `<note-phoneticization>` can be one of:
     * | | Note phoneticization | Designed for what note symbol
       | --- | --- | ---
       | `0` | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>* Don | `1`
@@ -2751,7 +2757,7 @@ Similar to [the `#SENOTECHANGE` command](#senotechange), but with a different ra
       | `2` | *<ruby>コ<rt>Ko</rt></ruby>* (Do) | `1`
       | `3` | *<ruby>カッ<rt>Ka'</rt></ruby>* Ka | `2`
       | `4` | *<ruby>カ<rt>Ka</rt></ruby>* (Ka) | `2`
-  * *Unspecified*: The behavior when an `<enum-int-note-phoneticization>` not designed for the applied note is used.
+  * *Unspecified*: The behavior when an `<note-phoneticization>` not designed for the applied note is used.
 * Initial value / `#NOTESCHANGE -1`
   * Use the automatically assigned note phoneticization.
 
@@ -2769,7 +2775,7 @@ Basically the same as the **[`BALLOON:`](#balloon-headers)** header, except that
 
 Override the assigned hit amount specified by the one of the BALLOON headers if applies to an already assigned balloon-type note.
 
-* `#BALLOON <comma-separated-list-positive-or-zero-int-amount-of-hits>`
+* `#BALLOON <(comma-separated-list:positive-or-zero-int)amount-of-hits>`
 
 The semantics are otherwise the same as the [BALLOON](#balloon-headers) headers.
 
@@ -2813,12 +2819,12 @@ Specify the next **note** to be **giant**, as in the official Wii games. A giant
 
 Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF` or (*proposal* (IID)) `#COMMANDIFF` command](#proposal-komi-commandif-commands).
 
-* `#GIANTNOTE <str-local-value-trigger-written-on-ok>, <str-local-value-trigger-written-on-great>, <enum-str-bool-great-activates-ok>`
-  * `<str-local-value-trigger-written-on-ok>` specifies the local trigger to set to true when the giant note receives *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK judgement.
-  * `<str-local-value-trigger-written-on-great>` specifies the local trigger to set to true when the giant note receives *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement.
-  * `<enum-str-bool-great-activates-ok>` defaults to `False` and specifies whether the trigger specified by `<str-local-value-trigger-written-on-ok>` is also set to true when the giant note receives *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement. If given, it can be one of:
-    * `False` &mdash; the default; `<str-local-value-trigger-written-on-ok>` will be untouched on *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement.
-    * `True` &mdash; `<str-local-value-trigger-written-on-ok>` will be set to true on *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement.
+* `#GIANTNOTE <(str-local-value-trigger)written-on-ok>, <(str-local-value-trigger)written-on-great>, [(enum-str-bool)great-activates-ok=False]`
+  * `<written-on-ok>` specifies the local trigger to set to true when the giant note receives *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK judgement.
+  * `<written-on-great>` specifies the local trigger to set to true when the giant note receives *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement.
+  * `[great-activates-ok]` defaults to `False` and specifies whether the trigger specified by `<written-on-ok>` is also set to true when the giant note receives *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement. If given, it can be one of:
+    * `False` &mdash; the default; `<written-on-ok>` will be untouched on *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement.
+    * `True` &mdash; `<written-on-ok>` will be set to true on *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement.
 
 ### *Proposal* (Komi): NOTEIF Commands
 
@@ -2834,11 +2840,11 @@ Conditionally ("**if**") enable the next **note**.
 
 *Proposal* (IID): If the next note is not a hit-type note, the command has no effects.
 
-* `#NOTEIF <str-local-trigger-read-enable>, <enum-str-bool-glow-effect>`
-* *Proposal* (IID): `#NOTEIFF <str-local-formula-trigger-read-enable>, <enum-str-bool-glow-effect>`
+* `#NOTEIF <(str-local-trigger)read-enable>, [(enum-str-bool)glow-effect=False]`
+* *Proposal* (IID): `#NOTEIFF <(str-local-formula-trigger)read-enable>, [(enum-str-bool)glow-effect=False]`
   * If the bool value of the [(value or (*proposal* (IID)) formula) trigger](#proposal-komi-counter--trigger-commands) specified by `<str-local-*-trigger-read-enable>` is true, the note is enabled, *i.e.*, displays and receives input. \
     Otherwise the note is disabled, *i.e.*, hides and does not receive input, like [note symbol `0`](#note-symbols-in-taiko-mode).
-  * `<enum-str-bool-glow-effect>` defaults to `False` and specifies whether the note has the glow effect like the notes added after hitting giant notes in the official Wii games. \
+  * `[glow-effect]` defaults to `False` and specifies whether the note has the glow effect like the notes added after hitting giant notes in the official Wii games. \
     If given, it can be one of:
     * `False` &mdash; the default; the note appears as if the `#NOTEIF` or (*proposal* (IID)) `#NOTEIFF` command were not applied if the note is enabled.
     * `True` &mdash; the note has the glow effect if enabled. Intended to be used in conjunction with [the (*proposal* (Komi)) `#GIANTNOTE` command](#proposal-komi-giantnote).
@@ -2858,9 +2864,9 @@ Conditionally ("**if**") enable the next **command**.
 
 *Proposal* (IID): If the next command is a `#COMMANDIF` or `#COMMANDIFF` command, is not a supported command, or is placed after any note symbols, the current `#COMMANDIF` or `#COMMANDIFF` command has no effects.
 
-* `#COMMANDIF <str-local-value-trigger-read-enable>`
-* *Proposal* (IID): `#COMMANDIFF <str-local-formula-trigger-read-enable>`
-  * If the bool value of the [(3*proposal* (IID)) formula) trigger](#proposal-komi-counter--trigger-commands) specified `<str-local-*-trigger-read-enable>` is true, the next command is enabled, *i.e.*, has its static-time effects (re-)applied immediately, and has its command-time effects fired when its command time is reached. \
+* `#COMMANDIF <(str-local-value-trigger)read-enable>`
+* *Proposal* (IID): `#COMMANDIFF <(str-local-formula-trigger)read-enable>`
+  * If the bool value of the [(3*proposal* (IID)) formula) trigger](#proposal-komi-counter--trigger-commands) specified `<read-enable>` is true, the next command is enabled, *i.e.*, has its static-time effects (re-)applied immediately, and has its command-time effects fired when its command time is reached. \
     Otherwise the next command is disabled, *i.e.*, has its static-time effects reverted immediately as if it were not present, and has its command-time effects not fired when its command time is reached.
   * *Proposal* (IID): If the command-time of the next command have already passed, the command-time effects (if exist) of the next command are neither reapplied nor canceled.
 
@@ -2916,7 +2922,7 @@ Override the result of all *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>�
 
 * `#LEVELHOLD`
   * Override the determining result as the current "branch"/path.
-  * *Proposal* (IID): Equivalent to `#LEVELREDIR <enum-str-branch-current>, <enum-str-branch-current>, <enum-str-branch-current>`, where `<enum-str-branch-current>` represents the current "branch"/path.
+  * *Proposal* (IID): Equivalent to `#LEVELREDIR <current>, <current>, <current>`, where `<current>` represents the current "branch"/path.
 
 #### Compatibility Issues
 
@@ -2936,8 +2942,8 @@ Override the result of all *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>�
 
 Its effects end at either the next [`#LEVELHOLD`](#levelhold) or another  `#LEVELREDIR` command.
 
-* *Proposal* (IID): `#LEVELREDIR <enum-str-branch-from-normal>, <enum-str-branch-from-expert>, <enum-str-branch-from-master>`
-  * Override the determining result as respectively `<enum-str-branch-from-normal>` / `<enum-str-branch-from-expert>` / `<enum-str-branch-from-master>` when the default "branch"/path is determined to be respectively the ***<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>*** **N**ormal / ***<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**E**xpert") / ***<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>*** **M**aster "branch"/path. See the explanation of [the `#BRANCHSTART` command](#branchstart--branchend).
+* *Proposal* (IID): `#LEVELREDIR <(enum-str-branch)from-normal>, <(enum-str-branch)from-expert>, <(enum-str-branch)from-master>`
+  * Override the determining result as respectively `<from-normal>` / `<from-expert>` / `<from-master>` when the default "branch"/path is determined to be respectively the ***<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>*** **N**ormal / ***<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**E**xpert") / ***<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>*** **M**aster "branch"/path. See the explanation of [the `#BRANCHSTART` command](#branchstart--branchend).
 * *Proposal* (IID): Initial value: `#LEVELREDIR N, E, M`
 
 #### Examples
@@ -3002,24 +3008,24 @@ The determining point of this "branch"/path section is defaulted to be placed at
 
 At the determining point, the "branch"/path&ndash;switching effects are played and the targeted branch is updated, but only the notes and bar lines whose definition position is at-or-after the actual beginning of the "branch"/path section have their pattern changed.
 
-* `#BRANCHSTART <enum-str-condition>, <number-expert-branch-requirement>, <number-master-branch-requirement>`
-* *Proposal* (Komi): `#BRANCHSTART lc:<str-local-value-counter-read-value>, <number-expert-branch-requirement>, <number-master-branch-requirement>` \
+* `#BRANCHSTART <(enum-str)condition>, <(number)expert-branch-requirement>, <(number)master-branch-requirement>`
+* *Proposal* (Komi): `#BRANCHSTART lc:<(str-local-value-counter)read-value>, <(number)expert-branch-requirement>, <(number)master-branch-requirement>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
-* *Proposal* (IID): `#BRANCHSTART lcf:<str-local-formula-counter-read-value>, <number-expert-branch-requirement>, <number-master-branch-requirement>` \
+* *Proposal* (IID): `#BRANCHSTART lcf:<(str-local-formula-counter)read-value>, <(number)expert-branch-requirement>, <(number)master-branch-requirement>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
-  * The value of the [local (value or formula) counter](#proposal-komi-counter--trigger-commands) specified by `<str-local-*-counter-read-value>` is read at the branch determining point as the condition value.
-* *Proposal* (Komi): `#BRANCHSTART lt, <str-local-value-trigger-read-expert-branch-condition>, <str-local-value-trigger-read-master-branch-condition>` \
+  * The value of the [local (value or formula) counter](#proposal-komi-counter--trigger-commands) specified by `<read-value>` is read at the branch determining point as the condition value.
+* *Proposal* (Komi): `#BRANCHSTART lt, <(str-local-value-trigger)read-expert-branch-condition>, <(str-local-value-trigger)read-master-branch-condition>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
-* *Proposal* (IID): `#BRANCHSTART ltf, <str-local-formula-trigger-read-expert-branch-condition>, <str-local-formula-trigger-read-master-branch-condition>` \
+* *Proposal* (IID): `#BRANCHSTART ltf, <(str-local-formula-trigger)read-expert-branch-condition>, <(str-local-formula-trigger)read-master-branch-condition>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
-  * Each bool value of the [local (value or formula) triggers](#proposal-komi-counter--trigger-commands) specified by `<str-local-*-trigger-*-read-*-branch-condition>` is read at the branch determining point as a condition value, with the requirement value being 1 (true).
-* *Proposal* (IID): `#BRANCHSTART <comma-separated-list-branchstart-arguments>, <enum-str-range>` \
+  * Each bool value of the [local (value or formula) triggers](#proposal-komi-counter--trigger-commands) specified by `<read-*-branch-condition>` is read at the branch determining point as a condition value, with the requirement value being 1 (true).
+* *Proposal* (IID): `#BRANCHSTART <(comma-separated-list)branchstart-arguments>, <(enum-str)range>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
-  * `<comma-separated-list-branchstart-arguments>` is any argument form above without trailing commas.
-  * `<enum-str-range>` specifies how the requirement is fulfilled, see [Condition Judgement](#condition-judgement). It can be one of:
+  * `<branchstart-arguments>` is any argument form above without trailing commas.
+  * `<range>` specifies how the requirement is fulfilled, see [Condition Judgement](#condition-judgement). It can be one of:
     * (empty) or `m` &mdash; **m**ore than or equal to ("≥") the given requirement
     * `l` &mdash; **l**ess than ("\<") the given requirement
-  * Recommendation for charters: For `lc:<str-local-value-counter-read-value>`, `lcf:<str-local-formula-counter-read-value>`, `lt`, & `ltf` conditions, negating the value is preferred over specifying `l` as `<enum-str-range>`.
+  * Recommendation for charters: For `lc:<read-value>`, `lcf:<read-value>`, `lt`, & `ltf` conditions, negating the value is preferred over specifying `l` as `<range>`.
 * *Proposal* (IID): `#BRANCHSTART` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
   * No condition and requirements specified. Intended to be specified later by [the `#FROMNOR`, `#FROMEXP`, & `#FROMMAS`](#proposal-iid-fromnor--fromexp--frommas) commands.
@@ -3029,9 +3035,9 @@ At the determining point, the "branch"/path&ndash;switching effects are played a
 
 #### Conditions
 
-The possible conditions includes `<enum-str-condition>`, `lc:<str-local-value-counter-read-value>`, `lcf:<str-local-value-counter-read-value>`, `lt`, `ltf`, & (none). Conditions other than `<enum-str-condition>` are explained above.
+The possible conditions includes `<condition>`, `lc:<read-value>`, `lcf:<read-value>`, `lt`, `ltf`, & (none). Conditions other than `<condition>` are explained above.
 
-`<enum-str-condition>` specifies the condition value for determining the "branch"/path can be one of the following:
+`<condition>` specifies the condition value for determining the "branch"/path can be one of the following:
 
 * `p` &mdash; percentage (%) of *<ruby>精<rt>sei</rt>度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy of all missable notes.
   * *Proposal* (IID): The value is limited between 0(%) and 100(%).
@@ -3100,18 +3106,18 @@ For other conditions, the percentage or amount calculated during the determining
 
 #### Condition Judgement
 
-For number conditions (`<enum-str-condition>`, `lc:<str-local-value-counter-read-value>`, & `lcf:<str-local-value-counter-read-value>`), the condition value will be compared with the specified requirement value. \
+For number conditions (`<condition>`, `lc:<read-value>`, & `lcf:<read-value>`), the condition value will be compared with the specified requirement value. \
 For Boolean conditions (`lt` & `ltf`), the condition values for Expert condition and Master condition will be compared with 1 (true).
 
-If `<enum-str-range>` is (empty) or `m`, the requirement is fulfilled if the value is more than or equal to ("≥") the given requirement (for a Boolean condition, when the value is 1 (true)). \
-If `<enum-str-range>` is `l`, the requirement is fulfilled if the value is less than ("\<") the given requirement (for a Boolean condition, when the value is 0 (false)).
+If `<range>` is (empty) or `m`, the requirement is fulfilled if the value is more than or equal to ("≥") the given requirement (for a Boolean condition, when the value is 1 (true)). \
+If `<range>` is `l`, the requirement is fulfilled if the value is less than ("\<") the given requirement (for a Boolean condition, when the value is 0 (false)).
 
 * If no condition and requirements are specified, the currently targeted branch will be taken by default.
 * If the Master requirement is fulfilled, the *<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>* Master "branch"/path will be taken by default.
 * Otherwise, if the Expert requirement is fulfilled, the *<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path will be taken by default.
 * Otherwise: The *<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>* Normal "branch"/path is taken by default.
 * To force a "branch"/path to be taken by default, for a number condition, the requirement value for the branch can be set out-of-bound; for a Boolean condition, the condition value for the branch can be specified as false or true.
-  * For example, with `<enum-str-condition>` being `p`:
+  * For example, with `<condition>` being `p`:
     * To prevent the Normal branch from being taken: `#BRANCHSTART p,0,Y`, with `Y` being any number.
     * To prevent the Expert branch from being taken: `#BRANCHSTART p,Y,Y`, with `Y` being any number.
     * To prevent the Master branch from being taken: `#BRANCHSTART p,X,101`, with `X` being any number.
@@ -3285,10 +3291,10 @@ Specify or override the branch condition and requirements for when the ***<ruby>
 
 The branch determining point for different currently targeted branch may vary.
 
-* *Proposal* (IID): `#FROMNOR <comma-separated-list-branchstart-arguments>`
-* *Proposal* (IID): `#FROMEXP <comma-separated-list-branchstart-arguments>`
-* *Proposal* (IID): `#FROMMAS <comma-separated-list-branchstart-arguments>`
-  * `<comma-separated-list-branchstart-arguments>` is any argument form for [the `#BRANCHSTART`](#branchstart--branchend).
+* *Proposal* (IID): `#FROMNOR <(comma-separated-list)branchstart-arguments>`
+* *Proposal* (IID): `#FROMEXP <(comma-separated-list)branchstart-arguments>`
+* *Proposal* (IID): `#FROMMAS <(comma-separated-list)branchstart-arguments>`
+  * `<branchstart-arguments>` is any argument form for [the `#BRANCHSTART`](#branchstart--branchend).
 
 #### Examples
 
@@ -3399,33 +3405,33 @@ Start the definition of a timing **group**. (?)
 
 Define conditionally enabled notechart sections which appear / disappear with the effects of [`#NOTESPAWN`](#notespawn) ("**spawn**"), when the specified time point before the command is reached.
 
-* `#IFSPAWN(<bool-condition-enable>, <enum-str-spawntype>, <float-seconds-duration>)`
+* `#IFSPAWN(<(bool)condition-enable>, <(enum-str)spawntype>, <(float-seconds)duration>)`
   * Starts a conditional spawn definition section, its conditional part, and a conditional notechart definition section.
-* `#UNLESSSPAWN(<bool-condition-disable>, <enum-str-spawntype>, <float-seconds-duration>)`
+* `#UNLESSSPAWN(<(bool)condition-disable>, <(enum-str)spawntype>, <(float-seconds)duration>)`
   * Starts a conditional spawn definition section, its conditional part, and a conditional notechart definition section.
-  * Equivalent to `#IFSPAWN(<bool-condition-enable>, <enum-str-spawntype>, <float-seconds-duration>)`, where `<bool-condition-enable>` is the boolean invert of `<bool-condition-disable>`. (?)
-* `#ELSEIFSPAWN(<bool-condition-enable>, <enum-str-spawntype>, <float-seconds-duration>)`
+  * Equivalent to `#IFSPAWN(<condition-enable>, <spawntype>, <duration>)`, where `<condition-enable>` is the boolean invert of `<condition-disable>`. (?)
+* `#ELSEIFSPAWN(<(bool)condition-enable>, <(enum-str)spawntype>, <(float)seconds-duration>)`
   * Continues the conditional part of a conditional spawn definition section.
   * Ends the previous conditional notechart definition section and starts a new section.
-* `#ELSESPAWN(<enum-str-spawntype>, <float-seconds-duration>)`
+* `#ELSESPAWN(<(enum-str)spawntype>, <(float-seconds)duration>)`
   * Ends the conditional part of a conditional spawn definition section.
   * Ends the previous conditional notechart definition section and starts a new section.
 * `#IFSPAWNEND()`
   * Ends a conditional spawn definition section and the previous conditional notechart definition section.
 
-All `<bool-condition>` within a conditional spawn definition section are (re-)evaluated at each specified `<float-seconds-duration>` seconds before the `#*SPAWN()` command. (?)
+All `<condition-*>` within a conditional spawn definition section are (re-)evaluated at each specified `<(float-seconds)duration>` seconds before the `#*SPAWN()` command. (?)
 
-Within a conditional spawn definition section, after each (re-)evaluation, the conditional notechart definition section of the first defined `#*SPAWN()` command with `<bool-condition-enable>` being `true`, `<bool-condition-disable>` being `false`, or without specifiable `<bool-condition-*>` is enabled, while all the other sections are disabled.
+Within a conditional spawn definition section, after each (re-)evaluation, the conditional notechart definition section of the first defined `#*SPAWN()` command with `<condition-enable>` being `true`, `<condition-disable>` being `false`, or without specifiable `<condition-*>` is enabled, while all the other sections are disabled.
 
-`<enum-str-spawntype>` must be one of:
+`<spawntype>` must be one of:
 
 * `Spawn`
   * The section is initially disabled and invisible. (?)
-  * If the section is enabled, the chart objects in the section appears `<float-seconds-duration>` seconds before the time point of the `#*SPAWN()` command.
+  * If the section is enabled, the chart objects in the section appears `<duration>` seconds before the time point of the `#*SPAWN()` command.
   * Otherwise the section disappears or remains invisible.
 * `Vanish`
   * The section is initially enabled and visible. (?)
-  * If the section is disabled, the chart objects in the section disappears `<float-seconds-duration>` seconds before the time point of the `#*SPAWN()` command. (?)
+  * If the section is disabled, the chart objects in the section disappears `<duration>` seconds before the time point of the `#*SPAWN()` command. (?)
   * Otherwise the section appears or remains visible.
 
 Example usages (adapted from barrier15300):
@@ -3480,17 +3486,17 @@ Used in conjunction with [`COURSE:Dan`](#course).
 
 See [TJC Header](#tjc-header) for the header version of the `#NEXTSONG` command.
 
-* `#NEXTSONG <text-song-title>,<text-song-subtitle>, <str-genre>,<text-filepath-song-wave>, <positive-or-zero-int-score-init>, <positive-or-zero-int-score-diff>`
+* `#NEXTSONG <(text)song-title>,<(text)song-subtitle>, <(str)genre>,<(text-filepath)song-wave>, <(positive-or-zero-int)score-init>, <(positive-or-zero-int)score-diff>`
   * Basically has the effects of the [`TITLE:`](#title-headers), [`SUBTITLE:`](#subtitle-headers), [`GENRE:`](#genre), [`WAVE:`](#wave), [`SCOREINIT:`](#scoreinit), and [`SCOREDIFF:`](#scorediff) headers combined, except that every comma (`,`) in each `text` values ***MUST*** be escaped as `\,`
-* `#NEXTSONG <text-song-title>,<text-song-subtitle>, <str-genre>,<text-filepath-song-wave>, <positive-or-zero-int-score-init>, <positive-or-zero-int-score-diff>,<positive-or-zero-number-level>, <enum-course>, <enum-str-bool-hide-title>` \
+* `#NEXTSONG <(text)song-title>,<(text)song-subtitle>, <(str)genre>,<(text-filepath)song-wave>, <(positive-or-zero-int)score-init>, <(positive-or-zero-int)score-diff>,[(positive-or-zero-number)level], [(enum)course], [(enum-str-bool)hide-title=False]` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
   ***Supported by***: TJAPlayer3-Develop-ReWrite, OpenTaiko (0auBSQ)
-  * `<positive-or-zero-number-level>, <enum-course>, <enum-str-bool-hide-title>` are optional parameters where the last one(s) can be omitted:
-    * `<enum-str-bool-hide-title>` defaults to `False` and specifies whether the title of the song is obscured ("hidden") in the certification challenge selection screen of the *<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games. If given, it can be one of:
+  * `[level], [course], [hide-title]` are optional parameters where the last one(s) can be omitted:
+    * `[hide-title]` defaults to `False` and specifies whether the title of the song is obscured ("hidden") in the certification challenge selection screen of the *<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games. If given, it can be one of:
       * `False` &mdash; the default; the title is displayed as-is.
       * `True` &mdash; the title is obscured (*e.g.*, displayed as "`???`").
-    * `<enum-course>` has the effects and the default value of [the `COURSE:` header](#course).
-    * `<positive-or-zero-number-level>` has the effects and the default value of [the `LEVEL:` header](#level).
+    * `[course]` has the effects and the default value of [the `COURSE:` header](#course).
+    * `[level]` has the effects and the default value of [the `LEVEL:` header](#level).
 
 ### *Proposal* (Komi): #SONGJUMP
 
@@ -3507,10 +3513,10 @@ Immediately **jump** to the loading screen of the specified **song**. The result
 
 Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF` or (*proposal* (IID)) `#COMMANDIFF` command](#proposal-komi-commandif-commands).
 
-* `#SONGJUMP <str-song-unique-id>, <enum-difficulty>`
-  * `<str-song-unique-id>` is a unique alphanumeric string representing the specified song.
-  * `<enum-difficulty-course>` can one of the argument to [the `COURSE:` header](#course).
+* `#SONGJUMP <(str)song-unique-id>, <(enum)difficulty-course>`
+  * `<song-unique-id>` is a unique alphanumeric string representing the specified song.
     * In OpenTaiko (0auBSQ), it is stored in the `uniqueID.json` file in the same directory as the TJA file for the song. The `uniqueID.json` is automatically generated if not present when the TJA file is being scanned.
+  * `<difficulty-course>` can one of the argument to [the `COURSE:` header](#course).
   * If either the specified song or (*proposal* (IID)) the specified difficulty does not exist, the song jump is canceled.
 
 ### #GAMETYPE
@@ -3540,7 +3546,11 @@ See [the `GAME:` header](#game) for specifying the initial game mode for the not
 
 #### Compatibility Issues
 
-* In OpenTaiko (0auBSQ) v0.6.0 (as for b3), the effect time is command-time, and the non-static effect scope is all. The static behavior has been proposed and will be in a newer version.
+* In OpenTaiko (0auBSQ) v0.6.0 until v0.6.0.93:
+  * The argument was case-sensitive (*i.e.*, only `Bongo` was correctly recognized, while `bongo` and `BONGO` were treated as `Taiko`).
+  * The effect time was command-time, and the non-static effect scope was all.
+* In OpenTaiko (0auBSQ) v0.6.0:
+  * Unrecognized argument is treated as `Taiko` and not ignored.
 
 ### NOTE / BARLINE Commands
 
@@ -3572,22 +3582,22 @@ Resetters:
 
 Setters:
 
-* `#SIZE <unsigned-number-scale>` \
+* `#SIZE <(unsigned-number)scale>` \
   ***Supported by***: TaikoManyGimmicks v0.6α
   * Specify the scaling ("**size**") of notes.
-* `#BARLINESIZE <unsigned-number-pixel-thickness> <unsigned-number-pixel-height>`
+* `#BARLINESIZE <(unsigned-number-pixel)thickness> <(unsigned-number-pixel)height>`
   * Specify the **size** of **bar** **line**s.
-* `#ANGLE <number-degrees-rotation>` \
+* `#ANGLE <(number-degrees)rotation>` \
   ***Supported by***: TaikoManyGimmicks v0.6α
-  * Specify the per-object rotation ("**angle**") of notes & bar lines to be `<number-degrees-rotation>` degrees (°) clockwise (↻).
-* `#COLOR <unsigned-number-9bit-r> <unsigned-number-9bit-g> <unsigned-number-9bit-b> <unsigned-number-8bit-a>` \
+  * Specify the per-object rotation ("**angle**") of notes & bar lines to be `<rotation>` degrees (°) clockwise (↻).
+* `#COLOR <(unsigned-number)9bit-r> <(unsigned-number)9bit-g> <(unsigned-number)9bit-b> <(unsigned-number)8bit-a>` \
   ***Supported by***: TaikoManyGimmicks v0.6α \
-  / `#COLOR(<unsigned-number-9bit-r>, <unsigned-number-9bit-g>, <unsigned-number-9bit-b>)` \
+  / `#COLOR(<(unsigned-number)9bit-r>, <(unsigned-number)9bit-g>, <(unsigned-number)9bit-b>)` \
   ***Supported by***: TaikoManyGimmicks v0.6.1α
   * Specify the **color** of notes & bar lines.
-  * Each color channel (assumed to be in unsigned 8-bit) has its value increased by `<unsigned-number-*bit-*>` − 255.
+  * Each color channel (assumed to be in unsigned 9- or 8-bit) has its value increased by `<*bit-*>` − 255.
   * Defaults to `#COLOR 255 255 255 255` or `#COLOR(255, 255, 255)`
-* `#ALPHA(<unsigned-number-8bit-a>)` \
+* `#ALPHA(<(unsigned-number)8bit-a>)` \
   ***Supported by***: TaikoManyGimmicks v0.6.1α
   * Specify the opacity ("**α** channel"/"**alpha** channel") of notes & bar lines.
   * Defaults to `#ALPHA(255)`
@@ -3610,21 +3620,21 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 The arguments are whitespace-separated.
 
-* `#GRADATION start <float-seconds-approach-duration> <enum-int-easing-points> <enum-int-easing-function>` \
+* `#GRADATION start <(float-seconds)approach-duration> <(enum-int)easing-points> <(enum-int)easing-function>` \
   ***Supported by***: TaikoManyGimmicks (TJA)
   * Make the following commands apply to the beginning ("**start**") of the approaching phase and specify the time duration and easing property of the approaching phase.
-* `#GRADATION(Set, <enum-int-easing-points>, <enum-int-easing-function>, <float-seconds-pre-approach-offset>, <float-seconds-approach-duration>)` \
+* `#GRADATION(Set, <(enum-int)easing-points>, <(enum-int)easing-function>, <(float-seconds)pre-approach-offset>, <(float-seconds)approach-duration>)` \
   ***Supported by***: TaikoManyGimmicks v0.6.1α
   * Start (**set** up) the interpolated command definition section of the approaching phase and specify the time offset and duration and easing property of the approaching phase.
   * For interpolated commands, each value for the interpolation points is separated by a tilde operator (`~`), which has a lower operator precedence than most operators except the comma (`,`).
-  * `<float-seconds-pre-approach-offset>` specifies the time point before the time position of this command when the approaching phase should start.
-  * `<enum-int-easing-points>` can be one of:
+  * `<pre-approach-offset>` specifies the time point before the time position of this command when the approaching phase should start.
+  * `<easing-points>` can be one of:
     * `0` &mdash; EaseIn
     * `1` &mdash; EaseOut
     * `2` &mdash; EaseInOut
     * `3` &mdash; EaseOutIn \
       ***Supported by***: TaikoManyGimmicks v0.6.1α+
-  * `<enum-int-easing-function>` can be one of:
+  * `<easing-function>` can be one of:
     * `0` &mdash; Linear
     * `1` &mdash; Sine
     * `2` &mdash; Quadratic
@@ -3641,7 +3651,7 @@ The arguments are whitespace-separated.
   ***Supported by***: TaikoManyGimmicks (TJA)
   * Start a gradation group.
   * Make the following commands apply to the **end**ing of the approaching phase.
-  * Each commands appear after `#GRADATION start <float-seconds-approach-duration> <enum-int-easing-points> <enum-int-easing-function>` are specified again with a possibly different value here.
+  * Each commands appear after `#GRADATION start <approach-duration> <easing-points> <easing-function>` are specified again with a possibly different value here.
 * `#GRADATION(Start)` \
   ***Supported by***: TaikoManyGimmicks v0.6.1α
   * Start a gradation group.
@@ -3698,11 +3708,11 @@ Commands supporting the `#GRADATION` command in TaikoManyGimmicks:
 ***Effect time***: (depending on included notechart definition content) \
 ***Effect target***: (depending on included notechart definition content) \
 ***Effect branches***: (depending on included notechart definition content) \
-***Inspired by***: C(++) programming language `#include <<filepath-standard-header>>` or `#include "<filepath-custom-header>"`
+***Inspired by***: C(++) programming language `#include <<(filepath)standard-header>>` or `#include "<(filepath)custom-header>"`
 
 Append ("**include**") the notechart definition content defined the included file to the current definition. The included file can include any headers and commands in the TMG format.
 
-* `#INCLUDE(<text-filepath-notechart-definition>)`
+* `#INCLUDE(<(text-filepath)notechart-definition>)`
 
 ### `#SPLITLANE` / `#MERGELANE`
 
@@ -3719,7 +3729,7 @@ Append ("**include**") the notechart definition content defined the included fil
 **Split**/**merge** the note field ("**lane**") into/from top and bottom note field, with <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> notes on the top note field, <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> notes on the bottom note field, and other notes on the middle of these 2 note fields.
 
 * `#SPLITLANE` / (*Proposed* (IID)) `#SPLITLANE 1`
-* *Proposal* (IID): `#SPLITLANE <float-split-amount>`
+* *Proposal* (IID): `#SPLITLANE <(float)split-amount>`
   * Specify the split amount, 1 for `#SPLITLANE` & 0 for `#MERGELANE`. A negative split amount makes <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> notes on the bottom note field and <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> notes on the top note field intead.
 * Initial value / `#MERGELANE` / (*Proposed* (IID)) `#SPLITLANE 0`
 
@@ -3740,85 +3750,87 @@ Manipulate texture **obj**ects & the game screen **cam**ara.
 
 Loader & unloader, reset by each other:
 
-* `#ADDOBJECT <str-name-object>, <number-pixel-x>, <number-pixel-y>,<text-filepath-texture>`
-* `#REMOVEOBJECT <str-name-object>`
+* `#ADDOBJECT <(str)name-object>, <(number-pixel)x>, <(number-pixel)y>,<(text-filepath)texture>`
+* `#REMOVEOBJECT <(str)name-object>`
 
 Display property setters:
 
-* `<number-pixel-x>`
-  * `#OBJX <str-name-object>, <number-pixel-x-end>`
-  * `#OBJHMOVESTART <str-name-object>, <number-pixel-x-start>, <number-pixel-x-end>, <enum-str-easing-points>, <enum-str-easying-function>`
+For `#<property>START` commands, `<property>-start` & `<property>-end` have the same value type as `<property>`, and `easing-points` & `easing-function` have the value type of `enum-str`.
+
+* `<(number-pixel)x>`
+  * `#OBJX <(str)name-object>, <x-end>`
+  * `#OBJHMOVESTART <(str)name-object>, <x-start>, <x-end>, <easing-points>, <easing-function>`
   * `#OBJHMOVEEND`
-* `<number-pixel-y>`
-  * `#OBJY <str-name-object>, <number-pixel-y-end>`
-  * `#OBJVMOVESTART <str-name-object>, <number-pixel-y-start>, <number-pixel-y-end>, <enum-str-easing-points>, <enum-str-easing-function>`
+* `<(number-pixel)y>`
+  * `#OBJY <(str)name-object>, <y-end>`
+  * `#OBJVMOVESTART <(str)name-object>, <y-start>, <y-end>, <easing-points>, <easing-function>`
   * `#OBJVMOVEEND`
-* `<float-scale-x>`
-  * `#OBJHSCALE <str-name-object>, <float-scale-x-end>`
-  * `#OBJHSCALESTART <str-name-object>, <float-scale-x-start>, <float-scale-x-end>, <enum-str-easing-points>, <enum-str-easing-function>`
+* `<(float)scale-x>`
+  * `#OBJHSCALE <(str)name-object>, <scale-x-end>`
+  * `#OBJHSCALESTART <(str)name-object>, <scale-x-start>, <scale-x-end>, <easing-points>, <easing-function>`
   * `#OBJHSCALEEND`
-* `<float-scale-y>`
-  * `#OBJVSCALE <str-name-object>, <float-scale-y-end>`
-  * `#OBJVSCALESTART <str-name-object>, <float-scale-y-start>, <float-scale-y-end>, <enum-str-easing-points>, <enum-str-easing-function>`
+* `<(float)scale-y>`
+  * `#OBJVSCALE <(str)name-object>, <scale-y-end>`
+  * `#OBJVSCALESTART <(str)name-object>, <scale-y-start>, <scale-y-end>, <easing-points>, <easing-function>`
   * `#OBJVSCALEEND`
-* `<number-degrees-rotation>`
-  * `#OBJROTATION <str-name-object>, <number-degrees-rotation-end>`
-  * `#OBJROTATIONSTART <str-name-object>, <number-degrees-rotation-start>, <number-degrees-rotation-end>, <enum-str-easing-points>, <enum-str-easing-function>`
+* `<(number-degrees)rotation>`
+  * `#OBJROTATION <(str)name-object>, <rotation-end>`
+  * `#OBJROTATIONSTART <(str)name-object>, <rotation-start>, <rotation-end>, <easing-points>, <easing-function>`
   * `#OBJROTATIONEND`
-* `<unsigned-number-8bit-opacity>`
-  * `#OBJOPACITY <str-name-object>, <unsigned-number-8bit-opacity-end>`
-  * `#OBJOPACITYSTART <str-name-object>, <unsigned-number-8bit-opacity-start> <unsigned-number-8bit-opacity-end>, <enum-str-easing-points>, <enum-str-easing-function>`
+* `<(unsigned-number)8bit-opacity>`
+  * `#OBJOPACITY <(str)name-object>, <8bit-opacity-end>`
+  * `#OBJOPACITYSTART <(str)name-object>, <8bit-opacity-start> <8bit-opacity-end>, <easing-points>, <easing-function>`
   * `#OBJOPACITYEND`
-* `<unsigned-number-8bit-*>`
-  * `#OBJCOLOR <str-name-object>, <unsigned-number-8bit-r-end>, <unsigned-number-8bit-g-end>, <unsigned-number-8bit-b-end>`
+* `<(unsigned-number)8bit-*>`
+  * `#OBJCOLOR <(str)name-object>, <(unsigned-number)8bit-r-end>, <(unsigned-number)8bit-g-end>, <(unsigned-number)8bit-b-end>`
 
 Frame-based animation:
 
 * Animating status:
-  * `#OBJANIMSTART <str-name-object>, <positive-number-milliseconds-frame-duration>`
-  * `#OBJANIMSTARTLOOP <str-name-object>, <positive-number-milliseconds-frame-duration>`
-  * `#OBJANIMEND <str-name-object>`
-* `#OBJFRAME <str-name-object>, <unsigned-int-frame-index>`
+  * `#OBJANIMSTART <(str)name-object>, <(positive-number-milliseconds)frame-duration>`
+  * `#OBJANIMSTARTLOOP <(str)name-object>, <(positive-number-milliseconds)frame-duration>`
+  * `#OBJANIMEND <(str)name-object>`
+* `#OBJFRAME <(str)name-object>, <(unsigned-int)frame-index>`
 
 CAM commands:
 
 * `#CAMRESET` &mdash; resets the following
-* `<number-pixel-x>`
-  * `#CAMHOFFSET <number-pixel-x-end>`
-  * `#CAMHMOVESTART <number-pixel-x-start>, <number-pixel-x-end>, <enum-str-easing-points>, <enum-str-easing-function>`
+* `<(number-pixel)x>`
+  * `#CAMHOFFSET <x-end>`
+  * `#CAMHMOVESTART <x-start>, <x-end>, <easing-points>, <easing-function>`
   * `#CAMHMOVEEND`
-* `<number-pixel-y>`
-  * `#CAMVOFFSET <number-pixel-y-end>`
-  * `#CAMVMOVESTART <number-pixel-y-start>, <number-pixel-y-end>, <enum-str-easing-points>, <enum-str-easying-function>`
+* `<(number-pixel)y>`
+  * `#CAMVOFFSET <y-end>`
+  * `#CAMVMOVESTART <y-start>, <y-end>, <easing-points>, <easing-function>`
   * `#CAMVMOVEEND`
-* `<float-zoom-factor>`
-  * `#CAMZOOM <float-zoom-factor-end>`
-  * `#CAMZOOMSTART <float-zoom-factor-start>, <float-zoom-factor-end>, <enum-str-easing-points>, <enum-str-easing-function>`
+* `<(float)zoom-factor>`
+  * `#CAMZOOM <zoom-factor-end>`
+  * `#CAMZOOMSTART <zoom-factor-start>, <zoom-factor-end>, <easing-points>, <easing-function>`
   * `#CAMZOOMEND`
-* `<float-scale-x>`
-  * `#CAMHSCALE <float-scale-x-end>`
-  * `#CAMHSCALESTART <float-scale-x-start>, <float-scale-x-end>, <enum-str-easing-type>, <enum-str-easing-function>`
+* `<(float)scale-x>`
+  * `#CAMHSCALE <scale-x-end>`
+  * `#CAMHSCALESTART <scale-x-start>, <scale-x-end>, <easing-points>, <easing-function>`
   * `#CAMHSCALEEND`
-* `<float-scale-y>`
-  * `#CAMVSCALE <float-scale-y-end>`
-  * `#CAMVSCALESTART <float-scale-y-start>, <float-scale-y-end>, <enum-str-easing-points>, <enum-str-easing-function>`
+* `<(float)scale-y>`
+  * `#CAMVSCALE <scale-y-end>`
+  * `#CAMVSCALESTART <scale-y-start>, <scale-y-end>, <easing-points>, <easing-function>`
   * `#CAMVSCALEEND`
-* `<number-degrees-rotation>`
-  * `#CAMROTATION <number-degrees-rotation-end>`
-  * `#CAMROTATIONSTART <number-degrees-rotation-start>, <number-degrees-rotation-end>, <enum-str-easing-points>, <enum-str-easing-function>`
+* `<(number-degrees)rotation>`
+  * `#CAMROTATION <rotation-end>`
+  * `#CAMROTATIONSTART <rotation-start>, <rotation-end>, <easing-points>, <easing-function>`
   * `#CAMROTATIONEND`
 
 The `#<property>START` and `#<property>END` commands are sequential.
 
 The approach phase of a `#<property>START` command starts at its definition position and is ended by the nearest at-or-after corresponding `#<property>END` in notechart definition. *Unspecified*: The behavior when a `#<property>START` command either has no such corresponding `#<property>END` or has such `#<property>END` with an earlier time position than the `#<property>START` command itself.
 
-`<enum-str-easing-points>` can be one of:
+`<easing-points>` can be one of:
 
 * `IN`
 * `OUT`
 * `IN_OUT`
 
-`<enum-str-easing-function>` can be one of:
+`<easing-function>` can be one of:
 
 * `CUBIC`
 * `QUARTIC`
@@ -3827,6 +3839,12 @@ The approach phase of a `#<property>START` command starts at its definition posi
 * `EXPONENTIAL`
 * `CIRCULAR`
 * `LINEAR`
+
+#### Compatibility Issues
+
+* In OpenTaiko (0auBSQ) 0.6.0:
+  * The interpolated value for OBJ / CAM commands only have integer precision.
+  * CAM commands only affect objects added with the `#ADDOBJECT` command and do not affect the game camera.
 
 ### #BORDERCOLOR
 
@@ -3843,7 +3861,11 @@ The approach phase of a `#<property>START` command starts at its definition posi
 
 Set the **color** of the displayed region outside the **border** of the gameplay screen (when the gameplay screen camera is manipulated).
 
-* `#BORDERCOLOR <unsigned-number-8bit-r>, <unsigned-number-8bit-g>, <unsigned-number-8bit-b>`
+* `#BORDERCOLOR <(unsigned-number)8bit-r>, <(unsigned-number)8bit-g>, <(unsigned-number)8bit-b>`
+
+#### Compatibility Issues
+
+* In OpenTaiko (0auBSQ) 0.6.0, because CAM commands do not affect the game camera, the `#BORDERCOLOR` command has no visible effects.
 
 ### #CHANGETEXTURE / #RESETTEXTURE
 
@@ -3862,8 +3884,8 @@ Respectively **change** / restore ("**reset**") the texture used in the current 
 
 Reset by each other.
 
-* `#CHANGETEXTURE <text-filepath-original>,<text-filepath-replacing>`
-* `#RESETTEXTURE <text-filepath-original>`
+* `#CHANGETEXTURE <(text-filepath)original>,<(text-filepath)replacing>`
+* `#RESETTEXTURE <(text-filepath)original>`
 
 #### Compatibility Issues
 
@@ -3886,7 +3908,7 @@ Override ("**set**") the **config** value read from the `SkinConfig.ini` of the 
 
 *Unspecified*: The exact list of valid configs, allowed values, and the behaviors.
 
-* `#SETCONFIG <str-config-key>=<rawstr-config-value>`
+* `#SETCONFIG <(str)config-key>=<(rawstr)config-value>`
 
 #### Compatibility Issues
 
@@ -3908,14 +3930,14 @@ Start ("**on**")/stop ("**off**") playing the specified **b**ack**g**round video
 
 The arguments are whitespace-separated.
 
-* `#BGAON <unsigned-int-video-index> <float-milliseconds-video-offset>`
-  * Start playing the specified background video from `<float-milliseconds-video-offset>` milliseconds into the video. The background video specified by [`BGMOVIE:`](#bgmovie) (if any) is hidden but is still playing.
-* `#BGAOFF <unsigned-int-video-index>`
+* `#BGAON <(unsigned-int)video-index> <(float-milliseconds)video-offset>`
+  * Start playing the specified background video from `<video-offset>` milliseconds into the video. The background video specified by [`BGMOVIE:`](#bgmovie) (if any) is hidden but is still playing.
+* `#BGAOFF <(unsigned-int)video-index>`
   * Stop and hide the specified background video. The background video specified by [`BGMOVIE:`](#bgmovie) (if any) is shown and is still playing.
 
 #### Compatibility Issues
 
-* In OpenTaiko (0auBSQ) v0.6.0, `<unsigned-int-video-index>` must be at least 2 decimal digits (including prefixing `0` if necessary). Only the leading 2 digits are significant.
+* In OpenTaiko (0auBSQ) v0.6.0, `<video-index>` must be at least 2 decimal digits (including prefixing `0` if necessary). Only the leading 2 digits are significant.
 
 ### *Proposal* (Komi): COUNTER / TRIGGER Commands
 
@@ -3953,28 +3975,28 @@ Evaluation method:
 
 Local charter-defined variable setters:
 
-* `#STOREC <str-local-value-counter-written>, <text-store-expr-float>`
-* *Proposal* (IID): `#STORECF <str-local-formula-counter-written>, <text-store-expr-float>`
-  * `<str-local-*-counter-written>` is the key of the stored local (value or formula) counter and must not have the form of a [`float`](#value-type).
-* `#STORET <str-local-value-trigger-written>, <text-store-expr-bool>`
-* *Proposal* (IID): `#STORETF <str-local-formula-trigger-written>, <text-store-expr-bool>`
-  * `<str-local-*-trigger-written>` is the key of the stored local (value or formula) trigger and must not be one of `True`, `False`, and any string different from them only by their letter case.
-  * See [Store Expression Syntax](#store-expression-syntax) for the syntax of `<text-store-expr-*>`
+* `#STOREC <(str-local-value-counter)written>, <(text-store-expr-float)value>`
+* *Proposal* (IID): `#STORECF <(str-local-formula-counter)written>, <(text-store-expr-float)formula>`
+  * `<written>` is the key of the stored local (value or formula) counter and must not have the form of a [`float`](#value-type).
+* `#STORET <(str-local-value-trigger)written>, <(text-store-expr-bool)value>`
+* *Proposal* (IID): `#STORETF <(str-local-formula-trigger)written>, <(text-store-expr-bool)formula>`
+  * `<written>` is the key of the stored local (value or formula) trigger and must not be one of `True`, `False`, and any string different from them only by their letter case.
+  * See [Store Expression Syntax](#store-expression-syntax) for the syntax of `text-store-expr-*`
 
 Global charter-defined variable setters:
 
-* `#ELEVATEC <str-global-value-counter-written>, <str-local-value-counter-read>`
-* *Proposal* (IID): `#ELEVATECF <str-global-value-counter-written>, <str-local-formula-counter-read>`
-  * `<str-global-value-counter-written>` is the key of the stored global value counter and must not have the form of a [`float`](#value-type).
-* `#ELEVATET <str-global-value-trigger-written>, <str-local-value-trigger-read>`
-* *Proposal* (IID): `#ELEVATETF <str-global-value-trigger-written>, <str-local-formula-trigger-read>`
-  * `<str-global-value-trigger-written>` is the key of the stored global value trigger and must not be one of `True`, `False`, and any string different from them only by their letter case.
+* `#ELEVATEC <(str-global-value-counter)written>, <(str-local-value-counter)read>`
+* *Proposal* (IID): `#ELEVATECF <(str-global-value-counter)written>, <(str-local-formula-counter)read>`
+  * `<written>` is the key of the stored global value counter and must not have the form of a [`float`](#value-type).
+* `#ELEVATET <(str-global-value-trigger)written>, <(str-local-value-trigger)read>`
+* *Proposal* (IID): `#ELEVATETF <(str-global-value-trigger)written>, <(str-local-formula-trigger)read>`
+  * `<written>` is the key of the stored global value trigger and must not be one of `True`, `False`, and any string different from them only by their letter case.
 
 Recommendation for charters: Global charter-defined variable setters should be used only when necessary and are preferredly used as late (by time position) as possible in the notechart, such as before [`#END`](#start--end) or [(*proposal* (Komi)) the `#SONGJUMP` command](#proposal-komi-songjump).
 
 If the global charter-defined variables are disabled by user option or unimplemented by the simulator, the global charter-defined variable setters have no effects.
 
-For each charter-defined variable setter, if `<str-*-*-*-written>` contains one of the `<>,` characters, the command has no effects.
+For each charter-defined variable setter, if `<written>` contains one of the `<>,` characters, the command has no effects.
 
 #### Store Expression Syntax
 
@@ -3984,7 +4006,7 @@ Operations (in descending precedence):
 
 Syntax | Functionality | Precedence Level | Example | Meaning
 --- | --- | --- | --- | ---
-`< <str-tag> : <str-arg0> : <str-arg1> : ... >` | Variable access <br /> (see below) | (preprocess) | &bull; `<jp>` <br /> &bull; `<gc:acc_oni_p1>` | &bull; The current number of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement. <br /> &bull; The value of the global counter with key `acc_oni_p1`.
+`< <(str)tag> : <(str)arg0> : <(str)arg1> : ... >` | Variable access <br /> (see below) | (preprocess) | &bull; `<jp>` <br /> &bull; `<gc:acc_oni_p1>` | &bull; The current number of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement. <br /> &bull; The value of the global counter with key `acc_oni_p1`.
 `<unsigned-float>` | Unsigned [`float`](#value-type) literal | `primary` | `42` / `.1` / `3.` | `42` / `0.1` / `3.0`
 `( <expr-or> )` | Grouping | `primary` | `(2+2)/2` | → `4 / 2` → `2`
 *Proposal* (IID): <br /> `<expr-funcioncall-func> ( <expr-or-arg0> : <expr-or-arg1> : ... )` | Function call | `funcioncall` | `<math:min>(<lc:acc>:<a>)` | The minimum of the value of local counter with key `acc` and the current accuracy.
@@ -4010,15 +4032,15 @@ The result of `comparison` and `equality` operators is 0 (false) or 1 (true).
 
 #### Store Expression Variable Access
 
-The variable access operation `< <str-tag> : <str-arg0> : <str-arg1> : ... >` is replaced with the [`float`](#value-type) literal of the resolved value before the whole expression is parsed.
+The variable access operation `< <(str)tag> : <(str)arg0> : <(str)arg1> : ... >` is replaced with the [`float`](#value-type) literal of the resolved value before the whole expression is parsed.
 
 If the lookup fails, a warning is emitted and the result is `0`.
 
 *Proposal* (IID): If any of the following are violated, the opening `<` is instead parsed as (part of) a comparison operator:
 
-* If `<str-tag>` starts with `=`, it should be separated from the opening `<` by at least one whitespace, otherwise the operator `<=` is formed.
-* `<str-tag>` should not start with any of `.()!-` or a digit, *i.e.*, the non-whitespace characters possible after the operator `<`, and their paired character (if exists).
-* `<str-tag>` & `<str-arg*>` should not contain any `<` &mdash; Nested variable accesses are not allowed.
+* If `<tag>` starts with `=`, it should be separated from the opening `<` by at least one whitespace, otherwise the operator `<=` is formed.
+* `<tag>` should not start with any of `.()!-` or a digit, *i.e.*, the non-whitespace characters possible after the operator `<`, and their paired character (if exists).
+* `<tag>` & `<arg*>` should not contain any `<` &mdash; Nested variable accesses are not allowed.
 * At least one `>` should present after the opening `<`. If present, the first occuring `>` character is parsed as the closing `>`.
 
 Pre-defined variable tags:
@@ -4075,14 +4097,14 @@ Tag | Arguments | Value
 `mc` <br /> `c` | (none) | **M**aximum/longest **c**ombo ever earned.
 `cb` | (none) | **C**urrent displayed target **b**ranch (0 for Normal, 1 for Expert, 2 for Master)
 `cg` | (none) | **C**urrent **g**ame mode <br /> Positive or zero for 1-digit note symbol game modes: 0 for [Taiko](#note-symbols-in-taiko-mode), 1 for [Konga (Bongo)](#note-symbols-in-konga-mode), 2 for *proposal* (Komi) [Beatz](#proposal-komi-note-symbols-in-beatz-mode). <br /> Negative for multi-digit note symbol modes (reserved, non-standard): -1 for [Jube](#note-symbols-in-jube-mode), -2 for [Bm](#note-symbols-in-bm-mode).
-`lc` | `<str-local-value-counter-read>` | Current value of **l**ocal value **c**ounter (`0` if undefined)
-`lt` | `<str-local-value-trigger-read>` | Current value of **l**ocal value **t**rigger (false if undefined) (`0` for false, `1` for true)
-*Proposal* (IID): <br /> `lcf` | `<str-local-formula-counter-read>` | Current cached value of **l**ocal **c**ounter **f**ormula (`0` if undefined)
-*Proposal* (IID): <br /> `ltf` | `<str-local-formula-trigger-read>` | Current cached value of **l**ocal **t**rigger **f**ormula (false if undefined) (`0` for false, `1` for true)
-`gc` | `<str-global-value-counter-read>` | Current value of **g**lobal value **c**ounter (`0` if undefined)
-`gt` | `<str-global-value-trigger-read>` | Current value of **g**lobal value **t**rigger (false if undefined) (`0` for false, `1` for true)
-*Proposal* (IID): <br /> `func` | `<str-function-name>` | Utility functions
-*Proposal* (IID): <br /> `math` | `<str-constant-or-function-name>` | Mathematical constants and functions
+`lc` | `<(str-local-value-counter)read>` | Current value of **l**ocal value **c**ounter (`0` if undefined)
+`lt` | `<(str-local-value-trigger)read>` | Current value of **l**ocal value **t**rigger (false if undefined) (`0` for false, `1` for true)
+*Proposal* (IID): <br /> `lcf` | `<(str-local-formula-counter)read>` | Current cached value of **l**ocal **c**ounter **f**ormula (`0` if undefined)
+*Proposal* (IID): <br /> `ltf` | `<(str-local-formula-trigger)read>` | Current cached value of **l**ocal **t**rigger **f**ormula (false if undefined) (`0` for false, `1` for true)
+`gc` | `<(str-global-value-counter)read>` | Current value of **g**lobal value **c**ounter (`0` if undefined)
+`gt` | `<(str-global-value-trigger)read>` | Current value of **g**lobal value **t**rigger (false if undefined) (`0` for false, `1` for true)
+*Proposal* (IID): <br /> `func` | `<(str)function-name>` | Utility functions
+*Proposal* (IID): <br /> `math` | `<(str)constant-or-function-name>` | Mathematical constants and functions
 
 *Proposal* (IID): Pre-defined constants:
 
@@ -4293,7 +4315,7 @@ Intended for **mod**ifying the content of loaded notechart, including adjusting 
 
 The exact behavior is *unspecified*.
 
-* `#LUAMOD <str-lua-code>`
+* `#LUAMOD <(str)lua-code>`
 
 ### *Proposal* (IID): #LUAFX
 
@@ -4315,7 +4337,7 @@ Intended to be used in conjunction with [**Proposed** (IID) command modifiers](#
 
 The exact behavior is *unspecified*.
 
-* `#LUAFX <str-lua-code>`
+* `#LUAFX <(str)lua-code>`
 
 ### *Proposal* (IID): Command Modifier
 
@@ -4331,10 +4353,10 @@ The exact behavior is *unspecified*.
 
 A command modifier can be specified to certain branch-scoped commands using the following form:
 
-* `#COMMAND values; <effect-scope-specifier>; <approach-specifier>`
+* `#COMMAND values; [effect-scope-specifier]; [approach-specifier]`
   * The last semicolon-separated element(s) and trailing semicolon(s) (`;`) can be omitted:
-    * `<approach-specifier>` defaults to `0:Linear, 0:Linear`
-    * `<effect-scope-specifier>` defaults to (empty).
+    * `[approach-specifier]` defaults to `0:Linear, 0:Linear`
+    * `[effect-scope-specifier]` defaults to (empty).
 
 The whitespace rule of the [comma (`,`)](#comma) also applies to the semicolon (`;`).
 
@@ -4342,40 +4364,40 @@ The characters after the first semicolon (`;`) are ignored in TaikoJiro 1 but ca
 
 `<effect-scope-specifier>` specifies the non-static effect scope of the command.
 
-* Format: `<command-time-scope-specifier>, <object-time-scope-specifier>`
+* Format: `[command-time-scope-specifier], [object-time-scope-specifier]`
   * The last comma-separated element(s) can be omitted.
-* `<command-time-scope-specifier>` can be one of:
+* `[command-time-scope-specifier]` can be one of:
   * (Empty) &mdash; the default.
   * `:` &mdash; (None): Affect no notechart objects.
-  * `:<range-command-time-at-or-after>` &mdash; At-or-after: Affect notechart objects at-or-after the point.
-  * `<range-command-time-before>:` \
-    / `<range-command-time-before>:0` &mdash; Before: Affect notechart objects before the point.
-  * `<range-command-time-before>:<range-command-time-at-or-after>` &mdash; Both: Affect notechart objects near to the point.
-* `<range-command-time-before>` & `<range-command-time-at-or-after>` can be one of:
+  * `:<(range-command-time)at-or-after>` &mdash; At-or-after: Affect notechart objects at-or-after the point.
+  * `<(range-command-time)before>:` \
+    / `<(range-command-time)before>:0` &mdash; Before: Affect notechart objects before the point.
+  * `<(range-command-time)before>:<(range-command-time)at-or-after>` &mdash; Both: Affect notechart objects near to the point.
+* A `range-command-time` value can be one of:
   * `*` &mdash; the range is unlimited.
-  * `<unsigned-int-amount-note>n` specifies the maximum amount of affected notes.
-  * `<range-duration-*>` specifies the time/beat range of affected notechart objects (see below).
+  * `<(unsigned-int)amount-note>n` specifies the maximum amount of affected notes.
+  * `<range-duration-specifier>` specifies the time/beat range of affected notechart objects (see below).
 * *Proposal* (IID): `<object-time-scope-specifier>`
   * (Empty) &mdash; override the effect of the whole scrolling path of affected notechart objects.
-  * `<range-object-time-deactivate>:<range-object-time-activate>` &mdash; Override the effect of the part of scrolling path of affected notechart objects from `<range-object-time-activate>` (inclusive) before the judgment time to `<range-object-time-deactivate>` (inclusive) before the judgment time of each notechart object.
-    * `<range-object-time-deactivate>` & `<range-object-time-activate>` can be one of:
+  * `<(range-object-time)deactivate>:<(range-object-time)activate>` &mdash; Override the effect of the part of scrolling path of affected notechart objects from `<range-object-time-activate>` (inclusive) before the judgment time to `<range-object-time-deactivate>` (inclusive) before the judgment time of each notechart object.
+    * A `range-object-time` value can be one of:
       * `*` &mdash; the range is unlimited.
-      * `<range-duration-*>` specifies the time/beat duration (inclusive) before the judgment time of each notechart object (see below).
+      * `<range-duration-specifier>` specifies the time/beat duration (inclusive) before the judgment time of each notechart object (see below).
 
 `<approach-specifier>` specifies the time or beat interval and easing method of the approach phase.
 
 * Can be one of:
-  * `<approach-before>, <approach-at-or-after>` &mdash; Start approaching for the specified time duration before the beat position of the command and end approaching at the beat position of the command at-or-before the specified duration interval.
-  * `<approach-both>` &mdash; Both `<approach-before>` & `<approach-at-or-after>` are `<approach-both>`
+  * `<(range-approach)before>, <(range-approach)at-or-after>` &mdash; Start approaching for the specified time duration before the beat position of the command and end approaching at the beat position of the command at-or-before the specified duration interval.
+  * `<(range-approach)both>` &mdash; Both `<before>` & `<at-or-after>` are specified to be `<both>`
   * (Empty) / `0` / `0:Linear` / `0:0` / `0:Linear, 0:Linear`
-* `<approach-before>` & `<approach-at-or-after>` can be one of:
-  * `<range-duration-*>` &mdash; (see below).
-  * `<range-duration-*>:<enum-str-easing-function>`
-    * `<enum-str-easing-function>` specifies the easing functions for the begin or end point of approaching.
+* A `range-approach` value can be one of:
+  * `<range-duration-specifier>` &mdash; (see below).
+  * `<range-duration-specifier>:<(enum-str)easing-function>`
+    * `<(enum-str)easing-function>` specifies the easing functions for the begin or end point of approaching.
 
-`<range-duration-*>` specifies the time/beat duration interval of the approach phase and can be one of:
+`<range-duration-specifier>` specifies the time/beat duration interval of the approach phase and can be one of:
 
-* `<unsigned-float-seconds-time-duration>` specifies the time duration.
+* `<(unsigned-float-seconds)time-duration>` specifies the time duration.
 
 ## TJA Notechart Definition
 
@@ -4401,7 +4423,7 @@ In non-command lines, all whitespaces are ignored. (TaikoJiro-only?)
 
 ### Notechart Symbols
 
-Including the measure delimiter symbol (comma; `,`) & note symbols (`<enum-str-note>`).
+Including the measure delimiter symbol (comma; `,`) & note symbols (`<(enum-str)note>`).
 
 A measure consists of at least 1 notechart symbol (except for the last measure of the chart) and any number of commands and headers. The measure delimiter symbol `,` must be the last element if present.
 
