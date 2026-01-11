@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-01-10 (UTC+8)
+* Last changed: 2026-01-12 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -3755,14 +3755,14 @@ The arguments are whitespace-separated.
   * Roughly equivalent to (*Proposal* (IID)) `#SPLITLANE 43.333i` if defined in a [Taiko](#note-symbols-in-taiko-mode) or [Konga](#note-symbols-in-konga-mode) mode section.
   * *Proposal* (Komi, IID): Roughly equivalent to `#SPLITLANE 86.667i` if defined in a (*Proposal* (Komi)) [Beatz mode](#proposal-komi-note-symbols-in-beatz-mode) section. The default split offset of Beatz mode is in the opposite direction of the total split offset of `#SPLITLANE`.
 * *Proposal* (IID): `#SPLITLANE <(complex-ri-float-pixel)katsu-offset-xy> [direction-specifier=0]`
-  * Specify the offset for <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>-type notes relatived to the game mode default.
+  * Specify the offset for <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>-type notes relatived to the game mode default. <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>-type notes have the offset reversed in sign (rotated 180 degrees (°) (counter)clockwise (↺/↻)).
   * The real component of `<katsu-offset>` specifies the horizontal offset toward the right of the screen (→), and the imaginary component specifies the vertical offset toward the bottom of the screen (↓), which is the same as [the `#JPOSSCROLL` command](#jposscroll).
   * The unit is a pixel in 1280×720 resolution and scales with game resolution.
   * `<direction-specifier>` can be one of:
     * (Empty) / `0`
       * Specify the offset for <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>-type notes directly.
     * `1`
-      * The offset for <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>-type notes direction is reversed (rotated 180 degrees (°) (counter)clockwise (↺/↻)). The specified offset is for <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>-type notes directly.
+      * The offset for <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>-type notes is reversed in sign (rotated 180 degrees (°) (counter)clockwise (↺/↻)). The specified offset is for <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>-type notes directly.
 * Initial value (Taiko and Konga mode) / `#MERGELANE`
   * Move <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>-type notes and <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>-type notes onto the middle note field.
   * Equivalent to (*Proposal* (IID)) `#SPLITLANE 0` if defined in a [Taiko](#note-symbols-in-taiko-mode) or [Konga](#note-symbols-in-konga-mode) mode section.
