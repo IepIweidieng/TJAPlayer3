@@ -2444,7 +2444,7 @@ Insert a fake/dummy normal **bar** **line** displayed at the head of the current
 
 Move ("**scroll**") the **pos**ition of the **j**udgment mark (together with all notes and bar lines) from the current position.
 
-If another `#JPOSSCROLL` command is placed within the moving duration interval of the current `#JPOSSCROLL` command, the current `#JPOSSCROLL` command continues normally until the next `#JPOSSCROLL`, then stops the current `#JPOSSCROLL` and leaves the judgement mark at where it have moved to, and then the next `#JPOSSCROLL` starts.
+If another `#JPOSSCROLL` command is placed within the moving duration interval of the current `#JPOSSCROLL` command, the current `#JPOSSCROLL` command continues normally until the next `#JPOSSCROLL`, then stops the current `#JPOSSCROLL` and leaves the judgement mark at where it has moved to, and then the next `#JPOSSCROLL` starts.
 
 Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
@@ -2462,7 +2462,7 @@ The arguments are whitespace-separated.
     * `<(complex-ri-number-pixel)distance-xy>` \
       ***Supported by***: TJAPlayer3 v1.6.x, OpenTaiko (0auBSQ) v0.6.0
       * The imaginary component of `<distance-xy>` specifies the vertical movement toward the bottom of the screen (↓).
-        * In TaikoJiro 2 and TaikoManyGimmicks, this vertical movement direction is in the opposite direction of the direction of the [`#SCROLL` command] in these simulators.
+        * In TaikoJiro 2 and TaikoManyGimmicks, this vertical movement direction is in the opposite direction of the direction of the [`#SCROLL` command](#scroll) in these simulators.
       * In OpenTaiko (0auBSQ) 0.6.0, the unit is a pixel in 1280×720 resolution and scales with game resolution.
     * `<(number-distance)x-upper>/<(number-distance)x-lower>` \
       ***Supported by***: TaikoManyGimmicks
