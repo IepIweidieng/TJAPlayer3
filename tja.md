@@ -1133,6 +1133,10 @@ See [the `#GAMETYPE` command](#gametype) for specifying the game mode for specif
   ***Supported by***: taiko-web (plugin "Donkey Konga Mode")
   * A game mode similar to *Donkey Konga*, developed by Namco
   * See [Note Symbols in Konga Mode](#note-symbols-in-konga-mode)
+* (*Proposal* (Komi)) `GAME:Beatz` \
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 2.0
+  * A game mode similar to Squid Beatz 2, a mini game in Splatoon 2, developed by Nintendo
+  * See [Note Symbols in Beatz Mode](#proposal-komi-note-symbols-in-beatz-mode)
 
 #### Compatibility Issues
 
@@ -1739,7 +1743,7 @@ These compatibility flags are considered for internal uses by the simulator and 
   * `up` &mdash; from the bottom to the top of the screen (↑).
 * `jposscroll-i=down`, `jposscroll-i=up`
   * ***Impact level***: gimmicky ★★・・・
-  * Specify the vertical scroll direction specified by the imaginary component of `<complex-ri-float-xy>` in [`#JPOSSCROLL <approach-duration-specifier> <complex-ri-float-xy> 0`](#jposscroll).
+  * Specify the vertical scroll direction specified by the imaginary component of `<complex-ri-float-xy>` in [`#JPOSSCROLL <approach-duration> <complex-ri-float-xy> 0`](#jposscroll).
   * `down` &mdash; from the top to the bottom of the screen (↓).
   * `up` &mdash; from the bottom to the top of the screen (↑).
 * `jposscroll-interrupt=trunc`, `jposscroll-interrupt=jump`, `jposscroll-interrupt=add`
@@ -2438,27 +2442,28 @@ Insert a fake/dummy normal **bar** **line** displayed at the head of the current
 ***Effect target***: notes, bar lines, judgment mark, note field \
 ***Effect branches***: *Unspecified*
 
-Move ("**scroll**") the **pos**ition of the **j**udgment circle from the current position.
+Move ("**scroll**") the **pos**ition of the **j**udgment mark (together with all notes and bar lines) from the current position.
 
-*Unspecified*: The behavior when another `#JPOSSCROLL` command is placed within the moving duration interval of the current `#JPOSSCROLL` command.
+If another `#JPOSSCROLL` command is placed within the moving duration interval of the current `#JPOSSCROLL` command, the current `#JPOSSCROLL` command continues normally until the next `#JPOSSCROLL`, then stops the current `#JPOSSCROLL` and leaves the judgement mark at where it have moved to, and then the next `#JPOSSCROLL` starts.
 
 Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 The arguments are whitespace-separated.
 
-* `#JPOSSCROLL <approach-duration-specifier> <distance-specifier> <direction-specifier>`\
-  / `#JPOSSCROLL(<approach-duration-specifier>, <(number-pixel)distance-x>)` \
+* `#JPOSSCROLL <(positive-or-zero-float-seconds)approach-duration> <distance-specifier> <direction-specifier>`\
+  ***Supported by***: OpenTaiko-TaikoManyGimmicks v0.6.1α\
+  / `#JPOSSCROLL(<(positive-or-zero-float-seconds)approach-duration>, <(number-pixel)distance-x>)` \
   ***Supported by***: TaikoManyGimmicks v0.6.1α\
-  / `#JPOSSCROLL(<approach-duration-specifier>, <(number-pixel)distance-x>, <(number-pixel)distance-y>)` \
+  / `#JPOSSCROLL(<(positive-or-zero-float-seconds)approach-duration>, <(number-pixel)distance-x>, <(number-pixel)distance-y>)` \
   ***Supported by***: TaikoManyGimmicks v0.6.6α
-  * `<approach-duration-specifier>` can be one of:
-    * `<(positive-float-seconds)approach-duration>`
+  * If `<approach-duration>` is 0, the judgement mark is instantly moved to the destination even if the next `#JPOSSCROLL` begins simultaneously.
   * `<distance-specifier>` can be one of:
     * `<(number-pixel)distance-x>`
     * `<(complex-ri-number-pixel)distance-xy>` \
       ***Supported by***: TJAPlayer3 v1.6.x, OpenTaiko (0auBSQ) v0.6.0
       * The imaginary component of `<distance-xy>` specifies the vertical movement toward the bottom of the screen (↓).
         * In TaikoJiro 2 and TaikoManyGimmicks, this vertical movement direction is in the opposite direction of the direction of the [`#SCROLL` command] in these simulators.
+      * In OpenTaiko (0auBSQ) 0.6.0, the unit is a pixel in 1280×720 resolution and scales with game resolution.
     * `<(number-distance)x-upper>/<(number-distance)x-lower>` \
       ***Supported by***: TaikoManyGimmicks
       * Specify the horizontal movement to be `<(number-distance)x-upper>/<(number-distance)x-lower>` of the default note field width.
@@ -2466,7 +2471,9 @@ The arguments are whitespace-separated.
       ***Supported by***: TaikoManyGimmicks
       * Move the judgment mark to the default position, regardless of `<direction-specifier>`.
   * `<direction-specifier>` can be one of:
-    * (Empty) / `0`
+    * `0`
+      / (Empty)\
+      ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
       * Specify the moving direction as toward from where the notes and bar lines would scroll if `<distance-specifier>` were the argument of [the `#SCROLL` command](#scroll) when the BPM is positive.
     * `1`
       * The moving direction is reversed (rotated 180 degrees (°) (counter)clockwise (↺/↻)) compared to when `<direction-specifier>` is `0`.
@@ -2474,8 +2481,13 @@ The arguments are whitespace-separated.
 #### Compatibility Issues
 
 * Recommendation for charters: If the vertical scroll direction is significant, [the `COMPAT:` header](#proposal-iid-compat) should be specified.
-* In TJAPlayer3, where the imaginary component of `<pixel-distance-xy>` is introduced, due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑), the vertical movement direction is in the same direction as the direction of the [`#SCROLL` command](#scroll), but is in the opposite direction of the `#SCROLL` command in other simulators including TaikoJiro 2 and TaikoManyGimmicks.
+* In TJAPlayer3, where the imaginary component of `<distance-xy>` is introduced, due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑), the vertical movement direction is in the same direction as the direction of the [`#SCROLL` command](#scroll), but is in the opposite direction of the `#SCROLL` command in other simulators including TaikoJiro 2 and TaikoManyGimmicks.
 * TJAPlayer2 for.PC and TaikoManyGimmicks do not support all existent forms of `<scroll-speed-xy>`, see the explanation of compatibility issues in [Value Type](#value-type).
+* In TJAPlayer2 for.PC:
+  * Until TJAPlayer-f and TJAPlayer3-Develop-ReWrite: For every `#JPOSSCROOLL` the resulting judgement mark position depends on the frame rate and is not accurate, especially for short `<approach-duration>` or large distance of `<distance-x>` or `<distance-xy>`. If `<approach-duration>` is 0, the judgement mark and most (if not all) notes and bar lines go off the screen because the movement per frame is divided by 0.
+  * Until OpenTaiko (0auBSQ) v0.6.0.48:
+    * `<distance-x>` or `<distance-xy>` is rounded to the nearest integer toward 0.
+    * When a current `#JPOSSCROLL` is stopped by another `#JPOSSCROLL` command within the current `#JPOSSCROLL`'s moving duration interval, the resulting judgement mark position depends on the frame rate and is not accurate.
 
 ### #JUDGEDELAY
 
@@ -3542,6 +3554,10 @@ See [the `GAME:` header](#game) for specifying the initial game mode for the not
 * `#GAMETYPE Konga` / `#GAMETYPE Bongo`
   * A game mode similar to *Donkey Konga*, developed by Namco
   * See [Note Symbols in Konga Mode](#note-symbols-in-konga-mode)
+* (*Proposal* (Komi)) `#GAMETYPE Beatz` \
+  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 2.0
+  * A game mode similar to Squid Beatz 2, a mini game in Splatoon 2, developed by Nintendo
+  * See [Note Symbols in Beatz Mode](#proposal-komi-note-symbols-in-beatz-mode)
 * Initial value: The game mode specified by [the `GAME:` header](#game) (not supported by OpenTaiko (0auBSQ))
 
 #### Compatibility Issues
@@ -3726,12 +3742,36 @@ Append ("**include**") the notechart definition content defined the included fil
 ***Effect target***: notes, bar lines, judgment mark(s), note field(s) \
 ***Effect branches***: *Unspecified*
 
-**Split**/**merge** the note field ("**lane**") into/from top and bottom note field, with <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> notes on the top note field, <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> notes on the bottom note field, and other notes on the middle of these 2 note fields.
+**Split**/**merge** the note field ("**lane**") into/from top and bottom note field for hit-type notes and non-balloon bar drumrolls. "<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>-type notes" (notes accepting only <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> or <ruby>ポ<rt>Po</rt>ン<rt>n</rt></ruby> input) goes to one field, and "<ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>-type notes" (<ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> or <ruby>パ<rt>Pa</rt></ruby>) go to another field. Other notes remains on the middle of these 2 note fields.
 
-* `#SPLITLANE` / (*Proposed* (IID)) `#SPLITLANE 1`
-* *Proposal* (IID): `#SPLITLANE <(float)split-amount>`
-  * Specify the split amount, 1 for `#SPLITLANE` & 0 for `#MERGELANE`. A negative split amount makes <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> notes on the bottom note field and <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> notes on the top note field intead.
-* Initial value / `#MERGELANE` / (*Proposed* (IID)) `#SPLITLANE 0`
+*Proposal* (Komi, IID): The (*Proposal* (Komi)) [Beatz mode](#proposal-komi-note-symbols-in-beatz-mode) has a non-zero default split offset, which is not affected by the additional split offset added by the `#SPLITLANE` or `#MERGELANE` command.
+
+*Proposal* (IID): Reset by [`#RESETCOMMAND`](#note--barline-commands).
+
+The arguments are whitespace-separated.
+
+* `#SPLITLANE`
+  * Move <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>-type notes onto the top note field, <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>-type notes onto the bottom note field. Both note fields are offset by 1/3 of the lane height to the middle of both fields.
+  * Roughly equivalent to (*Proposal* (IID)) `#SPLITLANE 43.333i` if defined in a [Taiko](#note-symbols-in-taiko-mode) or [Konga](#note-symbols-in-konga-mode) mode section.
+  * *Proposal* (Komi, IID): Roughly equivalent to `#SPLITLANE 86.667i` if defined in a (*Proposal* (Komi)) [Beatz mode](#proposal-komi-note-symbols-in-beatz-mode) section. The default split offset of Beatz mode is in the opposite direction of the total split offset of `#SPLITLANE`.
+* *Proposal* (IID): `#SPLITLANE <(complex-ri-float-pixel)katsu-offset-xy> [direction-specifier=0]`
+  * Specify the offset for <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>-type notes relatived to the game mode default.
+  * The real component of `<katsu-offset>` specifies the horizontal offset toward the right of the screen (→), and the imaginary component specifies the vertical offset toward the bottom of the screen (↓), which is the same as [the `#JPOSSCROLL` command](#jposscroll).
+  * The unit is a pixel in 1280×720 resolution and scales with game resolution.
+  * `<direction-specifier>` can be one of:
+    * (Empty) / `0`
+      * Specify the offset for <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>-type notes directly.
+    * `1`
+      * The offset for <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>-type notes direction is reversed (rotated 180 degrees (°) (counter)clockwise (↺/↻)). The specified offset is for <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>-type notes directly.
+* Initial value (Taiko and Konga mode) / `#MERGELANE`
+  * Move <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>-type notes and <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>-type notes onto the middle note field.
+  * Equivalent to (*Proposal* (IID)) `#SPLITLANE 0` if defined in a [Taiko](#note-symbols-in-taiko-mode) or [Konga](#note-symbols-in-konga-mode) mode section.
+  * (*Proposal* (Komi, IID)) Roughly equivalent to `#SPLITLANE 43.333i` if defined in a (*Proposal* (Komi)) [Beatz mode](#proposal-komi-note-symbols-in-beatz-mode) section.
+* (*Proposal* (IID)) Initial value (Beatz mode) / (roughly) `#SPLITLANE -43.333i`
+
+#### Compatibility Issues
+
+* Recommendation for charters: If the vertical scroll direction is significant, [the `COMPAT:` header](#proposal-iid-compat) should be specified.
 
 ### OBJ / CAM Commands
 
@@ -4753,6 +4793,8 @@ The note handling details of the Taiko mode apply. See the explanation in [Note 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 2.0
 
 Specification by Komi: <https://docs.google.com/document/d/1GSBX-xVymf6p525MUm9bvhTryYyG_3pLaTk6wiHVtck>
+
+Effective when [`GAME:Beatz`](#game) or [`#GAMETYPE Beatz`](#gametype) is in effect.
 
 The Beatz mode is based on Squid Beatz 2, a mini game in Splatoon 2, developed by Nintendo.
 
