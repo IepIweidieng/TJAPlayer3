@@ -1324,8 +1324,6 @@ Each balloon-type note with unassigned hit amount requires an *unspecified* defa
 * In TaikoJiro, the default amount of hits is `5`.
 * In TJAPlayer2 for.PC, if the balloon header for the corresponding branch is specified, the default amount of hits in the branch is `0`. Otherwise, the default amount of hits in the branch is `5`.
 
-*Proposal* (IID): The [`#BALLOON`](#proposal-iid-balloon-command) command can be used in the notechart definition for the same purpose instead.
-
 * `BALLOON:<(comma-separated-list:positive-or-zero-int)amount-of-hits>` \
   [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0
   * The list of amount is iterated over non-repeated head of balloon-type notes in all sections of all *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>ki</rt></ruby>* "notechart branches"/forked paths.
@@ -1641,16 +1639,14 @@ If enabled, make the *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>k
 ### *Proposal* (IID) COMPAT:
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
-***Impact level***: note ★★★★★ (maximum, depends on the compatibility flags) \
+***Impact level***: note ★★★★★ (maximum, depends on the compatibility mode) \
 ***Scope-fineness***: per&ndash;player-side
 
 Specify the intended compatibility mode of the chart.
 
-The supported set of headers & commands and allowed argument forms is not affected. However, the arguments might be interpreted differently dependent on the compatibility mode and flags.
+The supported set of headers & commands and allowed argument forms is not affected. However, the arguments might be interpreted differently dependent on the compatibility mode.
 
-* `COMPAT:<(comma-separated-list:enum-str)compat-option>`
-  * The first element of `<(comma-separated-list:enum-str)compat-option>` is one of `<(enum-str)compat-mode>` & `<(enum-str)compat-flag>`, and subsequent elements are `<(enum-str)compat-flag>`.
-  * Unrecognized or unsupported elements are warned (if possible) and then skipped. If the first element is unrecognized or unsupported, all elements are treated as `<compat-flag>`.
+* `COMPAT:<(enum-str)compat-mode>`
 * Initial value: An *unspecified* compatibility mode is chosen by the simulator.
   * In OpenTaiko (0auBSQ), defaults to `oos`, unless specified in the TJA file or the `box.def` in the directory containing the TJA file.
   * Recommendation for simulator developers: Defaults to `oos` unless the simulator is used as a drop-in replacement of a certain existing simulator.
@@ -1663,119 +1659,111 @@ The supported set of headers & commands and allowed argument forms is not affect
 * `tjap3` &mdash; Reference: TJAPlayer3 v5.2.10
 * `oos` &mdash; OpenTaiko-OutFox standard. Reference: OpenTaiko (0auBSQ). Proposed here as a more idealized form of `tjap3`
 
-`<compat-flag>` is in the format of `<(enum-str)compat-item>=<(enum-str)compat-option>`.
+#### Compatibility Behaviors
 
-#### Preset Compatibility Flags
+The compatibility behaviors are denoted in this article as below.
 
-These compatibility flags are in the form of `<(enum-str)compat-item>=<(enum-str)compat-mode>`. Charters should only use these flags if necessary.
+Balloon parsing behaviors:
 
-See [Comparison of Compatibility Modes](#comparison-of-compatibility-modes) for the value of internal flags for each compatibility mode.
-
-* `balloon` &ndash; Balloon parsing behaviors: `balloon-popcount` & `balloonnem-popcount-nonbranch`
-* `end-at` &ndash; Chart ending behaviors: `end-at`
-* `timing` &ndash; Timing behaviors: `timing-precision` & `timing-effect-order`
-* `hbscroll` &ndash; HBScroll behaviors: `hbscroll-past` & `hbscroll-delay`
-* `scroll` &ndash; Note object scrolling behaviors: `roll-pos`, `roll-nodes`, `scroll-i`, `jposscroll-i`, `jposscroll-interrupt`, `sudden-directions`, & `sudden-precision`
-* `draw` &ndash; Note object drawing behaviors: `stack-order`, `angle-barline`, `angle-note`, & `angle-roll-bar`
-
-#### Internal Compatiblity Flags
-
-These compatibility flags are considered for internal uses by the simulator and may be unimplemented. Charters should never specify these flags.
-
-* `balloon-popcount=common`, `balloon-popcount=n`
+* `balloon-popcount`
   * ***Impact level***: note ★★★★★
-  * Specify how the required amounts of hits to finish balloon-type notes defined by [the non-branching `BALLOON:` header](#balloon-headers) is assigned in a branched chart.
+  * How the required amounts of hits to finish balloon-type notes defined by [the non-branching `BALLOON:` header](#balloon-headers) is assigned in a branched chart.
   * `common` &mdash; for each balloon-type note head symbol, a value is assigned and consumed if the note symbol is a non-repeated roll head in any branch, in their lexical definition order. The `BALLOONNOR:`, `BALLOONEXP:`, and `BALLOONMAS:` headers are ignored if the `BALLOON:` header is specified.
   * `n` &mdash; the `BALLOON:` header is treated the same as the `BALLOONNOR:` header.
-* `balloonnem-popcount-nonbranch=1n`, `balloonnem-popcount-nonbranch=1nem`, `balloonnem-popcount-nonbranch=1n-or-end-3last`, `balloonnem-popcount-nonbranch=1n-or-end-1nem`
+* `balloonnem-popcount-nonbranch`
   * ***Impact level***: note ★★★★★
-  * Specify how the required amounts of hits to finish balloon-type notes defined by [the BALLOON headers](#balloon-headers) is assigned within non-branched sections.
+  * How the required amounts of hits to finish balloon-type notes defined by [the BALLOON headers](#balloon-headers) is assigned within non-branched sections.
   * `1n` &mdash; for each balloon-type note head symbol, a value from `BALLOONNOR:` is assigned and consumed if the note symbol is a non-repeated roll head in any branch.
+    * TJAPlayer2 for.PC behavior, not in any compatibility mode.
   * `1nem` &mdash; for each balloon-type note head symbol, a value (up to 3 total) from the respect branched BALLOON header is assigned and consumed if the note symbol is a non-repeated roll head in a branch, in the order of Normal, Expert, and Master branches.
   * `1n-or-end-3last` &mdash; before the first [`#BRANCHEND`](#branchstart--branchend), behaviors as `1n`; after the first `#BRANCHEND`, for each balloon-type note head symbol, a value (up to 3 total) from the branched BALLOON header for the last branch specified by [`#N`, `#E`, or `#M`](#n--e--m) is assigned and consumed if the note symbol is a non-repeated roll head in a branch, in the order of Normal, Expert, and Master branches.
   * `1n-or-end-1nem` &mdash; before the first [`#BRANCHEND`](#branchstart--branchend), behaviors as `1n`; after the first `#BRANCHEND`, behaviors as `1nem`
-* `end-at=end`, `end-at=music`, `end-at=music-and-end`
+    * TJAPlayer3-Develop & TJAPlayer3-Develop-ReWrite behavior, not in any compatibility mode.
+
+Playable section behaviors:
+
+* `end-at`
   * ***Impact level***: note ★★★★★
-  * Specify the ending point, where the gameplay should end at *unspecified* finite duration at-or-after these ending point.
+  * The ending point, where the gameplay should end at *unspecified* finite duration at-or-after these ending point.
   * `end` &mdash; the ending point is the (possibly implicit) [`#END`](#start--end).
   * `music` &mdash; the default ending point is the end of music. If [the `WAVE:` header](#wave) is not specified or the specified file is missing or unsupported, the ending point is the (possibly implicit) [`#END`](#start--end).
   * For option `music-and-end`, the ending point is the earliest one specified by `end-at=music` & `end-at=end`.
-* `timing-precision=any`, `timing-precision=ms`, `timing-precision=ms-bpm`
+ 
+Timing behaviors:
+
+* `timing-precision`
   * ***Impact level***: timing ★★★★・
-  * Specify the time precision of [measure divisions](#the-measure-delimiter-symbol-and-timing), [`#DELAY`](#delay), and commands.
+  * The time precision of [measure divisions](#the-measure-delimiter-symbol-and-timing), [`#DELAY`](#delay), and commands.
   * `any` &mdash; the precision is only limited by the implementation.
   * `ms` &mdash; the definition cursor has the same precision as `any`, but the resulting time for each measure division has the precision is 0.001 seconds, rounded toward 0.
   * `ms-bpm` &mdash; the definition cursor has the same precision as `any`, but the elapsed time between elapse points is rounded to 0.001 second (toward 0). The elapsed point is one of chart start, the `#BPMCHANGE` command, and the end of a measure with `#BPMCHANGE` defined. The resulting time for each measure division and the time duration of `#DELAY` has the precision of 0.001 seconds, rounded toward 0. Notes' beat position is also aligned to pixels when a `#BPMCHANGE` comment is encountered (?).
     * Reference: K. *太鼓さん次郎 Ver.2.92 の内部仕様雑記*. ("Miscellaneous notes on the internal behaviors of TaikoJiro Ver.2.92"). <https://note.com/lime_5137/n/n672c0a41495d>
-* `timing-effect-order=def`, `timing-effect-order=flat-time-or-def`, `timing-effect-order=time-or-def`, `timing-effect-order=time`
+* `timing-effect-order`
   * ***Impact level***: gimmicky ★★・・・
-  * Specify the applying order of the per-note static-time effects of `#BPMCHANGE` & `#SCROLL` and the command-time effects of `#BPMCHANGE` & positive `#DELAY`.
+  * The applying order of the per-note static-time effects of `#BPMCHANGE` & `#SCROLL` and the command-time effects of `#BPMCHANGE` & positive `#DELAY`.
   * `def` &mdash; by the definition order in a branch.
   * `flat-time-or-def` &mdash; by time order (if differs) or by the definition order in a branch.
   * `time-or-def` &mdash; by time order (if differs), with later defined commands overrides earlier defined commands, or by the definition order in a branch.
   * `time` &mdash; by time range, with later defined commands overrides earlier defined commands, rounded according to `timing-precision`.
-* `hbscroll-past=hbscroll`, `hbscroll-past=nmscroll`
+
+HBScroll behaviors:
+
+* `hbscroll-past`
   * ***Impact level***: gimmicky ★★・・・
-  * Specify the past-judgement scroll behavior for notechart objects with [HBScroll or BMScroll mode](#bmscroll--hbscroll--nmscroll).
+  * The past-judgement scroll behavior for notechart objects with [HBScroll or BMScroll mode](#bmscroll--hbscroll--nmscroll).
   * `hbscroll` &mdash; no scroll behavior changes.
   * `nmscroll` &mdash; when a such object reaches the judgement timing, these objects and earlier defined such objects in the same branch are positioned as if their scroll mode had been changed to Normal Taiko scroll for the remaining gameplay. (and with [`#SCROLL 1`](#scroll) enforced for BMScroll mode objects)
-* `hbscroll-delay=offset`, `hbscroll-delay=pause`, `hbscroll-delay=freeze`
+* `hbscroll-delay`
   * ***Impact level***: gimmicky ★★・・・
-  * Specify how each positive [`#DELAY`](#delay) pauses the scroll in HBScroll and BMScroll during its effective duration. A negative `#DELAY` always offsets both the time and the beat of the definition cursor regardless of this flag.
+  * How each positive [`#DELAY`](#delay) pauses the scroll in HBScroll and BMScroll during its effective duration. A negative `#DELAY` always offsets both the time and the beat of the definition cursor regardless of this flag.
   * `offset` &mdash; does not pause; offsets both the time and the beat of the definition cursor.
   * `pause` &mdash; pauses while no beat progress happens; offsets only the time of the definition cursor.
   * `freeze` &mdash; if the `#DELAY` is defined at the maximum time ever reached by the definition cursor in the current branch, pauses until the specified duration after the `#DELAY`; offsets only the time of the definition cursor.
-* `roll-pos=complex`, `roll-pos=real`
+
+Note object scrolling behaviors:
+
+* `roll-pos`
   * ***Impact level***: gimmicky ★★・・・
-  * Specify which components of the scrolling velocity is used to position all drumroll-type notes.
+  * Which components of the scrolling velocity is used to position all drumroll-type notes.
   * `complex` &mdash; both of the horizontal and vertical components are considered.
   * `real` &mdash; only the horizontal component is considered; the vertical compoment is treated as 0.
-* `roll-nodes=head`, `roll-nodes=tips`, `roll-nodes=all`
+* `roll-stretch`
   * ***Impact level***: gimmicky ★★・・・
-  * Specify which of the end and the (*Proposal* (IID)) [middle points](#duration-of-drumroll-type-notes) of the body of roll-type notes are used as roll nodes. Roll nodes can be positioned and move independently of the roll head, while non-nodes have their position fixed relative to last roll node in the definition order.
-  * `head` &mdash; The roll head is used as the only roll node.
-  * `tips` &mdash; The roll head and end are used as roll nodes.
-  * `all` &mdash; The roll head, middle points, and end are used as roll nodes.
-* `scroll-i=down`, `scroll-i=up`
+  * The initial value of (*Proposal* (IID)) [the `#ROLLSTRETCH` command](#proposal-iid-rollstretch), *i.e.*, whether the end of roll-type notes is a stretchable point by default.
+  * `0` &mdash; `#ROLLSTRETCH 0`; the roll head is the only stretchable point.
+  * `1` &mdash; `#ROLLSTRETCH 1`; the roll head and end are the stretchable points.
+* `scroll-i`
   * ***Impact level***: gimmicky ★★・・・
-  * Specify the vertical scroll direction specified by the imaginary component of `<complex-ri-float-xy>` in [`#SCROLL <complex-ri-float-xy>`](#scroll).
+  * The vertical scroll direction specified by the imaginary component of `<complex-ri-float-xy>` in [`#SCROLL <complex-ri-float-xy>`](#scroll).
   * `down` &mdash; from the top to the bottom of the screen (↓).
   * `up` &mdash; from the bottom to the top of the screen (↑).
-* `jposscroll-i=down`, `jposscroll-i=up`
+* `sudden-directions`
   * ***Impact level***: gimmicky ★★・・・
-  * Specify the vertical scroll direction specified by the imaginary component of `<complex-ri-float-xy>` in [`#JPOSSCROLL <approach-duration> <complex-ri-float-xy> 0`](#jposscroll).
-  * `down` &mdash; from the top to the bottom of the screen (↓).
-  * `up` &mdash; from the bottom to the top of the screen (↑).
-* `jposscroll-interrupt=trunc`, `jposscroll-interrupt=jump`, `jposscroll-interrupt=add`
-  * ***Impact level***: gimmicky ★★・・・
-  * Specify the behavior when [a `#JPOSSCROLL` command](#jposscroll) takes effect while a still-in-action `#JPOSSCROLL`.
-  * `trunc` &mdash; The still-in-action `#JPOSSCROLL` is terminated, the judgement mark is kept at the expected current position, and then the next `#JPOSSCROLL` takes effect.
-  * `jump` &mdash; The still-in-action `#JPOSSCROLL` is terminated, the judgement mark is suddenly moved to the destination position, and then the next `#JPOSSCROLL` takes effect.
-  * `add` &mdash; The still-in-action `#JPOSSCROLL` has it movement done independently of the next `#JPOSSCROLL`. The total movement is the sum of all ongoing movements.
-* `sudden-directions=all`, `sudden-directions=x`
-  * ***Impact level***: gimmicky ★★・・・
-  * Specify which directions of notechart object scrolling are affected by [the `#SUDDEN` command](#sudden--hidden-commands).
+  * Which directions of notechart object scrolling are affected by [the `#SUDDEN` command](#sudden--hidden-commands).
   * `all` &mdash; all directions are affected.
   * `x` &mdash; only the horizontal direction is affected.
-* `sudden-precision=any`, `sudden-precision=ms`
+* `sudden-precision`
   * ***Impact level***: gimmicky ★★・・・
-  * Specify the precision of `<float-seconds-*-duration>` for [the `#SUDDEN` command](#sudden--hidden-commands).
+  * The precision of `<float-seconds-*-duration>` for [the `#SUDDEN` command](#sudden--hidden-commands).
   * `any` &mdash; The precision is only limited by the implementation. The interpreted duration is positive infinity only when the duration is given without any non-`0` digits in non-exponential part.
   * `ms` &mdash; The precision is 0.001 (1 ms), rounded toward 0, and any value < 0.001 is treated as 0, which has the interpreted duration of positive infinity.
-* `stack-order=def`, `stack-order=time`, `stack-order=appear-time`
+
+Note object drawing behaviors:
+
+* `stack-order`
   * ***Impact level***: gimmicky ★★・・・
-  * Specify the stack order of notes.
+  * The stack order of notes.
   * `def` &mdash; earlier defined notes are stacked over later defined notes.
   * `time` &mdash; notes with earlier judgement time are stacked over notes with later judgement time.
   * `appear-time` &mdash; notes with earlier "appear-on-lane" time are stacked over notes with later "appear-on-lane" time.
     * > Formula (approximant, in normal Taiko scroll): *appear_time* = *judgement_time* (in seconds) − 4 (beats/scroll_range) × 60 (s/min) ÷ (**abs**(*scroll*) × *BPM_at_note*)
-* `angle-barline=none`, `angle-barline=angle-mirror`, `angle-barline=im`
+* `angle-barline`
   * ***Impact level***: gimmicky ★★・・・
-* `angle-note=none`, `angle-note=angle-mirror`
+* `angle-note`
   * ***Impact level***: decorative ・・・・・
-* `angle-roll-bar=angle`, `angle-roll-bar=angle-mirror`
+* `angle-roll-bar`
   * ***Impact level***: decorative ・・・・・
-  * Specify how bar lines, the face of note heads, or the bar body of roll notes are rotated and/or or left-right mirroed, around their center, before applying [the `#ANGLE` command](#note--barline-commands).
+  * How bar lines, the face of note heads, or the bar body of roll notes are rotated and/or or left-right mirroed, around their center, before applying [the `#ANGLE` command](#note--barline-commands).
   * `none` &mdash; neither rorated nor mirrored.
   * `angle` &mdash; rotated by the angle of the scroll velocity.
   * `angle-mirrors` &mdash; rotated by the angle of the scroll velocity; mirroed when the real component of scroll velocity is negative.
@@ -1787,26 +1775,25 @@ Each proposed compatibility-mode behavior is enclosed in parentheses (`()`) for:
 
 * Non-exist behaviors in the reference simulator
 * Potential changes to `oos` behaviors.
+* Proposed changes of existing behavior for unification.
 
-Flag \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
+Behavior \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
 --- | --- | --- | --- | --- | --- | ---
-`balloon-popcount` | N/A | `common` | `common` | `common` | `n` | `n` <br /> (`common`)
-`balloonnem-popcount-nonbranch` | N/A | N/A <br /> (`1n-or-end-1nem`) | N/A <br /> (`1n-or-end-1nem`) | N/A <br /> (`1n-or-end-1nem`) | `1n-or-end-3last` | `1nem`
-`end-at` | `music` | `music` | `music` | `music` (?) | `end` | `end` <br /> (`music-and-end`)
+`balloon-popcount` | N/A | `common` | `common` | `common` | `n` <br /> (`common`) | `n` <br /> (`common`)
+`balloonnem-popcount-nonbranch` | N/A | N/A <br /> (`1nem`) | N/A <br /> (`1nem`) | N/A <br /> (`1nem`) | `1n-or-end-3last` | `1nem`
+`end-at` | `music` <br /> (`music-and-end`) | `music` <br /> (`music-and-end`) | `music` <br /> (`music-and-end`) | `music` (?) <br /> (`music-and-end`) | `end` <br /> (`music-and-end`) | `end` <br /> (`music-and-end`)
 `timing-precision` | ? | `ms-bpm` | `ms` (?) | `any` (?) | `ms` | `ms`
 `timing-effect-order` | `def` | `time` | `time` | `time` (?) | `flat-time-or-def` | `flat-time-or-def`
 `hbscroll-past` | N/A | `nmscroll` | `hbscroll` | `nmscroll` | `hbscroll` | `hbscroll`
 `hbscroll-delay` | N/A | `freeze` | `freeze` | `freeze` (?) | `offset` | `offset`
 `roll-pos` | N/A | N/A <br /> (`complex`) | `complex` | `complex` | `real` | `complex`
-`roll-nodes` | `head` | `tips` | `tips` | `tips` | `head` | `head`
+`roll-stretch` | `0` | `1` | `1` | `1` | `0` | `0`
 `scroll-i` | N/A | N/A <br /> (`down`) | `down` | `down` | `up` | `up`
-`jposscroll-i` | N/A | N/A <br /> (`up`) | N/A <br /> (`up`) | `up` | `up` | `up`
-`jposscroll-interrupt` | N/A | N/A <br /> (`trunc`) | N/A <br /> (`trunc`) | `trunc` | `trunc` | `trunc`
 `sudden-directions` | N/A | N/A <br /> (`all`) | N/A <br /> (`all`) | `all` | `x` | N/A <br /> (`x`)
 `sudden-precision` | N/A | N/A <br /> (`ms`) | N/A <br /> (`ms`) | `any` (?) | `ms` | `ms`
 `stack-order` | `appear-time` (PS1/2-gen) <br /> `def` (PS3/PC-gen) | `def` | `def` | `time` (?) | `time` | `def`
 `angle-barline` | N/A | `angle-mirror` (?) | `angle-mirror` (?) | `angle-mirror` (?) | `im` | `none` <br /> (`angle-mirror`)
-`angle-note` | N/A | `angle-mirror` | `angle-mirror` | `angle-mirror` | `none` | `none` <br /> (`angle-mirror`)
+`angle-note` | N/A | `none` (?) | `angle-mirror` | `angle-mirror` | `none` | `none`
 `angle-roll-bar` | N/A | `angle-mirror` | `angle-mirror` | `angle-mirror` | N/A <br /> (`angle-mirror`) | `angle` <br /> (`angle-mirror`)
 
 ### *Proposal* (Komi) VERSION:
@@ -2396,6 +2383,46 @@ Notice that the scrolling speed of diagonal directions is √(2) times of the sc
 
 * In TJAPlayer2 for.PC and TJAPlayer3, due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑), the equivalent [`#SCROLL` command](#scroll) for each `<direction>` except for 0 (←) and 5 (→) differ from other simulators including TaikoJiro 2 and TaikoManyGimmicks.
 
+### *Proposal* (IID): #ROLLSTRETCH
+
+[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+***Impact level***: gimmicky ★★・・・ \
+***Scope***: branch \
+***Scope-fineness***: at-or-after \
+***Effect time***: command-time \
+***Non-static effect scope***: all \
+***Effect target***: notes, bar lines \
+***Effect branches***: current
+
+Specify which points of bar-type drum**roll** notes are **stretch**able (have independent display attributes).
+
+The roll's head is always a stretchable point. A non-stretchable point is either an interpolated point or a lasting point. The display attributes of interpolated points are linearly interpolated from the previous stretchable or lasting point and the next stretchable point. The display attributes of lasting points are the same as the previous stretchable point.
+
+Time position is not considered a display attribute. Time position of every point is always independent and always affects the calculated HBScroll beat position.
+
+* `#ROLLSTRETCH 0` (Default in [TJAP3, OOS compatibility modes](#proposal-iid-compat))
+  * Stretchable points are the roll's head and where `#ROLLSTRETCH` switches from non-0 to 0. All the other parts of the roll when `#ROLLSTRETCH 0` is in effect are lasting points.
+* `#ROLLSTRETCH 1` (Default in [Jiro1, Jiro2, TMG compatibility modes](#proposal-iid-compat))
+  * Stretchable points are the roll's head and end.
+* `#ROLLSTRETCH 2`
+  * Stretchable points are the roll's head, end, and repeated head symbols during the roll's definition.
+* `#ROLLSTRETCH 3`
+  * Stretchable points are all the points visited in definition: The roll's head, end, and repeated head symbols, padding `0`s, and `#DELAY`s during the roll's definition.
+* `#ROLLSTRETCH 4`
+  * The whole roll body in definition is considered a curve made of stretchable points.
+  * The implementation may choose any amount of points as fine as or finer than `#ROLLSTRETCH 3` to be stretchable, and treat other parts of the body to be interpolated points.
+
+Every point of a bar-type drumroll can have different value applied. All the other parts of the roll are curves of interpolated points.
+
+Affected note attribute commands:
+
+* Display position: [`#SCROLL`](#scroll), [`#DIRECTION`](#direction), [`#NMSCROLL`/`#BMSCROLL`/`#HBSCROLL`](#nmscroll--bmscroll--hbscroll), [`#BPMCHANGE`](#bpmchange) (per-note scroll speed), [`#JUDGEDELAY`](#judgedelay), [`#SUDDEN`](#sudden--hidden) (move offset), (*Proposal* (IID)) [`#HIDDEN`](#sudden--hidden) (stop offset)
+* (Dis-)appearance: [`#SUDDEN`](#sudden--hidden) (appearance offset), (*Proposal* (IID)) [`#HIDDEN`](#sudden--hidden) (disappearance offset)
+  * Each interpolated non-stretchable point on the bar body has the (dis-)appear time interpolated.
+  * All lasting points (dis-)appear along with the last stretchable point at the same time.
+* Other interpolatable attributes: [`#SIZE`, `#COLOR`, `#ALPHA`](#note--barline-commands)
+* [`#RESETCOMMAND`](#note--barline-commands)
+
 ### `#BARLINEOFF` / `#BARLINEON`
 
 [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
@@ -2772,24 +2799,6 @@ Similar to [the `#SENOTECHANGE` command](#senotechange), but with a different ra
   * *Unspecified*: The behavior when an `<note-phoneticization>` not designed for the applied note is used.
 * Initial value / `#NOTESCHANGE -1`
   * Use the automatically assigned note phoneticization.
-
-### *Proposal* (IID): #BALLOON (Command)
-
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
-***Impact level***: note ★★★★★ \
-***Scope***: branch, note one-shot \
-***Scope-fineness***: at-or-after \
-***Effect time***: static \
-***Effect target***: balloon-type notes \
-***Effect branches***: current
-
-Basically the same as the **[`BALLOON:`](#balloon-headers)** header, except that the `#BALLOON` command only applies to the at-or-after notes in the note definition.
-
-Override the assigned hit amount specified by the one of the BALLOON headers if applies to an already assigned balloon-type note.
-
-* `#BALLOON <(comma-separated-list:positive-or-zero-int)amount-of-hits>`
-
-The semantics are otherwise the same as the [BALLOON](#balloon-headers) headers.
 
 ### *Proposal* (Komi): `#PARTNERNOTE`
 
@@ -4678,8 +4687,6 @@ The head and end of drumroll-type notes have no timing window. In the official a
 During the defined duration interval within a drumroll-type note, either `0` or the symbol of the note head may appear. *E.g.*: `5008` / `5558` / `5058` are all equivalent. *Unspecified*: Whether other drumroll-type notes can be used in place of the repeated symbol of the note head.
 
 * In TaikoJiro, all drumroll-type note head symbols can be used in place of the repeated symbol.
-
-*Proposal* (IID): Each symbol of the note head inside a bar-type drumroll note denotes a middle point of the bar which can scroll independently to the head, end, and other middle points of the note.
 
 For special balloons (`9`), the last occurrence of repeated note head symbol (if any) defines the full bonus time point. If the note is cleared, full bonus is awarded only by clearing the note at-or-before that point and partial bonus is awarded otherwise. The full bonus time point is *unspecified* when no repeated note head symbols ever occur.
 
