@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-01-12 (UTC+8)
+* Last changed: 2026-01-21 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -5017,8 +5017,6 @@ Some corresponding terminologies from other rhythm games are taken as one of the
 
 ### Mentioned PC-Compatible Simulators with TJA Format Support
 
-Reference: *太鼓シミュレーター一覧* ("List of Taiko Simulators"). (2022, July 26). 太鼓の達人 Wiki ("Taiko no Tatsujin Wiki"). <https://wikiwiki.jp/taiko/太鼓シミュレーター一覧>
-
 Unless stated otherwise, a simulator mentioned in this article also refers to its derivations.
 
 The honorific title is omitted.
@@ -5052,10 +5050,23 @@ The honorific title is omitted.
     * ← Derived from StepMania 3.9: By Chris Danford *et al.*
 * TaikoManyGimmicks (aka. taikosimu(NN)): By barrier15300 <https://twitter.com/barrier15300/with_replies>
 
+### Reference of Projects Related to TJA or Taiko Mode
+
+Most projects listed as fork of another project on GitHub are omitted.
+
+* Selected projects using TJA Format on GitHub: <https://github.com/stars/IepIweidieng/lists/tja-and-on>
+  * Games (except most TJAPlayer2 for.PC derives): <https://github.com/stars/IepIweidieng/lists/tja-rhythm-game-player>
+  * Games, TJAPlayer2 for.PC derives: <https://github.com/stars/IepIweidieng/lists/social-experiment-of-tjaplayers>
+  * Editors: <https://github.com/stars/IepIweidieng/lists/tja-editor>
+  * Converters from or to non-TJA formats: <https://github.com/stars/IepIweidieng/lists/tja-cross-converter>
+* Selected game projects with taiko mode but only use non-TJA custom chart formats on GitHub: <https://github.com/stars/IepIweidieng/lists/non-tja-taiko-game-players>
+* *太鼓シミュレーター一覧* ("List of Taiko Simulators"). (2026, Jan 17). 太鼓の達人 Wiki ("Taiko no Tatsujin Wiki"). <https://wikiwiki.jp/taiko/太鼓シミュレーター一覧>
+* *太鼓さん次郎(TJA)関連ツール* ("TaikoJiro(TJA)-Related Tool"). (2024, Oct 20). 太鼓の達人 Wiki ("Taiko no Tatsujin Wiki"). <https://wikiwiki.jp/taiko/太鼓さん次郎%28TJA%29関連ツール>
+* Name, platform, & author of some simulators: *太鼓シミュ一覧* ("List of Taiko Simu(lator)s"). (2025, Dec 31). *太鼓シミュ総合Wiki* ("Taiko Simu(lator) Consolidation Wiki"). Gamerch. <https://gamerch.com/taiko-simu/393869>
+
 ### Proposers
 
 The honorific title is omitted.
-
 Listed in alphabetic dictionary order.
 
 Screen name used for *proposal* | Other screen names | Notes
