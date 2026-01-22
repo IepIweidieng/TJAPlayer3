@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-01-21 (UTC+8)
+* Last changed: 2026-01-23 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -286,17 +286,30 @@ Formatting notations:
 
 TJA header are written in the format of **`HEADER:values`**.
 
+A lenient regular expression (Python): `^[ \t]*([^ \t:]*)[ \t]*:(.*)$`
+
+* Group 1: `HEADER:` part excluding the `:`.
+* Group 2: `values` part.
+
 Each header ***MUST*** be placed on its own line.
 
-The `HEADER:` part ***MUST*** be written in an all-upper-case manner and ***MUST NOT*** contain whitespaces in-between. No leading non-newline whitespaces are allowed.
+For a recognized header, `HEADER:` part ***MUST*** be written in an all-upper-case manner and ***MUST NOT*** contain whitespaces in-between. *Unspecified*: Whether leading non-newline whitespaces are allowed.
 
-Headers with an unrecognized `HEADER:` name are ignored.
+* In TaikoJiro1, leading non-newline spaces makes the header unrecognized.
 
-If the `values` part is omitted, the default value is used, which can be used for resetting previously used headers from other difficulties or player sides to their default value.
+For some headers, if the `values` part is omitted, the default value is used, which can be used for resetting previously used headers from other player sides to their default value.
+
+If the `values` part is not in expected format, or if the default value is not used when `values` is omitted, the header is unrecognized.
 
 For non-string values, whitespaces can immediately occur after `:`, *e.g.*, [`LEVEL: 8`](#level).
 
 * Although the forms with whitespaces are seldom seen.
+
+*Unspecified*: Whether unrecognized headers are ignored.
+
+* In TJAPlayer2 for.PC but not OpenTaiko (0auBSQ) v0.6.0.73, headers unrecognized due to the `values` part either takes the default value, or terminates the parsing and make the chart empty or unselectable.
+* In OpenTaiko (0auBSQ) v0.6.0.73: Unrecognized headers due to the `values` part are ignored and warned.
+* **Recommendation for simulator developers**: Unrecognized headers should be ignored with optional warnings.
 
 #### Post-[#START](#start--end) Header Position
 
@@ -1826,7 +1839,7 @@ If the TJA file uses any features outside the specified feature set, a warning s
 
 The descriptions of [Header Overview](#header-overview) for TJA mostly applies.
 
-Some TJA headers can be used as TJC headers and have similar or even identical effects. *Unspecified*: Which TJA headers can be used as TJC header aside from [`TITLE:`](#title-headers), [`COURSE:`](#course), & [`TOTAL:`](#total). Only non-TJA headers are listed in this section.
+Some TJA headers can be used as TJC headers and have similar or even identical effects. *Unspecified*: Which s can be used as TJC header aside from [`TITLE:`](#title-headers), [`COURSE:`](#course), & [`TOTAL:`](#total). Only non-TJA headers are listed in this section.
 
 See [the `#NEXTSONG` command](#nextsong) for the TJA command version of TJC headers.
 
@@ -1851,29 +1864,43 @@ Specify a notechart ("**song**") of the notechart set.
 
 TJA commands are written in the format of **`#COMMAND values`**.
 
+A lenient regular expression: `^[ \t]*#([^ \t]*[A-Z_]+)[ \t]?(.*)$`
+
+* Group 1: The `#COMMAND` part excluding the `#`.
+* Group 2: The `values` part.
+
 Each commands ***MUST*** be placed on its own line.
 
-No leading non-newline whitespaces are allowed for the `#START` and `#END` commands & other commands placed outside of the notechart definition enclosed between `#START` & `#END`.
+*Unspecified*: Whether leading non-newline whitespaces are allowed for the `#START` and `#END` commands & other commands placed outside of the notechart definition enclosed between `#START` & `#END`.
+
+* In TaikoJiro1, such a command becomes unrecognized.
 
 However, leading non-newline whitespaces are allowed and ignored in the notechart definition enclosed between `#START` & `#END`.
 
-The `#COMMAND` part ***MUST*** be written in an all-upper-case manner and ***MUST NOT*** contain whitespaces in-between.
+For a recognized command, the `#COMMAND` part ***MUST*** be written in an all-upper-case manner and ***MUST NOT*** contain whitespaces in-between.
 
-Commands with an unrecognized `#COMMAND` name are ignored.
+*Unspecified*: Whether omitting the whitespaces before the `values` part for letter-ending commands with numeric values is recognized (occurs in some legacy charts).
 
-*Unspecified*: The behavior when the whitespaces before the `values` part is omitted for all-letter commands with numeric values (occurs in some legacy charts).
+* In TaikoJiro, TJAPlayer2 for.PC but not TJAPlayer3 v1.5.2, because recognized command names are parsed by matching the prefix of the line, for known commands, such a case is parsed as if there were whitespaces after the command name. However, unknown commands starting with the name of known command are misinterpreted as the known command with unexpected `values` part.
+* In TJAPlayer3 v1.5.2, command names are parsed by matching with regular expression, such a case is always parsed as if there were whitespaces after the `#COMMAND` part.
 
-* In TaikoJiro, such a case is parsed as if there were whitespaces before the `values` part.
+If the `values` part is not in expected format, the command is unrecognized.
 
 The arguments for commands introduced in TaikoJiro are comma-separated. However, the arguments for commands introduced in TJAPlayer2 for.PC are instead whitespace-separated as in the `.bms` format (which is modified and extended into the `.dtx` format for DTXMania).
 
 *Unspecified*: The behavior when a comma (`,`) is used as the decimal point (normally a full-stop (`.`)).
 
+*Unspecified*: Whether unrecognized commands are ignored.
+
+* In TJAPlayer2 for.PC but not OpenTaiko (0auBSQ) v0.6.0.73, commands unrecognized due to the `values` part either takes the default value, or terminates the parsing and makes the rest of the chart empty and endless.
+* In OpenTaiko (0auBSQ) v0.6.0.73: Unrecognized commands due to the `values` part are ignored and warned.
+* **Recommandation for simulator developers**: Unrecognized commands are ignored with optional warnings.
+
 #### Pre-[#START](#start--end) Command Position
 
 Most commands are expected to be placed within the notechart definition enclosed between `#START` & `#END`. However, some commands are expected to be placed before the notechart definition, or "pre-`#START` position".
 
-Commands allowed in pre-#START position will be explicitly denoted.
+Commands recognized in pre-#START position will be explicitly denoted.
 
 *Proposal* (IID): If a command with [command-time effects](#command-effect-time) is placed in the pre-#START position, its command-time effects apply as if these effects were [static effects](#command-effect-time).
 
