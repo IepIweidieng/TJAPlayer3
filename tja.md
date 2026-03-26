@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-01-23 (UTC+8)
+* Last changed: 2026-03-26 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -365,7 +365,7 @@ For headers, the coarsest fineness is per-file. The finest fineness other than s
 
 ### TITLE Headers
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (including any `<lang>` forms) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (including any `<lang>` forms) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, Malody, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
@@ -410,7 +410,7 @@ Specify the **title** of the song.
 
 ### SUBTITLE Headers
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (including any `<lang>` forms) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (including any `<lang>` forms) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro v2.64 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
@@ -442,7 +442,7 @@ The display details are *unspecified*.
 
 ### ARTIST:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: Malody \
 ***Scope-fineness***: per-file \
@@ -461,7 +461,7 @@ The display details are *unspecified*.
 
 ### MAKER:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: taiko-web ver.19.11.25 \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
@@ -480,7 +480,7 @@ The display details are *unspecified*.
 
 ### NOTESDESIGNER Headers
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) (including both forms of `<difficulty-course>` being `0`&ndash;`4` and being omitted) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) (including both forms of `<difficulty-course>` being `0`&ndash;`4` and being omitted) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: (Better)TaikoCatsCaffe (?) \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
@@ -501,7 +501,7 @@ The display details are *unspecified*.
 
 ### AUTHOR:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: Malody \
 ***Scope-fineness***: per-file (?)
@@ -516,7 +516,7 @@ The display details are *unspecified*.
 
 ### GENRE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (including any `<genre>` value (?)) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (including any `<genre>` value (?)) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TJAPlayer2 for.PC \
 ***Supported by***: taiko-web ver.19.01.06 \
@@ -548,7 +548,7 @@ The display details are *unspecified*.
 
 ### SIDE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) (per-file usage); \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) (per-file usage); \
 &emsp; 1.2 (per&ndash;player-side usage for [`COURSE:Tower`](#course)) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro v2.49 \
@@ -591,7 +591,7 @@ For specifying the inner chart of solely the Oni difficulty with the same audio 
 
 ### SIDEREV:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro 2 v0.70 \
 ***Scope-fineness***: per-file
@@ -605,7 +605,7 @@ Specify the filename of the *<ruby>裏<rt>ura</rt>譜<rt>fu</rt>面<rt>men</rt><
 
 ### WAVE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
 ***Impact level***: timing ★★★★・ \
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
@@ -635,7 +635,7 @@ Specify the audio file ("**wave**form audio file") of the song.
 
 ### DEMOSTART:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TaikoJiro v2.37 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro v0.80, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
@@ -652,7 +652,7 @@ Specify the amount of seconds into the song audio for **start**ing playing the p
 
 ### OFFSET:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
 ***Impact level***: timing ★★★★・ \
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
@@ -672,7 +672,7 @@ Equation: `music-offset` = `time-point-of-audio-beginning` − `time-point-of-ch
 
 ### SONGVOL:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TaikoJiro v1.66 \
 ***Supported by***: TaikoJiro 2, TJAPlayer3 v1.5.2 \
@@ -700,7 +700,7 @@ Recommendation for chart creators: `<amplitude-gain>` should not exceed `100` un
 
 ### SEVOL:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TaikoJiro v1.66 \
 ***Supported by***: TaikoJiro 2 \
@@ -728,7 +728,7 @@ Recommendation for simulator developers: The reference amplitude is the amplitud
 
 ### BPM:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (minimum, see each form) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (minimum, see each form) \
 ***Impact level***: timing ★★★★・ \
 ***FIrst seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
@@ -741,13 +741,13 @@ Recommendation for simulator developers: The reference amplitude is the amplitud
 Specify the initial **BPM** (**b**eat **p**er **m**inute) of the notechart.
 
 * **`BPM:<(positive-int)initial-bpm>`** \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0
 * **`BPM:<(positive-float)initial-bpm>`** \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
   ***First seen in***: TaikoJiro v1.29 \
   ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9)
 * `BPM:<(negative-float)initial-bpm>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (?; to be discussed)
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 (?; to be discussed)
   * The behavior is *unspecified* (may cause crashes in some existing simulators).
   * In TaikoJiro 1:
     * Before the beginning time of the first note symbol of the chart, the played beat position starts from positive and decreases to 0 beats as if `#MEASURE -4/4` were active.
@@ -755,14 +755,14 @@ Specify the initial **BPM** (**b**eat **p**er **m**inute) of the notechart.
   * In TaikoJiro 2, the game freezes when starting playing the notechart in the gameplay screen.
   * Recommendation for simulator developers: The behavior in TaikoJiro 1 is followed.
 * `BPM:0` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (requires [`#BPMCHANGE`](#bpmchange) with non-zero value at-or-before the first note symbol of the notechart definition) (?)
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 (requires [`#BPMCHANGE`](#bpmchange) with non-zero value at-or-before the first note symbol of the notechart definition) (?)
   * The behavior is *unspecified* (may cause crashes in some existing simulators).
   * In TaikoJiro 1 and 2:
     * Before the beginning time of the first note symbol of the chart, the played beat position stay at 0 beats.
     * At-or-after such time, the gameplay behaviors as if [`#BPMCHANGE 0`](#bpmchange) were active unless overridden by any actual `#BPMCHANGE`s before the first note symbol.
   * Recommendation for simulator developers: The behavior before the beginning time of the first note symbol in TaikoJiro 1 and 2 is followed.
 * `BPM:` / unrecognized value \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard)
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard)
   * The behavior is *unspecified*.
   * In TaikoJiro 1 and 2, the header is ignored and the lastly specified `BPM:` is kept.
 * Initial value
@@ -776,7 +776,7 @@ Specify the initial **BPM** (**b**eat **p**er **m**inute) of the notechart.
 
 ### HEADSCROLL:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) (minimum; unless stated otherwise) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) (minimum; unless stated otherwise) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer2 for.PC \
 ***Scope-fineness***: per&ndash;player-side
@@ -787,15 +787,15 @@ Can be reset by [the `#SCROLL` command](#scroll) at-or-after the beginning of th
 
 * `HEADSCROLL:<(float)initial-scroll-velocity>`
 * `HEADSCROLL:0` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 (?; to be discussed)
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.1 (?; to be discussed)
   * The behavior is the same as if [`#SCROLL 0`](#scroll) were applied at-or-before the beginning of the notechart.
 * `HEADSCROLL:` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard)
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard)
   * The behavior is *unspecified*.
 
 ### PREIMAGE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.4 \
 ***Scope-fineness***: per&ndash;player-side (?) \
@@ -810,7 +810,7 @@ Specify the jacket ("**pre**view") **image** of the song.
 
 ### COVER:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: Malody \
 ***Scope-fineness***: per-file
@@ -825,7 +825,7 @@ Specify the jacket ("**cover**") image of the song.
 
 ### TAIKOWEBSKIN:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: taiko-web ver.19.02.03 \
 ***Scope-fineness***: per-file
@@ -857,7 +857,7 @@ Each element of `<key-value>` can be one of:
 
 ### SCENEPRESET:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope-fineness***: per&ndash;player-side (?)
@@ -886,7 +886,7 @@ Available pre-defined values in officially-supported interface skins of OpenTaik
 
 ### TOWERTYPE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) (with `<tower-skin>` being `0`&ndash;`9` (?) or omitted, as in the *<ruby>わ<rt>Wa</rt>く<rt>ku</rt>わ<rt>wa</rt>く<rt>ku</rt>冒<rt>Bou</rt>険<rt>ken</rt>ラ<rt>Ra</rt>ン<rt>n</rt>ド<rt>do</rt></ruby>* "Wakuwaku (Exciting) Adventure land" mode from the 7th PS2 console game) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) (with `<tower-skin>` being `0`&ndash;`9` (?) or omitted, as in the *<ruby>わ<rt>Wa</rt>く<rt>ku</rt>わ<rt>wa</rt>く<rt>ku</rt>冒<rt>Bou</rt>険<rt>ken</rt>ラ<rt>Ra</rt>ン<rt>n</rt>ド<rt>do</rt></ruby>* "Wakuwaku (Exciting) Adventure land" mode from the 7th PS2 console game) \
 &emsp; (non-standard) (otherwise) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.0 \
@@ -912,7 +912,7 @@ Available values in officially-supported interface skins of OpenTaiko (0auBSQ):
 
 ### DANTICK:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compat) (with `<dan-tick-skin>` being `0`&ndash;`5` or omitted, as in AC15.8 (*<ruby>レッ<rt>Red</rt>ド<rt>do</rt></ruby>Ver.* "Red Ver.") and onward); \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compat) (with `<dan-tick-skin>` being `0`&ndash;`5` or omitted, as in AC15.8 (*<ruby>レッ<rt>Red</rt>ド<rt>do</rt></ruby>Ver.* "Red Ver.") and onward); \
 &emsp; (non-standard) (otherwise) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.1 \
@@ -940,7 +940,7 @@ In OpenTaiko (0auBSQ), no effects for the custom single dan-i plate (`Dan_Plate.
 
 ### DANTICKCOLOR:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.1 \
 ***Scope-fineness***: per-file
@@ -963,7 +963,7 @@ In OpenTaiko (0auBSQ), no effects for the custom single dan-i plate (`Dan_Plate.
 
 ### SELECTBG:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope-fineness***: per&ndash;player-side (?)
@@ -977,7 +977,7 @@ Specify the **b**ack**g**round image of the song **select**ion screen. Override 
 
 ### BGIMAGE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TJAPlayer2 for.PC ver.2016021300 \
 ***Scope-fineness***: per&ndash;player-side (?) \
@@ -993,7 +993,7 @@ Specify the **b**ack**g**round **image** of the gameplay screen. Override the sk
 
 ### BGOFFSET:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: ? \
 ***Reference***: TJA Format Support (vscode extension) \
@@ -1008,7 +1008,7 @@ Equation: `bgoffset` = `time-point-of-image-displaying` − `time-point-of-audio
 
 ### BGMOVIE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TJAPlayer2 for.PC ver.2016021300 \
 ***Scope-fineness***: per&ndash;player-side (?)
@@ -1023,7 +1023,7 @@ Specify the **b**ack**g**round video ("**movie**") of the gameplay screen. Overr
 
 ### MOVIEOFFSET:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TJAPlayer2 for.PC ver.2015081100 \
 ***Scope-fineness***: per&ndash;player-side (?)
@@ -1043,7 +1043,7 @@ Equation: `movieoffset` = `time-point-of-video-beginning` − `time-point-of-aud
 
 ### BGA Headers
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: C-Taiko \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
@@ -1064,7 +1064,7 @@ Specify a **b**ack**g**round video ("**a**nimation") to be used in the gameplay 
 
 ### LYRICS: / LYRICFILE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: taiko-web ver.20.03.31, TJAPlayer3-Develop-ReWrite (parse-only) \
 ***Supported by***: TJAPlayer3-f v1.6.0.0, OpenTaiko (0auBSQ) v0.6.0 \
@@ -1082,7 +1082,7 @@ Specify the lyric file(s) for the song to display **lyrics** in the playback scr
   ***Supported by***: TJAPlayer3-Develop-ReWrite, TJAPlayer3-f v1.6.0.0
   * `<lyric-file>` has a file extension of one of, *e.g.*:
     * `.vtt` &mdash; WebVTT, see <https://en.wikipedia.org/wiki/WebVTT> \
-      ***Supported by***: taiko-web, OpenTaiko (0auBSQ) v0.6.0 (only for the `LYRICS:` header)
+      ***Supported by***: taiko-web, OpenTaiko (0auBSQ) v0.6.0 (only for the `LYRICS:` header) & v0.6.0.100 (for both headers)
     * `.lrc` &mdash; LRC, see <https://en.wikipedia.org/wiki/LRC_(file_format)> \
       ***Supported by***: TJAPlayer3-Develop-ReWrite, TJAPlayer3-f v1.6.0.0
   * In TJAPlayer3-f & OpenTaiko (0auBSQ) v0.6.0, every comma (`,`) in `<lyric-file>` ***MUST*** be escaped as `\,`
@@ -1102,7 +1102,7 @@ Specify the lyric file(s) for the song to display **lyrics** in the playback scr
 
 ### EXPLICIT:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope-fineness***: per-file
@@ -1118,7 +1118,7 @@ The display details are *unspecified*.
 
 ### GAME:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 ([Taiko](#note-symbols-in-taiko-mode) and [Konga](#note-symbols-in-konga-mode) modes) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 ([Taiko](#note-symbols-in-taiko-mode) and [Konga](#note-symbols-in-konga-mode) modes) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v2.13 \
 ***Supported by***: taiko-web (plugin "Donkey Konga Mode") \
@@ -1147,7 +1147,7 @@ See [the `#GAMETYPE` command](#gametype) for specifying the game mode for specif
   * A game mode similar to *Donkey Konga*, developed by Namco
   * See [Note Symbols in Konga Mode](#note-symbols-in-konga-mode)
 * (*Proposal* (Komi)) `GAME:Beatz` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 2.0
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 2.0
   * A game mode similar to Squid Beatz 2, a mini game in Splatoon 2, developed by Nintendo
   * See [Note Symbols in Beatz Mode](#proposal-komi-note-symbols-in-beatz-mode)
 
@@ -1157,7 +1157,7 @@ See [the `#GAMETYPE` command](#gametype) for specifying the game mode for specif
 
 ### COURSE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (minimum, unless stated otherwise) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (minimum, unless stated otherwise) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.76 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, Malody, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
@@ -1188,7 +1188,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
   * As a result, after the official AC15 was released, this difficulty has been re-purposed as the *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby> (<ruby>裏 <rt>Ura</rt></ruby>)* Oni/Extreme (Inner) difficulty.
   * For specifying the inner chart of every difficulty together or with different audio as a separate song entry, as in official AC11&ndash;AC14, [`SIDE:Ex`](#side) and [the `SIDEREV:` head](#siderev) should be used.
 * `COURSE:Ura` / `COURSE:ura` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
   ***Supported by***: taiko-web
   * Equivalent to `COURSE:Edit`
   * The *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby> (<ruby>裏 <rt>Ura</rt></ruby>)* Oni/Extreme (Inner) difficulty.
@@ -1209,7 +1209,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
   ***Supported by***: TJAPlayer3 v1.5.0
   * The special difficulty used for *<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games.
 * `COURSE:<text-difficulty-name>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
   ***Supported by***: Malody
   * The difficulty name, commonly one of:
     * `Easy` / `Kantan` &mdash; Equivalent to `COURSE:Easy` in other simulators.
@@ -1219,7 +1219,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
     * `Extra` / `Ura Oni` &mdash; Equivalent to `COURSE:Edit` in other simulators.
   * This is the only form expected by Malody
 * `COURSE:` / Unrecognized value \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard)
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard)
   * The behavior is *unspecified*.
   * In TaikoJiro 1 and 2, treated as an unaccessible difficulty. Causes a crash in TaikoJiro 2 when entering the gameplay screen at any difficulty.
 * Initial value
@@ -1234,7 +1234,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
 
 ### LEVEL:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (minimum, see each form) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (minimum, see each form) \
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, Malody, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
@@ -1248,7 +1248,7 @@ Since the Japanese terminology is easily confused with the fore-mentioned "diffi
 Depending on the simulator and/or user settings, the `LEVEL:` header may affect the default scoring, the default increasing rate of the *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge, *etc.*
 
 * `LEVEL:<(positive-int)difficulty-star>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
   ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9)
   * *Unspecified*: The upper limit.
   * Universally supported range (as in the latest official games):
@@ -1268,18 +1268,18 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
     * Oni/Extreme and beyond: 11- &ndash; 40+
 * `LEVEL:<(positive-int)difficulty-star>+` \
   & `LEVEL:<(positive-int)difficulty-star>-` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
   ***First seen in***: Malody (?)
 * `LEVEL:0` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2
   * If supported, the difficulty star is displayed as 0 stars in the song selection screen. The other behaviors are *unspecified*.
   * In TaikoJiro 1, appears as 0 stars in song selection but 1 star in gameplay.
 * `LEVEL:<(positive-or-zero-float)difficulty-star>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 \
   ***Supported by***: TaikoJiro v2.78
   * The fraction part is considered for sorting by difficulty star but is not displayed.
 * `LEVEL:` / Unrecognized value \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard)
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard)
   * An *unspecified* difficulty star is chosen by the simulator.
   * In TaikoJiro 1, appears as 0 stars in song selection but 255 stars in gameplay.
   * In TaikoJiro 2, the command is ignored and the lastly specified difficulty star is kept.
@@ -1296,7 +1296,7 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
 
 ### STYLE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (up to 2 player-sides); \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (up to 2 player-sides); \
 &emsp; 1.2 (up to 5 player-sides) (?) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.99 \
@@ -1324,7 +1324,7 @@ Reference: *ダブルプレイ* ("Double Play"; "Two-player Charts"). 太鼓の�
 
 ### BALLOON Headers
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (minimum, see each form) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (minimum, see each form) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
@@ -1338,16 +1338,16 @@ Each balloon-type note with unassigned hit amount requires an *unspecified* defa
 * In TJAPlayer2 for.PC, if the balloon header for the corresponding branch is specified, the default amount of hits in the branch is `0`. Otherwise, the default amount of hits in the branch is `5`.
 
 * `BALLOON:<(comma-separated-list:positive-or-zero-int)amount-of-hits>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0
   * The list of amount is iterated over non-repeated head of balloon-type notes in all sections of all *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>ki</rt></ruby>* "notechart branches"/forked paths.
 * `BALLOONNOR:<(comma-separated-list:positive-or-zero-int)amount-of-hits>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.1 \
   ***Supported by***: TJAPlayer2 for.PC
 * `BALLOONEXP:<(comma-separated-list:positive-or-zero-int)amount-of-hits>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.1 \
   ***Supported by***: TJAPlayer2 for.PC
 * `BALLOONMAS:<(comma-separated-list:positive-or-zero-int)amount-of-hits>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.1 \
   ***Supported by***: TJAPlayer2 for.PC
   * The list of amount is iterated over non-repeated head of balloon-type notes in "branched"/forked sections of only ***<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>*** **Nor**mal, ***<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>*** "Professional"/Advanced ("**Exp**ert"), or ***<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>*** **Mas**ter "branch"/path.
   * *Unspecified*: How the list of amount is iterated non-branched sections.
@@ -1373,7 +1373,7 @@ For each element of `<amount-of-hits>`, if the amount of hits is `0`, the per-no
 
 ### LIFE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (for [`COURSE:Tower`](#course), except the 0 form) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 (for [`COURSE:Tower`](#course), except the 0 form) \
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v2.19 \
 ***Supported by***: OpenTaiko (0auBSQ) v0.4.3 \
@@ -1406,7 +1406,7 @@ In TaikoJiro 1 (the header is not supported in TaikoJiro 2), the maximum possibl
 
 ### TOTAL:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (despite ignored in TJAPlayer3) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (despite ignored in TJAPlayer3) \
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v2.92 & TaikoJiro 2 v0.93 \
 ***Scope-fineness***: per&ndash;player-side \
@@ -1426,7 +1426,7 @@ Specify the **total** *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt
 
 ### GAUGEINCR:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TJAPlayer3 v1.5.4 \
 ***Scope-fineness***: per&ndash;player-side
@@ -1443,7 +1443,7 @@ Specify the rounding mode of the **incr**ement of the *<ruby>魂<rt>tamashii</rt
 
 ### EXAM Headers
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (minimum, unless stated otherwise) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (minimum, unless stated otherwise) \
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TJAPlayer3 v1.5.0 \
 ***Post-[#START](#start--end) position***: forbidden; \
@@ -1460,11 +1460,11 @@ Used in conjunction with [`COURSE:Dan`](#course).
   * `<trimmed-exam-requirement-index-specifier>` specifies the displayed order of this requirement. The display details are *unspecified*. Its value range is:
     * `1`&ndash;`3`
     * `1`&ndash;`4` \
-      [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
+      [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 \
       ***Supported by***: TJAPlayer3-Develop-ReWrite
       * For `1`, `<requirement>` is expected to be `g`.
     * `1`&ndash;`7` \
-      [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
+      [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 \
       ***Supported by***: OpenTaiko (0auBSQ)
       * For `1`, `<requirement>` is expected to be `g`.
   * `<requirement>` can be one of:
@@ -1483,26 +1483,26 @@ Used in conjunction with [`COURSE:Dan`](#course).
       * > Formula: `h` = `jp` + `jg` + `r`
     * `c` &mdash; maximum/longest **c**ombo.
     * `a` &mdash; final percentage (%) of **a**ccuracy. \
-      [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
+      [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 \
       ***Supported by***: OpenTaiko (0auBSQ)
       * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
   * `<range>` can be one of:
     * `m` &mdash; **m**ore than or equal to ("≥") the given requirement
     * `l` &mdash; **l**ess than ("\<") the given requirement
 * `EXAM<trimmed-exam-requirement-index-specifier>:<(enum-str)requirement>, <(comma-separated-list:number)pass-and-gold-requirements>, <(enum-str)range>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
   ***Supported by***: TJAPlayer3-f
   * The elements of `<pass-and-gold-requirements>` are pairs of `<(number)pass-requirement>, <(number)gold-requirement>` for each song specified by [the `#NEXTSONG` command](#nextsong).
   * Corresponding to the per-song&ndash;scoped usage in TJAPlayer3-Develop-ReWrite & OpenTaiko (0auBSQ).
 * `EXAMGAUGE:<(number)pass-requirement>, <(number)gold-requirement>, <(enum-str)range>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (?; to be discussed) \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 (?; to be discussed) \
   ***Supported by***: TJAPlayer3-f
   * The `<requirement>` is implicitly fixed to `g`.
   * Corresponding to the `EXAM1:` header in TJAPlayer3-Develop-ReWrite & OpenTaiko (0auBSQ).
 
 ### SCOREMODE:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v2.85 \
 ***Supported by***: TaikoJiro 2 v0.72, TJAPlayer2 for.PC \
@@ -1581,7 +1581,7 @@ Reference: *配点* ("Scoring"). 太鼓の達人 譜面とか Wiki\* ("Taiko no 
 
 ### SCOREINIT:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v1.67 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC) \
@@ -1604,7 +1604,7 @@ Recommendation for charters: The `SCOREMODE:`, `SCOREINIT:`, & [`SCOREDIFF:`](#s
 
 ### SCOREDIFF:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro v1.67 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC) \
@@ -1633,7 +1633,7 @@ In the official game, `diff` is not required to be a multiple of 10. Instead, th
 
 ### HIDDENBRANCH:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (except 0 or omitted forms) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (except 0 or omitted forms) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TJAPlayer2 for.PC \
 ***Scope-fineness***: per&ndash;player-side
@@ -1651,7 +1651,7 @@ If enabled, make the *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>k
 
 ### *Proposal* (IID) COMPAT:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ (maximum, depends on the compatibility mode) \
 ***Scope-fineness***: per&ndash;player-side
 
@@ -1809,11 +1809,11 @@ Behavior \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
 `angle-note` | N/A | `none` (?) | `angle-mirror` | `angle-mirror` | `none` | `none`
 `angle-roll-bar` | N/A | `angle-mirror` | `angle-mirror` | `angle-mirror` | N/A <br /> (`angle-mirror`) | `angle` <br /> (`angle-mirror`)
 
-### *Proposal* (Komi) VERSION:
+### *Proposal* (Komi) SPEC:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
-Impact level: note ★★★★★ (restrictive usage) / metadata ★・・・・ (non-mandatory usage) \
-Scope-fineness: per-file
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
+***Impact level***: note ★★★★★ (restrictive usage) / metadata ★・・・・ (non-mandatory usage) \
+***Scope-fineness***: per-file
 
 Specification by Komi: <https://docs.google.com/document/d/17GKK9U5S_eT97oTwgB6tMMNQsQm2uhp-OIhBMv2Mgso>
 
@@ -1823,17 +1823,52 @@ Simulators may choose to keep the enabled set of TJA features unchanged. If the 
 
 If the TJA file uses any features outside the specified feature set, a warning should be emitted, and the simulator may choose to accept the usage, ignored the usage (treated as a comment for headers and commands, treated as blank `0` for uppercase notechart symbols), or reject such TJA files.
 
-* `VERSION:<(enum-str)version>`
-  * `<version>` can be one of:
+* `SPEC:<(enum-str)spec>`
+  * `<spec>` can be one of:
     * `1.0` &ndash; The feature set common in PC-gen official AC games and TJAPlayer3, including Dan-i certification mode.
     * `1.1` &ndash; The feature set of TJAPlayer3 v1.6.x, including enhancements originate from TaikoJiro 1 and 2.
     * `1.2` &ndash; The current stable feature set of the OpenTaiko-OutFox standard, based on the gameplay-focused enhancements of OpenTaiko (0auBSQ) v0.6.0, including a more complete feature of Tower mode and the Konga game mode.
     * `1.3` &ndash; A developing feature set including enhanced branch conditions, TJA state, and compatibility support.
     * `2.0` &ndash; A developing feature set including the Beatz game mode and a standardized version of TJAPlayer3-Extended features.
 
+## .CUTSCENE_INTRO & .CUTSCENE_OUTRO
+
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) (?) \
+***Impact level***: metadata ★・・・・ (non-mandatory usage) \
+***Scope-fineness***: per-file \
+***First seen in***: OpenTaiko (0auBSQ) v0.6.0.52
+
+Specify the cutscene(s) to play in order. Intro cutscene(s) are played after selecting song and outro cutscene(s) are played after existing from result screen and before returning to other screen.
+
+* `.CUTSCENE_INTRO:<(string)path>, [(enum-int)repeat-mode=1]`
+  * Specify the unconditional intro cutscene.
+* `.CUTSCENE_OUTRO:<(string)path>, [(enum-int)clear-status=0], [(enum-str)-clear-status-range=me], [(enum-int)-repeat-mode=1]`
+  * Specify a conditional outro cutscene. The cutscene is skipped if the specified condition for it is not fulfilled. 
+  * `[clear-status]` specifies the required clear status. It can be one of the difficulty code of unlockable condition in OpenTaiko:
+    * `0` / (default) &mdash; failed
+    * `1` &mdash; assistant clear
+    * `2` &mdash; clear
+    * `3` &mdash; full combo
+    * `4` &mdash; perfect
+  * `<clear-status-range>` specifies the requirement range for clear status. It can be one of the range code of unlockable condition in OpenTaiko: 
+    * `l` &mdash; \<
+    * `le` &mdash; ≤
+    * `e` &mdash; =
+    * `me` / (default) &mdash; ≥
+    * `m` &mdash; >
+    * `d` &mdash; ≠
+  * `<repeat-mode>` specifies how the cutscene is played when reached and can be one if:
+    * `-1` &mdash; the cut scene is played until the requirement is first unmet.
+    * `0` / (default) &mdash; the cut scene is only played when the requirement is first met
+    * `1` &mdash; the cut scene is played whenever the requirement is met
+* `.CUTSCENE_OUTRO:<(comma-separated-list)conditional-cutscene-specifiers>`
+  * Specify multiple conditional outro cutscenes. Each element of `<conditional-cutscene-specifier>` is in the form of specifying a conditional outro, with all arguments required except for the last outro.
+
+The last arguments can be omitted for both headers.
+
 ## TJC Header
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard)
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard)
 
 ### TJC Header Overview
 
@@ -1845,7 +1880,7 @@ See [the `#NEXTSONG` command](#nextsong) for the TJA command version of TJC head
 
 ### SONG:
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v2.34 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
@@ -1969,7 +2004,7 @@ Due to the incoherent behaviors, many commands introduced in TJAPlayer2 for.PC a
 
 ### `#BMSCROLL` / `#HBSCROLL` / `#NMSCROLL`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 (except `#NMSCROLL`; pre-[#START](#start--end) position); \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.1 (except `#NMSCROLL`; pre-[#START](#start--end) position); \
 &emsp; 1.2 (post-`#START` position) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoJiro v1.91 \
@@ -1992,7 +2027,7 @@ Use a **scroll**ing mode similar to the scrolling method used in either **B**E**
   ***Supported by***: TaikoJiro v2.31
   * Likes `#BMSCROLL` ("**B**E**M**ANI-like"), but [the `#SCROLL` command](#scroll) ("(per-note) **H**iSpeed") is not ignored and is effective.
 * `#NMSCROLL` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 \
   ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
   / initial value
   * Use the default ("**n**or**m**al") Taiko-like scrolling behavior
@@ -2034,7 +2069,7 @@ See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior of timi
 
 ### `#PAPAMAMA`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard, but seen in official games) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard, but seen in official games) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TJAPlayer3-f v1.7.2.0 \
 ***Pre-[#START](#start--end) position***: required \
@@ -2051,7 +2086,7 @@ Reference: <https://taiko.namco-ch.net/taiko/en/howto/papamama.php#papamama>
 
 ### #START / `#END`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (except proposed forms) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (except proposed forms) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
@@ -2108,7 +2143,7 @@ Respectively **start** / **end** the region of notechart definition.
 
 ### #BPMCHANGE
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (positive value) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (positive value) \
 &emsp; 1.1 (non-zero real value, and [resulting time of measure division interval is positive or zero](#sign-of-timing-commands) or [normal Taiko scrolling mode](#bmscroll--hbscroll--nmscroll) is used) \
 &emsp; 2.0 (non-zero real value) (?; to be discussed) \
 ***Impact level***: timing ★★★★・ \
@@ -2141,7 +2176,7 @@ Respectively **start** / **end** the region of notechart definition.
 
 ### #MEASURE
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (resulting beats of measure is positive); \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (resulting beats of measure is positive); \
 &emsp; 1.1 (resulting beats of measure is any non-zero real value, and [resulting time of measure division interval is positive or zero](#sign-of-timing-commands) or [normal Taiko scrolling mode](#bmscroll--hbscroll--nmscroll) is used); \
 &emsp; 2.0 (resulting beats of measure is any real value except division by 0) (?; to be discussed) \
 ***Impact level***: timing ★★★★・ \
@@ -2178,7 +2213,7 @@ Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby
 
 ### #DELAY
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
 ***Impact level***: timing ★★★★・ \
 ***First seen in***: TaikoJiro v1.60 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC) \
@@ -2212,7 +2247,7 @@ For the timing of notechart object, multiple `#DELAY` commands placed at the sam
 
 ### `#GOGOSTART` / `#GOGOEND`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
 ***Impact level***: scoring ★★★・・ \
 ***First seen in***: TaikoJiro \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
@@ -2231,7 +2266,7 @@ For playing the Go-Go Time entering effects during an existing Go-Go Time sectio
 
 ### `#DUMMYSTART` / `#DUMMYEND`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoManyGimmicks \
 ***Scope***: branch \
@@ -2244,7 +2279,7 @@ Respectively **start** / **end** a fake/dummy section if not already respectivel
 
 ### #SCROLL
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (minimum, except TMG forms, see each form) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (minimum, except TMG forms, see each form) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoJiro \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
@@ -2263,11 +2298,11 @@ For specifying the same initial scrolling speed for multiple player-sides or dif
 Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 * `#SCROLL <(positive-float)scroll-speed-x>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0
 * `#SCROLL <(negative-float)scroll-speed-x>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.1
 * `#SCROLL <(non-zero-complex-ri-float)scroll-speed-xy>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.1 \
   ***Supported by***: TaikoJiro 2 v0.97, TJAPlayer2 for.PC, TaikoManyGimmicks (TJA)
   * Complex-number&ndash;valued, modeled after the rectangular form of complex number: *x* ± *yi*
   * Notecharts with this type of command are usually referred as *<ruby>複<rt>Fuku</rt>素<rt>so</rt>数<rt>suu</rt>譜<rt>fu</rt>面<rt>men</rt></ruby>* "Complex number notechart".
@@ -2276,10 +2311,10 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
   ***Supported by***: TaikoManyGimmicks v0.6.1α
   * `<scroll-speed-y>` specifies the vertical scrolling speed from the top to the bottom of the screen (↓). The unit is the same as `<scroll-speed-x>`.
 * `#SCROLL 0` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 (?; to be discussed)
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.1 (?; to be discussed)
   * The notes and bar lines stay on the judgement mark, or where they should be when expected to be hit if the [`#JUDGEDELAY` command](#judgedelay) is used.
 * `#SCROLL <(float)scroll-speed>, <(number)rotation-lower>, <(number)rotation-upper>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
   ***Supported by***: TaikoManyGimmicks
   * Complex-number&ndash;valued, modeled after the polar form of complex number: *r*∠*φ*
   * Set the scrolling speed vector to `<scroll-speed>` rotated `<degrees-upper>/<degrees-lower>` turns counterclockwise (↺).
@@ -2308,7 +2343,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 ### `#BARLINESCROLL`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: taiko-web (plugin "Custom Barlines") \
 ***Scope***: branch \
@@ -2325,7 +2360,7 @@ Change the **scroll**ing speed of only **bar** **line**s, relative to the normal
 
 ### #HISPEED
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoManyGimmicks v0.6.1α \
 ***Scope***: branch \
@@ -2344,7 +2379,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 ### *Proposal* (IID): #SPEED
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***Scope***: branch \
 ***Scope-fineness***: at-or-after \
@@ -2369,7 +2404,7 @@ If the notes & the bar lines are rotated around their center accordingly when a 
 
 ### #DIRECTION
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 (except proposed forms) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.1 (except proposed forms) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer2 for.PC \
 ***Scope***: branch \
@@ -2386,8 +2421,8 @@ Recommendation for charters: [The `#SCROLL` command](#scroll) should be used ins
 
 *Unspecified*: The behavior when a [`#SCROLL` command](#scroll) with complex value is active.
 
-* In TJAPlayer2 for.PC until OpenTaiko (0auBSQ) v0.6.0.56, if the active [`#SCROLL` command](#scroll) has non-0 vertical scroll velocity, the resulting vertical position is not affected by `#DIRECTION`.
-* In OpenTaiko (0auBSQ) since v0.6.0.56, the vertical scroll velocity of the active [`#SCROLL` command](#scroll) is ignored except when `<enum-int-direction>` is 0 (←) and 5 (→).
+* In TJAPlayer2 for.PC, if the active [`#SCROLL` command](#scroll) has non-0 vertical scroll velocity, the resulting vertical position is not affected by `#DIRECTION`.
+* In OpenTaiko (0auBSQ) v0.6.0.56 until reverted in v0.6.0.100, the vertical scroll velocity of the active [`#SCROLL` command](#scroll) is ignored except when `<enum-int-direction>` is 0 (←) and 5 (→).
 
 Only the horizontal scroll velocity of the active [`#SCROLL` command](#scroll) is used to calculate the resulting scroll velocity.
 
@@ -2412,7 +2447,7 @@ Notice that the scrolling speed of diagonal directions is √(2) times of the sc
 
 ### *Proposal* (IID): #ROLLSTRETCH
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***Scope***: branch \
 ***Scope-fineness***: at-or-after \
@@ -2452,7 +2487,7 @@ Affected note attribute commands:
 
 ### `#BARLINEOFF` / `#BARLINEON`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoJiro v2.69 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC) \
@@ -2471,7 +2506,7 @@ Respectively disable ("turn **off**") / enable ("turn **on**") the display of al
 
 ### `#BARLINE`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: taiko-web (plugin "Custom Barlines") \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
@@ -2485,7 +2520,7 @@ Insert a fake/dummy normal **bar** **line** displayed at the head of the current
 
 ### #JPOSSCROLL
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 (except TMG forms) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.1 (except TMG forms) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer2 for.PC \
 ***Supported by***: TaikoManyGimmicks v0.6α \
@@ -2545,7 +2580,7 @@ The arguments are whitespace-separated.
 
 ### #JUDGEDELAY
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoManyGimmicks \
 ***Scope***: branch \
@@ -2575,7 +2610,7 @@ The arguments are whitespace-separated.
 
 ### SUDDEN / HIDDEN Commands
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 (except proposed forms) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.1 (except proposed forms) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer2 for.PC \
 ***Supported by***: TaikoManyGimmicks v0.6α \
@@ -2637,7 +2672,7 @@ The arguments are whitespace-separated.
 
 ### #NOTESPAWN
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoManyGimmicks \
 ***Scope***: branch \
@@ -2672,7 +2707,7 @@ The arguments are whitespace-separated.
 
 ### `#ENABLEDORON` / `#DISABLEDORON`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 2.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 2.0 \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer3-Extended \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
@@ -2687,7 +2722,7 @@ Respectively **enable** / **disable** the ***<ruby>ド<rt>Do</rt>ロ<rt>ro</rt>�
 
 ### #LYRIC
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TJAPlayer2 for.PC \
 ***Supported by***: taiko-web ver.20.03.31, TaikoManyGimmicks v0.6α \
@@ -2719,7 +2754,7 @@ Display the specified **lyric**.
 
 ### #SENOTECHANGE
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer3 v1.4.0 \
 ***Scope***: branch, note one-shot \
@@ -2801,7 +2836,7 @@ However, in the official Konga games, the general pattern is less consistent and
 
 ### #NOTESCHANGE
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: C-Taiko \
 ***Scope***: branch, note one-shot (?) \
@@ -2829,7 +2864,7 @@ Similar to [the `#SENOTECHANGE` command](#senotechange), but with a different ra
 
 ### *Proposal* (Komi): `#PARTNERNOTE`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ \
 ***Scope***: branch, note one-shot \
 ***Scope-fineness***: at-or-after \
@@ -2853,7 +2888,7 @@ Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF
 
 ### *Proposal* (Komi): #GIANTNOTE
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ \
 ***Scope***: branch, note one-shot \
 ***Scope-fineness***: at-or-after \
@@ -2876,7 +2911,7 @@ Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF
 
 ### *Proposal* (Komi): NOTEIF Commands
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ \
 ***Scope***: branch, note one-shot \
 ***Scope-fineness***: at-or-after \
@@ -2900,7 +2935,7 @@ Conditionally ("**if**") enable the next **note**.
 
 ### *Proposal* (Komi): COMMANDIF Commands
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ (maximum, depends on the usage) \
 ***Scope***: branch, command one-shot \
 ***Scope-fineness***: sequential \
@@ -2927,7 +2962,7 @@ Commands supporting the `#COMMANDIF` and (*proposal* (IID)) `#COMMANDIFF` comman
 
 ### `#SECTION`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (except proposed forms) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (except proposed forms) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.63 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC) \
@@ -2954,7 +2989,7 @@ The value of the condition for determining the "branch"/path by score (the `s` c
 
 ### `#LEVELHOLD`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.63 \
 ***Supported by***: TaikoJiro 2, TJAPlayer2 for.PC \
@@ -2978,7 +3013,7 @@ Override the result of all *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>�
 
 ### *Proposal* (IID): #LEVELREDIR
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ \
 ***Scope***: branch \
 ***Scope-fineness***: measure \
@@ -3036,7 +3071,7 @@ The "branch"/path behavior of the *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby>* Oni
 
 ### #BRANCHSTART / `#BRANCHEND`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (except proposed forms; except `d` condition) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (except proposed forms; except `d` condition) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.63 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC) \
@@ -3058,24 +3093,25 @@ At the determining point, the "branch"/path&ndash;switching effects are played a
 
 * `#BRANCHSTART <(enum-str)condition>, <(number)expert-branch-requirement>, <(number)master-branch-requirement>`
 * *Proposal* (Komi): `#BRANCHSTART lc:<(str-local-value-counter)read-value>, <(number)expert-branch-requirement>, <(number)master-branch-requirement>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
 * *Proposal* (IID): `#BRANCHSTART lcf:<(str-local-formula-counter)read-value>, <(number)expert-branch-requirement>, <(number)master-branch-requirement>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
   * The value of the [local (value or formula) counter](#proposal-komi-counter--trigger-commands) specified by `<read-value>` is read at the branch determining point as the condition value.
 * *Proposal* (Komi): `#BRANCHSTART lt, <(str-local-value-trigger)read-expert-branch-condition>, <(str-local-value-trigger)read-master-branch-condition>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
 * *Proposal* (IID): `#BRANCHSTART ltf, <(str-local-formula-trigger)read-expert-branch-condition>, <(str-local-formula-trigger)read-master-branch-condition>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
   * Each bool value of the [local (value or formula) triggers](#proposal-komi-counter--trigger-commands) specified by `<read-*-branch-condition>` is read at the branch determining point as a condition value, with the requirement value being 1 (true).
 * *Proposal* (IID): `#BRANCHSTART <(comma-separated-list)branchstart-arguments>, <(enum-str)range>` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
   * `<branchstart-arguments>` is any argument form above without trailing commas.
   * `<range>` specifies how the requirement is fulfilled, see [Condition Judgement](#condition-judgement). It can be one of:
     * (empty) or `m` &mdash; **m**ore than or equal to ("≥") the given requirement
     * `l` &mdash; **l**ess than ("\<") the given requirement
   * Recommendation for charters: For `lc:<read-value>`, `lcf:<read-value>`, `lt`, & `ltf` conditions, negating the value is preferred over specifying `l` as `<range>`.
 * *Proposal* (IID): `#BRANCHSTART` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
+  ***Supported by***: OpenTaiko (0auBSQ) v0.6.0.99
   * No condition and requirements specified. Intended to be specified later by [the `#FROMNOR`, `#FROMEXP`, & `#FROMMAS`](#proposal-iid-fromnor--fromexp--frommas) commands.
   * If the condition and requirements for a branch is left unspecified, when that branch is currently targeted, the currently targeted branch is taken as the next target branch before the [`#LEVELHOLD`](#levelhold) and the (*Proposal* (IID)) [`#LEVELREDIR`](#proposal-iid-levelredir) commands are applied, see [judging the target branch](#condition-judgement).
 * `#BRANCHEND` \
@@ -3091,26 +3127,26 @@ The possible conditions includes `<condition>`, `lc:<read-value>`, `lcf:<read-va
   * *Proposal* (IID): The value is limited between 0(%) and 100(%).
   * > Formula: **min**{100(%), (`<sect:jp>` + 0.5 × `<sect:jg>`) / **max**{`<sect:tn>`, 1} × 100(%)}
 * *Proposal* (IID): `P` &mdash; percentage (%) of *<ruby>精<rt>sei</rt>度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy of all missable **big** notes. \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
   * > Formula: **min**{100(%), (`<sect:jp>` + 0.5 × `<sect:jg>`) / **max**{`<sect:tn>`, 1} × 100(%)}
 * `d` &mdash; (*Proposal* (IID)) Percentage (%) of "precision"/accuracy of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes. (**`d`** can be seen as a rotated `p`) \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
   ***First seen in***: TJAPlayer2 for.PC
   * Defined but without formula in TJAPlayer2 for.PC, where this condition is described as "*大音符のみの精度分岐*" ("branching by precision of only big notes").
   * In [TJAPlayer3 (Akasoko-Master)](https://github.com/Akasoko-Master/TJAPlayer3), and later ported to TJAPlayer3-f, TJAPlayer3-Develop, & TJAPlayer3-Develop-ReWrite, the formula is defined but not counted in gameplay, so the condition value is always 0.
   * > Formula (TJAPlayer3 (Akasoko-Master), intended): `<sect:JP>`
   * > Formula (*Proposal* (IID)): **min**{100(%), (`<sect:JP>` + 0.5 × `<sect:JG>`) / **max**{`<sect:TN>`, 1} × 100(%)}
 * *Proposal* (IID): `pp` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable notes. \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
   * > Formula: **min**{100(%), `<sect:jp>` / **max**{`<sect:tn>`, 1} × 100(%)}
 * *Proposal* (IID): `PP` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable **big** notes. \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
   * > Formula: **min**{100(%), `<sect:JP>` / **max**{`<sect:TN>`, 1} × 100(%)}
 * *Proposal* (IID): `jb` &mdash; amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD **j**udgements. \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
   * > Formula: `<sect:jb>`
 * *Proposal* (IID): `JB` &mdash; amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD **j**udgements on **big** notes. \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
   * > Formula: `<sect:JB>`
 * `r` &mdash; amount of hits on non-balloon bar drum**r**oll notes. *Unspecified*: Whether hits on balloon-type notes are also included.
   * Not to be confused with the `r` (always includes *all* drum**r**oll-type notes) used for the requirement of [the `EXAM` headers](#exam-headers).
@@ -3120,10 +3156,10 @@ The possible conditions includes `<condition>`, `lc:<read-value>`, `lcf:<read-va
   * > Formula (if `r` = `<sect:rt>` − `<sect:rb>`): `<sect:RT>` − `<sect:RB>`
   * > Formula (if `r` = `<sect:rt>`): `<sect:RT>`
 * *Proposal* (IID): `rb` &mdash; amount of hits on **b**alloon-type drum**r**oll-**t**ype notes. \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
   * > Formula: `<sect:rb>`
 * *Proposal* (IID): `RB` &mdash; amount of hits on special ("**b**ig") **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`). \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
   * > Formula: `<sect:RB>`
 * `s` &mdash; the current **s**core points. \
   ***Supported by***: TaikoJiro v2.66, [TJAPlayer3 (Akasoko-Master)](https://github.com/Akasoko-Master/TJAPlayer3), TJAPlayer3-f, TJAPlayer3-Develop, TJAPlayer3-Develop-ReWrite
@@ -3327,7 +3363,7 @@ Branch-dependent condition:
 
 ### *Proposal* (IID) #FROMNOR / #FROMEXP / #FROMMAS
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ \
 ***Scope***: notechart \
 ***Scope-fineness***: measure \
@@ -3382,7 +3418,7 @@ The branch determining point for different currently targeted branch may vary.
 
 ### `#N` / `#E` / `#M`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v1.63 \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC) \
@@ -3428,7 +3464,7 @@ The definition of unused "branches"/paths due to forced "branch"/path determinat
 
 ### *Proposal* (barrier): #GROUP
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***Scope***: branch (?) \
 ***Scope-fineness***: at-or-after \
@@ -3442,7 +3478,7 @@ Start the definition of a timing **group**. (?)
 
 ### *Proposal* (barrier): Conditional SPAWN Commands
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: note ★★★★★ \
 ***Scope***: branch (?) \
 ***Scope-fineness***: sequential \
@@ -3516,7 +3552,7 @@ Example usages (adapted from barrier15300):
 
 ### #NEXTSONG
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (minimum, unless stated otherwise) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (minimum, unless stated otherwise) \
 ***Impact level***: timing ★★★★・ \
 ***First seen in***: TJAPlayer3 v1.5.0 \
 ***Scope***: notechart \
@@ -3537,7 +3573,7 @@ See [TJC Header](#tjc-header) for the header version of the `#NEXTSONG` command.
 * `#NEXTSONG <(text)song-title>,<(text)song-subtitle>, <(str)genre>,<(text-filepath)song-wave>, <(positive-or-zero-int)score-init>, <(positive-or-zero-int)score-diff>`
   * Basically has the effects of the [`TITLE:`](#title-headers), [`SUBTITLE:`](#subtitle-headers), [`GENRE:`](#genre), [`WAVE:`](#wave), [`SCOREINIT:`](#scoreinit), and [`SCOREDIFF:`](#scorediff) headers combined, except that every comma (`,`) in each `text` values ***MUST*** be escaped as `\,`
 * `#NEXTSONG <(text)song-title>,<(text)song-subtitle>, <(str)genre>,<(text-filepath)song-wave>, <(positive-or-zero-int)score-init>, <(positive-or-zero-int)score-diff>,[(positive-or-zero-number)level], [(enum)course], [(enum-str-bool)hide-title=False]` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 \
   ***Supported by***: TJAPlayer3-Develop-ReWrite, OpenTaiko (0auBSQ)
   * `[level], [course], [hide-title]` are optional parameters where the last one(s) can be omitted:
     * `[hide-title]` defaults to `False` and specifies whether the title of the song is obscured ("hidden") in the certification challenge selection screen of the *<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games. If given, it can be one of:
@@ -3548,7 +3584,7 @@ See [TJC Header](#tjc-header) for the header version of the `#NEXTSONG` command.
 
 ### *Proposal* (Komi): #SONGJUMP
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ \
 ***Scope***: notechart \
 ***Scope-fineness***: at-or-after \
@@ -3569,7 +3605,7 @@ Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF
 
 ### #GAMETYPE
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0, OutFox v0.4.18 \
 ***Scope***: branch \
@@ -3591,7 +3627,7 @@ See [the `GAME:` header](#game) for specifying the initial game mode for the not
   * A game mode similar to *Donkey Konga*, developed by Namco
   * See [Note Symbols in Konga Mode](#note-symbols-in-konga-mode)
 * (*Proposal* (Komi)) `#GAMETYPE Beatz` \
-  [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 2.0
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 2.0
   * A game mode similar to Squid Beatz 2, a mini game in Splatoon 2, developed by Nintendo
   * See [Note Symbols in Beatz Mode](#proposal-komi-note-symbols-in-beatz-mode)
 * Initial value: The game mode specified by [the `GAME:` header](#game) (not supported by OpenTaiko (0auBSQ))
@@ -3606,7 +3642,7 @@ See [the `GAME:` header](#game) for specifying the initial game mode for the not
 
 ### NOTE / BARLINE Commands
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoManyGimmicks \
 ***Scope***: branch \
@@ -3656,7 +3692,7 @@ Setters:
 
 ### #GRADATION
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoManyGimmicks v0.6α \
 ***Scope***: branch \
@@ -3752,7 +3788,7 @@ Commands supporting the `#GRADATION` command in TaikoManyGimmicks:
 
 ### #INCLUDE
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: note ★★★★★ (depending on included notechart definition content) \
 ***First seen in***: TaikoManyGimmicks v0.6.1α \
 ***Scope***: (depending on included notechart definition content) \
@@ -3768,7 +3804,7 @@ Append ("**include**") the notechart definition content defined the included fil
 
 ### `#SPLITLANE` / `#MERGELANE`
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope***: branch \
@@ -3811,7 +3847,7 @@ The arguments are whitespace-separated.
 
 ### OBJ / CAM Commands
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 2.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 2.0 \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer3-Extended \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
@@ -3924,7 +3960,7 @@ The approach phase of a `#<property>START` command starts at its definition posi
 
 ### #BORDERCOLOR
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 2.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 2.0 \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: TJAPlayer3-Extended \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 \
@@ -3945,7 +3981,7 @@ Set the **color** of the displayed region outside the **border** of the gameplay
 
 ### #CHANGETEXTURE / #RESETTEXTURE
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 2.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 2.0 \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer3-Extended \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 (no effects) \
@@ -3969,7 +4005,7 @@ Reset by each other.
 
 ### #SETCONFIG
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 2.0 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 2.0 \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer3-Extended \
 ***Supported by***: OpenTaiko (0auBSQ) v0.6.0 (no effects) \
@@ -3992,7 +4028,7 @@ Override ("**set**") the **config** value read from the `SkinConfig.ini` of the 
 
 ### #BGAON / #BGAOFF
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-mandatory; 1.0-compatible) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0 \
 ***Scope***: branch \
@@ -4017,7 +4053,7 @@ The arguments are whitespace-separated.
 
 ### *Proposal* (Komi): COUNTER / TRIGGER Commands
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.3 \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ (depending on usage) \
 ***Scope***: branch \
 ***Scope-fineness***: sequential \
@@ -4376,7 +4412,7 @@ Evaluation by frame:
 
 ### *Proposal* (IID): #LUAMOD
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: note ★★★★★ (intended; depending on usage) \
 ***Scope***: branch \
 ***Scope-fineness***: sequential \
@@ -4395,7 +4431,7 @@ The exact behavior is *unspecified*.
 
 ### *Proposal* (IID): #LUAFX
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ (intended; depending on usage) \
 ***Scope***: branch \
 ***Scope-fineness***: sequential \
@@ -4417,7 +4453,7 @@ The exact behavior is *unspecified*.
 
 ### *Proposal* (IID): Command Modifier
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***Scope***: (Part of a command) \
 ***Scope-fineness***: (Part of a command) \
@@ -4642,7 +4678,7 @@ In the official games, notes neither consumed nor missed are usually judged in i
 
 ### Note Symbols in Taiko Mode
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 (minimum, unless stated otherwise) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (minimum, unless stated otherwise) \
 ***First seen in***: TaikoJiro v0.80 (initial release) \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Inspired by***: TJF format (`0` to `7`) \
@@ -4675,18 +4711,18 @@ Timing Window | Official default range (Easy/Normal) | (Hard/Oni) | Explanation
 `2` | Regular <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> | Small sky-blue circle | <ruby>カ<rt>Ka</rt></ruby> / *<ruby>カッ<rt>Ka'</rt></ruby>* Ka | [Correctly input](#judgement-expection-type) Rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window, consumes the note. [Propogates wrong inputs](#judgement-expection-type). <br /> Awards the same as `1`. | Otherwise, correctly input within *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD judgment window (consumes the note) or [missing input](#judgement-expection-type) (keeps note's visibility). <br /> Gives the same penalty as `1`. |
 `3` | Big <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> | Big orange-ish red circle | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* DON | [Correctly input](#judgement-expection-type) Surface within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window, consumes the note. [Propogates wrong inputs](#judgement-expection-type). <br /> Awards the same as `1` but extra score bonus† if input is Strong (AC) <br> if correctly input left Surface + right Surface‡ (CS) | (same as `1`) |
 `4` | Big <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> | Big sky-blue circle | *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* KA | Correctly input Rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window, consumes the note. [Propogates wrong inputs](#judgement-expection-type). <br /> Awards the same as `2` but extra score bonus† if input is Strong (AC) <br> if correctly input left Rim + right Rim‡ (CS) | (same as `2`) |
-`G` | Swap note | (Vary) <br /> Big green circle in taiko-web (plugin "Green Notes") <br /> Big purple circle in OpenTaiko (0auBSQ) | (*<ruby>グ<rt>Gu</rt>リー<rt>rii</rt>ン<rt>n</rt></ruby>* Green) <br /> (*<ruby>カ<rt>Ka</rt>ド<rt>do</rt>ン<rt>n</rt></ruby>* KADON) | [Correctly input](#judgement-expection-type) Surface + Rim with the first input within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window, consumes the note. [Consumes incomplete inputs (?) and propogates wrong inputs](#judgement-expection-type). <br /> Awards the same as `1` according to the timing of the first input. | Otherwise, correctly input with the first input within the *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD judgment window (consumes the note) or [missing input](#judgement-expection-type) (keeps note's visibility). <br /> Gives the same penalty as `1`. | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 <br /> ***First seen in***: taiko-web (plugin "Green Notes") <br /> ***Supported by***: OpenTaiko (0auBSQ) v0.5.4 <br /> Not in the official games.
-`A` | Hand-holding big <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> | Big orange-ish red circle with hands holding with other note(s) for other player(s) <br /> Its face resembles `1` rather than `3` until being hit. | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "DON (Hand)" | Similar to `1` or `3` (strong or double-hit not required in some official games (?)) but awards extra score bonus† if all players hit within a certain time duration. | (same as `1`) | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2018040100 <br /> ***Supported by***: OutFox v0.4.9.9 <br /> In the official games, becomes `3` when no hand-holding notes exist at the same time position for any of the other players.
-`B` | Hand-holding big <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> | Big sky-blue circle with hands holding with other note(s) for other player(s) <br /> Its face resembles `2` rather than `4` until being hit. | *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "KA (Hand)" | Similar to `2` or `4` (strong or double-hit not required in some official games (?)) but awards extra score bonus† if all players hit within a certain time duration. | (same as `2`) | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.0 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2018040100 <br /> ***Supported by***: OutFox v0.4.9.9 <br /> In the official games, becomes `4` when no hand-holding notes exist at the same time position for any of the other players.
-`C` | Bomb/mine | Small dark-blue cherry bomb with ignited fuze 💣 | (none) | [Missing input](#judgement-expection-type). <br /> Awards a "bomb/mine-pass" judgment. | [Correctly input](#judgement-expection-type) Surface or Rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK (?) timing window, consumes the note. <br /> Gives a BOOM ("bomb/mine-miss") judgment & a combo-break and decreases *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge. | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 <br /> ***First seen in***: OpenTaiko-OutFox standard 1.2 (proposed from OutFox) <br /> ***Supported by***: OpenTaiko (0auBSQ) v0.5.4
-`F` | *Ad libitum* note (AD-LIB) | (invisible by default) | (none) | [Correctly input](#judgement-expection-type) Surface or Rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window, consumes the note. <br /> Awards an AD-LIB judgment but keep combo unchanged. | [Missing input](#judgement-expection-type) within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window. <br /> Gives no penalties. | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.1 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2016081500 <br /> Not in the official games. <br> Inspired by another rhythm game *GROOVE COASTER*, developed by TAITO
+`G` | Swap note | (Vary) <br /> Big green circle in taiko-web (plugin "Green Notes") <br /> Big purple circle in OpenTaiko (0auBSQ) | (*<ruby>グ<rt>Gu</rt>リー<rt>rii</rt>ン<rt>n</rt></ruby>* Green) <br /> (*<ruby>カ<rt>Ka</rt>ド<rt>do</rt>ン<rt>n</rt></ruby>* KADON) | [Correctly input](#judgement-expection-type) Surface + Rim with the first input within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window, consumes the note. [Consumes incomplete inputs (?) and propogates wrong inputs](#judgement-expection-type). <br /> Awards the same as `1` according to the timing of the first input. | Otherwise, correctly input with the first input within the *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD judgment window (consumes the note) or [missing input](#judgement-expection-type) (keeps note's visibility). <br /> Gives the same penalty as `1`. | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 <br /> ***First seen in***: taiko-web (plugin "Green Notes") <br /> ***Supported by***: OpenTaiko (0auBSQ) v0.5.4 <br /> Not in the official games.
+`A` | Hand-holding big <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> | Big orange-ish red circle with hands holding with other note(s) for other player(s) <br /> Its face resembles `1` rather than `3` until being hit. | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "DON (Hand)" | Similar to `1` or `3` (strong or double-hit not required in some official games (?)) but awards extra score bonus† if all players hit within a certain time duration. | (same as `1`) | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2018040100 <br /> ***Supported by***: OutFox v0.4.9.9 <br /> In the official games, becomes `3` when no hand-holding notes exist at the same time position for any of the other players.
+`B` | Hand-holding big <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> | Big sky-blue circle with hands holding with other note(s) for other player(s) <br /> Its face resembles `2` rather than `4` until being hit. | *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "KA (Hand)" | Similar to `2` or `4` (strong or double-hit not required in some official games (?)) but awards extra score bonus† if all players hit within a certain time duration. | (same as `2`) | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2018040100 <br /> ***Supported by***: OutFox v0.4.9.9 <br /> In the official games, becomes `4` when no hand-holding notes exist at the same time position for any of the other players.
+`C` | Bomb/mine | Small dark-blue cherry bomb with ignited fuze 💣 | (none) | [Missing input](#judgement-expection-type). <br /> Awards a "bomb/mine-pass" judgment. | [Correctly input](#judgement-expection-type) Surface or Rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK (?) timing window, consumes the note. <br /> Gives a BOOM ("bomb/mine-miss") judgment & a combo-break and decreases *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge. | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 <br /> ***First seen in***: OpenTaiko-OutFox standard 1.2 (proposed from OutFox) <br /> ***Supported by***: OpenTaiko (0auBSQ) v0.5.4
+`F` | *Ad libitum* note (AD-LIB) | (invisible by default) | (none) | [Correctly input](#judgement-expection-type) Surface or Rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window, consumes the note. <br /> Awards an AD-LIB judgment but keep combo unchanged. | [Missing input](#judgement-expection-type) within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK timing window. <br /> Gives no penalties. | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.1 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2016081500 <br /> Not in the official games. <br> Inspired by another rhythm game *GROOVE COASTER*, developed by TAITO
 `5` | Head of regular (bar) *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>* drumroll <br /> Examples: `5008`, `5558`, `5001` | Small yellow circle with bar attached behind <br> Turns red if hit rapidly while gradually fading out to its original color in AC games | *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>ー* Roll&ndash; | Repeatly [correctly input](#judgement-expection-type) Surface or Rim by any times during its duration, only reacts to each input up to 1 per 60fps frame†† (official games). <br /> Increases score per reacted input. | (impossible to fail) |
-`I` | &bull; (same as `5`) (OpenTaiko (0auBSQ)) <br /> &bull; Head of regular <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> (bar) *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>* drumroll (OutFox's OpenTaiko-OutFox standard draft (?)) <br /> Examples: `I008`, `III8`, `I001` | &bull; (see `5`) <br /> &bull; Small sky-blue circle with bar attached behind (OutFox, expected (?)) | (see `5`) | &bull; (same as `5`) (OpenTaiko (0auBSQ)) <br /> &bull; Repeatly [correctly input](#judgement-expection-type) Rim by any times during its duration. [Consumes wrong inputs](#judgement-expection-type) (?). (OutFox's OpenTaiko-OutFox standard draft) <br /> Awards the same as `5`. | (impossible to fail) | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 <br /> ***First seen in***: OpenTaiko-OutFox standard 1.2 (first proposed from OutFox), OpenTaiko (0auBSQ) v0.5.4 <br /> By analogy with Konga mode
+`I` | &bull; (same as `5`) (OpenTaiko (0auBSQ)) <br /> &bull; Head of regular <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> (bar) *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>* drumroll (OutFox's OpenTaiko-OutFox standard draft (?)) <br /> Examples: `I008`, `III8`, `I001` | &bull; (see `5`) <br /> &bull; Small sky-blue circle with bar attached behind (OutFox, expected (?)) | (see `5`) | &bull; (same as `5`) (OpenTaiko (0auBSQ)) <br /> &bull; Repeatly [correctly input](#judgement-expection-type) Rim by any times during its duration. [Consumes wrong inputs](#judgement-expection-type) (?). (OutFox's OpenTaiko-OutFox standard draft) <br /> Awards the same as `5`. | (impossible to fail) | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 <br /> ***First seen in***: OpenTaiko-OutFox standard 1.2 (first proposed from OutFox), OpenTaiko (0auBSQ) v0.5.4 <br /> By analogy with Konga mode
 `6` | Head of big (bar) *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>* drumroll <br /> Examples: `6008`, `6668`, `6001` | Big yellow circle with bar attached behind <br> Turns red if hit rapidly while gradually fading out to its original color in AC games | *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）ー* ROLL&ndash; | Repeatly [correctly input](#judgement-expection-type) Rim by any times during its duration, only reacts to each input up to 1 per 60fps frame†† (official games). <br /> Increases score per reacted input. <br /> Extra score bonus† for each reacted input if is Strong (?) (earlier AC), and/or with at least 2 inputs in a 60fps frame†† (?) (earlier AC & earlier CS), or always (?) (AC & CS) | (impossible to fail) |
-`H` | &bull; (same as `6`) (OpenTaiko (0auBSQ)) <br /> &bull; Head of regular <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> (bar) *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>* drumroll (OutFox's OpenTaiko-OutFox standard draft (?)) <br /> Examples: `H008`, `HHH8`, `H001` | &bull; (see `6`) <br /> &bull; Small orange-ish red circle with bar attached behind (OutFox) | (see `6`) | &bull; (same as `5`) (OpenTaiko (0auBSQ)) <br /> &bull; Repeatly [correctly input](#judgement-expection-type) Surface by any times during its duration. [Consumes wrong inputs](#judgement-expection-type) (?). (OutFox's OpenTaiko-OutFox standard draft) <br /> Awards the same as `5`. | (impossible to fail) | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 <br /> ***First seen in***: (first proposed from OutFox), OpenTaiko (0auBSQ) v0.5.4 <br /> By analogy with Konga mode
+`H` | &bull; (same as `6`) (OpenTaiko (0auBSQ)) <br /> &bull; Head of regular <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> (bar) *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>* drumroll (OutFox's OpenTaiko-OutFox standard draft (?)) <br /> Examples: `H008`, `HHH8`, `H001` | &bull; (see `6`) <br /> &bull; Small orange-ish red circle with bar attached behind (OutFox) | (see `6`) | &bull; (same as `5`) (OpenTaiko (0auBSQ)) <br /> &bull; Repeatly [correctly input](#judgement-expection-type) Surface by any times during its duration. [Consumes wrong inputs](#judgement-expection-type) (?). (OutFox's OpenTaiko-OutFox standard draft) <br /> Awards the same as `5`. | (impossible to fail) | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 <br /> ***First seen in***: (first proposed from OutFox), OpenTaiko (0auBSQ) v0.5.4 <br /> By analogy with Konga mode
 `7` | Head of regular *<ruby>激<rt>Geki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt>キ<rt>ki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt>船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* balloon <br /> Examples: `7008`, `7778`, `7001` | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | *<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* Balloon | Repeatly [correctly input](#judgement-expection-type) Surface until exactly certain amount of reacted inputs during its duration, reacts to each correct input up to 1 per 60fps frame†† (official games). [Consumes wrong inputs](#judgement-expection-type). Consumes the note when cleared. <br /> Each reacted input increases score (except for CS4&ndash;5, TDM, & PSP1&ndash;2). <br /> Awards extra score bonus† when cleared. | Fail to reach enough amount of reacted inputs. <br /> Does not give penalties except that notes (except bombs/mines (?)) placed within the duration of the balloon are impossible to hit while the balloon is not cleared. |
 `9` | Head of special burst note/balloon <br> (Differ from game to game) <br /> Examples: `9008`, `9998`, `9001` | &bull; (Vary) <br> &bull; Big yellow circle with potato attached (PS2-generation) <br> &bull; Big yellow circle in the shape of a confetti ball 🎊 (PS3- and PC-generation) <br> &bull; Has particle decorative visual effects in AC. | *<ruby>く<rt>Ku</rt>す<rt>su</rt>玉<rt>dama</rt></ruby>* Party Popper <br> (Strictly speaking, *<ruby>薬<rt>Kusu</rt>玉<rt>dama</rt></ruby>/<ruby>く<rt>Ku</rt>す<rt>su</rt>玉<rt>dama</rt></ruby>* "Confetti Ball" 🎊 & party popper 🎉 only resemble each other and are not the same thing) | &bull; (Vary) <br> &bull; In AC, repeatly [correctly input](#judgement-expection-type) Surface until exactly certain amount of reacted inputs (shared among players) during its duration, reacts to each correct input up to 1 per 60fps frame†† (official games). [Consumes wrong inputs](#judgement-expection-type). Consumes the note when cleared. <br /> Each reacted input increases score. <br /> Awards vary extra score bonus† to all players when cleared, according to the timing of an additional correct Surface input (wrong inputs consumed) hinted by the player character's face (AC7) or whether the note is cleared quickly enough (later AC) <br> | (same as `7`) | ***First seen in***: TaikoJiro v2.75 <br /> In the official games, becomes `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player.
-`D` | Fuze/fuse drumroll <br /> Examples: `D008`, `DDD8`, `D001` | ? <br /> (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt>爆<rt>baku</rt>弾<rt>dan</rt></ruby> "Time bomb"/Fuseroll) | Similar to `7` but awards a "bomb/mine-pass" judgment. | Similar to `7` but gives a BOOM ("bomb/mine-miss") judgment & a combo-break and decreases *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge. | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 <br /> ***First seen in***: (first proposed from OutFox), OpenTaiko (0auBSQ) v0.6.0 <br /> Not in the official games.
+`D` | Fuze/fuse drumroll <br /> Examples: `D008`, `DDD8`, `D001` | ? <br /> (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt>爆<rt>baku</rt>弾<rt>dan</rt></ruby> "Time bomb"/Fuseroll) | Similar to `7` but awards a "bomb/mine-pass" judgment. | Similar to `7` but gives a BOOM ("bomb/mine-miss") judgment & a combo-break and decreases *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge. | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 <br /> ***First seen in***: (first proposed from OutFox), OpenTaiko (0auBSQ) v0.6.0 <br /> Not in the official games.
 `8` | Explicit end of a drumroll-type note (if any), otherwise (blank) | &bull; (round end of a bar) (end of bar-type drumrolls) <br /> &bull; (none) (otherwise) | &bull; (っ!!) (end of non-balloon bar drumrolls) <br /> &bull; (none) (otherwise) | Nothing needs to be done. Consumes no input. | (impossible to fail) | Stopping rolling the drum at-or-before the point (end of drumrolls) <br /> Introduced to replaced the TJF syntax for specifying drumroll duration (`5555` / `7777`) (explained below).
 
 †: No score bonuses if the PC-generation scoring rule is followed. \
@@ -4761,7 +4797,7 @@ In the official games, drumroll-type notes are usually intentionally made to end
 
 ### Note Symbols in Konga Mode
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 1.2 (unless stated otherwise) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 (unless stated otherwise) \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.4 \
 ***Supported by***: taiko-web (plugin "Donkey Konga Mode"), OutFox
 
@@ -4795,7 +4831,7 @@ MISS | (miss) | ‡ Corresponds to a unhit *<ruby>不<rt>Fu</rt>可<rt>ka</rt></
 `3` | Both drum beats | Pink circle | D | [Correctly input](#judgement-expection-type) Left + Right with the first input within the OK timing window. [Consumes incomplete input (?) and propogates wrong inputs](#judgement-expection-type). <br /> Awards the same as `1` according to the timing of the first input. | Otherwise, correctly input but with the first input within the BAD judgment window (consumes the note) or [missing inputs](#judgement-expection-type) (keeps note's visibility). <br /> Gives the same penalty as `1`. |
 `G` | (same as `3`) | (see `3`) | (see `3`) | (see `3`) | (see `3`) | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ) v0.5.4, OutFox v0.4.18 <br /> By analogy with Taiko mode.
 `4` | Clap | Sky-blue circle with star-ish edge | <ruby>チャ<rt>Cha</rt></ruby> / <ruby>チャッ<rt>Cha'</rt></ruby> / <ruby>チャン<rt>Chan</rt></ruby> | [Correctly input](#judgement-expection-type) Clap within the OK timing window, consumes the note. [Propogates wrong inputs](#judgement-expection-type) <br /> Awards the same as `1`. | Otherwise, correctly input but only within the BAD judgment window (consumes the note) or [missing input](#judgement-expection-type) (keeps note's visibility). <br /> Gives the same penalty as `1`. |
-`J` | (same as `4`) | (see `4`) | (see `4`) | (see `4`) | (see `4`) | [***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) <br /> ***First seen in***: OutFox v0.4.18 (?)
+`J` | (same as `4`) | (see `4`) | (see `4`) | (see `4`) | (see `4`) | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) <br /> ***First seen in***: OutFox v0.4.18 (?)
 `A` | Hand-holding both drum beats | (Pink circle with hands holding with other note(s) for other player(s)) | ? | Similar to `3` but awards extra score bonus† if all players hit within a certain time duration <br> | (same as `3`) | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ), OutFox <br /> Might becomes `3` when no hand-holding notes exist at the same time position for any of the other players. <br> Not in the official games. <br> By analogy with `GAME:Taiko`.
 `B` | Hand-holding clap beat | (Sky-blue circle with star-ish edge and with hands holding with other note(s) for other player(s)) | ? | Similar to `4` but awards extra score bonus† if all players hit within a certain time duration. | (same as `4`) | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ), OutFox <br /> Might becomes `4` when no hand-holding notes exist at the same time position for any of the other players. <br> Not in the official games. <br> By analogy with Taiko mode.
 `C` | Bomb/mine | (Small dark-blue cherry bomb with ignited fuze 💣) | (none) | [Missing input](#judgement-expection-type). <br /> Awards a "bomb/mine-pass" judgment. | [Correctly input](#judgement-expection-type) Left, Right, or Clap within the OK (?) timing window, consumes the note. <br /> Gives a BOOM ("bomb/mine-miss") judgment & a combo-break and decreases healty gauge. | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ) <br /> Not in the official games. <br /> By analogy with Taiko mode.
@@ -4824,7 +4860,7 @@ The note handling details of the Taiko mode apply. See the explanation in [Note 
 
 ### *Proposal* (Komi): Note Symbols in Beatz Mode
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): 2.0
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 2.0
 
 Specification by Komi: <https://docs.google.com/document/d/1GSBX-xVymf6p525MUm9bvhTryYyG_3pLaTk6wiHVtck>
 
@@ -4878,7 +4914,7 @@ The note handling details of the Taiko mode apply. See the explanation in [Note 
 
 ### Note Symbols in Jube Mode
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***First seen in***: TaikoJiro v2.13
 
 Effective when [`GAME:Jube`](#game) is in effect.
@@ -4909,7 +4945,7 @@ The above note combination is written `D610`.
 
 ### Note Symbols in Bm Mode
 
-[***OpenTaiko-OutFox standard version***](#proposal-komi-version): (non-standard) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***First seen in***: TaikoJiro 1 (unknown version)
 
 Effective when [`GAME:Bm`](#game) is in effect.
