@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-03-26 (UTC+8)
+* Last changed: 2026-03-28 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -233,7 +233,7 @@ For multiple values separated by comma (`,`), except for `rawstr`-valued fields,
     * *Unspecified*: Whether a comma (`,`) can be used as the decimal point instead of a full-stop (`.`).
     * *Unspecified*: The supported precision.
     * In TaikoJiro 1 and 2, TJAPlayer2 for.PC, taiko-web: Exponential notation is supported, *e.g.*, `1e4`, `-3.14e-6`.
-    * In TJAPlayer2 for.PC, taiko-web: Infinity (∞) is supported, *e.g.*, `inf`, `+INF`, `-Infinity`.
+    * In TJAPlayer2 for.PC, taiko-web: Infinity (∞) is supported, *e.g.*, `Infinity`, `-Infinity`.
   * `enum-int` (enum-like, int-form): An `int` with specific accepted values.
   * *Unspecified*: Whether the positive sign (`+`) may appear for a positive-or-zero value, except for `unsigned-*`.
   * In TaikoJiro, leading non-newline whitespaces are always ignored.
