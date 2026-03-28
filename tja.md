@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-03-28 (UTC+8)
+* Last changed: 2026-03-29 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -234,6 +234,7 @@ For multiple values separated by comma (`,`), except for `rawstr`-valued fields,
     * *Unspecified*: The supported precision.
     * In TaikoJiro 1 and 2, TJAPlayer2 for.PC, taiko-web: Exponential notation is supported, *e.g.*, `1e4`, `-3.14e-6`.
     * In TJAPlayer2 for.PC, taiko-web: Infinity (∞) is supported, *e.g.*, `Infinity`, `-Infinity`.
+    * In OpenTaiko (0auBSQ) v0.6.0.103: Alternative spellings of infinity (∞) (case-insensitive `inf` & `infinity`) are supported
   * `enum-int` (enum-like, int-form): An `int` with specific accepted values.
   * *Unspecified*: Whether the positive sign (`+`) may appear for a positive-or-zero value, except for `unsigned-*`.
   * In TaikoJiro, leading non-newline whitespaces are always ignored.
@@ -249,9 +250,10 @@ For multiple values separated by comma (`,`), except for `rawstr`-valued fields,
     * `i` &mdash; the imaginary component has the absolute value of 1.
     * `<(unsigned-number)imaginary>i` &mdash; the imaginary component has the absolute value of `<imaginary>`.
     * *Unspecified*: whether `j` can be used in place of `i`.
+  * In OpenTaiko (0auBSQ) v0.6.0.103: Infinity (∞) (case-insensitive `inf` & `infinity`) can be used as components, *e.g.*, `infinity+infi`.
   * ***Compatibility issues***:
     * In TaikoJiro 2, `+<(unsigned-number)real>-<(unsigned-number)imaginary>i` (?) where `<imaginary>` is equivalent to 0 is not fully supported.
-    * In TJAP2fPC but not OpenTaiko (0auBSQ) v0.6.0, only the forms `<(number)real>` & `<(number)real><sign-imaginary><(unsigned-number)imaginary>i` are supported; omitting any number parts is not supported.
+    * In TJAP2fPC but not OpenTaiko (0auBSQ) v0.6.0, only the forms `<(number)real>` & `<(number)real><sign-imaginary><(unsigned-number)imaginary>i` are supported; omitting any number parts is not 
     * In TaikoManyGimmicks up to 0.6.6α, omitting the real number component when  `<sign-imaginary>` is not `-` is not supported.
 * `text`: A string. `text` indicates that it is *unspecified* whether leading or trailing non-newline whitespaces are significant. *Unspecified*: The maximum supported length.
   * `rawstr`: A string. Can contain leading or trailing non-newline whitespaces & comments.
@@ -332,11 +334,11 @@ Non&ndash;post-`#START` headers with finer scope-fineness have difficulty scope 
 Each difficulty scope starts at [a `COURSE:` header](#course) specifying the target difficulty and ends at another `COURSE:` header specifying any difficulty. The file section before the first `COURSE:` header is in the default difficulty scope.
 
 * *Unspecified*: The behavior when the difficulty scope for the same difficulty is defined at multiple file sections.
-  * In TaikoJiro: All such sections are effective and are considered to be a single difficulty scope. The headers with difficulty scope from the earlier defined section are used as the default value for the later defined sections.
-  * In TJAPlayer2 for.PC: All headers with difficulty scope and notechart definitions in such sections except for the last defined section are ignored.
+  * In TaikoJiro & OpenTaiko (0auBSQ) v0.6.0.103: All such sections are effective and are considered to be a single difficulty scope. The headers with difficulty scope from the earlier defined section are used as the default value for the later defined sections.
+  * In TJAPlayer2 for.PC but not OpenTaiko (0auBSQ) v0.6.0.103: All headers with difficulty scope and notechart definitions in such sections except for the last defined section are ignored.
 * *Unspecified*: The behavior when headers with difficulty scope and notechart definitions are defined within the default difficulty scope.
-  * In TaikoJiro: Such headers are used as the default value for each difficulty. Such notecharts have the default difficulty of `COURSE:Oni`.
-  * In TJAPlayer2 for.PC: When any `COURSE:` headers are defined, all such headers and notechart definitions are ignore. Otherwise, the default scope is treated as a `COURSE:Oni` scope.
+  * In TaikoJiro & OpenTaiko (0auBSQ) v0.6.0.103: Such headers are used as the default value for each difficulty. Such notecharts have the default difficulty of `COURSE:Oni`.
+  * In TJAPlayer2 for.PC but not OpenTaiko (0auBSQ) v0.6.0.103: When any `COURSE:` headers are defined, all such headers and notechart definitions are ignore. Otherwise, the default scope is treated as a `COURSE:Oni` scope.
 * *Unspecified*: The behavior when a header with possible per-file scope-fineness is defined after the default difficulty scope.
   * In TaikoJiro 1 (?) & TJAPlayer2 for.PC: If the header is implemented with per-file scope-fineness, the last occurence of such header is used.
   * In TaikoJiro 2 (?): If the header is implemented with per-file scope-fineness, the last occurence of such header in the difficulty scope(s) of selected difficulty is used.
@@ -493,7 +495,11 @@ The display details are *unspecified*.
 * `NOTESDESIGNER<(trimmed-enum-int)difficulty-course>:<(text)name-notechart-creator>` \
   ***Supported by***: (Better)TaikoCatsCaffe (?), OpenTaiko (0auBSQ) v0.6.0
   * `<difficulty-course>` can one of the integer argument to [the `COURSE:` header](#course).
-  * *Unspecified*: The behavior when the difficulty specified by `<difficulty-course>` is different from the difficulty specified by `COURSE:` for the notechart definition.
+  * *Unspecified*: The behavior when defined in the default difficulty scope.
+    * In OpenTaiko (0auBSQ) until v0.6.0.103, the per&ndash;player-side headers within the default difficulty scope are ignored.
+    * In OpenTaiko (0auBSQ) v0.6.0.103, `<name-notechart-creator>` is set as the default value for the difficulty specified by `<difficulty-course>`.
+  * *Unspecified*: The behavior when the difficulty specified by `<difficulty-course>` is different from the difficulty specified by `COURSE:` for the notechart definition (not a default difficulty scope).
+    * In OpenTaiko (0auBSQ): `<difficulty-course>` is ignored in such a case.
   * *Proposal* (Komi): Every comma (`,`) in `<name-notechart-creator>` ***MUST*** be escaped as `\,`
 * `NOTESDESIGNER:<(text)name-notechart-creator>` \
   ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
@@ -872,7 +878,8 @@ Specify the pre-defined ("**preset**") skin ("**scene**") in the gameplay screen
     * `Dan` &mdash; for difficulties with `COURSE:Dan`.
     * `AI` &mdash; for other difficulties ("regular charts") in AI battle mode
     * `Regular` &mdash; for other difficulties ("regular charts") in regular mode
-* *Proposal* (IID): `SCENEPRESET:<(comma-separated-list:text-filepath)scene-preset>`
+* `SCENEPRESET:<(comma-separated-list:text-filepath)scene-preset>` \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
   * A random gameplay skin is chosen from the specified list.
 * Unavailable value / `SCENEPRESET:`
   * The default gameplay skin is used.
@@ -1121,7 +1128,7 @@ The display details are *unspecified*.
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 ([Taiko](#note-symbols-in-taiko-mode) and [Konga](#note-symbols-in-konga-mode) modes) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v2.13 \
-***Supported by***: taiko-web (plugin "Donkey Konga Mode") \
+***Supported by***: taiko-web (plugin "Donkey Konga Mode"), OpenTaiko (0auBSQ) v0.6.0.93 \
 ***Scope-fineness***: per&ndash;player-side (?)
 
 Specify the **game** mode. The meaning of the symbols used in the notechart definition is changed accordingly; see [TJA Notechart Definition](#tja-notechart-definition).
@@ -1636,7 +1643,7 @@ In the official game, `diff` is not required to be a multiple of 10. Instead, th
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 (except 0 or omitted forms) \
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TJAPlayer2 for.PC \
-***Scope-fineness***: per&ndash;player-side
+***Scope-fineness***: per-file; (OpenTaiko (0auBSQ) 0.6.0.103+) per&ndash;player-side
 
 If enabled, make the *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path indicator **hidden** in the song selection screen; hide the "branch"/path mark on the note field from the beginning of the notechart until time point when the "branch"/path&ndash;switching effects should play for the first "branch"/path section in the gameplay screen.
 
@@ -1655,7 +1662,7 @@ If enabled, make the *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>k
 ***Impact level***: note ★★★★★ (maximum, depends on the compatibility mode) \
 ***Scope-fineness***: per&ndash;player-side
 
-Specify the intended compatibility mode of the chart.
+Specify the intended **compat**ibility mode of the chart.
 
 The supported set of headers & commands and allowed argument forms is not affected. However, the arguments might be interpreted differently dependent on the compatibility mode.
 
@@ -1805,7 +1812,7 @@ Behavior \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
 `sudden-directions` | N/A | N/A <br /> (`all`) | N/A <br /> (`all`) | `all` | `x` | N/A <br /> (`x`)
 `sudden-precision` | N/A | N/A <br /> (`ms`) | N/A <br /> (`ms`) | `any` (?) | `ms` | `ms`
 `stack-order` | `appear-time` (PS1/2-gen) <br /> `def` (PS3/PC-gen) | `def` | `def` | `time` (?) | `time` | `def`
-`angle-barline` | N/A | `angle-mirror` (?) | `angle-mirror` (?) | `angle-mirror` (?) | `im` | `none` <br /> (`angle-mirror`)
+`angle-barline` | N/A | `angle-mirror` (?) | `angle-mirror` (?) | `angle-mirror` (?) | `im` | `angle` <br /> (`angle-mirror`)
 `angle-note` | N/A | `none` (?) | `angle-mirror` | `angle-mirror` | `none` | `none`
 `angle-roll-bar` | N/A | `angle-mirror` | `angle-mirror` | `angle-mirror` | N/A <br /> (`angle-mirror`) | `angle` <br /> (`angle-mirror`)
 
@@ -1817,7 +1824,7 @@ Behavior \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
 
 Specification by Komi: <https://docs.google.com/document/d/17GKK9U5S_eT97oTwgB6tMMNQsQm2uhp-OIhBMv2Mgso>
 
-Specify the version-numbered set of the OpenTaiko-OutFox standard TJA features required by the TJA file.
+Specify the version-numbered set of the OpenTaiko-OutFox standard TJA **spec**ification required by the TJA file.
 
 Simulators may choose to keep the enabled set of TJA features unchanged. If the specified feature set isn't supported by the simulator, a warning should be emitted, and the simulator may choose the accept or reject such TJA files.
 
@@ -1834,11 +1841,11 @@ If the TJA file uses any features outside the specified feature set, a warning s
 ## .CUTSCENE_INTRO & .CUTSCENE_OUTRO
 
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) (?) \
-***Impact level***: metadata ★・・・・ (non-mandatory usage) \
+***Impact level***: metadata ★・・・・ \
 ***Scope-fineness***: per-file \
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.52
 
-Specify the cutscene(s) to play in order. Intro cutscene(s) are played after selecting song and outro cutscene(s) are played after existing from result screen and before returning to other screen.
+Specify the **cutscene**(s) to play in order. **Intro cutscene**(s) are played after selecting song and **outro cutscene**(s) are played after existing from result screen and before returning to other screen.
 
 * `.CUTSCENE_INTRO:<(string)path>, [(enum-int)repeat-mode=1]`
   * Specify the unconditional intro cutscene.
@@ -1865,6 +1872,38 @@ Specify the cutscene(s) to play in order. Intro cutscene(s) are played after sel
   * Specify multiple conditional outro cutscenes. Each element of `<conditional-cutscene-specifier>` is in the form of specifying a conditional outro, with all arguments required except for the last outro.
 
 The last arguments can be omitted for both headers.
+
+## .FORCEGAUGE
+
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
+***Impact level***: scoring ★★★・・ \
+***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103 \
+***Scope-fineness***: per&ndash;player-side
+
+**Force**s the **gauge** type.
+
+* `.FORCEGAUGE:<(enum-str)type>`
+  * `<type>` can be one of:
+    * `Normal` &mdash; Force Normal gauge
+    * `Hard` &mdash; Force Hard gauge
+    * `Extreme` &mdash; Force Extreme gauge
+    * (Default) / `None` &mdash; No gauge is forced
+
+## .BOOMRULE
+
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
+***Impact level***: scoring ★★★・・ \
+***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103 \
+***Scope-fineness***: per&ndash;player-side
+
+Specifies the gauge penalty of the **BOOM** judgement.
+
+* `.BOOMRULE:<(enum-str)type>,[(float)amount]`
+  * `<type>` can be one of:
+    * `Scal` &mdash; Decrease gauge by `[amount]` percentage. `[amount]` defaults to 4 and is clamped above 0 (100 for whole gauge).
+    * `Ratio` &mdash; Decrease gauge by `[amount]` times of what a *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement gives. `[amount]` defaults to 1 and is clamped above 0.
+    * `Fatal` &mdash; No decreasing gauge, but getting `[amount]` BOOM judgements causes an instant fail (even if using normal gauge). `[amount]` defaults to 1 and is clamped above 1.
+* (Default) &mdash; `.BOOMRULE:Scal,4`
 
 ## TJC Header
 
@@ -2666,7 +2705,7 @@ The arguments are whitespace-separated.
   * The per-note effect is only applied at-or-after the time position of [the `#START` command](#start--end). (?)
   * The vertical scrolling velocity of a note is not affected during the stopping phase of the note.
   * `#SUDDEN <appear-duration> 0` with positive `<appear-duration>` makes roll-type notes completely invisible. To make roll-type notes appear normally, use a positive `<moving-duration>`.
-* In OpenTaiko (0auBSQ) (?, as for v0.6.0 b3):
+* In OpenTaiko (0auBSQ) (?, as for v0.6.0 b3) until fixed in v0.6.0.103:
   * The scrolling velocity of a note is completely not affected during the stopping phase of the note.
   * The note phoneticization is never hidden.
 
@@ -3102,14 +3141,15 @@ At the determining point, the "branch"/path&ndash;switching effects are played a
 * *Proposal* (IID): `#BRANCHSTART ltf, <(str-local-formula-trigger)read-expert-branch-condition>, <(str-local-formula-trigger)read-master-branch-condition>` \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
   * Each bool value of the [local (value or formula) triggers](#proposal-komi-counter--trigger-commands) specified by `<read-*-branch-condition>` is read at the branch determining point as a condition value, with the requirement value being 1 (true).
-* *Proposal* (IID): `#BRANCHSTART <(comma-separated-list)branchstart-arguments>, <(enum-str)range>` \
-  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
+* `#BRANCHSTART <(comma-separated-list)branchstart-arguments>, <(enum-str)range>` \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
   * `<branchstart-arguments>` is any argument form above without trailing commas.
   * `<range>` specifies how the requirement is fulfilled, see [Condition Judgement](#condition-judgement). It can be one of:
     * (empty) or `m` &mdash; **m**ore than or equal to ("≥") the given requirement
     * `l` &mdash; **l**ess than ("\<") the given requirement
   * Recommendation for charters: For `lc:<read-value>`, `lcf:<read-value>`, `lt`, & `ltf` conditions, negating the value is preferred over specifying `l` as `<range>`.
-* *Proposal* (IID): `#BRANCHSTART` \
+* `#BRANCHSTART` \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
   ***Supported by***: OpenTaiko (0auBSQ) v0.6.0.99
   * No condition and requirements specified. Intended to be specified later by [the `#FROMNOR`, `#FROMEXP`, & `#FROMMAS`](#proposal-iid-fromnor--fromexp--frommas) commands.
@@ -3126,40 +3166,66 @@ The possible conditions includes `<condition>`, `lc:<read-value>`, `lcf:<read-va
 * `p` &mdash; percentage (%) of *<ruby>精<rt>sei</rt>度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy of all missable notes.
   * *Proposal* (IID): The value is limited between 0(%) and 100(%).
   * > Formula: **min**{100(%), (`<sect:jp>` + 0.5 × `<sect:jg>`) / **max**{`<sect:tn>`, 1} × 100(%)}
-* *Proposal* (IID): `P` &mdash; percentage (%) of *<ruby>精<rt>sei</rt>度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy of all missable **big** notes. \
-  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
-  * > Formula: **min**{100(%), (`<sect:jp>` + 0.5 × `<sect:jg>`) / **max**{`<sect:tn>`, 1} × 100(%)}
-* `d` &mdash; (*Proposal* (IID)) Percentage (%) of "precision"/accuracy of all missable big (<ruby>**大**<rt>**d**ai</rt></ruby>) notes. (**`d`** can be seen as a rotated `p`) \
+* `P` &mdash; percentage (%) of *<ruby>精<rt>sei</rt>度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy of all missable **big** notes. \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
+  * > Formula: **min**{100(%), (`<sect:JP>` + 0.5 × `<sect:JG>`) / **max**{`<sect:TN>`, 1} × 100(%)}
+* `d` &mdash; Either alias to `P` or `JP`, for (<ruby>**大**<rt>**d**ai</rt></ruby>) notes. (**`d`** can be seen as a rotated `p`) \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
   ***First seen in***: TJAPlayer2 for.PC
-  * Defined but without formula in TJAPlayer2 for.PC, where this condition is described as "*大音符のみの精度分岐*" ("branching by precision of only big notes").
-  * In [TJAPlayer3 (Akasoko-Master)](https://github.com/Akasoko-Master/TJAPlayer3), and later ported to TJAPlayer3-f, TJAPlayer3-Develop, & TJAPlayer3-Develop-ReWrite, the formula is defined but not counted in gameplay, so the condition value is always 0.
-  * > Formula (TJAPlayer3 (Akasoko-Master), intended): `<sect:JP>`
+  * Defined but without formula in TJAPlayer2 for.PC, where this condition is described as "*大音符のみの精度分岐*" ("branching by precision of only big notes") suggesting the formula of `P`.
+  * In [TJAPlayer3 (Akasoko-Master)](https://github.com/Akasoko-Master/TJAPlayer3), and later ported to TJAPlayer3-f, TJAPlayer3-Develop, & TJAPlayer3-Develop-ReWrite, the formula is defined as the same as `JP` but not counted in gameplay, so the condition value is always 0.
+    * Implemented in OpenTaiko (0auBSQ) v0.6.0.103 as `JP`.
+  * > Formula (TJAPlayer3 (Akasoko-Master), OpenTaiko (0auBSQ)): `<sect:JP>`
   * > Formula (*Proposal* (IID)): **min**{100(%), (`<sect:JP>` + 0.5 × `<sect:JG>`) / **max**{`<sect:TN>`, 1} × 100(%)}
-* *Proposal* (IID): `pp` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable notes. \
-  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
+  * Recommendation for charters: `P` or `JP` should be used instead.
+* `pp` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable notes. \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
   * > Formula: **min**{100(%), `<sect:jp>` / **max**{`<sect:tn>`, 1} × 100(%)}
-* *Proposal* (IID): `PP` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable **big** notes. \
-  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
+* `PP` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable **big** notes. \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
   * > Formula: **min**{100(%), `<sect:JP>` / **max**{`<sect:TN>`, 1} × 100(%)}
-* *Proposal* (IID): `jb` &mdash; amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD **j**udgements. \
-  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
+* `jp` &mdash; amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements. \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
+  * > Formula: `<sect:jp>`
+* `JP` &mdash; amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements on **big** notes. \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
+  * > Formula: `<sect:JP>`
+* `jg` &mdash; amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements. \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
+  * > Formula: `<sect:jg>`
+* `JG` &mdash; amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements on **big** notes. \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
+  * > Formula: `<sect:JG>`
+* `jb` &mdash; amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* **B**AD **j**udgements. \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
   * > Formula: `<sect:jb>`
-* *Proposal* (IID): `JB` &mdash; amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD **j**udgements on **big** notes. \
-  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
+* `JB` &mdash; amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* **B**AD **j**udgements on **big** notes. \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
   * > Formula: `<sect:JB>`
 * `r` &mdash; amount of hits on non-balloon bar drum**r**oll notes. *Unspecified*: Whether hits on balloon-type notes are also included.
   * Not to be confused with the `r` (always includes *all* drum**r**oll-type notes) used for the requirement of [the `EXAM` headers](#exam-headers).
   * > Formula (TaikoJiro (1 and 2 (?))): `<sect:rt>` − `<sect:rb>`
   * > Formula (TJAPlayer2 for.PC, TaikoManyGimmicks): `<sect:rt>`
-* *Proposal* (IID): `R` &mdash; amount of hits on **big** non-balloon bar drum**r**oll notes. If `r` includes hits on balloon-type notes, hits on special ("**big**") balloons (note symbol `9`) are also included, otherwise such hits are excluded.
+* `R` &mdash; amount of hits on **big** non-balloon bar drum**r**oll notes. If `r` includes hits on balloon-type notes, hits on special ("**big**") balloons (note symbol `9`) are also included, otherwise such hits are excluded. \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
   * > Formula (if `r` = `<sect:rt>` − `<sect:rb>`): `<sect:RT>` − `<sect:RB>`
   * > Formula (if `r` = `<sect:rt>`): `<sect:RT>`
-* *Proposal* (IID): `rb` &mdash; amount of hits on **b**alloon-type drum**r**oll-**t**ype notes. \
-  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
+* `rb` &mdash; amount of hits on **b**alloon-type drum**r**oll-**t**ype notes. \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
   * > Formula: `<sect:rb>`
-* *Proposal* (IID): `RB` &mdash; amount of hits on special ("**b**ig") **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`). \
-  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
+* `RB` &mdash; amount of hits on special ("**b**ig") **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`). \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
   * > Formula: `<sect:RB>`
 * `s` &mdash; the current **s**core points. \
   ***Supported by***: TaikoJiro v2.66, [TJAPlayer3 (Akasoko-Master)](https://github.com/Akasoko-Master/TJAPlayer3), TJAPlayer3-f, TJAPlayer3-Develop, TJAPlayer3-Develop-ReWrite
@@ -3954,7 +4020,7 @@ The approach phase of a `#<property>START` command starts at its definition posi
 
 #### Compatibility Issues
 
-* In OpenTaiko (0auBSQ) 0.6.0:
+* In OpenTaiko (0auBSQ) 0.6.0 until fixed in v0.6.0.103:
   * The interpolated value for OBJ / CAM commands only have integer precision.
   * CAM commands only affect objects added with the `#ADDOBJECT` command and do not affect the game camera.
 
@@ -3977,7 +4043,7 @@ Set the **color** of the displayed region outside the **border** of the gameplay
 
 #### Compatibility Issues
 
-* In OpenTaiko (0auBSQ) 0.6.0, because CAM commands do not affect the game camera, the `#BORDERCOLOR` command has no visible effects.
+* In OpenTaiko (0auBSQ) 0.6.0 until fixed in v0.6.0.103, because CAM commands do not affect the game camera, the `#BORDERCOLOR` command has no visible effects.
 
 ### #CHANGETEXTURE / #RESETTEXTURE
 
