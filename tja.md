@@ -31,7 +31,7 @@ The dates listed here are mostly in UTC+9.
 
 Excluding `.bin` and the compressed formats, all the formats listed below are text-based and can be edited with any text editor.
 
-### Main Notechart Formats
+### Notechart Definition Formats
 
 Filename/extension | Full Name | Content | Supported by | First Release | Specification
 --- | --- | --- | --- | --- | ---
@@ -68,7 +68,7 @@ Filename/extension | Full Name | Content | Supported by | First Release | Specif
 --- | --- | --- | --- | --- | ---
 `.tjc` | *<ruby>**太**<rt>**T**ai</rt>鼓<rt>ko</rt>の<rt>no</rt>**達**<rt>**T**atsu</rt>**人**<rt>**j**in</rt>譜<rt>fu</rt>面<rt>men</rt></ruby> **C**ourse* <br /> **T**aiko no **T**atsu**j**in **C**ourse (?) | `.tja`-syntax headers | TaikoJiro v2.34, TaikoJiro 2 v0.98, ReTaikoManyGimmicks(Fixed2) | 2009-12-28 (TaikoJiro v2.34) | [TaikoJiro's `readme.txt`](taiko-sim-readmes/taikojiro/utf-8/readme-v2.92.txt)
 `.tcm` | Open **T**aiko **C**hart **M**edley | JSON | Koioto (plugin "OpenTaikoChart" v3.0), TJAPlayer3-f v1.6.0.1 | 2019-11-15 (format rev.2) <br /> 2020-05-07 (plugin "OpenTaikoChart") | See <https://github.com/AioiLight/Op en-Taiko-Chart>
-`dan.json` | JSON | TaikøNauts | On-or-before 2025-11-16 (first known generation tool) <br /> 2026-04-08 (first official documentation) | Documentation is in the TaikøNauts Official Server <https://discord.gg/rddyYErDMe>. <br /> See the official converter <https://tools.taiko.team/> and the non-official converter <https://github.com/LuiCat/mc2tja(https://github.com/fjfjdkdk706-lgtm/TaikoNautsdan-Conversion-tool)>. <br/> An `.mc` file with Taiko mode can be played as a Taiko chart.
+`dan.json` | **Dan**-i **JSON** (?) | JSON | TaikøNauts | On-or-before 2025-11-16 (first known generation tool) <br /> 2026-04-08 (first official documentation) | Documentation is in the TaikøNauts Official Server <https://discord.gg/rddyYErDMe>. <br /> See the official converter <https://tools.taiko.team/> and the non-official converter <https://github.com/LuiCat/mc2tja(https://github.com/fjfjdkdk706-lgtm/TaikoNautsdan-Conversion-tool)>. <br/> An `.mc` file with Taiko mode can be played as a Taiko chart.
 
 ### Other Metadata Formats
 
@@ -85,9 +85,9 @@ Filename/extension | Content | Supported by | First Release | Notes
 `musiclist.txt` | List of file paths to notecharts | TJAPlayer (for PSP) | On-or-before 2010-02-10 (musiclistGenerator v6) <br /> On-or-before 2010-02-24 (TJAPlayer Ver ?×7 already released) | Similar to the later `.t3u8`, but in native encoding (assumedly Shift-JIS) <br /> and with the first occurrence of a line being `#END` (if exist) and all subsequent line ignored.
 `song.txt` | Number of notechart directories + List of directory name of notechart directories | <ruby>鬼<rt>Gwai2</rt>太<rt>Taai3</rt>鼓<rt>gu2</rt></ruby>DS (OniTaiko DS) | On-or-before 2010-06-27 (OniTaiko DS F C v.1.2.1X fat) | See <https://web.archive.org/web/20100726082352/http://www.owataiko.com/~aki/_onitaikods/readme.txt>
 `box.def` | Genre definition for notecharts in the (sub)directory/ies. `.dtx`-syntax headers. | TJAPlayer2 for.PC, taiko-web | On-or-after 2000-01-17 (DTXMania v0.01; first release) <br /> On-or-after 2015-05-15 (taiko mode; <ruby>太<rt>Tai</rt>鼓<rt>ko</rt>さ<rt>sa</rt>ん<rt>n</rt>ア<rt>A</rt>ル<rt>ru</rt>ファ<rt>fa</rt></ruby> (early TJAPlayer2 for.PC) OSDN project registration) | First used in DTXMania, inherited by TJAPlayer2 for.PC
-`folder.json` | Genre definition for notecharts in the (sub)directory/ies. (JSON) | 2021-02-18 (bundled sample) <br /> 2021-03-09 (Koioto Ver.0.39; first release) | Koioto |
+`folder.json` | Genre definition for notecharts in the (sub)directory/ies. (JSON) | Koioto | 2021-02-18 (bundled sample) <br /> 2021-03-09 (Koioto Ver.0.39; first release) |
 `.t3u8` | List of file paths to notecharts | TJAPlayer3 v4.7.0 | 2019-07-18 (TJAPlayer3 [commit 9261ee0271](https://github.com/twopointzero/TJAPlayer3/commit/9261ee0271dd3cabd5e0f4f2222ef28a23555135)) <br /> 2020-02-03 (TJAPlayer3 v4.7.0) | See <https://github.com/twopointzero/TJAPlayer3/blob/develop/docs/song-list-files.md>. <br /> Based on and having identical syntax with `.m3u8`. <br /> `.m3u8` is a UTF-8&ndash;encoded variant of `.m3u` (**M**P**3** **U**RL).
- `.optksc` | **Op**en**T**ai**k**o **S**hort**c**ut, List of song unique IDs to notecharts | OpenTaiko (0auBSQ) 0.6.0.59 | 2025-05-09 (UTC+0) | Usage is similar to `.t3u8` but with each path replaced by a song unique ID, a unique alphanumeric strings representing the specified song. <br /> In OpenTaiko (0auBSQ), the song unique ID is stored in the `uniqueID.json` file in the same directory as the TJA file for the song. The `uniqueID.json` is automatically generated if not present when the TJA file is being scanned.
+ `.optksc` | **Op**en**T**ai**k**o **S**hort**c**ut, List of song unique IDs to notecharts | OpenTaiko (0auBSQ) v0.6.0.59 | 2025-05-09 (UTC+0) (OpenTaiko (0auBSQ) v0.6.0.59) | Usage is similar to `.t3u8` but with each path replaced by a song unique ID, a unique alphanumeric strings representing the specified song. <br /> In OpenTaiko (0auBSQ), the song unique ID is stored in the `uniqueID.json` file in the same directory as the TJA file for the song. The `uniqueID.json` is automatically generated if not present when the TJA file is being scanned.
 `dan.def` | Genre definition for *<ruby>**段**<rt>**Dan**'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" notecharts in the (sub)directory/ies. `.dtx`-syntax headers. | TaikøNauts | On-or-after 2025-11-22 (first known mention) <br /> 2026-04-08 (first official documentation) | Documentation is in the TaikøNauts Official Server <https://discord.gg/rddyYErDMe>. Inspired by `box.def`. Only `dan.json` files are listed within the genre folder.
 
 ## About TJA
