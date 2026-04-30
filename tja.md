@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-04-29 (UTC+8)
+* Last changed: 2026-04-30 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -2821,13 +2821,13 @@ Display the specified **lyric**.
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer3 v1.4.0 \
-***Scope***: branch, measure division one-shot \
+***Scope***: branch, note-symbol one-shot \
 ***Scope-fineness***: at-or-after \
 ***Effect time***: static \
 ***Effect target***: notes \
 ***Effect branches***: *Unspecified*
 
-Override ("**change**") the automatically assigned *<ruby>口<rt>Kuchi</rt>唱<rt>Shou</rt>歌<rt>ga</rt></ruby>* "**Note** phoneticization" ("**s**ound **e**ffect of a **note**" or "*<ruby>発<rt>Hatsu</rt>**声**<rt>**se**i</rt></ruby>* vocalization of a **note**" (?)) of the specified note (if any) placed at the measure division of the command.
+Override ("**change**") the automatically assigned *<ruby>口<rt>Kuchi</rt>唱<rt>Shou</rt>歌<rt>ga</rt></ruby>* "**Note** phoneticization" ("**s**ound **e**ffect of a **note**" or "*<ruby>発<rt>Hatsu</rt>**声**<rt>**se**i</rt></ruby>* vocalization of a **note**" (?)) of the note specified by the next note symbol (if any).
 
 Similar to [the `#NOTESCHANGE` command](#noteschange), but with a different range of argument.
 
@@ -2903,13 +2903,13 @@ However, in the official Konga games, the general pattern is less consistent and
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: C-Taiko \
-***Scope***: branch, measure division one-shot (?) \
+***Scope***: branch, note-symbol one-shot (?) \
 ***Scope-fineness***: at-or-after \
 ***Effect time***: static \
 ***Effect target***: notes \
 ***Effect branches***: current (?)
 
-Override ("**change**") the automatically assigned *<ruby>口<rt>Kuchi</rt>唱<rt>Shou</rt>歌<rt>ga</rt></ruby>* "**Note** phoneticization" ("**s**ound effect of a **note**" or "*<ruby>発<rt>Hatsu</rt>**声**<rt>**se**i</rt></ruby>* vocalization of a **note**" (?)) of the specified note (if any) placed at the measure division of the command (?).
+Override ("**change**") the automatically assigned *<ruby>口<rt>Kuchi</rt>唱<rt>Shou</rt>歌<rt>ga</rt></ruby>* "**Note** phoneticization" ("**s**ound effect of a **note**" or "*<ruby>発<rt>Hatsu</rt>**声**<rt>**se**i</rt></ruby>* vocalization of a **note**" (?)) of the note specified by the next note symbol (if any) (?).
 
 Similar to [the `#SENOTECHANGE` command](#senotechange), but with a different range of argument.
 
@@ -2930,13 +2930,13 @@ Similar to [the `#SENOTECHANGE` command](#senotechange), but with a different ra
 
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ \
-***Scope***: branch, measure division one-shot \
+***Scope***: branch, note-symbol one-shot \
 ***Scope-fineness***: at-or-after \
 ***Effect time***: static \
 ***Effect target***: notes \
 ***Effect branches***: current
 
-Specify the **note** (if any) placed at the measure division of the command to be hand-holding ("**partner**"), like [note symbols `A` and `B`](#note-symbols-in-taiko-mode).
+Specify the **note** specified by the next note symbol (if any) to be hand-holding ("**partner**"), like [note symbols `A` and `B`](#note-symbols-in-taiko-mode).
 
 *proposal* (IID): A hand-holding bomb/mine gives extra gauge penalty if all players hit the hand-held notes within a certain time duration.
 
@@ -2954,13 +2954,13 @@ Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF
 
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ \
-***Scope***: branch, measure division one-shot \
+***Scope***: branch, note-symbol one-shot \
 ***Scope-fineness***: at-or-after \
 ***Effect time***: static \
 ***Effect target***: notes \
 ***Effect branches***: current
 
-Specify the **note** (if any) placed at the measure division of the command to be **giant**, as in the official Wii games. A giant notes receive input and reward points the same as a regular note, but sets certain specified [(*proposal* (Komi)) triggers](#proposal-komi-counter--trigger-commands) to true based on its received judgement.
+Specify the **note** specified by the next note symbol (if any) to be **giant**, as in the official Wii games. A giant notes receive input and reward points the same as a regular note, but sets certain specified [(*proposal* (Komi)) triggers](#proposal-komi-counter--trigger-commands) to true based on its received judgement.
 
 *Proposal* (IID): If the specified note is already a giant note or is not a hit-type note, the command has no effects. If the specified note is a big note, it is converted to a regular note and then becomes a giant note.
 
@@ -2977,13 +2977,13 @@ Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF
 
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ \
-***Scope***: branch, measure division one-shot \
+***Scope***: branch, note-symbol one-shot \
 ***Scope-fineness***: at-or-after \
 ***Effect time***: static \
 ***Effect target***: notes \
 ***Effect branches***: current
 
-Conditionally ("**if**") enable the **note** (if any) placed at the measure division of the command.
+Conditionally ("**if**") enable the **note** specified by the next note symbol (if any).
 
 *Proposal* (IID): If the specified note is not a hit-type note, the command has no effects.
 
