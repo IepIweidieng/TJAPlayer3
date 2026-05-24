@@ -373,6 +373,7 @@ For headers, the coarsest fineness is per-file. The finest fineness other than s
 #### Compatibility Issues
 
 * In TaikoJiro 1 before v1.95 & Malody, only one notechart definition is supported within a single TJA file. The per&ndash;player-side scope-fineness is identical to the per-file scope-fineness in these simulators.
+* In TJAPlayer2 for.PC but not TJAPlayer3 v1.5.2, per&ndash;player-side headers are not parsed for multi-player charts with [the `STYLE:` header](#style) and any of [`#START P1` and `#START P2`](#start--end) specified.
 
 ### TITLE Headers
 
@@ -797,7 +798,7 @@ Specify the initial **BPM** (**b**eat **p**er **m**inute) of the notechart.
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) (minimum; unless stated otherwise) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TJAPlayer2 for.PC \
-***Scope-fineness***: per&ndash;player-side
+***Scope-fineness***: per-file
 
 Specify the initial **scroll**ing velocity (at-and-before the beginning ("**head**") of the notechart), relative to the base scrolling velocity.
 
@@ -810,6 +811,10 @@ Can be reset by [the `#SCROLL` command](#scroll) at-or-after the beginning of th
 * `HEADSCROLL:` \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard)
   * The behavior is *unspecified*.
+ 
+#### Compatibility Issues
+
+* In TJAPlayer2 for.PC but not OpenTaiko (0auBSQ) 0.6.0.106, no effects.
 
 ### PREIMAGE:
 
@@ -1353,7 +1358,8 @@ If the specified amount of player-sides is not 1, [`#START <player-side>`](#star
 
 * `STYLE:1` / `STYLE:Single` / `STYLE:SINGLE` / `STYLE:single` / `STYLE:`
 * `STYLE:2` / `STYLE:Double` / `STYLE:DOUBLE` / `STYLE:double` / `STYLE:Couple` / `STYLE:couple`
-* *Proposal* (IID): `STYLE:<(positive-int)amount-of-player-sides>`
+* `STYLE:<(positive-int)amount-of-player-sides>` \
+  ***Supported by***: OpenTaiko (0auBSQ) v0.6.0.106
 
 Reference: *ダブルプレイ* ("Double Play"; "Two-player Charts"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/ダブルプレイ>
 
@@ -1830,7 +1836,7 @@ Behavior \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
 --- | --- | --- | --- | --- | --- | ---
 `balloon-popcount` | N/A | `common` | `common` | `common` | `n` <br /> (`common`) | `n` <br /> (`common`)
 `balloonnem-popcount-nonbranch` | N/A | N/A <br /> (`1nem`) | N/A <br /> (`1nem`) | N/A <br /> (`1nem`) | `1n-or-end-3last` | `1nem`
-`end-at` | `music` <br /> (`music-and-end`) | `music` <br /> (`music-and-end`) | `music` <br /> (`music-and-end`) | `music` (?) <br /> (`music-and-end`) | `end` <br /> (`music-and-end`) | `end` <br /> (`music-and-end`)
+`end-at` | `music` <br /> (`music-and-end`) | `music` <br /> (`music-and-end`) | `music` <br /> (`music-and-end`) | `music` (?) <br /> (`music-and-end`) | `end` <br /> (`music-and-end`) | `music-and-end`
 `timing-precision` | ? | `ms-bpm` | `ms` (?) | `any` (?) | `ms` | `ms`
 `timing-effect-order` | `def` | `time` | `time` | `time` (?) | `flat-time-or-def` | `flat-time-or-def`
 `hbscroll-past` | N/A | `nmscroll` | `hbscroll` | `nmscroll` | `hbscroll` | `hbscroll`
@@ -2009,6 +2015,9 @@ Commands recognized in pre-#START position will be explicitly denoted.
 
 *Unspecified*: The behavior when any commands are placed before any headers outside the notechart definition.
 
+* In TJAPlayer2 for.PC but not TJAPlayer3 v1.5.2, pre-`#START` commands are not parsed for multi-player charts with [the `STYLE:` header](#style) and any of [`#START P1` and `#START P2`](#start--end) specified.
+* In TJAPlayer3 v1.5.2 but not OpenTaiko (0auBSQ) v0.6.0.106, pre-`#START` commands could apply to next player-sides within the difficulty scope.
+
 #### Command Scope
 
 Commands with per&ndash;player-side scope-fineness are similar to [headers](#tja-header) but the effects of these commands reset at the end of their scope.
@@ -2134,7 +2143,8 @@ See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior of timi
         * This behavior can be utilized for creating bar-type drumroll notes which stretch when reaching the judgment timing.
     * The objects defined at-or-after but having its time before the next [`#BPMCHANGE` command](#bpmchange) during gameplay.
         * This behavior can be utilized for achieving the *<ruby>途<rt>To</rt>中<rt>chuu</rt>出<rt>Shutsu</rt>現<rt>gen</rt></ruby>* "appearing in middle" (including "disappearing in middle") when combined with [forward beat warps](#sign-of-timing-commands).
-* In OpenTaiko (0auBSQ) v0.6.0 until v0.6.0.90+,  `#BMSCROLL` / `#HBSCROLL` / `#NMSCROLL` could apply across branch definitions.
+* In TJAPlayer2 for.PC but not OpenTaiko (0auBSQ) v0.6.0, when pre-`#START` `#BMSCROLL` / `#HBSCROLL` / `#NMSCROLL` is parsed, the scrolling mode config of the game is changed directly. Until TJAPlayer3-Develop-ReWrite, the config could be changed even when parsing the TJA file while generating the song list.
+* In OpenTaiko (0auBSQ) v0.6.0 until v0.6.0.90+, post-`#START` `#BMSCROLL` / `#HBSCROLL` / `#NMSCROLL` could apply across branch definitions.
 
 ### `#PAPAMAMA`
 
@@ -2179,7 +2189,8 @@ Respectively **start** / **end** the region of notechart definition.
     * **`P2`** / `p2` &mdash; for the 2nd player-side (2P) if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ 2.
   * *Unspecified*: The behavior when other `<player-side>` is used.
     * In TaikoJiro, using any other `<player-side>` is treated as if the 0-argument `#START` were used.
-* *Proposal* (IID): `#START P<(trimmed-unsigned-positive-int)player-side>`
+* `#START P<(trimmed-unsigned-positive-int)player-side>` \
+  ***Supported by***: OpenTaiko (0auBSQ) v0.6.0.106
   * The notechart definition is for the `<player-side>`-th player-side if the amount of player-sides specified by [the `STYLE:` header](#style) ≥ `<player-side>`.
 * `#END`
 
@@ -2942,10 +2953,11 @@ Similar to [the `#SENOTECHANGE` command](#senotechange), but with a different ra
 * Initial value / `#NOTESCHANGE -1`
   * Use the automatically assigned note phoneticization.
 
-### *Proposal* (Komi): `#PARTNERNOTE`
+### `#PARTNERNOTE`
 
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ \
+***First seen in***: OpenTaiko (0auBSQ) v0.6.0.106 (only gimmicky) \
 ***Scope***: branch, note-symbol one-shot \
 ***Scope-fineness***: at-or-after \
 ***Effect time***: static \
@@ -2965,6 +2977,10 @@ If the specified note is already a hand-holding note or (*proposal* (IID)) is no
 *Unspecified*: In [Taiko mode](#note-symbols-in-taiko-mode), whether big notes `3` and `4` with `#PARTNERNOTE` applied are equivalent to the hand-holding notes `A` & `B`.
 
 Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF` or (*proposal* (IID)) `#COMMANDIFF` command](#proposal-komi-commandif-commands).
+
+#### Compatibility Issues
+
+* In OpenTaiko (0auBSQ) v0.6.0.106, only the hand-holding sprite and animation is displayed. None of the special gameplay, scoring, and hit animation are implemented.
 
 ### *Proposal* (Komi): #GIANTNOTE
 
