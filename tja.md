@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-04-30 (UTC+8)
+* Last changed: 2026-05-25 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -509,10 +509,13 @@ The display details are *unspecified*.
     * In OpenTaiko (0auBSQ) v0.6.0.103, `<name-notechart-creator>` is set as the default value for the difficulty specified by `<difficulty-course>`.
   * *Unspecified*: The behavior when the difficulty specified by `<difficulty-course>` is different from the difficulty specified by `COURSE:` for the notechart definition (not a default difficulty scope).
     * In OpenTaiko (0auBSQ): `<difficulty-course>` is ignored in such a case.
-  * *Proposal* (Komi): Every comma (`,`) in `<name-notechart-creator>` ***MUST*** be escaped as `\,`
-* `NOTESDESIGNER:<(text)name-notechart-creator>` \
+  * In OpenTaiko (0auBSQ): Every comma (`,`) in `<name-notechart-creator>` ***MUST*** be escaped as `\,`
+* `NOTESDESIGNER<(trimmed-enum-int)difficulty-course>:<(comma-separated-list:text)name-notechart-creator>` \
   ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
-  * *Proposal* (Komi): Every comma (`,`) in `<name-notechart-creator>` ***MUST*** be escaped as `\,`
+  * Every comma (`,`) in `<name-notechart-creator>` ***MUST*** be escaped as `\,`
+* `NOTESDESIGNER:<(comma-separated-list:text)name-notechart-creator>` \
+  ***Supported by***: OpenTaiko (0auBSQ) v0.6.0
+  * Every comma (`,`) in `<name-notechart-creator>` ***MUST*** be escaped as `\,`
 
 ### AUTHOR:
 
@@ -568,7 +571,7 @@ The display details are *unspecified*.
 ***Impact level***: metadata ★・・・・ \
 ***First seen in***: TaikoJiro v2.49 \
 ***Supported by***: TaikoJiro 2, OpenTaiko (0auBSQ) v0.6.0 \
-***Scope-fineness***: per-file
+***Scope-fineness***: per-file; (OpenTaiko (0auBSQ) 0.6.0.103+) per&ndash;player-side
 
 Specify whether the corresponding song entry is displayed, regarding the *<ruby>裏<rt>ura</rt>譜<rt>fu</rt>面<rt>men</rt>状<rt>jou</rt>態<rt>tai</rt></ruby>* "inner notechart state/mode" ("*<ruby>裏 <rt>ura</rt></ruby>* inner or *<ruby>表 <rt>omote</rt></ruby>* outer **side**") of the song selection screen.
 
@@ -922,7 +925,7 @@ Specify the named (**ID**) skin ("**song genre**") in the gameplay screen. The s
 &emsp; (non-standard) (otherwise) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.0 \
-***Scope-fineness***: per&ndash;player-side (?)
+***Scope-fineness***: per-file; (OpenTaiko (0auBSQ) 0.6.0.103+) per&ndash;player-side
 
 Specify the dedicated **tower** skin ("**type**") to use.
 
@@ -948,7 +951,7 @@ Available values in officially-supported interface skins of OpenTaiko (0auBSQ):
 &emsp; (non-standard) (otherwise) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.1 \
-***Scope-fineness***: per-file
+***Scope-fineness***: per-file; (OpenTaiko (0auBSQ) 0.6.0.103+) per&ndash;player-side
 
 Specify the dedicated *<ruby>**段**<rt>**Dan**'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" skin (*<ruby>コ<rt>ko</rt>ス<rt>su</rt>メ<rt>me</rt>**チッ**<rt>**chik**</rt>**ク**<rt>**ku**</rt></ruby>* "cosme**tic**" (?)) to use in the certification challenge selection screen.
 
@@ -975,7 +978,7 @@ In OpenTaiko (0auBSQ), no effects for the custom single dan-i plate (`Dan_Plate.
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: decorative ・・・・・ \
 ***First seen in***: OpenTaiko (0auBSQ) v0.5.1 \
-***Scope-fineness***: per-file
+***Scope-fineness***: per-file; (OpenTaiko (0auBSQ) 0.6.0.103+) per&ndash;player-side
 
 Specify the **color** filter to apply to the *<ruby>**段**<rt>**Dan**'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" skin (*<ruby>コ<rt>ko</rt>ス<rt>su</rt>メ<rt>me</rt>**チッ**<rt>**chik**</rt>**ク**<rt>**ku**</rt></ruby>* "cosme**tic**" (?)) objects in the certification challenge selection screen.
 
@@ -1154,7 +1157,7 @@ The display details are *unspecified*.
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TaikoJiro v2.13 \
 ***Supported by***: taiko-web (plugin "Donkey Konga Mode"), OpenTaiko (0auBSQ) v0.6.0.93 \
-***Scope-fineness***: per&ndash;player-side (?)
+***Scope-fineness***: per-file; (OpenTaiko (0auBSQ) 0.6.0.103+) per&ndash;player-side
 
 Specify the **game** mode. The meaning of the symbols used in the notechart definition is changed accordingly; see [TJA Notechart Definition](#tja-notechart-definition).
 
@@ -1324,7 +1327,7 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
 
 * In TaikoJiro 1 and 2, the difficulty star is parsed an unsigned integer, but affects song's sorting order in TaikoJiro 1. In TaikoJiro 1, the maximum possible value displayed is 65535 (2¹⁶ − 1) In TaikoJiro 2, the maximum possible value parsed is 65535 (2¹⁶ − 1)
 * In TaikoJiro & TJAPlayer2 for.PC, the `LEVEL:` header is treated as having per-difficulty scope-fineness for the difficulty star displayed in the song selection screen. In TJAPlayer2 for.PC, the `LEVEL:` header also has per-difficulty scope-fineness for the actual difficulty star in the gameplay screen.
-  * In TaikoJiro, a "deceptive difficulty star" (a displayed difficulty star in the song selection screen which is different from the actual difficulty star in the gameplay screen) can be defined by placing the `LEVEL:` for the deceptive difficulty star after all notechart definitions in the difficulty scope.
+  * In TaikoJiro and OpenTaiko (0auBSQ) 0.6.0.103+, a "deceptive difficulty star" (a displayed difficulty star in the song selection screen which is different from the actual difficulty star in the gameplay screen) can be defined by placing the `LEVEL:` for the deceptive difficulty star after all notechart definitions in the difficulty scope.
 
 ### STYLE:
 
@@ -1434,7 +1437,8 @@ A *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD judgment decreases the life co
 
 #### Compatibility issues
 
-In TaikoJiro 1 (the header is not supported in TaikoJiro 2), the maximum possible value is 65535 (2¹⁶ − 1).
+* In TaikoJiro 1 (the header is not supported in TaikoJiro 2), the maximum possible value is 65535 (2¹⁶ − 1).
+* In OpenTaiko (0auBSQ) until 0.6.0.103, the scope-fineness is per-file.
 
 ### TOTAL:
 
@@ -2079,7 +2083,7 @@ Due to the incoherent behaviors, many commands introduced in TJAPlayer2 for.PC a
 ***Scope-fineness***: per&ndash;player-side (or at-or-after) \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines \
-***Effect branches***: *Unspecified*
+***Effect branches***: *Unspecified*; (OpenTaiko (0auBSQ) v0.6.0.90+) current
 
 Use a **scroll**ing mode similar to the scrolling method used in either **B**E**M**ANI-series or the official Taiko ("**n**or**m**al") game series for the at-or-after notes and bar lines, unless overridden by user settings.
 
@@ -2130,6 +2134,7 @@ See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior of timi
         * This behavior can be utilized for creating bar-type drumroll notes which stretch when reaching the judgment timing.
     * The objects defined at-or-after but having its time before the next [`#BPMCHANGE` command](#bpmchange) during gameplay.
         * This behavior can be utilized for achieving the *<ruby>途<rt>To</rt>中<rt>chuu</rt>出<rt>Shutsu</rt>現<rt>gen</rt></ruby>* "appearing in middle" (including "disappearing in middle") when combined with [forward beat warps](#sign-of-timing-commands).
+* In OpenTaiko (0auBSQ) v0.6.0 until v0.6.0.90+,  `#BMSCROLL` / `#HBSCROLL` / `#NMSCROLL` could apply across branch definitions.
 
 ### `#PAPAMAMA`
 
@@ -2320,13 +2325,17 @@ For the timing of notechart object, multiple `#DELAY` commands placed at the sam
 ***Effect time***: static <sub>per-note scoring</sub> + command-time <sub>visual</sub> \
 ***Non-static effect scope***: notes: (none), gameplay screen: all \
 ***Effect target***: notes, gameplay screen \
-***Effect branches***: current
+***Effect branches***: *Unspecified*; (TaikoJiro, OpenTaiko (0auBSQ) v0.6.0.90+ <sub>per-note scoring</sub>) current; (OpenTaiko (0auBSQ) v0.6.0.90+ <sub>visual</sub>) all
 
 Respectively **start** / **end** a *<ruby>ゴー<rt>Goo</rt>ゴー<rt>Goo</rt>タ<rt>Ta</rt>イ<rt>i</rt>ム<rt>mu</rt></ruby>* **Go-Go** Time section if not already respectively started / ended.
 
 *Unspecified*: The behavior if `#GOGOSTART` occurs when a Go-Go Time section has already started.
 
 For playing the Go-Go Time entering effects during an existing Go-Go Time section, a pair of `#GOGOEND` and `#GOGOSTART` can be placed together.
+
+#### Compatibility Issues
+
+* In TJAPlayer2 for.PC but not OpenTaiko (0auBSQ) v0.6.0.90+, `#GOGOSTART` & `#GOGOEND` could apply to notes across branch definitions.
 
 ### `#DUMMYSTART` / `#DUMMYEND`
 
@@ -2440,6 +2449,9 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 * `#HISPEED(<(float)scroll-speed-x>)`
   * Suddenly change the scrolling speed as if the BPM were changed into `<(float)scroll-speed-x>` × BPM.
+* *Proposal* (IID): `#HISPEED <(complex-ri-float)base-speed-xy>`
+  * Suddenly change the scrolling speed as if the BPM were changed into `<(complex-ri-float)base-speed-xy>` × BPM.
+  * Visualization: <https://www.desmos.com/calculator/lx6skvqfjm>
 
 ### *Proposal* (IID): #SPEED
 
@@ -2475,7 +2487,7 @@ If the notes & the bar lines are rotated around their center accordingly when a 
 ***Scope-fineness***: at-or-after \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines \
-***Effect branches***: *Unspecified*
+***Effect branches***: *Unspecified*; (OpenTaiko (0auBSQ) v0.6.0.90+) current
 
 Change the scrolling **direction** of notes & bar lines.
 
@@ -2508,6 +2520,7 @@ Notice that the scrolling speed of diagonal directions is √(2) times of the sc
 #### Compatibility Issues
 
 * In TJAPlayer2 for.PC and TJAPlayer3, due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑), the equivalent [`#SCROLL` command](#scroll) for each `<direction>` except for 0 (←) and 5 (→) differ from other simulators including TaikoJiro 2 and TaikoManyGimmicks.
+* In TJAPlayer2 for.PC but not OpenTaiko (0auBSQ) v0.6.0.90+, `#DIRECTION` could apply across branch definitions.
 
 ### *Proposal* (IID): #ROLLSTRETCH
 
@@ -2546,6 +2559,8 @@ Affected note attribute commands:
 * (Dis-)appearance: [`#SUDDEN`](#sudden--hidden) (appearance offset), (*Proposal* (IID)) [`#HIDDEN`](#sudden--hidden) (disappearance offset)
   * Each interpolated non-stretchable point on the bar body has the (dis-)appear time interpolated.
   * All lasting points (dis-)appear along with the last stretchable point at the same time.
+  * Examplar implementation for `#ROLLSTRETCH 1`: <https://github.com/IepIweidieng/PeepoDrumKit/blob/master/src/peepo_drum_kit/chart_editor_widgets_game.cpp> (begins at the `// sudden move` comment)
+  * Visualization of `#ROLLSTRETCH 1` vs.  `#ROLLSTRETCH 4`: <https://www.desmos.com/calculator/oruykk0yzg>
 * Other interpolatable attributes: [`#SIZE`, `#COLOR`, `#ALPHA`](#note--barline-commands)
 * [`#RESETCOMMAND`](#note--barline-commands)
 
@@ -2559,7 +2574,7 @@ Affected note attribute commands:
 ***Scope-fineness***: at-or-after \
 ***Effect time***: static \
 ***Effect target***: bar lines \
-***Effect branches***: *Unspecified* (?)
+***Effect branches***: *Unspecified* (?); (TaikoJiro, OpenTaiko (0auBSQ) 0.6.0.90+) current
 
 Respectively disable ("turn **off**") / enable ("turn **on**") the display of all **bar** **line**s (including the special yellow bar lines indicating the beginning of a *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>ki</rt></ruby>* "notechart **branch**"/forked path section) from the definition position and on.
 
@@ -2567,6 +2582,7 @@ Respectively disable ("turn **off**") / enable ("turn **on**") the display of al
 
 * In TaikoJiro 1, only up to 8 bar lines are displayed. A bar line "expires" 1 second past its judgement timing. In each frame, when at least 2 bar lines (including bar lines with disabled display) are allowed to be displayed and there are more bar lines which have not been allowed to be displayed, the first expired bar line is no longer allowed to be displayed. If less than 8 bar lines are left, the first not-yet-allowed bar line in the definition order is then allowed to be displayed.
 * In TaikoJiro 1, only the first bar line which is after the played time and is allowed to be displayed can be displayed as a special yellow bar line indicating the start of a branch section.
+* In TJAPlayer2 for.PC but not OpenTaiko (0auBSQ) v0.6.0.90+, `#BARLINEOFF` & `#BARLINEON` could apply across branch definitions.
 
 ### `#BARLINE`
 
@@ -3073,7 +3089,8 @@ Override the result of all *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>�
 
 #### Compatibility Issues
 
-* In TJAPlayer2 for.PC, `#LEVELHOLD` affects all branches and all routes.
+* In TJAPlayer2 for.PC but not OpenTaiko (0auBSQ) v0.6.0.90+, `#LEVELHOLD` affects all branches and all routes.
+* In OpenTaiko (0auBSQ) v0.6.0.90+, `#LEVELHOLD` in branched section takes affect right after judging into the branch section containing the `#LEVELHOLD`.
 
 ### *Proposal* (IID): #LEVELREDIR
 
@@ -3333,10 +3350,13 @@ An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--en
 * No more than 1 `#BRANCHSTART` with different branch condition should be placed in a measure.
   * In TaikoJiro 1, only the first branch condition takes effects.
 * No drumroll-type notes should be defined as starting before and ending at-or-after the beginning or the end of the "branch"/path section.
-  * In TaikoJiro 1:
+  * In TaikoJiro 1 and OpenTaiko (0auBSQ) v0.6.0.23+:
     * The position and duration of each drumroll-type note is determined as [Duration of drumroll-type notes](#duration-of-drumroll-type-notes), but is determined independently for each branch. Each note symbol in a non-branching section is treated as a note symbol in every branch.
     * A drumroll-type notes which starts in a non-branching section: Behaves as a single drumroll-type note but changes its length (and swap its bar body, for bar-type drumroll notes) on branch switching.
+      * In OpenTaiko (0auBSQ), the length is fixed to the Normal branch definition.
     * Drumroll-type note(s) which share the same terminating note symbol: Behaves as a single drumroll-type note but changes its head position, note type, and length on branch switching.
+      * In OpenTaiko (0auBSQ) v0.6.0.90+, treated as separated pairs of branched drumroll-type note and branched end.
+  * In TaikoJiro 1:
     * For length-changing notes, the amount of hits done for non-balloon bar drumrolls is counted independently in each branch, but amount of hits done for balloons is shared across branches.
     * For a bar-type drumroll note, its visual appearance becomes broken when its head in the target branch is no longer drawn when switching the branch.
   * Recommendation for developers: The behaviors of TaikoJiro 1 is followed for such drumroll-type notes, but the visual appearance of bar-type drumrolls should not be broken.
@@ -3701,9 +3721,10 @@ Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF
 ***First seen in***: OpenTaiko (0auBSQ) v0.6.0, OutFox v0.4.18 \
 ***Scope***: branch \
 ***Scope-fineness***: at-or-after \
-***Effect time***: static \
-***Effect target***: notes, bar lines \
-***Effect branches***: *Unspecified*
+***Effect time***: static <sub>per-note visual + input</sub> + command-time <sub>mini drum visual</sub> \
+***Non-static effect scope***: notes: (none), gameplay screen: all \
+***Effect target***: notes, gameplay screen (mini drum) \
+***Effect branches***: *Unspecified*; (OpenTaiko (0auBSQ) v0.6.0.106+) current
 
 Specify the **game** mode ("**type**") for the notes at-or-after the current beat position. The meaning of the note symbols at-or-after the current beat position is changed accordingly; see [TJA Notechart Definition](#tja-notechart-definition).
 
@@ -3725,6 +3746,8 @@ See [the `GAME:` header](#game) for specifying the initial game mode for the not
 
 #### Compatibility Issues
 
+* In OpenTaiko (0auBSQ) v0.6.0.93 until v0.6.0.106:
+  * `#GAMETYPE` could apply to notes across branch definitions
 * In OpenTaiko (0auBSQ) v0.6.0 until v0.6.0.93:
   * The argument was case-sensitive (*i.e.*, only `Bongo` was correctly recognized, while `bongo` and `BONGO` were treated as `Taiko`).
   * The effect time was command-time, and the non-static effect scope was all.
@@ -4620,9 +4643,11 @@ A notechart definition line can be one of:
 
 ### Whitespaces in Notechart Definition
 
-In non-command lines, all whitespaces are ignored. (TaikoJiro-only?)
+**Recommandation for simulator developers**: In non-command lines, all whitespaces should be ignored.
 
-* In TJF format, such whitespaces are not ignored as are treated as unknown characters (handled as `0`).
+* In TJF format, such whitespaces are not ignored and are treated as unknown characters (handled as `0`).
+* In TJAPlayer2 for.PC but not OpenTaiko (0auBSQ) 0.6.0.73+, only surrounding whitespaces are ignored. Inner whitespaces are not ignored and are treated as unknown characters (handled as `0`).
+* In TaikoJiro and OpenTaiko (0auBSQ) 0.6.0.73+, all whitespaces are ignored.
 
 ### Notechart Symbols
 
@@ -4631,6 +4656,10 @@ Including the measure delimiter symbol (comma; `,`) & note symbols (`<(enum-str)
 A measure consists of at least 1 notechart symbol (except for the last measure of the chart) and any number of commands and headers. The measure delimiter symbol `,` must be the last element if present.
 
 *Unspecified*: The behavior if the last measure of the chart is not ended with the measure delimiter symbol `,`.
+
+* In TaikoJiro, the measure is ignored.
+* In TJAPlayer2 for.PC but not OpenTaiko 0.6.0.73+, every such note symbol occupies the amount of beats of a 1/16th measure.
+* In OpenTaiko 0.6.0.73+, the last measure behaviors as if it were ended with a `,`.
 
 *Unspecified*: Whether unrecognized note symbols are ignored (removed) or treated as `0` (blank).
 
@@ -4749,8 +4778,8 @@ In the official games, notes neither consumed nor missed are usually judged in i
 
 * In TaikoJiro 1 (and 2 (?)), judgement of notes is handled in increasing definition order.
 * The earliest Drumroll-type note passing the judgement timing takes precedence over hit-type notes in official games (?) and TJAPlayer2 for.PC.
-  * *Proposal* (IID): Drumroll-type notes only takes precedence over later-defined notes.
-* In OpenTaiko (0auBSQ), a bomb or AD-Lib note just past the judgement timing takes precedence over other hit-type notes past the judgement timing, until a future note becomes closer to the judgement timing than the bomb or AD-Lib.
+  * In OpenTaiko (0auBSQ) v0.6.0.93+: Drumroll-type notes only takes precedence over later-defined notes.
+* In OpenTaiko (0auBSQ), an unhit bomb or AD-Lib note past the judgement timing takes precedence over earlier hit-type notes, and an unhit future note closer to the judgement timing takes precedence over a farther bomb or AD-Lib.
 
 ### Judgement Expection Type
 
@@ -4855,6 +4884,7 @@ By default, drumroll-type notes are ended at-or-before one of:
     * In notecharts without any "branch"/path sections: 50ms.
     * Otherwise, in the *<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>* Normal "branch"/path state: 8/53 s (≈ 150.94ms) (tentatically determined).
     * Otherwise, in other "branch"/path states: 0ms.
+  * In OpenTaiko (0auBSQ) v0.6.0.23+: 0ms.
   * *Unspecified*: The behavior of the hit-type note which ends a balloon-type note.
     * In TaikoJiro v2.36+, the hit-type note become impossible to hit if the balloon-type note is not cleared.
       * This behavior is in reference to the *<ruby>む<rt>Mu</rt>ず<rt>zu</rt>か<rt>ka</rt>し<rt>shi</rt>い<rt>i</rt></ruby>* Hard  and *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby>* Oni/Extreme difficulties of "<ruby>風<rt>Fu</rt>雲<rt>un</rt></ruby>！<ruby>バ<rt>Ba</rt>チ<rt>chi</rt>お<rt>o</rt>先<rt>Sen</rt>生<rt>sei</rt></ruby>" in AC3&ndash;6, where the duration interval of balloon-type notes overlaps with the following hit-type note. The overlap has been canceled since AC7.
@@ -4862,7 +4892,7 @@ By default, drumroll-type notes are ended at-or-before one of:
       * This behavior later appeared in *<ruby>太<rt>Tai</rt>鼓<rt>ko</rt>タ<rt>Ta</rt>ワー<rt>waa</rt>3<rt>San</rt></ruby>（<ruby>辛<rt>kara</rt>口<rt>kuchi</rt></ruby>）* ("Taiko Tower 3 (hard)") and a few RPG-mode charts in other games.
         * See <https://wikiwiki.jp/taiko-fumen/収録曲/その他/太鼓タワー3%28辛口%29>
       * However, this can be achieved alternatively by using `#DELAY`s with negative duration to place the hit-type note.
-      * *Proposal* (IID): The hit-type note which ends a balloon-type note cannot be hit until the balloon-type note is broken or missed. If the balloon-type note has been broken or missed, the hit-type note ending the balloon-type note becomes possible to hit.
+    * In OpenTaiko (0auBSQ) v0.6.0.93+: The hit-type note which ends a balloon-type note cannot be hit until the balloon-type note is broken or missed. If the balloon-type note has been broken or missed, the hit-type note ending the balloon-type note becomes possible to hit.
   * *Proposal* (IID): If a roll-type notes would end by hit-type note symbol, but an isolated `8` occurs after the hit-type note and before any roll-type note head symbol, the roll-type note ends instead at a position earlier than the `8` by an *unspecified* duration as if the hit-type notes were irrelevant for determining the roll length.
 * In TaikoJiro, the definition position of the last note symbol of the notechart, except when the note head is in the definition of a "branch"/path other than the *<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>* Normal "branch"/path.
 
