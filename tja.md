@@ -243,8 +243,8 @@ For multiple values separated by comma (`,`), except for `rawstr`-valued fields,
   * `float`: A real number in decimal which can either be an integer or have the fraction part, *e.g.*, `0` / `+.3` / `-1.`
     * *Unspecified*: Whether a comma (`,`) can be used as the decimal point instead of a full-stop (`.`).
     * *Unspecified*: The supported precision.
-    * In TaikoJiro 1 and 2, TJAPlayer2 for.PC, taiko-web: Exponential notation is supported, *e.g.*, `1e4`, `-3.14e-6`.
-    * In TJAPlayer2 for.PC, taiko-web: Infinity (∞) is supported, *e.g.*, `Infinity`, `-Infinity`.
+    * In TaikoJiro 1 and 2, TJAPlayer2 for.PC, taiko-web: Exponential notation is supported, *e.g.*, `1e4` for 1×10<sup>4</sup>, `-3.14e-6` for −3.14×10<sup>−6</sup>.
+    * In TJAPlayer2 for.PC, taiko-web: Infinity (∞) is supported, *e.g.*, `Infinity` for +∞, `-Infinity` for −∞.
     * In OpenTaiko (0auBSQ) v0.6.0.103: Alternative spellings of infinity (∞) (case-insensitive `inf` & `infinity`) are supported
   * `enum-int` (enum-like, int-form): An `int` with specific accepted values.
   * *Unspecified*: Whether the positive sign (`+`) may appear for a positive-or-zero value, except for `unsigned-*`.
@@ -261,7 +261,7 @@ For multiple values separated by comma (`,`), except for `rawstr`-valued fields,
     * `i` &mdash; the imaginary component has the absolute value of 1.
     * `<(unsigned-number)imaginary>i` &mdash; the imaginary component has the absolute value of `<imaginary>`.
     * *Unspecified*: whether `j` can be used in place of `i`.
-  * In OpenTaiko (0auBSQ) v0.6.0.103: Infinity (∞) (case-insensitive `inf` & `infinity`) can be used as components, *e.g.*, `infinity+infi`.
+  * In OpenTaiko (0auBSQ) v0.6.0.103: Infinity (∞) (case-insensitive `inf` & `infinity`) can be used as components, *e.g.*, `infinity+infi` for +∞+∞*i*.
   * ***Compatibility issues***:
     * In TaikoJiro 2, `+<(unsigned-number)real>-<(unsigned-number)imaginary>i` (?) where `<imaginary>` is equivalent to 0 is not fully supported.
     * In TJAP2fPC but not OpenTaiko (0auBSQ) v0.6.0, only the forms `<(number)real>` & `<(number)real><sign-imaginary><(unsigned-number)imaginary>i` are supported; omitting any number parts is not 
@@ -680,7 +680,7 @@ Specify the amount of seconds into the song audio for **start**ing playing the p
 ***Scope-fineness***: per&ndash;player-side (?) \
 ***Inspired by***: (likely) SM format `#OFFSET:<(float-seconds)music-offset>;` (with same signness) \
 &emsp; from DWI format `#GAP:<(float-seconds)chart-offset>;` (with opposite signness) \
-&emsp; from MSD format `#GAP:<(number-1/192nd)chart-offset>;`
+&emsp; from MSD format `#GAP:<(number-1⁄192nd)chart-offset>;`
 
 Specify the amount of seconds past ("**offset**ted") from the time position of `#START` of the notechart which the song audio should start playing from the beginning.
 
@@ -1462,7 +1462,7 @@ Specify the **total** *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt
   * The increasing rate of spirit gauge/soul gauge is calculated from the given total spirit gauge/soul gauge increment.
   * *Unspecified*: Whether the total gauge increment is calculated using defined branch of notes or by considering specific possible branching route of notes.
 * *Proposal* (IID): `TOTAL:<(positive-or-zero-number)total-gauge-increment-normal>, <(positive-or-zero-number)total-gauge-increment-expert>, <(positive-or-zero-number)total-gauge-increment-master>`
-  * > Formula: *gauge_increment_great_unrounded_branch* = *total_gauge_increment_branch* / **n**(*defined_notes_in_branch*)
+  * > Formula: *gauge_increment_great_unrounded_branch* = *total_gauge_increment_branch* ∕ **n**(*defined_notes_in_branch*)
   * The increasing rate of spirit gauge/soul gauge for each branch is calculated from the given total spirit gauge/soul gauge increment.
   * If the simulator chooses to ignore branch-less total gauge increment, the total gauge increment for an *unspecified* branch is calculated, and then the relative increments between branches are used for the gauge increment in other branches.
 * `TOTAL:`
@@ -1529,7 +1529,7 @@ Used in conjunction with [`COURSE:Dan`](#course).
     * `a` &mdash; final percentage (%) of **a**ccuracy. \
       [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 \
       ***Supported by***: OpenTaiko (0auBSQ)
-      * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) / **max**{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
+      * > Formula: (*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + 0.5 × *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK) ∕ max{*<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD + *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK + *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD, 1} × 100(%) (Unit of variables: Amount of judgment results)
   * `<range>` can be one of:
     * `m` &mdash; **m**ore than or equal to ("≥") the given requirement
     * `l` &mdash; **l**ess than ("\<") the given requirement
@@ -1575,7 +1575,7 @@ When either the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussio
   * Combo | 1&ndash;199 | 200&ndash;
     --- | --- | ---
     Basic score (points) <br /> If `SCOREINIT:` & `SCOREDIFF:` ignored | 1000 | 2000
-    If `SCOREINIT:` & `SCOREDIFF:` used | **floor**(`init` / 10) × 10 | **floor**(`init` + `diff` / 10) × 10
+    If `SCOREINIT:` & `SCOREDIFF:` used | **floor**(`init` ∕ 10) × 10 | **floor**(`init` + `diff` ∕ 10) × 10
   * *Unspecified*: The behavior when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option is enabled.
 * `SCOREMODE:1`
   * Follow the normal scoring rule of the official PS1- and PS2-generation games (*<ruby>旧<rt>kyuu</rt>筐<rt>kyou</rt>体<rt>tai</rt></ruby>* "old (arcade) cabinet"; AC1&ndash;AC14).
@@ -1583,8 +1583,8 @@ When either the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussio
     --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
     *n* | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
   * Only the first 9 notes of a combo reward exactly `init` points per note.
-  * The basic score is **floor**((`init` + *n* × `diff`) / 10) × 10 points.
-  * > An equivalent formula: Basic score = **floor**((`init` + **min**{**floor**(`combo` / 10), 10} × `diff`) / 10) × 10 (points).
+  * The basic score is **floor**((`init` + *n* × `diff`) ∕ 10) × 10 points.
+  * > An equivalent formula: Basic score = **floor**((`init` + min{**floor**(`combo` ∕ 10), 10} × `diff`) ∕ 10) × 10 (points).
   * `init` is usualy set to between 3&ndash;5 × `diff` in official charts.
   * In TaikoJiro, if the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option is enabled, the scoring rules of the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" mode from the 14th arcade console version of the official game is followed.
   * The *<ruby>基<rt>Ki</rt>本<rt>hon</rt>天<rt>Ten</rt>井<rt>joo</rt></ruby>* "basic ceiling" score varies according to the difficulty and difficulty star.
@@ -1593,7 +1593,7 @@ When either the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussio
   * Combo | 1&ndash;9 | 10&ndash;29 | 30&ndash;49 | 50&ndash;99 | 100&ndash;
     --- | --- | --- | --- | --- | ---
     *n* | 0 | 1 | 2 | 4 | 8
-  * The basic score is **floor**((`init` + *n* × `diff`) / 10) × 10 points.
+  * The basic score is **floor**((`init` + *n* × `diff`) ∕ 10) × 10 points.
   * Combo milestone bonus: 10000 points are rewarded when every 100 combo is reached.
   * `init` is usualy set to between 3&ndash;5 × `diff` in official charts.
   * The *<ruby>基<rt>Ki</rt>本<rt>hon</rt>天<rt>Ten</rt>井<rt>joo</rt></ruby>* "basic ceiling" score varies according to the difficulty and difficulty star.
@@ -1603,7 +1603,7 @@ When either the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussio
   * All types of score bonus are cancelled.
   * Combo | 1&ndash;
     --- | ---
-    Basic score (points) | **floor**(`init` / 10) × 10
+    Basic score (points) | **floor**(`init` ∕ 10) × 10
   * The scoring rules are the same regardless of the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option.
   * The *<ruby>基<rt>Ki</rt>本<rt>hon</rt>天<rt>Ten</rt>井<rt>joo</rt></ruby>* "basic ceiling" score is close to 1000000 points.
 * Initial value / `SCOREMODE:`
@@ -1668,7 +1668,7 @@ In the official game, `diff` is not required to be a multiple of 10. Instead, th
   * If supported, a scoring rule similar to *<ruby>**ド<rt>Do</rt>**ン<rt>n</rt>ダ<rt>da</rt>フ<rt>fu</rt>ル<rt>ru</rt></ruby>！<ruby>コー<rt>Koo</rt>ス<rt>su</rt></ruby>* "**D**onderful! Course" is used as if `SCOREMODE:0` were used, except that the `SCOREINIT:` & `SCOREDIFF:` headers are always used.
   * Combo | 1&ndash;199 | 200&ndash;
     --- | --- | ---
-    Basic score | **floor**(`init` / 10) × 10 | **floor**(`init` + `diff` / 10) × 10
+    Basic score | **floor**(`init` ∕ 10) × 10 | **floor**(`init` + `diff` ∕ 10) × 10
 * `SCOREDIFF:0`
   * `diff` is `0`.
   * Recommendation for charters: To specify the basic score when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" option ("stable") is enabled, the non–*<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" score should also be specified, and [`SCOREINIT:<score-init>, <score-init-shin-uchi>`](#scoreinit) should be used and `SCOREDIFF:0` should not be used.
@@ -1802,8 +1802,8 @@ Note object scrolling behaviors:
 * `sudden-precision`
   * ***Impact level***: gimmicky ★★・・・
   * The precision of `<float-seconds-*-duration>` for [the `#SUDDEN` command](#sudden--hidden-commands).
-  * `any` &mdash; The precision is only limited by the implementation. The interpreted duration is positive infinity only when the duration is given without any non-`0` digits in non-exponential part.
-  * `ms` &mdash; The precision is 0.001 (1 ms), rounded toward 0, and any value < 0.001 is treated as 0, which has the interpreted duration of positive infinity.
+  * `any` &mdash; The precision is only limited by the implementation. The interpreted duration is positive infinity (+∞) only when the duration is given without any non-`0` digits in non-exponential part.
+  * `ms` &mdash; The precision is 0.001 (1 ms), rounded toward 0, and any value < 0.001 is treated as 0, which has the interpreted duration of positive infinity (+∞).
 
 Note object drawing behaviors:
 
@@ -1813,7 +1813,7 @@ Note object drawing behaviors:
   * `def` &mdash; earlier defined notes are stacked over later defined notes.
   * `time` &mdash; notes with earlier judgement time are stacked over notes with later judgement time.
   * `appear-time` &mdash; notes with earlier "appear-on-lane" time are stacked over notes with later "appear-on-lane" time.
-    * > Formula (approximant, in normal Taiko scroll): *appear_time* = *judgement_time* (in seconds) − 4 (beats/scroll_range) × 60 (s/min) ÷ (**abs**(*scroll*) × *BPM_at_note*)
+    * > Formula (approximant, in normal Taiko scroll): *appear_time* = *judgement_time* (in seconds) − 4 (beats/scroll_range) × 60 (s/min) ÷ (&vert;*scroll*&vert; × *BPM_at_note*)
 * `angle-barline`
   * ***Impact level***: gimmicky ★★・・・
 * `angle-note`
@@ -2124,7 +2124,7 @@ Scrolling mode | Taiko-like | BEMANI-like <br> XMod | IGS-like <br /> CMod
 --- | --- | --- | ---
 Command or TaikoJiro setting | (Default) <br /> `#NMSCROLL` | `#BMSCROLL` <br> `#HBSCROLL` <br> User option | User option: REGUL-SPEED
 Position Formula | `px_per_beat` × (`bpm_at_note` ÷ 60 (s/min)) × (`second_time_of_note` − `second_time_played`) × `scroll` × `modifier` | `px_per_beat` × (`visual_beat_of_note` − `visual_beat_played`) × `scroll` × `modifier` | `px_per_beat` × (`bpm_displayed` ÷ 60 (s/min)) × (`second_time_of_note` − `second_time_played`) × `scroll` × `modifier`
-Primary Speed Factor | `bpm_at_note` | `bpm_visual` <br /> (0 during effective positive delays) <br /> (Infinity during visual beat jumps) | `bpm_displayed`
+Primary Speed Factor | `bpm_at_note` | `bpm_visual` <br /> (0 during effective positive delays) <br /> (Infinity (∞) during visual beat jumps) | `bpm_displayed`
 Constant Factor on BPM Changes | Notes' and bar lines' individual drawn velocity | Ratios of notes' and bar lines' drawn distance to their beat distance | Ratios of drawn distances between Notes' and bar lines'
 Default scrolling changes of [`#BPMCHANGE`](#bpmchange) command | Set the per-note or per–bar-line base BPM of at-or-after notes and bar lines | Suddenly change the apparent base BPM of all notes & all bar lines | (No changes)
 Default scrolling changes of [`#DELAY`](#delay) command | (No changes) | Pause the scrolling if positive and effective; <br> (no changes) if negative | (No changes)
@@ -2247,7 +2247,7 @@ Respectively **start** / **end** the region of notechart definition.
     * See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior.
 * `#BPMCHANGE 0`
   * The behavior is *unspecified* (may cause crashes in some existing simulators).
-  * In TaikoJiro 1 and 2, all notechart objects during the `#BPMCHANGE 0` section have the scrolling behavior of 0 BPM but the time distance of positive infinity BPM. In TaikoJiro 1, the affected section also extends to the end of the notechart.
+  * In TaikoJiro 1 and 2, all notechart objects during the `#BPMCHANGE 0` section have the scrolling behavior of 0 BPM but the time distance of positive infinity (+∞) BPM. In TaikoJiro 1, the affected section also extends to the end of the notechart.
 * Initial value: The BPM specified by [the `BPM:` header](#bpm).
 
 #### Compatibility Issues
@@ -2408,8 +2408,8 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
       * Turn (tr/pla), when `<rotation-lower>` is 1.
       * Degree (deg), when `<rotation-lower>` is 360.
       * Gradian (grad), when `<rotation-lower>` is 400.
-  * > Formula: `scroll_speed_x` = `scroll_speed` × **cos**(2*π* × `rotation_upper` ÷ `rotation_lower`)
-  * > Formula: `scroll_speed_y` = `scroll_speed` × **sin**(2*π* × `rotation_upper` ÷ `rotation_lower`)
+  * > Formula: `scroll_speed_x` = `scroll_speed` × cos(2*π* × `rotation_upper` ÷ `rotation_lower`)
+  * > Formula: `scroll_speed_y` = `scroll_speed` × sin(2*π* × `rotation_upper` ÷ `rotation_lower`)
 * Initial value: `#SCROLL 1` / `#SCROLL 1+0i` / (TaikoManyGimmicks) `#SCROLL 1, 180, 0`
   * The normal scrolling speed vectors. The notes & the bar lines travel through the whole note field in 4 beats when no BPM changes occur.
 
@@ -2726,7 +2726,7 @@ The arguments are whitespace-separated.
 
 * `#SUDDEN <(float-seconds)appear-duration> <(float-seconds)moving-duration>`
   * Set the appear time point *appear_duration* and the moving-start time point *moving_duration*.
-  * An implicit disappear point and an implicit stop point at positive infinity seconds before the time point of each affected notechart object is reached are also set.
+  * An implicit disappear point and an implicit stop point at positive infinity (+∞) seconds before the time point of each affected notechart object is reached are also set.
   * If *appear_duration* > *moving_duration*, a note will stop for the length of *appear_duration* − *moving_duration* after it appears.
   * The "note phoneticization" is displayed/hidden along the note.
 * *Proposal* (IID): `#SUDDEN <(float-seconds)appear-duration> <(float-seconds)moving-duration> <(enum-str)affected-type>`
@@ -2755,7 +2755,7 @@ The arguments are whitespace-separated.
 #### Compatibility Issues
 
 * In TJAPlayer2 for.PC:
-  * `<*-duration>` has the precision of `0.001` (1 ms), and any value < `0.001` is treated as `0` (positive infinity for `#SUDDEN`).
+  * `<*-duration>` has the precision of `0.001` (1 ms), and any value < `0.001` is treated as `0` (positive infinity (+∞) for `#SUDDEN`).
   * The per-note effect is only applied at-or-after the time position of [the `#START` command](#start--end). (?)
   * The vertical scrolling velocity of a note is not affected during the stopping phase of the note.
   * `#SUDDEN <appear-duration> 0` with positive `<appear-duration>` makes roll-type notes completely invisible. To make roll-type notes appear normally, use a positive `<moving-duration>`.
@@ -2792,7 +2792,7 @@ The arguments are whitespace-separated.
   * In TaikoManyGimmicks, the fallback behavior of a `#NOTESPANW` with an invalid first argument.
 * `#NOTESPAWN 1 <(float-seconds)appear-duration>` / `#NOTESPAWN(Spawn, <(float-seconds)appear-duration>)`
   * Set an appear ("**spawn**") point.
-  * If it resets the previous `#NOTESPAWN`, an implicit disappear point at positive infinity seconds before the command is reached is also set.
+  * If it resets the previous `#NOTESPAWN`, an implicit disappear point at positive infinity (+∞) seconds before the command is reached is also set.
 * `#NOTESPAWN 2 <(float-seconds)disappear-duration>` / `#NOTESPAWN(Vanish, <(float-seconds)disappear-duration>)`
   * Set a disappear ("**vanish**") point.
 
@@ -2901,12 +2901,12 @@ The general pattern in recent Taiko games seems to be:
 
 * The time duration between `x` & `y` is denoted as `td_<x>_to_<y>` below. The visual beat duration between `x` & `y` (`vd_<x>_to_<y>` below) is defined as `scroll` × `beat_duration_<x>_to_<y>`. Both the time duration and the visual beat duration are used for determining the note phoneticization.
 * Both the head and end of drumroll-type notes are treated as ordinary notes for determining the note phoneticization.
-* A note is "chain-final" when any of the followings are met (the "? / 3" factors are tentatively determined tolerance values):
-  * `td_this_to_next_note` ≥ 4.0 / 3 × `td_this_to_previous_note`, the end of a chain before a short pause or a sparser chain.
-  * `td_next_to_2nd_next_note` ≤ 2.0 / 3 × `td_this_to_next_note`, the end of a chain before a denser chain.
+* A note is "chain-final" when any of the followings are met (the "?⁄3" factors are tentatively determined tolerance values):
+  * `td_this_to_next_note` ≥ 4⁄3 × `td_this_to_previous_note`, the end of a chain before a short pause or a sparser chain.
+  * `td_next_to_2nd_next_note` ≤ 2⁄3 × `td_this_to_next_note`, the end of a chain before a denser chain.
 * The long form is avoided for notes in any of the following conditions ("non-long conditions"), to ensure the readability of note phoneticization:
-  * `vd_this_to_previous_note` \< 1/16th, to avoid the texts from overlapping.
-  * `vd_this_to_next_note` \< 1/8th, with `scroll` upper-limited to 1.0 for calculation, to avoid the text for a note from being extended below the next note.
+  * `vd_this_to_previous_note` \< 1⁄16th, to avoid the texts from overlapping.
+  * `vd_this_to_next_note` \< 1⁄8th, with `scroll` upper-limited to 1.0 for calculation, to avoid the text for a note from being extended below the next note.
 * The alternate form is used for every even notes in an "alternative chain", where all the followings are met:
   * Each of the previous chain & the next chain is either sparser than this chain or separated from this chain by a pause.
   * The chain contains only odd amount of notes of the same type (*i.e.*, using the same note symbol) and the same drumroll duration (if applicable).
@@ -2916,7 +2916,7 @@ The general pattern in recent Taiko games seems to be:
   * Exceptions: In some older official charts, "alternative chains" can begin within a regular chain and even contain even amount of notes.
 * The long form is used for a hit-type note when:
   * The note is "chain-final" and do not meet any of the "non-long conditions".
-  * The note is not in an "alternative chain" and `vd_this_to_next_note` > 1/8th. ("pre-pause")
+  * The note is not in an "alternative chain" and `vd_this_to_next_note` > 1⁄8th. ("pre-pause")
 * There is only one form for drumroll-type notes and applause notes in the official games: The short form had been used in earlier games until the long form was introduced in PS3-generation and has been used onward.
 * The short form is used for all other notes and is preferred in other obscure cases.
 * For notes near a non-forced branch point, the results of branching from and into each different branch are considered. The long or alternate form is used only if the same form would be used in all branch results, while the short form is used otherwise.
@@ -3185,7 +3185,7 @@ Respectively **start** / **end** the definition of a *<ruby>譜<rt>fu</rt>面<rt
 
 The determining point of this "branch"/path section is defaulted to be placed at the beginning of the previous measure from the `#BRANCHSTART` command.
 
-* In the official games, the determining point is fixed to 4 beats (the length of 4 1/4th notes) before the branch point, calculated using the defined BPM of the branch point. So the determining point can occur more or less than 1 measure before the branch point.
+* In the official games, the determining point is fixed to 4 beats (the length of 4 1⁄4th notes) before the branch point, calculated using the defined BPM of the branch point. So the determining point can occur more or less than 1 measure before the branch point.
   * In "*<ruby>夏<rt>Natsu</rt>祭<rt>Matsu</rt>り<rt>ri</rt></ruby> / <ruby>ジッ<rt>Jit</rt>タ<rt>ta</rt>リ<rt>ri</rt>ン<rt>n</rt></ruby>・<ruby>ジ<rt>Ji</rt>ン<rt>n</rt></ruby>*" (JITTERIN'JINN version), Easy, Normal, Hard, and Oni difficulties, the branch determining point is in the middle of measure 46, and the notes in measure 47 can be seen to suddenly change from the Normal branch pattern to Master branch pattern. <https://wikiwiki.jp/taiko-fumen/%E5%8F%8E%E9%8C%B2%E6%9B%B2/%E3%81%8A%E3%81%AB/%E5%A4%8F%E7%A5%AD%E3%82%8A%20%EF%BC%8F%20%E3%82%B8%E3%83%83%E3%82%BF%E3%83%AA%E3%83%B3%E3%83%BB%E3%82%B8%E3%83%B3>
 
 At the determining point, the "branch"/path&ndash;switching effects are played and the targeted branch is updated, but only the notes and bar lines whose definition position is at-or-after the actual beginning of the "branch"/path section have their pattern changed.
@@ -3225,11 +3225,11 @@ The possible conditions includes `<condition>`, `lc:<read-value>`, `lcf:<read-va
 
 * `p` &mdash; percentage (%) of *<ruby>精<rt>sei</rt>度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy of all missable notes.
   * *Proposal* (IID): The value is limited between 0(%) and 100(%).
-  * > Formula: **min**{100(%), (`<sect:jp>` + 0.5 × `<sect:jg>`) / **max**{`<sect:tn>`, 1} × 100(%)}
+  * > Formula: min{100(%), (`<sect:jp>` + 0.5 × `<sect:jg>`) ∕ max{`<sect:tn>`, 1} × 100(%)}
 * `P` &mdash; percentage (%) of *<ruby>精<rt>sei</rt>度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy of all missable **big** notes. \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
   ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
-  * > Formula: **min**{100(%), (`<sect:JP>` + 0.5 × `<sect:JG>`) / **max**{`<sect:TN>`, 1} × 100(%)}
+  * > Formula: min{100(%), (`<sect:JP>` + 0.5 × `<sect:JG>`) ∕ max{`<sect:TN>`, 1} × 100(%)}
 * `d` &mdash; Either alias to `P` or `JP`, for (<ruby>**大**<rt>**d**ai</rt></ruby>) notes. (**`d`** can be seen as a rotated `p`) \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
   ***First seen in***: TJAPlayer2 for.PC
@@ -3237,16 +3237,16 @@ The possible conditions includes `<condition>`, `lc:<read-value>`, `lcf:<read-va
   * In [TJAPlayer3 (Akasoko-Master)](https://github.com/Akasoko-Master/TJAPlayer3), and later ported to TJAPlayer3-f, TJAPlayer3-Develop, & TJAPlayer3-Develop-ReWrite, the formula is defined as the same as `JP` but not counted in gameplay, so the condition value is always 0.
     * Implemented in OpenTaiko (0auBSQ) v0.6.0.103 as `JP`.
   * > Formula (TJAPlayer3 (Akasoko-Master), OpenTaiko (0auBSQ)): `<sect:JP>`
-  * > Formula (*Proposal* (IID)): **min**{100(%), (`<sect:JP>` + 0.5 × `<sect:JG>`) / **max**{`<sect:TN>`, 1} × 100(%)}
+  * > Formula (*Proposal* (IID)): min{100(%), (`<sect:JP>` + 0.5 × `<sect:JG>`) ∕ max{`<sect:TN>`, 1} × 100(%)}
   * Recommendation for charters: `P` or `JP` should be used instead.
 * `pp` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable notes. \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
   ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
-  * > Formula: **min**{100(%), `<sect:jp>` / **max**{`<sect:tn>`, 1} × 100(%)}
+  * > Formula: min{100(%), `<sect:jp>` ∕ max{`<sect:tn>`, 1} × 100(%)}
 * `PP` &mdash; **p**ercentage (%) of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") of all missable **big** notes. \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
   ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
-  * > Formula: **min**{100(%), `<sect:JP>` / **max**{`<sect:TN>`, 1} × 100(%)}
+  * > Formula: min{100(%), `<sect:JP>` ∕ max{`<sect:TN>`, 1} × 100(%)}
 * `jp` &mdash; amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements. \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
   ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
@@ -3400,13 +3400,13 @@ Single condition:
     * Easy difficulty: `#BRANCHSTART rb,38,38`
     * Normal difficulty: `#BRANCHSTART rb,46,46`
     * Hard difficulty: `#BRANCHSTART rb,60,60`
-    * Oni difficulty: `#BRANCHSTART pp,76,76` &mdash; 60 / 78 × 100(%)
+    * Oni difficulty: `#BRANCHSTART pp,76,76` &mdash; 60 ∕ 78 × 100(%)
 * *"<ruby>限<rt>Gen</rt>界<rt>kai</rt>突<rt>Top</rt>破<rt>pa</rt></ruby>×<ruby>サ<rt>Sa</rt>バ<rt>ba</rt>イ<rt>i</rt>バー<rt>baa</rt></ruby>"* "Genkai Toppa x Survivor", Inner oni difficulty
   * Measure 45: `#BRANCHSTART JB,1,1,l`
 * "*<ruby>ス<rt>Su</rt>カー<rt>kaa</rt>レッ<rt>ret</rt>ト<rt>to</rt>警<rt>Kei</rt>察<rt>satsu</rt>の<rt>no</rt>ゲッ<rt>Get</rt>トー<rt>too</rt>パ<rt>Pa</rt>ト<rt>to</rt>ロー<rt>roo</rt>ル<rt>ru</rt>24<rt>Nijuuyon</rt>時<rt>ji</rt></ruby>*" "Scarlet Police Getto Patrol 24 hour", Inner oni difficulty
-  * Measure 75: `#BRANCHSTART PP,100,100` &mdash; 24 / 24 × 100(%)
+  * Measure 75: `#BRANCHSTART PP,100,100` &mdash; 24 ∕ 24 × 100(%)
 * "INTERNET YAMERO", Oni difficulty
-  * Measure 116: `#BRANCHSTART PP,100,100` &mdash; 96 / 96 × 100(%)
+  * Measure 116: `#BRANCHSTART PP,100,100` &mdash; 96 ∕ 96 × 100(%)
 * *"<ruby>ダー<rt>Daa</rt>ク<rt>ku</rt></ruby>・<ruby>エ<rt>E</rt>ク<rt>ku</rt>ス<rt>su</rt></ruby>・<ruby>マ<rt>Ma</rt>キ<rt>ki</rt>ナ<rt>na</rt></ruby>♡"* "Dark Ex Machina♡", Oni difficulty
   ```txt
   #BPMCHANGE 300
@@ -3955,7 +3955,7 @@ Append ("**include**") the notechart definition content defined the included fil
 The arguments are whitespace-separated.
 
 * `#SPLITLANE`
-  * Move <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>-type notes onto the top note field, <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>-type notes onto the bottom note field. Both note fields are offset by 1/3 of the lane height to the middle of both fields.
+  * Move <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>-type notes onto the top note field, <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>-type notes onto the bottom note field. Both note fields are offset by 1⁄3 of the lane height to the middle of both fields.
   * Roughly equivalent to (*Proposal* (IID)) `#SPLITLANE 43.333i` if defined in a [Taiko](#note-symbols-in-taiko-mode) or [Konga](#note-symbols-in-konga-mode) mode section.
   * *Proposal* (Komi, IID): Roughly equivalent to `#SPLITLANE 86.667i` if defined in a (*Proposal* (Komi)) [Beatz mode](#proposal-komi-note-symbols-in-beatz-mode) section. The default split offset of Beatz mode is in the opposite direction of the total split offset of `#SPLITLANE`.
 * *Proposal* (IID): `#SPLITLANE <(complex-ri-float-pixel)katsu-offset-xy> [direction-specifier=0]`
@@ -4380,15 +4380,15 @@ Variable | Arguments | Function
 `<math:max>` | `<x>` : `<y>` | The maximum of `<x>` and `<y>`.
 `<math:exp>` | `<p>` | Exponentiation with the base of natural logarithm; *e*<sup>*p*</sup>
 `<math:pow>` | `<b>` : `<p>` | Exponentiation with given base; *b*<sup>*p*</sup>
-`<math:log>` | `<x>` | Natural logarithm; **log**<sub>*e*</sub>(*x*), NaN for negative
-`<math:log10>` | `<x>` | Common logarithm (with base 10); **log**<sub>10</sub>(*x*), NaN for negative
+`<math:log>` | `<x>` | Natural logarithm; log<sub>*e*</sub>(*x*), NaN for negative
+`<math:log10>` | `<x>` | Common logarithm (with base 10); log<sub>10</sub>(*x*), NaN for negative
 `<math:sqrt>` | `<x>` | Square root; √(*x*), NaN for negative
 `<math:cbrt>` | `<x>` | Cubic root; ∛(*x*)
 `<math:ceil>` | `<x>` | Ceiling; ⌈*x*⌉; the least integer ≥ *x*
-`<math:round>` | `<x>` | Rounding; **sign**(*x*) × ⌈**abs**(*x*) − 0.5⌉; the nearest integer with magnitute ≥ that of *x*
-`<math:trunc>` | `<x>` | Truncate; **trunc**(*x*); **sign**(*x*) × ⌊**abs**(*x*)⌋; the nearest integer with magnitute ≤ that of *x*
+`<math:round>` | `<x>` | Rounding; sgn(*x*) × ⌈&vert;*x*&vert; − 0.5⌉; the nearest integer with magnitute ≥ that of *x*
+`<math:trunc>` | `<x>` | Truncate; trunc(*x*); sgn(*x*) × ⌊&vert;*x*&vert;⌋; the nearest integer with magnitute ≤ that of *x*
 `<math:floor>` | `<x>` | Floor; ⌊*x*⌋; the greatest integer ≤ *x*
-`<math:fmod>` | `<x>` : `<y>` | Floating-number remainder; *x* − **trunc**(*x* / *y*) × *y*
+`<math:fmod>` | `<x>` : `<y>` | Floating-number remainder; *x* − trunc(*x* ∕ *y*) × *y*
 
 #### Store Expression Evaluation
 
@@ -4676,7 +4676,7 @@ A measure consists of at least 1 notechart symbol (except for the last measure o
 *Unspecified*: The behavior if the last measure of the chart is not ended with the measure delimiter symbol `,`.
 
 * In TaikoJiro, the measure is ignored.
-* In TJAPlayer2 for.PC but not OpenTaiko 0.6.0.73+, every such note symbol occupies the amount of beats of a 1/16th measure.
+* In TJAPlayer2 for.PC but not OpenTaiko 0.6.0.73+, every such note symbol occupies the amount of beats of 1⁄16 of a measure.
 * In OpenTaiko 0.6.0.73+, the last measure behaviors as if it were ended with a `,`.
 
 *Unspecified*: Whether unrecognized note symbols are ignored (removed) or treated as `0` (blank).
@@ -4697,7 +4697,7 @@ The total beat duration of the measure is divided equally by the total division 
 
 The beat and time position of the note, note head, or note end for the notechart symbol (if any) is at the beginning of the first division interval for this notechart symbol. The time duration of every division interval can vary and even become negative.
 
-* In TJF format, `,` did not exist and every note symbol occupies the amount of beats of a 1/16th note.
+* In TJF format, `,` did not exist and every note symbol occupies the amount of beats of a 1⁄16th note.
 * The `,` syntax is (likely) inspired by the SM format. However, in the SM format, the minimum of measure division weight is 4, and `,` is placed on its own line and is not used before the end of the notechart definition.
 
 Equation: `beat_duration_of_division` (scope: a measure)
@@ -4732,7 +4732,7 @@ Sign of BPM | Sign of Beat Duration | Notes on Behavior | Beat-time Diagram
 --- | --- | --- | ---
 Positive | Positive | | ![b-t diagram for positive BPM & positive beat duration](tja-assets/b-t_pos-bpm_pos-beatdur.svg)
 Positive | Negative | The time position of notes are *unspecified* if notes are defined within. | ![b-t diagram for positive BPM & negative beat duration](tja-assets/b-t_pos-bpm_neg-beatdur.svg)
-Zero | Any | In TaikoJiro 1 and 2, the time duration is 0 instead of infinity. | ![b-t diagram for zero BPM & positive beat duration](tja-assets/b-t_zero-bpm_pos-beatdur.svg) <br /> ![b-t diagram for zero BPM & negative beat duration](tja-assets/b-t_zero-bpm_neg-beatdur.svg)
+Zero | Any | In TaikoJiro 1 and 2, the time duration is 0 instead of infinity (∞). | ![b-t diagram for zero BPM & positive beat duration](tja-assets/b-t_zero-bpm_pos-beatdur.svg) <br /> ![b-t diagram for zero BPM & negative beat duration](tja-assets/b-t_zero-bpm_neg-beatdur.svg)
 Negative | Positive | The time position of notes are *unspecified* if notes are defined within. | ![b-t diagram for negative BPM & positive beat duration](tja-assets/b-t_neg-bpm_pos-beatdur.svg)
 Negative | Negative | | ![b-t diagram for negative BPM & negative beat duration](tja-assets/b-t_neg-bpm_neg-beatdur.svg)
 
@@ -4914,7 +4914,7 @@ By default, drumroll-type notes are ended at-or-before one of:
   * *Proposal* (IID): If a roll-type notes would end by hit-type note symbol, but an isolated `8` occurs after the hit-type note and before any roll-type note head symbol, the roll-type note ends instead at a position earlier than the `8` by an *unspecified* duration as if the hit-type notes were irrelevant for determining the roll length.
 * In TaikoJiro, the definition position of the last note symbol of the notechart, except when the note head is in the definition of a "branch"/path other than the *<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>* Normal "branch"/path.
 
-In the official games, drumroll-type notes are usually intentionally made to end earlier than the designed ending beat position by the amount of beats of a 1/48th note.
+In the official games, drumroll-type notes are usually intentionally made to end earlier than the designed ending beat position by the amount of beats of a 1⁄48th note.
 
 * Reference: *連打秒数表* ("List of seconds of drumrolls"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/連打秒数表>
 
@@ -5137,9 +5137,9 @@ Time relation | \< | ≤ | = | ≥ | >
 
 The fraction (for beat duration, *etc*.) is denoted as follow:
 
-Word | whole | half | 1/3rd | quarter <br /> 1/4th | 1/8th | 1/16th | ...
+Word | whole | half | 1⁄3rd | quarter <br /> 1⁄4th | 1⁄8th | 1⁄16th | ...
 --- | --- | --- | --- | --- | --- | --- | ---
-Fraction | 1/1 | 1/2 | 1/3 | 1/4 | 1/8 | 1/16 | ...
+Fraction | 1⁄1 | 1⁄2 | 1⁄3 | 1⁄4 | 1⁄8 | 1⁄16 | ...
 Other <br /> spellings | whole | half | third | quarter <br /> fourth | eighth | sixteenth | ...
 
 #### *Unspecified*
