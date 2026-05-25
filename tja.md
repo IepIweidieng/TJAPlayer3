@@ -4385,10 +4385,10 @@ Variable | Arguments | Function
 `<math:sqrt>` | `<x>` | Square root; √(*x*), NaN for negative
 `<math:cbrt>` | `<x>` | Cubic root; ∛(*x*)
 `<math:ceil>` | `<x>` | Ceiling; ⌈*x*⌉; the least integer ≥ *x*
-`<math:round>` | `<x>` | Rounding; sgn(*x*) × ⌈&vert;*x*&vert; − 0.5⌉; the nearest integer with magnitute ≥ that of *x*
-`<math:trunc>` | `<x>` | Truncate; trunc(*x*); sgn(*x*) × ⌊&vert;*x*&vert;⌋; the nearest integer with magnitute ≤ that of *x*
+`<math:round>` | `<x>` | Rounding (half away from zero); sgn(*x*) × ⌊&vert;*x*&vert; + 0.5⌋; the nearest integer to *x*, using magnitute ≥ that of *x* for tie-breaking (the behavior of C's & C++'s `round()`)
+`<math:trunc>` | `<x>` | Truncate; truncate(*x*); sgn(*x*) × ⌊&vert;*x*&vert;⌋; the nearest integer with magnitute ≤ that of *x*
 `<math:floor>` | `<x>` | Floor; ⌊*x*⌋; the greatest integer ≤ *x*
-`<math:fmod>` | `<x>` : `<y>` | Floating-number remainder; *x* − trunc(*x* ∕ *y*) × *y*
+`<math:fmod>` | `<x>` : `<y>` | Floating-number remainder; *x* − truncate(*x* ∕ *y*) × *y*
 
 #### Store Expression Evaluation
 
