@@ -286,7 +286,7 @@ Formatting notations:
   * `start-trimmed-*` and `end-trimmed-*`: Without leading and without trailing new-newline whitespaces & comments, respectively.
 * `unsigned-*`: The value is written without preceding positive sign (`+`) or negative sign (`-`).
 * `<separator>-separated-list:*`: Multiple values are given and are separated by the separator indicated by `<separator>`
-  * *E.g.*, exemplar valid values for `comma-separated-list:int`: (empty) / `42` / `8, 7, 6`
+  * *E.g.*, example valid values for `comma-separated-list:int`: (empty) / `42` / `8, 7, 6`
 * `<(type)name>`: The value `name` has the value type `type` and can be refered to just `<name>`.
 * `[name=<default>]`: The value `name` is optional and defaults to `<default>`.
   * *E.g.*, `[(enum-str)difficulty-type=Oni]` means the value `difficulty-type` defaults to `Oni`.
@@ -1240,10 +1240,10 @@ Depending on the simulator, the `COURSE:` header may affect the judgment window,
   * The actual behavior may differ from simulator to simulator.
   * In TaikoJiro, this cause the bar-type drumroll notes to be drawn above of all <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> & <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> notes. However, it was stated that *this behavior might be changed later.* (Original quote: "*この仕様は後に変更されるかもしれません。*")
   * This draw order behavior is in reference to *<ruby>太<rt>Tai</rt>鼓<rt>ko</rt>タ<rt>Ta</rt>ワー<rt>waa</rt>6<rt>Roku</rt></ruby>（<ruby>辛<rt>kara</rt>口<rt>kuchi</rt></ruby>）* ("Taiko Tower 6 (hard)") ([fumen-wiki](https://wikiwiki.jp/taiko-fumen/収録曲/その他/太鼓タワー3%28辛口%29)), where the faster notes are drawn beneath the slower note (mainly the big bar drumroll notes) and thus make the notechart hard to read.
-    * Exemplar Gameplay: <https://youtu.be/nDsFM6XQwO4?t=23> <br />
+    * Example Gameplay: <https://youtu.be/nDsFM6XQwO4?t=23> <br />
       <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/nDsFM6XQwO4?start=23" title="YouTube video player, playing &quot;太鼓の達人CS7　太鼓タワーその6(辛口) 月下美人　全良&quot;, uploaded by Guest Don" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     * However, this also occur in normal gameplay in some pre-AC15 games. An earlier example is *<ruby>ハ<rt>Ha</rt>ン<rt>n</rt>ガ<rt>ga</rt>リー<rt>rii</rt>舞<rt>Bu</rt>曲<rt>kyoku</rt>第<rt>Dai</rt>５<rt>go</rt>番<rt>ban</rt></ruby>* (Hungarian Dances No.5) ([fumen-wiki](https://wikiwiki.jp/taiko-fumen/収録曲/おに/ハンガリー舞曲第５番)) before Wii1, in all difficulties.
-      * Exemplar Gameplay: <https://www.youtube.com/watch?v=kSQe9xRlWtg> <br />
+      * Example Gameplay: <https://www.youtube.com/watch?v=kSQe9xRlWtg> <br />
         <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/kSQe9xRlWtg" title="YouTube video player, playing &quot;【太鼓の達人7】ハンガリー舞曲第5番【全良】&quot;, uploaded by みっちー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     * The draw order in these game is probably determined by the timepoint of each note passing the [`#SCROLL 1`](#scroll)-equivalent note spawning position right beyond the right edge of the screen. However, in later games such as AC15 and AC16, the draw order is determined instead by notes' definition order in the notechart file.
     * In TJAPlayer2 for.PC, the relative draw order of non-balloon bar drumroll notes is determined by the relative scrolling velocity regardless of the value of the `COURSE:` header.
@@ -2421,7 +2421,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
 * In TJAPlayer2 for.PC and TJAPlayer3, the imaginary component of `<scroll-speed-xy>` makes bar lines rotate around their center. However, it is misinterpreted as the amount of rotation and the unit is 90 degrees (°) clockwise (↻), see:
   * <https://github.com/kairera0467/TJAP2fPC/blob/17e5c3bea5ccd5eaae5367128ec209384e12e954/DTXManiaプロジェクト/コード/ステージ/07.演奏/ドラム画面/CStage演奏ドラム画面.cs#L2026>
   * <https://github.com/AioiLight/TJAPlayer3/blob/59835a522887c67b8db0e60d89a1e61ed3220742/TJAPlayer3/Stages/07.Game/Taiko/CStage演奏ドラム画面.cs#L2034>
-  * This behavior is utilized in some existing notecharts to achieve bar line rotation. Exemplar notechart: <https://www.youtube.com/watch?v=SR94XPuGoyQ> <br />
+  * This behavior is utilized in some existing notecharts to achieve bar line rotation. Example notechart: <https://www.youtube.com/watch?v=SR94XPuGoyQ> <br />
     <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/SR94XPuGoyQ" title="YouTube video player, playing &quot;【TJAPlayer3】Sense【創作譜面】[BilliumMoto × Silentroom] 《ギミック譜面》&quot;, uploaded by かれーどらい{きつね}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   * The [`#ANGLE`](#note--barline-commands) command introduced in TaikoManyGimmicks can achieve such effects without depending on the *unspecified* behavior.
 * TJAPlayer2 for.PC and TaikoManyGimmicks do not support all existent forms of `<scroll-speed-xy>`, see the explanation of compatibility issues in [Value Type](#value-type).
@@ -2572,7 +2572,7 @@ Affected note attribute commands:
 * (Dis-)appearance: [`#SUDDEN`](#sudden--hidden) (appearance offset), (*Proposal* (IID)) [`#HIDDEN`](#sudden--hidden) (disappearance offset)
   * Each interpolated non-stretchable point on the bar body has the (dis-)appear time interpolated.
   * All lasting points (dis-)appear along with the last stretchable point at the same time.
-  * Examplar implementation for `#ROLLSTRETCH 1`: <https://github.com/IepIweidieng/PeepoDrumKit/blob/master/src/peepo_drum_kit/chart_editor_widgets_game.cpp> (begins at the `// sudden move` comment)
+  * Example implementation for `#ROLLSTRETCH 1`: <https://github.com/IepIweidieng/PeepoDrumKit/blob/master/src/peepo_drum_kit/chart_editor_widgets_game.cpp> (begins at the `// sudden move` comment)
   * Visualization of `#ROLLSTRETCH 1` vs.  `#ROLLSTRETCH 4`: <https://www.desmos.com/calculator/oruykk0yzg>
 * Other interpolatable attributes: [`#SIZE`, `#COLOR`, `#ALPHA`](#note--barline-commands)
 * [`#RESETCOMMAND`](#note--barline-commands)
@@ -3338,7 +3338,7 @@ If `<range>` is `l`, the requirement is fulfilled if the value is less than ("\<
 They are conventionally used as follow:
 
 ```txt
-#BRANCHSTART r,1,2 // Exemplar branch/path condition similar to the opening section of the "画竜点睛 (Garyoutensei)" series
+#BRANCHSTART r,1,2 // Example branch/path condition similar to the opening section of the "画竜点睛 (Garyoutensei)" series
 #N
     // 0 hits: "普通 (Futsuu)" Normal branch/path
     // Normal branch/path section
@@ -3355,7 +3355,7 @@ They are conventionally used as follow:
 
 // Some commands or notechart section
 
-#BRANCHSTART p,0,101 // Exemplar condition which forces the "玄人 (Kurouto)"/Advanced branch/path to be chosen
+#BRANCHSTART p,0,101 // Example condition which forces the "玄人 (Kurouto)"/Advanced branch/path to be chosen
 // ...
 ```
 
@@ -3887,19 +3887,19 @@ They are conventionally used as follow:
 
 * TaikoManyGimmicks before v0.6.1α:
   ```tja
-  #GRADATION start 1.0 2 0 // Exemplar
-  #SIZE 1 // Exemplar command with the value before approaching
+  #GRADATION start 1.0 2 0 // Example
+  #SIZE 1 // Example command with the value before approaching
   // More commands with the values before approaching
   #GRADATION end
-  #SIZE 2 // Exemplar command with the value after approaching
+  #SIZE 2 // Example command with the value after approaching
   // More commands with the values after approaching
   // Notechart section
   #GRADATION init // Optional sometimes
   ```
 * TaikoManyGimmicks v0.6.1α+:
   ```tmg
-  #GRADATION(Set, 2, 0, 0.0, 1.0) // Exemplar
-  #SIZE(1~2) // Exemplar command with the value before~after approaching
+  #GRADATION(Set, 2, 0, 0.0, 1.0) // Example
+  #SIZE(1~2) // Example command with the value before~after approaching
   // More commands with the values before approaching
   #GRADATION(Start)
   // Notechart section
@@ -4244,7 +4244,7 @@ For each charter-defined variable setter, if `<written>` contains one of the `<>
 
 #### Store Expression Syntax
 
-Examplar evaluator implementation in C#: <https://dotnetfiddle.net/LtjtCQ>
+Example evaluator implementation in C#: <https://dotnetfiddle.net/LtjtCQ>
 
 Operations (in descending precedence):
 
@@ -4746,7 +4746,7 @@ Negative | Negative | | ![b-t diagram for negative BPM & negative beat duration]
 
 Their common combinations and usages are as follow:
 
-Usage | Examplar Combination | Beat-time Diagram
+Usage | Example Combination | Beat-time Diagram
 --- | --- | ---
 Forward scrolling in [BMS scrolling modes](#bmscroll--hbscroll--nmscroll). (Assume `#SCROLL 1`) | *d*: Positive BPM & positive beat duration | ![Beat-time diagram for forward scrolling](tja-assets/b-t_forward-scroll.svg)
 Backward scrolling in [BMS scrolling modes](#bmscroll--hbscroll--nmscroll). (Assume `#SCROLL 1`) | *d*: Negative BPM & negative beat duration | ![Beat-time diagram for backward scrolling](tja-assets/b-t_backward-scroll.svg)
@@ -4774,7 +4774,7 @@ Negative | Negative | ![Musical beat-time diagram for negative delay duration](t
 
 The visual beat duration behavior between positive and negative delay is not symmetrical, so the visual effects of positive delays and negative delays with total delay duration being zero do not cancel out. The behavior is as follows:
 
-Examplar Combination | Musical Beat-time Diagram | Visual Beat-time Diagram
+Example Combination | Musical Beat-time Diagram | Visual Beat-time Diagram
 --- | --- | ---
 *d*<sub>0</sub>: Positive delay <br /> + *d*<sub>1</sub>: Negative delay & positive BPM <br /> + *d*<sub>2</sub>: Positive BPM & positive beat duration (with notes) | ![Musical beat-time diagram for positive delay and then negative delay](tja-assets/ba-t_pos-delay-then-neg-delay.svg) | ![Visual beat-time diagram for positive delay and then negative delay, positive BPM](tja-assets/bv-t_pos-delay-then-neg-delay_pos-bpm.svg)
 
@@ -4942,7 +4942,7 @@ In the official games, drumroll-type notes are usually intentionally made to end
 
 Effective when [`GAME:Konga`](#game) or [`#GAMETYPE Konga`](#gametype) is in effect.
 
-See the exemplar actual gameplays:
+See the example actual gameplays:
 
 * <https://www.youtube.com/watch?v=G70HoWO1umc> <br /> <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/G70HoWO1umc" title="YouTube video player, playing &quot;Donkey Konga &lbrack;29&rbrack; GameCube Longplay&quot;, uploaded by Mutch Games" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 * <https://www.youtube.com/watch?v=myci706YXss> <br /> <iframe width="560" height="315" src="https://www.youtube.com/embed/myci706YXss?si=AKOnV2vJgvUB63gU" title="YouTube video player, playing &quot;Longplay of Donkey Konga 3&quot;, uploaded by LongplayArchive" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
