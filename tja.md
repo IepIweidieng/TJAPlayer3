@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-05-29 (UTC+8)
+* Last changed: 2026-05-30 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -3059,7 +3059,7 @@ Conditionally ("**if**") enable the next **command** placed within the same meas
 
 * `#COMMANDIF <(str-local-value-trigger)read-enable>`
 * *Proposal* (IID): `#COMMANDIFF <(str-local-formula-trigger)read-enable>`
-  * If the bool value of the [(3*proposal* (IID)) formula) trigger](#counter--trigger-commands) specified `<read-enable>` is true, the next command is enabled, *i.e.*, has its static-time effects (re-)applied immediately, and has its command-time effects fired when its command time is reached. \
+  * If the bool value of the [(*proposal* (IID)) formula) trigger](#counter--trigger-commands) specified `<read-enable>` is true, the next command is enabled, *i.e.*, has its static-time effects (re-)applied immediately, and has its command-time effects fired when its command time is reached. \
     Otherwise the next command is disabled, *i.e.*, has its static-time effects reverted immediately as if it were not present, and has its command-time effects not fired when its command time is reached.
   * *Proposal* (IID): If the command-time of the next command have already passed, the command-time effects (if exist) of the next command are neither reapplied nor canceled.
 
