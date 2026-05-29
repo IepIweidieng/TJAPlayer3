@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-05-25 (UTC+8)
+* Last changed: 2026-05-29 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -3316,11 +3316,16 @@ For other conditions, the percentage or amount calculated during the determining
 
 #### Condition Judgement
 
-For number conditions (`<condition>`, `lc:<read-value>`, & `lcf:<read-value>`), the condition value will be compared with the specified requirement value. \
-For Boolean conditions (`lt` & `ltf`), the condition values for Expert condition and Master condition will be compared with 1 (true).
+For number conditions (`<condition>`, `lc:<read-value>`, & `lcf:<read-value>`), the condition value is directly compared with the specified requirement value. \
+Boolean conditions (`lt` & `ltf`) are converted into number conditions as follow:
 
-If `<range>` is (empty) or `m`, the requirement is fulfilled if the value is more than or equal to ("≥") the given requirement (for a Boolean condition, when the value is 1 (true)). \
-If `<range>` is `l`, the requirement is fulfilled if the value is less than ("\<") the given requirement (for a Boolean condition, when the value is 0 (false)).
+* If the Master condition is 1 (true), the condition value is 2.
+* Otherwise, if the Expert condition is 1 (true), the condition value is 1.
+* Otherwise, the condition value is 0.
+* The requirement values are fixed to 1 for Expert and 2 for Master.
+
+If `<range>` is (empty) or `m`, the requirement is fulfilled if the value is more than or equal to ("≥") the given requirement. \
+If `<range>` is `l`, the requirement is fulfilled if the value is less than ("\<") the given requirement.
 
 * If no condition and requirements are specified, the currently targeted branch will be taken by default.
 * If the Master requirement is fulfilled, the *<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>* Master "branch"/path will be taken by default.
