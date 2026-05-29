@@ -1894,12 +1894,12 @@ Specify the **cutscene**(s) to play in order. **Intro cutscene**(s) are played a
     * `2` &mdash; clear
     * `3` &mdash; full combo
     * `4` &mdash; perfect
-  * `<clear-status-range>` specifies the requirement range for clear status. It can be one of the range code of unlockable condition in OpenTaiko: 
+  * `<clear-status-range>` specifies the requirement range for clear status. It can be one of the range code of unlockable condition in OpenTaiko, or *Proposal* (IID) `mt`: 
     * `l` &mdash; \<
     * `le` &mdash; ≤
     * `e` &mdash; =
     * `me` / (default) &mdash; ≥
-    * `m` &mdash; >
+    * `m` & *Proposal* (IID) `mt` &mdash; >
     * `d` &mdash; ≠
   * `<repeat-mode>` specifies how the cutscene is played when reached and can be one if:
     * `-1` &mdash; the cut scene is played until the requirement is first unmet.
@@ -2978,27 +2978,28 @@ If the specified note is already a hand-holding note or (*proposal* (IID)) is no
 
 *Unspecified*: In [Taiko mode](#note-symbols-in-taiko-mode), whether big notes `3` and `4` with `#PARTNERNOTE` applied are equivalent to the hand-holding notes `A` & `B`.
 
-Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF` or (*proposal* (IID)) `#COMMANDIFF` command](#proposal-komi-commandif-commands).
+*proposal* (Komi): Can be conditionally enabled or disabled by [the `#COMMANDIF` or (*proposal* (IID)) `#COMMANDIFF` command](#commandif-commands).
 
 #### Compatibility Issues
 
 * In OpenTaiko (0auBSQ) v0.6.0.106, only the hand-holding sprite and animation is displayed. None of the special gameplay, scoring, and hit animation are implemented.
 
-### *Proposal* (Komi): #GIANTNOTE
+### #GIANTNOTE
 
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ \
+***First seen in***: OpenTaiko (0auBSQ) v0.6.1 \
 ***Scope***: branch, note-symbol one-shot \
 ***Scope-fineness***: at-or-after \
 ***Effect time***: static \
 ***Effect target***: notes \
 ***Effect branches***: current
 
-Specify the **note** specified by the next note symbol (if any) to be **giant**, as in the official Wii games. A giant notes receive input and reward points the same as a regular note, but sets certain specified [(*proposal* (Komi)) triggers](#proposal-komi-counter--trigger-commands) to true based on its received judgement.
+Specify the **note** specified by the next note symbol (if any) to be **giant**, as in the official Wii games. A giant notes receive input and reward points the same as a regular note, but sets certain specified [triggers](#counter--trigger-commands) to true based on its received judgement.
 
 *Proposal* (IID): If the specified note is already a giant note or is not a hit-type note, the command has no effects. If the specified note is a big note, it is converted to a regular note and then becomes a giant note.
 
-Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF` or (*proposal* (IID)) `#COMMANDIFF` command](#proposal-komi-commandif-commands).
+Can be conditionally enabled or disabled by [the `#COMMANDIF` or (*proposal* (IID)) `#COMMANDIFF` command](#commandif-commands).
 
 * `#GIANTNOTE <(str-local-value-trigger)written-on-ok>, <(str-local-value-trigger)written-on-great>, [(enum-str-bool)great-activates-ok=False]`
   * `<written-on-ok>` specifies the local trigger to set to true when the giant note receives *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK judgement.
@@ -3007,10 +3008,15 @@ Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF
     * `False` &mdash; the default; `<written-on-ok>` will be untouched on *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement.
     * `True` &mdash; `<written-on-ok>` will be set to true on *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD judgement.
 
-### *Proposal* (Komi): NOTEIF Commands
+#### Compatibility Issues
+
+* In OpenTaiko (0auBSQ) v0.6.1, only the trigger functionality is implemented. None of the special gameplay, scoring, and hit animation are implemented.
+
+### NOTEIF Commands
 
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ \
+***First seen in***: OpenTaiko (0auBSQ) v0.6.1 \
 ***Scope***: branch, note-symbol one-shot \
 ***Scope-fineness***: at-or-after \
 ***Effect time***: static \
@@ -3021,20 +3027,26 @@ Conditionally ("**if**") enable the **note** specified by the next note symbol (
 
 *Proposal* (IID): If the specified note is not a hit-type note, the command has no effects.
 
-* `#NOTEIF <(str-local-trigger)read-enable>, [(enum-str-bool)glow-effect=False]`
+* `#NOTEIF <(str-local-trigger)read-enable>`
+* *Proposal (Komi)*: `#NOTEIF <(str-local-trigger)read-enable>, [(enum-str-bool)glow-effect=False]`
 * *Proposal* (IID): `#NOTEIFF <(str-local-formula-trigger)read-enable>, [(enum-str-bool)glow-effect=False]`
-  * If the bool value of the [(value or (*proposal* (IID)) formula) trigger](#proposal-komi-counter--trigger-commands) specified by `<str-local-*-trigger-read-enable>` is true, the note is enabled, *i.e.*, displays and receives input. \
+  * If the bool value of the [(value or (*proposal* (IID)) formula) trigger](#counter--trigger-commands) specified by `<str-local-*-trigger-read-enable>` is true, the note is enabled, *i.e.*, displays and receives input. \
     Otherwise the note is disabled, *i.e.*, hides and does not receive input, like [note symbol `0`](#note-symbols-in-taiko-mode).
   * `[glow-effect]` defaults to `False` and specifies whether the note has the glow effect like the notes added after hitting giant notes in the official Wii games. \
     If given, it can be one of:
     * `False` &mdash; the default; the note appears as if the `#NOTEIF` or (*proposal* (IID)) `#NOTEIFF` command were not applied if the note is enabled.
-    * `True` &mdash; the note has the glow effect if enabled. Intended to be used in conjunction with [the (*proposal* (Komi)) `#GIANTNOTE` command](#proposal-komi-giantnote).
+    * `True` &mdash; the note has the glow effect if enabled. Intended to be used in conjunction with [the `#GIANTNOTE` command](#giantnote).
   * *Unspecified*: The display details of the glow effect.
 
-### *Proposal* (Komi): COMMANDIF Commands
+#### Compatibility Issues
+
+* In OpenTaiko (0auBSQ) v0.6.1, only the missed BAD judgement is disabled for the disabled note.
+
+### COMMANDIF Commands
 
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ (maximum, depends on the usage) \
+***First seen in***: OpenTaiko (0auBSQ) v0.6.1 \
 ***Scope***: branch, same&ndash;measure-division command one-shot \
 ***Scope-fineness***: sequential \
 ***Effect time***: static \
@@ -3047,16 +3059,16 @@ Conditionally ("**if**") enable the next **command** placed within the same meas
 
 * `#COMMANDIF <(str-local-value-trigger)read-enable>`
 * *Proposal* (IID): `#COMMANDIFF <(str-local-formula-trigger)read-enable>`
-  * If the bool value of the [(3*proposal* (IID)) formula) trigger](#proposal-komi-counter--trigger-commands) specified `<read-enable>` is true, the next command is enabled, *i.e.*, has its static-time effects (re-)applied immediately, and has its command-time effects fired when its command time is reached. \
+  * If the bool value of the [(3*proposal* (IID)) formula) trigger](#counter--trigger-commands) specified `<read-enable>` is true, the next command is enabled, *i.e.*, has its static-time effects (re-)applied immediately, and has its command-time effects fired when its command time is reached. \
     Otherwise the next command is disabled, *i.e.*, has its static-time effects reverted immediately as if it were not present, and has its command-time effects not fired when its command time is reached.
   * *Proposal* (IID): If the command-time of the next command have already passed, the command-time effects (if exist) of the next command are neither reapplied nor canceled.
 
 Commands supporting the `#COMMANDIF` and (*proposal* (IID)) `#COMMANDIFF` command:
 
-* [The (*proposal* (Komi)) `#PARTNERNOTE` command](#proposal-komi-partnernote)
-* [The (*proposal* (Komi)) `#GIANTNOTE` command](#proposal-komi-giantnote)
-* [The (*Proposal* (Komi)) `#SONGJUMP` command](#proposal-komi-songjump)
-* [(*Proposal* (Komi)) COUNTER / TRIGGER Commands](#proposal-komi-counter--trigger-commands)
+* *proposal* (Komi): [The `#PARTNERNOTE` command](#partnernote)
+* [The `#GIANTNOTE` command](#giantnote)
+* [The `#SONGJUMP` command](#songjump)
+* [COUNTER / TRIGGER Commands](#counter--trigger-commands)
 
 ### `#SECTION`
 
@@ -3191,23 +3203,32 @@ The determining point of this "branch"/path section is defaulted to be placed at
 At the determining point, the "branch"/path&ndash;switching effects are played and the targeted branch is updated, but only the notes and bar lines whose definition position is at-or-after the actual beginning of the "branch"/path section have their pattern changed.
 
 * `#BRANCHSTART <(enum-str)condition>, <(number)expert-branch-requirement>, <(number)master-branch-requirement>`
-* *Proposal* (Komi): `#BRANCHSTART lc:<(str-local-value-counter)read-value>, <(number)expert-branch-requirement>, <(number)master-branch-requirement>` \
-  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
+* `#BRANCHSTART lc:<(str-local-value-counter)read-value>, <(number)expert-branch-requirement>, <(number)master-branch-requirement>` \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.1
 * *Proposal* (IID): `#BRANCHSTART lcf:<(str-local-formula-counter)read-value>, <(number)expert-branch-requirement>, <(number)master-branch-requirement>` \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
-  * The value of the [local (value or formula) counter](#proposal-komi-counter--trigger-commands) specified by `<read-value>` is read at the branch determining point as the condition value.
-* *Proposal* (Komi): `#BRANCHSTART lt, <(str-local-value-trigger)read-expert-branch-condition>, <(str-local-value-trigger)read-master-branch-condition>` \
-  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
+  * The value of the [local (value or formula) counter](#counter--trigger-commands) specified by `<read-value>` is read at the branch determining point as the condition value.
+* `#BRANCHSTART lt, <(str-local-value-trigger)read-expert-branch-condition>, <(str-local-value-trigger)read-master-branch-condition>` \
+  [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
+  ***First seen in***: OpenTaiko (0auBSQ) v0.6.1
 * *Proposal* (IID): `#BRANCHSTART ltf, <(str-local-formula-trigger)read-expert-branch-condition>, <(str-local-formula-trigger)read-master-branch-condition>` \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3
-  * Each bool value of the [local (value or formula) triggers](#proposal-komi-counter--trigger-commands) specified by `<read-*-branch-condition>` is read at the branch determining point as a condition value, with the requirement value being 1 (true).
+  * Each bool value of the [local (value or formula) triggers](#counter--trigger-commands) specified by `<read-*-branch-condition>` is read at the branch determining point as a condition value, with the requirement value being 1 (true).
 * `#BRANCHSTART <(comma-separated-list)branchstart-arguments>, <(enum-str)range>` \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
   ***First seen in***: OpenTaiko (0auBSQ) v0.6.0.103
   * `<branchstart-arguments>` is any argument form above without trailing commas.
-  * `<range>` specifies how the requirement is fulfilled, see [Condition Judgement](#condition-judgement). It can be one of:
-    * (empty) or `m` &mdash; **m**ore than or equal to ("≥") the given requirement
-    * `l` &mdash; **l**ess than ("\<") the given requirement
+  * `<range>` specifies the requirement range for fulfilling the requirement, see [Condition Judgement](#condition-judgement). It can be one of:
+    *  `l` &mdash; \<
+    * `le` &mdash; ≤ \
+      ***First seen in***: OpenTaiko (0auBSQ) v0.6.1
+    * *Proposal* (Komi, IID) `e` &mdash; =
+    * `m` / (default) &mdash; ≥
+    * `me` &mdash; ≥ (alias of `m`) \
+      ***First seen in***: OpenTaiko (0auBSQ) v0.6.1
+    * *Proposal* (Komi, IID) `mt` &mdash; >
+    * *Proposal* (Komi, IID) `d` &mdash; ≠
   * Recommendation for charters: For `lc:<read-value>`, `lcf:<read-value>`, `lt`, & `ltf` conditions, negating the value is preferred over specifying `l` as `<range>`.
 * `#BRANCHSTART` \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
@@ -3292,7 +3313,7 @@ The possible conditions includes `<condition>`, `lc:<read-value>`, `lcf:<read-va
   * > Formula: `<s>`
   * *Unspecified*: The behavior when any of the requirement values are greater than 1 and either unsupported scoring mode or the default value is specified to [the `SCOREMODE:` header](#scoremode) or the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option is enabled.
 
-The variables in the above formulae are [(*proposal* (Komi)) pre-defined store expression variables](#store-expression-variable-access). See there for the explanation about calculating the condition value regarding big notes.
+The variables in the above formulae are [pre-defined store expression variables](#store-expression-variable-access). See there for the explanation about calculating the condition value regarding big notes.
 
 For roll count conditions (`r`, `R`, `rb`, & `RB`), if a counted drumroll note is defined as beginning at-or-before but ending after the default beat position of the determining point, the actual determining point is postponed until the earlier of the definition positions of the ending of that note and an *unspecified* duration before the `#BRANCHSTART` command:
 
@@ -3316,23 +3337,29 @@ For other conditions, the percentage or amount calculated during the determining
 
 #### Condition Judgement
 
-For number conditions (`<condition>`, `lc:<read-value>`, & `lcf:<read-value>`), the condition value is directly compared with the specified requirement value. \
-Boolean conditions (`lt` & `ltf`) are converted into number conditions as follow:
+For number conditions (`<condition>`, `lc:<read-value>`, & `lcf:<read-value>`), the condition value is directly compared with the specified requirement value.
 
-* If the Master condition value is 1 (true), the number condition value is 2.
-* Otherwise, if the Expert condition value is 1 (true), the number condition value is 1.
-* Otherwise, the number condition value is 0.
-* The number requirement values are fixed to 1 for Expert and 2 for Master.
+Boolean conditions (`lt` & `ltf`) are converted into number conditions and then compared. Number condition value ("number cond.") by Expert and Master condition value ("Expert and Master cond."), number requirements by `<range>`, and branch taken by default for Boolean conditions is as follow:
 
-If `<range>` is (empty) or `m`, the requirement is fulfilled if the value is more than or equal to ("≥") the given requirement. \
-If `<range>` is `l`, the requirement is fulfilled if the value is less than ("\<") the given requirement.
+Expert cond. | Master cond. | number cond. | (`<range>` →) `mt` | `m`/`me` | `e` | `le` | `l` | `d`
+--- | --- | --- | ---: | --- | --- | --- | --- | ---
+(equivalent | `#BRANCHSTART` | arguments →) | `1,2,mt` | `1,2,m` | `1,2,e` | `2,1,le` | `2,1,l` | `2,1,d`
+0 (false) | 0 (false) | 0 | Normal | Normal | Normal | Master | Master | Master
+1 (true) | 0 (false) | 1 | Normal | Expert | Expert | Master | Expert | Expert
+0 (false) | 1 (true) | 2 | Expert | Master | Master | Expert | Normal | Normal
+1 (true) | 1 (true) | 3 | Master | Master | Normal | Normal | Normal | Master
 
 * If no condition and requirements are specified, the currently targeted branch will be taken by default.
-* If the Master requirement is fulfilled, the *<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>* Master "branch"/path will be taken by default.
-* Otherwise, if the Expert requirement is fulfilled, the *<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path will be taken by default.
-* Otherwise: The *<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>* Normal "branch"/path is taken by default.
+* For all `<range>` except `d`:
+  * If the Master requirement is fulfilled, the *<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>* Master "branch"/path will be taken by default.
+  * Otherwise, if the Expert requirement is fulfilled, the *<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path will be taken by default.
+  * Otherwise, the *<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>* Normal "branch"/path is taken by default.
+* When `<range>` is `d`, the requirement checking is inverted:
+  * If the Expert requirement is **NOT** fulfilled, the *<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>* Normal "branch"/path is taken by default.
+  * Otherwise, if the Master requirement is **NOT** fulfilled, the *<ruby>玄<rt>Kuro</rt>人<rt>uto</rt></ruby>* "Professional"/Advanced ("Expert") "branch"/path will be taken by default.
+  * Otherwise, the *<ruby>達<rt>Tatsu</rt>人<rt>jin</rt></ruby>* Master "branch"/path will be taken by default.
 * To force a "branch"/path to be taken by default, for a number condition, the requirement value for the branch can be set out-of-bound; for a Boolean condition, the condition value for the branch can be specified as false or true.
-  * For example, with `<condition>` being `p`:
+  * For example, with `<condition>` being `p` and `<range>` being the default (`m`):
     * To prevent the Normal branch from being taken: `#BRANCHSTART p,0,Y`, with `Y` being any number.
     * To prevent the Expert branch from being taken: `#BRANCHSTART p,Y,Y`, with `Y` being any number.
     * To prevent the Master branch from being taken: `#BRANCHSTART p,X,101`, with `X` being any number.
@@ -3716,10 +3743,11 @@ See [TJC Header](#tjc-header) for the header version of the `#NEXTSONG` command.
     * `[course]` has the effects and the default value of [the `COURSE:` header](#course).
     * `[level]` has the effects and the default value of [the `LEVEL:` header](#level).
 
-### *Proposal* (Komi): #SONGJUMP
+### #SONGJUMP
 
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ \
+***First seen in***: OpenTaiko (0auBSQ) v0.6.1
 ***Scope***: notechart \
 ***Scope-fineness***: at-or-after \
 ***Effect time***: command-time \
@@ -3727,15 +3755,16 @@ See [TJC Header](#tjc-header) for the header version of the `#NEXTSONG` command.
 ***Effect target***: all \
 ***Effect branches***: current
 
-Immediately **jump** to the loading screen of the specified **song**. The results (including [(*proposal* (Komi)) local counters and local triggers](#proposal-komi-counter--trigger-commands)) of the current gameplay is discarded.
+Immediately **jump** to the loading screen of the specified **song**. The results (including [local counters and local triggers](#counter--trigger-commands)) of the current gameplay is discarded.
 
-Can be conditionally enabled or disabled by [the (*proposal* (Komi)) `#COMMANDIF` or (*proposal* (IID)) `#COMMANDIFF` command](#proposal-komi-commandif-commands).
+Can be conditionally enabled or disabled by [the `#COMMANDIF` or (*proposal* (IID)) `#COMMANDIFF` command](#commandif-commands).
 
-* `#SONGJUMP <(str)song-unique-id>, <(enum)difficulty-course>`
+* `#SONGJUMP <(str)song-unique-id>, [(enum)difficulty-course=Oni]`
   * `<song-unique-id>` is a unique alphanumeric string representing the specified song.
     * In OpenTaiko (0auBSQ), it is stored in the `uniqueID.json` file in the same directory as the TJA file for the song. The `uniqueID.json` is automatically generated if not present when the TJA file is being scanned.
-  * `<difficulty-course>` can one of the argument to [the `COURSE:` header](#course).
+  * `[difficulty-course]` can one of the argument to [the `COURSE:` header](#course) and defaults to `Oni`.
   * If either the specified song or (*proposal* (IID)) the specified difficulty does not exist, the song jump is canceled.
+    * In OpenTaiko (0auBSQ) v0.6.1, if the specified song exists, the difficulty closest to the specified difficulty is chosen.
 
 ### #GAMETYPE
 
@@ -4188,10 +4217,11 @@ The arguments are whitespace-separated.
 
 * In OpenTaiko (0auBSQ) v0.6.0, `<video-index>` must be at least 2 decimal digits (including prefixing `0` if necessary). Only the leading 2 digits are significant.
 
-### *Proposal* (Komi): COUNTER / TRIGGER Commands
+### COUNTER / TRIGGER Commands
 
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ (depending on usage) \
+***First seen in***: OpenTaiko (0auBSQ) v0.6.1
 ***Scope***: branch \
 ***Scope-fineness***: sequential \
 ***Effect time***: command-time \
@@ -4241,7 +4271,7 @@ Global charter-defined variable setters:
 * *Proposal* (IID): `#ELEVATETF <(str-global-value-trigger)written>, <(str-local-formula-trigger)read>`
   * `<written>` is the key of the stored global value trigger and must not be one of `True`, `False`, and any string different from them only by their letter case.
 
-Recommendation for charters: Global charter-defined variable setters should be used only when necessary and are preferredly used as late (by time position) as possible in the notechart, such as before [`#END`](#start--end) or [(*proposal* (Komi)) the `#SONGJUMP` command](#proposal-komi-songjump).
+Recommendation for charters: Global charter-defined variable setters should be used only when necessary and are preferredly used as late (by time position) as possible in the notechart, such as before [`#END`](#start--end) or [the `#SONGJUMP` command](#songjump).
 
 If the global charter-defined variables are disabled by user option or unimplemented by the simulator, the global charter-defined variable setters have no effects.
 
@@ -4300,9 +4330,9 @@ Excessive arguments are ignored. Lacking arguments cause the lookup to fail and 
 
 *Proposal* (IID): For calculating the pre-defined variables regarding big note statistics:
 
-* The hand-holding notes [`A` & `B` in Taiko mode](#note-symbols-in-taiko-mode) (*not* including notes with an enabled [(*proposal* (Komi)) `#PARTNERNOTE` command](#proposal-komi-partnernote) applied) are counted as big notes. No pre-defined judgement statistic variables separate these notes from originally non&ndash;hand-holding big notes which are made hand-holding by the (*proposal* (Komi)) `#PARTNERNOTE` command.
+* The hand-holding notes [`A` & `B` in Taiko mode](#note-symbols-in-taiko-mode) (*not* including regular notes with an enabled [`#PARTNERNOTE` command](#partnernote) applied) are counted as big notes. All pre-defined judgement statistic variables treat these notes the same as big notes made hand-holding by the `#PARTNERNOTE` command.
 * A Swap note in Taiko mode (`G`) is *not* counted as a big note.
-* A Giant note (notes with an enabled [(*proposal* (Komi)) `#GIANTNOTE` command](#proposal-komi-giantnote) applied) is *not* counted as a big note.
+* A Giant note (notes with an enabled [`#GIANTNOTE` command](#giantnote) applied) is *not* counted as a big note.
 
 Tag | Arguments | Value
 --- | --- | ---
@@ -4311,40 +4341,40 @@ Tag | Arguments | Value
 `pc` | (none) | Amount ("**c**ount") of **p**layer-sides in this gameplay.
 `ss` | (none) | Current value of **s**ong **s**peed multiplier modifier.
 `sc` | (none) | **C**urrent value of **s**crolling rate multiplier modifier.
-`jp` | &bull; (none) <br /> &bull; `l` | Current amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements. <br /> &bull; `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
-`jg` | &bull; (none) <br /> &bull; `l` | Current amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements. <br /> &bull; `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
-`jb` | &bull; (none) <br /> &bull; `l` | Current amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* **B**AD **j**udgements on missable **n**otes. <br /> &bull; `l` &mdash; Only counts hand-holding ("**l**"inked) notes.
+`jp` | &bull; (none) <br /> &bull; *Proposal* (IID): `l` | Current amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements. <br /> &bull; `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
+`jg` | &bull; (none) <br /> &bull; *Proposal* (IID): `l` | Current amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements. <br /> &bull; `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
+`jb` | &bull; (none) <br /> &bull; *Proposal* (IID): `l` | Current amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* **B**AD **j**udgements on missable **n**otes. <br /> &bull; `l` &mdash; Only counts hand-holding ("**l**"inked) notes.
 *Proposal* (IID): `jbt` | (none) | Current amount of combo-break **j**udgements, including ("**t**otal") *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* **B**AD (both for notes and for empty hits) and **B**OOM.
 *Proposal* (IID): <br /> `JP` | &bull; (none) <br /> &bull; `d` <br /> &bull; `l` | Current amount of *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD ("**p**erfect") **j**udgements on **big** notes (not including note symbol `G`). <br /> &bull; `d` &mdash; Only counts *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" judgements and successful hand-holding judgements. <br /> &bull; `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
 *Proposal* (IID): <br /> `JG` | &bull; (none) <br /> &bull; `d` <br /> &bull; `l` | Current amount of *<ruby>可<rt>Ka</rt></ruby>* **G**OOD/OK **j**udgements on **big** notes (not including note symbol `G`). <br /> &bull; `d` &mdash; Only counts *<ruby>特 <rt>Toku</rt></ruby>* "special"/strong/"**d**ouble-hit" judgements and successful hand-holding judgements. <br /> &bull; `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
 *Proposal* (IID): <br /> `JB` | &bull; (none) or `d` <br /> &bull; `l` | Current amount of *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* **B**AD **j**udgements on **big** notes. <br /> &bull; `l` &mdash; Only counts hand-holding ("**l**"inked) big notes.
-`ja` | &bull; (none) <br /> &bull; `l` | Current amount of caught _**A**d libitum_ (**A**D-LIB) notes. <br /> `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
+`ja` | &bull; (none) <br /> &bull; (*proposal* (IID)) `l` | Current amount of caught _**A**d libitum_ (**A**D-LIB) notes. <br /> `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
 `jm` | &bull; (none) | Current amount of caught BOOM ("**m**ine caught") **j**udgements.
 *Proposal* (IID): <br /> `jmb` | &bull; (none) <br /> &bull; `l` | Current amount of caught **b**omb/**m**ine. <br /> `l` &mdash; Only counts successful hand-holding ("**l**"inked) judgements.
 *Proposal* (IID): <br /> `jrb` | (none) | Current amount of popped **b**alloon-type drum**r**oll-**t**ype notes.
 *Proposal* (IID): <br /> `JRB` | &bull; (none) <br /> &bull; `d` | Current amount of popped special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`). <br /> &bull; `d` &mdash; Only counts pops with full bonus.
-`tn` | (in any order) <br /> (&bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t`) : <br /> (&bull; (none) <br /> &bull; *Proposal* (IID): `l`) | **T**otal amount of encountered missable **n**otes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now. <br /> &bull; `l` &mdash; Only count hand-holding notes.
-*Proposal* (IID): `TN` | (in any order) <br /> (&bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t`) : <br /> (&bull; (none) or `d` <br /> &bull; *Proposal* (IID): `l`) | **T**otal amount of encountered missable **big** **n**otes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now. <br /> &bull; `l` &mdash; Only count hand-holding notes.
-`ta` | (same as `tn`) | **T**otal amount of encountered _**A**d libitum_ (**A**D-LIB) notes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now. <br /> &bull; `l` &mdash; Only count hand-holding notes.
-`tm` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | **T**otal amount of encountered notes which can give a BOOM ("**m**ine caught") judgement (*Proposal* (IID)) (for `j`) **j**udged (hit, popped, or failed to pop) or (for `t`) whose critical judgement **t**iming or beginning or ending **t**iming has been reached before now.
-*Proposal* (IID): <br /> `tmb` | (same as `tn`) | **T**otal amount of encountered **b**omb/**m**ine notes (*Proposal* (IID)) (for `j`) **j**udged or (for `t`) whose critical judgement **t**iming has been reached before now. <br /> &bull; `l` &mdash; Only count hand-holding notes.
-*Proposal* (IID): <br /> `trb` | &bull; (none) or `j` <br /> &bull; `t` | **T**otal amount of encountered **b**alloon-type drum**r**oll-**t**ype notes (for `j`) popped or failed to pop or (for `t`) whose beginning or ending **t**iming has been reached before now.
-*Proposal* (IID): <br /> `TRB` | &bull; (none) or `j` <br /> &bull; `t` | **T**otal amount of encountered special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`) (for `j`) popped or failed to pop or (for `t`) whose beginning or ending **t**iming has been reached before now.
-*Proposal* (IID): <br /> `trbh` | &bull; (none) or `j` <br /> &bull; `t` | **T**otal required amount of **h**its of all encountered **b**alloon-type drum**r**oll-**t**ype notes (for `j`) popped or failed to pop or (for `t`) whose beginning or ending **t**iming has been reached before now.
-*Proposal* (IID): <br /> `TRBH` | &bull; (none) or `j` <br /> &bull; `t` | **T**otal required amount of **h**its of all encountered special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`) (for `j`) popped or failed to pop or (for `t`) whose beginning or ending **t**iming has been reached before now.
+`tn` | (in any order) <br /> (&bull; (none) or (*Proposal* (IID)) `m` <br /> &bull; *Proposal* (IID): `j` <br /> &bull; *Proposal* (IID): `t`) : <br /> (&bull; (none) <br /> &bull; *Proposal* (IID): `l`) | **T**otal amount of missable **n**otes, (for (none) or (*Proposal* (IID)) `m`) in the **m**ost difficult branch route, (*Proposal* (IID)) (for `j`) **j**udged, or (*Proposal* (IID)) (for `t`) encountered and whose critical judgement **t**iming has been reached before now. <br /> &bull; `l` &mdash; Only count hand-holding notes.
+*Proposal* (IID): `TN` | (in any order) <br /> (&bull; (none) <br /> &bull; *Proposal* (IID): `j` <br /> &bull; *Proposal* (IID): `t`) : <br /> (&bull; (none) or `d` <br /> &bull; *Proposal* (IID): `l`) | **T**otal amount of missable **big** **n**otes, (for (none) or (*Proposal* (IID)) `m`) in the **m**ost difficult branch route, (*Proposal* (IID)) (for `j`) **j**udged, or (*Proposal* (IID)) (for `t`) encountered and whose critical judgement **t**iming has been reached before now. <br /> &bull; `l` &mdash; Only count hand-holding notes.
+`ta` | (same as `tn`) | **T**otal amount of _**A**d libitum_ (**A**D-LIB) notes, (for (none) or (*Proposal* (IID)) `m`) in the **m**ost difficult branch route, (*Proposal* (IID)) (for `j`) **j**udged, or (*Proposal* (IID)) (for `t`) encountered and whose critical judgement **t**iming has been reached before now. <br /> &bull; `l` &mdash; Only count hand-holding notes.
+`tm` | &bull; (none) or (*Proposal* (IID)) `m` <br /> &bull; *Proposal* (IID): `j` <br /> &bull; *Proposal* (IID): `t` | **T**otal amount of notes which can give a BOOM ("**m**ine caught") judgement, (for (none) or (*Proposal* (IID)) `m`) in the **m**ost difficult branch route, (*Proposal* (IID)) (for `j`) **j**udged (hit, popped, or failed to pop), or (*Proposal* (IID)) (for `t`) encountered and whose critical judgement **t**iming or beginning or ending **t**iming has been reached before now.
+*Proposal* (IID): <br /> `tmb` | (same as `tn`) | **T**otal amount of **b**omb/**m**ine notes, (for (none) or (*Proposal* (IID)) `m`) in the **m**ost difficult branch route, (for `j`) **j**udged, or (for `t`) encountered and whose critical judgement **t**iming has been reached before now. <br /> &bull; `l` &mdash; Only count hand-holding notes.
+*Proposal* (IID): <br /> `trb` | &bull; (none) or (*Proposal* (IID)) `m` <br /> &bull; *Proposal* (IID): `j` <br /> &bull; `t` | **T**otal amount of **b**alloon-type drum**r**oll-**t**ype notes, (for (none) or (*Proposal* (IID)) `m`) in the **m**ost difficult branch route, (for `j`) popped or failed to pop, or (for `t`) encountered and whose beginning or ending **t**iming has been reached before now.
+*Proposal* (IID): <br /> `TRB` | &bull; (none) or (*Proposal* (IID)) `m` <br /> &bull; *Proposal* (IID): `j` <br /> &bull; `t` | **T**otal amount of special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`), (for (none) or (*Proposal* (IID)) `m`) in the **m**ost difficult branch route, (for `j`) popped or failed to pop, or (for `t`) encountered and whose beginning or ending **t**iming has been reached before now.
+*Proposal* (IID): <br /> `trbh` | &bull; (none) or (*Proposal* (IID)) `m` <br /> &bull; *Proposal* (IID): `j` <br /> &bull; `t` | **T**otal required amount of **h**its of all **b**alloon-type drum**r**oll-**t**ype notes, (for (none) or (*Proposal* (IID)) `m`) in the **m**ost difficult branch route, (for `j`) popped or failed to pop, or (for `t`) encountered and whose beginning or ending **t**iming has been reached before now.
+*Proposal* (IID): <br /> `TRBH` | &bull; (none) or (*Proposal* (IID)) `m` <br /> &bull; *Proposal* (IID): `j` <br /> &bull; `t` | **T**otal required amount of **h**its of all special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`), (for (none) or (*Proposal* (IID)) `m`) in the **m**ost difficult branch route, (for `j`) popped or failed to pop, or (for `t`) encountered and whose beginning or ending **t**iming has been reached before now.
 *Proposal* (IID): `rt` | (none) | Current amount of hits on all (**t**otal) drum**r**oll-**t**ype notes.
 *Proposal* (IID): `RT` | &bull; (none) <br /> &bull; `d` | Current amount of hits on all (**t**otal) **big** (including special balloons (note symbol `9`)) drum**r**oll-**t**ype notes. <br /> &bull; `d` &mdash; Only counts _strong/"**d**ouble-hit"_ hits on big non-balloon bar drumrolls.
 *Proposal* (IID): `rb` | (none) | Current amount of hits on **b**alloon-type drum**r**oll-**t**ype notes.
 *Proposal* (IID): `RB` | (none) | Current amount of hits on special/"**big**" **b**alloon-type drum**r**oll-**t**ype notes (note symbol `9`).
 *Proposal* (IID): `sect` | (One of above tags from `jp` to `RB`) : <br /> (One of (none), `d`, & `l`) | The current judgement statistic counted since the last [`#SECTION`](#section) (if any) or the start of the chart. <br /> The `d` or `l` option is applied to the tag if applicable.
 *Proposal* (IID): `sect` | (One of `p`, `P`, `pp`, `PP`, `r`, `R`) : (One of (none), `d`, & `l`) | The current value calculated using the formula of the corresponding `<enum-str-condition>` of [the `#BRANCHSTART` command](#branchstart--branchend) since the last [`#SECTION`](#section) (if any) or the start of the chart. <br /> The `d` or `l` option is applied to the `<sect:*>` variables in the formula if applicable.
-`a` <br /> `p` | &bull; (none) or `j` <br /> &bull; *Proposal* (IID): `t` | Current percentage (%) of *<ruby>精<rt>sei</rt>度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/**a**ccuracy of all missable notes, based on (*Proposal* (IID)) (for `j`) amount of actual **j**udgements or (for `t`) amount of notes whose critical judgement **t**iming has been reached before now.
+`a` <br /> `p` | &bull; *Proposal* (IID): `m` <br /> &bull; (none) or *Proposal* (IID): `j` <br /> &bull; *Proposal* (IID): `t` | Current percentage (%) of *<ruby>精<rt>sei</rt>度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/**a**ccuracy of all missable notes based on (for (*Proposal* (IID)) `m`) actual judgements against total notes in the **m**ost difficult branch route, (for (none) or (*Proposal* (IID)) `j`) actual judgements against **j**udged notes or (for `t`) judgements of notes whose critical judgement **t**iming has been reached before now.
 *Proposal* (IID): `s` | (none) | Current **s**core.
 `cc` | (none) | **C**urrent **c**ombo earned.
 `g` | (none) | Percentage (%) of *<ruby>魂<rt>tamashii</rt>**ゲー**<rt>**g**ee</rt>ジ<rt>ji</rt></ruby>* spirit **g**auge/soul **g**auge. <br /> *Proposal* (IID): For [`LIFE:`](#life) life count, the initial life count is defined as 100%.
 *Proposal* (IID): <br /> `cs` | (none) | `0` for failed, `1` for assisted passed, `2` for non-assisted passed, `3` for passed and full combo (`<jb:t> == 0`), `4` for passed and perfect (`<jg> + <jb:t> == 0`).
 `mc` <br /> `c` | (none) | **M**aximum/longest **c**ombo ever earned.
-`cb` | (none) | **C**urrent displayed target **b**ranch (0 for Normal, 1 for Expert, 2 for Master)
+`cb` | &bull; (none) <br> &bull; *Proposal* (IID): `t` | **C**urrent **b**ranch (0 for Normal, 1 for Expert, 2 for Master), (for (none)) still being taken until reaching the next branch point or (*Proposal* (IID)) (for `t`) displayed as the **t**arget after the last branch-determining point (often at the previous measure of the branch point) passed.
 `cg` | (none) | **C**urrent **g**ame mode <br /> Positive or zero for 1-digit note symbol game modes: 0 for [Taiko](#note-symbols-in-taiko-mode), 1 for [Konga (Bongo)](#note-symbols-in-konga-mode), 2 for *proposal* (Komi) [Beatz](#proposal-komi-note-symbols-in-beatz-mode). <br /> Negative for multi-digit note symbol modes (reserved, non-standard): -1 for [Jube](#note-symbols-in-jube-mode), -2 for [Bm](#note-symbols-in-bm-mode).
 `lc` | `<(str-local-value-counter)read>` | Current value of **l**ocal value **c**ounter (`0` if undefined)
 `lt` | `<(str-local-value-trigger)read>` | Current value of **l**ocal value **t**rigger (false if undefined) (`0` for false, `1` for true)
@@ -4399,14 +4429,15 @@ Variable | Arguments | Function
 
 Reading point: The value of a charter-defined variable is read when:
 
-* For a charter-defined value variable setter command, (*proposal* (IID)) when its command time is reached.
-* For [the `#BRANCHSTART` command with local charter-defined variable condition](#branchstart--branchend), when its branch-determining point (at the previous measure) is reached.
-* For the [(*proposal* (Komi)) `#NOTEIF`, (*proposal* (IID)) `#NOTEIFF`](#proposal-komi-noteif-commands), [(*proposal* (Komi)) `#COMMANDIF`, and (*proposal* (IID)) `#COMMANDIFF` commands](#proposal-komi-commandif-commands), whenever the (direct or cached) value of the accessed variable is changed or invalidated.
+* For a command setting a charter-defined value variable, when its command time is reached.
+* For [the `#BRANCHSTART` command with local charter-defined variable condition](#branchstart--branchend), when its branch-determining point (often at the previous measure) is reached.
+* *proposal* (IID): For the [`#NOTEIF`, (*proposal* (IID)) `#NOTEIFF`](#proposal-komi-noteif-commands), [`#COMMANDIF`, and (*proposal* (IID)) `#COMMANDIFF` commands](#commandif-commands), whenever the (direct or cached) value of the accessed variable is changed or invalidated.
+  * In OpenTaiko (0auBSQ) v0.6.1: When the command time of such a command is reached.
 
 Writing point of values: The value of a charter-defined value variable is written only when:
 
-* For a charter-defined value variable setter command, (*proposal* (IID)) when its command time is reached.
-* For an enabled and effective [(*proposal* (Komi)) `#GIANTNOTE` command](#proposal-komi-giantnote), when the note is judged.
+* For a command setting a charter-defined value variable, when its command time is reached.
+* For an enabled and effective [`#GIANTNOTE` command](#giantnote), when the note is judged.
 
 *Proposal* (IID): Writing point of formulae: The cached value of a charter-defined formula variable is invalidated when:
 
@@ -4418,7 +4449,7 @@ When a store expression of a charter-defined formula variable is (re-)evaluated,
 *Proposal* (IID): Evaluation stages in each game update frame:
 
 1. Update pre-defined variables: The gameplay state variables except `<t*:t>` (**t**otal amount of encountered certain notes whose critical judgement **t**iming has been reached before now) are updated. \
-  [(*Proposal* (Komi)) `#GIANTNOTE` commands](#proposal-komi-giantnote) have the triggers updated in this stage.
+  [`#GIANTNOTE` commands](#giantnote) have the triggers updated in this stage.
 2. Update charter-defined variables: After stage 1, the to-be-executed reading or writing of charter-defined variables have their reading and writing executed in their definition order (for [the `#BRANCHSTART` command](#branchstart--branchend), assumed to be right before the first note symbol (if any) at the previous measure). \
   For each reading or writing which requires evaluating any store expressions (including re-evaluating charter-defined formula variables), the `<t*:t>` variables are increased to include uncounted notes whose both definition position and time position is before the reading or writing point, and then the store expressions (if any) are evaluated. \
   For reading a formula variable with invalidated cached value, all invalidated formula variables which is (directly or indirectly) accessed by store expression of the current formula variable are re-evaluated in the definition order of the last `#STORECF` or `#STORETF` command setting them.
