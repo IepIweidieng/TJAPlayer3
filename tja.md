@@ -3319,10 +3319,10 @@ For other conditions, the percentage or amount calculated during the determining
 For number conditions (`<condition>`, `lc:<read-value>`, & `lcf:<read-value>`), the condition value is directly compared with the specified requirement value. \
 Boolean conditions (`lt` & `ltf`) are converted into number conditions as follow:
 
-* If the Master condition is 1 (true), the condition value is 2.
-* Otherwise, if the Expert condition is 1 (true), the condition value is 1.
-* Otherwise, the condition value is 0.
-* The requirement values are fixed to 1 for Expert and 2 for Master.
+* If the Master condition value is 1 (true), the number condition value is 2.
+* Otherwise, if the Expert condition value is 1 (true), the number condition value is 1.
+* Otherwise, the number condition value is 0.
+* The number requirement values are fixed to 1 for Expert and 2 for Master.
 
 If `<range>` is (empty) or `m`, the requirement is fulfilled if the value is more than or equal to ("≥") the given requirement. \
 If `<range>` is `l`, the requirement is fulfilled if the value is less than ("\<") the given requirement.
