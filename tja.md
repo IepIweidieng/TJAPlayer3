@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-05-30 (UTC+8)
+* Last changed: 2026-06-01 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -3083,7 +3083,7 @@ Commands supporting the `#COMMANDIF` and (*proposal* (IID)) `#COMMANDIFF` comman
 ***Effect target***: (none) \
 ***Effect branches***: all
 
-Start a *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>ki</rt></ruby>* "notechart branch"/forked path&ndash;determining **section** by resetting the value of the conditions for determining the next not-yet-determined "branch(es)"/path(s) at the beginning of the section. See the explanation for [the `#BRANCHSTART` command](#branchstart--branchend).
+Start a *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>ki</rt></ruby>* "notechart branch"/forked path&ndash;determining **section** by resetting the accumulated variables (including judgement count) variables for determining the next not-yet-determined "branch(es)"/path(s) at the beginning of the section. See the explanation for [the `#BRANCHSTART` command](#branchstart--branchend).
 
 When the `#SECTION` command & a "branch"/path&ndash;determining point occur at the same beat position, the effect of the `#SECTION` command should take place after the "notechart branch"/forked path is determined.
 
@@ -3091,7 +3091,7 @@ The effects of `#SECTION` applie regardless the current branch and on which bran
 
 An implicit `#SECTION` is placed at the beginning of every notechart definition.
 
-The value of the condition for determining the "branch"/path by score (the `s` condition) is not reset.
+The variable for determining the "branch"/path by score (the `s` condition) is not reset.
 
 #### Compatibility Issues
 
@@ -3242,7 +3242,7 @@ At the determining point, the "branch"/path&ndash;switching effects are played a
 
 The possible conditions includes `<condition>`, `lc:<read-value>`, `lcf:<read-value>`, `lt`, `ltf`, & (none). Conditions other than `<condition>` are explained above.
 
-`<condition>` specifies the condition value for determining the "branch"/path can be one of the following:
+`<condition>` specifies the formula for calculating the condition value for determining the "branch"/path and can be one of the following:
 
 * `p` &mdash; percentage (%) of *<ruby>精<rt>sei</rt>度<rt>do</rt></ruby>* "**p**recision/**p**erfect rate"/accuracy of all missable notes.
   * *Proposal* (IID): The value is limited between 0(%) and 100(%).
