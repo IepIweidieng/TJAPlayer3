@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-06-01 (UTC+8)
+* Last changed: 2026-06-26 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -5286,10 +5286,11 @@ The honorific title is omitted.
   * ← Derived from StepMania 5.1: Mainly maintained by The Spinal Shark Collective <https://github.com/stepmania/stepmania> \
     In comparison, Project OutFox introduces the originally lacking TJA format parsing and Taiko gameplay (as "taitai" mode), among with many new game modes, theming and gameplay gimmick support, and other improvements.
     * ← Derived from StepMania 3.9: By Chris Danford *et al.*
-* TaikoManyGimmicks (aka. taikosimu(NN)): By barrier15300 <https://twitter.com/barrier15300/with_replies>. Official Discord server: <https://discord.gg/T9uKVZWY7E>
+* TaikoManyGimmicks (aka. taikosimu(NN)): By barrier15300 <https://github.com/barrier15300/TaikoManyGimmicks>. Official Discord server: <https://discord.gg/T9uKVZWY7E>
   * Derivatives
     * Source code release, on-or-before 2025, June 18 → ReTaikoManyGimmicks: By apopic.
-* TaikøNauts: By touhourenren *et al.*. Official Discord server: <https://discord.gg/rddyYErDMe>
+    * GitHub release, on 2026, June 26
+* TaikøNauts: By touhourenren *et al.*. <https://taikonauts-docs.pages.dev>
 
 ### Reference of Projects Related to TJA or Taiko Mode
 
