@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-07-02 (UTC+8)
+* Last changed: 2026-08-17 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -4732,6 +4732,8 @@ Each note symbol has the division weight of 1. The measure delimiter symbol `,` 
 The total beat duration of the measure is divided equally by the total division weight of the notechart symbols of this measure (including the note symbols and the measure delimiter symbol `,` at the end of this measure (if any)). Each unit of division weight occupies the same amount of beats &mdash; a closed-head, open-end interval "measure division interval".
 
 The beat and time position of the note, note head, or note end for the notechart symbol (if any) is at the beginning of the first division interval for this notechart symbol. The time duration of every division interval can vary and even become negative.
+
+The beat and time position of a non-dummy bar line is at the beginning of the first division interval of the measure containing it.
 
 * In TJF format, `,` did not exist and every note symbol occupies the amount of beats of a 1⁄16th note.
 * The `,` syntax is (likely) inspired by the SM format. However, in the SM format, the minimum of measure division weight is 4, and `,` is placed on its own line and is not used before the end of the notechart definition.
