@@ -2313,7 +2313,7 @@ The decorative visual/audio effects are *unspecified*.
 For the timing of notechart object, multiple `#DELAY` commands placed at the same beat position act as a single `#DELAY` with the value of the sum of their duration, even when negative delay durations are used.
 
 * `#DELAY <(non-zero-float-seconds)delay-duration>`
-  * In TaikoJiro, in HBScroll or BMScroll mode, a delay with positive duration makes the notechart objects stops moving up to the specified duration. However, the stop normally starts at the beginning of the last measure division, offset by earlier `#DELAY`s placed at the current measure division (?), and is moved to the timing of the next `#BPMCHANGE` if the stop would end at-or-after that `#BPMCHANGE`, and to the further next `#BPMCHANGE` if still so after moving.
+  * In TaikoJiro, in HBScroll or BMScroll mode, a delay with positive duration makes the notechart objects stops moving up to the specified duration. However, the stop normally starts at the beginning of the last measure division, offset by earlier `#DELAY`s placed at the current measure division (?), and is moved to the timing of the next `#BPMCHANGE` if the stop would end at-or-after that `#BPMCHANGE`, and to the further next `#BPMCHANGE` and on if still so after moving.
   * A negative duration results in "negative delay" and can cause note objects to overlap.
     * See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior.
 * `#DELAY 0`
