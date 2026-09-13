@@ -2313,7 +2313,7 @@ The decorative visual/audio effects are *unspecified*.
 For the timing of notechart object, multiple `#DELAY` commands placed at the same beat position act as a single `#DELAY` with the value of the sum of their duration, even when negative delay durations are used.
 
 * `#DELAY <(non-zero-float-seconds)delay-duration>`
-  * In TaikoJiro, in HBScroll or BMScroll mode, a delay with positive duration makes the notechart objects stops moving up to the specified duration. However, the stop normally starts at the beginning of the last measure division, offset by earlier `#DELAY`s placed at the current measure division (?), and is moved to the timing of the next `#BPMCHANGE` if the stop would end at-or-after that `#BPMCHANGE`, and to the further next `#BPMCHANGE` and on if still so after moving.
+  * In TaikoJiro, in HBScroll or BMScroll mode, a delay with positive duration makes the notechart objects stops moving up to the specified duration. However, the stop normally starts at the beginning of the last measure division, offset by earlier `#DELAY`s placed at the current measure division (?), and is moved to the timing of the 1st next `#BPMCHANGE` if the stop would end at-or-after the 1st `#BPMCHANGE`, and is moved to the timing of the 2nd next `#BPMCHANGE` if the stop would end at-or-after the 2nd `#BPMCHANGE` after move, and so on.
   * A negative duration results in "negative delay" and can cause note objects to overlap.
     * See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior.
 * `#DELAY 0`
@@ -4829,7 +4829,7 @@ Example Combination | Musical Beat-time Diagram | Visual Beat-time Diagram
 * The visual beat duration offset of a negative delay is calculated from *unspecified* BPMs.
   * In TaikoJiro 1: The BPM the until last measure division (?) or the BPM at the time of the destination of the delay (?) is used.
   * In TJAPlayer2 for PC: The currently defined BPM is used.
-* In TaikoJiro 1: A positive delay is moved to the timing of the next `#BPMCHANGE` if its stop would end at-or-after that `#BPMCHANGE`, and to the further next `#BPMCHANGE` and on if still so after moving.
+* In TaikoJiro 1: A positive delay is moved to the timing of the 1st next `#BPMCHANGE` if its stop would end at-or-after the 1st next `#BPMCHANGE`, and is moved to the timing of the 2nd next `#BPMCHANGE` if its stop would end at-or-after the 2nd next `#BPMCHANGE` after move, and so on.
 
 ### Judgement Order
 
