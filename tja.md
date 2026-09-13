@@ -2313,7 +2313,7 @@ The decorative visual/audio effects are *unspecified*.
 For the timing of notechart object, multiple `#DELAY` commands placed at the same beat position act as a single `#DELAY` with the value of the sum of their duration, even when negative delay durations are used.
 
 * `#DELAY <(non-zero-float-seconds)delay-duration>`
-  * In TaikoJiro, in HBScroll or BMScroll mode, a delay with positive duration makes the notechart objects stops moving up to the specified duration. However, the stop starts at the beginning of the last measure division, offset by earlier `#DELAY`s placed at the current measure division.
+  * In TaikoJiro, in HBScroll or BMScroll mode, a delay with positive duration makes the notechart objects stops moving up to the specified duration. However, the stop normally starts at the beginning of the last measure division, offset by earlier `#DELAY`s placed at the current measure division (?), and is moved to the timing of the next `#BPMCHANGE` if the stop would end at-or-after that `#BPMCHANGE`, and to the further next `#BPMCHANGE` if still so after moving.
   * A negative duration results in "negative delay" and can cause note objects to overlap.
     * See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior.
 * `#DELAY 0`
@@ -4806,7 +4806,7 @@ Negative | Negative | ![Musical beat-time diagram for negative delay duration](t
   * The direction and length in *t*-axis is determined by the delay duration.
   * Negative delays behavior as if an extra beat duration (can also be negative) were inserted, which causes the musical beat duration (*b<sub>a</sub>*) and visual beat duration (*b<sub>v</sub>*) to differ. In these conditions, the definition vector has the slope determined by the current BPM on the visual beat-time diagram.
 * Zero delay duration has no effects and is a point (zero vector) on the beat-time diagram.
-* In TaikoJiro 1 and 2, a positive delay forces the played visual beat to freeze at the start of the last measure division before its `#DELAY` command (not right at `#DELAY`, except when `#DELAY` is placed at the beginning of the chart) plus offsets of earlier delays defined within the same measure division. If the played time is within multiple positive delay beat-time segment during gameplay, the first defined such segment takes effect.
+* In TaikoJiro 1 and 2, a positive delay forces the played visual beat to freeze at the start of the last measure division before its `#DELAY` command (not right at `#DELAY`, except when `#DELAY` is placed at the beginning of the chart), offset by earlier delays defined within the same measure division (?). If the played time is within multiple positive delay beat-time segment during gameplay, the first defined such segment takes effect.
 
 The visual beat duration behavior between positive and negative delay is not symmetrical, so the visual effects of positive delays and negative delays with total delay duration being zero do not cancel out. The behavior is as follows:
 
@@ -4829,7 +4829,7 @@ Example Combination | Musical Beat-time Diagram | Visual Beat-time Diagram
 * The visual beat duration offset of a negative delay is calculated from *unspecified* BPMs.
   * In TaikoJiro 1: The BPM the until last measure division (?) or the BPM at the time of the destination of the delay (?) is used.
   * In TJAPlayer2 for PC: The currently defined BPM is used.
-* In TaikoJiro 1: If a positive delay is followed by a negative delay, which is defined before but occurs after the next `#BPMCHANGE`, the positive delay is delayed and the played visual beat is forced to freeze until immediately before the `#BPMCHANGE` instead, with the freezing duration unchanged.
+* In TaikoJiro 1: A positive delay is moved to the timing of the next `#BPMCHANGE` if its stop would end at-or-after that `#BPMCHANGE`, and to the further next `#BPMCHANGE` and on if still so after moving.
 
 ### Judgement Order
 
