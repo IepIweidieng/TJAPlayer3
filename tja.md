@@ -1787,7 +1787,7 @@ Note object scrolling behaviors:
   * `real` &mdash; only the horizontal component is considered; the vertical compoment is treated as 0.
 * `roll-stretch`
   * ***Impact level***: gimmicky ★★・・・
-  * The initial value of (*Proposal* (IID)) [the `#ROLLSTRETCH` command](#proposal-iid-rollstretch), *i.e.*, whether the end of roll-type notes is a stretchable point by default.
+  * The initial value of (*Proposal* (IID)) [the `#ROLLSTRETCH` command](#proposal-iid-rollstretch), *i.e.*, whether the end of drumroll-type notes is a stretchable point by default.
   * `0` &mdash; `#ROLLSTRETCH 0`; the roll head is the only stretchable point.
   * `1` &mdash; `#ROLLSTRETCH 1`; the roll head and end are the stretchable points.
 * `scroll-i`
@@ -1859,14 +1859,14 @@ Behavior \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
 In OpenTaiko 0.6.1 (compared to OpenTaiko 0.6.0 behaviors):
 
 * `jiro1`, `jiro2`, `tmg`, `tjap3`, & `oos`:
-  * negative timing in HBScroll (beat wraps, overlapping notes)
-  * remove special priority for BPM changes and info-only `CChip` events, which would break notes between BPM events within the same millisecond
+  * handle negative time duration in HBScroll as in TaikoJiro1 (used for beat wraps and overlapping notes)
+  * simplify event priority levels to handle notes between BPM events within the same millisecond
   * support and prefer unbranched `BALLOON:` for branched charts as in TaikoJiro, when `BALLOON:` does not seem to be used as `BALLOONNOR:`
 * `tjap3` & `oos`:
-  * when `BALLOON:` is defined, `BALLOONNOR:` is undefined, and any of `BALLOONEXP`/`MAS:` is defined, `BALLOON:` is treated as `BALLOONOR:` and branched BALLOON commands are used
+  * when `BALLOON:` is defined but `BALLOONNOR:` is undefined, and any of `BALLOONEXP`/`MAS:` is defined, `BALLOON:` is treated as `BALLOONOR:` and branched BALLOON commands are used
 * `jiro1`, `jiro2`, `tmg`, & `oos`:
-  * bar lines and roll-type notes respect `#DIRECTION`
-  * roll-type notes respect the imaginary part of `#SCROLL`
+  * `#DIRECTION` affects bar lines and drumroll-type notes
+  * imaginary component of `#SCROLL` affects drumroll-type notes
 * `jiro1`, `jiro2`, & `tmg`:
   * rolls are stretchable
   * go-go time is independent in each branch.
@@ -1878,11 +1878,14 @@ In OpenTaiko 0.6.1 (compared to OpenTaiko 0.6.0 behaviors):
   * notes' and bar lines' speed and HBScroll beat determined by timing events, not definition order
   * forced NMScroll for notes past judgement, or defined later but timed before the next `#BPMCHANGE`
   * HBScroll stopping by positive `#DELAY`, at last measure division
+* `jiro1` & `jiro2`:
+  * `#DELAY` duration is rounded toward 0 to the nearest 0.001 seconds
+  * only show at most 8 bar lines
 * `jiro1`:
-  * handle time and HBScroll beat rounding arround `#BPMCHANGE`
+  * round time and HBScroll beat at `#BPMCHANGE` and end of measures containing `#BPMCHANGE`s
     (HBScroll beat rounding can still significantly differ from TaikoJiro1 in extreme cases)
   * the section right after `#BRANCHSTART` and before `#N`/`E`/`M` is treated as Normal branch (`#N`), not common branch
-  * only show at most 8 bar lines and color only 1 branched bar lines
+  * only color 1 branched bar lines
   * allow currently-breaking balloon and fuzeroll to go right
   * *Unimplemented*: positive `#DELAY` is moved to 1st next `#BPMCHANGE` when the stop ends at-or-after it, to 2nd when moved stop ends at-or-after it, and so on)
 
@@ -2456,7 +2459,7 @@ Reset by [`#RESETCOMMAND`](#note--barline-commands).
     <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/SR94XPuGoyQ" title="YouTube video player, playing &quot;【TJAPlayer3】Sense【創作譜面】[BilliumMoto × Silentroom] 《ギミック譜面》&quot;, uploaded by かれーどらい{きつね}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   * The [`#ANGLE`](#note--barline-commands) command introduced in TaikoManyGimmicks can achieve such effects without depending on the *unspecified* behavior.
 * TJAPlayer2 for.PC and TaikoManyGimmicks do not support all existent forms of `<scroll-speed-xy>`, see the explanation of compatibility issues in [Value Type](#value-type).
-* In TJAPlayer2 for.PC but not OpenTaiko (0auBSQ) v0.6.0.47, because the end of roll-type notes are judged by display position, roll-type notes in scroll speed with negative or zero real part makes notes right before it unable to receive just or late judgement.
+* In TJAPlayer2 for.PC but not OpenTaiko (0auBSQ) v0.6.0.47, because the end of drumroll-type notes are judged by display position, drumroll-type notes in scroll speed with negative or zero real part makes notes right before it unable to receive just or late judgement.
 
 ### `#BARLINESCROLL`
 
@@ -2789,7 +2792,7 @@ The arguments are whitespace-separated.
   * `<*-duration>` has the precision of `0.001` (1 ms), and any value < `0.001` is treated as `0` (positive infinity (+∞) for `#SUDDEN`).
   * The per-note effect is only applied at-or-after the time position of [the `#START` command](#start--end). (?)
   * The vertical scrolling velocity of a note is not affected during the stopping phase of the note.
-  * `#SUDDEN <appear-duration> 0` with positive `<appear-duration>` makes roll-type notes completely invisible. To make roll-type notes appear normally, use a positive `<moving-duration>`.
+  * `#SUDDEN <appear-duration> 0` with positive `<appear-duration>` makes drumroll-type notes completely invisible. To make drumroll-type notes appear normally, use a positive `<moving-duration>`.
 * In OpenTaiko (0auBSQ) (?, as for v0.6.0 b3) until fixed in v0.6.0.103:
   * The scrolling velocity of a note is completely not affected during the stopping phase of the note.
   * The note phoneticization is never hidden.
@@ -2917,8 +2920,8 @@ Similar to [the `#NOTESCHANGE` command](#noteschange), but with a different rang
       | Konga `2` | <ruby>パン<rt>Pan</rt></ruby> | <ruby>パ<rt>Pa</rt></ruby> | <ruby>パ<rt>Pa</rt></ruby> | <ruby>パッ<rt>Pa'</rt></ruby>
       | Konga `4` | <ruby>チャン<rt>Chan</rt></ruby> | <ruby>チャ<rt>Cha</rt></ruby> | <ruby>チャ<rt>Cha</rt></ruby> | <ruby>チャッ<rt>Cha'</rt></ruby>
       | End of bar | *ーっ!!* &ndash;!! | (none) | (none) | *ーっ!!* &ndash;!!
-      * End of bar: End of roll-type notes with bar (after Taiko & Konga `5`, `6`, `D`, `H`, & `I`)
-    * For roll-type notes, If the roll end is an `8`, the nearest non-yet-consumed `#SENOTECHANGE` command at-or-after the `8` takes effect, otherwise the nearest non-yet-consumed `#SENOTECHANGE` command at-or-before the non-repeated roll head takes effect.
+      * End of bar: End of drumroll-type notes with bar (after Taiko & Konga `5`, `6`, `D`, `H`, & `I`)
+    * For drumroll-type notes, If the roll end is an `8`, the nearest non-yet-consumed `#SENOTECHANGE` command at-or-after the `8` takes effect, otherwise the nearest non-yet-consumed `#SENOTECHANGE` command at-or-before the non-repeated roll head takes effect.
     * No effects on other note symbols but consumed.
   * *Proposal* (IID): If the `<note-phoneticization>` is `0` or `-1`, the automatically assigned note phoneticization is used.
 * *Proposal* (IID): `#SENOTECHANGE <(comma-separated-list:enum-int)note-phoneticization>`
@@ -4985,7 +4988,7 @@ By default, drumroll-type notes are ended at-or-before one of:
         * See <https://wikiwiki.jp/taiko-fumen/収録曲/その他/太鼓タワー3%28辛口%29>
       * However, this can be achieved alternatively by using `#DELAY`s with negative duration to place the hit-type note.
     * In OpenTaiko (0auBSQ) v0.6.0.93+: The hit-type note which ends a balloon-type note cannot be hit until the balloon-type note is broken or missed. If the balloon-type note has been broken or missed, the hit-type note ending the balloon-type note becomes possible to hit.
-  * *Proposal* (IID): If a roll-type notes would end by hit-type note symbol, but an isolated `8` occurs after the hit-type note and before any roll-type note head symbol, the roll-type note ends instead at a position earlier than the `8` by an *unspecified* duration as if the hit-type notes were irrelevant for determining the roll length.
+  * *Proposal* (IID): If a drumroll-type notes would end by hit-type note symbol, but an isolated `8` occurs after the hit-type note and before any drumroll-type note head symbol, the drumroll-type note ends instead at a position earlier than the `8` by an *unspecified* duration as if the hit-type notes were irrelevant for determining the roll length.
 * In TaikoJiro, the definition position of the last note symbol of the notechart, except when the note head is in the definition of a "branch"/path other than the *<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>* Normal "branch"/path.
 
 In the official games, drumroll-type notes are usually intentionally made to end earlier than the designed ending beat position by the amount of beats of a 1⁄48th note.
