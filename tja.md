@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-09-13 (UTC+8)
+* Last changed: 2026-09-22 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1404,7 +1404,7 @@ For each element of `<amount-of-hits>`, if the amount of hits is `0`, the per-no
 
 #### Compatibility Issues
 
-* Recommendation for charters: If the correctness of balloon count is significant, for branched charts, if any balloons are defined in non-branched sections, the branch-less `BALLOON:` should be always specified and should be specified after `BALLOONNOR:`, `BALLOONEXP:`, & `BALLOONMAS:`. [The `COMPAT:` header](#proposal-iid-compat) can be specified if necessary.
+* Recommendation for charters: If the correctness of balloon count is significant, for branched charts, if any balloons are defined in non-branched sections, the branch-less `BALLOON:` should be always specified and should be specified after `BALLOONNOR:`, `BALLOONEXP:`, & `BALLOONMAS:`. [The `COMPAT:` header](#compat) can be specified if necessary.
 * TJAPlayer2 for.PC & TJAPlayer3, but not OpenTaiko (0auBSQ) v0.6.0.73: Unlike in TaikoJiro, the scope-fineness of the BALLOON headers is per-difficulty instead of per&ndash;player-side (see [the `LEVEL:` header](#level)). Specifically, if a BALLOON header is specified multiple times in its scope, the specified hit amount values is appended to the existent values, instead of replacing all the existent values.
 * TJAPlayer2 for.PC & TJAPlayer3: The `BALLOON:` header is *erroneously* treated equivalent to the `BALLOONNOR:` header.
 * *Unspecified* iteration behavior over non-branched sections:
@@ -1693,10 +1693,11 @@ If enabled, make the *<ruby>譜<rt>fu</rt>面<rt>men</rt>分<rt>bun</rt>岐<rt>k
   * The behavior is *unspecified*.
   * In TJAPlayer2 for.PC: Ignored
 
-### *Proposal* (IID) COMPAT:
+### COMPAT:
 
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.3 \
 ***Impact level***: note ★★★★★ (maximum, depends on the compatibility mode) \
+***First seen in***: OpenTaiko 0.6.1 \
 ***Scope-fineness***: per&ndash;player-side
 
 Specify the intended **compat**ibility mode of the chart.
@@ -1711,7 +1712,7 @@ The supported set of headers & commands and allowed argument forms is not affect
 `<compat-mode>` can be one of:
 
 * `jiro1` &mdash; Reference: TaikoJiro 1 v2.92
-* `jiro2` &mdash; Reference: TaikoJiro 2 v0.98
+* *Proposed* (IID): `jiro2` &mdash; Reference: TaikoJiro 2 v0.98
 * `tmg` &mdash; Reference: TaikoManyGimmicks v0.6.6α. Proposed here as a more idealized form of `jiro1`.
 * `tjap3` &mdash; Reference: TJAPlayer3 v5.2.10
 * `oos` &mdash; OpenTaiko-OutFox standard. Reference: OpenTaiko (0auBSQ). Proposed here as a more idealized form of `tjap3`
@@ -2013,7 +2014,7 @@ Most commands are expected to be placed within the notechart definition enclosed
 
 Commands recognized in pre-#START position will be explicitly denoted.
 
-*Proposal* (IID): If a command with [command-time effects](#command-effect-time) is placed in the pre-#START position, its command-time effects apply as if these effects were [static effects](#command-effect-time).
+In OpenTaiko 0.6.1: If a command with [command-time effects](#command-effect-time) is placed in the pre-#START position, its command-time effects apply as if these effects were [static effects](#command-effect-time), which means these effects have already happened when entering the gameplay screen.
 
 *Unspecified*: The behavior when any commands are placed before any headers outside the notechart definition.
 
@@ -2502,7 +2503,7 @@ If the notes & the bar lines are rotated around their center accordingly when a 
 
 Change the scrolling **direction** of notes & bar lines.
 
-Recommendation for charters: [The `#SCROLL` command](#scroll) should be used instead. If the vertical scroll direction is significant, [the `COMPAT:` header](#proposal-iid-compat) should be specified.
+Recommendation for charters: [The `#SCROLL` command](#scroll) should be used instead. If the vertical scroll direction is significant, [the `COMPAT:` header](#compat) should be specified.
 
 *Unspecified*: Whether the notes & the bar lines are rotated around their center accordingly.
 
@@ -2550,9 +2551,9 @@ The roll's head is always a stretchable point. A non-stretchable point is either
 
 Time position is not considered a display attribute. Time position of every point is always independent and always affects the calculated HBScroll beat position.
 
-* `#ROLLSTRETCH 0` (Default in [TJAP3, OOS compatibility modes](#proposal-iid-compat))
+* `#ROLLSTRETCH 0` (Default in [TJAP3, OOS compatibility modes](#compat))
   * Stretchable points are the roll's head and where `#ROLLSTRETCH` switches from non-0 to 0. All the other parts of the roll when `#ROLLSTRETCH 0` is in effect are lasting points.
-* `#ROLLSTRETCH 1` (Default in [Jiro1, Jiro2, TMG compatibility modes](#proposal-iid-compat))
+* `#ROLLSTRETCH 1` (Default in [Jiro1, (*Proposed* (IID)) Jiro2, TMG compatibility modes](#compat))
   * Stretchable points are the roll's head and end.
 * `#ROLLSTRETCH 2`
   * Stretchable points are the roll's head, end, and repeated head symbols during the roll's definition.
@@ -2660,7 +2661,7 @@ The arguments are whitespace-separated.
 
 #### Compatibility Issues
 
-* Recommendation for charters: If the vertical scroll direction is significant, [the `COMPAT:` header](#proposal-iid-compat) should be specified.
+* Recommendation for charters: If the vertical scroll direction is significant, [the `COMPAT:` header](#compat) should be specified.
 * In TJAPlayer3, where the imaginary component of `<distance-xy>` is introduced, due to the positive vertical scroll direction being inverted as from the bottom to the top of the screen (↑), the vertical movement direction is in the same direction as the direction of the [`#SCROLL` command](#scroll), but is in the opposite direction of the `#SCROLL` command in other simulators including TaikoJiro 2 and TaikoManyGimmicks.
 * TJAPlayer2 for.PC and TaikoManyGimmicks do not support all existent forms of `<scroll-speed-xy>`, see the explanation of compatibility issues in [Value Type](#value-type).
 * In TJAPlayer2 for.PC:
@@ -4007,7 +4008,7 @@ The arguments are whitespace-separated.
 
 #### Compatibility Issues
 
-* Recommendation for charters: If the vertical scroll direction is significant, [the `COMPAT:` header](#proposal-iid-compat) should be specified.
+* Recommendation for charters: If the vertical scroll direction is significant, [the `COMPAT:` header](#compat) should be specified.
 
 ### OBJ / CAM Commands
 
@@ -4747,7 +4748,7 @@ Equation: `time_duration_of_division` (unit: seconds)
 
 #### Compatibility issues:
 
-* In TaikoJiro 1, if `#BPMCHANGE` is encountered, the time of the definition cursor is rounded to the nearest 0.001 second toward 0. See the [`timing-precision=ms-bpm`](#proposal-iid-compat) behavior.
+* In TaikoJiro 1, if `#BPMCHANGE` is encountered, the time of the definition cursor is rounded to the nearest 0.001 second toward 0. See the [`timing-precision=ms-bpm`](#compat) behavior.
 * In TaikoJiro 2, notes are placed at the end of division interval if the time duration of the division is negative.
 * In TJAP2fPC until ver.2018040600, each measure with no note symbols has 0 beat duration and 0 time duration.
 * In TJAP2fPC since ver.2018040600, TJAPlayer3, but not OpenTaiko (0auBSQ) since v0.6.0.12, each `,` has the division weight of 1 at the beginning of unindented non-command line, and has the division weight of 0 (0 beat duration and 0 time duration) at the beginning of indented non-command line, regardless whether there are any note symbols in this measure.
