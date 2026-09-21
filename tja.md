@@ -1854,6 +1854,38 @@ Behavior \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
 `angle-note` | N/A | `none` (?) | `angle-mirror` | `angle-mirror` | `none` | `none`
 `angle-roll-bar` | N/A | `angle-mirror` | `angle-mirror` | `angle-mirror` | N/A <br /> (`angle-mirror`) | `angle` <br /> (`angle-mirror`)
 
+#### Implemented Compatibility Behaviors
+
+In OpenTaiko 0.6.1 (compared to OpenTaiko 0.6.0 behaviors):
+
+* `jiro1`, `jiro2`, `tmg`, `tjap3`, & `oos`:
+  * negative timing in HBScroll (beat wraps, overlapping notes)
+  * remove special priority for BPM changes and info-only `CChip` events, which would break notes between BPM events within the same millisecond
+  * support and prefer unbranched `BALLOON:` for branched charts as in TaikoJiro, when `BALLOON:` does not seem to be used as `BALLOONNOR:`
+* `tjap3` & `oos`:
+  * when `BALLOON:` is defined, `BALLOONNOR:` is undefined, and any of `BALLOONEXP`/`MAS:` is defined, `BALLOON:` is treated as `BALLOONOR:` and branched BALLOON commands are used
+* `jiro1`, `jiro2`, `tmg`, & `oos`:
+  * bar lines and roll-type notes respect `#DIRECTION`
+  * roll-type notes respect the imaginary part of `#SCROLL`
+* `jiro1`, `jiro2`, & `tmg`:
+  * rolls are stretchable
+  * go-go time is independent in each branch.
+  * the definition cursor moves to the branch with the most measures at `#BRANCHEND`, when parsing TJA
+  * keep sub-ms precision of `#SUDDEN` move offset
+  * `#SUDDEN` also affects notes' vertical position
+  * imaginary part of `#SCROLL` makes notes go downward (↓) instead of upward (↑) (assume positive BPM and measure length)
+* `jiro1` & `tmg`:
+  * notes' and bar lines' speed and HBScroll beat determined by timing events, not definition order
+  * forced NMScroll for notes past judgement, or defined later but timed before the next `#BPMCHANGE`
+  * HBScroll stopping by positive `#DELAY`, at last measure division
+* `jiro1`:
+  * handle time and HBScroll beat rounding arround `#BPMCHANGE`
+    (HBScroll beat rounding can still significantly differ from TaikoJiro1 in extreme cases)
+  * the section right after `#BRANCHSTART` and before `#N`/`E`/`M` is treated as Normal branch (`#N`), not common branch
+  * only show at most 8 bar lines and color only 1 branched bar lines
+  * allow currently-breaking balloon and fuzeroll to go right
+  * *Unimplemented*: positive `#DELAY` is moved to 1st next `#BPMCHANGE` when the stop ends at-or-after it, to 2nd when moved stop ends at-or-after it, and so on)
+
 ### *Proposal* (Komi) SPEC:
 
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-mandatory; 1.0-compatible) \
