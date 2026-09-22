@@ -1880,14 +1880,14 @@ In OpenTaiko 0.6.1 (compared to OpenTaiko 0.6.0 behaviors):
   * HBScroll stopping by positive `#DELAY`, at last measure division
 * `jiro1` & `jiro2`:
   * `#DELAY` duration is rounded toward 0 to the nearest 0.001 seconds
-  * only show at most 8 bar lines
+  * only allow at most 8 bar lines (including hidden bar lines) to display
 * `jiro1`:
   * round time and HBScroll beat at `#BPMCHANGE` and end of measures containing `#BPMCHANGE`s
     (HBScroll beat rounding can still significantly differ from TaikoJiro1 in extreme cases)
   * the section right after `#BRANCHSTART` and before `#N`/`E`/`M` is treated as Normal branch (`#N`), not common branch
-  * only color 1 branched bar lines
+  * only apply branch color to the first bar line allowed to display (including hidden bar lines) if the bar line is branched
   * allow currently-breaking balloon and fuzeroll to go right
-  * *Unimplemented*: positive `#DELAY` is moved to 1st next `#BPMCHANGE` when the stop ends at-or-after it, to 2nd when moved stop ends at-or-after it, and so on)
+  * *Unimplemented*: positive `#DELAY` is moved to 1st next `#BPMCHANGE` when the stop ends at-or-after it, to 2nd when the moved stop ends at-or-after it, and so on
 
 ### *Proposal* (Komi) SPEC:
 
