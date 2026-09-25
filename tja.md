@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-09-22 (UTC+8)
+* Last changed: 2026-09-25 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1792,7 +1792,7 @@ Note object scrolling behaviors:
   * `1` &mdash; `#ROLLSTRETCH 1`; the roll head and end are the stretchable points.
 * `scroll-i`
   * ***Impact level***: gimmicky ★★・・・
-  * The vertical scroll direction specified by the imaginary component of `<complex-ri-float-xy>` in [`#SCROLL <complex-ri-float-xy>`](#scroll).
+  * The vertical scroll direction specified by the imaginary component of the scrolling velocity, affected by `<complex-ri-float-xy>` in [`#SCROLL <complex-ri-float-xy>`](#scroll) and [`#HISPEED <complex-ri-float-xy>`](#hispeed).
   * `down` &mdash; from the top to the bottom of the screen (↓).
   * `up` &mdash; from the bottom to the top of the screen (↑).
 * `sudden-directions`
@@ -1843,7 +1843,7 @@ Behavior \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
 `timing-precision` | ? | `ms-bpm` | `ms` (?) | `any` (?) | `ms` | `ms`
 `timing-effect-order` | `def` | `time` | `time` | `time` (?) | `flat-time-or-def` | `flat-time-or-def`
 `hbscroll-past` | N/A | `nmscroll` | `hbscroll` | `nmscroll` | `hbscroll` | `hbscroll`
-`hbscroll-delay` | N/A | `freeze` | `freeze` | `freeze` (?) | `offset` | `offset`
+`hbscroll-delay` | N/A | `freeze` | `freeze` | `offset` | `offset` | `offset`
 `roll-pos` | N/A | N/A <br /> (`complex`) | `complex` | `complex` | `real` | `complex`
 `roll-stretch` | `0` | `1` | `1` | `1` | `0` | `0`
 `scroll-i` | N/A | N/A <br /> (`down`) | `down` | `down` | `up` | `up`
@@ -1878,6 +1878,7 @@ In OpenTaiko 0.6.1 (compared to OpenTaiko 0.6.0 behaviors):
   * notes' and bar lines' speed and HBScroll beat determined by timing events, not definition order
   * forced NMScroll for notes past judgement, or defined later but timed before the next `#BPMCHANGE`
   * HBScroll stopping by positive `#DELAY`, at last measure division
+  * A roll's bar is automatically hidden, when the roll past judgement and the body's both tips exited the screen.
 * `jiro1` & `jiro2`:
   * `#DELAY` duration is rounded toward 0 to the nearest 0.001 seconds
   * only allow at most 8 bar lines (including hidden bar lines) to display
@@ -1888,6 +1889,7 @@ In OpenTaiko 0.6.1 (compared to OpenTaiko 0.6.0 behaviors):
   * only apply branch color to the first bar line allowed to display (including hidden bar lines) if the bar line is branched
   * allow currently-breaking balloon and fuzeroll to go right
   * *Unimplemented*: positive `#DELAY` is moved to 1st next `#BPMCHANGE` when the stop ends at-or-after it, to 2nd when the moved stop ends at-or-after it, and so on
+  * A roll's bar is automatically hidden using the screen obscuring test when the roll is "flipped" (roll end is ahead of roll head, related to roll head's velocity).
 
 ### *Proposal* (Komi) SPEC:
 
@@ -2164,7 +2166,7 @@ Primary Speed Factor | `bpm_at_note` | `bpm_visual` <br /> (0 during effective p
 Constant Factor on BPM Changes | Notes' and bar lines' individual drawn velocity | Ratios of notes' and bar lines' drawn distance to their beat distance | Ratios of drawn distances between Notes' and bar lines'
 Default scrolling changes of [`#BPMCHANGE`](#bpmchange) command | Set the per-note or per–bar-line base BPM of at-or-after notes and bar lines | Suddenly change the apparent base BPM of all notes & all bar lines | (No changes)
 Default scrolling changes of [`#DELAY`](#delay) command | (No changes) | Pause the scrolling if positive and effective; <br> (no changes) if negative | (No changes)
-Mode-invariant velocity-changing command | [`#SCROLL <value>`](#scroll) | [`#HISPEED(<value>)`](#hispeed) (TMG format) | (*Proposal* (IID)) [`#SPEED <value>; *:*; <changing-duration>`](#proposal-iid-speed)
+Mode-invariant velocity-changing command | [`#SCROLL <value>`](#scroll) | [`#HISPEED <value>`](#hispeed) | (*Proposal* (IID)) [`#SPEED <value>; *:*; <changing-duration>`](#proposal-iid-speed)
 Analogous Timing Segment in SSC Format | (None) | `#SCROLLS:;` | `#SPEEDS:;`
 
 In OutFox, the Taiko-like scrolling mode can be achieved by using CAMod (AMod/"Average BPM Scroll Mode" with constant per-note or per–bar-line scrolling speed) with the BPM parameter set to 4 × the average BPM of the notechart.
@@ -2483,22 +2485,28 @@ Change the **scroll**ing speed of only **bar** **line**s, relative to the normal
 [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
 ***Impact level***: gimmicky ★★・・・ \
 ***First seen in***: TaikoManyGimmicks v0.6.1α \
+***Supported by***: OpenTaiko 0.6.1 \
 ***Scope***: branch \
 ***Scope-fineness***: at-or-after \
 ***Effect time***: static <sub>objects' distance</sub> + command-time <sub>objects' velocity</sub> \
 ***Non-static effect scope***: all ([BMS scrolling modes](#bmscroll--hbscroll--nmscroll)); (none) (otherwise) \
 ***Effect target***: notes, bar lines \
-***Effect branches***: all (?)
+***Effect branches***: all (?); current (OpenTaiko 0.6.1)
 
-Suddenly change the scrolling speed (**HiSpeed** / **hi**gh-**speed**) of notes & bar lines in BMS scrolling modes, as if the BPM were changed accordingly.
+Suddenly change the scrolling speed (**HiSpeed** / **hi**gh-**speed**) of notes & bar lines in [BMS scrolling modes](#nmscroll--bmscroll--hbscroll), as if the BPM were changed accordingly.
+
+The `#HISPEED` command has no effects on notes and bar lines in [the normal scrolling mode](#nmscroll--bmscroll--hbscroll) and acts as if `#HISPEED 1` were used for such notes and bar lines.
 
 Reset by [`#RESETCOMMAND`](#note--barline-commands).
 
 * `#HISPEED(<(float)scroll-speed-x>)`
   * Suddenly change the scrolling speed as if the BPM were changed into `<(float)scroll-speed-x>` × BPM.
-* *Proposal* (IID): `#HISPEED <(complex-ri-float)base-speed-xy>`
+* `#HISPEED <(complex-ri-float)base-speed-xy>`
+  ***Supported by***: OpenTaiko 0.6.1
   * Suddenly change the scrolling speed as if the BPM were changed into `<(complex-ri-float)base-speed-xy>` × BPM.
+  * A note's or bar line's velocity and direction is notes' scrolling speed (`#SCROLL`) × hi-speed (`#HISPEED`), relative to the normal scrolling speed.
   * Visualization: <https://www.desmos.com/calculator/lx6skvqfjm>
+* Initial value: `#HISPEED 1`
 
 ### *Proposal* (IID): #SPEED
 
