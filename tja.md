@@ -2460,16 +2460,16 @@ Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby
 ***Effect target***: notes, bar lines \
 ***Effect branches***: *Simulator-dependent* (with *Simulator-dependent* behaviors)
 
-Adjust (**delay**) the time position of all notechart object (including commands) at-or-after the `#DELAY` command by the specified time duration.
+Adjust (**delay**) the time position by the specified time duration for all notechart object (including commands) after the last `#DELAY` command for the current measure division.
 
 The decorative visual/audio effects are *simulator-dependent*.
 
-For the time of notechart objects, multiple `#DELAY` commands placed at the same beat position act as a single `#DELAY` with the value of the sum of their duration, even when negative delay durations are used.
+For the time of notechart objects after multiple `#DELAY` commands placed at the same beat position, these `#DELAY` commands act as a single `#DELAY` with the value of the sum of their duration, even when negative delay durations are used.
 
 #### Argument Forms
 
 * `#DELAY <(non-zero-float-seconds)delay-duration>`
-  * In TaikoJiro, in HBScroll or BMScroll mode, a delay with positive duration makes the notechart objects stops moving up to the specified duration. The stop normally starts at where `#DELAY` is inserted into the parsed chart, but is moved to the time of the 1st next `#BPMCHANGE` if the stop would end at-or-after the 1st `#BPMCHANGE`, and is moved to the time of the 2nd next `#BPMCHANGE` if the stop would end at-or-after the 2nd `#BPMCHANGE` after move, and so on.
+  * In TaikoJiro, in HBScroll or BMScroll mode, a delay with positive duration makes the notechart objects stops moving up to the specified duration. The stop normally starts at where `#DELAY` is inserted into the parsed chart (see Usage Notices below), but is moved to the time of the 1st next `#BPMCHANGE` if the stop would end at-or-after the 1st `#BPMCHANGE`, and is moved to the time of the 2nd next `#BPMCHANGE` if the stop would end at-or-after the 2nd `#BPMCHANGE` after move, and so on.
   * A negative duration results in "negative delay" and can cause note objects to overlap.
     * See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior.
 * `#DELAY 0`
@@ -2496,7 +2496,7 @@ Consider the following chart:
 #END
 ```
 
-* In TaikoJiro 1 and 2, `#DELAY` is inserted immediately after the start of the last measure division:
+* In TaikoJiro 1 and 2, `#DELAY` is inserted immediately after the start of the last measure division, or the start of the chart if `#DELAY` is placed at the beginning of the chart:
   * | Event | The note <br> `1` | 1st <br> `#DELAY` | 2nd <br> `#DELAY` | The duration <br> for `1` | 1st <br> `#JPOSSCROLL` | 2nd <br> `#JPOSSCROLL` | 3rd <br> `#JPOSSCROLL` | The note <br> `2` | The duration <br> for `2` | `#END`
     | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
     | Start time (sec) | 0 | 0 | 1 | 3 | 7 | 7 | 7 | 7 | 7 | 11
