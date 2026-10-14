@@ -1849,7 +1849,7 @@ Timing behaviors:
   * ***Impact level***: timing ★★★★・
   * The time precision of [measure divisions](#the-measure-delimiter-symbol-and-timing), [`#DELAY`](#delay), and commands.
   * `any` &mdash; the precision is only limited by the implementation.
-  * `ms` &mdash; the definition cursor has the same precision as `any`, but the resulting time for each measure division has the precision is 0.001 seconds, rounded toward 0.
+  * `ms` &mdash; the [definition cursor](#definition-cursor-and-played-time) has the same precision as `any`, but the resulting time for each measure division has the precision is 0.001 seconds, rounded toward 0.
   * `ms-bpm` &mdash; the definition cursor has the same precision as `any`, but the elapsed time between elapse points is rounded to 0.001 second (toward 0). The elapsed point is one of chart start, the `#BPMCHANGE` command, and the end of a measure with `#BPMCHANGE` defined. The resulting time for each measure division and the time duration of `#DELAY` has the precision of 0.001 seconds, rounded toward 0. Notes' beat position is also aligned to pixels when a `#BPMCHANGE` comment is encountered (?).
     * Reference: K. *太鼓さん次郎 Ver.2.92 の内部仕様雑記*. ("Miscellaneous notes on the internal behaviors of TaikoJiro Ver.2.92"). <https://note.com/lime_5137/n/n672c0a41495d>
 * `timing-effect-order`
@@ -1869,7 +1869,7 @@ HBScroll behaviors:
   * `nmscroll` &mdash; when a such object reaches the judgement timing, these objects and earlier defined such objects in the same branch are positioned as if their scroll mode had been changed to Normal Taiko scroll for the remaining gameplay. (and with [`#SCROLL 1`](#scroll) enforced for BMScroll mode objects)
 * `hbscroll-delay`
   * ***Impact level***: gimmicky ★★・・・
-  * How each positive [`#DELAY`](#delay) pauses notes and bar lines in HBScroll and BMScroll from scrolling during its effective duration. A negative `#DELAY` always offsets both the time and the beat of the definition cursor regardless of this flag.
+  * How each positive [`#DELAY`](#delay) pauses notes and bar lines in HBScroll and BMScroll from scrolling during its effective duration. A negative `#DELAY` always offsets both the time and the beat of the [definition cursor](#definition-cursor-and-played-time) regardless of this flag.
   * `offset` &mdash; does not pause; offsets both the time and the beat of the definition cursor.
   * `pause` &mdash; pauses while no beat progress happens; offsets only the time of the definition cursor.
   * `freeze` &mdash; if the `#DELAY` is in the current branch, pauses from the activation time of the `#DELAY` until the specified duration after the activation time; offsets only the time of the definition cursor.
@@ -1966,7 +1966,7 @@ In OpenTaiko 0.6.1 (compared to OpenTaiko 0.6.0 behaviors):
 * `jiro1`, `jiro2`, & `tmg`:
   * rolls are stretchable
   * go-go time is independent in each branch.
-  * the definition cursor moves to the branch with the most measures at `#BRANCHEND`, when parsing TJA
+  * the [definition cursor](#definition-cursor-and-played-time) moves to the branch with the most measures at `#BRANCHEND`, when parsing TJA
   * keep sub-ms precision of `#SUDDEN` move offset
   * `#SUDDEN` also affects notes' vertical position
   * imaginary part of `#SCROLL` makes notes go downward (↓) instead of upward (↑) (assume positive BPM and measure length)
@@ -2502,12 +2502,12 @@ Consider the following chart:
     | Start time (sec) | 0 | 0 | 1 | 3 | 7 | 7 | 7 | 7 | 7 | 11
     | Occupied <br> Duration (sec) | 0 | 1 | 2 | 4 | 0 | 0 | 0 | 0 | 4 | 0
   * The notes and bar lines in HBScroll stop scrolling from 0 second to 3 second.
-* In TJAPlayer2 for PC, `#DELAY` is inserted directly at the definition cursor:
+* In TJAPlayer2 for PC, `#DELAY` is inserted directly at the [definition cursor](#definition-cursor-and-played-time):
   * | Event | The note <br> `1` | The duration <br> for `1` | 1st <br> `#JPOSSCROLL` | 1st <br> `#DELAY` | 2nd <br> `#JPOSSCROLL` | 2nd <br> `#DELAY` | 3rd <br> `#JPOSSCROLL` | The note <br> `2` | The duration <br> for `2` | `#END`
     | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
     | Start time (sec) | 0 | 0 | 4 | 4 | 5 | 5 | 7 | 7 | 7 | 11
     | Occupied <br> Duration (sec) | 0 | 4 | 0 | 1 | 0 | 2 | 0 | 0 | 4 | 0
-  * Notes and bar lines in HBScroll do not stop scrolling, but the `#DELAY`s are active from 4 second to 7 second.
+  * In TJAPlayer2 for PC (until Ver2018052000) and TJAPlayer3, notes and bar lines in HBScroll do not stop scrolling, but the `#DELAY`s are active from 4 second to 7 second.
 
 #### Compatibility Issues
 
@@ -5035,12 +5035,22 @@ Equation: `time_duration_of_division` (unit: seconds)
 
 #### Compatibility issues:
 
-* In TaikoJiro 1, if `#BPMCHANGE` is encountered, the time of the definition cursor is rounded to the nearest 0.001 second toward 0. See the [`timing-precision=ms-bpm`](#compat) behavior.
+* In TaikoJiro 1, if `#BPMCHANGE` is encountered, the time of the [definition cursor](#definition-cursor-and-played-time) is rounded to the nearest 0.001 second toward 0. See the [`timing-precision=ms-bpm`](#compat) behavior.
 * In TaikoJiro 2, notes are placed at the end of division interval if the time duration of the division is negative.
 * In TJAP2fPC until ver.2018040600, each measure with no note symbols has 0 beat duration and 0 time duration.
 * In TJAP2fPC since ver.2018040600, TJAPlayer3, but not OpenTaiko (0auBSQ) since v0.6.0.12, each `,` has the division weight of 1 at the beginning of unindented non-command line, and has the division weight of 0 (0 beat duration and 0 time duration) at the beginning of indented non-command line, regardless whether there are any note symbols in this measure.
 
 Commands with at-or-after scope-fineness have their effects fired when all the measure division intervals of the nearest preceding notechart symbol ends. If the measure delimiter symbol `,` has the division weight of 0, placing such commands before or after this `,` symbol has the same effects.
+
+### Definition Cursor and Played Time
+
+During parsing a TJA chart, the notechart objects can be thought as being inserted at the timing positions (includes time, beat, HBScroll beat) at or relative to the definition cursor, which moves as the chart is being parsed:
+
+* The definition cursor advances for each measure division and delay encountered during parsing the chart.
+  * The time position of the definition cursor can advance backward due to the sign of timing commands.
+* The definition cursor jumps for parsing certain commands (for example, [`#N`/`#E`/`#M`](#n--e--m), [`#BRANCHEND`](#branchstart--branchend), & [`#NEXTSONG`](#nextsong)).
+
+During gameplay, the played timing positions except time (includes beat and HBScroll beat) are queried by the played time position. The played time position advances regardless of how the definition cursor advances during parsing the chart.
 
 ### Sign of Timing Commands
 
@@ -5110,7 +5120,7 @@ Example Combination | Musical Beat-time Diagram | Visual Beat-time Diagram
 * In TaikoJiro 1, notes but not bar lines which are made earlier than [the `#START` command](#start--end) has their time position and beat position fixed to the `#START` command.
 * In TaikoJiro 1, if the chart ends with the measure division interval having negative time duration, the chart teleports to the beat position of the `#START` command, and then beat progresses as if `#MEASURE -4/4` were active. The gameplay ends if [the `WAVE:` header](#wave) is not specified or the specified file is missing or unsupported.
 * In TaikoJiro 2, if notes and bar lines are defined in a section which overlaps with other sections in time, the notes' and bar lines' time position is also affected by the latest defined section.
-* In TaikoJiro 2, if the time position of the definition cursor is rewound by measure division intervals with negative time durations, the next measure division segments (consecutive measure division interval without timing changes in middle) until the next measure and the bar lines and notes on it are shifted, so that the beginning of the next measure division segment starts at the end of the internal measure division with the maximum time position ever reached during definition. The internal time position of the definition cursor is unaffected by the shift and the next measure onward are not affected.
+* In TaikoJiro 2, if the time position of the [definition cursor](#definition-cursor-and-played-time) is rewound by measure division intervals with negative time durations, the next measure division segments (consecutive measure division interval without timing changes in middle) until the next measure and the bar lines and notes on it are shifted, so that the beginning of the next measure division segment starts at the end of the internal measure division with the maximum time position ever reached during definition. The internal time position of the definition cursor is unaffected by the shift and the next measure onward are not affected.
   * To work around this issue, some gimmick charts targeting TaikoJiro 2 split the measure at each negative delay into two, and place the negative delay right before the measure delimiter `,` of the first half measure.
 * In TJAPlayer2 for PC, beat duration ÷ BPM being negative causes incorrect lookup of the played beat position and might make notes not aligned to the judgement mark on their judgement time in [HBScroll or BMScroll mode](#bmscroll--hbscroll--nmscroll).
 * In TJAPlayer2 for PC (until Ver2018052000) and TJAPlayer3, a positive delay does not stop the visual beat position from progressing and behaviors as a negative delay but with positive duration.
