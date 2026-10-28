@@ -35,7 +35,7 @@ Excluding `.bin` and the compressed formats, all the formats listed below are te
 
 Filename/extension | Full Name | Content | Supported by | First Release | Specification
 --- | --- | --- | --- | --- | ---
-`.bin` | **Bin**ary (*<ruby>譜<rt>Fu</rt>面<rt>men</rt></ruby>* Notechart File Format) | Notechart metadata + definition (binary file) | Official games, taiko-web (plugin "Fumen File Format") | 2000 (official local test) <br /> 2001-02-21 (AC1) | Proprietary format, not explained in this article.
+`.bin` | **Bin**ary (*<ruby>譜<rt>Fu</rt>面<rt>men</rt></ruby>* Notechart File Format) | Notechart metadata + definition (binary file) | Original games, taiko-web (plugin "Fumen File Format") | 2000 (original game's official local test) <br /> 2001-02-21 (AC1) | Proprietary format, not explained in this article.
 `.tjf` | *<ruby>**太**<rt>**T**ai</rt>鼓<rt>ko</rt>の<rt>no</rt>**達**<rt>**T**atsu</rt>**人**<rt>**j**in</rt>**譜**<rt>**f**u</rt>面<rt>men</rt></ruby>* <br /> **T**aiko no **T**atsu**j**in Notechart (?) | Notechart metadata + definition | Taikosan, TaikoJiro 1 | 2004-05-08 (TJF EDIT) <br /> 2006-03-30 (Taikosan nicover) <br /> 2007-07-06 (Taikosan's public release) <br /> 2009-01-16 (Taikosan's public re-release with TJF EDIT's public release) | [Re-released Taikosan's `Readme.txt`](taiko-sim-readmes/utf-8/Readme-taikosan-plusedit.txt)
 `data.txt` | owatatsujin Notechart **Data** (?) | Notechart set metadata + definition | owatatsujin | 2007-03-04 (owatatsujin v1.31; first release) | See <https://web.archive.org/web/20150527222157/http://www.geocities.jp/syun_k765/flash/owatatsu/seqhowto.html> <br /> Based on the notechart format of CIRRING-S by D4U: <http://noia.g3.xrea.com/parastoic/crs/maker.html> <br /> and CarmBeat by D4U <http://noia.g3.xrea.com/parastoic/carm/maker.html> <br /> Similar to the Simai notation, which is also based on D4U's format: <https://w.atwiki.jp/simai/pages/1003.html>
 `.osu` | **osu**! Beatmap | Notechart metadata + definition | osu!, taiko-web, OutFox (Taiko mode planned), TaikøNauts, OpenTaiko (0auBSQ) v0.6.1 | 2007-07-01 (UTC+?) <br /> 2008-05 (taiko mode) <br /> On-or-before 2008-05-23 (first known mentioning) | See <https://osu.ppy.sh/wiki/en/Client/File_formats>. <br/> An `.osu` file with std or Taiko mode can be played as a Taiko chart.
@@ -103,7 +103,7 @@ The etymology of both `.tjf` & `.tja` were unexplained.
 * `tj` originally did ***NOT*** refer to *<ruby>**太**<rt>**T**ai</rt>鼓<rt>ko</rt>さ<rt>sa</rt>ん<rt>n</rt>**次**<rt>**J**i</rt>郎<rt>rou</rt></ruby>* **T**aiko**J**iro since it has already appeared in `.tjf`, which is already used in *<ruby>太<rt>Tai</rt>鼓<rt>ko</rt>さ<rt>sa</rt>ん<rt>n</rt>太<rt>Ta</rt>郎<rt>rou</rt></ruby>* Taikosan.
 * Taikosan is not the original name when the extension `.tjf` was determined. Taikosan was named *<ruby>日<rt>Nichi</rt>曜<rt>you</rt>太<rt>Tai</rt>鼓<rt>ko</rt></ruby>* "Sun(day) Taiko" when TJF EDIT was last updated (2004-05-08).
 * In TJF EDIT, `.tjf` is referred as "*<ruby>**太**<rt>**T**ai</rt>鼓<rt>ko</rt>**譜**<rt>**F**u</rt>面<rt>men</rt></ruby>*" "Taiko Notechart" in the "*<ruby>開<rt>A</rt>く<rt>ku</rt></ruby>*" "Open" dialog box and as "*<ruby>日<rt>Nichi</rt>曜<rt>you</rt>**太**<rt>**T**ai</rt>鼓<rt>ko</rt>**譜**<rt>**F**u</rt>面<rt>men</rt>ファ<rt>Fa</rt>イ<rt>i</rt>ル<rt>ru</rt></ruby>*" "Sun(day) Taiko Notechart File" in the "*<ruby>保<rt>Ho</rt>存<rt>zon</rt></ruby>*" "Save" dialog box.
-* `tj` could refer to *<ruby>**太**<rt>**T**ai</rt>鼓<rt>ko</rt>の<rt>no</rt>**達**<rt>**T**atsu</rt>**人**<rt>**j**in</rt></ruby>*, the official game series. `.ttf` as "*<ruby>**太**<rt>**T**ai</rt>鼓<rt>ko</rt>の<rt>no</rt>**達**<rt>**T**atsu</rt>人<rt>jin</rt>**譜**<rt>**F**u</rt>面<rt>men</rt></ruby>*" might be one of the intended file extension but was not usable because it had already been used for TrueType font files. `.tkf` as "*<ruby>**太**<rt>**T**ai</rt>**鼓**<rt>**k**o</rt>**譜**<rt>**F**u</rt>面<rt>men</rt></ruby>*" might be another possibility but not adapted for unknown reason.
+* `tj` could refer to *<ruby>**太**<rt>**T**ai</rt>鼓<rt>ko</rt>の<rt>no</rt>**達**<rt>**T**atsu</rt>**人**<rt>**j**in</rt></ruby>*, the original game series. `.ttf` as "*<ruby>**太**<rt>**T**ai</rt>鼓<rt>ko</rt>の<rt>no</rt>**達**<rt>**T**atsu</rt>人<rt>jin</rt>**譜**<rt>**F**u</rt>面<rt>men</rt></ruby>*" might be one of the intended file extension but was not usable because it had already been used for TrueType font files. `.tkf` as "*<ruby>**太**<rt>**T**ai</rt>**鼓**<rt>**k**o</rt>**譜**<rt>**F**u</rt>面<rt>men</rt></ruby>*" might be another possibility but not adapted for unknown reason.
 * `a` could just be an alphabetic number, or could mean "**a**dvanced" (refers to *<ruby>次<rt>Ji</rt></ruby>* "next"), "**a**dd" (refers to *<ruby>＋<rt>**a**dd</rt></ruby>* "plus"), *etc*. A possibility referenced later within TaikoJiro is "**A**NOTHER" (also refers to *<ruby>次<rt>Ji</rt></ruby>* "next").
   * TaikoJiro has a hidden gameplay modifier "G.Judge-A" (**G**AMBOL **Judge** **A**NOTHER), which is enabled by holding <kbd>⇧ Shift</kbd> and then pressing <kbd>G</kbd>, <kbd>J</kbd>, & <kbd>A</kbd>. This is a reference to the *ANOTHER* difficulty of the song *GAMBOL* in *beatmania IIDX 11 IIDX RED CS* (released 2006-05-18) and the hidden enabling method for the judgement window modifier replicating this difficulty of the song in *beatmania IIDX 15 DJ TROOPERS CS* (released 2008-12-18, later than the initial release of TaikoJiro), both games developed by Konami. See <https://remywiki.com/GAMBOL>
 
@@ -113,7 +113,7 @@ Thus, `.tja` possibly means "*<ruby>**太**<rt>**T**ai</rt>鼓<rt>ko</rt>の<rt>
 
 The honorific title is omitted.
 
-Property formats from the official games are not listed here.
+Property formats from the original games are not listed here.
 
 * TJF is likely inspired by the DWI (Dance With Intensity) or the earlier MSD format. Apart from several syntax similarities mentioned in this article, VIL (creator of Taikosan, TJF EDIT, and TJF format) mentioned `GAP` (a chart offset header in the DWI and earlier MSD formats) in [Taikosan's `Readme.txt`](taiko-sim-readmes/utf-8/Readme-taikosan-plusedit.txt):
 
@@ -592,9 +592,9 @@ The display details are *simulator-dependent*.
 
 Specify whether the corresponding song entry is displayed, regarding the *<ruby>裏<rt>ura</rt>譜<rt>fu</rt>面<rt>men</rt>状<rt>jou</rt>態<rt>tai</rt></ruby>* "inner notechart state/mode" ("*<ruby>裏 <rt>ura</rt></ruby>* inner or *<ruby>表 <rt>omote</rt></ruby>* outer **side**") of the song selection screen.
 
-This allows the chart creators to specify the inner chart of every difficulty together or with different audio as a separate song entry, as in official AC11&ndash;AC14.
+This allows the chart creators to specify the inner chart of every difficulty together or with different audio as a separate song entry, as in original AC11&ndash;AC14.
 
-For specifying the inner chart of solely the Oni difficulty with the same audio as in official AC15 and later official games (except only *<ruby>ハ<rt>Ha</rt>レ<rt>re</rt>晴<rt>Ha</rt>レ<rt>re</rt>ユ<rt>Yu</rt>カ<rt>ka</rt>イ<rt>i</rt></ruby>* inner Hard in AC15), [`COURSE:Edit`](#course) is commonly used instead.
+For specifying the inner chart of solely the Oni difficulty with the same audio as in original AC15 and later original games (except only *<ruby>ハ<rt>Ha</rt>レ<rt>re</rt>晴<rt>Ha</rt>レ<rt>re</rt>ユ<rt>Yu</rt>カ<rt>ka</rt>イ<rt>i</rt></ruby>* inner Hard in AC15), [`COURSE:Edit`](#course) is commonly used instead.
 
 * Reference: <https://wikiwiki.jp/taiko-fumen/%E5%8F%8E%E9%8C%B2%E6%9B%B2/%E3%82%80%E3%81%9A%E3%81%8B%E3%81%97%E3%81%84/%E3%83%8F%E3%83%AC%E6%99%B4%E3%83%AC%E3%83%A6%E3%82%AB%E3%82%A4#another>
 
@@ -604,7 +604,7 @@ For specifying the inner chart of solely the Oni difficulty with the same audio 
 
 *Simulator-dependent*: Whether and how inner mode is implemented.
 
-* TaikoJiro 1 and 2 use the official AC11&ndash;AC14 inner-notechart&ndash;unlocking command for toggling inner notechart mode, which is hitting the drum rims on left and right sides alternatively for a total of 20 hits.
+* TaikoJiro 1 and 2 use the original AC11&ndash;AC14 inner-notechart&ndash;unlocking command for toggling inner notechart mode, which is hitting the drum rims on left and right sides alternatively for a total of 20 hits.
 
 *Proposal* (IID): Make the scope per&ndash;player-side.
 
@@ -1006,7 +1006,7 @@ Available values in officially-supported interface skins of OpenTaiko (0auBSQ):
 
 Specify the dedicated *<ruby>**段**<rt>**Dan**'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" skin (*<ruby>コ<rt>ko</rt>ス<rt>su</rt>メ<rt>me</rt>**チッ**<rt>**chik**</rt>**ク**<rt>**ku**</rt></ruby>* "cosme**tic**" (?)) to use in the certification challenge selection screen.
 
-*<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games.
+*<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the original games.
 
 Used in conjunction with [`COURSE:Dan`](#course).
 
@@ -1037,7 +1037,7 @@ Used in conjunction with [`COURSE:Dan`](#course).
 
 Specify the **color** filter to apply to the *<ruby>**段**<rt>**Dan**'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" skin (*<ruby>コ<rt>ko</rt>ス<rt>su</rt>メ<rt>me</rt>**チッ**<rt>**chik**</rt>**ク**<rt>**ku**</rt></ruby>* "cosme**tic**" (?)) objects in the certification challenge selection screen.
 
-*<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games.
+*<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the original games.
 
 Used in conjunction with [`COURSE:Dan`](#course).
 
@@ -1279,7 +1279,7 @@ Specify the *<ruby>コー<rt>koo</rt>ス<rt>su</rt></ruby> "course"/<ruby>む<rt
 
 Not to be confused with the difficulty star specified by [the `LEVEL:` header](#level).
 
-"Course" in other rhythm games usually refers to playing multiple songs in a row. In early arcade console versions of the official game series, the player could only play a fixed difficulty during the *<ruby>ク<rt>ku</rt>レ<rt>re</rt></ruby>(<ruby>ジッ<rt>jet</rt>ト<rt>to</rt></ruby>)* "credit"/game session. "`<difficulty>`<ruby>コー<rt>koo</rt>ス<rt>su</rt></ruby>" ("`<difficulty>` course") was displayed in those official games.
+"Course" in other rhythm games usually refers to playing multiple songs in a row. In early arcade console versions of the original game series, the player could only play a fixed difficulty during the *<ruby>ク<rt>ku</rt>レ<rt>re</rt></ruby>(<ruby>ジッ<rt>jet</rt>ト<rt>to</rt></ruby>)* "credit"/game session. "`<difficulty>`<ruby>コー<rt>koo</rt>ス<rt>su</rt></ruby>" ("`<difficulty>` course") was displayed in those original games.
 
 Depending on the simulator, the `COURSE:` header may affect the judgement window, default scoring, the default increasing rate of the *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge, *etc.*
 
@@ -1293,14 +1293,14 @@ Depending on the simulator, the `COURSE:` header may affect the judgement window
   * The *<ruby>難<rt>Muzuka</rt>し<rt>shi</rt>い<rt>i</rt></ruby>/<ruby>む<rt>Mu</rt>ず<rt>zu</rt>か<rt>ka</rt>し<rt>shi</rt>い<rt>i</rt></ruby>* Hard difficulty.
 * **`COURSE:3`** / **`COURSE:Oni`** / `COURSE:ONI` / `COURSE:oni`
   * The *<ruby>鬼<rt>Oni</rt></ruby>/<ruby>お<rt>O</rt>に<rt>ni</rt></ruby>* Oni/Extreme difficulty.
-  * The official English localization of this difficulty was "Oni" in PS2 TDM, "Mania" in the development version of certain PC-generation games (?), and is "Extreme" in the released PC-generation games.
+  * The official English localization of this difficulty in the original games was "Oni" in PS2 TDM, "Mania" in the development version of certain PC-generation games (?), and is "Extreme" in the released PC-generation games.
   * The "Extreme" as the name of the 4th difficulty is identical to *<ruby>初<rt>Hatsu</rt>音<rt>ne</rt>ミ<rt>Mi</rt>ク<rt>ku</rt></ruby> -Project DIVA- 2nd* "Hatsune Miku: Project DIVA 2nd" (2010), developed by Sega, Crypton Future Media, and Dingo. The game features "Easy", "Normal", "Hard", & "Extreme" difficulties, with the 5th difficulty "Extra Extreme" added in newer games in the Project DIVA series.
-  * In the official game series, before AC7 (specifically AC2&ndash;AC6), this difficulty was named *<ruby>ド<rt>Do</rt>ン<rt>n</rt>ダ<rt>da</rt>フ<rt>fu</rt>ル<rt>ru</rt></ruby>！<ruby>コー<rt>Koo</rt>ス<rt>su</rt></ruby>* "Donderful! Course" and had a different scoring rule from the other difficulties (see [`SCOREMODE:0`](#scoremode)). This difficulty was always named *<ruby>鬼<rt>Oni</rt></ruby>/<ruby>お<rt>O</rt>に<rt>ni</rt></ruby>* Oni in the PS2 console games and is later synchronized into AC7 and on, but the same scoring rule still applied to CS1&ndash;CS5 and AC7.
+  * In the original game series, before AC7 (specifically AC2&ndash;AC6), this difficulty was named *<ruby>ド<rt>Do</rt>ン<rt>n</rt>ダ<rt>da</rt>フ<rt>fu</rt>ル<rt>ru</rt></ruby>！<ruby>コー<rt>Koo</rt>ス<rt>su</rt></ruby>* "Donderful! Course" and had a different scoring rule from the other difficulties (see [`SCOREMODE:0`](#scoremode)). This difficulty was always named *<ruby>鬼<rt>Oni</rt></ruby>/<ruby>お<rt>O</rt>に<rt>ni</rt></ruby>* Oni in the PS2 console games and is later synchronized into AC7 and on, but the same scoring rule still applied to CS1&ndash;CS5 and AC7.
 * **`COURSE:4`** / **`COURSE:Edit`** / `COURSE:EDIT` / `COURSE:edit`
   * Now commonly used as the *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby> (<ruby>裏 <rt>Ura</rt></ruby>)* Oni/Extreme (Inner) difficulty.
   * This difficulty was meant for chart creators to freely specifying the scoring rules in earlier versions of TaikoJiro 1. However, the restriction of the scoring rules for other difficulties were lifted in v1.95, which made this difficulty unnecessary for such a purpose.
-  * As a result, after the official AC15 was released, this difficulty has been re-purposed as the *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby> (<ruby>裏 <rt>Ura</rt></ruby>)* Oni/Extreme (Inner) difficulty.
-  * For specifying the inner chart of every difficulty together or with different audio as a separate song entry, as in official AC11&ndash;AC14, [`SIDE:Ex`](#side) and [the `SIDEREV:` head](#siderev) should be used.
+  * As a result, after the original game AC15 was released, this difficulty has been re-purposed as the *<ruby>お<rt>O</rt>に<rt>ni</rt></ruby> (<ruby>裏 <rt>Ura</rt></ruby>)* Oni/Extreme (Inner) difficulty.
+  * For specifying the inner chart of every difficulty together or with different audio as a separate song entry, as in original games AC11&ndash;AC14, [`SIDE:Ex`](#side) and [the `SIDEREV:` head](#siderev) should be used.
 * `COURSE:Ura` / `COURSE:ura` \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
   ***Supported by***: taiko-web
@@ -1321,7 +1321,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgement window
     * In TJAPlayer2 for.PC, the relative draw order of non-balloon bar drumroll notes is determined by the relative scrolling velocity regardless of the value of the `COURSE:` header.
 * **`COURSE:6`** / **`COURSE:Dan`** / `COURSE:dan` \
   ***Supported by***: TJAPlayer3 v1.5.0
-  * The special difficulty used for *<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games.
+  * The special difficulty used for *<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the original games.
 * `COURSE:<text-difficulty-name>` \
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) \
   ***Supported by***: Malody
@@ -1357,7 +1357,7 @@ Depending on the simulator, the `COURSE:` header may affect the judgement window
 
 Specify the *<ruby>難<rt>nan'</rt>易<rt>i</rt>**度**<rt>do</rt></ruby>* "difficulty (or easiness) **level**"/difficulty star/? ("**level**").
 
-Since the Japanese terminology is easily confused with the fore-mentioned "difficulty" specified by [the `COURSE:` header](#course), the difficulty star is often referred as *<ruby>星<rt>hoshi</rt>の<rt>no</rt>数<rt>kazu</rt></ruby>/<ruby>★<rt>hoshi</rt>の<rt>no</rt>数<rt>kazu</rt></ruby>* "amount of stars" and is displayed as "<ruby>★<rt>hoshi</rt></ruby>×*n*" in the official PC-generation arcade games.
+Since the Japanese terminology is easily confused with the fore-mentioned "difficulty" specified by [the `COURSE:` header](#course), the difficulty star is often referred as *<ruby>星<rt>hoshi</rt>の<rt>no</rt>数<rt>kazu</rt></ruby>/<ruby>★<rt>hoshi</rt>の<rt>no</rt>数<rt>kazu</rt></ruby>* "amount of stars" and is displayed as "<ruby>★<rt>hoshi</rt></ruby>×*n*" in the original PC-generation arcade games.
 
 Depending on the simulator and/or user settings, the `LEVEL:` header may affect the default scoring, the default increasing rate of the *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge, *etc.*
 
@@ -1367,7 +1367,7 @@ Depending on the simulator and/or user settings, the `LEVEL:` header may affect 
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 \
   ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9)
   * *Simulator-dependent*: The upper limit.
-  * Universally supported range (as in the latest official games):
+  * Universally supported range (as in the latest original games):
     * Easy: 1&ndash;5 (up to 6 only for *<ruby>ケ<rt>Ke</rt>チャ<rt>cha</rt>ド<rt>Do</rt>ン<rt>n</rt>2000<rt>Nisen</rt></ruby>*/*Kecha-Don 2000* in CS4 and *<ruby>恋文<rt>Koibumi</rt>2000<rt>Nisen</rt></ruby>*/*KOIBUMI 2000* in CS5)
     * Normal: 1&ndash;7
     * Hard: 1&ndash;8
@@ -1424,7 +1424,7 @@ Specify the total amount of player-**side**s of the notechart(s).
 
 The multiple-player-side notecharts of the difficulty is chosen if enough amount of players have chosen the same difficulty.
 
-In the official games, some difficulties may have only 2-player-side notecharts but are still playable in single player mode, where the notechart for one of the player-side is chosen (always the 1st player-side in PC-generation games).
+In the original games, some difficulties may have only 2-player-side notecharts but are still playable in single player mode, where the notechart for one of the player-side is chosen (always the 1st player-side in PC-generation games).
 
 *Simulator-dependent*: Whether such notecharts are chosen when some players have chosen different difficulties.
 
@@ -1548,7 +1548,7 @@ Specify the **total** *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt
   * The increasing rate of spirit gauge/soul gauge for each branch is calculated from the given total spirit gauge/soul gauge increment.
   * If the simulator chooses to ignore branch-less total gauge increment, the total gauge increment for an *simulator-dependent* branch is calculated, and then the relative increments between branches are used for the gauge increment in other branches.
 * `TOTAL:`
-  * The increasing rate of spirit gauge/soul gauge is determined by the simulator. *Simulator-dependent*: The details for determining it; usually one of the official games is followed.
+  * The increasing rate of spirit gauge/soul gauge is determined by the simulator. *Simulator-dependent*: The details for determining it; usually one of the original games is followed.
 
 ### GAUGEINCR:
 
@@ -1580,7 +1580,7 @@ Specify the rounding mode of the **incr**ement of the *<ruby>魂<rt>tamashii</rt
 
 Specify a requirement for passing the notechart in *<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" ("**exam**ination").
 
-*<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games.
+*<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the original games.
 
 Used in conjunction with [`COURSE:Dan`](#course).
 
@@ -1652,7 +1652,7 @@ When either the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussio
 
 * In TaikoJiro, the option with *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" enabled is referred as "Stable", while the disable of this option is referred as "StepWise".
 
-*Simulator-dependent*: Scoring details other than the basic score in each mode; usually one of the official games is followed.
+*Simulator-dependent*: Scoring details other than the basic score in each mode; usually one of the original games is followed.
 
 #### Argument Forms
 
@@ -1666,28 +1666,28 @@ When either the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussio
     If `SCOREINIT:` & `SCOREDIFF:` used | **floor**(`init` ∕ 10) × 10 | **floor**(`init` + `diff` ∕ 10) × 10
   * *Simulator-dependent*: The behavior when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option is enabled.
 * `SCOREMODE:1`
-  * Follow the normal scoring rule of the official PS1- and PS2-generation games (*<ruby>旧<rt>kyuu</rt>筐<rt>kyou</rt>体<rt>tai</rt></ruby>* "old (arcade) cabinet"; AC1&ndash;AC14).
+  * Follow the normal scoring rule of the original PS1- and PS2-generation games (*<ruby>旧<rt>kyuu</rt>筐<rt>kyou</rt>体<rt>tai</rt></ruby>* "old (arcade) cabinet"; AC1&ndash;AC14).
   * Combo | 1&ndash;9 | 10&ndash;19 | 20&ndash;29 | 30&ndash;39 | 40&ndash;49 | 50&ndash;59 | 60&ndash;69 | 70&ndash;79 | 80&ndash;89 | 90&ndash;99 | 100&ndash;
     --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
     *n* | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
   * Only the first 9 notes of a combo reward exactly `init` points per note.
   * The basic score is **floor**((`init` + *n* × `diff`) ∕ 10) × 10 points.
   * > An equivalent formula: Basic score = **floor**((`init` + min{**floor**(`combo` ∕ 10), 10} × `diff`) ∕ 10) × 10 (points).
-  * `init` is usualy set to between 3&ndash;5 × `diff` in official charts.
-  * In TaikoJiro, if the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option is enabled, the scoring rules of the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" mode from the 14th arcade console version of the official game is followed.
+  * `init` is usualy set to between 3&ndash;5 × `diff` in charts from the original games.
+  * In TaikoJiro, if the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option is enabled, the scoring rules of the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" mode from the 14th arcade version of the original games is followed.
   * The *<ruby>基<rt>Ki</rt>本<rt>hon</rt>天<rt>Ten</rt>井<rt>joo</rt></ruby>* "basic ceiling" score varies according to the difficulty and difficulty star.
 * `SCOREMODE:2`
-  * Follow the scoring rule of the official PS3-generation games (AC15).
+  * Follow the scoring rule of the original PS3-generation games (AC15).
   * Combo | 1&ndash;9 | 10&ndash;29 | 30&ndash;49 | 50&ndash;99 | 100&ndash;
     --- | --- | --- | --- | --- | ---
     *n* | 0 | 1 | 2 | 4 | 8
   * The basic score is **floor**((`init` + *n* × `diff`) ∕ 10) × 10 points.
   * Combo milestone bonus: 10000 points are rewarded when every 100 combo is reached.
-  * `init` is usualy set to between 3&ndash;5 × `diff` in official charts.
+  * `init` is usualy set to between 3&ndash;5 × `diff` in charts form the original games.
   * The *<ruby>基<rt>Ki</rt>本<rt>hon</rt>天<rt>Ten</rt>井<rt>joo</rt></ruby>* "basic ceiling" score varies according to the difficulty and difficulty star.
 * `SCOREMODE:3` \
   ***Supported by***: TJAPlayer2 for.PC but not TJAPlayer3 v1.4.0+, TJAPlayer3-f
-  * Follow the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)"/"true performance" scoring rules of the official PS3-generation games (AC15).
+  * Follow the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)"/"true performance" scoring rules of the original PS3-generation games (AC15).
   * All types of score bonus are cancelled.
   * Combo | 1&ndash;
     --- | ---
@@ -1701,7 +1701,7 @@ When either the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussio
 
 During gameplay, the last digit of the total score during is kept as an *simulator-dependent* digit after the first score-rewarding hit-type note is hit.
 
-* In the official game, the digit is 0.
+* In the orginal games, the digit is 0.
 * In TaikoJiro 1, a score penalty of at most 10 points is subtracted from the total score at the first score-rewarding hit according to the judge window setting.
 
 Reference: *配点* ("Scoring"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/システム/配点>
@@ -1709,7 +1709,7 @@ Reference: *配点* ("Scoring"). 太鼓の達人 譜面とか Wiki\* ("Taiko no 
 #### Compatibility Issues
 
 * In TJAPlayer3 v1.4.0+ but not TJAPlayer3-f, `SCOREMODE:3` is treated the same as `SCOREMODE:2`, where the behavior of the former `SCOREMODE:3` can be enabled by enabling the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option.
-* In TJAPlayer3-Develop (?), TJAPlayer3-Develop-ReWrite (?), & OpenTaiko (0auBSQ), the former `SCOREMODE:3` behavior cannot be enabled because the scoring rules when enabling the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option follows the scoring rule of the official PC-generation games (<ruby>虹<rt>Niji</rt>色<rt>iro</rt></ruby>/<ruby>ニ<rt>Ni</rt>ジ<rt>ji</rt>イ<rt>i</rt>ロ<rt>ro</rt></ruby> version(s); AC16), although charts without big notes & balloon-type notes behave the same in both scoring rules.
+* In TJAPlayer3-Develop (?), TJAPlayer3-Develop-ReWrite (?), & OpenTaiko (0auBSQ), the former `SCOREMODE:3` behavior cannot be enabled because the scoring rules when enabling the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true performance" option follows the scoring rule of the original PC-generation games (<ruby>虹<rt>Niji</rt>色<rt>iro</rt></ruby>/<ruby>ニ<rt>Ni</rt>ジ<rt>ji</rt>イ<rt>i</rt>ロ<rt>ro</rt></ruby> version(s); AC16), although charts without big notes & balloon-type notes behave the same in both scoring rules.
 
 ### SCOREINIT:
 
@@ -1737,7 +1737,7 @@ Recommendation for charters: The `SCOREMODE:`, `SCOREINIT:`, & [`SCOREDIFF:`](#s
   * The behavior is *simulator-dependent*.
   * In TaikoJiro 1: Specifying `0` to `9` makes the specified `init` to be determined by the simulator.
 * Initial value / `SCOREINIT:`
-  * Make either `init` values to be determined by the simulator. *Simulator-dependent*: The details for determining it; usually one of the official games is followed.
+  * Make either `init` values to be determined by the simulator. *Simulator-dependent*: The details for determining it; usually one of the original games is followed.
 
 ### SCOREDIFF:
 
@@ -1751,7 +1751,7 @@ Specify the *<ruby>公<rt>kou</rt>**差**<rt>sa</rt></ruby>* common **diff**eren
 
 Recommendation for charters: The `SCOREMODE:`, [`SCOREINIT:`](#scoreinit), & `SCOREDIFF:` headers should not be manually specified for custom charts, unless the precise control of total score is significant, *e.g.*, [any `#BRANCHSTART` commands](#branchstart--branchend) with `s` (score) condition appear for the player-side, complex forced branch route, special number of maximum possible score for charts without rolls.
 
-In the official game, `diff` is not required to be a multiple of 10. Instead, the basic score is rounded to the nearest 10 toward 0.
+In the original games, `diff` is not required to be a multiple of 10. Instead, the basic score is rounded to the nearest 10 toward 0.
 
 *Simulator-dependent*: Whether the specified `diff` is ignored when the simulator chooses a set of scoring rules different from the scoring rules specified by the `SCOREMODE:` header.
 
@@ -1768,7 +1768,7 @@ In the official game, `diff` is not required to be a multiple of 10. Instead, th
   * `diff` is `0`.
   * Recommendation for charters: To specify the basic score when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" option ("stable") is enabled, the non–*<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" score should also be specified, and [`SCOREINIT:<score-init>, <score-init-shin-uchi>`](#scoreinit) should be used and `SCOREDIFF:0` should not be used.
 * Initial value / `SCOREDIFF:`
-  * Make `diff` to be determined by the simulator. *Simulator-dependent*: The details for determining it; usually one of the official games is followed.
+  * Make `diff` to be determined by the simulator. *Simulator-dependent*: The details for determining it; usually one of the original games is followed.
 
 #### Compatibility Issues
 
@@ -1938,7 +1938,7 @@ Each proposed compatibility-mode behavior is enclosed in parentheses (`()`) for:
 * Potential changes to `oos` behaviors.
 * Proposed changes of existing behavior for unification.
 
-Behavior \\ Mode | (Official game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
+Behavior \\ Mode | (Original game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
 --- | --- | --- | --- | --- | --- | ---
 `balloon-popcount` | N/A | `common` | `common` | `common` | `n` <br /> (`common`) | `n` <br /> (`common`)
 `balloonnem-popcount-nonbranch` | N/A | N/A <br /> (`1nem`) | N/A <br /> (`1nem`) | N/A <br /> (`1nem`) | `1n-or-end-3last` | `1nem`
@@ -2012,7 +2012,7 @@ If the TJA file uses any features outside the specified feature set, a warning s
 
 * `SPEC:<(enum-str)spec>`
   * `<spec>` can be one of:
-    * `1.0` &ndash; The feature set common in PC-gen official AC games and TJAPlayer3, including Dan-i certification mode.
+    * `1.0` &ndash; The feature set common in PC-gen original AC games and TJAPlayer3, including Dan-i certification mode.
     * `1.1` &ndash; The feature set of TJAPlayer3 v1.6.x, including enhancements originate from TaikoJiro 1 and 2.
     * `1.2` &ndash; The current stable feature set of the OpenTaiko-OutFox standard, based on the gameplay-focused enhancements of OpenTaiko (0auBSQ) v0.6.0, including a more complete feature of Tower mode and the Konga game mode.
     * `1.3` &ndash; A developing feature set including enhanced branch conditions, TJA state, and compatibility support.
@@ -2247,7 +2247,7 @@ Due to the incoherent behaviors, many commands introduced in TJAPlayer2 for.PC a
 ***Effect target***: notes, bar lines \
 ***Effect branches***: *Simulator-dependent*; (OpenTaiko (0auBSQ) v0.6.0.90+) current
 
-Use a **scroll**ing mode similar to the scrolling method used in either **B**E**M**ANI-series or the official Taiko ("**n**or**m**al") game series for the at-or-after notes and bar lines, unless overridden by user settings.
+Use a **scroll**ing mode similar to the scrolling method used in either **B**E**M**ANI-series or the original Taiko ("**n**or**m**al") game series for the at-or-after notes and bar lines, unless overridden by user settings.
 
 #### Argument Forms
 
@@ -2303,7 +2303,7 @@ See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior of timi
 
 ### `#PAPAMAMA`
 
-[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard, but seen in official games) \
+[***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard, but seen in original games) \
 ***Impact level***: note ★★★★★ \
 ***First seen in***: TJAPlayer3-f v1.7.2.0 \
 ***Pre-[#START](#start--end) position***: required \
@@ -2312,7 +2312,7 @@ See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior of timi
 ***Effect target***: notes \
 ***Effect branches***: *Simulator-dependent*
 
-Use the *<ruby>**パ**<rt>**Pa**</rt>**パ**<rt>**pa**</rt>**マ**<rt>**Ma**</rt>**マ**<rt>**ma**</rt>サ<rt>Sa</rt>ポー<rt>poo</rt>ト<rt>to</rt></ruby>* "Parent Support Mode"/Helping Hand Mode gameplay rules from the official arcade games for certain song in the *<ruby>簡<rt>Kan</rt>単<rt>tan</rt></ruby>/<ruby>か<rt>Ka</rt>ん<rt>n</rt>た<rt>ta</rt>ん<rt>n</rt></ruby>* Easy difficulty, where the amount of players is fixed to 1 and the inputs from all players are combined to play the song.
+Use the *<ruby>**パ**<rt>**Pa**</rt>**パ**<rt>**pa**</rt>**マ**<rt>**Ma**</rt>**マ**<rt>**ma**</rt>サ<rt>Sa</rt>ポー<rt>poo</rt>ト<rt>to</rt></ruby>* "Parent Support Mode"/Helping Hand Mode gameplay rules from the original arcade games for certain song in the *<ruby>簡<rt>Kan</rt>単<rt>tan</rt></ruby>/<ruby>か<rt>Ka</rt>ん<rt>n</rt>た<rt>ta</rt>ん<rt>n</rt></ruby>* Easy difficulty, where the amount of players is fixed to 1 and the inputs from all players are combined to play the song.
 
 Reference: <https://taiko.namco-ch.net/taiko/en/howto/papamama.php#papamama>
 
@@ -3124,7 +3124,7 @@ Similar to [the `#NOTESCHANGE` command](#noteschange), but with a different rang
 
 #### Usual Patterns of Note Phoneticization in the Offical Games
 
-In the official games, the note phoneticization is assigned per-note and does not follow a definite pattern, especially in earlier games.
+In the original games, the note phoneticization is assigned per-note and does not follow a definite pattern, especially in earlier games.
 
 The general pattern in recent Taiko games seems to be:
 
@@ -3142,18 +3142,18 @@ The general pattern in recent Taiko games seems to be:
   * The notes are spaced evenly in time duration.
   * The "chain-final" note of this chain does not meet any of the "non-long conditions".
   * The time duration between the first note & the last note ≤ 0.5 seconds. (This has known exceptions in few charts)
-  * Exceptions: In some older official charts, "alternative chains" can begin within a regular chain and even contain even amount of notes.
+  * Exceptions: In some older charts in the original games, "alternative chains" can begin within a regular chain and even contain even amount of notes.
 * The long form is used for a hit-type note when:
   * The note is "chain-final" and do not meet any of the "non-long conditions".
   * The note is not in an "alternative chain" and `vd_this_to_next_note` > 1⁄8th. ("pre-pause")
-* There is only one form for drumroll-type notes and applause notes in the official games: The short form had been used in earlier games until the long form was introduced in PS3-generation and has been used onward.
+* There is only one form for drumroll-type notes and applause notes in the original games: The short form had been used in earlier games until the long form was introduced in PS3-generation and has been used onward.
 * The short form is used for all other notes and is preferred in other obscure cases.
 * For notes near a non-forced branch point, the results of branching from and into each different branch are considered. The long or alternate form is used only if the same form would be used in all branch results, while the short form is used otherwise.
 
-However, in the official Konga games, the general pattern is less consistent and "chain-final" is defined less strictly:
+However, in the original Konga games, the general pattern is less consistent and "chain-final" is defined less strictly:
 
 * Both the long and final forms can be used for "chain-final" and "pre-pause" notes which do not meet any of the "non-long conditions".
-* There is only one form for drumroll-type notes and applause notes in the official games: Only the short form has been used because all the Konga games were released before the PS3-generation of Taiko games.
+* There is only one form for drumroll-type notes and applause notes in the original games: Only the short form has been used because all the Konga games were released before the PS3-generation of Taiko games.
 * The short form is used otherwise.
 
 ### #NOTESCHANGE
@@ -3226,7 +3226,7 @@ If the specified note is already a hand-holding note or (*proposal* (IID)) is no
 ***Effect target***: notes \
 ***Effect branches***: current
 
-Specify the **note** specified by the next note symbol (if any) to be **giant**, as in the official Wii games. A giant notes receive input and reward points the same as a regular note, but sets certain specified [triggers](#counter--trigger-commands) to true based on its received judgement.
+Specify the **note** specified by the next note symbol (if any) to be **giant**, as in the original Wii games. A giant notes receive input and reward points the same as a regular note, but sets certain specified [triggers](#counter--trigger-commands) to true based on its received judgement.
 
 *Proposal* (IID): If the specified note is already a giant note or is not a hit-type note, the command has no effects. If the specified note is a big note, it is converted to a regular note and then becomes a giant note.
 
@@ -3267,7 +3267,7 @@ Conditionally ("**if**") enable the **note** specified by the next note symbol (
 * *Proposal* (IID): `#NOTEIFF <(str-local-formula-trigger)read-enable>, [(enum-str-bool)glow-effect=False]`
   * If the bool value of the [(value or (*proposal* (IID)) formula) trigger](#counter--trigger-commands) specified by `<str-local-*-trigger-read-enable>` is true, the note is enabled, *i.e.*, displays and receives input. \
     Otherwise the note is disabled, *i.e.*, hides and does not receive input, like [note symbol `0`](#note-symbols-in-taiko-mode).
-  * `[glow-effect]` defaults to `False` and specifies whether the note has the glow effect like the notes added after hitting giant notes in the official Wii games. \
+  * `[glow-effect]` defaults to `False` and specifies whether the note has the glow effect like the notes added after hitting giant notes in the original Wii games. \
     If given, it can be one of:
     * `False` &mdash; the default; the note appears as if the `#NOTEIF` or (*proposal* (IID)) `#NOTEIFF` command were not applied if the note is enabled.
     * `True` &mdash; the note has the glow effect if enabled. Intended to be used in conjunction with [the `#GIANTNOTE` command](#giantnote).
@@ -3440,7 +3440,7 @@ Respectively **start** / **end** the definition of a *<ruby>譜<rt>fu</rt>面<rt
 
 The determining point of this "branch"/path section is defaulted to be placed at the beginning of the previous measure from the `#BRANCHSTART` command.
 
-* In the official games, the determining point is fixed to 4 beats (the length of 4 1⁄4th notes) before the branch point, calculated using the defined BPM of the branch point. So the determining point can occur more or less than 1 measure before the branch point.
+* In the original games, the determining point is fixed to 4 beats (the length of 4 1⁄4th notes) before the branch point, calculated using the defined BPM of the branch point. So the determining point can occur more or less than 1 measure before the branch point.
   * In "*<ruby>夏<rt>Natsu</rt>祭<rt>Matsu</rt>り<rt>ri</rt></ruby> / <ruby>ジッ<rt>Jit</rt>タ<rt>ta</rt>リ<rt>ri</rt>ン<rt>n</rt></ruby>・<ruby>ジ<rt>Ji</rt>ン<rt>n</rt></ruby>*" (JITTERIN'JINN version), Easy, Normal, Hard, and Oni difficulties, the branch determining point is in the middle of measure 46, and the notes in measure 47 can be seen to suddenly change from the Normal branch pattern to Master branch pattern. <https://wikiwiki.jp/taiko-fumen/%E5%8F%8E%E9%8C%B2%E6%9B%B2/%E3%81%8A%E3%81%AB/%E5%A4%8F%E7%A5%AD%E3%82%8A%20%EF%BC%8F%20%E3%82%B8%E3%83%83%E3%82%BF%E3%83%AA%E3%83%B3%E3%83%BB%E3%82%B8%E3%83%B3>
 
 At the determining point, the "branch"/path&ndash;switching effects are played and the targeted branch is updated, but only the notes and bar lines whose definition position is at-or-after the actual beginning of the "branch"/path section have their pattern changed.
@@ -3660,13 +3660,13 @@ An implicit `#BRANCHEND` is placed before `#BRANCHSTART` and [`#END`](#start--en
 
 #### Examples
 
-Following are known special conditions (beyond `r` & `p`) used in official games.
+Following are known special conditions (beyond `r` & `p`) used in original games.
 
 Reference: *譜面分岐条件* ("Notechart branch conditions"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/分岐譜面/分岐条件>
 
 * The measure number is based on the non-internal measure number listed in the corresponding page for the difficulty of the song.
 
-`s` can be used for simulating older official games (including AC6 and earlier games), but is also useful for simulating the "getting *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD on anything and hitting no rolls to take certain branch" condition in current official games.
+`s` can be used for simulating older original games (including AC6 and earlier games), but is also useful for simulating the "getting *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD on anything and hitting no rolls to take certain branch" condition in current original games.
 
 Single condition:
 
@@ -3698,7 +3698,7 @@ Single condition:
   00100100 // Measure 77 (3/8 to 7/8 of 7/8)
   #BARLINE
   #SCROLL 9
-  60000800, // Measure 78 (2/4) // The roll in the official game is 1/48th shorter than this notation
+  60000800, // Measure 78 (2/4) // The roll in the original game is 1/48th shorter than this notation
   #SCROLL 1
   #BARLINEON
   #BRANCHSTART jb,1,1,l
@@ -3980,7 +3980,7 @@ Example usages (adapted from barrier15300):
 
 Switch to the **next song** in the *<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode".
 
-*<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games.
+*<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode" resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the original games.
 
 Used in conjunction with [`COURSE:Dan`](#course).
 
@@ -3994,7 +3994,7 @@ See [TJC Header](#tjc-header) for the header version of the `#NEXTSONG` command.
   [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 \
   ***Supported by***: TJAPlayer3-Develop-ReWrite, OpenTaiko (0auBSQ)
   * `[level], [course], [hide-title]` are optional parameters where the last one(s) can be omitted:
-    * `[hide-title]` defaults to `False` and specifies whether the title of the song is obscured ("hidden") in the certification challenge selection screen of the *<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the official games. If given, it can be one of:
+    * `[hide-title]` defaults to `False` and specifies whether the title of the song is obscured ("hidden") in the certification challenge selection screen of the *<ruby>段<rt>Dan'</rt>位<rt>i</rt>認<rt>nin</rt>定<rt>tei</rt>モー<rt>Moo</rt>ド<rt>do</rt></ruby>* "Rank Certification Mode", which resembles *<ruby>段<rt>Dan'</rt>位<rt>i</rt>道<rt>Dou</rt>場<rt>jou</rt></ruby>* "Rank Dojo"/Dan-i Dojo in the original games. If given, it can be one of:
       * `False` &mdash; the default; the title is displayed as-is.
       * `True` &mdash; the title is obscured (*e.g.*, displayed as "`???`").
     * `[course]` has the effects and the default value of [the `COURSE:` header](#course).
@@ -5065,7 +5065,7 @@ The time duration of different measure division intervals are possible to overla
 
 *Simulator-dependent*: The input judgement behavior when the time duration intervals of any non-blank note symbols overlap.
 
-* In TaikoJiro, regardless of whether any multiple notechart sections overlap in time, the later defined notes do not accept any inputs until all the earlier defined notes in currently determined branch(es) (?) are judged. This is different from the official games, where a later <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> (or <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>) hit-type note may be hit before an earlier <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> (or <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>) hit-type note is judged.
+* In TaikoJiro, regardless of whether any multiple notechart sections overlap in time, the later defined notes do not accept any inputs until all the earlier defined notes in currently determined branch(es) (?) are judged. This is different from the original games, where a later <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> (or <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby>) hit-type note may be hit before an earlier <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> (or <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>) hit-type note is judged.
 
 Each sign combination of BPM & beat duration is as follow:
 
@@ -5138,10 +5138,10 @@ Example Combination | Musical Beat-time Diagram | Visual Beat-time Diagram
 
 ### Judgement Order
 
-In the official games, notes neither consumed nor missed are usually judged in increasing time order. However:
+In the original games, notes neither consumed nor missed are usually judged in increasing time order. However:
 
 * In TaikoJiro 1 (and 2 (?)), judgement of notes is handled in increasing definition order.
-* The earliest Drumroll-type note passing the judgement time takes precedence over hit-type notes in official games (?) and TJAPlayer2 for.PC.
+* The earliest Drumroll-type note passing the judgement time takes precedence over hit-type notes in original games (?) and TJAPlayer2 for.PC.
   * In OpenTaiko (0auBSQ) v0.6.0.93+: Drumroll-type notes only takes precedence over later-defined notes.
 * In OpenTaiko (0auBSQ), an unhit bomb or AD-Lib note past the judgement time takes precedence over earlier hit-type notes, and an unhit future note closer to the judgement time takes precedence over a farther bomb or AD-Lib.
 
@@ -5170,7 +5170,7 @@ In the official games, notes neither consumed nor missed are usually judged in i
 
 Effective when [`GAME:Taiko`](#game) or [`#GAMETYPE Taiko`](#gametype) is in effect.
 
-See <https://taiko.namco-ch.net/taiko/en/howto/onpu.php> for the appearance of notes in the official PC-generation arcade games.
+See <https://taiko.namco-ch.net/taiko/en/howto/onpu.php> for the appearance of notes in the original PC-generation arcade games.
 
 See [Usual Patterns of Note Phoneticization in the Offical Games](#usual-patterns-of-note-phoneticization-in-the-offical-games) for the general patterns of how the alternative forms of *<ruby>口<rt>Kuchi</rt>唱<rt>Shou</rt>歌<rt>ga</rt></ruby>* <br> "Note phoneticizations" are used.
 
@@ -5181,7 +5181,7 @@ Rim | Hit the left-half or the right-half of drum rim
 Weak | Hit with less than certain force
 Strong | Hit with certain or greater force
 
-Time Window | Official default range (Easy/Normal) | (Hard/Oni) | Explanation
+Time Window | Default range in the original games (Easy/Normal) | (Hard/Oni) | Explanation
 --- | --- | --- | ---
 *<ruby>良<rt>Ryou</rt></ruby>* GREAT/GOOD | ±41.6̅ms (±0.1%) | ±25ms (±0.1%) |
 *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK | ±108.3̅ms (±0.1%) | ±75ms (±0.1%) | Widest non&ndash;combo-break time window
@@ -5195,18 +5195,18 @@ Time Window | Official default range (Easy/Normal) | (Hard/Oni) | Explanation
 `2` | Regular <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> | Small sky-blue circle | <ruby>カ<rt>Ka</rt></ruby> / *<ruby>カッ<rt>Ka'</rt></ruby>* Ka | [Correctly input](#judgement-expection-type) Rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK time window, consumes the note. [Propogates wrong inputs](#judgement-expection-type). <br /> Awards the same as `1`. | Otherwise, correctly input within *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD judgement window (consumes the note) or [missing input](#judgement-expection-type) (keeps note's visibility). <br /> Gives the same penalty as `1`. |
 `3` | Big <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> | Big orange-ish red circle | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* DON | [Correctly input](#judgement-expection-type) Surface within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK time window, consumes the note. [Propogates wrong inputs](#judgement-expection-type). <br /> Awards the same as `1` but extra score bonus† if input is Strong (AC) <br> if correctly input left Surface + right Surface‡ (CS) | (same as `1`) |
 `4` | Big <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> | Big sky-blue circle | *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）* KA | Correctly input Rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK time window, consumes the note. [Propogates wrong inputs](#judgement-expection-type). <br /> Awards the same as `2` but extra score bonus† if input is Strong (AC) <br> if correctly input left Rim + right Rim‡ (CS) | (same as `2`) |
-`G` | Swap note | (Vary) <br /> Big green circle in taiko-web (plugin "Green Notes") <br /> Big purple circle in OpenTaiko (0auBSQ) | (*<ruby>グ<rt>Gu</rt>リー<rt>rii</rt>ン<rt>n</rt></ruby>* Green) <br /> (*<ruby>カ<rt>Ka</rt>ド<rt>do</rt>ン<rt>n</rt></ruby>* KADON) | [Correctly input](#judgement-expection-type) Surface + Rim with the first input within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK time window, consumes the note. [Consumes incomplete inputs (?) and propogates wrong inputs](#judgement-expection-type). <br /> Awards the same as `1` according to the time of the first input. | Otherwise, correctly input with the first input within the *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD judgement window (consumes the note) or [missing input](#judgement-expection-type) (keeps note's visibility). <br /> Gives the same penalty as `1`. | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 <br /> ***First seen in***: taiko-web (plugin "Green Notes") <br /> ***Supported by***: OpenTaiko (0auBSQ) v0.5.4 <br /> Not in the official games.
-`A` | Hand-holding big <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> | Big orange-ish red circle with hands holding with other note(s) for other player(s) <br /> Its face resembles `1` rather than `3` until being hit. | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "DON (Hand)" | Similar to `1` or `3` (strong or double-hit not required in some official games (?)) but awards extra score bonus† if all players hit within a certain time duration. | (same as `1`) | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2018040100 <br /> ***Supported by***: OutFox v0.4.9.9 <br /> In the official games, becomes `3` when no hand-holding notes exist at the same time position for any of the other players.
-`B` | Hand-holding big <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> | Big sky-blue circle with hands holding with other note(s) for other player(s) <br /> Its face resembles `2` rather than `4` until being hit. | *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "KA (Hand)" | Similar to `2` or `4` (strong or double-hit not required in some official games (?)) but awards extra score bonus† if all players hit within a certain time duration. | (same as `2`) | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2018040100 <br /> ***Supported by***: OutFox v0.4.9.9 <br /> In the official games, becomes `4` when no hand-holding notes exist at the same time position for any of the other players.
+`G` | Swap note | (Vary) <br /> Big green circle in taiko-web (plugin "Green Notes") <br /> Big purple circle in OpenTaiko (0auBSQ) | (*<ruby>グ<rt>Gu</rt>リー<rt>rii</rt>ン<rt>n</rt></ruby>* Green) <br /> (*<ruby>カ<rt>Ka</rt>ド<rt>do</rt>ン<rt>n</rt></ruby>* KADON) | [Correctly input](#judgement-expection-type) Surface + Rim with the first input within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK time window, consumes the note. [Consumes incomplete inputs (?) and propogates wrong inputs](#judgement-expection-type). <br /> Awards the same as `1` according to the time of the first input. | Otherwise, correctly input with the first input within the *<ruby>不<rt>Fu</rt>可<rt>ka</rt></ruby>* BAD judgement window (consumes the note) or [missing input](#judgement-expection-type) (keeps note's visibility). <br /> Gives the same penalty as `1`. | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 <br /> ***First seen in***: taiko-web (plugin "Green Notes") <br /> ***Supported by***: OpenTaiko (0auBSQ) v0.5.4 <br /> Not in the original games.
+`A` | Hand-holding big <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> | Big orange-ish red circle with hands holding with other note(s) for other player(s) <br /> Its face resembles `1` rather than `3` until being hit. | *<ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "DON (Hand)" | Similar to `1` or `3` (strong or double-hit not required in some original games (?)) but awards extra score bonus† if all players hit within a certain time duration. | (same as `1`) | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2018040100 <br /> ***Supported by***: OutFox v0.4.9.9 <br /> In the original games, becomes `3` when no hand-holding notes exist at the same time position for any of the other players.
+`B` | Hand-holding big <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> | Big sky-blue circle with hands holding with other note(s) for other player(s) <br /> Its face resembles `2` rather than `4` until being hit. | *<ruby>カッ<rt>Ka'</rt></ruby>（<ruby>手<rt>Te</rt></ruby>）* "KA (Hand)" | Similar to `2` or `4` (strong or double-hit not required in some original games (?)) but awards extra score bonus† if all players hit within a certain time duration. | (same as `2`) | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.0 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2018040100 <br /> ***Supported by***: OutFox v0.4.9.9 <br /> In the original games, becomes `4` when no hand-holding notes exist at the same time position for any of the other players.
 `C` | Bomb/mine | Small dark-blue cherry bomb with ignited fuze 💣 | (none) | [Missing input](#judgement-expection-type). <br /> Awards a "bomb/mine-pass" judgement. | [Correctly input](#judgement-expection-type) Surface or Rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK (?) time window, consumes the note. <br /> Gives a BOOM ("bomb/mine-miss") judgement & a combo-break and decreases *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge. | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 <br /> ***First seen in***: OpenTaiko-OutFox standard 1.2 (proposed from OutFox) <br /> ***Supported by***: OpenTaiko (0auBSQ) v0.5.4
-`F` | *Ad libitum* note (AD-LIB) | (invisible by default) | (none) | [Correctly input](#judgement-expection-type) Surface or Rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK time window, consumes the note. <br /> Awards an AD-LIB judgement but keep combo unchanged. | [Missing input](#judgement-expection-type) within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK time window. <br /> Gives no penalties. | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.1 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2016081500 <br /> Not in the official games. <br> Inspired by another rhythm game *GROOVE COASTER*, developed by TAITO
-`5` | Head of regular (bar) *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>* drumroll <br /> Examples: `5008`, `5558`, `5001` | Small yellow circle with bar attached behind <br> Turns red if hit rapidly while gradually fading out to its original color in AC games | *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>ー* Roll&ndash; | Repeatly [correctly input](#judgement-expection-type) Surface or Rim by any times during its duration, only reacts to each input up to 1 per 60fps frame†† (official games). <br /> Increases score per reacted input. | (impossible to fail) |
+`F` | *Ad libitum* note (AD-LIB) | (invisible by default) | (none) | [Correctly input](#judgement-expection-type) Surface or Rim within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK time window, consumes the note. <br /> Awards an AD-LIB judgement but keep combo unchanged. | [Missing input](#judgement-expection-type) within the *<ruby>可<rt>Ka</rt></ruby>* GOOD/OK time window. <br /> Gives no penalties. | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.1 <br /> ***First seen in***: TJAPlayer2 for.PC ver.2016081500 <br /> Not in the original games. <br> Inspired by another rhythm game *GROOVE COASTER*, developed by TAITO
+`5` | Head of regular (bar) *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>* drumroll <br /> Examples: `5008`, `5558`, `5001` | Small yellow circle with bar attached behind <br> Turns red if hit rapidly while gradually fading out to its original color in AC games | *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>ー* Roll&ndash; | Repeatly [correctly input](#judgement-expection-type) Surface or Rim by any times during its duration, only reacts to each input up to 1 per 60fps frame†† (original games). <br /> Increases score per reacted input. | (impossible to fail) |
 `I` | &bull; (same as `5`) (OpenTaiko (0auBSQ)) <br /> &bull; Head of regular <ruby>カ<rt>Ka</rt>ツ<rt>tsu</rt></ruby> (bar) *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>* drumroll (OutFox's OpenTaiko-OutFox standard draft (?)) <br /> Examples: `I008`, `III8`, `I001` | &bull; (see `5`) <br /> &bull; Small sky-blue circle with bar attached behind (OutFox, expected (?)) | (see `5`) | &bull; (same as `5`) (OpenTaiko (0auBSQ)) <br /> &bull; Repeatly [correctly input](#judgement-expection-type) Rim by any times during its duration. [Consumes wrong inputs](#judgement-expection-type) (?). (OutFox's OpenTaiko-OutFox standard draft) <br /> Awards the same as `5`. | (impossible to fail) | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 <br /> ***First seen in***: OpenTaiko-OutFox standard 1.2 (first proposed from OutFox), OpenTaiko (0auBSQ) v0.5.4 <br /> By analogy with Konga mode
-`6` | Head of big (bar) *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>* drumroll <br /> Examples: `6008`, `6668`, `6001` | Big yellow circle with bar attached behind <br> Turns red if hit rapidly while gradually fading out to its original color in AC games | *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）ー* ROLL&ndash; | Repeatly [correctly input](#judgement-expection-type) Rim by any times during its duration, only reacts to each input up to 1 per 60fps frame†† (official games). <br /> Increases score per reacted input. <br /> Extra score bonus† for each reacted input if is Strong (?) (earlier AC), and/or with at least 2 inputs in a 60fps frame†† (?) (earlier AC & earlier CS), or always (?) (AC & CS) | (impossible to fail) |
+`6` | Head of big (bar) *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>* drumroll <br /> Examples: `6008`, `6668`, `6001` | Big yellow circle with bar attached behind <br> Turns red if hit rapidly while gradually fading out to its original color in AC games | *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>（<ruby>大<rt>Ookii</rt></ruby>）ー* ROLL&ndash; | Repeatly [correctly input](#judgement-expection-type) Rim by any times during its duration, only reacts to each input up to 1 per 60fps frame†† (original games). <br /> Increases score per reacted input. <br /> Extra score bonus† for each reacted input if is Strong (?) (earlier AC), and/or with at least 2 inputs in a 60fps frame†† (?) (earlier AC & earlier CS), or always (?) (AC & CS) | (impossible to fail) |
 `H` | &bull; (same as `6`) (OpenTaiko (0auBSQ)) <br /> &bull; Head of regular <ruby>ド<rt>Do</rt>ン<rt>n</rt></ruby> (bar) *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>* drumroll (OutFox's OpenTaiko-OutFox standard draft (?)) <br /> Examples: `H008`, `HHH8`, `H001` | &bull; (see `6`) <br /> &bull; Small orange-ish red circle with bar attached behind (OutFox) | (see `6`) | &bull; (same as `5`) (OpenTaiko (0auBSQ)) <br /> &bull; Repeatly [correctly input](#judgement-expection-type) Surface by any times during its duration. [Consumes wrong inputs](#judgement-expection-type) (?). (OutFox's OpenTaiko-OutFox standard draft) <br /> Awards the same as `5`. | (impossible to fail) | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 <br /> ***First seen in***: (first proposed from OutFox), OpenTaiko (0auBSQ) v0.5.4 <br /> By analogy with Konga mode
-`7` | Head of regular *<ruby>激<rt>Geki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt>キ<rt>ki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt>船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* balloon <br /> Examples: `7008`, `7778`, `7001` | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | *<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* Balloon | Repeatly [correctly input](#judgement-expection-type) Surface until exactly certain amount of reacted inputs during its duration, reacts to each correct input up to 1 per 60fps frame†† (official games). [Consumes wrong inputs](#judgement-expection-type). Consumes the note when cleared. <br /> Each reacted input increases score (except for CS4&ndash;5, TDM, & PSP1&ndash;2). <br /> Awards extra score bonus† when cleared. | Fail to reach enough amount of reacted inputs. <br /> Does not give penalties except that notes (except bombs/mines (?)) placed within the duration of the balloon are impossible to hit while the balloon is not cleared. |
-`9` | Head of special burst note/balloon <br> (Differ from game to game) <br /> Examples: `9008`, `9998`, `9001` | &bull; (Vary) <br> &bull; Big yellow circle with potato attached (PS2-generation) <br> &bull; Big yellow circle in the shape of a confetti ball 🎊 (PS3- and PC-generation) <br> &bull; Has particle decorative visual effects in AC. | *<ruby>く<rt>Ku</rt>す<rt>su</rt>玉<rt>dama</rt></ruby>* Party Popper <br> (Strictly speaking, *<ruby>薬<rt>Kusu</rt>玉<rt>dama</rt></ruby>/<ruby>く<rt>Ku</rt>す<rt>su</rt>玉<rt>dama</rt></ruby>* "Confetti Ball" 🎊 & party popper 🎉 only resemble each other and are not the same thing) | &bull; (Vary) <br> &bull; In AC, repeatly [correctly input](#judgement-expection-type) Surface until exactly certain amount of reacted inputs (shared among players) during its duration, reacts to each correct input up to 1 per 60fps frame†† (official games). [Consumes wrong inputs](#judgement-expection-type). Consumes the note when cleared. <br /> Each reacted input increases score. <br /> Awards vary extra score bonus† to all players when cleared, according to the time of an additional correct Surface input (wrong inputs consumed) hinted by the player character's face (AC7) or whether the note is cleared quickly enough (later AC) <br> | (same as `7`) | ***First seen in***: TaikoJiro v2.75 <br /> In the official games, becomes `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player.
-`D` | Fuze/fuse drumroll <br /> Examples: `D008`, `DDD8`, `D001` | ? <br /> (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt>爆<rt>baku</rt>弾<rt>dan</rt></ruby> "Time bomb"/Fuseroll) | Similar to `7` but awards a "bomb/mine-pass" judgement. | Similar to `7` but gives a BOOM ("bomb/mine-miss") judgement & a combo-break and decreases *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge. | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 <br /> ***First seen in***: (first proposed from OutFox), OpenTaiko (0auBSQ) v0.6.0 <br /> Not in the official games.
+`7` | Head of regular *<ruby>激<rt>Geki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt>キ<rt>ki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt>船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* balloon <br /> Examples: `7008`, `7778`, `7001` | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | *<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* Balloon | Repeatly [correctly input](#judgement-expection-type) Surface until exactly certain amount of reacted inputs during its duration, reacts to each correct input up to 1 per 60fps frame†† (original games). [Consumes wrong inputs](#judgement-expection-type). Consumes the note when cleared. <br /> Each reacted input increases score (except for CS4&ndash;5, TDM, & PSP1&ndash;2). <br /> Awards extra score bonus† when cleared. | Fail to reach enough amount of reacted inputs. <br /> Does not give penalties except that notes (except bombs/mines (?)) placed within the duration of the balloon are impossible to hit while the balloon is not cleared. |
+`9` | Head of special burst note/balloon <br> (Differ from game to game) <br /> Examples: `9008`, `9998`, `9001` | &bull; (Vary) <br> &bull; Big yellow circle with potato attached (PS2-generation) <br> &bull; Big yellow circle in the shape of a confetti ball 🎊 (PS3- and PC-generation) <br> &bull; Has particle decorative visual effects in AC. | *<ruby>く<rt>Ku</rt>す<rt>su</rt>玉<rt>dama</rt></ruby>* Party Popper <br> (Strictly speaking, *<ruby>薬<rt>Kusu</rt>玉<rt>dama</rt></ruby>/<ruby>く<rt>Ku</rt>す<rt>su</rt>玉<rt>dama</rt></ruby>* "Confetti Ball" 🎊 & party popper 🎉 only resemble each other and are not the same thing) | &bull; (Vary) <br> &bull; In AC, repeatly [correctly input](#judgement-expection-type) Surface until exactly certain amount of reacted inputs (shared among players) during its duration, reacts to each correct input up to 1 per 60fps frame†† (original games). [Consumes wrong inputs](#judgement-expection-type). Consumes the note when cleared. <br /> Each reacted input increases score. <br /> Awards vary extra score bonus† to all players when cleared, according to the time of an additional correct Surface input (wrong inputs consumed) hinted by the player character's face (AC7) or whether the note is cleared quickly enough (later AC) <br> | (same as `7`) | ***First seen in***: TaikoJiro v2.75 <br /> In the original games, becomes `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player.
+`D` | Fuze/fuse drumroll <br /> Examples: `D008`, `DDD8`, `D001` | ? <br /> (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt>爆<rt>baku</rt>弾<rt>dan</rt></ruby> "Time bomb"/Fuseroll) | Similar to `7` but awards a "bomb/mine-pass" judgement. | Similar to `7` but gives a BOOM ("bomb/mine-miss") judgement & a combo-break and decreases *<ruby>魂<rt>tamashii</rt>ゲー<rt>gee</rt>ジ<rt>ji</rt></ruby>* spirit gauge/soul gauge. | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): 1.2 <br /> ***First seen in***: (first proposed from OutFox), OpenTaiko (0auBSQ) v0.6.0 <br /> Not in the original games.
 `8` | Explicit end of a drumroll-type note (if any), otherwise (blank) | &bull; (round end of a bar) (end of bar-type drumrolls) <br /> &bull; (none) (otherwise) | &bull; (っ!!) (end of non-balloon bar drumrolls) <br /> &bull; (none) (otherwise) | Nothing needs to be done. Consumes no input. | (impossible to fail) | Stopping rolling the drum at-or-before the point (end of drumrolls) <br /> Introduced to replaced the TJF syntax for specifying drumroll duration (`5555` / `7777`) (explained below).
 
 †: No score bonuses if the PC-generation scoring rule is followed. \
@@ -5229,7 +5229,7 @@ Time Window | Official default range (Easy/Normal) | (Hard/Oni) | Explanation
 
 #### Duration of drumroll-type notes
 
-The head and end of drumroll-type notes have no time window. In the official arcade game, drumroll inputs are allowed at-or-after/at-or-before the containing frame of the judgement time of the head/end of the drumroll-type note.
+The head and end of drumroll-type notes have no time window. In the original arcade games, drumroll inputs are allowed at-or-after/at-or-before the containing frame of the judgement time of the head/end of the drumroll-type note.
 
 During the defined duration interval within a drumroll-type note, either `0` or the symbol of the note head may appear. *E.g.*: `5008` / `5558` / `5058` are all equivalent. *Simulator-dependent*: Whether other drumroll-type notes can be used in place of the repeated symbol of the note head.
 
@@ -5260,7 +5260,7 @@ By default, drumroll-type notes are ended at-or-before one of:
   * *Proposal* (IID): If a drumroll-type notes would end by hit-type note symbol, but an isolated `8` occurs after the hit-type note and before any drumroll-type note head symbol, the drumroll-type note ends instead at a position earlier than the `8` by an *simulator-dependent* duration as if the hit-type notes were irrelevant for determining the roll length.
 * In TaikoJiro, the definition position of the last note symbol of the notechart, except when the note head is in the definition of a "branch"/path other than the *<ruby>普<rt>Fu</rt>通<rt>tsuu</rt></ruby>* Normal "branch"/path.
 
-In the official games, drumroll-type notes are usually intentionally made to end earlier than the designed ending beat position by the amount of beats of a 1⁄48th note.
+In the original games, drumroll-type notes are usually intentionally made to end earlier than the designed ending beat position by the amount of beats of a 1⁄48th note.
 
 * Reference: *連打秒数表* ("List of seconds of drumrolls"). 太鼓の達人 譜面とか Wiki\* ("Taiko no Tatsujin - Wiki\* about Notecharts and so on"). <https://wikiwiki.jp/taiko-fumen/収録曲/連打秒数表>
 
@@ -5301,7 +5301,7 @@ Right | Hit the right drum | Any right face buttons (X/Y/B/A/C-stick)
 Left | Hit the left drum | Any left face buttons (left stick/D-pad)
 Clap | Clap above both drum <br /> (sound-level activated) | Any back trigger buttons (L/R) or right shoulder button (Z)
 
-Timing Window | Official default range | Explanation
+Timing Window | Default range in the original games | Explanation
 --- | --- | ---
 GREAT | ±25ms
 OK | ±75ms | Widest non&ndash;combo-break timing window.
@@ -5317,17 +5317,17 @@ MISS | (miss) | ‡ Corresponds to a unhit *<ruby>不<rt>Fu</rt>可<rt>ka</rt></
 `G` | (same as `3`) | (see `3`) | (see `3`) | (see `3`) | (see `3`) | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ) v0.5.4, OutFox v0.4.18 <br /> By analogy with Taiko mode.
 `4` | Clap | Sky-blue circle with star-ish edge | <ruby>チャ<rt>Cha</rt></ruby> / <ruby>チャッ<rt>Cha'</rt></ruby> / <ruby>チャン<rt>Chan</rt></ruby> | [Correctly input](#judgement-expection-type) Clap within the OK timing window, consumes the note. [Propogates wrong inputs](#judgement-expection-type) <br /> Awards the same as `1`. | Otherwise, correctly input but only within the BAD judgement window (consumes the note) or [missing input](#judgement-expection-type) (keeps note's visibility). <br /> Gives the same penalty as `1`. |
 `J` | (same as `4`) | (see `4`) | (see `4`) | (see `4`) | (see `4`) | [***OpenTaiko-OutFox standard spec***](#proposal-komi-spec): (non-standard) <br /> ***First seen in***: OutFox v0.4.18 (?)
-`A` | Hand-holding both drum beats | (Pink circle with hands holding with other note(s) for other player(s)) | ? | Similar to `3` but awards extra score bonus† if all players hit within a certain time duration <br> | (same as `3`) | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ), OutFox <br /> Might becomes `3` when no hand-holding notes exist at the same time position for any of the other players. <br> Not in the official games. <br> By analogy with `GAME:Taiko`.
-`B` | Hand-holding clap beat | (Sky-blue circle with star-ish edge and with hands holding with other note(s) for other player(s)) | ? | Similar to `4` but awards extra score bonus† if all players hit within a certain time duration. | (same as `4`) | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ), OutFox <br /> Might becomes `4` when no hand-holding notes exist at the same time position for any of the other players. <br> Not in the official games. <br> By analogy with Taiko mode.
-`C` | Bomb/mine | (Small dark-blue cherry bomb with ignited fuze 💣) | (none) | [Missing input](#judgement-expection-type). <br /> Awards a "bomb/mine-pass" judgement. | [Correctly input](#judgement-expection-type) Left, Right, or Clap within the OK (?) timing window, consumes the note. <br /> Gives a BOOM ("bomb/mine-miss") judgement & a combo-break and decreases healty gauge. | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ) <br /> Not in the official games. <br /> By analogy with Taiko mode.
-`F` | *Ad libitum* note (AD-LIB) | (invisible by default) | (none) | [Correctly input](#judgement-expection-type) Left, Right, or Clap within the OK (?) timing window, consumes the note. <br /> Awards an AD-LIB judgement but keep combo unchanged. | [Missing input](#judgement-expection-type). <br /> Gives no penalties. | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ) <br /> Not in the official games. <br> By analogy with Taiko mode.
-`5` | Head of right bar drumroll <br /> Examples: `5008`, `5558`, `5001` | Red circle with its right half filled and with bar attached behind | *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>～* "Roll~" | Repeatly [correctly input](#judgement-expection-type) Right by any times during its duration, reacts to each correct input up to 1 per 60fps frame†† (official games). [Consumes wrong inputs](#judgement-expection-type). <br /> Increases score per reacted input. | (impossible to fail) |
-`I` | Head of left bar drumroll <br /> Examples: `I008`, `III8`, `I001` | Yellow circle with its left half filled and with bar attached behind | *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>～* "Roll~" | Repeatly [correctly input](#judgement-expection-type) Left by any times during its duration, reacts to each correct input up to 1 per 60fps frame†† (official games). [Consumes wrong inputs](#judgement-expection-type). <br /> Increases score per reacted input. | (impossible to fail) |
-`6` | Head of both bar drumroll <br /> Examples: `6008`, `6668`, `6001` | Pink circle with bar attached behind | *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>～* "Roll~" | Repeatly [correctly input](#judgement-expection-type) Left or Right by any times during its duration, reacts to each correct input up to 1 per 60fps frame†† (official games). [Consumes wrong inputs](#judgement-expection-type). <br /> Increases score per reacted input. | (impossible to fail) |
-`H` | Head of clap bar applause <br /> Examples: `H008`, `HHH8`, `H001` | Sky-blue circle with star-ish edge and with bar attached behind | *<ruby>拍<rt>Haku</rt>手<rt>shu</rt></ruby>～* "Applaud~" | Repeatly [correctly input](#judgement-expection-type) Clap by any times during its duration, reacts to each correct input up to 1 per 60fps frame†† (official games). [Consumes wrong inputs](#judgement-expection-type). <br /> Increases score per reacted input. | (impossible to fail) |
-`7` | Head of regular *<ruby>激<rt>Geki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt>キ<rt>ki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt>船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* balloon <br /> Examples: `7008`, `7778`, `7001` | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | (*<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* Balloon) | Repeatly [correctly input](#judgement-expection-type) Left or Right until exactly certain amount of reacted inputs during its duration, reacts to each correct input up to 1 per 60fps frame†† (official games). [Consumes wrong inputs](#judgement-expection-type). Consumes the note when cleared. <br /> Each reacted hit increases score. <br /> Awards extra score bonus† when cleared. | Fail to reach enough amount of reacted inputs. <br /> Does not give penalties except that notes (except bombs/mines (?)) placed within the duration of the balloon are impossible to hit while the balloon is not cleared. | ***First seen in***: OpenTaiko-OutFox standard 1.2 <br /> By analogy with Taiko mode.
-`9` | Head of special burst note/balloon <br /> Examples: `9008`, `9998`, `9001` | (Vary) | (*<ruby>く<rt>Ku</rt>す<rt>su</rt>玉<rt>dama</rt></ruby>* Party Popper) | (Vary) <br> Repeatly [correctly input](#judgement-expection-type) Left or Right until exactly certain amount of reacted inputs (shared among players) during its duration, reacts to each correct input up to 1 per 60fps frame†† (official games). [Consumes wrong inputs](#judgement-expection-type). Consumes the note when cleared. <br /> Each reacted hit increases score. <br /> Awards vary extra score bonus† to all players when cleared, according to whether the note is cleared quickly enough. | (same as `7`) | ***First seen in***: OpenTaiko-OutFox standard 1.2 <br /> Might become `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player. <br /> Not in the official games. <br /> By analogy with Taiko mode.
-`D` | Fuze/fuse drumroll <br /> Examples: `D008`, `DDD8`, `D001` | (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt>爆<rt>baku</rt>弾<rt>dan</rt></ruby> "Time bomb"/Fuseroll) | Similar to `7` but awards a "bomb/mine-pass" judgement. | Similar to `7` but gives a BOOM ("bomb/mine-miss") judgement & a combo-break and decreases healthy gauge. | ***First seen in***: OpenTaiko-OutFox standard 1.2 (first proposed from OutFox), OpenTaiko (0auBSQ) v0.6.0 <br /> Not in the official games. <br /> By analogy with Taiko mode.
+`A` | Hand-holding both drum beats | (Pink circle with hands holding with other note(s) for other player(s)) | ? | Similar to `3` but awards extra score bonus† if all players hit within a certain time duration <br> | (same as `3`) | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ), OutFox <br /> Might becomes `3` when no hand-holding notes exist at the same time position for any of the other players. <br> Not in the original games. <br> By analogy with `GAME:Taiko`.
+`B` | Hand-holding clap beat | (Sky-blue circle with star-ish edge and with hands holding with other note(s) for other player(s)) | ? | Similar to `4` but awards extra score bonus† if all players hit within a certain time duration. | (same as `4`) | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ), OutFox <br /> Might becomes `4` when no hand-holding notes exist at the same time position for any of the other players. <br> Not in the original games. <br> By analogy with Taiko mode.
+`C` | Bomb/mine | (Small dark-blue cherry bomb with ignited fuze 💣) | (none) | [Missing input](#judgement-expection-type). <br /> Awards a "bomb/mine-pass" judgement. | [Correctly input](#judgement-expection-type) Left, Right, or Clap within the OK (?) timing window, consumes the note. <br /> Gives a BOOM ("bomb/mine-miss") judgement & a combo-break and decreases healty gauge. | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ) <br /> Not in the original games. <br /> By analogy with Taiko mode.
+`F` | *Ad libitum* note (AD-LIB) | (invisible by default) | (none) | [Correctly input](#judgement-expection-type) Left, Right, or Clap within the OK (?) timing window, consumes the note. <br /> Awards an AD-LIB judgement but keep combo unchanged. | [Missing input](#judgement-expection-type). <br /> Gives no penalties. | ***First seen in***: OpenTaiko-OutFox standard 1.2, OpenTaiko (0auBSQ) <br /> Not in the original games. <br> By analogy with Taiko mode.
+`5` | Head of right bar drumroll <br /> Examples: `5008`, `5558`, `5001` | Red circle with its right half filled and with bar attached behind | *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>～* "Roll~" | Repeatly [correctly input](#judgement-expection-type) Right by any times during its duration, reacts to each correct input up to 1 per 60fps frame†† (original games). [Consumes wrong inputs](#judgement-expection-type). <br /> Increases score per reacted input. | (impossible to fail) |
+`I` | Head of left bar drumroll <br /> Examples: `I008`, `III8`, `I001` | Yellow circle with its left half filled and with bar attached behind | *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>～* "Roll~" | Repeatly [correctly input](#judgement-expection-type) Left by any times during its duration, reacts to each correct input up to 1 per 60fps frame†† (original games). [Consumes wrong inputs](#judgement-expection-type). <br /> Increases score per reacted input. | (impossible to fail) |
+`6` | Head of both bar drumroll <br /> Examples: `6008`, `6668`, `6001` | Pink circle with bar attached behind | *<ruby>連<rt>Ren</rt>打<rt>da</rt></ruby>～* "Roll~" | Repeatly [correctly input](#judgement-expection-type) Left or Right by any times during its duration, reacts to each correct input up to 1 per 60fps frame†† (original games). [Consumes wrong inputs](#judgement-expection-type). <br /> Increases score per reacted input. | (impossible to fail) |
+`H` | Head of clap bar applause <br /> Examples: `H008`, `HHH8`, `H001` | Sky-blue circle with star-ish edge and with bar attached behind | *<ruby>拍<rt>Haku</rt>手<rt>shu</rt></ruby>～* "Applaud~" | Repeatly [correctly input](#judgement-expection-type) Clap by any times during its duration, reacts to each correct input up to 1 per 60fps frame†† (original games). [Consumes wrong inputs](#judgement-expection-type). <br /> Increases score per reacted input. | (impossible to fail) |
+`7` | Head of regular *<ruby>激<rt>Geki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt>キ<rt>ki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt>船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* balloon <br /> Examples: `7008`, `7778`, `7001` | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | (*<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* Balloon) | Repeatly [correctly input](#judgement-expection-type) Left or Right until exactly certain amount of reacted inputs during its duration, reacts to each correct input up to 1 per 60fps frame†† (original games). [Consumes wrong inputs](#judgement-expection-type). Consumes the note when cleared. <br /> Each reacted hit increases score. <br /> Awards extra score bonus† when cleared. | Fail to reach enough amount of reacted inputs. <br /> Does not give penalties except that notes (except bombs/mines (?)) placed within the duration of the balloon are impossible to hit while the balloon is not cleared. | ***First seen in***: OpenTaiko-OutFox standard 1.2 <br /> By analogy with Taiko mode.
+`9` | Head of special burst note/balloon <br /> Examples: `9008`, `9998`, `9001` | (Vary) | (*<ruby>く<rt>Ku</rt>す<rt>su</rt>玉<rt>dama</rt></ruby>* Party Popper) | (Vary) <br> Repeatly [correctly input](#judgement-expection-type) Left or Right until exactly certain amount of reacted inputs (shared among players) during its duration, reacts to each correct input up to 1 per 60fps frame†† (original games). [Consumes wrong inputs](#judgement-expection-type). Consumes the note when cleared. <br /> Each reacted hit increases score. <br /> Awards vary extra score bonus† to all players when cleared, according to whether the note is cleared quickly enough. | (same as `7`) | ***First seen in***: OpenTaiko-OutFox standard 1.2 <br /> Might become `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player. <br /> Not in the original games. <br /> By analogy with Taiko mode.
+`D` | Fuze/fuse drumroll <br /> Examples: `D008`, `DDD8`, `D001` | (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | (<ruby>時<rt>Ji</rt>爆<rt>baku</rt>弾<rt>dan</rt></ruby> "Time bomb"/Fuseroll) | Similar to `7` but awards a "bomb/mine-pass" judgement. | Similar to `7` but gives a BOOM ("bomb/mine-miss") judgement & a combo-break and decreases healthy gauge. | ***First seen in***: OpenTaiko-OutFox standard 1.2 (first proposed from OutFox), OpenTaiko (0auBSQ) v0.6.0 <br /> Not in the original games. <br /> By analogy with Taiko mode.
 `8` | Explicit end of a drumroll-type or applause note (if any), otherwise (blank) | &bull; (round end of a bar) (end of a bar-type drumroll or applause) <br /> &bull; (none) (otherwise) | (none) | Nothing needs to be done. Consumes no input. | (impossible to fail) | Stop rolling both the bongo drums or clapping at-or-before the point (end of drumrolls)
 
 †: No score bonuses if the PC-generation scoring rule is followed. \
@@ -5382,15 +5382,15 @@ MISS | For missing or wrong inputs
 `J` | Top-double bottom-double note | Green or blue square on the top lane and red square on the bottom lane, joined by grey background | [Correctly input](#judgement-expection-type) Bottom-left + Bottom-right + Top-left + Top-right with the first input within the GOOD‡ timing window, consumes the note. <br /> Awards the same as `1` according to the timing of the first input. | Otherwise, correctly, [incompletely, or wrongly input](#judgement-expection-type) with the first input within the MISS judgement window (consumes the note) or [missing input](#judgement-expection-type). <br /> Gives the same penalty as `1`. |
 `A` | (same as `3`) | (see `3`) | (see `3`) | (see `3`) | By analogy with `GAME:Taiko`.
 `B` | (same as `4`) | (see `4`) | (see `4`) | (see `4`) | By analogy with `GAME:Taiko`.
-`C` | Bomb/mine | (Small dark-blue cherry bomb with ignited fuze 💣) | [Missing input](#judgement-expection-type). <br /> Awards a "bomb/mine-pass" judgement. | [Correctly input](#judgement-expection-type) either Bottom or Top within the GOOD‡ (?) timing window, consumes the note. <br /> Gives a BOOM ("bomb/mine-miss") judgement & a combo-break and decreases healty gauge. | Not in the official games. <br /> By analogy with Taiko mode.
-`F` | *Ad libitum* note (AD-LIB) | (invisible by default) | [Correctly input](#judgement-expection-type) either Bottom or Top within the GOOD‡ timing window, consumes the note. <br /> Awards an AD-LIB judgement. | [Missing input](#judgement-expection-type). <br /> Gives no penalties. | Not in the official games. <br> By analogy with Taiko mode.
+`C` | Bomb/mine | (Small dark-blue cherry bomb with ignited fuze 💣) | [Missing input](#judgement-expection-type). <br /> Awards a "bomb/mine-pass" judgement. | [Correctly input](#judgement-expection-type) either Bottom or Top within the GOOD‡ (?) timing window, consumes the note. <br /> Gives a BOOM ("bomb/mine-miss") judgement & a combo-break and decreases healty gauge. | Not in the original games. <br /> By analogy with Taiko mode.
+`F` | *Ad libitum* note (AD-LIB) | (invisible by default) | [Correctly input](#judgement-expection-type) either Bottom or Top within the GOOD‡ timing window, consumes the note. <br /> Awards an AD-LIB judgement. | [Missing input](#judgement-expection-type). <br /> Gives no penalties. | Not in the original games. <br> By analogy with Taiko mode.
 `5` | Head of bottom bar drumroll <br /> Examples: `5008`, `5558`, `5001` | Red circle with bar attached behind on the bottom lane | Repeatly [correctly input](#judgement-expection-type) either Bottom by any times during its duration, reacts to each input up to *simulator-dependent* speed††. [Consumes wrong inputs](#judgement-expection-type). <br /> Awards the same as `6`. | (impossible to fail) | By analogy with `GAME:Konga`.
 `I` | Head of top bar drumroll <br /> Examples: `I008`, `III8`, `I001` | Green or blue circle with bar attached behind on the top lane | Repeatly [correctly input](#judgement-expection-type) either Top by any times during its duration, reacts to each input up to *simulator-dependent* speed††. [Consumes wrong inputs](#judgement-expection-type). <br /> Awards the same as `6`. | (impossible to fail) | By analogy with `GAME:Konga`.
 `6` | Head of bottom-double bar drumroll <br /> Examples: `6008`, `6668`, `6001` | Red square with bar attached behind on the bottom lane | Repeatly [correctly input](#judgement-expection-type) Bottom-left + Bottom-right by any times during its duration, reacts to each input up to *simulator-dependent* speed††. | (impossible to fail) | By analogy with `GAME:Konga` and `GAME:Taiko`.
 `H` | Head of top-double bar drumroll <br /> Examples: `H008`, `HHH8`, `H001` | Green or blue square with bar attached behind on the top lane | Repeatly [correctly input](#judgement-expection-type) Top-left + Top-right by any times during its duration, reacts to each input up to *simulator-dependent* speed††. | (impossible to fail) | By analogy with `GAME:Konga` and `GAME:Taiko`. |
 `7` | Head of regular *<ruby>激<rt>Geki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>/<ruby>ゲ<rt>Ge</rt>キ<rt>ki</rt>連<rt>ren</rt>打<rt>da</rt></ruby>* "fierce drumroll" burst note / *<ruby>風<rt>Fuu</rt>船<rt>sen</rt></ruby>/<ruby>ふ <rt>Fu</rt>う<rt>u</rt>せ<rt>se</rt>ん<rt>n</rt></ruby>* balloon <br /> Examples: `7008`, `7778`, `7001` | Small orange circle (slightly brighter than `1`) with orange-ish red balloon attached behind | Repeatly [correctly input](#judgement-expection-type) either Bottom or Top until exactly certain amount of reacted inputs during its duration, reacts to each correct input up to *simulator-dependent* speed††. [Consumes wrong inputs](#judgement-expection-type). Consumes the note when cleared. | Fail to reach enough amount of reacted inputs. <br /> Does not give penalties except that notes (except bombs/mines (?)) placed within the duration of the balloon are impossible to press while the balloon is not cleared. | By analogy with Taiko mode.
-`9` | Head of special burst note/balloon <br /> Examples: `9008`, `9998`, `9001` | (Vary) | (Vary) <br> Repeatly [correctly input](#judgement-expection-type) either Bottom or Top until exactly certain amount of reacted inputs (shared among players) during its duration, reacts to each correct input up *simulator-dependent* speed††. [Consumes wrong inputs](#judgement-expection-type). Consumes the note when cleared. | (same as `7`) | Might become `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player. <br /> Not in the official games. <br /> By analogy with Taiko mode.
-`D` | Fuze/fuse drumroll <br /> Examples: `D008`, `DDD8`, `D001` | (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | Similar to `7` but awards a "bomb/mine-pass" judgement. | Similar to `7` but gives a BOOM ("bomb/mine-miss") judgement & a combo-break and decreases healthy gauge. | Not in the official games. <br /> By analogy with Taiko mode.
+`9` | Head of special burst note/balloon <br /> Examples: `9008`, `9998`, `9001` | (Vary) | (Vary) <br> Repeatly [correctly input](#judgement-expection-type) either Bottom or Top until exactly certain amount of reacted inputs (shared among players) during its duration, reacts to each correct input up *simulator-dependent* speed††. [Consumes wrong inputs](#judgement-expection-type). Consumes the note when cleared. | (same as `7`) | Might become `7` when not all players encounter `9` with the note head, the full bonus time point, & the note end respectively at the same time position for each player. <br /> Not in the original games. <br /> By analogy with Taiko mode.
+`D` | Fuze/fuse drumroll <br /> Examples: `D008`, `DDD8`, `D001` | (Big circular clock with blue-ish purple edge and with bar attached behind in OpenTaiko (0auBSQ)) | Similar to `7` but awards a "bomb/mine-pass" judgement. | Similar to `7` but gives a BOOM ("bomb/mine-miss") judgement & a combo-break and decreases healthy gauge. | Not in the original games. <br /> By analogy with Taiko mode.
 `8` | Explicit end of a drumroll-type note (if any), otherwise (blank) | &bull; (round end of a bar) (end of a bar-type drumroll) <br /> &bull; (none) (otherwise) | Nothing needs to be done. Consumes no input. | (impossible to fail) | Stop repeately pressing buttons at-or-before the point (end of drumrolls)
 
 ††: In most simulators, the react speed of drumroll-type notes is either only limited by the current frame or unlimited.
@@ -5552,9 +5552,9 @@ Some of the *<ruby>漢<rt>kan</rt>字<rt>ji</rt></ruby>* "Chinese Character" for
 For some terminologies of the game, there exist multiple English translations. Their are expressed as `"LIT"/TDM/TKT/PC (ALTs)` when necessary in this article:
 
 * `"LIT"` &mdash; A rather literal translation
-* `TDM` &mdash; The earlier English translation from the official PS2 console game *Taiko: Drum Master*
+* `TDM` &mdash; The earlier English translation from the original PS2 console game *Taiko: Drum Master*
 * `TKT` &mdash; <https://taikotime.blogspot.com/2010/12/glossary.html>
-* `PC` &mdash; The official English translation from the official PC-generation games and the official English website: <https://taiko.namco-ch.net/taiko/en>
+* `PC` &mdash; The official English translation from the original PC-generation games and the official English website of the original game series: <https://taiko.namco-ch.net/taiko/en>
 * `ALTs` &mdash; Alternative translation(s) usually used in the code & the notechart format
 
 Fields with unknown (not existing or simply not investigated by the maintainer of this article) translation are denoted with `?`.
