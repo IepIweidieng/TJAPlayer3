@@ -1728,13 +1728,16 @@ Recommendation for charters: The `SCOREMODE:`, `SCOREINIT:`, & [`SCOREDIFF:`](#s
 #### Argument Forms
 
 * `SCOREINIT:<(positive-or-zero-int)score-init>`
+  * Specify the `init` when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" option is disabled (TaikoJiro 1 "stepwise" scoring)
+  * Make `init` when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" option is enabled ("stable") is determined by the simulator.
 * `SCOREINIT:<(positive-or-zero-int)score-init>, <(positive-or-zero-int)score-init-shin-uchi>` \
   ***Supported by***: TaikoJiro v2.70, TJAPlayer2 for.PC
-  * If supported, `<score-init-shin-uchi>` is used for `init` when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" option ("stable") is enabled
+  * If supported, `<score-init-shin-uchi>` is used for `init` when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" option is enabled (TaikoJiro 1 "stable" scoring)
 * `SCOREINIT:0`
   * The behavior is *simulator-dependent*.
+  * In TaikoJiro 1: Specifying `0` to `9` makes the specified `init` to be determined by the simulator.
 * Initial value / `SCOREINIT:`
-  * `init` is determined by the simulator. *Simulator-dependent*: The details for determining it; usually one of the official games is followed.
+  * Make either `init` values to be determined by the simulator. *Simulator-dependent*: The details for determining it; usually one of the official games is followed.
 
 ### SCOREDIFF:
 
@@ -1765,7 +1768,11 @@ In the official game, `diff` is not required to be a multiple of 10. Instead, th
   * `diff` is `0`.
   * Recommendation for charters: To specify the basic score when the *<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" option ("stable") is enabled, the non–*<ruby>真<rt>Shin'</rt>打<rt>uchi</rt></ruby>* "true percussion (performance)" score should also be specified, and [`SCOREINIT:<score-init>, <score-init-shin-uchi>`](#scoreinit) should be used and `SCOREDIFF:0` should not be used.
 * Initial value / `SCOREDIFF:`
-  * `diff` is determined by the simulator. *Simulator-dependent*: The details for determining it; usually one of the official games is followed.
+  * Make `diff` to be determined by the simulator. *Simulator-dependent*: The details for determining it; usually one of the official games is followed.
+
+#### Compatibility Issues
+
+* In TaikoJiro 1, negative score per hit is possible, but the added value is displayed as the value plus 4294967296 (2³²).
 
 ### HIDDENBRANCH:
 
