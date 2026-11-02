@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-10-28 (UTC+8)
+* Last changed: 2026-11-03 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1223,8 +1223,11 @@ The display details are *simulator-dependent*.
 
 * `EXPLICIT:1`
   * The song has explicit lyrics.
-* `EXPLICIT:0` / `EXPLICIT:`
+* `EXPLICIT:0`
   * The song has no explicit lyrics.
+* `EXPLICIT:`
+  * The behavior is *simulator-dependent*.
+  * In OpenTaiko (0auBSQ): The header is ignored.
 
 ### GAME:
 
