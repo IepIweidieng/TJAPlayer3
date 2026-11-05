@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-11-03 (UTC+8)
+* Last changed: 2026-11-05 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -2427,7 +2427,7 @@ Respectively **start** / **end** the region of notechart definition.
 ***First seen in***: TaikoJiro \
 ***Supported by***: (assumedly universally supported, including TaikoJiro 1 & 2, TJAPlayer2 for.PC, OutFox v0.4.9.9) \
 ***Scope***: branch \
-***Scope-fineness***: measure \
+***Scope-fineness***: measure; (TJAPlayer2 for.PC) at-or-after \
 ***Effect time***: static \
 ***Effect target***: notes, bar lines \
 ***Effect branches***: *Simulator-dependent* (with *Simulator-dependent* behaviors)
@@ -2449,12 +2449,18 @@ Replaced the TJF command `#ONESYOSETU` (adjust the duration of this **one *<ruby
   * In TaikoJiro 1, the lower numeral becomes `<lower-numeral>` + 4294967296 (2³²).
 * Initial value: `#MEASURE 4/4`
 
+#### Usage Notices
+
+*Simulator-dependent*: How a `#MEASURE` command placed after any note symbols in a measure sets the effective measure beat duration for calculating the length of [measure divisions](#the-measure-delimiter-symbol-and-timing).
+
+* In TaikoJiro, the last defined `#MEASURE` in a measure sets the effective measure beat duration for the whole measure regardless of where it is defined.
+* In TJAPlayer2 for.PC, `#MEASURE` sets the effective measure beat duration of the [definition cursor](#definition-cursor-and-played-time) immediately.
+
 #### Compatibility Issues
 
 * In TaikoJiro 1 and 2, no whitespaces are allowed before the `/`
 * In TaikoJiro 1 but not 2, `<lower-numeral>` is parsed as an integer, decimal places are thus ignored, and negative-or-zero values are treated as the value plus 4294967296 (2³²).
-* In TaikoJiro 1 but not 2, `<upper-numeral>` being 0 fails to set measures' timing spacing, but still sets the time duration of measure divisions in each measure to 0. Zero-duration measures can be alternatively constructed using a large `<upper-numeral>` value due to the limited timing precision.
-* In TaikoJiro, the last defined `#MEASURE` in a measure applies to the whole measure regardless of where it is defined.
+* In TaikoJiro 1 but not 2, `<upper-numeral>` being 0 fails to set measures' timing spacing, but still sets the time duration of [measure divisions](#the-measure-delimiter-symbol-and-timing) in each measure to 0. Zero-duration measures can be alternatively constructed using a large `<upper-numeral>` value due to the limited timing precision.
 * In TaikoJiro 1, `#MEASURE`s defined in [a branch definition](#n--e--m) are partially reverted (only affects measure divisions in the measure) after [a `#BRANCHEND` or another `#BRANCHSTART` command](#branchstart--branchend). Not explicit defining `#MEASURE` after the branch definition section causes unintended behaviors. See [the `#N` / `#E` / `#M` commands](#n--e--m) for details.
 
 ### #DELAY
@@ -5036,12 +5042,12 @@ The beat and time position of a non-dummy bar line is at the beginning of the fi
 
 Equation: `beat_duration_of_division` (scope: a measure)
 
-* = `measure_beat_duration` / `measure_total_division_weight`
-* = 4 (beats) × `measure_upper_numeral` / `measure_lower_numeral` / `measure_total_division_weight`
+* = `effective_measure_beat_duration` / `measure_total_division_weight`, variables calculated at each division head
+* = 4 (beats) × `effective_measure_upper_numeral` / `effective_measure_lower_numeral` / `measure_total_division_weight`, variables calculated at each division head
 
 Equation: `time_duration_of_division` (unit: seconds)
 
-* = 60 (s) × `beat_duration_of_division` / `defined_bpm_at_division_head`
+* = 60 (s) × `beat_duration_of_division` / `bpm`, variables calculated at each division head
 
 #### Compatibility issues:
 
