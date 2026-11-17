@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-11-05 (UTC+8)
+* Last changed: 2026-11-17 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -1862,6 +1862,11 @@ Timing behaviors:
   * `ms` &mdash; the [definition cursor](#definition-cursor-and-played-time) has the same precision as `any`, but the resulting time for each measure division has the precision is 0.001 seconds, rounded toward 0.
   * `ms-bpm` &mdash; the definition cursor has the same precision as `any`, but the elapsed time between elapse points is rounded to 0.001 second (toward 0). The elapsed point is one of chart start, the `#BPMCHANGE` command, and the end of a measure with `#BPMCHANGE` defined. The resulting time for each measure division and the time duration of `#DELAY` has the precision of 0.001 seconds, rounded toward 0. Notes' beat position is also aligned to pixels when a `#BPMCHANGE` comment is encountered (?).
     * Reference: K. *太鼓さん次郎 Ver.2.92 の内部仕様雑記*. ("Miscellaneous notes on the internal behaviors of TaikoJiro Ver.2.92"). <https://note.com/lime_5137/n/n672c0a41495d>
+* `timing-redefinition`
+  * ***Impact level***: timing ★★★★・
+  * How [measure divisions](#the-measure-delimiter-symbol-and-timing) commands override when overlapped.
+  * `keep` &mdash; Keep the time of already defined notechart objects.
+  * `override` &mdash; Recalculate already defined notechart objects for all branches using their "time-signed beat position", which increase or decrease by the sign of time duration for each measure division and `#DELAY`.
 * `timing-effect-order`
   * ***Impact level***: gimmicky ★★・・・
   * The applying order of the per-note static-time effects of `#BPMCHANGE` & `#SCROLL` and the command-time effects of `#BPMCHANGE` & positive `#DELAY`.
@@ -1947,6 +1952,7 @@ Behavior \\ Mode | (Original game) | `jiro1` | `jiro2` | `tmg` | `tjap3` | `oos`
 `balloonnem-popcount-nonbranch` | N/A | N/A <br /> (`1nem`) | N/A <br /> (`1nem`) | N/A <br /> (`1nem`) | `1n-or-end-3last` | `1nem`
 `end-at` | `music` <br /> (`music-and-end`) | `music` <br /> (`music-and-end`) | `music` <br /> (`music-and-end`) | `music` (?) <br /> (`music-and-end`) | `end` <br /> (`music-and-end`) | `music-and-end`
 `timing-precision` | ? | `ms-bpm` | `ms` (?) | `any` (?) | `ms` | `ms`
+`timing-redefinition` | `keep` | `keep` <br> `override` (branched sections (?)) | `override` | `keep` | `keep` | `keep`
 `timing-effect-order` | `def` | `time` | `time` | `time` (?) | `flat-time-or-def` | `flat-time-or-def`
 `hbscroll-past` | N/A | `nmscroll` | `hbscroll` | `nmscroll` | `hbscroll` | `hbscroll`
 `hbscroll-delay` | N/A | `freeze` | `freeze` | `offset` | `offset` | `offset`
