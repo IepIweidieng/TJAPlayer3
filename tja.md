@@ -1,7 +1,7 @@
 # TJA Format and on
 
 * First created: 2022-02-01 (UTC+8)
-* Last changed: 2026-11-17 (UTC+8)
+* Last changed: 2026-11-25 (UTC+8)
 
 Main maintainer of this article: [@IepIweidieng](https://github.com/IepIweidieng)
 
@@ -2293,7 +2293,7 @@ Default scrolling changes of [`#DELAY`](#delay) command | (No changes) | Pause t
 Mode-invariant velocity-changing command | [`#SCROLL <value>`](#scroll) | [`#HISPEED <value>`](#hispeed) | (*Proposal* (IID)) [`#SPEED <value>; *:*; <changing-duration>`](#proposal-iid-speed)
 Analogous Timing Segment in SSC Format | (None) | `#SCROLLS:;` | `#SPEEDS:;`
 
-In OutFox, the Taiko-like scrolling mode can be achieved by using CAMod (AMod/"Average BPM Scroll Mode" with constant per-note or per–bar-line scrolling speed) with the BPM parameter set to 4 × the average BPM of the notechart.
+In OutFox, the Taiko-like scrolling mode can be achieved by using CAMod (AMod/"Average BPM Scroll Mode" with constant per-note or per–bar-line scrolling speed), and the scrolling speed could be approximated with the BPM parameter set to 4 × the average BPM of the notechart when verified on v0.5.0 pre043 a17.
 
 See [Sign of Timing Commands](#sign-of-timing-commands) for the behavior of timing commands with different sign of values.
 
@@ -5229,8 +5229,8 @@ Time Window | Default range in the original games (Easy/Normal) | (Hard/Oni) | E
 ††: In most simulators, the react speed of drumroll-type notes is either only limited by the current frame rate or unlimited.
 
 * In TJAPlayer2 for.PC & OpenTaiko (0auBSQ) until v0.6.0, `9` is treated the same as `7`.
-* In OutFox, as for v0.5.0 pre043, `A` is treated the same as `3` and `B` is treated the same as `4` (subjects to changes according to demands).
-* In OutFox, `0` to `9`, `A` to `D`, & `F` to `J` are all parsed, where `C` and `H` have work-in-progress gamepad/keyboard input and `D` to `G` & `I` have work-in-progress gamepad/keyboard input and noteskin support as for v0.5.0 pre043 a17.
+* In OutFox, when verified on v0.5.0 pre043, `A` was treated the same as `3` and `B` was treated the same as `4` (subjects to changes according to demands).
+* In OutFox, `0` to `9`, `A` to `D`, & `F` to `J` are all parsed, where gamepad/keyboard input for `C` and `H`, gamepad/keyboard input and noteskin support for `D` to `G` & `I` were works in progress when verified on v0.5.0 pre043 a17.
 
 #### Note type category
 
